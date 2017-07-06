@@ -1,13 +1,28 @@
 HARSHEN SOUL FRAGMENT
- -(more coming)
+ -used to ...(more coming)
 
 HARSHEN FLYLAND 
--second structure, such a flying island has similar colored blocks with castle
--has different mobs and bos
+-second structure, such a flying island on sky
+-made from harshen dimensional dirt(mainly)
+-has different mobs and boss
 -has same gate in castle, sends the player to Pontus world
 
 
+HARSHEN STUNSHIP
+-third structure, such normal ship
+-made from dimensional wood crate(mainly)
+-has different mobs and boss
+-has same gate in castle, sends the player to Pontus world
 
+
+HARSHEN DIMENSIONAL WOOD CRATE
+-texture WIP by kenijey
+-same properties with dimensional stone, but it's a plank
+
+
+HARSHEN DIMENSIONAL DIRT
+-texture WIP by kenijey
+-same properties with dimensional stone, but a dirt
 
 
 MOBS
