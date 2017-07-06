@@ -7,23 +7,25 @@ HARSHEN FLYLAND
 -has different mobs and boss
 -has same gate in castle, sends the player to Pontus world
 
-
 HARSHEN STUNSHIP
 -third structure, such normal ship
 -made from dimensional wood crate(mainly)
 -has different mobs and boss
 -has same gate in castle, sends the player to Pontus world
 
-
 HARSHEN DIMENSIONAL WOOD CRATE
 -texture WIP by kenijey
 -same properties with dimensional stone, but it's a plank
-
 
 HARSHEN DIMENSIONAL DIRT
 -texture WIP by kenijey
 -same properties with dimensional stone, but a dirt
 
+HARSHEN DIMENSIONAL LIQUID 
+-main liquid of pontus world
+-used to craft something in future
+-pick-up-able with bucket
+-turns any block into harshen dimensional dirt it touch
 
 MOBS
 -kazzendre(boss)
