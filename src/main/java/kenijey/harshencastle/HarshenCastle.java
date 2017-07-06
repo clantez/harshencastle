@@ -40,7 +40,7 @@ public class HarshenCastle {
     public void init(FMLInitializationEvent event) 
     {
     	Recipes.init();
-    	MinecraftForge.ORE_GEN_BUS.register(new OreGenerator(500));
+    	GameRegistry.registerWorldGenerator(new OreGenerator(100), 0);
     	proxy.init(event);
     }
 
