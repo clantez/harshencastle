@@ -1,5 +1,6 @@
 package kenijey.harshencastle.blocks;
 
+import java.util.List;
 import java.util.Random;
 
 import kenijey.harshencastle.HarshenCastle;
@@ -9,6 +10,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.particle.ParticleManager;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -88,6 +90,13 @@ public class HarshenSoulOre extends Block
 		if (world instanceof WorldServer)
 			((WorldServer)world).spawnParticle(EnumParticleTypes.CLOUD, false, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 4,  0.7, 0.8, 0.6, 0, new int[EnumParticleTypes.CLOUD.getArgumentCount()]);
 		return super.addHitEffects(state, worldObj, target, manager);
+	}
+	
+	@Override
+	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+		tooltip.add("\u00A73" + new TextComponentTranslation("ore1").getFormattedText());
+		tooltip.add("\u00a73" + new TextComponentTranslation("ore2").getFormattedText());
+		super.addInformation(stack, worldIn, tooltip, flagIn);
 	}
 	
 }
