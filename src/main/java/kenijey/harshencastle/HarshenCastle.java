@@ -1,21 +1,18 @@
 package kenijey.harshencastle;
 
-import java.util.logging.Logger;
-
+import kenijey.harshencastle.commands.CommandFlatPlate;
 import kenijey.harshencastle.creativetabs.HarshenTab;
-import kenijey.harshencastle.items.HarshenItems;
 import kenijey.harshencastle.items.Recipes;
 import kenijey.harshencastle.proxy.CommonProxy;
 import kenijey.harshencastle.worldgen.OreGenerator;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 @Mod(modid = HarshenCastle.MODID, name = HarshenCastle.MODNAME, version = HarshenCastle.VERSION/*, dependencies = "required-after:Forge@[14.21.1.2387,)", useMetadata = true*/)
@@ -49,4 +46,10 @@ public class HarshenCastle {
     {
     	proxy.postInit(event);
     }
+    
+    @EventHandler
+	public void serverLoad(FMLServerStartingEvent event)
+	{
+		event.registerServerCommand(new CommandFlatPlate());
+	}	
 }
