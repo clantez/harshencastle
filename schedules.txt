@@ -1,0 +1,18 @@
+HARSHEN SOUL FRAGMENT
+ -(more coming)
+
+HARSHEN FLYLAND 
+-second structure, such a flying island has similar colored blocks with castle
+-has different mobs and bos
+-has same gate in castle, sends the player to Pontus world
+
+
+
+
+
+MOBS
+-kazzendre(boss)
+-soulless knight (powerful)
+-harshen soul (normal attacker mob)
+-soul part (flying)
+-soul shooter
