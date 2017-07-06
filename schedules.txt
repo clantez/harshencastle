@@ -23,9 +23,14 @@ HARSHEN DIMENSIONAL DIRT
 
 HARSHEN DIMENSIONAL LIQUID 
 -main liquid of pontus world
--used to craft something in future
+-used to crafting something in future
+-found in Pontus world
 -pick-up-able with bucket
 -turns any block into harshen dimensional dirt it touch
+
+ITIUM ORE
+-found in Pontus world
+-used to crafting something expensive and very useful/cool in future
 
 MOBS
 -kazzendre(boss)
