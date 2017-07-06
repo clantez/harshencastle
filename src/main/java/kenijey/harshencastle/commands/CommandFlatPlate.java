@@ -72,7 +72,7 @@ public class CommandFlatPlate extends CommandBase {
 								if(sender.getEntityWorld().getBlockState(new BlockPos(x, y, z).add(sender.getPosition().getX(), 0, sender.getPosition().getZ())).getBlock() instanceof HarshenDimensionalFlatPlate)
 									blockPositions.add(new BlockPos(x, y, z).add(sender.getPosition().getX(), 0, sender.getPosition().getZ()));
 							}
-					String posString = "";
+					String posString = "{title:\",author:\",generation:0,pages:[\"{text:\"";
 					for(int i = 0; i < blockPositions.size(); i ++)
 					{
 						BlockPos pos = blockPositions.get(i);
