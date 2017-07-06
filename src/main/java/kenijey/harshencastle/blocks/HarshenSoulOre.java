@@ -50,6 +50,11 @@ public class HarshenSoulOre extends Block
 	@Override
 	public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) 
 	{
+		if(player.capabilities.isCreativeMode)
+		{
+			super.onBlockHarvested(worldIn, pos, state, player);
+			return;
+		}
 		ItemStack item = player.inventory.getCurrentItem();
 		if(item.getItem() instanceof SoulHarsherPickaxe)
 		{

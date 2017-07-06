@@ -28,11 +28,16 @@ public class HarshenDimensionalStone extends Block
 	@Override
 	public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) 
 	{
-			player.attackEntityFrom(DamageSource.MAGIC, 21);
-			if(!worldIn.isRemote)
-			{
-				player.sendMessage((ITextComponent) new TextComponentTranslation("message.broken"));
-			}
+		if(player.capabilities.isCreativeMode)
+		{
+			super.onBlockHarvested(worldIn, pos, state, player);
+			return;
+		}
+		player.attackEntityFrom(DamageSource.MAGIC, 21);
+		if(!worldIn.isRemote)
+		{
+			player.sendMessage((ITextComponent) new TextComponentTranslation("message.broken"));
+		}
 
 
 	}
