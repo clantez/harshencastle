@@ -1,0 +1,6 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "harshencastle:blocks/harshen_dimensional_ladder"
+    }
+}

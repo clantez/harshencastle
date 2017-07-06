@@ -1,0 +1,7 @@
+{
+    "parent": "block/door_top",
+    "textures": {
+        "bottom": "harshencastle:blocks/harshen_dimensional_door_lower",
+        "top": "harshencastle:blocks/harshen_dimensional_door_upper"
+    }
+}

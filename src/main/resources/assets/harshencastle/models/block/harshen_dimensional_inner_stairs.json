@@ -1,0 +1,8 @@
+{
+    "parent": "block/inner_stairs",
+    "textures": {
+        "bottom": "harshencastle:blocks/harshen_dimensional_stone",
+        "top": "harshencastle:blocks/harshen_dimensional_stone",
+        "side": "harshencastle:blocks/harshen_dimensional_stone"
+    }
+}

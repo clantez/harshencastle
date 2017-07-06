@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "powered=true": { "model": "harshencastle:harshen_dimensional_flat_plate" },
+        "powered=false": { "model": "harshencastle:harshen_dimensional_flat_plate" }
+    }
+}

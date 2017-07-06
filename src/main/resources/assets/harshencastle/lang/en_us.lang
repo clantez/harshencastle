@@ -1,0 +1,48 @@
+
+#items
+item.harshen_soul_fragment.name=Harshen Soul Fragment
+item.soul_harsher_sword.name=Soul Harsher Sword
+item.soul_harsher_pickaxe.name=Soul Harsher Pickaxe
+item.item_harshen_dimensional_door.name=Harshen Dimensional Door
+item.itium.name=Itium
+
+
+#blocks
+tile.harshen_soul_ore.name=Harshen Soul Ore
+tile.soul_reminder.name=Soul Reminder
+tile.harshen_dimensional_stone.name=Harshen Dimensional Stone
+tile.harshen_dimensional_door.name=Harshen Dimensional Door
+tile.harshen_dimensional_plate.name=Harshen Dimensional Plate
+tile.harshen_dimensional_plate_active.name=Harshen Dimensional Plate
+tile.item_harshen_dimensional_door.name=Harshen Dimensional Door
+tile.harshen_dimensional_stairs.name=Harshen Dimensional Stairs
+tile.harshen_dimensional_glass.name=Harshen Dimensional Glass
+tile.harshen_dimensional_ladder.name=Harshen Dimensional Ladder
+tile.harshen_dimensional_pressure_plate.name=Harshen Dimensional Pressure Plate
+tile.harshen_dimensional_flat_plate.name=Harshen Dimensional Flat Plate
+tile.soul_reminder.name=Soul Reminder
+
+
+
+
+
+#tools
+sword1=Reminds the wraith
+sword2=of Kazzendre
+sword3=Drains the soul
+sword4=of the target you hit
+itium1=Very expensive matter.
+itium2=Not craftable, not belongs
+itium3=to the earth.
+
+pickaxe1=This pickaxe will help you
+pickaxe2=mine Harshen Soul Ore
+
+
+
+
+#misc
+itemGroup.harshenTab=Harshen Castle
+message.failed=You should use Soul Harsher Pickaxe.
+message.success=Kazzendre: You hurt my soul...
+message.broken=Kazzendre: Don't touch any particle of me
