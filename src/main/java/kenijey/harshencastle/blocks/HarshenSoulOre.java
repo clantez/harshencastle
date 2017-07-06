@@ -53,10 +53,9 @@ public class HarshenSoulOre extends Block
 		ItemStack item = player.inventory.getCurrentItem();
 		if(item.getItem() instanceof SoulHarsherPickaxe)
 		{
-			EntityItem ei = new EntityItem(worldIn, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, new ItemStack(HarshenItems.harshen_soul_fragment, 1));
 			if(!worldIn.isRemote)
 			{
-				worldIn.spawnEntity(ei);
+				super.onBlockHarvested(worldIn, pos, state, player);
 				player.sendMessage((ITextComponent) new TextComponentTranslation("message.success"));
 			}	
 		}
@@ -69,12 +68,6 @@ public class HarshenSoulOre extends Block
 			}
 		}
 
-	}
-	
-	@Override
-	public Item getItemDropped(IBlockState blockstate, Random random, int fortune) 
-	{
-	    return null;
 	}
 	
 	@Override
