@@ -13,14 +13,6 @@ HARSHEN STUNSHIP
 -has different mobs and boss
 -has same gate in castle, sends the player to Pontus world
 
-HARSHEN DIMENSIONAL WOOD CRATE
--texture WIP by kenijey
--same properties with dimensional stone, but it's a plank
-
-HARSHEN DIMENSIONAL DIRT
--texture WIP by kenijey
--same properties with dimensional stone, but a dirt
-
 HARSHEN DIMENSIONAL LIQUID 
 -main liquid of pontus world
 -used to crafting something in future
