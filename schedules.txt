@@ -1,5 +1,5 @@
 HARSHEN SOUL FRAGMENT
- -used to ...(more coming)
+ -used to craft harshen soul ingot
 
 HARSHEN FLYLAND 
 -second structure, such a flying island on sky
@@ -40,10 +40,12 @@ HARSHEN ESSENCE
 -used to craft harshen soul ingot
 -crafting recipe: 
 h=harshen essence
+s=harshen soul fragment
 e=emerald
 {e e}
-{ h }
+{shs}
 {e e}
+result= harshen soul ingot
 
 HARSHEN SOUL INGOT
 -used to craft harshen jaguar armor

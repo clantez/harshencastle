@@ -13,7 +13,7 @@ public class HarshenItems
 	public static Item soul_harsher_pickaxe;
 	public static Item item_harshen_dimensional_door;
 	public static Item itium;
-	
+	public static Item harshen_essence;
 	public static void preInit()
 	{
 		harshen_soul_fragment = new HarshenSoulFragment();
@@ -21,6 +21,7 @@ public class HarshenItems
 		soul_harsher_pickaxe = new SoulHarsherPickaxe();
 		item_harshen_dimensional_door = new HarshenDimensionalDoor();
 		itium = new Itium();
+		harshen_essence = new HarshenEssence();
 	}
 	
 	public static void reg()
@@ -30,6 +31,7 @@ public class HarshenItems
 		regItem(soul_harsher_pickaxe, 1);
 		regItem(item_harshen_dimensional_door,16);
 		regItem(itium,16);
+		regItem(harshen_essence, 8);
 	}
 	
 	public static void regRenders()
@@ -39,6 +41,7 @@ public class HarshenItems
 		regRender(soul_harsher_pickaxe);
 		regRender(item_harshen_dimensional_door);
 		regRender(itium);
+		regRender(harshen_essence);
 	}
 	
 	public static void regItem(Item item, int stackSize)
