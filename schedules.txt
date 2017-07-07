@@ -1,8 +1,4 @@
 -------------------------ITEMS/BLOCKS----------------------------
-HARSHEN DIMENSIONAL DIRT
--can't be hoed
--if you place any plant on it, that plant will turn into harshen destroyed plant
-
 HARSHEN DIMENSIONAL LIQUID 
 -main liquid of pontus world
 -used to crafting something in future
