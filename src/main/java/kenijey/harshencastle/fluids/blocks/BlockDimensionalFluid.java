@@ -1,10 +1,21 @@
 package kenijey.harshencastle.fluids.blocks;
 
+import java.util.List;
+
 import kenijey.harshencastle.blocks.HarshenBlocks;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockBush;
+import net.minecraft.block.BlockDirt;
+import net.minecraft.block.BlockGrass;
+import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -47,12 +58,36 @@ public class BlockDimensionalFluid extends BlockFluidClassic
         this.checkForMixing(worldIn, pos, state);
     }
     
+    @Override
+    public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
+    	List<Entity> playersWithin = worldIn.getEntitiesWithinAABB(EntityLivingBase.class, new  AxisAlignedBB(pos, pos.add(1, 1, 1)));
+		if(!playersWithin.isEmpty())
+			for(Object entity: playersWithin.toArray())
+			{
+				if(!((EntityLivingBase)entity).isInWater())
+					continue;
+				((EntityLivingBase)entity).addPotionEffect(new PotionEffect(Potion.getPotionById(9), 250));
+				((EntityLivingBase)entity).addPotionEffect(new PotionEffect(Potion.getPotionById(2), 250, 2));
+			}
+				
+    }
+    
     public boolean checkForMixing(World worldIn, BlockPos pos, IBlockState state)
     {
         boolean flag = false;
 
         for (EnumFacing enumfacing : EnumFacing.values())
         {
+        	if(worldIn.getBlockState(pos.offset(enumfacing)).getBlock() instanceof BlockDirt ||
+        			worldIn.getBlockState(pos.offset(enumfacing)).getBlock() instanceof BlockGrass ||
+        			worldIn.getBlockState(pos.offset(enumfacing)).getBlock() instanceof BlockLeaves ||
+        			(enumfacing != EnumFacing.DOWN && (
+        					worldIn.getBlockState(pos.offset(enumfacing).add(0, -1, 0)).getBlock() instanceof BlockDirt ||
+                			worldIn.getBlockState(pos.offset(enumfacing).add(0, -1, 0)).getBlock() instanceof BlockGrass ||
+                			worldIn.getBlockState(pos.offset(enumfacing).add(0, -1, 0)).getBlock() instanceof BlockLeaves)))
+        			
+        		worldIn.setBlockState(pos.offset(enumfacing).add(0, -1, 0), HarshenBlocks.harshen_dimensional_dirt.getDefaultState(), 3);
+        		
             if (enumfacing != EnumFacing.DOWN && (worldIn.getBlockState(pos.offset(enumfacing)).getMaterial().isLiquid() == true))
             {
             	if (worldIn.getBlockState(pos.offset(enumfacing)).getBlock() != this.getBlockState().getBlock())
