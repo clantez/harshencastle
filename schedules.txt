@@ -3,7 +3,7 @@ HARSHEN SOUL FRAGMENT
  
 HARSHEN DIMENSIONAL DIRT
 -can't be hoed
--if you place any plant(flowers or seeds) on it, that plant will turn into harshen destroyed plant
+-if you place any plant on it, that plant will turn into harshen destroyed plant
 
 HARSHEN FLYLAND 
 -second structure, such a flying island on sky
