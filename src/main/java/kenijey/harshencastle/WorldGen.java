@@ -39,7 +39,6 @@ public class WorldGen implements IWorldGenerator
 		switch (world.provider.getDimension()) {
 	    case 0:
 	    	oreGenerator(this.ore, world, random, chunkX, chunkZ, 10, 0, 20);
-	    	flowerGenerator(world, random, chunkX, chunkZ, 15/**MAX 100*/);
 	        break;
 	    default:
 	    	break;
