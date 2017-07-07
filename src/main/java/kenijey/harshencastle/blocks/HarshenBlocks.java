@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import kenijey.harshencastle.HarshenCastle;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockFlower;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -28,6 +29,7 @@ public class HarshenBlocks {
 	public static Block harshen_dimensional_dirt;
 	public static Block itium_ore;
 	public static Block harshen_destroyed_plant;
+	public static BlockFlower harshen_soul_flower;
 
 	public static void preInit() {
 		harshen_soul_ore = new HarshenSoulOre();
@@ -45,6 +47,7 @@ public class HarshenBlocks {
 		harshen_dimensional_dirt = new HarshenDimensionalDirt();
 		itium_ore = new ItiumOre();
 		harshen_destroyed_plant = new HarshenDestroyedPlant();
+		harshen_soul_flower = new HarshenSoulFlower();
 	}
 
 	public static void reg() {
@@ -60,6 +63,7 @@ public class HarshenBlocks {
 		regBlock(harshen_soul_ore, 64);
 		regBlock(itium_ore, 64);
 		regBlock(harshen_destroyed_plant,64);
+		regBlock(harshen_soul_flower, 64);
 		regBlock(soul_reminder,1);
 
 		regSingleBlock(harshen_dimensional_door);

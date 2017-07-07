@@ -1,0 +1,6 @@
+{
+    "parent": "block/cross",
+    "textures": {
+        "cross": "harshencastle:blocks/harshen_soul_flower"
+    }
+}
