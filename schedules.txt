@@ -1,11 +1,7 @@
 -------------------------ITEMS/BLOCKS----------------------------
-HARSHEN SOUL FRAGMENT
- -used to craft pontus ring
- 
 HARSHEN DIMENSIONAL DIRT
 -can't be hoed
 -if you place any plant on it, that plant will turn into harshen destroyed plant
-
 
 HARSHEN DIMENSIONAL LIQUID 
 -main liquid of pontus world
@@ -13,9 +9,6 @@ HARSHEN DIMENSIONAL LIQUID
 -found in Pontus world
 -pick-up-able with bucket
 -turns any block into harshen dimensional dirt it touch
-
-ITIUM
--used to craft pontus ring
 
 ITIUM ORE
 -found in Pontus world

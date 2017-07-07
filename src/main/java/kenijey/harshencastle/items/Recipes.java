@@ -29,5 +29,14 @@ public class Recipes
 				's', HarshenItems.harshen_soul_fragment,
 				'e', Items.EMERALD);
 		
+		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "pontus_ring"), new ResourceLocation("harshen_items"),
+				new ItemStack(HarshenItems.pontus_ring),
+				" s ",
+				"gig",
+				" g ",
+				
+				'i', HarshenItems.itium,
+				's', HarshenItems.harshen_soul_fragment,
+				'g', Items.GOLD_NUGGET);
 	}
 }
