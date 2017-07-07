@@ -1,17 +1,13 @@
 -------------------------ITEMS/BLOCKS----------------------------
 HARSHEN DIMENSIONAL LIQUID 
--main liquid of pontus world
+-main land liquid of pontus world, found only in there
 -used to crafting something in future...
--found in Pontus world
 -pick-up-able with bucket
 -turns any block into harshen dimensional dirt it touch
 -applies slowness1 and nausea effect for 15 seconds
 
 ITIUM ORE
 -found in Pontus world
-
-HARSHEN SOUL INGOT
--used to craft harshen jaguar armor(recipes)
 
 HARSHEN JAGUAR ARMOR SET
 -properties coming soon...
