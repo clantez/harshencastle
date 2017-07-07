@@ -36,8 +36,8 @@ public class HarshenDimensionalDirt extends HarshenBlockCastle
 	@Override
 	public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
 		if(worldIn.getBlockState(pos.add(0, 1, 0)).getBlock() instanceof BlockBush)
-			worldIn.setBlockState(pos.add(0, 1, 0), HarshenBlocks.harshen_dimensional_glass.getDefaultState(), 2);
-		if(worldIn.getBlockState(pos.add(0, 2, 0)).getBlock() instanceof BlockFlower)
+			worldIn.setBlockState(pos.add(0, 1, 0), HarshenBlocks.harshen_destroyed_plant.getDefaultState(), 2);
+		if(worldIn.getBlockState(pos.add(0, 2, 0)).getBlock() instanceof BlockBush)
 			worldIn.setBlockState(pos.add(0, 2, 0),Blocks.AIR.getDefaultState(), 2);
 	}
 	
