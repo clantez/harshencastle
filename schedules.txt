@@ -37,7 +37,7 @@ HARSHEN DESTROYED PLANT
 -has no seeds
 
 HARSHEN ESSENCE
--used to craft harshen ingot
+-used to craft harshen soul ingot
 -crafting recipe: 
 h=harshen essence
 e=emerald
@@ -45,7 +45,10 @@ e=emerald
 { h }
 {e e}
 
-HARSHEN ARMOR SET
+HARSHEN SOUL INGOT
+-used to craft harshen jaguar armor
+
+HARSHEN JAGUAR ARMOR SET
 -properties coming soon...
 
 PONTUS RING
