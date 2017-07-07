@@ -14,7 +14,12 @@ public class HarshenBlockCastle extends Block
 {
 
 	public HarshenBlockCastle() {
-		super(Material.ROCK);
+		this(Material.ROCK);
+	}
+	
+	public HarshenBlockCastle(Material material)
+	{
+		super(material);
 		setHarvestLevel("pickaxe", 3);
 		setHardness(2500.0F);
 		setResistance(2500.0F);

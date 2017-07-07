@@ -14,6 +14,7 @@ public class HarshenDimensionalWoodCrate extends HarshenBlockCastle
 {
 	public HarshenDimensionalWoodCrate()
 	{
+		super(Material.WOOD);
         setUnlocalizedName("harshen_dimensional_wood_crate");
         setRegistryName("harshen_dimensional_wood_crate");
 	}
