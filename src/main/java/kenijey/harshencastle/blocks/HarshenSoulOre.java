@@ -36,14 +36,7 @@ public class HarshenSoulOre extends Block
 		setHardness(31f);
 		setResistance(100f);
 		setCreativeTab(HarshenCastle.harshenTab);
-		meta=0;
-		least_quantity=1;
-		most_quantity=1;
     }
-	private Item drop;
-	private int meta;
-	private int least_quantity;
-	private int most_quantity;
 	private BlockPos pos;
 	private World world;
 	
