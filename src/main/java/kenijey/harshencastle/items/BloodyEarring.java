@@ -8,12 +8,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
-public class HealingEarring extends Item
+public class BloodyEarring extends Item
 {
-	public HealingEarring()
+	public BloodyEarring()
 	{
-		setUnlocalizedName("healing_earring");
-		setRegistryName("healing_earring");
+		setUnlocalizedName("bloody_earring");
+		setRegistryName("bloody_earring");
 	}
 
 	@Override

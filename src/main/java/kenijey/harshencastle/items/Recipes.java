@@ -38,5 +38,15 @@ public class Recipes
 				'i', HarshenItems.itium,
 				's', HarshenItems.harshen_soul_fragment,
 				'g', Items.GOLD_NUGGET);
+		
+		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "bloody_earring"), new ResourceLocation("harshen_items"),
+				new ItemStack(HarshenItems.bloody_earring),
+				" i ",
+				" s ",
+				" b ",
+				
+				'i', HarshenItems.itium,
+				's', HarshenItems.harshen_soul_fragment,
+				'b', HarshenItems.blood_essence);
 	}
 }

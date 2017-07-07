@@ -8,7 +8,8 @@ item.itium.name=Itium
 item.harshen_essence.name=Harshen Essence
 item.harshen_soul_ingot.name=Harshen Soul Ingot
 item.pontus_ring.name=Pontus Ring
-item.healing_earring.name=Healing Earring
+item.bloody_earring.name=Bloody Earring
+item.blood_essence.name=Blood Essence
 
 #blocks
 tile.harshen_soul_ore.name=Harshen Soul Ore
