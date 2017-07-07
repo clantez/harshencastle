@@ -1,5 +1,8 @@
 HARSHEN SOUL FRAGMENT
  -used to craft harshen soul ingot
+ 
+HARSHEN DIMENSIONAL DIRT
+-make so normal flowers eventually die if they are planted on this
 
 HARSHEN FLYLAND 
 -second structure, such a flying island on sky
