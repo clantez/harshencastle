@@ -33,7 +33,14 @@ tile.harshen_soul_flower.name=Harshen Soul Flower
 
 
 #commands
+commands.getflat.usage=Used to locate the Harshen Dimensional Flat Plates in the area
+commands.getflat.failure=%s is not a number
 commands.getflat.notfound=Harshen Dimensional Flat Plate was not found in the area
+
+commands.delflat.usage=Used to delete the Harshen Dimensional Flat Plates in the area
+commands.delflat.failure=%s is not a number
+commands.delflat.notfound=Harshen Dimensional Flat Plate was not found in the area
+commands.delflat.success=Removed %s Harshen Dimensional Flat Plate%s
 
 
 #tooltips

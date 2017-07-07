@@ -1,5 +1,6 @@
 package kenijey.harshencastle;
 
+import kenijey.harshencastle.commands.CommandDelFlatPlate;
 import kenijey.harshencastle.commands.CommandFlatPlate;
 import kenijey.harshencastle.creativetabs.HarshenTab;
 import kenijey.harshencastle.items.Recipes;
@@ -50,5 +51,6 @@ public class HarshenCastle {
 	public void serverLoad(FMLServerStartingEvent event)
 	{
 		event.registerServerCommand(new CommandFlatPlate());
+		event.registerServerCommand(new CommandDelFlatPlate());
 	}	
 }
