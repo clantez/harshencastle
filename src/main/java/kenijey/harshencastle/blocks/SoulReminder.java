@@ -102,10 +102,10 @@ public class SoulReminder extends Block
 	@Override
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
 		isTicking = true;
-		List<Entity> playersWithin = worldIn.getEntitiesWithinAABB(EntityPlayer.class, new  AxisAlignedBB(0, 0, 0, 1, 1, 1));
+		List<Entity> playersWithin = worldIn.getEntitiesWithinAABB(EntityPlayer.class, new  AxisAlignedBB(pos, pos.add(1, 1, 1)));
 		if(!playersWithin.isEmpty())
 			for(Object player: playersWithin.toArray())
-				((EntityPlayer)player).addPotionEffect(new PotionEffect(Potion.getPotionById(9), 100));
+				((EntityPlayer)player).addPotionEffect(new PotionEffect(Potion.getPotionById(9), 200));
 		this.world = worldIn;
 		this.pos = pos;
 		worldIn.scheduleBlockUpdate(pos, this, 10, 3);
