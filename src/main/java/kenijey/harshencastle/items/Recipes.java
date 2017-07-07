@@ -10,21 +10,24 @@ public class Recipes
 	public static void init()
 	{
 		
-		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "harsher_sword"), new ResourceLocation("harshen_items"),
+		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "soul_harsher_sword"), new ResourceLocation("harshen_items"),
 				new ItemStack(HarshenItems.soul_harsher_sword),
 				"a",
 				"a",
 				"b",
+				
 				'a', HarshenItems.harshen_soul_fragment,
 				'b', Items.IRON_INGOT);
 		
-		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "waht do i do?"), new ResourceLocation("harshen_items"),
-				new ItemStack(HarshenItems.soul_harsher_sword),
-				"a",
-				"a",
-				"b",
-				'a', HarshenItems.harshen_soul_fragment,
-				'b', Items.IRON_INGOT);
+		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "harshen_soul_ingot"), new ResourceLocation("harshen_items"),
+				new ItemStack(HarshenItems.harshen_soul_ingot),
+				"e e",
+				"shs",
+				"e e",
+				
+				'h', HarshenItems.harshen_essence,
+				's', HarshenItems.harshen_soul_fragment,
+				'e', Items.EMERALD);
 		
 	}
 }
