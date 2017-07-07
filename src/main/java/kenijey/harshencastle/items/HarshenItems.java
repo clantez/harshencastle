@@ -15,6 +15,10 @@ public class HarshenItems
 	public static Item itium;
 	public static Item harshen_essence;
 	public static Item harshen_soul_ingot;
+	public static Item pontus_ring;
+	public static Item healing_earring;
+	
+	
 	public static void preInit()
 	{
 		harshen_soul_fragment = new HarshenSoulFragment();
@@ -24,6 +28,8 @@ public class HarshenItems
 		itium = new Itium();
 		harshen_essence = new HarshenEssence();
 		harshen_soul_ingot = new HarshenSoulIngot();
+		pontus_ring = new PontusRing();
+		healing_earring = new HealingEarring();
 	}
 	
 	public static void reg()
@@ -35,6 +41,8 @@ public class HarshenItems
 		regItem(itium,8);
 		regItem(harshen_essence, 8);
 		regItem(harshen_soul_ingot, 8);
+		regItem(pontus_ring, 1);
+		regItem(healing_earring, 1);
 	}
 	
 	public static void regRenders()
@@ -46,6 +54,8 @@ public class HarshenItems
 		regRender(itium);
 		regRender(harshen_essence);
 		regRender(harshen_soul_ingot);
+		regRender(pontus_ring);
+		regRender(healing_earring);
 	}
 	
 	public static void regItem(Item item, int stackSize)

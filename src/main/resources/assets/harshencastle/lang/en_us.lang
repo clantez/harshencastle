@@ -7,7 +7,8 @@ item.item_harshen_dimensional_door.name=Harshen Dimensional Door
 item.itium.name=Itium
 item.harshen_essence.name=Harshen Essence
 item.harshen_soul_ingot.name=Harshen Soul Ingot
-
+item.pontus_ring.name=Pontus Ring
+item.healing_earring.name=Healing Earring
 
 #blocks
 tile.harshen_soul_ore.name=Harshen Soul Ore
