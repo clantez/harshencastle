@@ -65,7 +65,7 @@ public class WorldGen implements IWorldGenerator
 	private void flowerGenerator(World worldIn, Random rand, int chunk_X, int chunk_Z, int chancesToSpawn)
 	{
 		for(int i = 0; i < chancesToSpawn; i++)
-			if(rand.nextInt(400) == 0)
+			if(rand.nextInt(1000) == 0)
 				return;
 		int x = chunk_X * 16 + rand.nextInt(16);
 		int z = chunk_Z * 16 + rand.nextInt(16);
