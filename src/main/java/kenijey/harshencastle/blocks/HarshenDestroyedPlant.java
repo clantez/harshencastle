@@ -7,6 +7,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -21,6 +22,7 @@ public class HarshenDestroyedPlant extends Block
 		super(Material.GRASS);
 		setUnlocalizedName("harshen_destroyed_plant");
         setRegistryName("harshen_destroyed_plant");
+        blockSoundType = blockSoundType.PLANT;
 	}
 	
 	@Override
@@ -59,6 +61,13 @@ public class HarshenDestroyedPlant extends Block
 	public boolean isOpaqueCube(IBlockState state)
 	{
 		return false;
+	}
+	
+	
+	@Override
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+		if(!(worldIn.getBlockState(pos.add(0, -1, 0)).getBlock() instanceof HarshenDimensionalDirt))
+			worldIn.setBlockToAir(pos);
 	}
 
 
