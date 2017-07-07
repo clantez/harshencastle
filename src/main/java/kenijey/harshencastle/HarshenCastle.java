@@ -15,7 +15,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-@Mod(modid = HarshenCastle.MODID, name = HarshenCastle.MODNAME, version = HarshenCastle.VERSION/*, dependencies = "required-after:Forge@[14.21.1.2387,)", useMetadata = true*/)
+@Mod(modid = HarshenCastle.MODID, name = HarshenCastle.MODNAME, version = HarshenCastle.VERSION/*, dependencies = "required-after:Forge@[14.21.1.2400,)", useMetadata = true*/)
 public class HarshenCastle {
 
     public static final String MODID = "harshencastle";

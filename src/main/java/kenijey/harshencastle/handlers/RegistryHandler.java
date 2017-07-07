@@ -1,6 +1,7 @@
 package kenijey.harshencastle.handlers;
 
 import kenijey.harshencastle.blocks.HarshenBlocks;
+import kenijey.harshencastle.items.HarshenArmors;
 import kenijey.harshencastle.items.HarshenItems;
 
 public class RegistryHandler 
@@ -9,6 +10,7 @@ public class RegistryHandler
 	{
 		HarshenBlocks.regRenders();
 		HarshenItems.regRenders();
+		HarshenArmors.registerRenders();
 	}
 	
 	public static void PreInitCommon()
@@ -17,6 +19,8 @@ public class RegistryHandler
 		HarshenBlocks.reg();
 		HarshenItems.preInit();
 		HarshenItems.reg();
+		HarshenArmors.init();
+		HarshenArmors.register();
 	}
 
 }

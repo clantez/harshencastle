@@ -4,6 +4,7 @@ import kenijey.harshencastle.HarshenCastle;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 public class HarshenItems 

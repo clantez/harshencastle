@@ -10,6 +10,10 @@ item.harshen_soul_ingot.name=Harshen Soul Ingot
 item.pontus_ring.name=Pontus Ring
 item.bloody_earring.name=Bloody Earring
 item.blood_essence.name=Blood Essence
+item.harshen_jaguar_armor_helmet.name=Harshen Jaguar Armor Helmet
+item.harshen_jaguar_armor_chestplate.name=Harshen Jaguar Armor Chestplate
+item.harshen_jaguar_armor_leggings.name=Harshen Jaguar Armor Leggings
+item.harshen_jaguar_armor_boots.name=Harshen Jaguar Armor Boots
 
 #blocks
 tile.harshen_soul_ore.name=Harshen Soul Ore
