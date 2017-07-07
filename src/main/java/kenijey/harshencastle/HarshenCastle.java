@@ -1,16 +1,11 @@
 package kenijey.harshencastle;
 
-import java.io.File;
-
 import kenijey.harshencastle.commands.CommandFlatPlate;
 import kenijey.harshencastle.creativetabs.HarshenTab;
 import kenijey.harshencastle.items.Recipes;
 import kenijey.harshencastle.proxy.CommonProxy;
 import kenijey.harshencastle.worldgen.OreGenerator;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.common.config.Property;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
