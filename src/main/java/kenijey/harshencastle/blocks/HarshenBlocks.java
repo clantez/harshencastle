@@ -60,10 +60,10 @@ public class HarshenBlocks {
 		regBlock(harshen_soul_ore, 64);
 		regBlock(itium_ore, 64);
 		regBlock(harshen_destroyed_plant,64);
+		regBlock(soul_reminder,1);
 
 		regSingleBlock(harshen_dimensional_door);
 		regSingleBlock(harshen_hidden_plate_active);
-		regBlock(soul_reminder,1);
 	}
 
 	public static void regRenders() {
