@@ -1,10 +1,4 @@
-HARSHEN SOUL FRAGMENT
- -used to craft pontus ring
- 
-HARSHEN DIMENSIONAL DIRT
--can't be hoed
--if you place any plant on it, that plant will turn into harshen destroyed plant
-
+-----------------------------STRUCTURES--------------------------
 HARSHEN FLYLAND 
 -second structure, such a flying island on sky
 -made from harshen dimensional dirt(mainly)
@@ -16,6 +10,15 @@ HARSHEN STUNSHIP
 -made from dimensional wood crate(mainly)
 -has different mobs and boss
 -has same gate in castle, sends the player to Pontus world
+
+-------------------------ITEMS/BLOCKS----------------------------
+HARSHEN SOUL FRAGMENT
+ -used to craft pontus ring
+ 
+HARSHEN DIMENSIONAL DIRT
+-can't be hoed
+-if you place any plant on it, that plant will turn into harshen destroyed plant
+
 
 HARSHEN DIMENSIONAL LIQUID 
 -main liquid of pontus world
@@ -46,13 +49,26 @@ HARSHEN JAGUAR ARMOR SET
 -properties coming soon...
 
 PONTUS RING
--need baubles mod?...
--applies strength 1 and resistance 1 effects if equipped by player
+-thut wearables mod dependency is coming
+-applies strength 1 and resistance 1 effects if equipped/worn by player
 
-------------------------------------------------------------------------------------------------------------
-MOBS
--kazzendre(boss)
--soulless knight (powerful)
--harshen soul (normal attacker mob)
--soul part (flying)
--soul shooter
+HEALING EARRING
+-thut wearables mod dependency is coming
+-regenerates 1 hearth (2hp) every 10 seconds
+
+--------------------------MOBS----------------------------------
+KAZZANDRE
+-boss in harshen castle
+-more properties will come...
+
+SOULLESS KNIGHT
+-a powerful monster in harshen castle
+
+HARSHEN SOUL
+-normal attacker mob in harshen castle
+
+SOUL PART
+-flying mob in harshen castle
+
+SOUL SHOOTER
+-a mysterious mob in harshen castle
