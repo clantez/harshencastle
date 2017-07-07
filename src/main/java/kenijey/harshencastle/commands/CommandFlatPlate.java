@@ -67,6 +67,11 @@ public class CommandFlatPlate extends CommandBase {
 			dis = Integer.valueOf(args[0]);
 		}
 			
+		if(dis > 250)
+		{
+			notifyCommandListener(sender, this, "commands.getflat.toobig", args[0]);
+			return;
+		}
 		
 		int farDis = dis - (dis/2);
 		int shorDis = 0 - (dis/2);	

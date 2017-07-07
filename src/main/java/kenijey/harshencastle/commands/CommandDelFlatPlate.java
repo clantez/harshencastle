@@ -45,6 +45,11 @@ public class CommandDelFlatPlate extends CommandBase {
 				}
 			dis = Integer.valueOf(args[0]);
 		}
+		if(dis > 250)
+		{
+			notifyCommandListener(sender, this, "commands.delflat.toobig", args[0]);
+			return;
+		}
 			
 		
 		int farDis = dis - (dis/2);
