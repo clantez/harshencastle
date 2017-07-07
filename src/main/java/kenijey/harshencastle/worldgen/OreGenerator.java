@@ -23,6 +23,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class OreGenerator implements IWorldGenerator
 {
     private final WorldGenMinable ore = new WorldGenMinable(HarshenBlocks.harshen_soul_ore.getDefaultState(), 3);
+    private final WorldGenMinable itiumOre = new WorldGenMinable(HarshenBlocks.itium_ore.getDefaultState(), 5);
     private final int chanceForNodeToSpawn;
 	public OreGenerator(int chanceForNodeToSpawn)
 	{
@@ -33,8 +34,8 @@ public class OreGenerator implements IWorldGenerator
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator,
 			IChunkProvider chunkProvider) {
 
-		switch (world.provider.getDimensionType()) {
-	    case OVERWORLD:
+		switch (world.provider.getDimension()) {
+	    case 0:
 	    	runGenerator(this.ore, world, random, chunkX, chunkZ, 10, 0, 20);
 	        break;
 	    default:
