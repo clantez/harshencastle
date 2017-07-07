@@ -1,4 +1,4 @@
-package kenijey.harshencastle.items;
+package kenijey.harshencastle.armor;
 
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;

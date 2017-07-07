@@ -1,4 +1,4 @@
-package kenijey.harshencastle.items;
+package kenijey.harshencastle.armor;
 
 import kenijey.harshencastle.HarshenCastle;
 import net.minecraft.init.SoundEvents;

@@ -1,7 +1,7 @@
 package kenijey.harshencastle.handlers;
 
+import kenijey.harshencastle.armor.HarshenArmors;
 import kenijey.harshencastle.blocks.HarshenBlocks;
-import kenijey.harshencastle.items.HarshenArmors;
 import kenijey.harshencastle.items.HarshenItems;
 
 public class RegistryHandler 
