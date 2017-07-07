@@ -4,7 +4,6 @@ import kenijey.harshencastle.commands.CommandFlatPlate;
 import kenijey.harshencastle.creativetabs.HarshenTab;
 import kenijey.harshencastle.items.Recipes;
 import kenijey.harshencastle.proxy.CommonProxy;
-import kenijey.harshencastle.worldgen.OreGenerator;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -37,7 +36,7 @@ public class HarshenCastle {
     public void init(FMLInitializationEvent event) 
     {
     	Recipes.init();
-    	GameRegistry.registerWorldGenerator(new OreGenerator(100), 0);
+    	GameRegistry.registerWorldGenerator(new WorldGen(100), 0);
     	proxy.init(event);
     }
 

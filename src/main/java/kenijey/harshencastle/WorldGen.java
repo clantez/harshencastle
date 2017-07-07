@@ -1,4 +1,4 @@
-package kenijey.harshencastle.worldgen;
+package kenijey.harshencastle;
 
 import java.util.Random;
 
@@ -22,12 +22,12 @@ import net.minecraftforge.event.terraingen.OreGenEvent;
 import net.minecraftforge.fml.common.IWorldGenerator;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-public class OreGenerator implements IWorldGenerator
+public class WorldGen implements IWorldGenerator
 {
     private final WorldGenMinable ore = new WorldGenMinable(HarshenBlocks.harshen_soul_ore.getDefaultState(), 3);
     private final WorldGenMinable itiumOre = new WorldGenMinable(HarshenBlocks.itium_ore.getDefaultState(), 5);
     private final int chanceForNodeToSpawn;
-	public OreGenerator(int chanceForNodeToSpawn)
+	public WorldGen(int chanceForNodeToSpawn)
 	{
 		this.chanceForNodeToSpawn = chanceForNodeToSpawn;
 	}
