@@ -1,6 +1,8 @@
 package kenijey.harshencastle.commands;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import kenijey.harshencastle.blocks.HarshenBlocks;
 import kenijey.harshencastle.blocks.HarshenDimensionalFlatPlate;
@@ -25,6 +27,10 @@ import net.minecraft.nbt.NBTException;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
 
 public class CommandFlatPlate extends CommandBase {
 
@@ -38,15 +44,20 @@ public class CommandFlatPlate extends CommandBase {
 		return "commands.getflat.usage";
 	}
 	
+	@Override
+	public int getRequiredPermissionLevel() {
+		return 2;
+	}
+	
 	private ArrayList<BlockPos> blockPositions = new ArrayList<BlockPos>();
 
 	@Override
 	public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
 		int dis;
-		System.out.println("calculating");
 		if (args.length == 0)
-			dis = 20;
-		else {
+			dis = 50;
+		else
+		{
 			try {
 				Integer.valueOf(args[0]);
 			} catch (NumberFormatException e) {
@@ -54,35 +65,30 @@ public class CommandFlatPlate extends CommandBase {
 				return;
 				}
 			dis = Integer.valueOf(args[0]);
-			
-			int farDis = dis - (dis/2);
-			int shorDis = 0 - (dis/2);	
-			System.out.println(farDis);
-			System.out.println(shorDis);
-			new Thread()
-			{
-				@Override
-				public void run() 
-				{
-					blockPositions.clear();
-					for(int x = shorDis; x < farDis; x++)
-						for(int z = shorDis; z < farDis; z++)
-							for(int y = 0; y < 256; y++)
-							{
-								if(sender.getEntityWorld().getBlockState(new BlockPos(x, y, z).add(sender.getPosition().getX(), 0, sender.getPosition().getZ())).getBlock() instanceof HarshenDimensionalFlatPlate)
-									blockPositions.add(new BlockPos(x, y, z).add(sender.getPosition().getX(), 0, sender.getPosition().getZ()));
-							}
-					String posString = "{title:\",author:\",generation:0,pages:[\"{text:\"";
-					for(int i = 0; i < blockPositions.size(); i ++)
-					{
-						BlockPos pos = blockPositions.get(i);
-						if(i==0)
-							posString += "x: " + pos.getX() + ", y: " + pos.getY() + ", z:" + pos.getZ();
-						else
-							posString += "\nx: " + pos.getX() + ", y: " + pos.getY() + ", z:" + pos.getZ();
-					}			
-				}
-			}.start();
 		}
+			
+		
+		int farDis = dis - (dis/2);
+		int shorDis = 0 - (dis/2);	
+		new Thread()
+		{
+			@Override
+			public void run() 
+			{
+				blockPositions.clear();
+				for(int x = shorDis; x < farDis; x++)
+					for(int z = shorDis; z < farDis; z++)
+						for(int y = 0; y < 256; y++)
+						{
+							if(sender.getEntityWorld().getBlockState(new BlockPos(x, y, z).add(sender.getPosition().getX(), 0, sender.getPosition().getZ())).getBlock() instanceof HarshenDimensionalFlatPlate)
+								blockPositions.add(new BlockPos(x, y, z).add(sender.getPosition().getX(), 0, sender.getPosition().getZ()));
+
+						}
+				if(blockPositions.isEmpty())
+					sender.sendMessage(new TextComponentTranslation("commands.getflat.notfound"));
+				for(BlockPos pos : blockPositions)
+					sender.sendMessage(new TextComponentString( "x:"+ pos.getX() + ", y:" + pos.getY() + ", z:" + pos.getZ()));
+			}
+		}.start();
 	}
 }
