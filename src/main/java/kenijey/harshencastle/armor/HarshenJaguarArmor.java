@@ -11,7 +11,7 @@ public class HarshenJaguarArmor extends ItemArmor
 	{
 		super(materialIn, renderIndexIn, equipmentSlotIn);
 		this.setUnlocalizedName(name);
-		this.setRegistryName(new ResourceLocation(name));
+		this.setRegistryName(new ResourceLocation("harshencastle", name));
 	}
 	
 	

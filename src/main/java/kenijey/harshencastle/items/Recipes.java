@@ -12,9 +12,9 @@ public class Recipes
 		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "soul_harsher_sword"), new ResourceLocation("harshen_items"),
 				new ItemStack(HarshenItems.soul_harsher_sword),
-				"h",
+				" h ",
 				"hsh",
-				"i",
+				" i ",
 				
 				's', HarshenItems.harshen_soul_fragment,
 				'h', HarshenItems.harshen_essence,
