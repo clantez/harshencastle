@@ -17,7 +17,7 @@ ITIUM ORE
 HARSHEN DESTROYED PLANT
 -drops nothing, harvest nothing, no growment(just like dead bush)
 
--HARSHEN SOUL PLANT
+-HARSHEN SOUL FLOWER
 -generated randomly in world
 -drops 1x harshen essence
 -has no seeds
