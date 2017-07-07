@@ -32,6 +32,8 @@ tile.harshen_destroyed_plant.name=Harshen Destroyed Plant
 tile.harshen_soul_flower.name=Harshen Soul Flower
 
 
+#commands
+commands.getflat.notfound=Harshen Dimensional Flat Plate was not found in the area
 
 
 #tooltips
