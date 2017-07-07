@@ -1,8 +1,9 @@
 HARSHEN SOUL FRAGMENT
- -used to craft harshen soul ingot
+ -used to craft pontus ring
  
 HARSHEN DIMENSIONAL DIRT
--make so normal flowers eventually die if they are planted on this
+-can't be hoed
+-if you place any plant(flowers or seeds) on it, that plant will turn into harshen destroyed plant
 
 HARSHEN FLYLAND 
 -second structure, such a flying island on sky
@@ -23,13 +24,12 @@ HARSHEN DIMENSIONAL LIQUID
 -pick-up-able with bucket
 -turns any block into harshen dimensional dirt it touch
 
+ITIUM
+-used to craft pontus ring
+
 ITIUM ORE
 -found in Pontus world
 -used to crafting something expensive and very useful/cool in future
-
-HARSHEN DIMENSIONAL DIRT
--can't be hoed
--if you place any plant on it, that plant will turn into harshen destroyed plant
 
 HARSHEN DESTROYED PLANT
 -drops nothing, harvest nothing, no growment(just like dead bush)
@@ -48,8 +48,8 @@ HARSHEN JAGUAR ARMOR SET
 PONTUS RING
 -need baubles mod?...
 -applies strength 1 and resistance 1 effects if equipped by player
--craftable with itium and soul fragment
 
+------------------------------------------------------------------------------------------------------------
 MOBS
 -kazzendre(boss)
 -soulless knight (powerful)
