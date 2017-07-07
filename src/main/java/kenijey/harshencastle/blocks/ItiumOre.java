@@ -22,6 +22,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 
@@ -57,4 +58,18 @@ public class ItiumOre extends Block
 		return super.addHitEffects(state, worldObj, target, manager);
 	}
 	
+	@Override
+	protected boolean canSilkHarvest() {
+		return true;
+	}
+	
+	@Override
+	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+		return HarshenItems.itium;
+	}
+	
+	@Override
+	public int getExpDrop(IBlockState state, IBlockAccess world, BlockPos pos, int fortune) {
+		return new Random().nextInt(2) + fortune;
+	}
 }
