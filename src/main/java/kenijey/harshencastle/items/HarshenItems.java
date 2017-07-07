@@ -1,5 +1,7 @@
 package kenijey.harshencastle.items;
 
+import java.util.ArrayList;
+
 import kenijey.harshencastle.HarshenCastle;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -19,6 +21,7 @@ public class HarshenItems
 	public static Item pontus_ring;
 	public static Item bloody_earring;
 	public static Item blood_essence;
+	public static Item bucket_dimensional_liquid;
 	
 	
 	public static void preInit()
@@ -33,6 +36,7 @@ public class HarshenItems
 		pontus_ring = new PontusRing();
 		bloody_earring = new BloodyEarring();
 		blood_essence = new BloodEssence();
+		bucket_dimensional_liquid = new HarshenBucketDimensionalFluid();
 	}
 	
 	public static void reg()
@@ -47,24 +51,20 @@ public class HarshenItems
 		regItem(pontus_ring, 1);
 		regItem(bloody_earring, 1);
 		regItem(blood_essence, 8);
+		regItem(bucket_dimensional_liquid,1);
 	}
+	
+	public static ArrayList<Item> items = new ArrayList<Item>();
 	
 	public static void regRenders()
 	{
-		regRender(harshen_soul_fragment);
-		regRender(soul_harsher_sword);
-		regRender(soul_harsher_pickaxe);
-		regRender(item_harshen_dimensional_door);
-		regRender(itium);
-		regRender(harshen_essence);
-		regRender(harshen_soul_ingot);
-		regRender(pontus_ring);
-		regRender(bloody_earring);
-		regRender(blood_essence);
+		for(Item item : items)
+			regRender(item);
 	}
 	
 	public static void regItem(Item item, int stackSize)
 	{
+		items.add(item);
 		item.setMaxStackSize(stackSize);
 		ForgeRegistries.ITEMS.register(item);
 	}

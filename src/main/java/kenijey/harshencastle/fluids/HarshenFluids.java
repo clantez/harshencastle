@@ -19,7 +19,7 @@ public class HarshenFluids {
 
 	
 	public static Fluid dimensional_fluid;
-	public static Block dimensional;
+	public static Block dimensional_fluid_block;
 
 	public static void register()
 	{
@@ -27,7 +27,7 @@ public class HarshenFluids {
 		dimensional_fluid.setViscosity(1000);
 		dimensional_fluid.setDensity(500);
         FluidRegistry.addBucketForFluid(dimensional_fluid);
-        dimensional = registerFluidBlock(dimensional_fluid, new BlockDimensionalFluid(dimensional_fluid), "dimensional_fluid");
+        dimensional_fluid_block = registerFluidBlock(dimensional_fluid, new BlockDimensionalFluid(dimensional_fluid), "dimensional_fluid");
 	}
 	
 	public static Block registerFluidBlock(Fluid fluid, Block fluidBlock, String name)
