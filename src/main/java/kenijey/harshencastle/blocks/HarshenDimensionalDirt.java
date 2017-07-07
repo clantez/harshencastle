@@ -24,6 +24,7 @@ public class HarshenDimensionalDirt extends Block
         setHarvestLevel("shovel", 3);
         setHardness(2500.0f);
         setResistance(2500.0f);
+        blockSoundType = blockSoundType.GROUND;
     }
 
 	@Override

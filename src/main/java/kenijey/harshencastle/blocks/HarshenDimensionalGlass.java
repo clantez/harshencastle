@@ -21,6 +21,7 @@ public class HarshenDimensionalGlass extends BlockGlass
 		setHarvestLevel("pickaxe", 3);
         setHardness(2500.0f);
         setResistance(2500.0f);
+        blockSoundType = blockSoundType.GLASS;
 	}
 	
 	@Override
@@ -46,7 +47,5 @@ public class HarshenDimensionalGlass extends BlockGlass
 		{
 			player.sendMessage((ITextComponent) new TextComponentTranslation("message.broken"));
 		}
-
-
 	}
 }

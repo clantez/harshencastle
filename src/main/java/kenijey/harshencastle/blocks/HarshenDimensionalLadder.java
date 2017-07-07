@@ -12,5 +12,6 @@ public class HarshenDimensionalLadder extends BlockLadder
         setHarvestLevel("pickaxe", 3);
         setHardness(2500.0f);
         setResistance(2500.0f);
+        blockSoundType = blockSoundType.LADDER;
 	}
 }

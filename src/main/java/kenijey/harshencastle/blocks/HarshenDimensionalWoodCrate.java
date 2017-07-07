@@ -17,5 +17,6 @@ public class HarshenDimensionalWoodCrate extends HarshenBlockCastle
 		super(Material.WOOD);
         setUnlocalizedName("harshen_dimensional_wood_crate");
         setRegistryName("harshen_dimensional_wood_crate");
+        blockSoundType = blockSoundType.WOOD;
 	}
 }
