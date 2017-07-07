@@ -10,7 +10,7 @@ public class RegistryHandler
 	{
 		HarshenBlocks.regRenders();
 		HarshenItems.regRenders();
-		HarshenArmors.registerRenders();
+		HarshenArmors.regRenders();
 	}
 	
 	public static void PreInitCommon()

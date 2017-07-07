@@ -36,7 +36,7 @@ public class HarshenArmors
 		
 	}
 	
-	public static void registerRenders()
+	public static void regRenders()
 	{
 		registerItem(harshen_jaguar_armor_helmet);
 		registerItem(harshen_jaguar_armor_chestplate);
