@@ -111,7 +111,7 @@ public class SoulReminder extends Block
 		worldIn.scheduleBlockUpdate(pos, this, 10, 3);
 		if(world != null && pos != null)
 			if (world instanceof WorldServer)
-				((WorldServer)world).spawnParticle(EnumParticleTypes.CLOUD, false, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 7,  0.3, 0.1, 0.3, 0, new int[EnumParticleTypes.CLOUD.getArgumentCount()]);
+				((WorldServer)world).spawnParticle(EnumParticleTypes.CLOUD, false, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 7,  0.3, 0.2, 0.3, 0, new int[EnumParticleTypes.CLOUD.getArgumentCount()]);
 		super.updateTick(worldIn, pos, state, rand);
 	}
 	
@@ -119,7 +119,7 @@ public class SoulReminder extends Block
 	public boolean addHitEffects(IBlockState state, World worldObj, RayTraceResult target, ParticleManager manager) {
 		if(world != null && pos != null)
 			if (world instanceof WorldServer)
-				((WorldServer)world).spawnParticle(EnumParticleTypes.CLOUD, false, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 8,  0.8, 0.7, 0.7, 0, new int[EnumParticleTypes.CLOUD.getArgumentCount()]);
+				((WorldServer)world).spawnParticle(EnumParticleTypes.CLOUD, false, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 20,  0.7, 0.7, 0.7, 0, new int[EnumParticleTypes.CLOUD.getArgumentCount()]);
 		return super.addHitEffects(state, worldObj, target, manager);
 	}
 	

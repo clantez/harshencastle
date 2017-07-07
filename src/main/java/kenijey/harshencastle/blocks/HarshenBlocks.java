@@ -24,6 +24,7 @@ public class HarshenBlocks {
 	public static Block harshen_dimensional_pressure_plate;
 	public static Block harshen_dimensional_flat_plate;
 	public static Block soul_reminder;
+	public static Block harshen_dimensional_wood_crate;
 
 	public static void preInit() {
 		harshen_soul_ore = new HarshenSoulOre();
@@ -37,21 +38,23 @@ public class HarshenBlocks {
 		harshen_dimensional_pressure_plate = new HarshenDimensionalPlate();
 		harshen_dimensional_flat_plate = new HarshenDimensionalFlatPlate();
 		soul_reminder = new SoulReminder();
+		harshen_dimensional_wood_crate = new HarshenDimensionalWoodCrate();
 	}
 
 	public static void reg() {
 		regBlock(harshen_dimensional_stone, 64);
 		regBlock(harshen_hidden_plate,64);
-		regSingleBlock(harshen_hidden_plate_active);
 		regBlock(harshen_dimensional_pressure_plate, 64);
 		regBlock(harshen_dimensional_flat_plate, 64);
 		regBlock(harshen_dimensional_stairs,64);
 		regBlock(harshen_dimensional_glass,64);
 		regBlock(harshen_dimensional_ladder,64);
-		regSingleBlock(harshen_dimensional_door);
-	
-		regBlock(soul_reminder,1);
 		regBlock(harshen_soul_ore, 64);
+		regBlock(harshen_dimensional_wood_crate, 64);
+
+		regSingleBlock(harshen_dimensional_door);
+		regSingleBlock(harshen_hidden_plate_active);
+		regBlock(soul_reminder,1);
 	}
 
 	public static void regRenders() {
