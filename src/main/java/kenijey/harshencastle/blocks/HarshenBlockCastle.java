@@ -14,13 +14,23 @@ public class HarshenBlockCastle extends Block
 {
 
 	public HarshenBlockCastle() {
-		this(Material.ROCK);
+		this(Material.ROCK, "pickaxe");
 	}
 	
 	public HarshenBlockCastle(Material material)
 	{
+		this(material, "pickaxe");
+	}
+	
+	public HarshenBlockCastle(String harvestTool)
+	{
+		this(Material.ROCK, harvestTool);
+	}
+	
+	public HarshenBlockCastle(Material material,String harvestTool)
+	{
 		super(material);
-		setHarvestLevel("pickaxe", 3);
+		setHarvestLevel(harvestTool, 3);
 		setHardness(2500.0F);
 		setResistance(2500.0F);
 	}
