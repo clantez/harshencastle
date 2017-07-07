@@ -1,6 +1,8 @@
 package kenijey.harshencastle.armor;
 
 import kenijey.harshencastle.HarshenCastle;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
@@ -29,25 +31,29 @@ public class HarshenArmors
 	
 	public static void register()
 	{
-		registerItem(harshen_jaguar_armor_helmet);
-		registerItem(harshen_jaguar_armor_chestplate);
-		registerItem(harshen_jaguar_armor_leggings);
-		registerItem(harshen_jaguar_armor_boots);
+		regItem(harshen_jaguar_armor_helmet);
+		regItem(harshen_jaguar_armor_chestplate);
+		regItem(harshen_jaguar_armor_leggings);
+		regItem(harshen_jaguar_armor_boots);
 		
 	}
 	
 	public static void regRenders()
 	{
-		registerItem(harshen_jaguar_armor_helmet);
-		registerItem(harshen_jaguar_armor_chestplate);
-		registerItem(harshen_jaguar_armor_leggings);
-		registerItem(harshen_jaguar_armor_boots);
+		regRender(harshen_jaguar_armor_helmet);
+		regRender(harshen_jaguar_armor_chestplate);
+		regRender(harshen_jaguar_armor_leggings);
+		regRender(harshen_jaguar_armor_boots);
 	}
 	
-	public static void registerItem(Item item)
+	public static void regItem(Item item)
 	{
-		item.setCreativeTab(HarshenCastle.harshenTab);
 		ForgeRegistries.ITEMS.register(item);
 	}
 
+	public static void regRender(Item item)
+	{
+		item.setCreativeTab(HarshenCastle.harshenTab);
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
+	}
 }
