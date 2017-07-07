@@ -1,16 +1,3 @@
------------------------------STRUCTURES--------------------------
-HARSHEN FLYLAND 
--second structure, such a flying island on sky
--made from harshen dimensional dirt(mainly)
--has different mobs and boss
--has same gate in castle, sends the player to Pontus world
-
-HARSHEN STUNSHIP
--third structure, such normal ship
--made from dimensional wood crate(mainly)
--has different mobs and boss
--has same gate in castle, sends the player to Pontus world
-
 -------------------------ITEMS/BLOCKS----------------------------
 HARSHEN SOUL FRAGMENT
  -used to craft pontus ring
@@ -55,6 +42,19 @@ PONTUS RING
 HEALING EARRING
 -thut wearables mod dependency is coming
 -regenerates 1 hearth (2hp) every 10 seconds
+
+-----------------------------STRUCTURES--------------------------
+HARSHEN FLYLAND 
+-second structure, such a flying island on sky
+-made from harshen dimensional dirt(mainly)
+-has different mobs and boss
+-has same gate in castle, sends the player to Pontus world
+
+HARSHEN STUNSHIP
+-third structure, such normal ship
+-made from dimensional wood crate(mainly)
+-has different mobs and boss
+-has same gate in castle, sends the player to Pontus world
 
 --------------------------MOBS----------------------------------
 KAZZANDRE
