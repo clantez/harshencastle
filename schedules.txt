@@ -24,6 +24,30 @@ ITIUM ORE
 -found in Pontus world
 -used to crafting something expensive and very useful/cool in future
 
+HARSHEN DIMENSIONAL DIRT
+-can't be hoed
+-if you place any plant on it, that plant will turn into harshen destroyed plant
+
+HARSHEN DESTROYED PLANT
+-drops nothing, harvest nothing, no growment(just like dead bush)
+
+-HARSHEN SOUL PLANT
+-generated randomly in world
+-drops 1x harshen essence
+-has no seeds
+
+HARSHEN ESSENCE
+-used to craft harshen ingot
+-crafting recipe: 
+h=harshen essence
+e=emerald
+{e e}
+{ h }
+{e e}
+
+HARSHEN ARMOR SET
+-properties coming soon...
+
 MOBS
 -kazzendre(boss)
 -soulless knight (powerful)
