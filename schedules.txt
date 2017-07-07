@@ -48,6 +48,10 @@ e=emerald
 HARSHEN ARMOR SET
 -properties coming soon...
 
+PONTUS RING
+-need baubles mod?...
+-applies strength 1 and resistance 1 effects if equipped by player
+
 MOBS
 -kazzendre(boss)
 -soulless knight (powerful)
