@@ -31,7 +31,7 @@ HARSHEN JAGUAR ARMOR SET
 PONTUS RING
 -applies strength 1 and resistance 1 effects if equipped/worn by player
 
-HEALING EARRING
+BLOODY EARRING
 -regenerates 1 hearth (2hp) every 10 seconds
 
 -----------------------------STRUCTURES--------------------------
