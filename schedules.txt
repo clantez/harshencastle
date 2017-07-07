@@ -1,11 +1,4 @@
 -------------------------ITEMS/BLOCKS----------------------------
-HARSHEN DIMENSIONAL LIQUID 
--main land liquid of pontus world, found only in there
--used to crafting something in future...
--pick-up-able with bucket
--turns any block into harshen dimensional dirt it touch
--applies slowness1 and nausea effect for 15 seconds
-
 ITIUM ORE
 -found in Pontus world
 
