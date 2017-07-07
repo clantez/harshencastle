@@ -15,18 +15,13 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class HarshenHiddenPlateActive extends Block
+public class HarshenHiddenPlateActive extends HarshenBlockCastle
 {
 	
 	public HarshenHiddenPlateActive() {
-		super(Material.ROCK);
 		setTickRandomly(true);
         setUnlocalizedName("harshen_dimensional_plate_active");
-        setRegistryName("harshen_dimensional_plate_active");
-        setHarvestLevel("pickaxe", 3);
-        setHardness(2500.0f);
-        setResistance(2500.0f);
-		
+        setRegistryName("harshen_dimensional_plate_active");		
 	}
 	
 	@Override

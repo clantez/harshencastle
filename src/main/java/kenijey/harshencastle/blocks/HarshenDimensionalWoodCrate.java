@@ -10,32 +10,11 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
-public class HarshenDimensionalWoodCrate extends Block
+public class HarshenDimensionalWoodCrate extends HarshenBlockCastle
 {
 	public HarshenDimensionalWoodCrate()
 	{
-		super(Material.WOOD);
         setUnlocalizedName("harshen_dimensional_wood_crate");
         setRegistryName("harshen_dimensional_wood_crate");
-        setHarvestLevel("axe", 3);
-        setHardness(2500.0f);
-        setResistance(2500.0f);
-	}
-	
-	@Override
-	public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) 
-	{
-		if(player.capabilities.isCreativeMode)
-		{
-			super.onBlockHarvested(worldIn, pos, state, player);
-			return;
-		}
-		player.attackEntityFrom(DamageSource.MAGIC, 21);
-		if(!worldIn.isRemote)
-		{
-			player.sendMessage((ITextComponent) new TextComponentTranslation("message.broken"));
-		}
-
-
 	}
 }

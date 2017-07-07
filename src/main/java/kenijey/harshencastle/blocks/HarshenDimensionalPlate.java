@@ -17,19 +17,15 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class HarshenDimensionalPlate extends Block {
+public class HarshenDimensionalPlate extends HarshenBlockCastle {
 	
 	
     public static final PropertyBool POWERED = PropertyBool.create("powered");
 
 	public HarshenDimensionalPlate() {
-		super(Material.ROCK);
 		setUnlocalizedName("harshen_dimensional_pressure_plate");
 		setRegistryName("harshen_dimensional_pressure_plate");
 		this.setDefaultState(this.blockState.getBaseState().withProperty(POWERED, Boolean.valueOf(false)));
-		setHarvestLevel("pickaxe", 3);
-		setHardness(2500.0f);
-		setResistance(2500.0f);
 	}
 
 	@Override

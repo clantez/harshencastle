@@ -2,23 +2,19 @@ package kenijey.harshencastle.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class HarshenHiddenPlate extends Block
+public class HarshenHiddenPlate extends HarshenBlockCastle
 {
 
 	
 	public HarshenHiddenPlate() {
-		super(Material.ROCK);
         setUnlocalizedName("harshen_dimensional_plate");
-        setRegistryName("harshen_dimensional_plate");
-        setHarvestLevel("pickaxe", 3);
-        setHardness(2500.0f);
-        setResistance(2500.0f);
-		
+        setRegistryName("harshen_dimensional_plate");		
 	}
 
 	@Override
