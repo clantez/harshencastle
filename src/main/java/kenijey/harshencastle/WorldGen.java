@@ -39,7 +39,7 @@ public class WorldGen implements IWorldGenerator
 		switch (world.provider.getDimension()) {
 	    case 0:
 	    	oreGenerator(this.ore, world, random, chunkX, chunkZ, 10, 0, 20);
-	    	flowerGenerator(world, random, chunkX, chunkZ, 5/**THE LOWER THE BETTER*/);
+	    	flowerGenerator(world, random, chunkX, chunkZ, 5/**MAX 100*/);
 	        break;
 	    default:
 	    	break;
@@ -64,8 +64,9 @@ public class WorldGen implements IWorldGenerator
 	
 	private void flowerGenerator(World worldIn, Random rand, int chunk_X, int chunk_Z, int chancesToSpawn)
 	{
-		for(int i = 0; i < chancesToSpawn; i++)
-			if(rand.nextInt(3000) == 0)
+		if(chancesToSpawn > 100)
+			return;
+		for(int i = 0; i < 101 - chancesToSpawn; i++)
 				return;
 		int x = chunk_X * 16 + rand.nextInt(16);
 		int z = chunk_Z * 16 + rand.nextInt(16);
