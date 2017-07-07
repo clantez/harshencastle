@@ -3,7 +3,7 @@
   "modid": "harshencastle",
   "name": "Harshen Castle",
   "description": "Spawns a castle has traps, scary mobs and a powerful boss inside.",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "mcversion": "1.12",
   "url": "",
   "updateUrl": "",
