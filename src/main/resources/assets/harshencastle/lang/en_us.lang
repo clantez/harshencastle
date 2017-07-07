@@ -28,9 +28,7 @@ tile.soul_reminder.name=Soul Reminder
 tile.harshen_dimensional_dirt.name=Harshen Dimensional Dirt
 tile.harshen_dimensional_wood_crate.name=Harshen Dimensional Wood Crate
 tile.itium_ore.name=Itium Ore
-ore1=May contain Death
-ore2=if broken without
-ore3=Soul Harsher Pickaxe
+tile.harshen_destroyed_plant.name=Harshen Destroyed Plant
 
 
 
@@ -49,7 +47,9 @@ pickaxe1=A pickaxe used to
 pickaxe2=mine Harshen Soul Ore
 pontus1=Inveokes the power
 pontus2=of the old Koschei
-
+ore1=May contain Death
+ore2=if broken without
+ore3=Soul Harsher Pickaxe
 
 
 #misc
