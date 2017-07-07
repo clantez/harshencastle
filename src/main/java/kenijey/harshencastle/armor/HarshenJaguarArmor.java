@@ -13,7 +13,4 @@ public class HarshenJaguarArmor extends ItemArmor
 		this.setUnlocalizedName(name);
 		this.setRegistryName(new ResourceLocation("harshencastle", name));
 	}
-	
-	
-
 }
