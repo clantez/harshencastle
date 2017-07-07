@@ -14,6 +14,7 @@ public class HarshenItems
 	public static Item item_harshen_dimensional_door;
 	public static Item itium;
 	public static Item harshen_essence;
+	public static Item harshen_soul_ingot;
 	public static void preInit()
 	{
 		harshen_soul_fragment = new HarshenSoulFragment();
@@ -22,6 +23,7 @@ public class HarshenItems
 		item_harshen_dimensional_door = new HarshenDimensionalDoor();
 		itium = new Itium();
 		harshen_essence = new HarshenEssence();
+		harshen_soul_ingot = new HarshenSoulIngot();
 	}
 	
 	public static void reg()
@@ -29,9 +31,10 @@ public class HarshenItems
 		regItem(harshen_soul_fragment, 8);
 		regItem(soul_harsher_sword, 1);
 		regItem(soul_harsher_pickaxe, 1);
-		regItem(item_harshen_dimensional_door,16);
-		regItem(itium,16);
+		regItem(item_harshen_dimensional_door,8);
+		regItem(itium,8);
 		regItem(harshen_essence, 8);
+		regItem(harshen_soul_ingot, 8);
 	}
 	
 	public static void regRenders()
@@ -42,6 +45,7 @@ public class HarshenItems
 		regRender(item_harshen_dimensional_door);
 		regRender(itium);
 		regRender(harshen_essence);
+		regRender(harshen_soul_ingot);
 	}
 	
 	public static void regItem(Item item, int stackSize)
