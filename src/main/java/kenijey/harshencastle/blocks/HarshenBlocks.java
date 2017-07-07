@@ -26,6 +26,7 @@ public class HarshenBlocks {
 	public static Block soul_reminder;
 	public static Block harshen_dimensional_wood_crate;
 	public static Block harshen_dimensional_dirt;
+	public static Block itium_ore;
 
 	public static void preInit() {
 		harshen_soul_ore = new HarshenSoulOre();
@@ -41,6 +42,7 @@ public class HarshenBlocks {
 		soul_reminder = new SoulReminder();
 		harshen_dimensional_wood_crate = new HarshenDimensionalWoodCrate();
 		harshen_dimensional_dirt = new HarshenDimensionalDirt();
+		itium_ore = new ItiumOre();
 	}
 
 	public static void reg() {
@@ -54,6 +56,7 @@ public class HarshenBlocks {
 		regBlock(harshen_soul_ore, 64);
 		regBlock(harshen_dimensional_wood_crate, 64);
 		regBlock(harshen_dimensional_dirt, 64);
+		regBlock(itium_ore, 64);
 
 		regSingleBlock(harshen_dimensional_door);
 		regSingleBlock(harshen_hidden_plate_active);

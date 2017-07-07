@@ -12,7 +12,6 @@ HARSHEN DIMENSIONAL LIQUID
 
 ITIUM ORE
 -found in Pontus world
--used to crafting something expensive and very useful/cool in future
 
 HARSHEN DESTROYED PLANT
 -drops nothing, harvest nothing, no growment(just like dead bush)
