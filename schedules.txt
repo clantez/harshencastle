@@ -16,9 +16,6 @@ SOUL REMINDER
 ITIUM ORE
 -found in Pontus world
 
-HARSHEN DESTROYED PLANT
--drops nothing, harvest nothing, no growment(just like dead bush)
-
 -HARSHEN SOUL FLOWER
 -generated randomly in world
 -drops 1x harshen essence
