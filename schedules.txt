@@ -9,17 +9,10 @@ HARSHEN DIMENSIONAL LIQUID
 -found in Pontus world
 -pick-up-able with bucket
 -turns any block into harshen dimensional dirt it touch
-
-SOUL REMINDER
--applies nausea effect when player touches it (get on/in)
+-applies slowness1 and nausea effect for 15 seconds
 
 ITIUM ORE
 -found in Pontus world
-
--HARSHEN SOUL FLOWER
--generated randomly in world
--drops 1x harshen essence
--has no seeds
 
 HARSHEN SOUL INGOT
 -used to craft harshen jaguar armor(recipes)
