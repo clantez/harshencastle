@@ -46,7 +46,7 @@ public class PlantOfGleamNature extends BlockFlower
 	
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		int[] luck = {65,75,90,100};
+		int[] luck = {50,60,80,100};
 		if(rand.nextInt(101) <= luck[fortune])
 			return HarshenItems.light_emitted_seed;
 		return null;
