@@ -30,6 +30,7 @@ public class HarshenBlocks {
 	public static Block itium_ore;
 	public static Block harshen_destroyed_plant;
 	public static BlockFlower harshen_soul_flower;
+	public static Block harshen_dimensional_rock;
 
 	public static void preInit() {
 		harshen_soul_ore = new HarshenSoulOre();
@@ -48,6 +49,7 @@ public class HarshenBlocks {
 		itium_ore = new ItiumOre();
 		harshen_destroyed_plant = new HarshenDestroyedPlant();
 		harshen_soul_flower = new HarshenSoulFlower();
+		harshen_dimensional_rock = new HarshenDimensionalRock();
 	}
 
 	public static void reg() {
@@ -65,6 +67,7 @@ public class HarshenBlocks {
 		regBlock(harshen_destroyed_plant,64);
 		regBlock(harshen_soul_flower, 64);
 		regBlock(soul_reminder,1);
+		regBlock(harshen_dimensional_rock, 64);
 
 		regSingleBlock(harshen_dimensional_door);
 		regSingleBlock(harshen_hidden_plate_active);

@@ -18,9 +18,6 @@ ITIUM ORE
 HARSHEN JAGUAR ARMOR SET
 -when all the set worn, applies night vision 1 and fire resistance 1 effects
 
-HARSHEN DIMENSIONAL ROCK
--same properties with HD stone, only texture is different
-
 BLOOD
 -just like redstone, but blood. will make the textures correctly
 -placeable on blocks just like redstone, but can only be get/dropped by breaking if player has a blood collector
@@ -40,8 +37,8 @@ BLOODY EARRING
 -regenerates 1 hearth (2hp) every 10 seconds
 
 ------------------------PONTUS WORLD------------------------------
--land biome generated with H.D. dirt, H.D. fluid
--some ruins can be found that built with H.D. wood crate and (different) H.D. stone
+-land biome generated with HD dirt, HD fluid and HD rock
+-some ruins can be found that built with HD wood crate and (different) HD stone
 -sky is dark red, no sun or moon
 -if player dies in pontus world, he will respawn on the first point he came from overworld
 
