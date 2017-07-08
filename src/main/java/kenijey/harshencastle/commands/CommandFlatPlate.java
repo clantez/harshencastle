@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import kenijey.harshencastle.blocks.HarshenBlocks;
+import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.blocks.HarshenDimensionalFlatPlate;
 import kenijey.harshencastle.blocks.HarshenSoulOre;
 import net.minecraft.block.Block;

@@ -1,6 +1,6 @@
 package kenijey.harshencastle.creativetabs;
 
-import kenijey.harshencastle.items.HarshenItems;
+import kenijey.harshencastle.HarshenItems;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 

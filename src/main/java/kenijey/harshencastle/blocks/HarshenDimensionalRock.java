@@ -1,7 +1,7 @@
 package kenijey.harshencastle.blocks;
 
 import kenijey.harshencastle.HarshenCastle;
-import kenijey.harshencastle.items.HarshenItems;
+import kenijey.harshencastle.HarshenItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

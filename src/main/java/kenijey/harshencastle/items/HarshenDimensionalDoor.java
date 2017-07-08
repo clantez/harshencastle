@@ -2,8 +2,8 @@ package kenijey.harshencastle.items;
 
 import java.util.Arrays;
 
+import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenCastle;
-import kenijey.harshencastle.blocks.HarshenBlocks;
 import kenijey.harshencastle.blocks.HarshenDimensionalPlate;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;

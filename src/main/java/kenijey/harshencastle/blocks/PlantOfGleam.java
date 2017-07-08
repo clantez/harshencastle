@@ -19,12 +19,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class HarshenSoulFlower extends BlockFlower
+public class PlantOfGleam extends BlockFlower
 {
 	
-	public HarshenSoulFlower() {
-		setUnlocalizedName("harshen_soul_flower");
-        setRegistryName("harshen_soul_flower");
+	public PlantOfGleam() {
+		setUnlocalizedName("plant_of_gleam_nature");
+        setRegistryName("plant_of_gleam_nature");
         blockSoundType = blockSoundType.PLANT;
 	}
 	

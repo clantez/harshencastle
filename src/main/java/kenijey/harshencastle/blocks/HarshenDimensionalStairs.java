@@ -1,5 +1,6 @@
 package kenijey.harshencastle.blocks;
 
+import kenijey.harshencastle.HarshenBlocks;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,7 +13,7 @@ import net.minecraft.world.World;
 public class HarshenDimensionalStairs extends BlockStairs
 {
 
-	protected HarshenDimensionalStairs() {
+	public HarshenDimensionalStairs() {
 		super(HarshenBlocks.harshen_dimensional_stone.getDefaultState());
 		setUnlocalizedName("harshen_dimensional_stairs");
 		setRegistryName("harshen_dimensional_stairs");

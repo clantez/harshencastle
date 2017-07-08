@@ -19,6 +19,8 @@ item.pontus_world_gate_part_1.name=Pontus World Gate Spawner First Part
 item.pontus_world_gate_part_2.name=Pontus World Gate Spawner Second Part
 item.pontus_world_gate_part_3.name=Pontus World Gate Spawner Third Part
 item.pontus_world_gate_spawner.name=Pontus World Gate Spawner
+item.light_emitted_seed.name=Light Emitted Seed
+item.light_emitted_essence.name=Light Emitted Essence
 
 #blocks
 tile.harshen_soul_ore.name=Harshen Soul Ore

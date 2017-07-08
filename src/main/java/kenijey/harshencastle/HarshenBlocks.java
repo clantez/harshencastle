@@ -1,8 +1,25 @@
-package kenijey.harshencastle.blocks;
+package kenijey.harshencastle;
 
 import java.util.ArrayList;
 
-import kenijey.harshencastle.HarshenCastle;
+import kenijey.harshencastle.blocks.HarshenDestroyedPlant;
+import kenijey.harshencastle.blocks.HarshenDimensionalDirt;
+import kenijey.harshencastle.blocks.HarshenDimensionalDoor;
+import kenijey.harshencastle.blocks.HarshenDimensionalFlatPlate;
+import kenijey.harshencastle.blocks.HarshenDimensionalGlass;
+import kenijey.harshencastle.blocks.HarshenDimensionalLadder;
+import kenijey.harshencastle.blocks.HarshenDimensionalPedestal;
+import kenijey.harshencastle.blocks.HarshenDimensionalPlate;
+import kenijey.harshencastle.blocks.HarshenDimensionalRock;
+import kenijey.harshencastle.blocks.HarshenDimensionalStairs;
+import kenijey.harshencastle.blocks.HarshenDimensionalStone;
+import kenijey.harshencastle.blocks.HarshenDimensionalWoodCrate;
+import kenijey.harshencastle.blocks.HarshenHiddenPlate;
+import kenijey.harshencastle.blocks.HarshenHiddenPlateActive;
+import kenijey.harshencastle.blocks.HarshenSoulFlower;
+import kenijey.harshencastle.blocks.HarshenSoulOre;
+import kenijey.harshencastle.blocks.ItiumOre;
+import kenijey.harshencastle.blocks.SoulReminder;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.client.Minecraft;

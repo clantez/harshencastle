@@ -2,8 +2,9 @@ package kenijey.harshencastle.blocks;
 
 import java.util.Random;
 
+import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenCastle;
-import kenijey.harshencastle.items.HarshenItems;
+import kenijey.harshencastle.HarshenItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.BlockDirt;

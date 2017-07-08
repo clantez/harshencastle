@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import kenijey.harshencastle.HarshenCastle;
-import kenijey.harshencastle.items.HarshenItems;
+import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.items.SoulHarsherPickaxe;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;

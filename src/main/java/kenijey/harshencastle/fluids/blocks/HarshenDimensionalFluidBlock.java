@@ -2,7 +2,7 @@ package kenijey.harshencastle.fluids.blocks;
 
 import java.util.List;
 
-import kenijey.harshencastle.blocks.HarshenBlocks;
+import kenijey.harshencastle.HarshenBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.BlockDirt;

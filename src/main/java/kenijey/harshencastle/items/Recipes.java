@@ -1,5 +1,6 @@
 package kenijey.harshencastle.items;
 
+import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.armor.HarshenArmors;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;

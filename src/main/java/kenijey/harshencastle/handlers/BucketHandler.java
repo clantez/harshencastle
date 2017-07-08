@@ -1,8 +1,8 @@
 package kenijey.harshencastle.handlers;
 
+import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.fluids.HarshenDimensionalFluid;
 import kenijey.harshencastle.fluids.blocks.HarshenDimensionalFluidBlock;
-import kenijey.harshencastle.items.HarshenItems;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;

@@ -1,8 +1,24 @@
-package kenijey.harshencastle.items;
+package kenijey.harshencastle;
 
 import java.util.ArrayList;
 
-import kenijey.harshencastle.HarshenCastle;
+import kenijey.harshencastle.items.BloodEssence;
+import kenijey.harshencastle.items.BloodyEarring;
+import kenijey.harshencastle.items.HarshenDimensionalDoor;
+import kenijey.harshencastle.items.HarshenDimensionalFluidBucket;
+import kenijey.harshencastle.items.HarshenEssence;
+import kenijey.harshencastle.items.HarshenSoulFragment;
+import kenijey.harshencastle.items.HarshenSoulIngot;
+import kenijey.harshencastle.items.Itium;
+import kenijey.harshencastle.items.LightEmittedEssence;
+import kenijey.harshencastle.items.LightEmittedSeed;
+import kenijey.harshencastle.items.PontusRing;
+import kenijey.harshencastle.items.PontusWorldGatePart1;
+import kenijey.harshencastle.items.PontusWorldGatePart2;
+import kenijey.harshencastle.items.PontusWorldGatePart3;
+import kenijey.harshencastle.items.PontusWorldGateSpawner;
+import kenijey.harshencastle.items.SoulHarsherPickaxe;
+import kenijey.harshencastle.items.SoulHarsherSword;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -26,6 +42,8 @@ public class HarshenItems
 	public static Item pontus_world_gate_part_2;
 	public static Item pontus_world_gate_part_3;
 	public static Item pontus_world_gate_spawner;
+	public static Item light_emitted_seed;
+	public static Item light_emitted_essence;
 	
 	
 	public static void preInit()
@@ -45,6 +63,8 @@ public class HarshenItems
 		pontus_world_gate_part_2 = new PontusWorldGatePart2();
 		pontus_world_gate_part_3 = new PontusWorldGatePart3();
 		pontus_world_gate_spawner = new PontusWorldGateSpawner();
+		light_emitted_seed = new LightEmittedSeed();
+		light_emitted_essence = new LightEmittedEssence();
 	}
 	
 	public static void reg()
@@ -64,6 +84,8 @@ public class HarshenItems
 		regItem(pontus_world_gate_part_2,1);
 		regItem(pontus_world_gate_part_3,1);
 		regItem(pontus_world_gate_spawner,1);
+		regItem(light_emitted_essence,8);
+		regItem(light_emitted_seed,16);
 	}
 	
 	public static ArrayList<Item> items = new ArrayList<Item>();

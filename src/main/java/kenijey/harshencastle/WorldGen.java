@@ -4,7 +4,6 @@ import java.util.Random;
 
 import com.google.common.base.Predicate;
 
-import kenijey.harshencastle.blocks.HarshenBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlower.EnumFlowerType;
 import net.minecraft.block.BlockStone;
