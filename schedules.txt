@@ -1,9 +1,37 @@
--------------------------ITEMS/BLOCKS----------------------------
+--------------------------ITEMS/BLOCKS----------------------------
+Pontus World Dimensional Gate (First-Second-Third) Part(s)
+-shapeless crafting recipe that results Pontus World Dimensional Gate
+-found in chests in structures in overworld
+
+PONTUS WORLD DIMENSIONAL GATE
+-it's multiblock, made from dimensional stones and the real gate in it (small area, 3x4x4)
+-will be despawn(destroyed) after 1 min after placed
+-there will be gate will spawn near the player spawned in pontus world to turn back the overworld
+
+NEW PLANT(not named yet)
+-can be only grown on harshen dimensional dirt
+-after planted on HD dirt, it spawns (item entity) an item (not named yet and decided what) every 5 mins
+
 ITIUM ORE
--found in Pontus world
+-found in Pontus world(1 in 2x2 chunks area)
 
 HARSHEN JAGUAR ARMOR SET
--properties coming soon...
+-when all the set worn, applies night vision 1 and fire resistance 1 effects
+
+HARSHEN DIMENSIONAL ROCK
+-same properties with HD stone, only texture is different
+
+BLOOD
+-just like redstone, but blood. will make the textures correctly
+-placeable on blocks just like redstone, but can only be get/dropped by breaking if player has a blood collector
+
+BLOOD COLLECTOR
+-used to collect bloods on ground(right clicking)
+-made from iron nuggets and ingot(will make the recipe)
+-has blood capacity up to 80 bloods (0/80 empty) (shown in tooltip)
+
+-----------ACCESSORY-----------
+slots:earrings(x2) pendant(x1) rings(x2) //todo
 
 PONTUS RING
 -applies strength 1 and resistance 1 effects if equipped/worn by player
@@ -11,10 +39,13 @@ PONTUS RING
 BLOODY EARRING
 -regenerates 1 hearth (2hp) every 10 seconds
 
----------ACCESSORY SLOTS-----------
-todo
+------------------------PONTUS WORLD------------------------------
+-land biome generated with H.D. dirt, H.D. fluid
+-some ruins can be found that built with H.D. wood crate and (different) H.D. stone
+-sky is dark red, no sun or moon
+-if player dies in pontus world, he will respawn on the first point he came from overworld
 
------------------------------STRUCTURES--------------------------
+----------------------------STRUCTURES--------------------------
 HARSHEN FLYLAND 
 -second structure, such a flying island on sky
 -made from harshen dimensional dirt(mainly)
@@ -27,7 +58,21 @@ HARSHEN STUNSHIP
 -has different mobs and boss
 -has same gate in castle, sends the player to Pontus world
 
---------------------------MOBS----------------------------------
+HARSHEN GIGANTIC CAVE
+-has the boss harshen dimensional golem(no special name)
+-has NO gate to pontus world
+-spawns not only 1 time, spawns all over the world infinite
+-has only 1 custom mob(Golem Part) except the golem boss
+-4. structure in world
+-made from HD rock
+
+--------------------------MOBS---------------------------------
+BLOODY MARY
+-has its own structure in pontus world
+-drops bloody essence (x1)
+-has a skill makes everywhere around bloody (blood block)
+-spawns not very rare, not dense
+
 KAZZANDRE
 -boss in harshen castle
 -more properties will come...

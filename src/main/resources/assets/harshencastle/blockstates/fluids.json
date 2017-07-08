@@ -1,9 +1,9 @@
 {
     "forge_marker": 1,
     "variants": {
-        "dimensional_fluid": {
+        "harshen_dimensional_fluid": {
             "model": "forge:fluid",
-            "custom": { "fluid": "dimensional_liquid" }
+            "custom": { "fluid": "harshen_dimensional_fluid" }
         }
     }
 }

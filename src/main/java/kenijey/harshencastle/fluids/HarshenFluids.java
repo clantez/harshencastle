@@ -1,7 +1,7 @@
 package kenijey.harshencastle.fluids;
 
 import kenijey.harshencastle.HarshenCastle;
-import kenijey.harshencastle.fluids.blocks.BlockDimensionalFluid;
+import kenijey.harshencastle.fluids.blocks.HarshenDimensionalFluidBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelBakery;
@@ -18,16 +18,16 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 public class HarshenFluids {
 
 	
-	public static Fluid dimensional_fluid;
-	public static Block dimensional_fluid_block;
+	public static Fluid harshen_dimensional_fluid;
+	public static Block harshen_dimensional_fluid_block;
 
 	public static void register()
 	{
-		dimensional_fluid = DimensionalFluid.instance;
-		dimensional_fluid.setViscosity(1000);
-		dimensional_fluid.setDensity(500);
-        FluidRegistry.addBucketForFluid(dimensional_fluid);
-        dimensional_fluid_block = registerFluidBlock(dimensional_fluid, new BlockDimensionalFluid(dimensional_fluid), "dimensional_fluid");
+		harshen_dimensional_fluid = HarshenDimensionalFluid.instance;
+		harshen_dimensional_fluid.setViscosity(1000);
+		harshen_dimensional_fluid.setDensity(500);
+        FluidRegistry.addBucketForFluid(harshen_dimensional_fluid);
+        harshen_dimensional_fluid_block = registerFluidBlock(harshen_dimensional_fluid, new HarshenDimensionalFluidBlock(harshen_dimensional_fluid), "harshen_dimensional_fluid");
 	}
 	
 	public static Block registerFluidBlock(Fluid fluid, Block fluidBlock, String name)

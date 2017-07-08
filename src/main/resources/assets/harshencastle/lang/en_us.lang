@@ -14,6 +14,7 @@ item.harshen_jaguar_armor_helmet.name=Harshen Jaguar Armor Helmet
 item.harshen_jaguar_armor_chestplate.name=Harshen Jaguar Armor Chestplate
 item.harshen_jaguar_armor_leggings.name=Harshen Jaguar Armor Leggings
 item.harshen_jaguar_armor_boots.name=Harshen Jaguar Armor Boots
+item.harshen_dimensional_fluid_bucket.name=Harshen Dimensional Fluid Bucket
 
 #blocks
 tile.harshen_soul_ore.name=Harshen Soul Ore
@@ -34,6 +35,7 @@ tile.harshen_dimensional_wood_crate.name=Harshen Dimensional Wood Crate
 tile.itium_ore.name=Itium Ore
 tile.harshen_destroyed_plant.name=Harshen Destroyed Plant
 tile.harshen_soul_flower.name=Harshen Soul Flower
+tile.harshen_dimensional_fluid.name=Harshen Dimensional Fluid
 
 
 #commands

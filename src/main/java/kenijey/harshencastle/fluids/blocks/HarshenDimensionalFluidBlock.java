@@ -24,9 +24,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.BlockFluidClassic;
 import net.minecraftforge.fluids.Fluid;
 
-public class BlockDimensionalFluid extends BlockFluidClassic
+public class HarshenDimensionalFluidBlock extends BlockFluidClassic
 {
-    public BlockDimensionalFluid(Fluid fluid)
+    public HarshenDimensionalFluidBlock(Fluid fluid)
     {
         super(fluid, Material.WATER);
         this.setLightOpacity(3);
@@ -67,7 +67,7 @@ public class BlockDimensionalFluid extends BlockFluidClassic
 				if(!((EntityLivingBase)entity).isInWater())
 					continue;
 				((EntityLivingBase)entity).addPotionEffect(new PotionEffect(Potion.getPotionById(9), 250));
-				((EntityLivingBase)entity).addPotionEffect(new PotionEffect(Potion.getPotionById(2), 250, 2));
+				((EntityLivingBase)entity).addPotionEffect(new PotionEffect(Potion.getPotionById(2), 250));
 			}
 				
     }

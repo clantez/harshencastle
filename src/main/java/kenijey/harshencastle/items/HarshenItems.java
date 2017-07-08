@@ -21,7 +21,7 @@ public class HarshenItems
 	public static Item pontus_ring;
 	public static Item bloody_earring;
 	public static Item blood_essence;
-	public static Item bucket_dimensional_liquid;
+	public static Item harshen_dimensional_fluid_bucket;
 	
 	
 	public static void preInit()
@@ -36,7 +36,7 @@ public class HarshenItems
 		pontus_ring = new PontusRing();
 		bloody_earring = new BloodyEarring();
 		blood_essence = new BloodEssence();
-		bucket_dimensional_liquid = new HarshenBucketDimensionalFluid();
+		harshen_dimensional_fluid_bucket = new HarshenDimensionalFluidBucket();
 	}
 	
 	public static void reg()
@@ -51,7 +51,7 @@ public class HarshenItems
 		regItem(pontus_ring, 1);
 		regItem(bloody_earring, 1);
 		regItem(blood_essence, 8);
-		regItem(bucket_dimensional_liquid,1);
+		regItem(harshen_dimensional_fluid_bucket,1);
 	}
 	
 	public static ArrayList<Item> items = new ArrayList<Item>();

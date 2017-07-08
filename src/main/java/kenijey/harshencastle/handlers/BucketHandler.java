@@ -1,7 +1,7 @@
 package kenijey.harshencastle.handlers;
 
-import kenijey.harshencastle.fluids.DimensionalFluid;
-import kenijey.harshencastle.fluids.blocks.BlockDimensionalFluid;
+import kenijey.harshencastle.fluids.HarshenDimensionalFluid;
+import kenijey.harshencastle.fluids.blocks.HarshenDimensionalFluidBlock;
 import kenijey.harshencastle.items.HarshenItems;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Items;
@@ -34,10 +34,10 @@ public class BucketHandler
         IBlockState iblockstate = event.getWorld().getBlockState(blockpos);
         Fluid filled_fluid = null;
         ItemStack bucket = null;
-        if (iblockstate.getBlock() instanceof BlockDimensionalFluid && ((Integer)iblockstate.getValue(BlockDimensionalFluid.LEVEL)).intValue() == 0)
+        if (iblockstate.getBlock() instanceof HarshenDimensionalFluidBlock && ((Integer)iblockstate.getValue(HarshenDimensionalFluidBlock.LEVEL)).intValue() == 0)
         {
-            filled_fluid = DimensionalFluid.instance;
-            bucket = new ItemStack(HarshenItems.bucket_dimensional_liquid);
+            filled_fluid = HarshenDimensionalFluid.instance;
+            bucket = new ItemStack(HarshenItems.harshen_dimensional_fluid_bucket);
         }
         if(filled_fluid == null || bucket == null)
         	return;
