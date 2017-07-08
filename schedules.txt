@@ -18,6 +18,7 @@ ITIUM ORE
 BLOOD
 -just like redstone, but blood. will make the textures correctly
 -placeable on blocks just like redstone, but can only be get/dropped by breaking if player has a blood collector
+blood block: replaces randomly from the 4 blood block textures
 
 BLOOD COLLECTOR
 -used to collect bloods on ground(right clicking)
