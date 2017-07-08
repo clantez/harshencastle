@@ -34,6 +34,47 @@ public class HarshenDimensionalPedestalTileEntity extends TileEntity implements 
 		this.handler = new ItemStackHandler(1);
 	}
 	
+	public float getMove()
+	{
+		return activeTimer / 30f;
+	}
+	
+	public BlockPos getMoveDirection()
+	{
+		for(BlockPos pos : positionsOfGo)
+			if(pos.distanceSq(this.pos) < 2)
+				for(EnumFacing face : EnumFacing.HORIZONTALS)
+					if(this.pos.offset(face).equals(pos))
+						return new BlockPos(0, 0, 0).offset(face);
+				
+		return null;
+	}
+	
+	@Override
+	public void update() {
+		boolean flag = handler.getStackInSlot(0).getItem() == Item.getItemFromBlock(Blocks.AIR);
+		if(!flag)
+		{
+			if(hasItem)
+				checkForCompleation();
+			rotation = rotation == 360? 0 : rotation + 6;
+		}
+		else
+			rotation = 0;
+		if(flag != hasItem)
+		{
+			hasItem = flag;
+			dirty();
+		}
+		
+		if(isActive)
+			if(activeTimer++ == 20)
+			{
+				isActive = false;
+				handler.setStackInSlot(0, new ItemStack(Blocks.AIR));
+			}
+	}
+	
 	public boolean canAddItem()
 	{	 
 		return this.handler.getStackInSlot(0).getItem() == Item.getItemFromBlock(Blocks.AIR);
@@ -44,7 +85,6 @@ public class HarshenDimensionalPedestalTileEntity extends TileEntity implements 
 		item.setCount(1);
 		dirty();
 		this.handler.setStackInSlot(0, item);
-		checkForCompleation();
 	}
 	
 	private void checkForCompleation()
@@ -53,7 +93,7 @@ public class HarshenDimensionalPedestalTileEntity extends TileEntity implements 
 				HarshenItems.pontus_world_gate_part_1,
 				HarshenItems.pontus_world_gate_part_2,
 				HarshenItems.pontus_world_gate_part_3,
-				HarshenItems.pontus_world_gate_spawner));
+				HarshenItems.harshen_soul_fragment));
 		for(EnumFacing facing : EnumFacing.HORIZONTALS)
 		{
 			BlockPos position = pos.offset(facing);
@@ -80,14 +120,16 @@ public class HarshenDimensionalPedestalTileEntity extends TileEntity implements 
 	
 	private void activate(BlockPos pos, ArrayList<BlockPos> positions)
 	{
+		positionsOfGo.clear();
 		positionsOfGo.add(pos);
 		for(BlockPos position : positions)
-			((HarshenDimensionalPedestalTileEntity) world.getTileEntity(position)).setActive(true);
+			((HarshenDimensionalPedestalTileEntity) world.getTileEntity(position)).setActive();
 	}
 	
-	public void setActive(Boolean set)
+	public void setActive()
 	{
-		isActive = set;
+		isActive = true;
+		activeTimer = 0;
 	}
 	
 	public void delItem()
@@ -180,25 +222,6 @@ public class HarshenDimensionalPedestalTileEntity extends TileEntity implements 
 		return nbt;
 	}
 
-	@Override
-	public void update() {
-		boolean flag = handler.getStackInSlot(0).getItem() == Item.getItemFromBlock(Blocks.AIR);
-		if(!flag)
-			rotation = rotation == 360? 0 : rotation + 6;
-		else
-			rotation = 0;
-		if(flag != hasItem)
-		{
-			hasItem = flag;
-			dirty();
-		}
-		
-		if(isActive)
-			System.out.println(activeTimer++);
-		
-		
-
-	}
 
 	
 
