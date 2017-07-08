@@ -30,6 +30,8 @@ public class HarshenDimensionalPedestal extends Block implements ITileEntityProv
 		super(Material.ROCK);
 		setRegistryName("harshen_dimensional_pedestal");
 		setUnlocalizedName("harshen_dimensional_pedestal");
+		setHardness(50.0F);
+		setResistance(50.0F);
 	}
 	
 	@Override

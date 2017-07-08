@@ -19,10 +19,10 @@ LIGHT EMITTED SEED
 -when grow up to plant_of_gleam_grown, harvestable by right click for 1x light_emitted_essence
 
 LIGHT EMITTED ESSENCE
--used to craft something...
+-used to craft something...(and some rituals)
 
 ITIUM ORE
--found in Pontus world(1 in 2x2 chunks area)
+-found in Pontus world(1 in 1 chunk)
 
 BLOOD
 -just like redstone, but blood. will make the textures correctly
