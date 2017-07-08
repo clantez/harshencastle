@@ -32,10 +32,14 @@ public class RendererDimensionalPedestal extends TileEntitySpecialRenderer<Harsh
 			if(te.isActive())
 			{
 				BlockPos pos = te.getMoveDirection();
-				float dx = pos.getX() * te.getMove() * 2;
-				float dy = 0.5f * te.getMove();
-				float dz = pos.getZ() * te.getMove() * 2;
-				GlStateManager.translate(dx, dy, dz);
+				if(pos != null)
+				{
+					float dx = pos.getX() * te.getMove() * 2;
+					float dy = 0.5f * te.getMove();
+					float dz = pos.getZ() * te.getMove() * 2;
+					GlStateManager.translate(dx, dy, dz);
+				}
+				
 			}
 			else 
 				GlStateManager.rotate(rotateAngle, 0, 1, 0);

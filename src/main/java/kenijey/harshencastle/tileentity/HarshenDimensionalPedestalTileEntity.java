@@ -5,9 +5,12 @@ import java.util.Arrays;
 
 import org.omg.PortableInterceptor.ACTIVE;
 
+import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenItems;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.init.Blocks;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -70,8 +73,24 @@ public class HarshenDimensionalPedestalTileEntity extends TileEntity implements 
 		if(isActive)
 			if(activeTimer++ == 20)
 			{
+				BlockPos rem = null;
 				isActive = false;
 				handler.setStackInSlot(0, new ItemStack(Blocks.AIR));
+				for(BlockPos pos : positionsOfGo)
+				{
+					if(pos.distanceSq(this.pos) < 2)
+						for(EnumFacing face : EnumFacing.HORIZONTALS)
+							if(this.pos.offset(face).equals(pos))
+							{
+								world.addWeatherEffect(new EntityLightningBolt(world, pos.getX(), pos.getY(), pos.getZ(), true));
+								InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(HarshenBlocks.harshen_dimensional_rock));
+								rem = pos;
+								break;
+							}
+					if(rem == null)
+						break;
+				}
+				positionsOfGo.remove(rem);
 			}
 	}
 	
