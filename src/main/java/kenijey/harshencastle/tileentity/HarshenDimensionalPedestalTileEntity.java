@@ -157,6 +157,11 @@ public class HarshenDimensionalPedestalTileEntity extends TileEntity implements 
 		this.handler.setStackInSlot(0, new ItemStack(Blocks.AIR));
 	}
 	
+	public boolean hasItem()
+	{
+		return getItem().getItem() != Item.getItemFromBlock(Blocks.AIR);
+	}
+	
 	public ItemStack getItem()
 	{
 		return handler.getStackInSlot(0);
