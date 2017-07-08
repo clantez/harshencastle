@@ -15,9 +15,6 @@ NEW PLANT(not named yet)
 ITIUM ORE
 -found in Pontus world(1 in 2x2 chunks area)
 
-HARSHEN JAGUAR ARMOR SET
--when all the set worn, applies night vision 1 and fire resistance 1 effects
-
 BLOOD
 -just like redstone, but blood. will make the textures correctly
 -placeable on blocks just like redstone, but can only be get/dropped by breaking if player has a blood collector
@@ -27,7 +24,7 @@ BLOOD COLLECTOR
 -has blood capacity up to 80 bloods (0/80 empty) (shown in tooltip)
 -replaces texture by filling
 
------------ACCESSORY-----------
+-----------ACCESSORY/ARMOR-----------
 slots:earrings(x2) pendant(x1) rings(x2) //todo
 
 PONTUS RING
@@ -35,6 +32,10 @@ PONTUS RING
 
 BLOODY EARRING
 -regenerates 1 hearth (2hp) every 10 seconds
+
+HARSHEN JAGUAR ARMOR
+-should be 3d
+-when worn full set, applies night vision 1 and fire resistance 1 effects
 
 ------------------------PONTUS WORLD------------------------------
 -land biome generated with HD dirt, HD fluid and HD rock
