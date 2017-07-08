@@ -8,9 +8,18 @@ PONTUS WORLD GATE
 -will be despawn(destroyed) after 1 min after placed
 -there will be gate will spawn near the player spawned in pontus world to turn back the overworld
 
-NEW PLANT(not named yet)
--can be only grown on harshen dimensional dirt
--after planted on HD dirt, it spawns (item entity) an item (not named yet and decided what) every 5 mins
+PLANT OF GLEAM
+-spawns in minecraft world, same possibility with harshen soul flower 
+-no harvest on right click when found in nature, drops its special seed when broken
+-can be only grown and placeable on harshen dimensional dirt
+-after planted on HD dirt, it turns into plant_of_gleam_grown after 5 mins
+-drops light_emitted_essence (x1) (and nothing else) on harvest (right click) and turns into plant_of_gleam after harvest
+
+LIGHT EMITTED SEED
+-special seed of plant_of_gleam
+
+LIGHT EMITTED ESSENCE
+-used to craft something...
 
 ITIUM ORE
 -found in Pontus world(1 in 2x2 chunks area)
@@ -18,12 +27,12 @@ ITIUM ORE
 BLOOD
 -just like redstone, but blood. will make the textures correctly
 -placeable on blocks just like redstone, but can only be get/dropped by breaking if player has a blood collector
-blood block: replaces randomly from the 4 blood block textures
+blood block: replaces randomly from the 5 blood block textures
 
 BLOOD COLLECTOR
 -used to collect bloods on ground(right clicking)
 -has blood capacity up to 80 bloods (0/80 empty) (shown in tooltip)
--replaces texture by filling
+-replaces item texture by filling
 
 -----------ACCESSORY/ARMOR-----------
 slots:earrings(x2) pendant(x1) rings(x2) //todo
