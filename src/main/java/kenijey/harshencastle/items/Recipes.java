@@ -1,5 +1,6 @@
 package kenijey.harshencastle.items;
 
+import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.armor.HarshenArmors;
 import net.minecraft.init.Items;
@@ -81,6 +82,14 @@ public class Recipes
 				"   ",
 				"i i",
 				"i i",
+				
+				'i', HarshenItems.harshen_soul_ingot);
+		
+		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "harshen_dimensional_pedestal"), new ResourceLocation("harshen_items"),
+				new ItemStack(HarshenBlocks.harshen_dimensional_pedestal),
+				" i ",
+				" i ",
+				" i ",
 				
 				'i', HarshenItems.harshen_soul_ingot);
 	}
