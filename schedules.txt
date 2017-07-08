@@ -24,8 +24,8 @@ BLOOD
 
 BLOOD COLLECTOR
 -used to collect bloods on ground(right clicking)
--made from iron nuggets and ingot(will make the recipe)
 -has blood capacity up to 80 bloods (0/80 empty) (shown in tooltip)
+-replaces texture by filling
 
 -----------ACCESSORY-----------
 slots:earrings(x2) pendant(x1) rings(x2) //todo
