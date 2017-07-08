@@ -83,7 +83,10 @@ public class HarshenDimensionalPedestal extends Block implements ITileEntityProv
 			TileEntity tileEntity = worldIn.getTileEntity(pos);
 			if(tileEntity instanceof HarshenDimensionalPedestalTileEntity)
 				if(((HarshenDimensionalPedestalTileEntity)tileEntity).canAddItem())
-					playerIn.setHeldItem(hand,  new ItemStack(item.getItem(), item.getCount()-1, item.getMetadata()));
+				{
+					playerIn.setHeldItem(hand, new ItemStack(item.getItem(), item.getCount()-1, item.getMetadata()));
+					((HarshenDimensionalPedestalTileEntity)tileEntity).addItem(item);
+				}
 				else if (((HarshenDimensionalPedestalTileEntity) tileEntity).getItem().getItem() != Item.getItemFromBlock(Blocks.AIR))
 				{
 					InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY() + 0.7f, pos.getZ(), ((HarshenDimensionalPedestalTileEntity) tileEntity).getItem());

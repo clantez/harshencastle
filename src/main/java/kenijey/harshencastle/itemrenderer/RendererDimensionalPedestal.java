@@ -1,13 +1,15 @@
 package kenijey.harshencastle.itemrenderer;
 
+import java.util.ArrayList;
+
 import kenijey.harshencastle.tileentity.HarshenDimensionalPedestalTileEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.BlockPos;
 
 public class RendererDimensionalPedestal extends TileEntitySpecialRenderer<HarshenDimensionalPedestalTileEntity>
 {
@@ -20,10 +22,12 @@ public class RendererDimensionalPedestal extends TileEntitySpecialRenderer<Harsh
 		super.render(te, x, y, z, partialTicks, destroyStage, alpha);
 		ITEM = new EntityItem(Minecraft.getMinecraft().world, 0, 0, 0, te.getItem());
 		ITEM.hoverStart = 0.0f;
+		int rotateAngle = te.getRotation();
 		GlStateManager.pushMatrix();
 		{
 			GlStateManager.translate(x, y, z);
-			GlStateManager.translate(0.75f,-0.25f,0.75f);
+			GlStateManager.translate(0.5f,0.65f,0.5f);
+			GlStateManager.rotate(rotateAngle, 0, 1, 0);
 			GlStateManager.scale(0.7f, 0.7f, 0.7f);
 			GlStateManager.translate(0f,0f,0f);
 			Minecraft.getMinecraft().getRenderManager().doRenderEntity(ITEM, 0f, 0f, 0f, 0f, 0f, false);
