@@ -6,6 +6,7 @@ import kenijey.harshencastle.creativetabs.HarshenTab;
 import kenijey.harshencastle.handlers.BucketHandler;
 import kenijey.harshencastle.items.Recipes;
 import kenijey.harshencastle.proxy.CommonProxy;
+import kenijey.harshencastle.tileentity.HarshenDimensionalPedestalTileEntity;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
@@ -42,6 +43,7 @@ public class HarshenCastle {
     	Recipes.init();
     	GameRegistry.registerWorldGenerator(new WorldGen(100), 0);
     	proxy.init(event);
+    	GameRegistry.registerTileEntity(HarshenDimensionalPedestalTileEntity.class, MODID + "HarshenDimensionalPedestalTileEntity");
     }
 
     @Mod.EventHandler
