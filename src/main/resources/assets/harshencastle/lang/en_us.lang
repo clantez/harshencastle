@@ -15,6 +15,10 @@ item.harshen_jaguar_armor_chestplate.name=Harshen Jaguar Armor Chestplate
 item.harshen_jaguar_armor_leggings.name=Harshen Jaguar Armor Leggings
 item.harshen_jaguar_armor_boots.name=Harshen Jaguar Armor Boots
 item.harshen_dimensional_fluid_bucket.name=Harshen Dimensional Fluid Bucket
+item.pontus_world_gate_part_1.name=Pontus World Gate Spawner First Part
+item.pontus_world_gate_part_2.name=Pontus World Gate Spawner Second Part
+item.pontus_world_gate_part_3.name=Pontus World Gate Spawner Third Part
+item.pontus_world_gate_spawner.name=Pontus World Gate Spawner
 
 #blocks
 tile.harshen_soul_ore.name=Harshen Soul Ore
@@ -69,7 +73,10 @@ pontus2=of the old Koschei
 ore1=May contain Death
 ore2=if broken without
 ore3=Soul Harsher Pickaxe
-
+gatepart1=A part of the gate that
+gatepart2=opens to Pontus World
+gatespawner1=Opens the Gate
+gatespawner2=of the Pontus World
 
 #misc
 itemGroup.harshenTab=Harshen Castle

@@ -1,9 +1,9 @@
 --------------------------ITEMS/BLOCKS----------------------------
-Pontus World Dimensional Gate (First-Second-Third) Part(s)
--shapeless crafting recipe that results Pontus World Dimensional Gate
+Pontus World Gate (First-Second-Third) Part(s)
+-shapeless crafting recipe that results Pontus World Gate
 -found in chests in structures in overworld
 
-PONTUS WORLD DIMENSIONAL GATE
+PONTUS WORLD GATE
 -it's multiblock, made from dimensional stones and the real gate in it (small area, 3x4x4)
 -will be despawn(destroyed) after 1 min after placed
 -there will be gate will spawn near the player spawned in pontus world to turn back the overworld
@@ -47,17 +47,17 @@ HARSHEN FLYLAND
 -second structure, such a flying island on sky
 -made from harshen dimensional dirt(mainly)
 -has different mobs and boss
--has same gate in castle, sends the player to Pontus world
+-has same gate parts in castle
 
 HARSHEN STUNSHIP
 -third structure, such normal ship
 -made from dimensional wood crate(mainly)
 -has different mobs and boss
--has same gate in castle, sends the player to Pontus world
+-has same gate parts in castle
 
 HARSHEN GIGANTIC CAVE
 -has the boss harshen dimensional golem(no special name)
--has NO gate to pontus world
+-has NO gate part
 -spawns not only 1 time, spawns all over the world infinite
 -has only 1 custom mob(Golem Part) except the golem boss
 -4. structure in world

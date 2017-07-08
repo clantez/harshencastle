@@ -22,6 +22,10 @@ public class HarshenItems
 	public static Item bloody_earring;
 	public static Item blood_essence;
 	public static Item harshen_dimensional_fluid_bucket;
+	public static Item pontus_world_gate_part_1;
+	public static Item pontus_world_gate_part_2;
+	public static Item pontus_world_gate_part_3;
+	public static Item pontus_world_gate_spawner;
 	
 	
 	public static void preInit()
@@ -37,6 +41,10 @@ public class HarshenItems
 		bloody_earring = new BloodyEarring();
 		blood_essence = new BloodEssence();
 		harshen_dimensional_fluid_bucket = new HarshenDimensionalFluidBucket();
+		pontus_world_gate_part_1 = new PontusWorldGatePart1();
+		pontus_world_gate_part_2 = new PontusWorldGatePart2();
+		pontus_world_gate_part_3 = new PontusWorldGatePart3();
+		pontus_world_gate_spawner = new PontusWorldGateSpawner();
 	}
 	
 	public static void reg()
@@ -52,6 +60,10 @@ public class HarshenItems
 		regItem(bloody_earring, 1);
 		regItem(blood_essence, 8);
 		regItem(harshen_dimensional_fluid_bucket,1);
+		regItem(pontus_world_gate_part_1,1);
+		regItem(pontus_world_gate_part_2,1);
+		regItem(pontus_world_gate_part_3,1);
+		regItem(pontus_world_gate_spawner,1);
 	}
 	
 	public static ArrayList<Item> items = new ArrayList<Item>();
