@@ -41,8 +41,10 @@ tile.harshen_dimensional_wood_crate.name=Harshen Dimensional Wood Crate
 tile.itium_ore.name=Itium Ore
 tile.harshen_destroyed_plant.name=Harshen Destroyed Plant
 tile.harshen_soul_flower.name=Harshen Soul Flower
-tile.harshen_dimensional_fluid.name=Harshen Dimensional Fluid
 tile.harshen_dimensional_rock.name=Harshen Dimensional Rock
+
+#fluids
+fluid.harshen_dimensional_fluid=Harshen Dimensional Fluid
 
 
 #commands
