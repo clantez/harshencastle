@@ -9,7 +9,9 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.inventory.InventoryHelper;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -79,8 +81,16 @@ public class HarshenDimensionalPedestal extends Block implements ITileEntityProv
 		if(!worldIn.isRemote)
 		{
 			TileEntity tileEntity = worldIn.getTileEntity(pos);
-			if(tileEntity instanceof HarshenDimensionalPedestalTileEntity && ((HarshenDimensionalPedestalTileEntity)tileEntity).addItem(item))
-				playerIn.setHeldItem(hand, new ItemStack(item.getItem(), item.getCount() - 1, item.getMetadata()));
+			if(tileEntity instanceof HarshenDimensionalPedestalTileEntity)
+				if(((HarshenDimensionalPedestalTileEntity)tileEntity).canAddItem())
+					playerIn.setHeldItem(hand,  new ItemStack(item.getItem(), item.getCount()-1, item.getMetadata()));
+				else if (((HarshenDimensionalPedestalTileEntity) tileEntity).getItem().getItem() != Item.getItemFromBlock(Blocks.AIR))
+				{
+					InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY() + 0.7f, pos.getZ(), ((HarshenDimensionalPedestalTileEntity) tileEntity).getItem());
+					((HarshenDimensionalPedestalTileEntity)tileEntity).delItem();
+				}
+
+
 
 				
 		}

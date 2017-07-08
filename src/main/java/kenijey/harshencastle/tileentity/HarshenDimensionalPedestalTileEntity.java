@@ -1,7 +1,7 @@
 package kenijey.harshencastle.tileentity;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -9,6 +9,8 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -17,21 +19,41 @@ import net.minecraftforge.items.ItemStackHandler;
 public class HarshenDimensionalPedestalTileEntity extends TileEntity implements net.minecraft.util.ITickable, ICapabilityProvider
 {
 	private final ItemStackHandler handler;
+	private boolean hasItem = false;
 	
 	
 	public HarshenDimensionalPedestalTileEntity(){
 		this.handler = new ItemStackHandler(1);
 	}
 	
-	public boolean addItem(ItemStack item)
+	public boolean canAddItem()
+	{	 
+		return this.handler.getStackInSlot(0).getItem() == Item.getItemFromBlock(Blocks.AIR);
+	}
+	
+	public void addItem(ItemStack item)
 	{
-		if(this.handler.getStackInSlot(0).getItem() == Item.getItemFromBlock(Blocks.AIR))
-		{
-			this.handler.setStackInSlot(0, item);
-			return true;
-		}
-			 
-		return false;
+		item.setCount(1);
+		dirty();
+		this.handler.setStackInSlot(0, item);
+	}
+	
+	public void delItem()
+	{
+		dirty();
+		this.handler.setStackInSlot(0, new ItemStack(Blocks.AIR));
+	}
+	
+	public ItemStack getItem()
+	{
+		return handler.getStackInSlot(0);
+	}
+	
+	private void dirty()
+	{
+		markDirty();
+		IBlockState state = world.getBlockState(pos);
+		world.notifyBlockUpdate(pos, state, state, 3);
 	}
 	
 	@Override
@@ -98,9 +120,15 @@ public class HarshenDimensionalPedestalTileEntity extends TileEntity implements 
 
 	@Override
 	public void update() {
-		//if(!world.isRemote)
-			//System.out.println(handler.getStackInSlot(0));
-		
+		boolean flag = handler.getStackInSlot(0).getItem() == Item.getItemFromBlock(Blocks.AIR);
+		if(flag != hasItem)
+		{
+			hasItem = flag;
+			dirty();
+		}
+
 	}
+
+	
 
 }
