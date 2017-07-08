@@ -1,6 +1,6 @@
 --------------------------ITEMS/BLOCKS----------------------------
 Pontus World Gate (First-Second-Third) Part(s)
--shapeless crafting recipe that results Pontus World Gate
+-shapeless crafting recipe that results Pontus World Gate Spawner
 -found in chests in structures in overworld
 
 PONTUS WORLD GATE
