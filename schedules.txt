@@ -1,22 +1,22 @@
 --------------------------ITEMS/BLOCKS----------------------------
 Pontus World Gate (First-Second-Third) Part(s)
--shapeless crafting recipe that results Pontus World Gate Spawner
 -found in chests in structures in overworld
 
 PONTUS WORLD GATE
--it's multiblock, made from dimensional stones and the real gate in it (small area, 3x4x4)
--will be despawn(destroyed) after 1 min after placed
--there will be gate will spawn near the player spawned in pontus world to turn back the overworld
+-it's multiblock, made from dimensional stones and the real gate in it (small area, 3x4x5)
+-will be despawn(destroyed) after 1 min after placed(only portal will be destroyed, not the structure)
+-there will be gate will spawn near the player spawned in pontus world to turn back to overworld
 
 PLANT OF GLEAM
 -spawns in minecraft world, same possibility with harshen soul flower 
--no harvest on right click when found in nature, drops its special seed when broken
--can be only grown and placeable on harshen dimensional dirt
--after planted on HD dirt, it turns into plant_of_gleam_grown after 5 mins
--drops light_emitted_essence (x1) (and nothing else) on harvest (right click) and turns into plant_of_gleam after harvest
+-no harvest on right click when found in nature, drops light_emitted_seed when broken
 
 LIGHT EMITTED SEED
 -special seed of plant_of_gleam
+-can be grown and placeable only on harshen dimensional dirt
+-when grow up to plant_of_gleam_planted, drops itself when broken
+-when grow up to plant_of_gleam_grown, drops plant_of_gleam_planted and light_emitted_essence when broken
+-when grow up to plant_of_gleam_grown, harvestable by right click for 1x light_emitted_essence
 
 LIGHT EMITTED ESSENCE
 -used to craft something...
