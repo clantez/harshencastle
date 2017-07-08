@@ -19,10 +19,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class PlantOfGleam extends BlockFlower
+public class PlantOfGleamNature extends BlockFlower
 {
 	
-	public PlantOfGleam() {
+	public PlantOfGleamNature() {
 		setUnlocalizedName("plant_of_gleam_nature");
         setRegistryName("plant_of_gleam_nature");
         blockSoundType = blockSoundType.PLANT;
@@ -48,7 +48,7 @@ public class PlantOfGleam extends BlockFlower
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
 		int[] luck = {40,60,80,100};
 		if(rand.nextInt(101) <= luck[fortune])
-			return HarshenItems.harshen_essence;
+			return HarshenItems.light_emitted_seed;
 		return null;
 	}
 	

@@ -5,6 +5,7 @@ import java.util.Random;
 import com.google.common.base.Predicate;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockBush;
 import net.minecraft.block.BlockFlower.EnumFlowerType;
 import net.minecraft.block.BlockStone;
 import net.minecraft.block.state.IBlockState;
@@ -58,9 +59,6 @@ public class WorldGen implements IWorldGenerator
 	}
 	
 	
-	
-	
-	
 	private void flowerGenerator(World worldIn, Random rand, int chunk_X, int chunk_Z, int chancesToSpawn)
 	{
 		if(chancesToSpawn > 100)
@@ -73,9 +71,12 @@ public class WorldGen implements IWorldGenerator
 		BlockPos position = worldIn.getTopSolidOrLiquidBlock(new BlockPos(x, 0, z));
 		BlockPos blockpos = position.add(rand.nextInt(8) - rand.nextInt(8), rand.nextInt(4) - rand.nextInt(4), rand.nextInt(8) - rand.nextInt(8));
 
-        if (worldIn.isAirBlock(blockpos) && (!worldIn.provider.isNether() || blockpos.getY() < 255) && HarshenBlocks.harshen_soul_flower.canBlockStay(worldIn, blockpos, HarshenBlocks.harshen_soul_flower.getDefaultState()))
+        if (worldIn.isAirBlock(blockpos) && (worldIn.provider.isSurfaceWorld() || blockpos.getY() < 255) && HarshenBlocks.
+        		harshen_soul_flower.canBlockStay(worldIn, blockpos, HarshenBlocks.harshen_soul_flower.getDefaultState()))
         {
             worldIn.setBlockState(blockpos, HarshenBlocks.harshen_soul_flower.getDefaultState(), 2);
         }
+
 	}
+	
 }
