@@ -3,7 +3,7 @@ package kenijey.harshencastle.blocks;
 import java.util.List;
 
 import kenijey.harshencastle.dimensions.DimensionPontus;
-import kenijey.harshencastle.dimensions.pontus.PontusTeleporter;
+import kenijey.harshencastle.dimensions.pontus.PontusTeleporter_TEMPORARY_UNTILL_WORLD_GENERATION;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -66,7 +66,7 @@ public class HarshenDimensionalGate extends Block
 				if(goHome) 
 					transferPlayerToOverWorld((EntityPlayerMP) playerIn, 0);
 				else
-					((EntityPlayerMP)playerIn).mcServer.getPlayerList().transferPlayerToDimension((EntityPlayerMP) playerIn, DimensionPontus.DIMENSION_ID, new PontusTeleporter(Minecraft.getMinecraft().getIntegratedServer().getServer().getWorld(DimensionPontus.DIMENSION_ID)));
+					((EntityPlayerMP)playerIn).mcServer.getPlayerList().transferPlayerToDimension((EntityPlayerMP) playerIn, DimensionPontus.DIMENSION_ID, new PontusTeleporter_TEMPORARY_UNTILL_WORLD_GENERATION(Minecraft.getMinecraft().getIntegratedServer().getServer().getWorld(DimensionPontus.DIMENSION_ID)));
 		}
 			return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
 	}
