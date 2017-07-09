@@ -2,8 +2,8 @@ package kenijey.harshencastle.blocks;
 
 import java.util.List;
 
+import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.dimensions.DimensionPontus;
-import kenijey.harshencastle.dimensions.pontus.PontusTeleporter;
 import kenijey.harshencastle.items.PontusWorldGateSpawner;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -11,8 +11,6 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -61,22 +59,24 @@ public class HarshenDimensionalGate extends Block
 		
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
-			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		if(state == getStateFromMeta(1))
-		{
-			Boolean goHome = playerIn.dimension == DimensionPontus.DIMENSION_ID;
-			if(playerIn instanceof EntityPlayerMP)
-				if(goHome) 
-					transferPlayerToOverWorld((EntityPlayerMP) playerIn, 0);
-				else
-					((EntityPlayerMP)playerIn).mcServer.getPlayerList().transferPlayerToDimension((EntityPlayerMP) playerIn, DimensionPontus.DIMENSION_ID, new PontusTeleporter(Minecraft.getMinecraft().getIntegratedServer().getServer().getWorld(DimensionPontus.DIMENSION_ID)));
-		}
-		else if(playerIn.getHeldItemMainhand().getItem() instanceof PontusWorldGateSpawner || (playerIn.getHeldItemMainhand().getItem().equals(Item.getItemFromBlock(Blocks.AIR)) && playerIn.getHeldItemOffhand().getItem() instanceof PontusWorldGateSpawner))
-			worldIn.setBlockState(pos, getStateFromMeta(1), 3);
+			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) 
+	{
+		if(!worldIn.isRemote)
+			if(state == getStateFromMeta(1))
+			{
+				Boolean goHome = playerIn.dimension == DimensionPontus.DIMENSION_ID;
+				if(playerIn instanceof EntityPlayerMP)
+					if(goHome) 
+						transferPlayerToDimension((EntityPlayerMP) playerIn, 0, false);
+					else
+						transferPlayerToDimension((EntityPlayerMP) playerIn, DimensionPontus.DIMENSION_ID, true);
+			}
+			else if(playerIn.getHeldItemMainhand().getItem() instanceof PontusWorldGateSpawner || (playerIn.getHeldItemMainhand().getItem().equals(Item.getItemFromBlock(Blocks.AIR)) && playerIn.getHeldItemOffhand().getItem() instanceof PontusWorldGateSpawner))
+				worldIn.setBlockState(pos, getStateFromMeta(1), 3);
 		return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
 	}
 	
-	public void transferPlayerToOverWorld(EntityPlayerMP player, int dimensionIn)
+	public void transferPlayerToDimension(EntityPlayerMP player, int dimensionIn, boolean placeBlock)
     {
         int i = player.dimension;
         WorldServer worldserver = player.mcServer.getWorld(player.dimension);
@@ -86,7 +86,7 @@ public class HarshenDimensionalGate extends Block
         player.mcServer.getPlayerList().updatePermissionLevel(player);
         worldserver.removeEntityDangerously(player);
         player.isDead = false;
-        transferEntityToHome(player, i, worldserver, worldserver1);
+        transferPlayerToWorld(player, i, worldserver, worldserver1, placeBlock);
         player.mcServer.getPlayerList().preparePlayer(player, worldserver);
         player.connection.setPlayerLocation(player.posX, player.posY, player.posZ, player.rotationYaw, player.rotationPitch);
         player.interactionManager.setWorld(worldserver1);
@@ -101,7 +101,7 @@ public class HarshenDimensionalGate extends Block
         net.minecraftforge.fml.common.FMLCommonHandler.instance().firePlayerChangedDimensionEvent(player, i, dimensionIn);
     }
 	
-	public void transferEntityToHome(Entity entityIn, int lastDimension, WorldServer oldWorldIn, WorldServer toWorldIn)
+	public void transferPlayerToWorld(Entity entityIn, int lastDimension, WorldServer oldWorldIn, WorldServer toWorldIn, boolean placeBlock)
     {
         net.minecraft.world.WorldProvider pOld = oldWorldIn.provider;
         net.minecraft.world.WorldProvider pNew = toWorldIn.provider;
@@ -147,6 +147,8 @@ public class HarshenDimensionalGate extends Block
             if (entityIn.isEntityAlive())
             {
                 entityIn.setLocationAndAngles(d0, entityIn.posY, d1, entityIn.rotationYaw, entityIn.rotationPitch);
+                if(placeBlock && !toWorldIn.getBlockState(entityIn.getPosition().add(0, -1, 0)).equals(HarshenBlocks.harshen_dimensional_gate.getDefaultState().withProperty(HarshenDimensionalGate.ACTIVE, true)))
+                	toWorldIn.setBlockState(entityIn.getPosition().add(0, -1, 0), HarshenBlocks.harshen_dimensional_gate.getDefaultState().withProperty(HarshenDimensionalGate.ACTIVE, true), 3);
                 toWorldIn.spawnEntity(entityIn);
                 toWorldIn.updateEntityWithOptionalForce(entityIn, false);
             }
