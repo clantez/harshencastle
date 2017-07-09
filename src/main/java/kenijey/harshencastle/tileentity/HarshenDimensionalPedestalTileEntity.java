@@ -39,7 +39,7 @@ public class HarshenDimensionalPedestalTileEntity extends TileEntity implements 
 	
 	public float getMove()
 	{
-		return activeTimer / 30f;
+		return activeTimer / 100f;
 	}
 	
 	public BlockPos getMoveDirection()
@@ -60,7 +60,7 @@ public class HarshenDimensionalPedestalTileEntity extends TileEntity implements 
 		{
 			if(hasItem)
 				checkForCompleation();
-			rotation = rotation == 360? 0 : rotation + 6;
+			rotation += 6;
 		}
 		else
 			rotation = 0;
@@ -71,7 +71,7 @@ public class HarshenDimensionalPedestalTileEntity extends TileEntity implements 
 		}
 		
 		if(isActive)
-			if(activeTimer++ == 20)
+			if(activeTimer++ == 100)
 			{
 				BlockPos rem = null;
 				isActive = false;
