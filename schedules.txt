@@ -35,7 +35,8 @@ BLOOD COLLECTOR
 -replaces item texture by filling
 
 -----------ACCESSORY/ARMOR-----------
-slots:earrings(x2) pendant(x1) rings(x2) //todo
+slots:earrings(x2) pendant(x1) rings(x2) goggles(x1) //todo
+IMPORTANT: accessory, or u can say harshen tab will be added in inventory as a tab. (just like galacticraft)
 
 PONTUS RING
 -applies strength 1 and resistance 1 effects if equipped/worn by player
