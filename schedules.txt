@@ -14,13 +14,13 @@ ITIUM ORE
 -found in Pontus world(1 in 1 chunk)
 
 BLOOD
--just like redstone, but blood. will make the textures correctly
--placeable on blocks just like redstone, but can only be get/dropped by breaking if player has a blood collector
-blood block: replaces randomly from the 5 blood block textures
+-just like redstone, but blood. will be replaced one of 5 textures randomly
+-if you're a player, you can put or get it only with blood collector
+-NOT hittable, but right click-able with blood collector (if possible)
 
 BLOOD COLLECTOR
 -used to collect bloods on ground(right clicking)
--has blood capacity up to 80 bloods (0/80 empty) (shown in tooltip)
+-has blood capacity up to 80 bloods (0/60 empty) (shown in tooltip)
 -replaces item texture by filling
 
 -----------ACCESSORY/ARMOR-----------
@@ -31,7 +31,7 @@ PONTUS RING
 -applies strength 1 and resistance 1 effects if equipped/worn by player
 
 BLOODY EARRING
--regenerates 1 hearth (2hp) every 10 seconds
+-regenerates 1 heart (2 hp) every 10 seconds
 
 HARSHEN JAGUAR ARMOR
 -should be 3d
