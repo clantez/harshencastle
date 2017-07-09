@@ -3,12 +3,16 @@ package kenijey.harshencastle;
 import kenijey.harshencastle.commands.CommandDelFlatPlate;
 import kenijey.harshencastle.commands.CommandFlatPlate;
 import kenijey.harshencastle.creativetabs.HarshenTab;
+import kenijey.harshencastle.dimensions.DimensionPontus;
+import kenijey.harshencastle.dimensions.HarshenDimensions;
 import kenijey.harshencastle.handlers.BucketHandler;
 import kenijey.harshencastle.items.Recipes;
 import kenijey.harshencastle.proxy.CommonProxy;
 import kenijey.harshencastle.tileentity.HarshenDimensionalPedestalTileEntity;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -34,6 +38,7 @@ public class HarshenCastle {
     public void preInit(FMLPreInitializationEvent event) 
     {
     	proxy.preInit(event);
+    	HarshenDimensions.register();
     }
 
     @Mod.EventHandler
@@ -58,4 +63,8 @@ public class HarshenCastle {
 		event.registerServerCommand(new CommandFlatPlate());
 		event.registerServerCommand(new CommandDelFlatPlate());
 	}	
+    
+    public World getPontusWorld() {
+		return FMLCommonHandler.instance().getMinecraftServerInstance().getWorld(DimensionPontus.DIMENSION_ID);
+	}
 }
