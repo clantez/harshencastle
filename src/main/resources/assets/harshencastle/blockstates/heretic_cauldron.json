@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "level=0": { "model": "harshencastle:heretic_cauldron" },
+        "level=1": { "model": "harshencastle:heretic_cauldron" },
+		"level=2": { "model": "harshencastle:heretic_cauldron" },
+        "level=3": { "model": "harshencastle:heretic_cauldron" }
+    }
+}
