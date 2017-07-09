@@ -3,6 +3,7 @@ package kenijey.harshencastle.items;
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.armor.ArmorInit;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -26,10 +27,10 @@ public class Recipes
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "harshen_soul_ingot"), new ResourceLocation("harshen_items"),
 				new ItemStack(HarshenItems.harshen_soul_ingot),
 				"e e",
-				"shs",
+				"csc",
 				"e e",
 				
-				'h', HarshenItems.harshen_crystal,
+				'c', HarshenItems.harshen_crystal,
 				's', HarshenItems.harshen_soul_fragment,
 				'e', Items.EMERALD);
 		
@@ -100,6 +101,6 @@ public class Recipes
 				" e ",
 				
 				'e', HarshenItems.harshen_crystal,
-				'd', HarshenBlocks.harshen_dimensional_dirt);
+				'd', Blocks.DIRT);
 	}
 }
