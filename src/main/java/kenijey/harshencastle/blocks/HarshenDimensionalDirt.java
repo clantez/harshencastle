@@ -31,7 +31,7 @@ public class HarshenDimensionalDirt extends HarshenBlockCastle
  	@Override
 	public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
  		whiteListedBlocks.clear();
- 		whiteListedBlocks.add(HarshenBlocks.harshen_gleam_plant);
+ 		whiteListedBlocks.add(HarshenBlocks.crop_of_gleam);
 		if(worldIn.getBlockState(pos.add(0, 1, 0)).getBlock() instanceof BlockBush && 
 				!whiteListedBlocks.contains(worldIn.getBlockState(pos.add(0, 1, 0)).getBlock()))
 		{

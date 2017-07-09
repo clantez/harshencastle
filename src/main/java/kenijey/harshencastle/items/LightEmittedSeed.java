@@ -9,7 +9,7 @@ public class LightEmittedSeed extends ItemSeeds
 {
 
 	public LightEmittedSeed() {
-		super(HarshenBlocks.harshen_gleam_plant, HarshenBlocks.harshen_dimensional_dirt);
+		super(HarshenBlocks.crop_of_gleam, HarshenBlocks.harshen_dimensional_dirt);
 		setUnlocalizedName("light_emitted_seed");
 		setRegistryName("light_emitted_seed");	
 		}
