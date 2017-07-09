@@ -6,7 +6,7 @@ import kenijey.harshencastle.items.BloodEssence;
 import kenijey.harshencastle.items.BloodyEarring;
 import kenijey.harshencastle.items.HarshenDimensionalDoor;
 import kenijey.harshencastle.items.HarshenDimensionalFluidBucket;
-import kenijey.harshencastle.items.HarshenEssence;
+import kenijey.harshencastle.items.HarshenCrystal;
 import kenijey.harshencastle.items.HarshenSoulFragment;
 import kenijey.harshencastle.items.HarshenSoulIngot;
 import kenijey.harshencastle.items.Itium;
@@ -32,7 +32,7 @@ public class HarshenItems
 	public static Item soul_harsher_pickaxe;
 	public static Item item_harshen_dimensional_door;
 	public static Item itium;
-	public static Item harshen_essence;
+	public static Item harshen_crystal;
 	public static Item harshen_soul_ingot;
 	public static Item pontus_ring;
 	public static Item bloody_earring;
@@ -53,7 +53,7 @@ public class HarshenItems
 		soul_harsher_pickaxe = new SoulHarsherPickaxe();
 		item_harshen_dimensional_door = new HarshenDimensionalDoor();
 		itium = new Itium();
-		harshen_essence = new HarshenEssence();
+		harshen_crystal = new HarshenCrystal();
 		harshen_soul_ingot = new HarshenSoulIngot();
 		pontus_ring = new PontusRing();
 		bloody_earring = new BloodyEarring();
@@ -74,7 +74,7 @@ public class HarshenItems
 		regItem(soul_harsher_pickaxe, 1);
 		regItem(item_harshen_dimensional_door,8);
 		regItem(itium,8);
-		regItem(harshen_essence, 8);
+		regItem(harshen_crystal, 8);
 		regItem(harshen_soul_ingot, 8);
 		regItem(pontus_ring, 1);
 		regItem(bloody_earring, 1);

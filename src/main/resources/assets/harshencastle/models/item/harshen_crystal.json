@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "harshencastle:items/harshen_essence"
+        "layer0": "harshencastle:items/harshen_crystal"
     }
 }

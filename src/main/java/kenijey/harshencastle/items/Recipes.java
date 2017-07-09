@@ -20,7 +20,7 @@ public class Recipes
 				" i ",
 				
 				's', HarshenItems.harshen_soul_fragment,
-				'h', HarshenItems.harshen_essence,
+				'h', HarshenItems.harshen_crystal,
 				'i', Items.IRON_INGOT);
 		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "harshen_soul_ingot"), new ResourceLocation("harshen_items"),
@@ -29,7 +29,7 @@ public class Recipes
 				"shs",
 				"e e",
 				
-				'h', HarshenItems.harshen_essence,
+				'h', HarshenItems.harshen_crystal,
 				's', HarshenItems.harshen_soul_fragment,
 				'e', Items.EMERALD);
 		
@@ -99,7 +99,7 @@ public class Recipes
 				"ede",
 				" e ",
 				
-				'e', HarshenItems.harshen_essence,
+				'e', HarshenItems.harshen_crystal,
 				'd', HarshenBlocks.harshen_dimensional_dirt);
 	}
 }
