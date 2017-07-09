@@ -83,7 +83,7 @@ public class HarshenDimensionalPedestalTileEntity extends TileEntity implements 
 							if(this.pos.offset(face).equals(pos))
 							{
 								world.addWeatherEffect(new EntityLightningBolt(world, pos.getX(), pos.getY(), pos.getZ(), true));
-								InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(HarshenBlocks.harshen_dimensional_rock));
+								InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(HarshenBlocks.harshen_dimensional_gate));
 								rem = pos;
 								break;
 							}

@@ -6,6 +6,7 @@ import kenijey.harshencastle.blocks.HarshenDestroyedPlant;
 import kenijey.harshencastle.blocks.HarshenDimensionalDirt;
 import kenijey.harshencastle.blocks.HarshenDimensionalDoor;
 import kenijey.harshencastle.blocks.HarshenDimensionalFlatPlate;
+import kenijey.harshencastle.blocks.HarshenDimensionalGate;
 import kenijey.harshencastle.blocks.HarshenDimensionalGlass;
 import kenijey.harshencastle.blocks.HarshenDimensionalLadder;
 import kenijey.harshencastle.blocks.HarshenDimensionalPedestal;
@@ -50,6 +51,7 @@ public class HarshenBlocks {
 	public static BlockFlower harshen_soul_flower;
 	public static Block harshen_dimensional_rock;
 	public static Block harshen_dimensional_pedestal;
+	public static Block harshen_dimensional_gate;
 	
 	public static BlockFlower plant_of_gleam_nature;
 	public static BlockFlower plant_of_gleam_planted;
@@ -75,6 +77,7 @@ public class HarshenBlocks {
 		harshen_dimensional_rock = new HarshenDimensionalRock();
 		harshen_dimensional_pedestal = new HarshenDimensionalPedestal();
 		plant_of_gleam_nature = new PlantOfGleamNature();
+		harshen_dimensional_gate = new HarshenDimensionalGate();
 	}
 
 	public static void reg() {
@@ -87,6 +90,7 @@ public class HarshenBlocks {
 		regBlock(harshen_dimensional_ladder,64);
 		regBlock(harshen_dimensional_wood_crate, 64);
 		regBlock(harshen_dimensional_dirt, 64);
+		regBlock(harshen_dimensional_gate, 1);
 		regBlock(harshen_soul_ore, 64);
 		regBlock(itium_ore, 64);
 		regBlock(harshen_destroyed_plant,64);
@@ -95,6 +99,7 @@ public class HarshenBlocks {
 		regBlock(harshen_dimensional_rock, 64);
 		regBlock(harshen_dimensional_pedestal, 8);
 		regBlock(plant_of_gleam_nature, 64);
+		
 
 		regSingleBlock(harshen_dimensional_door);
 		regSingleBlock(harshen_hidden_plate_active);

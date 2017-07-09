@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "active=true": { "model": "harshencastle:harshen_dimensional_gate_open" },
+        "active=false": { "model": "harshencastle:harshen_dimensional_gate_closed" }
+    }
+}
