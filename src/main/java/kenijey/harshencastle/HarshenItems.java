@@ -2,11 +2,14 @@ package kenijey.harshencastle;
 
 import java.util.ArrayList;
 
+import kenijey.harshencastle.handlers.itemenum.EnumBloodCollectorHandler;
+import kenijey.harshencastle.handlers.itemenum.EnumBloodCollectorHandler.BloodLevels;
+import kenijey.harshencastle.items.BloodCollector;
 import kenijey.harshencastle.items.BloodEssence;
 import kenijey.harshencastle.items.BloodyEarring;
+import kenijey.harshencastle.items.HarshenCrystal;
 import kenijey.harshencastle.items.HarshenDimensionalDoor;
 import kenijey.harshencastle.items.HarshenDimensionalFluidBucket;
-import kenijey.harshencastle.items.HarshenCrystal;
 import kenijey.harshencastle.items.HarshenSoulFragment;
 import kenijey.harshencastle.items.HarshenSoulIngot;
 import kenijey.harshencastle.items.Itium;
@@ -22,7 +25,7 @@ import kenijey.harshencastle.items.SoulHarsherSword;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemArmor;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 public class HarshenItems 
@@ -44,6 +47,7 @@ public class HarshenItems
 	public static Item pontus_world_gate_spawner;
 	public static Item light_emitted_seed;
 	public static Item light_emitted_essence;
+	public static Item blood_collector;
 	
 	
 	public static void preInit()
@@ -65,6 +69,7 @@ public class HarshenItems
 		pontus_world_gate_spawner = new PontusWorldGateSpawner();
 		light_emitted_seed = new LightEmittedSeed();
 		light_emitted_essence = new LightEmittedEssence();
+		blood_collector = new BloodCollector();
 	}
 	
 	public static void reg()
@@ -86,6 +91,15 @@ public class HarshenItems
 		regItem(pontus_world_gate_spawner,1);
 		regItem(light_emitted_essence,8);
 		regItem(light_emitted_seed,16);
+		regItem(blood_collector,1);
+		
+		regMetaItem(blood_collector, 1);
+	}
+	
+	public static void regRenderMeta()
+	{
+		for(int i = 0; i < BloodLevels.values().length; i++)
+			regRender(blood_collector, i, "harshen_blood_collector_" + BloodLevels.values()[i].getName(), false);
 	}
 	
 	public static ArrayList<Item> items = new ArrayList<Item>();
@@ -94,11 +108,18 @@ public class HarshenItems
 	{
 		for(Item item : items)
 			regRender(item);
+		regRenderMeta();
 	}
 	
 	public static void regItem(Item item, int stackSize)
 	{
 		items.add(item);
+		item.setMaxStackSize(stackSize);
+		ForgeRegistries.ITEMS.register(item);
+	}
+	
+	public static void regMetaItem(Item item, int stackSize)
+	{
 		item.setMaxStackSize(stackSize);
 		ForgeRegistries.ITEMS.register(item);
 	}
@@ -109,4 +130,13 @@ public class HarshenItems
 		item.setCreativeTab(HarshenCastle.harshenTab);
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
 	}
+	
+	public static void regRender(Item item, int meta, String fileName, boolean addAllToCreativeTab)
+	{
+		System.out.println(item + "_" + meta + "-" + fileName);
+		if(meta == 0 || addAllToCreativeTab)
+			item.setCreativeTab(HarshenCastle.harshenTab);
+		ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(fileName, "inventory"));
+	}
+	
 }
