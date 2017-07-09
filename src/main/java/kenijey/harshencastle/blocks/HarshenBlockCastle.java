@@ -31,8 +31,8 @@ public class HarshenBlockCastle extends Block
 	{
 		super(material);
 		setHarvestLevel(harvestTool, 3);
-		setHardness(2.500f);//TODO ONLY FOR TESTING
-		setResistance(2.500f);
+		setHardness(2500f);
+		setResistance(2500f);
 	}
 	
 	@Override
