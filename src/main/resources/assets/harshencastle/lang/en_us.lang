@@ -44,6 +44,7 @@ tile.harshen_soul_flower.name=Harshen Soul Flower
 tile.harshen_dimensional_rock.name=Harshen Dimensional Rock
 tile.harshen_dimensional_pedestal.name=Harshen Dimensional Pedestal
 tile.plant_of_gleam.name=Plant of Gleam
+tile.crop_of_gleam.name=Crop of Gleam
 
 #fluids
 fluid.harshen_dimensional_fluid=Harshen Dimensional Fluid

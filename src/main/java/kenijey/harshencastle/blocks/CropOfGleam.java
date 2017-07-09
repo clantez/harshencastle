@@ -4,12 +4,12 @@ import kenijey.harshencastle.HarshenItems;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.item.Item;
 
-public class LightEmittedSeed extends BlockCrops
+public class CropOfGleam extends BlockCrops
 {
-	public LightEmittedSeed() 
+	public CropOfGleam() 
 	{
-		setRegistryName("light_emitted_seed");
-		setUnlocalizedName("light_emitted_seed");
+		setRegistryName("crop_of_gleam");
+		setUnlocalizedName("crop_of_gleam");
 	}
 	
 	@Override
