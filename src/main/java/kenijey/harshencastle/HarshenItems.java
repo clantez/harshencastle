@@ -2,7 +2,6 @@ package kenijey.harshencastle;
 
 import java.util.ArrayList;
 
-import kenijey.harshencastle.handlers.itemenum.EnumBloodCollectorHandler;
 import kenijey.harshencastle.handlers.itemenum.EnumBloodCollectorHandler.BloodLevels;
 import kenijey.harshencastle.items.BloodCollector;
 import kenijey.harshencastle.items.BloodEssence;
@@ -25,6 +24,8 @@ import kenijey.harshencastle.items.SoulHarsherSword;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
@@ -96,12 +97,6 @@ public class HarshenItems
 		regMetaItem(blood_collector, 1);
 	}
 	
-	public static void regRenderMeta()
-	{
-		for(int i = 0; i < BloodLevels.values().length; i++)
-			regRender(blood_collector, i, "harshen_blood_collector_" + BloodLevels.values()[i].getName(), false);
-	}
-	
 	public static ArrayList<Item> items = new ArrayList<Item>();
 	
 	public static void regRenders()
@@ -128,15 +123,20 @@ public class HarshenItems
 	public static void regRender(Item item)
 	{
 		item.setCreativeTab(HarshenCastle.harshenTab);
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
+		ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
+	}
+	
+	public static void regRenderMeta()
+	{
+		for(int i = 0; i < BloodLevels.values().length; i++)
+			regRender(blood_collector, i, "harshen_blood_collector_" + BloodLevels.values()[i].getName(), false);
 	}
 	
 	public static void regRender(Item item, int meta, String fileName, boolean addAllToCreativeTab)
 	{
-		System.out.println(item + "_" + meta + "-" + fileName);
 		if(meta == 0 || addAllToCreativeTab)
-			item.setCreativeTab(HarshenCastle.harshenTab);
-		ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(fileName, "inventory"));
+			new ItemStack(item, 1, meta).getItem().setCreativeTab(HarshenCastle.harshenTab);
+		ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(new ResourceLocation(HarshenCastle.MODID, fileName), "inventory"));
 	}
 	
 }

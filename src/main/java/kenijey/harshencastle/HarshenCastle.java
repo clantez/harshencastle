@@ -22,7 +22,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-@Mod(modid = HarshenCastle.MODID, name = HarshenCastle.MODNAME, version = HarshenCastle.VERSION/*, dependencies = "required-after:Forge@[14.21.1.2400,)", useMetadata = true*/)
+@Mod(modid = HarshenCastle.MODID, name = HarshenCastle.MODNAME, version = HarshenCastle.VERSION, useMetadata = true/*, dependencies = "required-after:Forge@[14.21.1.2400,)"*/)
 public class HarshenCastle {
 
     public static final String MODID = "harshencastle";
@@ -38,16 +38,18 @@ public class HarshenCastle {
     public void preInit(FMLPreInitializationEvent event) 
     {
     	proxy.preInit(event);
+    	proxy.regRenders(event);
     	HarshenDimensions.register();
     }
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) 
     {
+    	proxy.init(event);
     	MinecraftForge.EVENT_BUS.register(new BucketHandler());
     	Recipes.init();
     	GameRegistry.registerWorldGenerator(new WorldGen(100), 0);
-    	proxy.init(event);
+    	proxy.registerModelBakeryVarients();
     	GameRegistry.registerTileEntity(HarshenDimensionalPedestalTileEntity.class, MODID + "HarshenDimensionalPedestalTileEntity");
     }
 

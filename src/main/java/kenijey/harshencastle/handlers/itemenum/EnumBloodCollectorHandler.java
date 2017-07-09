@@ -6,12 +6,12 @@ public class EnumBloodCollectorHandler
 {
 	public static enum BloodLevels implements IStringSerializable
 	{
-		PERCENT_0("0",0),
-		PERCENT_20("20",1),
-		PERCENT_40("40",2),
-		PERCENT_60("60",3),
-		PERCENT_80("80",4),
-		PERCENT_100("100",5);
+		ZERO("0",0),
+		TWELVE("12",1),
+		TWENTYFOUR("24",2),
+		THIRTYSIX("36",3),
+		FOURTYEIGHT("48",4),
+		SIXTY("60",5);
 		
 		private int id;
 		private String name;
