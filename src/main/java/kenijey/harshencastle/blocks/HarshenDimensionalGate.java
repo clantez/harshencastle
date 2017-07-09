@@ -4,6 +4,7 @@ import java.util.List;
 
 import kenijey.harshencastle.dimensions.DimensionPontus;
 import kenijey.harshencastle.dimensions.pontus.PontusTeleporter;
+import kenijey.harshencastle.items.PontusWorldGateSpawner;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -15,6 +16,8 @@ import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.network.play.server.SPacketEntityEffect;
 import net.minecraft.network.play.server.SPacketPlayerAbilities;
 import net.minecraft.network.play.server.SPacketRespawn;
@@ -68,6 +71,9 @@ public class HarshenDimensionalGate extends Block
 				else
 					((EntityPlayerMP)playerIn).mcServer.getPlayerList().transferPlayerToDimension((EntityPlayerMP) playerIn, DimensionPontus.DIMENSION_ID, new PontusTeleporter(Minecraft.getMinecraft().getIntegratedServer().getServer().getWorld(DimensionPontus.DIMENSION_ID)));
 		}
+		else if(playerIn.getHeldItemMainhand().getItem() instanceof PontusWorldGateSpawner || (playerIn.getHeldItemMainhand().getItem().equals(Item.getItemFromBlock(Blocks.AIR)) && playerIn.getHeldItemOffhand().getItem() instanceof PontusWorldGateSpawner))
+			this.setDefaultState(getStateFromMeta(1));
+
 			return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
 	}
 	
