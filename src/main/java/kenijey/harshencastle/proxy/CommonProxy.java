@@ -1,13 +1,10 @@
 package kenijey.harshencastle.proxy;
 
-import java.util.ArrayList;
-
+import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.HarshenItems;
-import kenijey.harshencastle.handlers.itemenum.EnumBloodCollectorHandler;
-import kenijey.harshencastle.handlers.itemenum.EnumBloodCollectorHandler.BloodLevels;
-import kenijey.harshencastle.handlers.registry.Common;
-import kenijey.harshencastle.items.BloodCollector;
+import kenijey.harshencastle.armor.ArmorInit;
+import kenijey.harshencastle.fluids.HarshenFluids;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.util.ResourceLocation;
@@ -19,12 +16,23 @@ public class CommonProxy
 {
     public void preInit(FMLPreInitializationEvent event) 
     {
-    	Common.preInit();
+    	HarshenFluids.register();
+		
+		HarshenBlocks.preInit();
+		HarshenItems.preInit();
+		
+		HarshenBlocks.reg();
+		HarshenItems.reg();
+		
+		ArmorInit.init();
+		ArmorInit.register();
+		
+
     }
 
     public void init(FMLInitializationEvent event) 
     {
-    	registerModelBakeryVarients();
+
     }
 
     public void postInit(FMLPostInitializationEvent event) 
@@ -36,11 +44,12 @@ public class CommonProxy
 	
 	
 	public void registerModelBakeryVarients()
+	{	
+		
+	}
+
+	public void regRenders(FMLPreInitializationEvent event)
 	{
-		ModelBakery.registerItemVariants(HarshenItems.blood_collector, new ResourceLocation(HarshenCastle.MODID, "harshen_blood_collector_0"), 
-				new ResourceLocation(HarshenCastle.MODID, "harshen_blood_collector_1"), new ResourceLocation(HarshenCastle.MODID, "harshen_blood_collector_2"),
-				new ResourceLocation(HarshenCastle.MODID, "harshen_blood_collector_3"), new ResourceLocation(HarshenCastle.MODID, "harshen_blood_collector_4"),
-				new ResourceLocation(HarshenCastle.MODID, "harshen_blood_collector_5"), new ResourceLocation(HarshenCastle.MODID, "harshen_blood_collector_6"),
-				new ResourceLocation(HarshenCastle.MODID, "harshen_blood_collector_7"));
+		
 	}
 }

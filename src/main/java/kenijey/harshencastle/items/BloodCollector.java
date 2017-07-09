@@ -18,8 +18,7 @@ public class BloodCollector extends Item
 	@Override
 	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) 
 	{
-		for(int i = 0; i < BloodLevels.values().length; i ++)
-			items.add(new ItemStack(this, 1, i));
+		items.add(new ItemStack(this, 1, 0));
 	}
 	
 	@Override
@@ -28,7 +27,6 @@ public class BloodCollector extends Item
 		for(int i = 0; i < BloodLevels.values().length; i ++)
 			if(stack.getItemDamage() == i)
 				return this.getUnlocalizedName() + "." + BloodLevels.values()[i].getName();
-		return this.getUnlocalizedName() + "." + BloodLevels.PERCENT_0.getName();
+		return this.getUnlocalizedName() + "." + BloodLevels.ZERO.getName();
 	}
-	
 }
