@@ -129,7 +129,7 @@ public class HarshenItems
 	public static void regRenderMeta()
 	{
 		for(int i = 0; i < BloodLevels.values().length; i++)
-			regRender(blood_collector, i, "harshen_blood_collector_" + BloodLevels.values()[i].getName(), false);
+			regRender(blood_collector, i, "blood_collector_" + BloodLevels.values()[i].getName(), false);
 	}
 	
 	public static void regRender(Item item, int meta, String fileName, boolean addAllToCreativeTab)

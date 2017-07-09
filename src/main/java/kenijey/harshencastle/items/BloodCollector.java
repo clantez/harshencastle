@@ -10,8 +10,8 @@ public class BloodCollector extends Item
 {
 	
 	public BloodCollector() {
-		setRegistryName("harshen_blood_collector");
-		setUnlocalizedName("harshen_blood_collector");
+		setRegistryName("blood_collector");
+		setUnlocalizedName("blood_collector");
 		this.setHasSubtypes(true);
 	}
 	
