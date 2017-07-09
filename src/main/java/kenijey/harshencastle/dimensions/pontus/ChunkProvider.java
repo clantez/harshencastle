@@ -28,7 +28,6 @@ public class ChunkProvider implements IChunkGenerator {
 	public Chunk generateChunk(int x, int z) {
 		ChunkPrimer chunkprimer = new ChunkPrimer();
 		
-		
 		Chunk chunk = new Chunk(this.worldObj, chunkprimer, x, z);
 		//Biome[] abiome = this.worldObj.getBiomeProvider().loadBlockGeneratorData((Biome[])null, x * 16, z * 16, 16, 16);
 		byte[] abyte = chunk.getBiomeArray();
