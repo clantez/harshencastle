@@ -1,4 +1,9 @@
 --------------------------ITEMS/BLOCKS----------------------------
+HERETIC CAULDRON
+-used for make rituals
+-can only be filled with blood and HD fluid
+-can be shuffled with blood + HD fluid (for different ritual
+
 Pontus World Gate (First-Second-Third) Part(s)
 -found in chests in structures in overworld
 
