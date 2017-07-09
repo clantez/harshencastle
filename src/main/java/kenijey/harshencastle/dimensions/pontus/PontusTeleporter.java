@@ -19,13 +19,13 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
 
-public class PontusTeleporter_TEMPORARY_UNTILL_WORLD_GENERATION extends Teleporter{
+public class PontusTeleporter extends Teleporter{
 	
 	private final WorldServer worldServerInstance;
     private final Random random;
     private final Long2ObjectMap<Teleporter.PortalPosition> destinationCoordinateCache = new Long2ObjectOpenHashMap(4096);
 	
-	public PontusTeleporter_TEMPORARY_UNTILL_WORLD_GENERATION(WorldServer worldIn) {
+	public PontusTeleporter(WorldServer worldIn) {
 		super(worldIn);
 		this.worldServerInstance = worldIn;
 		this.random = new Random(worldIn.getSeed());
