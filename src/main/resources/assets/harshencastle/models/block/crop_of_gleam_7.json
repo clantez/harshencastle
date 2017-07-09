@@ -174,8 +174,8 @@
         },
         {
             "name": "Cube",
-            "from": [ 7.0, 8.0, 7.0 ], 
-            "to": [ 8.0, 11.0, 8.0 ], 
+            "from": [ 7.0, 7.0, 7.0 ], 
+            "to": [ 9.0, 10.0, 8.0 ], 
             "rotation": { "origin": [ 8.0, 8.0, 8.0 ], "axis": "y", "angle": 45.0 },
             "faces": {
                 "north": { "texture": "#essencecolor", "uv": [ 0.0, 0.0, 1.0, 2.0 ] },
