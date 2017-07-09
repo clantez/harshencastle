@@ -17,12 +17,14 @@ import kenijey.harshencastle.blocks.HarshenDimensionalStone;
 import kenijey.harshencastle.blocks.HarshenDimensionalWoodCrate;
 import kenijey.harshencastle.blocks.HarshenHiddenPlate;
 import kenijey.harshencastle.blocks.HarshenHiddenPlateActive;
+import kenijey.harshencastle.blocks.HarshenPlantGleamOfLight;
 import kenijey.harshencastle.blocks.HarshenSoulFlower;
 import kenijey.harshencastle.blocks.HarshenSoulOre;
 import kenijey.harshencastle.blocks.ItiumOre;
 import kenijey.harshencastle.blocks.PlantOfGleamNature;
 import kenijey.harshencastle.blocks.SoulReminder;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockCrops;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -51,11 +53,11 @@ public class HarshenBlocks {
 	public static Block harshen_dimensional_rock;
 	public static Block harshen_dimensional_pedestal;
 	public static Block harshen_dimensional_gate;
+	
+	public static BlockCrops harshen_gleam_plant;
 
 	public static BlockFlower harshen_soul_flower;
 	public static BlockFlower plant_of_gleam_nature;
-	public static BlockFlower plant_of_gleam_planted;
-	public static BlockFlower plant_of_gleam_grown;
 
 	public static void preInit() {
 		harshen_soul_ore = new HarshenSoulOre();
@@ -78,6 +80,7 @@ public class HarshenBlocks {
 		harshen_dimensional_pedestal = new HarshenDimensionalPedestal();
 		plant_of_gleam_nature = new PlantOfGleamNature();
 		harshen_dimensional_gate = new HarshenDimensionalGate();
+		harshen_gleam_plant = new HarshenPlantGleamOfLight();
 	}
 
 	public static void reg() {
@@ -100,7 +103,7 @@ public class HarshenBlocks {
 		regBlock(harshen_dimensional_pedestal, 8);
 		regBlock(plant_of_gleam_nature, 64);
 		
-
+		regSingleBlock(harshen_gleam_plant);
 		regSingleBlock(harshen_dimensional_door);
 		regSingleBlock(harshen_hidden_plate_active);
 	}

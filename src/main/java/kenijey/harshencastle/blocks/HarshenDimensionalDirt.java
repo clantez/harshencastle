@@ -1,24 +1,17 @@
 package kenijey.harshencastle.blocks;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 import kenijey.harshencastle.HarshenBlocks;
-import kenijey.harshencastle.HarshenCastle;
-import kenijey.harshencastle.HarshenItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
-import net.minecraft.block.BlockDirt;
-import net.minecraft.block.BlockFlower;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
@@ -33,13 +26,19 @@ public class HarshenDimensionalDirt extends HarshenBlockCastle
         blockSoundType = blockSoundType.GROUND;
         setTickRandomly(true);
     }
+	ArrayList<Block> whiteListedBlocks = new ArrayList<Block>();
 	
-	@Override
+ 	@Override
 	public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
-		if(worldIn.getBlockState(pos.add(0, 1, 0)).getBlock() instanceof BlockBush)
+ 		whiteListedBlocks.clear();
+ 		whiteListedBlocks.add(HarshenBlocks.harshen_gleam_plant);
+		if(worldIn.getBlockState(pos.add(0, 1, 0)).getBlock() instanceof BlockBush && 
+				!whiteListedBlocks.contains(worldIn.getBlockState(pos.add(0, 1, 0)).getBlock()))
+		{
 			worldIn.setBlockState(pos.add(0, 1, 0), HarshenBlocks.harshen_destroyed_plant.getDefaultState(), 2);
-		if(worldIn.getBlockState(pos.add(0, 2, 0)).getBlock() instanceof BlockBush)
-			worldIn.setBlockState(pos.add(0, 2, 0),Blocks.AIR.getDefaultState(), 2);
+			if(worldIn.getBlockState(pos.add(0, 2, 0)).getBlock() instanceof BlockBush)
+				worldIn.setBlockState(pos.add(0, 2, 0),Blocks.AIR.getDefaultState(), 2);
+		}
 	}
 	
 	@Override

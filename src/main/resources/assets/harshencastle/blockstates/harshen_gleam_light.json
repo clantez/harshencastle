@@ -1,0 +1,12 @@
+{
+    "variants": {
+        "age=0": { "model": "harshencastle:harshen_gleam_light0" },
+        "age=1": { "model": "harshencastle:harshen_gleam_light1" },
+		"age=2": { "model": "harshencastle:harshen_gleam_light2" },
+		"age=3": { "model": "harshencastle:harshen_gleam_light3" },
+		"age=4": { "model": "harshencastle:harshen_gleam_light4" },
+		"age=5": { "model": "harshencastle:harshen_gleam_light5" },
+		"age=6": { "model": "harshencastle:harshen_gleam_light6" },
+		"age=7": { "model": "harshencastle:harshen_gleam_light7" }
+    }
+}

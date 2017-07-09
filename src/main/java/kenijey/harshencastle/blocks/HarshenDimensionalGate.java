@@ -155,7 +155,6 @@ public class HarshenDimensionalGate extends Block
 
             oldWorldIn.profiler.endSection();
         }
-
         entityIn.setWorld(toWorldIn);
     }
 	

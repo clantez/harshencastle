@@ -10,10 +10,13 @@ public class Common
 	public static void preInit()
 	{
 		HarshenFluids.register();
+		
 		HarshenBlocks.preInit();
-		HarshenBlocks.reg();
 		HarshenItems.preInit();
+		
+		HarshenBlocks.reg();
 		HarshenItems.reg();
+		
 		ArmorInit.init();
 		ArmorInit.register();
 	}
