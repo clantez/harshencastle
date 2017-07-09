@@ -48,11 +48,11 @@ public class HarshenBlocks {
 	public static Block harshen_dimensional_dirt;
 	public static Block itium_ore;
 	public static Block harshen_destroyed_plant;
-	public static BlockFlower harshen_soul_flower;
 	public static Block harshen_dimensional_rock;
 	public static Block harshen_dimensional_pedestal;
 	public static Block harshen_dimensional_gate;
-	
+
+	public static BlockFlower harshen_soul_flower;
 	public static BlockFlower plant_of_gleam_nature;
 	public static BlockFlower plant_of_gleam_planted;
 	public static BlockFlower plant_of_gleam_grown;
