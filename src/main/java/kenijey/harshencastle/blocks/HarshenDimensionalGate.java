@@ -58,7 +58,7 @@ public class HarshenDimensionalGate extends Block
 		addCollisionBoxToList(pos, entityBox, collidingBoxes, new AxisAlignedBB(0.9375f, 1f, 0f, 1f, 0.9375f, 1f));
 								
 	}
-	
+		
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
 			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
@@ -72,9 +72,8 @@ public class HarshenDimensionalGate extends Block
 					((EntityPlayerMP)playerIn).mcServer.getPlayerList().transferPlayerToDimension((EntityPlayerMP) playerIn, DimensionPontus.DIMENSION_ID, new PontusTeleporter(Minecraft.getMinecraft().getIntegratedServer().getServer().getWorld(DimensionPontus.DIMENSION_ID)));
 		}
 		else if(playerIn.getHeldItemMainhand().getItem() instanceof PontusWorldGateSpawner || (playerIn.getHeldItemMainhand().getItem().equals(Item.getItemFromBlock(Blocks.AIR)) && playerIn.getHeldItemOffhand().getItem() instanceof PontusWorldGateSpawner))
-			this.setDefaultState(getStateFromMeta(1));
-
-			return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
+			worldIn.setBlockState(pos, getStateFromMeta(1), 3);
+		return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
 	}
 	
 	public void transferPlayerToOverWorld(EntityPlayerMP player, int dimensionIn)

@@ -10,6 +10,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
+import scala.actors.threadpool.Arrays;
 
 public class RendererDimensionalPedestal extends TileEntitySpecialRenderer<HarshenDimensionalPedestalTileEntity>
 {
@@ -28,21 +29,8 @@ public class RendererDimensionalPedestal extends TileEntitySpecialRenderer<Harsh
 			GlStateManager.translate(x, y, z);
 			GlStateManager.translate(0.5f,0.65f,0.5f);
 			GlStateManager.scale(0.7f, 0.7f, 0.7f);
-			GlStateManager.translate(0f,0f,0f);
-			if(te.isActive())
-			{
-				BlockPos pos = te.getMoveDirection();
-				if(pos != null)
-				{
-					float dx = pos.getX() * te.getMove() * 2;
-					float dy = 0.5f * te.getMove();
-					float dz = pos.getZ() * te.getMove() * 2;
-					GlStateManager.translate(dx, dy, dz);
-				}
-				
-			}
-			else 
-				GlStateManager.rotate(rotateAngle, 0, 1, 0);
+			GlStateManager.translate(0, Math.sin(rotateAngle) / 20f, 0);
+			GlStateManager.rotate(rotateAngle % 360 * (te.isActive()? te.getMove() * 10f : 1f), 0, 1, 0);
 			
 			Minecraft.getMinecraft().getRenderManager().doRenderEntity(ITEM, 0f, 0f, 0f, 0f, 0f, false);
 			
