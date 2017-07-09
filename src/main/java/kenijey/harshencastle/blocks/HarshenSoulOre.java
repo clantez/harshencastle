@@ -14,6 +14,7 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
@@ -43,7 +44,7 @@ public class HarshenSoulOre extends Block
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) 
 	{
-		return HarshenItems.harshen_soul_fragment;
+		return null;
 	}
 	
 	@Override
@@ -59,6 +60,8 @@ public class HarshenSoulOre extends Block
 		{
 			if(!worldIn.isRemote)
 			{
+				System.out.println("s");
+				InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(HarshenItems.harshen_soul_fragment));
 				super.onBlockHarvested(worldIn, pos, state, player);
 				player.sendMessage((ITextComponent) new TextComponentTranslation("message.success"));
 			}	
@@ -72,6 +75,11 @@ public class HarshenSoulOre extends Block
 			}
 		}
 
+	}
+	
+	@Override
+	protected ItemStack getSilkTouchDrop(IBlockState state) {
+		return null;
 	}
 	
 	@Override
