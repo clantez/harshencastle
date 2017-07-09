@@ -41,6 +41,12 @@ public class HarshenSoulOre extends Block
 	private World world;
 	
 	@Override
+	public Item getItemDropped(IBlockState state, Random rand, int fortune) 
+	{
+		return HarshenItems.harshen_soul_fragment;
+	}
+	
+	@Override
 	public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) 
 	{
 		if(player.capabilities.isCreativeMode)

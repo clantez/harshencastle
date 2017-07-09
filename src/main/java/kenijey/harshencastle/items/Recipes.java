@@ -92,5 +92,14 @@ public class Recipes
 				" i ",
 				
 				'i', HarshenItems.harshen_soul_ingot);
+		
+		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "harshen_dimensional_dirt"), new ResourceLocation("harshen_items"),
+				new ItemStack(HarshenBlocks.harshen_dimensional_dirt),
+				" e ",
+				"ede ",
+				" e ",
+				
+				'e', HarshenItems.harshen_essence,
+				'd', HarshenBlocks.harshen_dimensional_dirt);
 	}
 }
