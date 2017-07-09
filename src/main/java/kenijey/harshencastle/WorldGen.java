@@ -4,8 +4,10 @@ import java.util.Random;
 
 import com.google.common.base.Predicate;
 
+import kenijey.harshencastle.dimensions.DimensionPontus;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
+import net.minecraft.block.BlockFlower;
 import net.minecraft.block.BlockFlower.EnumFlowerType;
 import net.minecraft.block.BlockStone;
 import net.minecraft.block.state.IBlockState;
@@ -32,18 +34,23 @@ public class WorldGen implements IWorldGenerator
 		this.chanceForNodeToSpawn = chanceForNodeToSpawn;
 	}
 	
+	
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator,
 			IChunkProvider chunkProvider) {
+		
+		int dim = world.provider.getDimension();
+		if(dim == 0)
+		{
+			oreGenerator(this.ore, world, random, chunkX, chunkZ, 10, 0, 20);
+	    	flowerGenerator(HarshenBlocks.harshen_soul_flower, world, random, chunkX, chunkZ, 3);
+	    	flowerGenerator(HarshenBlocks.plant_of_gleam_nature, world, random, chunkX, chunkZ, 3);
+		}
+		else if(dim == DimensionPontus.DIMENSION_ID)
+		{
+	    	oreGenerator(this.itiumOre, world, random, chunkX, chunkZ, 10, 0, 20);
 
-		switch (world.provider.getDimension()) {
-	    case 0:
-	    	oreGenerator(this.ore, world, random, chunkX, chunkZ, 10, 0, 20);
-	    	flowerGenerator(world, random, chunkX, chunkZ, 3/**MAX 100*/);
-	        break;
-	    default:
-	    	break;
-	    }
+		}
 		
 	}
 	
@@ -59,7 +66,7 @@ public class WorldGen implements IWorldGenerator
 	}
 	
 	
-	private void flowerGenerator(World worldIn, Random rand, int chunk_X, int chunk_Z, int chancesToSpawn)
+	private void flowerGenerator(BlockFlower flower, World worldIn, Random rand, int chunk_X, int chunk_Z, int chancesToSpawn)
 	{
 		if(chancesToSpawn > 100)
 			return;
@@ -71,10 +78,10 @@ public class WorldGen implements IWorldGenerator
 		BlockPos position = worldIn.getTopSolidOrLiquidBlock(new BlockPos(x, 0, z));
 		BlockPos blockpos = position.add(rand.nextInt(8) - rand.nextInt(8), rand.nextInt(4) - rand.nextInt(4), rand.nextInt(8) - rand.nextInt(8));
 
-        if (worldIn.isAirBlock(blockpos) && (worldIn.provider.isSurfaceWorld() || blockpos.getY() < 255) && HarshenBlocks.
-        		harshen_soul_flower.canBlockStay(worldIn, blockpos, HarshenBlocks.harshen_soul_flower.getDefaultState()))
+        if (worldIn.isAirBlock(blockpos) && (worldIn.provider.isSurfaceWorld() || blockpos.getY() < 255) && 
+        		flower.canBlockStay(worldIn, blockpos, flower.getDefaultState()))
         {
-            worldIn.setBlockState(blockpos, HarshenBlocks.harshen_soul_flower.getDefaultState(), 2);
+            worldIn.setBlockState(blockpos,flower.getDefaultState(), 2);
         }
 
 	}
