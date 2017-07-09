@@ -20,6 +20,7 @@ import kenijey.harshencastle.blocks.HarshenHiddenPlateActive;
 import kenijey.harshencastle.blocks.CropOfGleam;
 import kenijey.harshencastle.blocks.HarshenSoulFlower;
 import kenijey.harshencastle.blocks.HarshenSoulOre;
+import kenijey.harshencastle.blocks.HereticCauldron;
 import kenijey.harshencastle.blocks.ItiumOre;
 import kenijey.harshencastle.blocks.PlantOfGleam;
 import kenijey.harshencastle.blocks.SoulReminder;
@@ -54,6 +55,7 @@ public class HarshenBlocks {
 	public static Block harshen_dimensional_rock;
 	public static Block harshen_dimensional_pedestal;
 	public static Block harshen_dimensional_gate;
+	public static Block heretic_cauldron;
 	
 	public static BlockCrops crop_of_gleam;
 
@@ -82,6 +84,7 @@ public class HarshenBlocks {
 		plant_of_gleam = new PlantOfGleam();
 		harshen_dimensional_gate = new HarshenDimensionalGate();
 		crop_of_gleam = new CropOfGleam();
+		heretic_cauldron = new HereticCauldron();
 	}
 
 	public static void reg() {
@@ -95,6 +98,7 @@ public class HarshenBlocks {
 		regBlock(harshen_dimensional_wood_crate, 64);
 		regBlock(harshen_dimensional_dirt, 64);
 		regBlock(harshen_dimensional_gate, 1);
+		regBlock(heretic_cauldron, 64);
 		regBlock(harshen_soul_ore, 64);
 		regBlock(itium_ore, 64);
 		regBlock(harshen_destroyed_plant,64);
