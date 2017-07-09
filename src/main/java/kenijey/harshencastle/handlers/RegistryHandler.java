@@ -2,7 +2,7 @@ package kenijey.harshencastle.handlers;
 
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenItems;
-import kenijey.harshencastle.armor.HarshenArmors;
+import kenijey.harshencastle.armor.ArmorInit;
 import kenijey.harshencastle.fluids.HarshenFluids;
 import kenijey.harshencastle.itemrenderer.RendererDimensionalPedestal;
 import kenijey.harshencastle.tileentity.HarshenDimensionalPedestalTileEntity;
@@ -14,7 +14,7 @@ public class RegistryHandler
 	{
 		HarshenBlocks.regRenders();
 		HarshenItems.regRenders();
-		HarshenArmors.regRenders();
+		ArmorInit.regRenders();
 		ClientRegistry.bindTileEntitySpecialRenderer(HarshenDimensionalPedestalTileEntity.class, new RendererDimensionalPedestal());
 	}
 	
@@ -25,8 +25,8 @@ public class RegistryHandler
 		HarshenBlocks.reg();
 		HarshenItems.preInit();
 		HarshenItems.reg();
-		HarshenArmors.init();
-		HarshenArmors.register();
+		ArmorInit.init();
+		ArmorInit.register();
 	}
 
 }

@@ -13,7 +13,7 @@ import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
-public class HarshenArmors 
+public class ArmorInit 
 {
 	public static ArmorMaterial harshen_material = EnumHelper.addArmorMaterial("harshen", "harshencastle:Harshen", 3000, new int[] {5,9,10,5}, 9, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 3.0F);
 

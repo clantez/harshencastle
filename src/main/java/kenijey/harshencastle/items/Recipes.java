@@ -2,7 +2,7 @@ package kenijey.harshencastle.items;
 
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenItems;
-import kenijey.harshencastle.armor.HarshenArmors;
+import kenijey.harshencastle.armor.ArmorInit;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -54,7 +54,7 @@ public class Recipes
 				'b', HarshenItems.blood_essence);
 		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "harshen_jaguar_armor_helmet"), new ResourceLocation("harshen_items"),
-				new ItemStack(HarshenArmors.harshen_jaguar_armor_helmet),
+				new ItemStack(ArmorInit.harshen_jaguar_armor_helmet),
 				"iii",
 				"i i",
 				"   ",
@@ -62,7 +62,7 @@ public class Recipes
 				'i', HarshenItems.harshen_soul_ingot);
 		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "harshen_jaguar_armor_chestplate"), new ResourceLocation("harshen_items"),
-				new ItemStack(HarshenArmors.harshen_jaguar_armor_chestplate),
+				new ItemStack(ArmorInit.harshen_jaguar_armor_chestplate),
 				"i i",
 				"iii",
 				"iii",
@@ -70,7 +70,7 @@ public class Recipes
 				'i', HarshenItems.harshen_soul_ingot);
 		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "harshen_jaguar_armor_leggings"), new ResourceLocation("harshen_items"),
-				new ItemStack(HarshenArmors.harshen_jaguar_armor_leggings),
+				new ItemStack(ArmorInit.harshen_jaguar_armor_leggings),
 				"iii",
 				"i i",
 				"i i",
@@ -78,7 +78,7 @@ public class Recipes
 				'i', HarshenItems.harshen_soul_ingot);
 		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "harshen_jaguar_armor_boots"), new ResourceLocation("harshen_items"),
-				new ItemStack(HarshenArmors.harshen_jaguar_armor_boots),
+				new ItemStack(ArmorInit.harshen_jaguar_armor_boots),
 				"   ",
 				"i i",
 				"i i",
@@ -96,7 +96,7 @@ public class Recipes
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "harshen_dimensional_dirt"), new ResourceLocation("harshen_items"),
 				new ItemStack(HarshenBlocks.harshen_dimensional_dirt),
 				" e ",
-				"ede ",
+				"ede",
 				" e ",
 				
 				'e', HarshenItems.harshen_essence,
