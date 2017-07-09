@@ -1,6 +1,6 @@
 package kenijey.harshencastle.proxy;
 
-import kenijey.harshencastle.handlers.RegistryHandler;
+import kenijey.harshencastle.handlers.registry.Common;
 import net.minecraft.block.Block;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -10,7 +10,7 @@ public class CommonProxy
 {
     public void preInit(FMLPreInitializationEvent event) 
     {
-    	RegistryHandler.PreInitCommon();
+    	Common.preInit();
     }
 
     public void init(FMLInitializationEvent event) 

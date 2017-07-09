@@ -1,13 +1,11 @@
 package kenijey.harshencastle.proxy;
 
 import kenijey.harshencastle.HarshenCastle;
-import kenijey.harshencastle.handlers.RegistryHandler;
+import kenijey.harshencastle.handlers.registry.Client;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
-import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -23,7 +21,7 @@ public class ClientProxy extends CommonProxy
     public void init(FMLInitializationEvent event) 
     {
     	super.init(event);
-    	RegistryHandler.Client();
+    	Client.preInit();;
     }
 
     public void postInit(FMLPostInitializationEvent event) 
