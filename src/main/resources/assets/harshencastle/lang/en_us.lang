@@ -21,6 +21,12 @@ item.pontus_world_gate_part_3.name=Pontus World Gate Spawner Third Part
 item.pontus_world_gate_spawner.name=Pontus World Gate Spawner
 item.light_emitted_seed.name=Light Emitted Seed
 item.light_emitted_essence.name=Light Emitted Essence
+item.blood_collector_0.name=Blood Collector (empty)
+item.blood_collector_1.name=Blood Collector
+item.blood_collector_2.name=Blood Collector
+item.blood_collector_3.name=Blood Collector
+item.blood_collector_4.name=Blood Collector
+item.blood_collector_5.name=Blood Collector (full)
 
 #blocks
 tile.harshen_soul_ore.name=Harshen Soul Ore
