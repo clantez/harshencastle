@@ -69,7 +69,7 @@ public class WorldGen implements IWorldGenerator
 	private void flowerGenerator(BlockFlower flower, World worldIn, Random rand, int chunk_X, int chunk_Z, int chancesToSpawn)
 	{
 		if(chancesToSpawn > 100)
-			return;
+			chancesToSpawn=100;
 		for(int i = 0; i < chancesToSpawn; i++)
 			if(rand.nextInt(100) == 0)
 			{
