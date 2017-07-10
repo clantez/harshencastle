@@ -3,7 +3,6 @@ package kenijey.harshencastle.blocks;
 import java.util.List;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockRedstoneWire;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -17,7 +16,7 @@ public class BloodBlock extends Block
 {
 	public BloodBlock()
 	{
-		 super(Material.CAKE);
+		 super(Material.CARPET);
 		 setUnlocalizedName("blood_block");
 	     setRegistryName("blood_block");
 	     blockSoundType = blockSoundType.SLIME;
@@ -50,6 +49,12 @@ public class BloodBlock extends Block
 	
 	@Override
 	public boolean isNormalCube(IBlockState state, IBlockAccess world, BlockPos pos) {
+		return false;
+	}
+	
+	@Override
+	public boolean isFullCube(IBlockState state) 
+	{
 		return false;
 	}
 }
