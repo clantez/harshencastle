@@ -2,6 +2,7 @@
 SOUL
 -player has 1 soul by default, his soul
 -souls can be catched by killing the boses with soul harsher sword in structures that placed in OVERWORLD by harshen castle 
+-player can carry 6 souls maximum
 
 SOUL BAR (gui)
 -will be above of the blood bar
@@ -19,6 +20,10 @@ BLOOD
 6-animated textures for all stages of the blood bar (kenijey will do)
 
 --------------------------ITEMS/BLOCKS----------------------------
+SOUL HARSHER SWORD
+-has 3 soul slots (0/3)
+-can be filled by shift+right click with souls player has
+
 HARSHEN SOUL FRAGMENT
 -can be filled by 1 soul:
 -player can make a ritual by placing the fragment on the pedestal, and placing 3 blood bottles on the other pedestals to fill the fragment with soul
