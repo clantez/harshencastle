@@ -1,5 +1,6 @@
 package kenijey.harshencastle.biomes;
 
+import kenijey.harshencastle.biomes.pontus.PontusBiome;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeManager;
@@ -13,12 +14,11 @@ public class HarshenBiomes
 	}
 	
 	public static Biome pontus_dimensional_biome;
-	public static final int pontusID = 170;
+
 	
 	public static void initBiomes()
 	{
-		pontus_dimensional_biome = new PontusDimensionBiome();
-		Biome.registerBiome(pontusID, "Pontus", pontus_dimensional_biome);
+		pontus_dimensional_biome = new PontusBiome();
 		ForgeRegistries.BIOMES.register(pontus_dimensional_biome);
 	}
 	

@@ -10,6 +10,7 @@ public class PontusDeadWood extends BlockLog
 	public PontusDeadWood() {
 		setRegistryName("pontus_dead_wood");
 		setUnlocalizedName("pontus_dead_wood");
+		this.setDefaultState(this.blockState.getBaseState().withProperty(LOG_AXIS, BlockLog.EnumAxis.Y));
 	}
 	
 	@Override

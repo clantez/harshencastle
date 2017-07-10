@@ -2,13 +2,11 @@ package kenijey.harshencastle.dimensions.pontus;
 
 import kenijey.harshencastle.dimensions.DimensionPontus;
 import net.minecraft.entity.Entity;
-import net.minecraft.init.Biomes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
-import net.minecraft.world.biome.BiomeProviderSingle;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -16,15 +14,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class PontusWorldProvider extends WorldProvider 
 {
 	public void createBiomeProvider() {
-		this.biomeProvider = new BiomeProviderSingle(Biomes.PLAINS);
 		this.hasSkyLight = true;
 		NBTTagCompound nbttagcompound = this.world.getWorldInfo().getDimensionData(DimensionType.OVERWORLD);
 	}
 	
 	public static String worldPreset = "{\"coordinateScale\":676.94366,\"heightScale\":684.412,\"lowerLimitScale\":512.0,\""
 			+ "upperLimitScale\":512.0,\"depthNoiseScaleX\":200.0,\"depthNoiseScaleZ\":200.0,\"depthNoiseScaleExponent\""
-			+ ":0.5,\"mainNoiseScaleX\":80.0,\"mainNoiseScaleY\":160.0,\"mainNoiseScaleZ\":80.0,\"baseSize\":8.5,\"stretchY\""
-			+ ":12.0,\"biomeDepthWeight\":1.0,\"biomeDepthOffset\":0.0,\"biomeScaleWeight\":1.0,\"biomeScaleOffset\":0.0,\""
+			+ ":0.5,\"mainNoiseScaleX\":80.0,\"mainNoiseScaleY\":300.0,\"mainNoiseScaleZ\":80.0,\"baseSize\":8.5,\"stretchY\""
+			+ ":24.0,\"biomeDepthWeight\":1.0,\"biomeDepthOffset\":0.0,\"biomeScaleWeight\":1.0,\"biomeScaleOffset\":0.0,\""
 			+ "seaLevel\":56,\"useCaves\":true,\"useDungeons\":false,\"dungeonChance\":1,\"useStrongholds\":false,\"useVillages\""
 			+ ":false,\"useMineShafts\":false,\"useTemples\":false,\"useMonuments\":false,\"useMansions\":true,\"useRavines\""
 			+ ":true,\"useWaterLakes\":true,\"waterLakeChance\":1,\"useLavaLakes\":false,\"lavaLakeChance\":10,\"useLavaOceans\""
@@ -144,10 +141,6 @@ public class PontusWorldProvider extends WorldProvider
 	{
 		return 256;
 	}
-	
-    public long getSeed() {
-    	return world.getSeed();
-    }
     
     @Override
     public Vec3d getSkyColor(Entity cameraEntity, float partialTicks) {

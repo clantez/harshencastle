@@ -8,6 +8,7 @@ import javax.annotation.Nullable;
 import javax.swing.text.html.parser.Entity;
 
 import kenijey.harshencastle.HarshenBlocks;
+import kenijey.harshencastle.biomes.HarshenBiomes;
 import kenijey.harshencastle.fluids.HarshenFluids;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
@@ -66,7 +67,7 @@ public class PontusChunkProvider implements IChunkGenerator
     private MapGenBase caveGenerator = new MapGenCaves();
     private MapGenMineshaft mineshaftGenerator = new MapGenMineshaft();
     private MapGenBase ravineGenerator = new MapGenRavine();
-    private Biome biomesForGeneration = Biomes.PLAINS;
+    private Biome biomesForGeneration = Biomes.BEACH;
     double[] mainNoiseRegion;
     double[] minLimitRegion;
     double[] maxLimitRegion;
