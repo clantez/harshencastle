@@ -11,7 +11,7 @@ SOUL BAR (gui)
 
 BLOOD
 1-blood bar (gui) on the screen (left side of the hotbar)
-2-player can bleed himself with a Blade item
+2-player can bleed himself with Blade item
 3-blood of the player will regenerate very slowly
 3.5-will generate if player has more than 5 hearts(10hp)
 4-player will bleed randomly by getting hit (piercing/cutting hits, if specifiable)
@@ -21,6 +21,10 @@ BLOOD
 7-if player has no blood, he will become withered
 
 --------------------------ITEMS/BLOCKS----------------------------
+HARSHING FLUID
+-kills anything that tries to swim in it
+-hits 20 damage per second
+
 SOUL HARSHER SWORD
 -has 3 soul slots (0/3)
 -can be filled by shift+right click with souls player has
