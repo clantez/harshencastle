@@ -41,12 +41,10 @@ public class ClientProxy extends CommonProxy
     @Override
     public void registerModelBakeryVarients() 
     {
-    	ModelBakery.registerItemVariants(HarshenItems.blood_collector, new ResourceLocation(HarshenCastle.MODID, "harshen_blood_collector_0"), 
-				new ResourceLocation(HarshenCastle.MODID, "harshen_blood_collector_1"), new ResourceLocation(HarshenCastle.MODID, "harshen_blood_collector_2"),
-				new ResourceLocation(HarshenCastle.MODID, "harshen_blood_collector_3"), new ResourceLocation(HarshenCastle.MODID, "harshen_blood_collector_4"),
-				new ResourceLocation(HarshenCastle.MODID, "harshen_blood_collector_5"), new ResourceLocation(HarshenCastle.MODID, "harshen_blood_collector_6"),
-				new ResourceLocation(HarshenCastle.MODID, "harshen_blood_collector_7"));
-
+    	ModelBakery.registerItemVariants(HarshenItems.blood_collector, new ResourceLocation(HarshenCastle.MODID, "blood_collector_0"), 
+				new ResourceLocation(HarshenCastle.MODID, "blood_collector_1"), new ResourceLocation(HarshenCastle.MODID, "blood_collector_2"),
+				new ResourceLocation(HarshenCastle.MODID, "blood_collector_3"), new ResourceLocation(HarshenCastle.MODID, "blood_collector_4"),
+				new ResourceLocation(HarshenCastle.MODID, "blood_collector_5"));
     }
     
     @Override

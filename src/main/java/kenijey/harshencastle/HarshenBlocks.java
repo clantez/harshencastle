@@ -2,6 +2,8 @@ package kenijey.harshencastle;
 
 import java.util.ArrayList;
 
+import kenijey.harshencastle.blocks.BloodBlock;
+import kenijey.harshencastle.blocks.CropOfGleam;
 import kenijey.harshencastle.blocks.HarshenDestroyedPlant;
 import kenijey.harshencastle.blocks.HarshenDimensionalDirt;
 import kenijey.harshencastle.blocks.HarshenDimensionalDoor;
@@ -17,18 +19,18 @@ import kenijey.harshencastle.blocks.HarshenDimensionalStone;
 import kenijey.harshencastle.blocks.HarshenDimensionalWoodCrate;
 import kenijey.harshencastle.blocks.HarshenHiddenPlate;
 import kenijey.harshencastle.blocks.HarshenHiddenPlateActive;
-import kenijey.harshencastle.blocks.BloodBlock;
-import kenijey.harshencastle.blocks.CropOfGleam;
 import kenijey.harshencastle.blocks.HarshenSoulFlower;
 import kenijey.harshencastle.blocks.HarshenSoulOre;
 import kenijey.harshencastle.blocks.HereticCauldron;
 import kenijey.harshencastle.blocks.ItiumOre;
 import kenijey.harshencastle.blocks.PlantOfGleam;
+import kenijey.harshencastle.blocks.PontusDeadLeaves;
+import kenijey.harshencastle.blocks.PontusDeadWood;
 import kenijey.harshencastle.blocks.SoulReminder;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.block.BlockFlower;
-import net.minecraft.client.Minecraft;
+import net.minecraft.block.BlockLog;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -58,11 +60,14 @@ public class HarshenBlocks {
 	public static Block harshen_dimensional_gate;
 	public static Block heretic_cauldron;
 	public static Block blood_block;
+	public static Block pontus_dead_leaves;
 	
 	public static BlockCrops crop_of_gleam;
 
 	public static BlockFlower harshen_soul_flower;
 	public static BlockFlower plant_of_gleam;
+	
+	public static BlockLog pontus_dead_wood;
 
 	public static void preInit() {
 		harshen_soul_ore = new HarshenSoulOre();
@@ -88,6 +93,8 @@ public class HarshenBlocks {
 		crop_of_gleam = new CropOfGleam();
 		heretic_cauldron = new HereticCauldron();
 		blood_block = new BloodBlock();
+		pontus_dead_wood = new PontusDeadWood();
+		pontus_dead_leaves = new PontusDeadLeaves();
 	}
 
 	public static void reg() {
@@ -101,6 +108,8 @@ public class HarshenBlocks {
 		regBlock(harshen_dimensional_wood_crate, 64);
 		regBlock(harshen_dimensional_dirt, 64);
 		regBlock(harshen_dimensional_gate, 1);
+		regBlock(pontus_dead_wood, 64);
+		regBlock(pontus_dead_leaves, 64);
 		regBlock(heretic_cauldron, 64);
 		regBlock(harshen_soul_ore, 64);
 		regBlock(itium_ore, 64);

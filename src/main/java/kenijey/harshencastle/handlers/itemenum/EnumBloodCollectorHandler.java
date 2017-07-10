@@ -6,25 +6,23 @@ public class EnumBloodCollectorHandler
 {
 	public static enum BloodLevels implements IStringSerializable
 	{
-		ZERO("0",0),
-		TWELVE("12",1),
-		TWENTYFOUR("24",2),
-		THIRTYSIX("36",3),
-		FOURTYEIGHT("48",4),
-		SIXTY("60",5);
+		ZERO(0),
+		TWELVE(1),
+		TWENTYFOUR(2),
+		THIRTYSIX(3),
+		FOURTYEIGHT(4),
+		SIXTY(5);
 		
 		private int id;
-		private String name;
 		
-		private BloodLevels(String name, int id)
+		private BloodLevels( int id)
 		{
 			this.id = id;
-			this.name = name;
 		}
 
 		@Override
 		public String getName() {
-			return name;
+			return String.valueOf(id);
 		}
 		
 		public int getId()

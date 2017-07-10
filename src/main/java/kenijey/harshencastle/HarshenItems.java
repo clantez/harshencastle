@@ -115,6 +115,7 @@ public class HarshenItems
 	
 	public static void regMetaItem(Item item, int stackSize)
 	{
+		System.out.println(item);
 		item.setMaxStackSize(stackSize);
 		ForgeRegistries.ITEMS.register(item);
 	}

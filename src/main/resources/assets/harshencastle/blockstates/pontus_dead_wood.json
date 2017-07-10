@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "axis=y":    { "model": "harshencastle:pontus_dead_wood" },
+        "axis=z":     { "model": "harshencastle:pontus_dead_wood", "x": 90 },
+        "axis=x":     { "model": "harshencastle:pontus_dead_wood", "x": 90, "y": 90 },
+        "axis=none":   { "model": "harshencastle:pontus_dead_bark" }
+    }
+}

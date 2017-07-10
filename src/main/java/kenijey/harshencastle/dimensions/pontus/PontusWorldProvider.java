@@ -20,10 +20,27 @@ public class PontusWorldProvider extends WorldProvider
 		NBTTagCompound nbttagcompound = this.world.getWorldInfo().getDimensionData(DimensionType.OVERWORLD);
 	}
 	
+	String worldPreset = "{\"coordinateScale\":676.94366,\"heightScale\":684.412,\"lowerLimitScale\":512.0,\""
+			+ "upperLimitScale\":512.0,\"depthNoiseScaleX\":200.0,\"depthNoiseScaleZ\":200.0,\"depthNoiseScaleExponent\""
+			+ ":0.5,\"mainNoiseScaleX\":80.0,\"mainNoiseScaleY\":160.0,\"mainNoiseScaleZ\":80.0,\"baseSize\":8.5,\"stretchY\""
+			+ ":12.0,\"biomeDepthWeight\":1.0,\"biomeDepthOffset\":0.0,\"biomeScaleWeight\":1.0,\"biomeScaleOffset\":0.0,\""
+			+ "seaLevel\":56,\"useCaves\":true,\"useDungeons\":false,\"dungeonChance\":1,\"useStrongholds\":false,\"useVillages\""
+			+ ":false,\"useMineShafts\":false,\"useTemples\":false,\"useMonuments\":false,\"useMansions\":true,\"useRavines\""
+			+ ":true,\"useWaterLakes\":true,\"waterLakeChance\":1,\"useLavaLakes\":false,\"lavaLakeChance\":10,\"useLavaOceans\""
+			+ ":false,\"fixedBiome\":7,\"biomeSize\":1,\"riverSize\":4,\"dirtSize\":33,\"dirtCount\":10,\"dirtMinHeight\":44,\""
+			+ "dirtMaxHeight\":256,\"gravelSize\":1,\"gravelCount\":0,\"gravelMinHeight\":0,\"gravelMaxHeight\":0,\"graniteSize\""
+			+ ":33,\"graniteCount\":10,\"graniteMinHeight\":0,\"graniteMaxHeight\":255,\"dioriteSize\":1,\"dioriteCount\":0,\""
+			+ "dioriteMinHeight\":0,\"dioriteMaxHeight\":0,\"andesiteSize\":1,\"andesiteCount\":0,\"andesiteMinHeight\":0,\""
+			+ "andesiteMaxHeight\":0,\"coalSize\":1,\"coalCount\":1,\"coalMinHeight\":0,\"coalMaxHeight\":61,\"ironSize\":1,\""
+			+ "ironCount\":0,\"ironMinHeight\":0,\"ironMaxHeight\":0,\"goldSize\":1,\"goldCount\":0,\"goldMinHeight\":0,\""
+			+ "goldMaxHeight\":0,\"redstoneSize\":1,\"redstoneCount\":0,\"redstoneMinHeight\":0,\"redstoneMaxHeight\":0,\""
+			+ "diamondSize\":1,\"diamondCount\":0,\"diamondMinHeight\":0,\"diamondMaxHeight\":0,\"lapisSize\":1,\"lapisCount\":0,\""
+			+ "lapisCenterHeight\":0,\"lapisSpread\":0}";
+	
 	@Override
 	public IChunkGenerator createChunkGenerator()
 	{
-		return new ChunkProvider(this.world);
+		return new PontusChunkProvider(this.world, this.getSeed(), worldPreset);
 	}
 
 	@Override
