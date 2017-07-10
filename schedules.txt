@@ -24,6 +24,7 @@ BLOOD
 SOUL HARSHER SWORD
 -has 3 soul slots (0/3)
 -can be filled by shift+right click with souls player has
+-if player kills an animal with this sword, all souls will be released and chat message: i'm not made to kill sinless entities
 
 HARSHEN SOUL FRAGMENT
 -can be filled by 1 soul:
@@ -115,6 +116,12 @@ HARSHEN GIGANTIC CAVE
 -4. structure in world
 -made from HD rock
 
+BLOODY MARY'S HORROR HOUSE
+-has scary paintings (custom)
+-we should build it like a normal house but scary
+-bloods around the floors...maybe we add bedside lamp to put somewhere in it to make it more scary
+-scary sound effects
+
 --------------------------MOBS---------------------------------
 BLOODY MARY
 -has its own structure in pontus world
@@ -122,8 +129,8 @@ BLOODY MARY
 -has a skill makes everywhere around bloody (blood block)
 -spawns not very rare, not dense
 
-KAZZANDRE
--boss in harshen castle
+KAZZENDRE
+-boss of harshen castle
 -more properties will come...
 
 SOULLESS KNIGHT
@@ -133,7 +140,7 @@ HARSHEN SOUL
 -normal attacker mob in harshen castle
 
 SOUL PART
--flying mob in harshen castle
+-flying mob in harshen castle(also can pass walls)
 
 SOUL SHOOTER
 -a mysterious mob in harshen castle
