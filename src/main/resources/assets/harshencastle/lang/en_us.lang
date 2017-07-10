@@ -91,6 +91,8 @@ gatepart1=A part of the gate that
 gatepart2=opens to Pontus World
 gatespawner1=Opens the Gate
 gatespawner2=of the Pontus World
+seed1=Plantable only on
+seed2=Harshen Dimensional Dirt
 
 #misc
 itemGroup.harshenTab=Harshen Castle
