@@ -6,7 +6,6 @@ import kenijey.harshencastle.creativetabs.HarshenTab;
 import kenijey.harshencastle.dimensions.DimensionPontus;
 import kenijey.harshencastle.dimensions.HarshenDimensions;
 import kenijey.harshencastle.handlers.BucketHandler;
-import kenijey.harshencastle.handlers.PontusPopulationHandler;
 import kenijey.harshencastle.items.Recipes;
 import kenijey.harshencastle.proxy.CommonProxy;
 import kenijey.harshencastle.tileentity.HarshenDimensionalPedestalTileEntity;
@@ -40,7 +39,7 @@ public class HarshenCastle {
     {
     	proxy.preInit(event);
     	proxy.regRenders(event);
-    	HarshenDimensions.register();
+    	
     }
 
     @Mod.EventHandler
@@ -48,7 +47,6 @@ public class HarshenCastle {
     {
     	proxy.init(event);
     	MinecraftForge.EVENT_BUS.register(new BucketHandler());
-    	MinecraftForge.EVENT_BUS.register(new PontusPopulationHandler());
     	Recipes.init();
     	GameRegistry.registerWorldGenerator(new WorldGen(100), 0);
     	proxy.registerModelBakeryVarients();

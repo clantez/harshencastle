@@ -9,7 +9,11 @@ import javax.swing.text.html.parser.Entity;
 
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.fluids.HarshenFluids;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
+import net.minecraft.block.BlockLeaves;
+import net.minecraft.block.BlockLog;
+import net.minecraft.block.BlockTallGrass;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -62,7 +66,7 @@ public class PontusChunkProvider implements IChunkGenerator
     private MapGenBase caveGenerator = new MapGenCaves();
     private MapGenMineshaft mineshaftGenerator = new MapGenMineshaft();
     private MapGenBase ravineGenerator = new MapGenRavine();
-    private Biome[] biomesForGeneration;
+    private Biome biomesForGeneration = Biomes.PLAINS;
     double[] mainNoiseRegion;
     double[] minLimitRegion;
     double[] maxLimitRegion;
@@ -118,7 +122,6 @@ public class PontusChunkProvider implements IChunkGenerator
 
     public void setBlocksInChunk(int x, int z, ChunkPrimer primer)
     {
-        this.biomesForGeneration = this.world.getBiomeProvider().getBiomesForGeneration(this.biomesForGeneration, x * 4 - 2, z * 4 - 2, 10, 10);        
         this.generateHeightmap(x * 4, 0, z * 4);
 
         for (int i = 0; i < 4; ++i)
@@ -185,20 +188,16 @@ public class PontusChunkProvider implements IChunkGenerator
         }
     }
 
-    public void replaceBiomeBlocks(int x, int z, ChunkPrimer primer, Biome[] biomesIn)
+    public void replaceBiomeBlocks(int x, int z, ChunkPrimer primer, Biome biomeIn)
     {
         if (!net.minecraftforge.event.ForgeEventFactory.onReplaceBiomeBlocks(this, x, z, primer, this.world)) return;
         double d0 = 0.03125D;
         this.depthBuffer = this.surfaceNoise.getRegion(this.depthBuffer, (double)(x * 16), (double)(z * 16), 16, 16, 0.0625D, 0.0625D, 1.0D);
 
         for (int i = 0; i < 16; ++i)
-        {
-            for (int j = 0; j < 16; ++j)
-            {
-                Biome biome = biomesIn[j + i * 16];
-                biome.genTerrainBlocks(this.world, this.rand, primer, x * 16 + i, z * 16 + j, this.depthBuffer[j + i * 16]);
-            }
-        }
+        	for (int j = 0; j < 16; ++j)
+            	biomeIn.genTerrainBlocks(this.world, this.rand, primer, x * 16 + i, z * 16 + j, this.depthBuffer[j + i * 16]);
+
     }
 
     /**
@@ -209,7 +208,8 @@ public class PontusChunkProvider implements IChunkGenerator
         this.rand.setSeed((long)x * 341873128712L + (long)z * 132897987541L);
         ChunkPrimer chunkprimer = new ChunkPrimer();
         this.setBlocksInChunk(x, z, chunkprimer);
-        this.biomesForGeneration = this.world.getBiomeProvider().getBiomes(this.biomesForGeneration, x * 16, z * 16, 16, 16);
+
+
         this.replaceBiomeBlocks(x, z, chunkprimer, this.biomesForGeneration);
 
         if (this.settings.useCaves)
@@ -223,15 +223,20 @@ public class PontusChunkProvider implements IChunkGenerator
         }
 
         Chunk chunk = new Chunk(this.world, chunkprimer, x, z);
-        byte[] abyte = chunk.getBiomeArray();
-
-        for (int i = 0; i < abyte.length; ++i)
-        {
-            abyte[i] = (byte)Biome.getIdForBiome(this.biomesForGeneration[i]);
-        }
-
         chunk.generateSkylightMap();
         return chunk;
+    }
+    
+    private int getMetaFromStateLog(IBlockState state)
+    {
+        switch ((BlockLog.EnumAxis)state.getValue(BlockLog.LOG_AXIS))
+        {
+            case X: return 0b0100;
+            case Y: return 0b0000;
+            case Z: return 0b1000;
+            case NONE: return 0b1100;
+        }
+        return 0;
     }
 
     private void generateHeightmap(int p_185978_1_, int p_185978_2_, int p_185978_3_)
@@ -253,13 +258,13 @@ public class PontusChunkProvider implements IChunkGenerator
                 float f3 = 0.0F;
                 float f4 = 0.0F;
                 int i1 = 2;
-                Biome biome = this.biomesForGeneration[k + 2 + (l + 2) * 10];
+                Biome biome = this.biomesForGeneration;
 
                 for (int j1 = -2; j1 <= 2; ++j1)
                 {
                     for (int k1 = -2; k1 <= 2; ++k1)
                     {
-                        Biome biome1 = this.biomesForGeneration[k + j1 + 2 + (l + k1 + 2) * 10];
+                        Biome biome1 = this.biomesForGeneration;
                         float f5 = this.settings.biomeDepthOffSet + biome1.getBaseHeight() * this.settings.biomeDepthWeight;
                         float f6 = this.settings.biomeScaleOffset + biome1.getHeightVariation() * this.settings.biomeScaleWeight;
 

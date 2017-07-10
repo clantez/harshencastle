@@ -4,6 +4,8 @@ import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.armor.ArmorInit;
+import kenijey.harshencastle.biomes.HarshenBiomes;
+import kenijey.harshencastle.dimensions.HarshenDimensions;
 import kenijey.harshencastle.fluids.HarshenFluids;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelBakery;
@@ -27,7 +29,9 @@ public class CommonProxy
 		ArmorInit.init();
 		ArmorInit.register();
 		
-
+		HarshenDimensions.register();
+		
+		HarshenBiomes.register();
     }
 
     public void init(FMLInitializationEvent event) 

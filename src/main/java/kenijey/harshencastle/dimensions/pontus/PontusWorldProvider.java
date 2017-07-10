@@ -1,6 +1,7 @@
 package kenijey.harshencastle.dimensions.pontus;
 
 import kenijey.harshencastle.dimensions.DimensionPontus;
+import net.minecraft.entity.Entity;
 import net.minecraft.init.Biomes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.MathHelper;
@@ -145,6 +146,12 @@ public class PontusWorldProvider extends WorldProvider
 	}
 	
     public long getSeed() {
-    	return 0;
+    	return world.getSeed();
     }
+    
+    @Override
+    public Vec3d getSkyColor(Entity cameraEntity, float partialTicks) {
+    	return new Vec3d(0.5, 0, 0);
+    }
+
 }
