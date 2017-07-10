@@ -1,0 +1,18 @@
+{
+"ambientocclusion": false,
+    "textures": {
+        "blood": "harshencastle:blocks/blood_4",
+        "particle": "harshencastle:blocks/blood_4"
+    },
+    "elements": [
+        {
+            "name": "Cube",
+            "from": [ 0.0, 0.0, 0.0 ], 
+            "to": [ 16.0, 0.0, 16.0 ], 
+            "faces": {
+                "up": { "texture": "#blood", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "cullface": "up" },
+                "down": { "texture": "#blood", "uv": [ 0.0, 0.0, 16.0, 16.0 ] }
+            }
+        }
+    ]
+}

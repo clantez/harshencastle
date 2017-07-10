@@ -52,6 +52,7 @@ tile.harshen_dimensional_pedestal.name=Harshen Dimensional Pedestal
 tile.plant_of_gleam.name=Plant of Gleam
 tile.crop_of_gleam.name=Crop of Gleam
 tile.heretic_cauldron.name=Heretic Cauldron
+tile.blood_block.name=Blood
 
 #fluids
 fluid.harshen_dimensional_fluid=Harshen Dimensional Fluid

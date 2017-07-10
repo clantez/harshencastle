@@ -1,0 +1,12 @@
+{
+    "variants": {
+        "normal": [
+                    { "model": "harshencastle:blood_1" },
+                    { "model": "harshencastle:blood_2" },
+                    { "model": "harshencastle:blood_3" },
+                    { "model": "harshencastle:blood_4" },
+                    { "model": "harshencastle:blood_5" }
+                        
+                  ]     
+                }
+}
