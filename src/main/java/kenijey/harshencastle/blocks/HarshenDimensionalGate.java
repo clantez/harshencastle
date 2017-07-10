@@ -67,16 +67,16 @@ public class HarshenDimensionalGate extends Block
 				Boolean goHome = playerIn.dimension == DimensionPontus.DIMENSION_ID;
 				if(playerIn instanceof EntityPlayerMP)
 					if(goHome) 
-						transferPlayerToDimension((EntityPlayerMP) playerIn, 0, false);
+						transferPlayerToDimension((EntityPlayerMP) playerIn, 0, false, pos);
 					else
-						transferPlayerToDimension((EntityPlayerMP) playerIn, DimensionPontus.DIMENSION_ID, true);
+						transferPlayerToDimension((EntityPlayerMP) playerIn, DimensionPontus.DIMENSION_ID, true, pos);
 			}
 			else if(playerIn.getHeldItemMainhand().getItem() instanceof PontusWorldGateSpawner || (playerIn.getHeldItemMainhand().getItem().equals(Item.getItemFromBlock(Blocks.AIR)) && playerIn.getHeldItemOffhand().getItem() instanceof PontusWorldGateSpawner))
 				worldIn.setBlockState(pos, getStateFromMeta(1), 3);
 		return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
 	}
 	
-	public void transferPlayerToDimension(EntityPlayerMP player, int dimensionIn, boolean placeBlock)
+	public void transferPlayerToDimension(EntityPlayerMP player, int dimensionIn, boolean placeBlock, BlockPos pos)
     {
         int i = player.dimension;
         WorldServer worldserver = player.mcServer.getWorld(player.dimension);
@@ -86,7 +86,7 @@ public class HarshenDimensionalGate extends Block
         player.mcServer.getPlayerList().updatePermissionLevel(player);
         worldserver.removeEntityDangerously(player);
         player.isDead = false;
-        transferPlayerToWorld(player, i, worldserver, worldserver1, placeBlock);
+        transferPlayerToWorld(player, i, worldserver, worldserver1, placeBlock, pos);
         player.mcServer.getPlayerList().preparePlayer(player, worldserver);
         player.connection.setPlayerLocation(player.posX, player.posY, player.posZ, player.rotationYaw, player.rotationPitch);
         player.interactionManager.setWorld(worldserver1);
@@ -101,7 +101,7 @@ public class HarshenDimensionalGate extends Block
         net.minecraftforge.fml.common.FMLCommonHandler.instance().firePlayerChangedDimensionEvent(player, i, dimensionIn);
     }
 	
-	public void transferPlayerToWorld(Entity entityIn, int lastDimension, WorldServer oldWorldIn, WorldServer toWorldIn, boolean placeBlock)
+	public void transferPlayerToWorld(Entity entityIn, int lastDimension, WorldServer oldWorldIn, WorldServer toWorldIn, boolean placeBlock, BlockPos pos)
     {
         net.minecraft.world.WorldProvider pOld = oldWorldIn.provider;
         net.minecraft.world.WorldProvider pNew = toWorldIn.provider;
@@ -141,14 +141,14 @@ public class HarshenDimensionalGate extends Block
         if (lastDimension != 1)
         {
             oldWorldIn.profiler.startSection("placing");
-            d0 = (double)MathHelper.clamp((int)d0, -29999872, 29999872);
-            d1 = (double)MathHelper.clamp((int)d1, -29999872, 29999872);
 
             if (entityIn.isEntityAlive())
             {
-                entityIn.setLocationAndAngles(d0, entityIn.posY, d1, entityIn.rotationYaw, entityIn.rotationPitch);
-                if(placeBlock && !toWorldIn.getBlockState(entityIn.getPosition().add(0, -1, 0)).equals(HarshenBlocks.harshen_dimensional_gate.getDefaultState().withProperty(HarshenDimensionalGate.ACTIVE, true)))
-                	toWorldIn.setBlockState(entityIn.getPosition().add(0, -1, 0), HarshenBlocks.harshen_dimensional_gate.getDefaultState().withProperty(HarshenDimensionalGate.ACTIVE, true), 3);
+            	int y = toWorldIn.getTopSolidOrLiquidBlock(pos).getY();
+            	BlockPos p = new BlockPos(pos.getX(), y, pos.getZ());
+                entityIn.setLocationAndAngles(p.getX(), p.getY(), p.getZ(), entityIn.rotationYaw, entityIn.rotationPitch);
+                if(placeBlock && !toWorldIn.getBlockState(p.add(0, -1, 0)).equals(HarshenBlocks.harshen_dimensional_gate.getDefaultState().withProperty(HarshenDimensionalGate.ACTIVE, true)))
+                	toWorldIn.setBlockState(p.add(0, -1, 0), HarshenBlocks.harshen_dimensional_gate.getDefaultState().withProperty(HarshenDimensionalGate.ACTIVE, true), 3);
                 toWorldIn.spawnEntity(entityIn);
                 toWorldIn.updateEntityWithOptionalForce(entityIn, false);
             }

@@ -28,7 +28,7 @@ public class VolatileChunkProvider implements IChunkProvider
 
 	public VolatileChunkProvider(World worldIn) {
 		worldObj = worldIn;
-		chunkGenerator = new PontusChunkProvider(worldIn);
+		chunkGenerator = new PontusChunkProvider(worldIn, worldIn.getSeed(), PontusWorldProvider.worldPreset);
 	}
 	
 	@Override

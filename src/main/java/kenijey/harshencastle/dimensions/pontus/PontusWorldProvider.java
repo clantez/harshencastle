@@ -20,7 +20,7 @@ public class PontusWorldProvider extends WorldProvider
 		NBTTagCompound nbttagcompound = this.world.getWorldInfo().getDimensionData(DimensionType.OVERWORLD);
 	}
 	
-	String worldPreset = "{\"coordinateScale\":676.94366,\"heightScale\":684.412,\"lowerLimitScale\":512.0,\""
+	public static String worldPreset = "{\"coordinateScale\":676.94366,\"heightScale\":684.412,\"lowerLimitScale\":512.0,\""
 			+ "upperLimitScale\":512.0,\"depthNoiseScaleX\":200.0,\"depthNoiseScaleZ\":200.0,\"depthNoiseScaleExponent\""
 			+ ":0.5,\"mainNoiseScaleX\":80.0,\"mainNoiseScaleY\":160.0,\"mainNoiseScaleZ\":80.0,\"baseSize\":8.5,\"stretchY\""
 			+ ":12.0,\"biomeDepthWeight\":1.0,\"biomeDepthOffset\":0.0,\"biomeScaleWeight\":1.0,\"biomeScaleOffset\":0.0,\""

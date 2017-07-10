@@ -52,7 +52,7 @@ public class PontusChunkProvider implements IChunkGenerator
     public NoiseGeneratorOctaves scaleNoise;
     public NoiseGeneratorOctaves depthNoise;
     public NoiseGeneratorOctaves forestNoise;
-    public final World world;
+    public static World world;
     private final WorldType terrainType;
     private final double[] heightMap;
     private final float[] biomeWeights;

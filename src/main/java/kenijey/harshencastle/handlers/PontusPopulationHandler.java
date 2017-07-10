@@ -14,34 +14,39 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing.Axis;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.event.terraingen.ChunkGeneratorEvent;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
+import net.minecraftforge.event.world.ChunkDataEvent;
+import net.minecraftforge.event.world.ChunkEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class PontusPopulationHandler 
 {
+
+	
 	@SubscribeEvent
-	public void pop(PopulateChunkEvent event)
+	public void pop(PopulateChunkEvent.Post event)
 	{
 		if(!(event.getGenerator() instanceof PontusChunkProvider))
 			return;
+		
 		new Thread("Pontus World Generator")
 		{
 			@Override
 			public void run() {
 				World world = event.getWorld();
+				System.out.println(world.getBlockState(new BlockPos(-45, 63, 409)));
 				int chunkX = event.getChunkX() * 16;
 				int chunkZ = event.getChunkZ() * 16;
 				for(int x = 0; x < 16; x ++)
 					for(int z = 0; z < 16; z ++)
-						for(int y = 0; y < 256; y ++)
+						for(int y = 54; y < 125; y ++)
 						{
 							BlockPos pos = new BlockPos(chunkX + x, y, chunkZ + z);
 							IBlockState state = world.getBlockState(pos);
 							Block block = state.getBlock();
 							if(block instanceof BlockLog)
 								world.setBlockState(pos, HarshenBlocks.pontus_dead_wood.getStateFromMeta(getMetaFromStateLog(state)));	
-							if(block instanceof BlockLeaves)
-								world.setBlockState(pos, HarshenBlocks.pontus_dead_leaves.getDefaultState());
 							if(block instanceof BlockTallGrass)
 								world.setBlockToAir(pos);
 						}
@@ -50,7 +55,12 @@ public class PontusPopulationHandler
 		
 	}
 	
-	public int getMetaFromStateLog(IBlockState state)
+	private void setBlockState(BlockPos pos, IBlockState state)
+	{
+		
+	}
+	
+	private int getMetaFromStateLog(IBlockState state)
     {
         switch ((BlockLog.EnumAxis)state.getValue(BlockLog.LOG_AXIS))
         {
@@ -61,4 +71,6 @@ public class PontusPopulationHandler
         }
         return 0;
     }
+	
+	
 }
