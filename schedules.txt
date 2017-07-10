@@ -1,8 +1,12 @@
 ------------FEATURES--------------
+SOUL
+-player has 1 soul by default, his soul
+-souls can be catched by killing the boses with soul harsher sword in structures that placed in OVERWORLD by harshen castle 
+
 SOUL BAR (gui)
 -will be above of the blood bar
 -not a bar actually, just a little box that shows a number that means catched souls
--catchen souls will be free if player dies (number will be set to 0)
+-catchen souls will be free if player dies (number will be set to 1)
 
 BLOOD
 1-blood bar (gui) on the screen (left side of the hotbar)
@@ -15,6 +19,15 @@ BLOOD
 6-animated textures for all stages of the blood bar (kenijey will do)
 
 --------------------------ITEMS/BLOCKS----------------------------
+HARSHEN SOUL FRAGMENT
+-can be filled by 1 soul:
+-player can make a ritual by placing the fragment on the pedestal, and placing 3 blood bottles on the other pedestals to fill the fragment with soul
+-if player does that ritual, that fragment will replace with Soul Filled Fragment
+
+SOUL FILLED FRAGMENT
+-used to make some rituals
+-more coming...
+
 BLADE
 -can be used to bleed the player by himself (by shift+right click)
 -and normal right click to bleed SOME of the mobs(villagers, witch)  (whitelist) with same procedure (blood block put around)
