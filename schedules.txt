@@ -36,7 +36,7 @@ SOUL FILLED FRAGMENT
 
 BLADE
 -can be used to bleed the player by himself (by shift+right click)
--and normal right click to bleed SOME of the mobs(villagers, witch)  (whitelist) with same procedure (blood block put around)
+-and normal right click to bleed SOME of the mobs(villagers, witch, another player) (whitelist) with same procedure (put blood block around)
 -it will damage to player 1 HP (half heart) but to other mobs will get 
 -a little sound effect for bleeding player himself
 -if used 1 time, item texture will replace with bloody one forever for that item
