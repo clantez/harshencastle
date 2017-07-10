@@ -1,4 +1,22 @@
+------------FEATURES--------------
+BLOOD
+1-blood bar (gui) on the screen (left side of the hotbar)
+2-player can bleed himself with a Blade item
+3-blood of the player will regenerate very slowly
+3.5-will generate if player has more than 5 hearts(10hp)
+4-player will bleed randomly by getting hit (piercing/cutting hits, if specifiable)
+4.5-if player bleed, blood block will be placed RANDOMLY AGAIN around close to player standing on
+5-blood will be kept after death
+6-animated textures for all stages of the blood bar (kenijey will do)
+
 --------------------------ITEMS/BLOCKS----------------------------
+BLADE
+-can be used to bleed the player by himself (by shift+right click)
+-and normal right click to bleed SOME of the mobs(villagers, witch)  (whitelist) with same procedure (blood block put around)
+-it will damage to player 1 HP (half heart) but to other mobs will get 
+-a little sound effect for bleeding player himself
+-if used 1 time, item texture will replace with bloody one forever for that item
+
 HERETIC CAULDRON
 -used for make rituals
 -can only be filled with blood and HD fluid
