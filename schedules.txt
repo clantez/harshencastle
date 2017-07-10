@@ -18,6 +18,7 @@ BLOOD
 4.5-if player bleed, blood block will be placed RANDOMLY AGAIN around close to player standing on
 5-blood will be kept after death
 6-animated textures for all stages of the blood bar (kenijey will do)
+7-if player has no blood, he will become withered
 
 --------------------------ITEMS/BLOCKS----------------------------
 SOUL HARSHER SWORD
