@@ -1,4 +1,9 @@
 ------------FEATURES--------------
+SOUL BAR (gui)
+-will be above of the blood bar
+-not a bar actually, just a little box that shows a number that means catched souls
+-catchen souls will be free if player dies (number will be set to 0)
+
 BLOOD
 1-blood bar (gui) on the screen (left side of the hotbar)
 2-player can bleed himself with a Blade item
@@ -16,6 +21,10 @@ BLADE
 -it will damage to player 1 HP (half heart) but to other mobs will get 
 -a little sound effect for bleeding player himself
 -if used 1 time, item texture will replace with bloody one forever for that item
+
+BLOOD BOTTLE
+-normal glass bottle should be fillable with blood block. and it will replace with blood bottle that i will add
+-it is drinkable, if player drinks it...(coming soon)
 
 HERETIC CAULDRON
 -used for make rituals
