@@ -53,6 +53,8 @@ tile.plant_of_gleam.name=Plant of Gleam
 tile.crop_of_gleam.name=Crop of Gleam
 tile.heretic_cauldron.name=Heretic Cauldron
 tile.blood_block.name=Blood
+tile.pontus_dead_wood.name=Pontus Dead Wood
+tile.pontus_dead_leaves.name=Pontus Dead Leaves
 
 #fluids
 fluid.harshen_dimensional_fluid=Harshen Dimensional Fluid
