@@ -19,8 +19,7 @@ public class PontusWorldGeneratorStone extends WorldGenerator
 
 	@Override
 	public boolean generate(World worldIn, Random rand, BlockPos position) {
-		if(worldIn.getTopSolidOrLiquidBlock(position).getY() > 50 ||
-				(worldIn.getTopSolidOrLiquidBlock(position).getY() < 30))
+		if(worldIn.getTopSolidOrLiquidBlock(position).getY() > 90)
 			return false;
 		float f = rand.nextFloat() * (float)Math.PI;
         double d0 = (double)((float)(position.getX() + 8) + MathHelper.sin(f) * (float)this.numberOfBlocks / 8.0F);

@@ -76,7 +76,7 @@ public class PontusBiome extends Biome
 	@Override
 	public void decorate(World worldIn, Random rand, BlockPos pos) {
 		super.decorate(worldIn, rand, pos);
-		for (int i = 0; i < 25; ++i)
+		for (int i = 0; i < 13; ++i)
         {
             int j = rand.nextInt(16) + 8;
             int k = rand.nextInt(16) + 8;
