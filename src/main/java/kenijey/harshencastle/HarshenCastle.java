@@ -4,13 +4,12 @@ import kenijey.harshencastle.commands.CommandDelFlatPlate;
 import kenijey.harshencastle.commands.CommandFlatPlate;
 import kenijey.harshencastle.creativetabs.HarshenTab;
 import kenijey.harshencastle.dimensions.DimensionPontus;
-import kenijey.harshencastle.handlers.BucketHandler;
 import kenijey.harshencastle.items.Recipes;
 import kenijey.harshencastle.proxy.CommonProxy;
 import kenijey.harshencastle.tileentity.HarshenDimensionalPedestalTileEntity;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -32,6 +31,12 @@ public class HarshenCastle {
     public static CommonProxy proxy;
 
     public static final CreativeTabs harshenTab = new HarshenTab("harshenTab");
+    
+	static 
+	{
+		FluidRegistry.enableUniversalBucket();
+	}
+
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) 
@@ -45,7 +50,6 @@ public class HarshenCastle {
     public void init(FMLInitializationEvent event) 
     {
     	proxy.init(event);
-    	MinecraftForge.EVENT_BUS.register(new BucketHandler());
     	Recipes.init();
     	GameRegistry.registerWorldGenerator(new WorldGen(100), 0);
     	proxy.registerModelBakeryVarients();

@@ -2,13 +2,12 @@ package kenijey.harshencastle;
 
 import java.util.ArrayList;
 
-import kenijey.harshencastle.handlers.itemenum.EnumBloodCollectorHandler.BloodLevels;
+import kenijey.harshencastle.itemenum.EnumBloodCollectorHandler.BloodLevels;
 import kenijey.harshencastle.items.BloodCollector;
 import kenijey.harshencastle.items.BloodEssence;
 import kenijey.harshencastle.items.BloodyEarring;
 import kenijey.harshencastle.items.HarshenCrystal;
 import kenijey.harshencastle.items.HarshenDimensionalDoor;
-import kenijey.harshencastle.items.HarshenDimensionalFluidBucket;
 import kenijey.harshencastle.items.HarshenSoulFragment;
 import kenijey.harshencastle.items.HarshenSoulIngot;
 import kenijey.harshencastle.items.Itium;
@@ -21,7 +20,6 @@ import kenijey.harshencastle.items.PontusWorldGatePart3;
 import kenijey.harshencastle.items.PontusWorldGateSpawner;
 import kenijey.harshencastle.items.SoulHarsherPickaxe;
 import kenijey.harshencastle.items.SoulHarsherSword;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -41,7 +39,6 @@ public class HarshenItems
 	public static Item pontus_ring;
 	public static Item bloody_earring;
 	public static Item blood_essence;
-	public static Item harshen_dimensional_fluid_bucket;
 	public static Item pontus_world_gate_part_1;
 	public static Item pontus_world_gate_part_2;
 	public static Item pontus_world_gate_part_3;
@@ -63,7 +60,6 @@ public class HarshenItems
 		pontus_ring = new PontusRing();
 		bloody_earring = new BloodyEarring();
 		blood_essence = new BloodEssence();
-		harshen_dimensional_fluid_bucket = new HarshenDimensionalFluidBucket();
 		pontus_world_gate_part_1 = new PontusWorldGatePart1();
 		pontus_world_gate_part_2 = new PontusWorldGatePart2();
 		pontus_world_gate_part_3 = new PontusWorldGatePart3();
@@ -85,7 +81,6 @@ public class HarshenItems
 		regItem(pontus_ring, 1);
 		regItem(bloody_earring, 1);
 		regItem(blood_essence, 8);
-		regItem(harshen_dimensional_fluid_bucket,1);
 		regItem(pontus_world_gate_part_1,1);
 		regItem(pontus_world_gate_part_2,1);
 		regItem(pontus_world_gate_part_3,1);

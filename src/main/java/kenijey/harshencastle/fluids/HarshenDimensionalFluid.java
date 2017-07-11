@@ -11,6 +11,8 @@ public class HarshenDimensionalFluid extends Fluid {
     public HarshenDimensionalFluid()
     {
         super(name, new ResourceLocation("harshencastle:blocks/harshen_dimensional_fluid_still"), new ResourceLocation("harshencastle:blocks/harshen_dimensional_fluid_flowing"));
+		setViscosity(1000);
+		setDensity(500);
     }
 
 }

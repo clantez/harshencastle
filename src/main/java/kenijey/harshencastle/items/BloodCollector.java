@@ -1,6 +1,6 @@
 package kenijey.harshencastle.items;
 
-import kenijey.harshencastle.handlers.itemenum.EnumBloodCollectorHandler.BloodLevels;
+import kenijey.harshencastle.itemenum.EnumBloodCollectorHandler.BloodLevels;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

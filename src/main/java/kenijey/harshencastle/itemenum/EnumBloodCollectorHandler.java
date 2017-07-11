@@ -1,4 +1,4 @@
-package kenijey.harshencastle.handlers.itemenum;
+package kenijey.harshencastle.itemenum;
 
 import net.minecraft.util.IStringSerializable;
 
