@@ -26,7 +26,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class WorldGen implements IWorldGenerator
 {
-    private final WorldGenMinable ore = new WorldGenMinable(HarshenBlocks.harshen_soul_ore.getDefaultState(), 3);
+    private final WorldGenMinable soulore = new WorldGenMinable(HarshenBlocks.harshen_soul_ore.getDefaultState(), 3);
     private final WorldGenMinable itiumOre = new WorldGenMinable(HarshenBlocks.itium_ore.getDefaultState(), 5);
     private final int chanceForNodeToSpawn;
 	public WorldGen(int chanceForNodeToSpawn)
@@ -42,7 +42,7 @@ public class WorldGen implements IWorldGenerator
 		int dim = world.provider.getDimension();
 		if(dim == 0)
 		{
-			oreGenerator(this.ore, world, random, chunkX, chunkZ, 10, 0, 20);
+			oreGenerator(this.soulore, world, random, chunkX, chunkZ, 10, 0, 20);
 	    	flowerGenerator(HarshenBlocks.harshen_soul_flower, world, random, chunkX, chunkZ, 30);
 	    	flowerGenerator(HarshenBlocks.plant_of_gleam, world, random, chunkX, chunkZ, 30);
 		}
@@ -61,7 +61,7 @@ public class WorldGen implements IWorldGenerator
 	        int x = chunk_X * 16 + rand.nextInt(16);
 	        int y = minHeight + rand.nextInt(heightDiff);
 	        int z = chunk_Z * 16 + rand.nextInt(16);
-	        ore.generate(world, rand, new BlockPos(x, y, z));
+	        soulore.generate(world, rand, new BlockPos(x, y, z));
 	    }
 	}
 	
