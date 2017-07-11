@@ -4,7 +4,7 @@ import java.util.Random;
 
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenCastle;
-import kenijey.harshencastle.worldgenerators.pontus.NullGenerator;
+import kenijey.harshencastle.worldgenerators.NullGenerator;
 import kenijey.harshencastle.worldgenerators.pontus.PontusWorldGeneratorDestroyedPlants;
 import kenijey.harshencastle.worldgenerators.pontus.PontusWorldGeneratorStone;
 import net.minecraft.block.state.IBlockState;
