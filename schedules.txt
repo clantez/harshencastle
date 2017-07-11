@@ -21,6 +21,16 @@ BLOOD
 7-if player has no blood, he will become withered
 
 --------------------------ITEMS/BLOCKS----------------------------
+LADLE
+-used to shuffle the cauldron
+
+RITUAL CRYSTAL and new expensive item
+-expensive vanilla item + light emitted essence + harshen crystal = expensive new item 
+-ritual crystal made from putting the new expensive item and blood fluid into the cauldron and shuffle it
+ 
+GUIDANCE OF HARSHEN WORLD
+-guide book of harshen castle
+
 SOUL HARSHER PICKAXE
 -can break all harshen blocks BUT ONLY IN PONTUS WORLD (dimension check)
 
