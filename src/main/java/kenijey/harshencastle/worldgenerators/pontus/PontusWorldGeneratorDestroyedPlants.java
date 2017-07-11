@@ -1,4 +1,4 @@
-package kenijey.harshencastle.biomes.pontus;
+package kenijey.harshencastle.worldgenerators.pontus;
 
 import java.util.Random;
 

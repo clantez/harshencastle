@@ -1,6 +1,5 @@
 package kenijey.harshencastle.biomes;
 
-import kenijey.harshencastle.biomes.pontus.PontusBiome;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeManager;

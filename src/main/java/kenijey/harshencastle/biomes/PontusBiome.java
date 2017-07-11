@@ -1,9 +1,12 @@
-package kenijey.harshencastle.biomes.pontus;
+package kenijey.harshencastle.biomes;
 
 import java.util.Random;
 
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenCastle;
+import kenijey.harshencastle.worldgenerators.pontus.NullGenerator;
+import kenijey.harshencastle.worldgenerators.pontus.PontusWorldGeneratorDestroyedPlants;
+import kenijey.harshencastle.worldgenerators.pontus.PontusWorldGeneratorStone;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.monster.EntityEndermite;
@@ -32,14 +35,18 @@ public class PontusBiome extends Biome
 		this.topBlock = DIRT;
 		this.fillerBlock = STONE;
 		
-		this.decorator.dirtGen = new WorldGenMinable(DIRT, 20);
-		this.decorator.treesPerChunk = 3;
-		
 		this.spawnableCaveCreatureList.clear();
 		this.spawnableCaveCreatureList.add(new SpawnListEntry(EntityEnderman.class, 25, 2, 5));
 		
 		this.spawnableCreatureList.clear();
 		this.spawnableCreatureList.add(new SpawnListEntry(EntityEndermite.class, 50, 1, 10));
+		
+		this.decorator.flowersPerChunk = 0;
+		this.decorator.mushroomsPerChunk = 0;
+		this.decorator.reedsPerChunk = 0;
+		this.decorator.reedGen = new NullGenerator();
+		this.decorator.cactiPerChunk = 0;
+		
 		
 	}
 	
@@ -66,6 +73,16 @@ public class PontusBiome extends Biome
 	public void addFlower(IBlockState state, int weight) {
 	}
 	
+	@Override
+	public void decorate(World worldIn, Random rand, BlockPos pos) {
+		super.decorate(worldIn, rand, pos);
+		for (int i = 0; i < 25; ++i)
+        {
+            int j = rand.nextInt(16) + 8;
+            int k = rand.nextInt(16) + 8;
+            new PontusWorldGeneratorStone().generate(worldIn, rand, worldIn.getTopSolidOrLiquidBlock(pos.add(j, 0, k)));
+        }
+	}
 	
 	
 

@@ -44,7 +44,7 @@ public class HarshenDimensionalDirt extends HarshenBlockCastle
 	@Override
 	public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction,
 			IPlantable plantable) {
-		return !Arrays.asList(Blocks.BROWN_MUSHROOM, Blocks.RED_MUSHROOM, Blocks.RED_FLOWER, Blocks.YELLOW_FLOWER, Blocks.REEDS).contains(plantable.getPlant(world, pos).getBlock());
+		return true;
 	}
 	
 }

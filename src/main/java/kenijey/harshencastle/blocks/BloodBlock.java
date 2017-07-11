@@ -24,10 +24,10 @@ public class BloodBlock extends Block
 	     setResistance(-1);
 	}
 	
-	/*@Override
+	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-		return NULL_AABB;
-	}	*/
+		return new AxisAlignedBB(0, 0, 0, 1, 0.625f, 1);
+	}
 	
 	@Override
 	public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox,

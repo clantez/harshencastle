@@ -1,6 +1,5 @@
 package kenijey.harshencastle;
 
-import kenijey.harshencastle.biomes.debugworldtype.DebugWorldType;
 import kenijey.harshencastle.commands.CommandDelFlatPlate;
 import kenijey.harshencastle.commands.CommandFlatPlate;
 import kenijey.harshencastle.creativetabs.HarshenTab;
@@ -11,7 +10,6 @@ import kenijey.harshencastle.proxy.CommonProxy;
 import kenijey.harshencastle.tileentity.HarshenDimensionalPedestalTileEntity;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldType;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
@@ -58,7 +56,7 @@ public class HarshenCastle {
     public void postInit(FMLPostInitializationEvent event) 
     {
     	proxy.postInit(event);
-    	WorldType Pontus = new DebugWorldType();
+    	//WorldType Pontus = new DebugWorldType();
     }
     
     @EventHandler
