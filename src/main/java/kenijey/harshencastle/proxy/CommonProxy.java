@@ -3,6 +3,7 @@ package kenijey.harshencastle.proxy;
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.HarshenItems;
+import kenijey.harshencastle.HarshenSounds;
 import kenijey.harshencastle.armor.ArmorInit;
 import kenijey.harshencastle.biomes.HarshenBiomes;
 import kenijey.harshencastle.dimensions.HarshenDimensions;
@@ -32,6 +33,8 @@ public class CommonProxy
 		HarshenDimensions.register();
 		
 		HarshenBiomes.register();
+		
+		HarshenSounds.preInit();
     }
 
     public void init(FMLInitializationEvent event) 
