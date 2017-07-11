@@ -98,7 +98,7 @@ public class PontusChunkProvider implements IChunkGenerator
         if (generatorOptions != null)
         {
             this.settings = ChunkGeneratorSettings.Factory.jsonToFactory(generatorOptions).build();
-            this.oceanBlock = this.settings.useLavaOceans ? Blocks.LAVA.getDefaultState() : HarshenFluids.harshen_dimensional_fluid_block.getDefaultState();
+            this.oceanBlock = this.settings.useLavaOceans ? HarshenFluids.harshing_water_block.getDefaultState() : HarshenFluids.harshen_dimensional_fluid_block.getDefaultState();
             worldIn.setSeaLevel(this.settings.seaLevel);
         }
 
@@ -387,7 +387,7 @@ public class PontusChunkProvider implements IChunkGenerator
 
             if (l2 < this.world.getSeaLevel() || this.rand.nextInt(this.settings.lavaLakeChance / 8) == 0)
             {
-                (new WorldGenLakes(Blocks.LAVA)).generate(this.world, this.rand, blockpos.add(i2, l2, k3));
+                (new WorldGenLakes(HarshenFluids.harshing_water_block)).generate(this.world, this.rand, blockpos.add(i2, l2, k3));
             }
         }
 

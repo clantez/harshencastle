@@ -1,6 +1,7 @@
 package kenijey.harshencastle.blocks;
 
 import java.util.List;
+import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -14,6 +15,7 @@ import net.minecraft.world.World;
 
 public class BloodBlock extends Block
 {
+	private int ticks;
 	public BloodBlock()
 	{
 		 super(Material.CARPET);
@@ -22,11 +24,18 @@ public class BloodBlock extends Block
 	     blockSoundType = blockSoundType.SLIME;
 	     setHardness(-1);
 	     setResistance(-1);
+	     setTickRandomly(true);
 	}
 	
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-		return new AxisAlignedBB(0, 0, 0, 1, 0.625f, 1);
+		return new AxisAlignedBB(0, 0, 0, 1, 0.0625f, 1);
+	}
+	
+	@Override
+	public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
+		if(ticks++ == 3)
+			worldIn.setBlockToAir(pos);
 	}
 	
 	@Override
