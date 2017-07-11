@@ -21,6 +21,9 @@ BLOOD
 7-if player has no blood, he will become withered
 
 --------------------------ITEMS/BLOCKS----------------------------
+SOUL HARSHER PICKAXE
+-can break all harshen blocks BUT ONLY IN PONTUS WORLD (dimension check)
+
 HARSHING FLUID
 -kills anything that tries to swim in it
 -hits 20 damage per second
