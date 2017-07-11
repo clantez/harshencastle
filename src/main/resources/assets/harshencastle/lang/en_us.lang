@@ -55,6 +55,7 @@ tile.heretic_cauldron.name=Heretic Cauldron
 tile.blood_block.name=Blood
 tile.pontus_dead_wood.name=Pontus Dead Wood
 tile.pontus_dead_leaves.name=Pontus Dead Leaves
+tile.harshen_dimensional_gate.name=Harshen Dimensional Gate (Pontus)
 
 #fluids
 fluid.harshen_dimensional_fluid=Harshen Dimensional Fluid
