@@ -66,6 +66,9 @@ public class HarshenDimensionalFluidBlock extends BlockFluidClassic
 			{
 				if(!((EntityLivingBase)entity).isInWater())
 					continue;
+				
+				//if(!player.capabilities.isCreativeMode)
+					//continue; //TODO
 				((EntityLivingBase)entity).addPotionEffect(new PotionEffect(Potion.getPotionById(9), 250));
 				((EntityLivingBase)entity).addPotionEffect(new PotionEffect(Potion.getPotionById(2), 250));
 			}
