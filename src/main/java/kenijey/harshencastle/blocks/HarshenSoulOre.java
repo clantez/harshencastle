@@ -17,6 +17,7 @@ import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
@@ -86,6 +87,11 @@ public class HarshenSoulOre extends Block
 		this.pos = pos;
 		this.world = worldIn;
 		super.onBlockClicked(worldIn, pos, playerIn);
+	}
+	
+	@Override
+	public BlockRenderLayer getBlockLayer() {
+		return BlockRenderLayer.TRANSLUCENT;
 	}
 	
 	@Override
