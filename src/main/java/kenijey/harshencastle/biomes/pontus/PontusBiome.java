@@ -7,6 +7,9 @@ import kenijey.harshencastle.HarshenCastle;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.monster.EntityEndermite;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenMinable;
@@ -48,6 +51,19 @@ public class PontusBiome extends Biome
 	@Override
 	public WorldGenerator getRandomWorldGenForGrass(Random rand) {
 		return new PontusWorldGeneratorDestroyedPlants();
+	}
+	
+	@Override
+	public void addDefaultFlowers() {
+		
+	}
+	
+	@Override
+	public void plantFlower(World world, Random rand, BlockPos pos) {
+	}
+	
+	@Override
+	public void addFlower(IBlockState state, int weight) {
 	}
 	
 	

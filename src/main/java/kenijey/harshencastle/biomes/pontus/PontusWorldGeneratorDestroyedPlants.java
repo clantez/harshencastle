@@ -30,7 +30,7 @@ public class PontusWorldGeneratorDestroyedPlants extends WorldGenerator
         {
             BlockPos blockpos = position.add(rand.nextInt(8) - rand.nextInt(8), rand.nextInt(4) - rand.nextInt(4), rand.nextInt(8) - rand.nextInt(8));
 
-            if (worldIn.isAirBlock(blockpos))
+            if (worldIn.isAirBlock(blockpos) && worldIn.getBlockState(blockpos.add(0, -1, 0)) == HarshenBlocks.harshen_dimensional_dirt.getDefaultState())
             {
                 worldIn.setBlockState(blockpos, this.blockState, 2);
             }

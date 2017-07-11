@@ -5,26 +5,19 @@ import java.util.List;
 import java.util.Random;
 
 import javax.annotation.Nullable;
-import javax.swing.text.html.parser.Entity;
 
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.biomes.HarshenBiomes;
 import kenijey.harshencastle.fluids.HarshenFluids;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
-import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockLog;
-import net.minecraft.block.BlockTallGrass;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.monster.EntityEndermite;
-import net.minecraft.entity.monster.EntitySilverfish;
 import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.WeightedRandom;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
@@ -67,7 +60,7 @@ public class PontusChunkProvider implements IChunkGenerator
     private MapGenBase caveGenerator = new MapGenCaves();
     private MapGenMineshaft mineshaftGenerator = new MapGenMineshaft();
     private MapGenBase ravineGenerator = new MapGenRavine();
-    private Biome biomesForGeneration = Biomes.BEACH;
+    private Biome biomesForGeneration = HarshenBiomes.pontus_dimensional_biome;
     double[] mainNoiseRegion;
     double[] minLimitRegion;
     double[] maxLimitRegion;
@@ -194,7 +187,6 @@ public class PontusChunkProvider implements IChunkGenerator
         if (!net.minecraftforge.event.ForgeEventFactory.onReplaceBiomeBlocks(this, x, z, primer, this.world)) return;
         double d0 = 0.03125D;
         this.depthBuffer = this.surfaceNoise.getRegion(this.depthBuffer, (double)(x * 16), (double)(z * 16), 16, 16, 0.0625D, 0.0625D, 1.0D);
-
         for (int i = 0; i < 16; ++i)
         	for (int j = 0; j < 16; ++j)
             	biomeIn.genTerrainBlocks(this.world, this.rand, primer, x * 16 + i, z * 16 + j, this.depthBuffer[j + i * 16]);
@@ -366,7 +358,7 @@ public class PontusChunkProvider implements IChunkGenerator
         int i = x * 16;
         int j = z * 16;
         BlockPos blockpos = new BlockPos(i, 0, j);
-        Biome biome = this.world.getBiome(blockpos.add(16, 0, 16));
+        Biome biome = world.getBiome(blockpos.add(16, 0, 16));
         this.rand.setSeed(this.world.getSeed());
         long k = this.rand.nextLong() / 2L * 2L + 1L;
         long l = this.rand.nextLong() / 2L * 2L + 1L;

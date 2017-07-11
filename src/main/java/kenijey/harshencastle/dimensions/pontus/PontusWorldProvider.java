@@ -1,22 +1,21 @@
 package kenijey.harshencastle.dimensions.pontus;
 
+import kenijey.harshencastle.biomes.HarshenBiomes;
 import kenijey.harshencastle.dimensions.DimensionPontus;
 import net.minecraft.entity.Entity;
+import net.minecraft.init.Biomes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
+import net.minecraft.world.biome.BiomeProviderSingle;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class PontusWorldProvider extends WorldProvider 
 {
-	public void createBiomeProvider() {
-		this.hasSkyLight = true;
-		NBTTagCompound nbttagcompound = this.world.getWorldInfo().getDimensionData(DimensionType.OVERWORLD);
-	}
 	
 	public static String worldPreset = "{\"coordinateScale\":676.94366,\"heightScale\":684.412,\"lowerLimitScale\":512.0,\""
 			+ "upperLimitScale\":512.0,\"depthNoiseScaleX\":200.0,\"depthNoiseScaleZ\":200.0,\"depthNoiseScaleExponent\""
@@ -25,7 +24,7 @@ public class PontusWorldProvider extends WorldProvider
 			+ "seaLevel\":56,\"useCaves\":true,\"useDungeons\":false,\"dungeonChance\":1,\"useStrongholds\":false,\"useVillages\""
 			+ ":false,\"useMineShafts\":false,\"useTemples\":false,\"useMonuments\":false,\"useMansions\":true,\"useRavines\""
 			+ ":true,\"useWaterLakes\":true,\"waterLakeChance\":1,\"useLavaLakes\":false,\"lavaLakeChance\":10,\"useLavaOceans\""
-			+ ":false,\"fixedBiome\":7,\"biomeSize\":1,\"riverSize\":4,\"dirtSize\":33,\"dirtCount\":10,\"dirtMinHeight\":44,\""
+			+ ":false,\"fixedBiome\":-1,\"biomeSize\":1,\"riverSize\":4,\"dirtSize\":33,\"dirtCount\":10,\"dirtMinHeight\":44,\""
 			+ "dirtMaxHeight\":256,\"gravelSize\":1,\"gravelCount\":0,\"gravelMinHeight\":0,\"gravelMaxHeight\":0,\"graniteSize\""
 			+ ":33,\"graniteCount\":10,\"graniteMinHeight\":0,\"graniteMaxHeight\":255,\"dioriteSize\":1,\"dioriteCount\":0,\""
 			+ "dioriteMinHeight\":0,\"dioriteMaxHeight\":0,\"andesiteSize\":1,\"andesiteCount\":0,\"andesiteMinHeight\":0,\""
@@ -34,6 +33,14 @@ public class PontusWorldProvider extends WorldProvider
 			+ "goldMaxHeight\":0,\"redstoneSize\":1,\"redstoneCount\":0,\"redstoneMinHeight\":0,\"redstoneMaxHeight\":0,\""
 			+ "diamondSize\":1,\"diamondCount\":0,\"diamondMinHeight\":0,\"diamondMaxHeight\":0,\"lapisSize\":1,\"lapisCount\":0,\""
 			+ "lapisCenterHeight\":0,\"lapisSpread\":0}";
+	
+	@Override
+	protected void init() {
+		this.hasSkyLight = true;
+		NBTTagCompound nbttagcompound = this.world.getWorldInfo().getDimensionData(DimensionType.OVERWORLD);
+		this.biomeProvider = new BiomeProviderSingle(HarshenBiomes.pontus_dimensional_biome);
+
+	}
 	
 	@Override
 	public IChunkGenerator createChunkGenerator()
