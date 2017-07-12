@@ -42,21 +42,21 @@ public class HereticCauldron extends BlockCauldron
             int i = ((Integer)state.getValue(LEVEL)).intValue();
             Item item = itemstack.getItem();
 
-            if (item == HarshenItems.harshen_dimensional_fluid_bucket)
-            {
-                if (i < 3 && !worldIn.isRemote)
-                {
-                    if (!playerIn.capabilities.isCreativeMode)
-                    {
-                        playerIn.setHeldItem(hand, new ItemStack(Items.BUCKET));
-                    }
-
-                    this.setWaterLevel(worldIn, pos, state, 3);
-                    worldIn.playSound((EntityPlayer)null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                }
-
-                return true;
-            }
+//            if (item == HarshenItems.harshen_dimensional_fluid_bucket)//TODO FORGE REGISTY BUCKET
+//            {
+//                if (i < 3 && !worldIn.isRemote)
+//                {
+//                    if (!playerIn.capabilities.isCreativeMode)
+//                    {
+//                        playerIn.setHeldItem(hand, new ItemStack(Items.BUCKET));
+//                    }
+//
+//                    this.setWaterLevel(worldIn, pos, state, 3);
+//                    worldIn.playSound((EntityPlayer)null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
+//                }
+//
+//                return true;
+//            }
             else if (item == Items.BUCKET)
             {
                 if (i == 3 && !worldIn.isRemote)
