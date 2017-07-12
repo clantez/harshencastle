@@ -41,7 +41,8 @@ public class HereticCauldron extends BlockCauldron
         {
             int i = ((Integer)state.getValue(LEVEL)).intValue();
             Item item = itemstack.getItem();
-
+            if(false) 
+            	return true;
 //            if (item == HarshenItems.harshen_dimensional_fluid_bucket)//TODO FORGE REGISTY BUCKET
 //            {
 //                if (i < 3 && !worldIn.isRemote)
@@ -65,14 +66,14 @@ public class HereticCauldron extends BlockCauldron
                     {
                         itemstack.shrink(1);
 
-                        if (itemstack.isEmpty())
-                        {
-                            playerIn.setHeldItem(hand, new ItemStack(HarshenItems.harshen_dimensional_fluid_bucket));
-                        }
-                        else if (!playerIn.inventory.addItemStackToInventory(new ItemStack(HarshenItems.harshen_dimensional_fluid_bucket)))
-                        {
-                            playerIn.dropItem(new ItemStack(HarshenItems.harshen_dimensional_fluid_bucket), false);
-                        }
+//                        if (itemstack.isEmpty())//TODO
+//                        {
+//                            playerIn.setHeldItem(hand, new ItemStack(HarshenItems.harshen_dimensional_fluid_bucket));
+//                        }
+//                        else if (!playerIn.inventory.addItemStackToInventory(new ItemStack(HarshenItems.harshen_dimensional_fluid_bucket)))
+//                        {
+//                            playerIn.dropItem(new ItemStack(HarshenItems.harshen_dimensional_fluid_bucket), false);
+//                        }
                     }
                     this.setWaterLevel(worldIn, pos, state, 0);
                     worldIn.playSound((EntityPlayer)null, pos, SoundEvents.ITEM_BUCKET_FILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
