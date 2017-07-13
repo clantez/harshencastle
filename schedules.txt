@@ -1,4 +1,10 @@
 ------------FEATURES--------------
+HARSHED EFFECT
+-has 3 levels
+-first level causes 1 hp damage per second, 9 seconds slowness and 9 seconds nausea
+-second level causes 2 hp damage per second, 11 seconds slowness and 4 seconds nausea
+-third level causes 5 hp damage per second, 5 seconds slowness and 5 seconds weakness
+
 SOUL
 -player has 1 soul by default, his soul
 -souls can be catched by killing the boses with soul harsher sword in structures that placed in OVERWORLD by harshen castle 
@@ -107,9 +113,7 @@ HARSHEN JAGUAR ARMOR
 -when worn full set, applies night vision 1 and fire resistance 1 effects
 
 ------------------------PONTUS WORLD------------------------------
--land biome generated with HD dirt, HD fluid and HD rock
--some ruins can be found that built with HD wood crate and (different) HD stone
--sky is dark red, no sun or moon
+-some ruins can be found that built with HD wood crate and (different) HD stone (STRUCTURE)
 -if player dies in pontus world, he will respawn on the first point he came from overworld
 
 ----------------------------STRUCTURES--------------------------
