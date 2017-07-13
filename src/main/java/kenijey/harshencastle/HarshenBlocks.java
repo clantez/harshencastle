@@ -119,8 +119,8 @@ public class HarshenBlocks {
 		regBlock(harshen_dimensional_rock, 64);
 		regBlock(harshen_dimensional_pedestal, 8);
 		regBlock(plant_of_gleam, 64);
+		regBlock(blood_block, 1);
 		
-		regSingleBlock(blood_block);
 		regSingleBlock(crop_of_gleam);
 		regSingleBlock(harshen_dimensional_door);
 		regSingleBlock(harshen_hidden_plate_active);
