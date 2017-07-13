@@ -104,7 +104,7 @@ public class Recipes
 				'd', Blocks.DIRT);
 		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "ritual_crystal.passive"), new ResourceLocation("harshen_items"),
-				new ItemStack(HarshenItems.ritual_crystal),
+				new ItemStack(HarshenItems.ritual_crystal, 1, 1),
 				" l ",
 				"cec",
 				" l ",
