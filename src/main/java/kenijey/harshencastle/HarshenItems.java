@@ -87,7 +87,6 @@ public class HarshenItems
 		regItem(pontus_world_gate_spawner,1);
 		regItem(light_emitted_essence,8);
 		regItem(light_emitted_seed,16);
-		regItem(blood_collector,1);
 		
 		regMetaItem(blood_collector, 1);
 	}
@@ -110,7 +109,6 @@ public class HarshenItems
 	
 	public static void regMetaItem(Item item, int stackSize)
 	{
-		System.out.println(item);
 		item.setMaxStackSize(stackSize);
 		ForgeRegistries.ITEMS.register(item);
 	}
