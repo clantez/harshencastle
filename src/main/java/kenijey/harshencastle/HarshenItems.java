@@ -3,6 +3,7 @@ package kenijey.harshencastle;
 import java.util.ArrayList;
 
 import kenijey.harshencastle.itemenum.EnumBloodCollectorHandler.BloodLevels;
+import kenijey.harshencastle.itemenum.EnumRitualCrystalItemHandler.CrystalAcive;
 import kenijey.harshencastle.items.BloodCollector;
 import kenijey.harshencastle.items.BloodEssence;
 import kenijey.harshencastle.items.BloodyEarring;
@@ -18,6 +19,7 @@ import kenijey.harshencastle.items.PontusWorldGatePart1;
 import kenijey.harshencastle.items.PontusWorldGatePart2;
 import kenijey.harshencastle.items.PontusWorldGatePart3;
 import kenijey.harshencastle.items.PontusWorldGateSpawner;
+import kenijey.harshencastle.items.RitualCrystal;
 import kenijey.harshencastle.items.SoulHarsherPickaxe;
 import kenijey.harshencastle.items.SoulHarsherSword;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -46,6 +48,7 @@ public class HarshenItems
 	public static Item light_emitted_seed;
 	public static Item light_emitted_essence;
 	public static Item blood_collector;
+	public static Item ritual_crystal;
 	
 	
 	public static void preInit()
@@ -67,6 +70,7 @@ public class HarshenItems
 		light_emitted_seed = new LightEmittedSeed();
 		light_emitted_essence = new LightEmittedEssence();
 		blood_collector = new BloodCollector();
+		ritual_crystal = new RitualCrystal();
 	}
 	
 	public static void reg()
@@ -88,7 +92,8 @@ public class HarshenItems
 		regItem(light_emitted_essence,8);
 		regItem(light_emitted_seed,16);
 		
-		regMetaItem(blood_collector, 1);
+		regMetaItem(blood_collector, 1, BloodLevels.getNames(), "blood_collector_");
+		regMetaItem(ritual_crystal, CrystalAcive.getNames(), "ritual_crystal_");
 	}
 	
 	public static ArrayList<Item> items = new ArrayList<Item>();
@@ -107,10 +112,22 @@ public class HarshenItems
 		ForgeRegistries.ITEMS.register(item);
 	}
 	
-	public static void regMetaItem(Item item, int stackSize)
+	public static void regMetaItem(Item item, int stackSize, String[] names, String prefix)
 	{
 		item.setMaxStackSize(stackSize);
+		regMetaItem(item, names, prefix);
+	}
+	
+	private static ArrayList<Item> allMetaItems = new ArrayList<Item>();
+	private static ArrayList<String[]> allMetaNames = new ArrayList<String[]>();
+	private static ArrayList<String> allMetaPrefix = new ArrayList<String>();
+	
+	public static void regMetaItem(Item item, String[] names, String prefix)
+	{
 		ForgeRegistries.ITEMS.register(item);
+		allMetaItems.add(item);
+		allMetaNames.add(names);
+		allMetaPrefix.add(prefix);
 	}
 	
 	
@@ -122,14 +139,20 @@ public class HarshenItems
 	
 	public static void regRenderMeta()
 	{
-		for(int i = 0; i < BloodLevels.values().length; i++)
-			regRender(blood_collector, i, "blood_collector_" + BloodLevels.values()[i].getName(), false);
+		for(int i = 0; i < allMetaItems.size(); i++)
+		{
+			for(int j = 0; j < allMetaNames.get(i).length; j++)
+				regRender(allMetaItems.get(i), j, allMetaPrefix.get(i) + allMetaNames.get(i)[j]);
+			System.out.println(allMetaItems.get(i));
+			System.out.println(allMetaNames.get(i));
+			System.out.println(allMetaPrefix.get(i));
+		}
+			
 	}
 	
-	public static void regRender(Item item, int meta, String fileName, boolean addAllToCreativeTab)
+	public static void regRender(Item item, int meta, String fileName)
 	{
-		if(meta == 0 || addAllToCreativeTab)
-			new ItemStack(item, 1, meta).getItem().setCreativeTab(HarshenCastle.harshenTab);
+		new ItemStack(item, 1, meta).getItem().setCreativeTab(HarshenCastle.harshenTab);
 		ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(new ResourceLocation(HarshenCastle.MODID, fileName), "inventory"));
 	}
 	

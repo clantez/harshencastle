@@ -48,12 +48,6 @@ public class CommonProxy
     }
 
 	public void registerFluidBlockRendering(Block block, String name) {}
-	
-	
-	public void registerModelBakeryVarients()
-	{	
-		
-	}
 
 	public void regRenders(FMLPreInitializationEvent event)
 	{

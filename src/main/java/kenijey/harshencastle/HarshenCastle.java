@@ -52,7 +52,6 @@ public class HarshenCastle {
     	proxy.init(event);
     	Recipes.init();
     	GameRegistry.registerWorldGenerator(new WorldGen(100), 0);
-    	proxy.registerModelBakeryVarients();
     	GameRegistry.registerTileEntity(TileEntityHarshenDimensionalPedestal.class, MODID + "HarshenDimensionalPedestalTileEntity");
     }
 
@@ -60,7 +59,6 @@ public class HarshenCastle {
     public void postInit(FMLPostInitializationEvent event) 
     {
     	proxy.postInit(event);
-    	//WorldType Pontus = new DebugWorldType();
     }
     
     @EventHandler
