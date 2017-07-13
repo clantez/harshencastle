@@ -20,6 +20,9 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.UniversalBucket;
 
 public class HereticCauldron extends BlockCauldron
@@ -81,17 +84,17 @@ public class HereticCauldron extends BlockCauldron
                     {
                         itemstack.shrink(1);
 
-//                        if (itemstack.isEmpty())//TODO
-//                        {
-//                            playerIn.setHeldItem(hand, new ItemStack(HarshenItems.harshen_dimensional_fluid_bucket));
-//                        }
-//                        else if (!playerIn.inventory.addItemStackToInventory(new ItemStack(HarshenItems.harshen_dimensional_fluid_bucket)))
-//                        {
-//                            playerIn.dropItem(new ItemStack(HarshenItems.harshen_dimensional_fluid_bucket), false);
-//                        }
+                        if (itemstack.isEmpty())
+                        {
+                            playerIn.setHeldItem(hand, FluidUtil.getFilledBucket(new FluidStack(FluidRegistry.getFluid(state.getValue(LIQUID).getName()), 1000)));
+                        }
+                        else if (!playerIn.inventory.addItemStackToInventory(FluidUtil.getFilledBucket(new FluidStack(FluidRegistry.getFluid(state.getValue(LIQUID).getName()), 1000))))
+                        {
+                            playerIn.dropItem(FluidUtil.getFilledBucket(new FluidStack(FluidRegistry.getFluid(state.getValue(LIQUID).getName()), 1000)), false);
+                        }
                     }
                     this.setWaterLevel(worldIn, pos, state, 0);
-                    worldIn.setBlockState(pos, state.withProperty(LIQUID, EnumLiquid.NONE), 2);
+                    worldIn.setBlockState(pos, state.withProperty(LIQUID, EnumLiquid.NONE).withProperty(LEVEL, 0), 2);
                     worldIn.playSound((EntityPlayer)null, pos, SoundEvents.ITEM_BUCKET_FILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
                 }
 
