@@ -102,5 +102,15 @@ public class Recipes
 				
 				'e', HarshenItems.harshen_crystal,
 				'd', Blocks.DIRT);
+		
+		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "ritual_crystal.passive"), new ResourceLocation("harshen_items"),
+				new ItemStack(HarshenItems.ritual_crystal),
+				" l ",
+				"cec",
+				" l ",
+				
+				'e', Items.ENDER_EYE,
+				'c', HarshenItems.harshen_crystal,
+				'l', HarshenItems.light_emitted_essence);
 	}
 }

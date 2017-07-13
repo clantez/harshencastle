@@ -30,9 +30,8 @@ BLOOD
 LADLE
 -used to shuffle the cauldron
 
-RITUAL CRYSTAL and new expensive item
--expensive vanilla item + light emitted essence + harshen crystal = expensive new item 
--ritual crystal made from putting the new expensive item and blood fluid into the cauldron and shuffle it
+RITUAL CRYSTAL
+-active crystal is obtainable by putting 3x blood and passive crystal into cauldron, then suffle it with LADLE
  
 GUIDANCE OF HARSHEN WORLD
 -guide book of harshen castle
@@ -65,12 +64,7 @@ BLADE
 -a little sound effect for bleeding player himself
 -if used 1 time, item texture will replace with bloody one forever for that item
 
-BLOOD BOTTLE
--normal glass bottle should be fillable with blood block. and it will replace with blood bottle that i will add
--it is drinkable, if player drinks it...(coming soon)
-
 HERETIC CAULDRON
--used for make rituals
 -can only be filled with blood and HD fluid
 -can be shuffled with blood + HD fluid (for different ritual
 
@@ -84,19 +78,6 @@ PONTUS WORLD GATE
 
 LIGHT EMITTED ESSENCE
 -used to craft something...(and some rituals)
-
-ITIUM ORE
--found in Pontus world(1 in 1 chunk)
-
-BLOOD
--just like redstone, but blood. will be replaced one of 5 textures randomly
--if you're a player, you can put or get it only with blood collector
--NOT hittable, but right click-able with blood collector (if possible)
-
-BLOOD COLLECTOR
--used to collect bloods on ground(right clicking)
--has blood capacity up to 80 bloods (0/60 empty) (shown in tooltip)
--replaces item texture by filling
 
 -----------ACCESSORY/ARMOR-----------
 slots:earrings(x2) pendant(x1) rings(x2) goggles(x1) //todo
