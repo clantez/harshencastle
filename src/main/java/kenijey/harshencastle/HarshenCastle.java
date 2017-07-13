@@ -6,7 +6,7 @@ import kenijey.harshencastle.creativetabs.HarshenTab;
 import kenijey.harshencastle.dimensions.DimensionPontus;
 import kenijey.harshencastle.items.Recipes;
 import kenijey.harshencastle.proxy.CommonProxy;
-import kenijey.harshencastle.tileentity.HarshenDimensionalPedestalTileEntity;
+import kenijey.harshencastle.tileentity.TileEntityHarshenDimensionalPedestal;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -53,7 +53,7 @@ public class HarshenCastle {
     	Recipes.init();
     	GameRegistry.registerWorldGenerator(new WorldGen(100), 0);
     	proxy.registerModelBakeryVarients();
-    	GameRegistry.registerTileEntity(HarshenDimensionalPedestalTileEntity.class, MODID + "HarshenDimensionalPedestalTileEntity");
+    	GameRegistry.registerTileEntity(TileEntityHarshenDimensionalPedestal.class, MODID + "HarshenDimensionalPedestalTileEntity");
     }
 
     @Mod.EventHandler

@@ -2,7 +2,7 @@ package kenijey.harshencastle.blocks;
 
 import java.util.List;
 
-import kenijey.harshencastle.tileentity.HarshenDimensionalPedestalTileEntity;
+import kenijey.harshencastle.tileentity.TileEntityHarshenDimensionalPedestal;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -58,19 +58,19 @@ public class HarshenDimensionalPedestal extends Block implements ITileEntityProv
 	
 	@Override
 	public TileEntity createTileEntity(World world, IBlockState state) {
-		return new HarshenDimensionalPedestalTileEntity();
+		return new TileEntityHarshenDimensionalPedestal();
 	}
 	
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta) {
-		return new HarshenDimensionalPedestalTileEntity();
+		return new TileEntityHarshenDimensionalPedestal();
 	}
 
 	
 	@Override
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
 	{
-		HarshenDimensionalPedestalTileEntity te = (HarshenDimensionalPedestalTileEntity) worldIn.getTileEntity(pos);
+		TileEntityHarshenDimensionalPedestal te = (TileEntityHarshenDimensionalPedestal) worldIn.getTileEntity(pos);
 		IItemHandler handler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
 		ItemStack stack = handler.getStackInSlot(0);
 		InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), stack);
@@ -84,16 +84,16 @@ public class HarshenDimensionalPedestal extends Block implements ITileEntityProv
 		if(!worldIn.isRemote)
 		{
 			TileEntity tileEntity = worldIn.getTileEntity(pos);
-			if(tileEntity instanceof HarshenDimensionalPedestalTileEntity)
-				if(((HarshenDimensionalPedestalTileEntity)tileEntity).canAddItem() && Item.getItemFromBlock(Blocks.AIR) != item.getItem())
+			if(tileEntity instanceof TileEntityHarshenDimensionalPedestal)
+				if(((TileEntityHarshenDimensionalPedestal)tileEntity).canAddItem() && Item.getItemFromBlock(Blocks.AIR) != item.getItem())
 				{
 					playerIn.setHeldItem(hand, new ItemStack(item.getItem(), item.getCount()-1, item.getMetadata(), item.serializeNBT()));
-					((HarshenDimensionalPedestalTileEntity)tileEntity).addItem(item);
+					((TileEntityHarshenDimensionalPedestal)tileEntity).addItem(item);
 				}
-				else if (((HarshenDimensionalPedestalTileEntity) tileEntity).hasItem())
+				else if (((TileEntityHarshenDimensionalPedestal) tileEntity).hasItem())
 				{
-					ItemStack stack = ((HarshenDimensionalPedestalTileEntity)tileEntity).getItem();
-					((HarshenDimensionalPedestalTileEntity)tileEntity).delItem();
+					ItemStack stack = ((TileEntityHarshenDimensionalPedestal)tileEntity).getItem();
+					((TileEntityHarshenDimensionalPedestal)tileEntity).delItem();
 					InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY() + 0.7f, pos.getZ(), stack);
 				}
 

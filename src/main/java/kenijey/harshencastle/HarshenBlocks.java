@@ -149,4 +149,8 @@ public class HarshenBlocks {
 		block.setCreativeTab(HarshenCastle.harshenTab);
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, new ModelResourceLocation(block.getRegistryName(), "inventory"));
 	}
+	
+	public static void regRender(Block block, boolean creativeTab) {
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, new ModelResourceLocation(block.getRegistryName(), "inventory"));
+	}
 }

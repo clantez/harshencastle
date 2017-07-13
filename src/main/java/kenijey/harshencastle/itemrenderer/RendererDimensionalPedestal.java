@@ -1,6 +1,6 @@
 package kenijey.harshencastle.itemrenderer;
 
-import kenijey.harshencastle.tileentity.HarshenDimensionalPedestalTileEntity;
+import kenijey.harshencastle.tileentity.TileEntityHarshenDimensionalPedestal;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -10,14 +10,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class RendererDimensionalPedestal extends TileEntitySpecialRenderer<HarshenDimensionalPedestalTileEntity>
+public class RendererDimensionalPedestal extends TileEntitySpecialRenderer<TileEntityHarshenDimensionalPedestal>
 {
 	
 	public static EntityItem ITEM = new EntityItem(Minecraft.getMinecraft().world, 0, 0, 0, new ItemStack(Blocks.STONE));
 	
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void render(HarshenDimensionalPedestalTileEntity te, double x, double y, double z, float partialTicks,
+	public void render(TileEntityHarshenDimensionalPedestal te, double x, double y, double z, float partialTicks,
 			int destroyStage, float alpha) {
 		super.render(te, x, y, z, partialTicks, destroyStage, alpha);
 		ITEM = new EntityItem(Minecraft.getMinecraft().world, 0, 0, 0, te.getItem());

@@ -5,7 +5,7 @@ import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.armor.ArmorInit;
 import kenijey.harshencastle.itemrenderer.RendererDimensionalPedestal;
-import kenijey.harshencastle.tileentity.HarshenDimensionalPedestalTileEntity;
+import kenijey.harshencastle.tileentity.TileEntityHarshenDimensionalPedestal;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelBakery;
@@ -54,7 +54,8 @@ public class ClientProxy extends CommonProxy
     	HarshenBlocks.regRenders();
 		HarshenItems.regRenders();
 		ArmorInit.regRenders();
-		ClientRegistry.bindTileEntitySpecialRenderer(HarshenDimensionalPedestalTileEntity.class, new RendererDimensionalPedestal());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHarshenDimensionalPedestal.class, new RendererDimensionalPedestal());
+
     }
     
     @Override

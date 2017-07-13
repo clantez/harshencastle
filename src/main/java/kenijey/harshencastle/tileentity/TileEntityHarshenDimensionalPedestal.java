@@ -24,7 +24,7 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class HarshenDimensionalPedestalTileEntity extends TileEntity implements net.minecraft.util.ITickable, ICapabilityProvider
+public class TileEntityHarshenDimensionalPedestal extends TileEntity implements net.minecraft.util.ITickable, ICapabilityProvider
 {
 	private final ItemStackHandler handler;
 	private boolean hasItem = false;
@@ -33,7 +33,7 @@ public class HarshenDimensionalPedestalTileEntity extends TileEntity implements 
 	private boolean isActive = false;
 
 	
-	public HarshenDimensionalPedestalTileEntity(){
+	public TileEntityHarshenDimensionalPedestal(){
 		this.handler = new ItemStackHandler(1);
 	}
 	
@@ -122,7 +122,7 @@ public class HarshenDimensionalPedestalTileEntity extends TileEntity implements 
 			ArrayList<Boolean> isBlockHolding = new ArrayList<Boolean>();
 			for(EnumFacing face : EnumFacing.HORIZONTALS)
 			{
-				boolean flag = world.getTileEntity(position.offset(face)) instanceof HarshenDimensionalPedestalTileEntity;
+				boolean flag = world.getTileEntity(position.offset(face)) instanceof TileEntityHarshenDimensionalPedestal;
 				isBlock.add(flag);
 				if(flag)
 					blocks.add(position.offset(face));
@@ -130,8 +130,8 @@ public class HarshenDimensionalPedestalTileEntity extends TileEntity implements 
 			if(!isBlock.contains(false))
 			{
 				for(EnumFacing face : EnumFacing.HORIZONTALS)
-					if(localItems.contains(((HarshenDimensionalPedestalTileEntity) world.getTileEntity(position.offset(face))).getItem().getItem()))
-						localItems.remove(((HarshenDimensionalPedestalTileEntity) world.getTileEntity(position.offset(face))).getItem().getItem());
+					if(localItems.contains(((TileEntityHarshenDimensionalPedestal) world.getTileEntity(position.offset(face))).getItem().getItem()))
+						localItems.remove(((TileEntityHarshenDimensionalPedestal) world.getTileEntity(position.offset(face))).getItem().getItem());
 				if(localItems.isEmpty())
 					activate(position, blocks);
 			}
@@ -143,7 +143,7 @@ public class HarshenDimensionalPedestalTileEntity extends TileEntity implements 
 		positionsOfGo.clear();
 		positionsOfGo.add(pos);
 		for(BlockPos position : positions)
-			((HarshenDimensionalPedestalTileEntity) world.getTileEntity(position)).setActive();
+			((TileEntityHarshenDimensionalPedestal) world.getTileEntity(position)).setActive();
 	}
 	
 	public void setActive()
