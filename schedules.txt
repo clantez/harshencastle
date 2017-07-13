@@ -5,30 +5,14 @@ HARSHED EFFECT
 -second level causes 2 hp damage per second, 11 seconds slowness and 4 seconds nausea
 -third level causes 5 hp damage per second, 5 seconds slowness and 5 seconds weakness
 
-SOUL
--player has 1 soul by default, his soul
--souls can be catched by killing the boses with soul harsher sword in structures that placed in OVERWORLD by harshen castle 
--player can carry 6 souls maximum
-
-SOUL BAR (gui)
--will be above of the blood bar
--not a bar actually, just a little box that shows a number that means catched souls
--catchen souls will be free if player dies (number will be set to 1)
-
 BLOOD
-1-blood bar (gui) on the screen (left side of the hotbar)
-2-player can bleed himself with Blade item
-3-blood of the player will regenerate very slowly
-3.5-will generate if player has more than 5 hearts(10hp)
-4-player will bleed randomly by getting hit (piercing/cutting hits, if specifiable)
-4.5-if player bleed, blood block will be placed RANDOMLY AGAIN around close to player standing on
-5-blood will be kept after death
-6-animated textures for all stages of the blood bar (kenijey will do)
-7-if player has no blood, he will become withered
+-player can bleed himself with Blade item (damages 2 hp and become withered for 6 seconds)
+-player will bleed randomly by getting hit (piercing/cutting hits, if specifiable)
+-if player bleed, blood block will be placed RANDOMLY AGAIN around close to player standing on
 
 --------------------------ITEMS/BLOCKS----------------------------
 LADLE
--used to shuffle the cauldron
+-used to shuffle the heretic cauldron
 
 RITUAL CRYSTAL
 -active crystal is obtainable by putting 3x blood and passive crystal into cauldron, then suffle it with LADLE
@@ -45,28 +29,18 @@ HARSHING FLUID
 
 SOUL HARSHER SWORD
 -has 3 soul slots (0/3)
--can be filled by shift+right click with souls player has
--if player kills an animal with this sword, all souls will be released and chat message: i'm not made to kill sinless entities
-
-HARSHEN SOUL FRAGMENT
--can be filled by 1 soul:
--player can make a ritual by placing the fragment on the pedestal, and placing 3 blood bottles on the other pedestals to fill the fragment with soul
--if player does that ritual, that fragment will replace with Soul Filled Fragment
-
-SOUL FILLED FRAGMENT
--used to make some rituals
--more coming...
+-can be filled by killing the 3 main bosses in 3 main structures that spawns in overworld
 
 BLADE
 -can be used to bleed the player by himself (by shift+right click)
 -and normal right click to bleed SOME of the mobs(villagers, witch, another player) (whitelist) with same procedure (put blood block around)
--it will damage to player 1 HP (half heart) but to other mobs will get 
--a little sound effect for bleeding player himself
--if used 1 time, item texture will replace with bloody one forever for that item
+-it will damage to player 2 hp and become withered for 6 seconds per use
+-not useable on mobs (exactly only on player)
+-a little sound effect for bleeding player by himself
+-if used <1 time, item texture will replace with bloody one forever for that item
 
 HERETIC CAULDRON
--can only be filled with blood and HD fluid
--can be shuffled with blood + HD fluid (for different ritual
+-can only be filled with HD fluid, blood and harshing water
 
 Pontus World Gate (First-Second-Third) Part(s)
 -found in chests in structures in overworld
@@ -74,10 +48,6 @@ Pontus World Gate (First-Second-Third) Part(s)
 PONTUS WORLD GATE
 -it's multiblock, made from dimensional stones and the real gate in it (small area, 3x4x5)
 -will be despawn(destroyed) after 1 min after placed(only portal will be destroyed, not the structure)
--there will be gate will spawn near the player spawned in pontus world to turn back to overworld
-
-LIGHT EMITTED ESSENCE
--used to craft something...(and some rituals)
 
 -----------ACCESSORY/ARMOR-----------
 slots:earrings(x2) pendant(x1) rings(x2) goggles(x1) //todo
