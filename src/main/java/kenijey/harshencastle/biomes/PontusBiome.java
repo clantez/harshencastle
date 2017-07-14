@@ -24,7 +24,7 @@ public class PontusBiome extends Biome
 	private static final IBlockState STONE = HarshenBlocks.harshen_dimensional_rock.getDefaultState();
 	
 	public PontusBiome() {
-		super(new Biome.BiomeProperties("Pontus").setTemperature(0.2F).setRainDisabled().setBaseHeight(0.7f).setHeightVariation(2f));
+		super(new Biome.BiomeProperties("Pontus").setTemperature(5f).setRainDisabled().setBaseHeight(0.7f).setHeightVariation(2f));
 		
 		setRegistryName(HarshenCastle.MODID, "Pontus");
 		
@@ -46,6 +46,7 @@ public class PontusBiome extends Biome
 		
 		
 	}
+	
 	
 	@Override
 	public WorldGenAbstractTree getRandomTreeFeature(Random rand) {

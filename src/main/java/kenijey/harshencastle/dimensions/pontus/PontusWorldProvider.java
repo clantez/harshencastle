@@ -5,6 +5,7 @@ import kenijey.harshencastle.dimensions.DimensionPontus;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Biomes;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
@@ -36,10 +37,17 @@ public class PontusWorldProvider extends WorldProvider
 	
 	@Override
 	protected void init() {
-		this.hasSkyLight = true;
+		this.hasSkyLight = false;
 		NBTTagCompound nbttagcompound = this.world.getWorldInfo().getDimensionData(DimensionType.OVERWORLD);
 		this.biomeProvider = new BiomeProviderSingle(HarshenBiomes.pontus_dimensional_biome);
-
+		
+	}
+	
+	@Override
+	protected void generateLightBrightnessTable() {
+		float[] d = {0,0,0,0,0,0,0,0,0.017543858f, 0.058823526f, 0.11111113f, 0.1794872f, 0.2727273f, 0.40740743f, 0.61904764f, 1.0f};
+        for (int i = 0; i <= 15; ++i)
+        	this.lightBrightnessTable[i] = d[i];
 	}
 	
 	@Override
@@ -63,9 +71,16 @@ public class PontusWorldProvider extends WorldProvider
 
 	@Override
 	@SideOnly(Side.CLIENT)
+	public Vec3d getFogColor(float p_76562_1_, float p_76562_2_)
+	{
+		return new Vec3d(0.02, 0, 0);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
 	public boolean isSkyColored()
 	{
-		return true;
+		return false;
 	}
 
 	@Override
@@ -132,10 +147,4 @@ public class PontusWorldProvider extends WorldProvider
 	{
 		return 256;
 	}
-    
-    @Override
-    public Vec3d getSkyColor(Entity cameraEntity, float partialTicks) {
-    	return new Vec3d(0.5, 0, 0);
-    }
-
 }
