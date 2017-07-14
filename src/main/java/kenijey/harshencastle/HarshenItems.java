@@ -12,6 +12,7 @@ import kenijey.harshencastle.items.HarshenDimensionalDoor;
 import kenijey.harshencastle.items.HarshenSoulFragment;
 import kenijey.harshencastle.items.HarshenSoulIngot;
 import kenijey.harshencastle.items.Itium;
+import kenijey.harshencastle.items.Ladle;
 import kenijey.harshencastle.items.LightEmittedEssence;
 import kenijey.harshencastle.items.LightEmittedSeed;
 import kenijey.harshencastle.items.PontusRing;
@@ -49,6 +50,7 @@ public class HarshenItems
 	public static Item light_emitted_essence;
 	public static Item blood_collector;
 	public static Item ritual_crystal;
+	public static Item ladle;
 	
 	
 	public static void preInit()
@@ -71,6 +73,7 @@ public class HarshenItems
 		light_emitted_essence = new LightEmittedEssence();
 		blood_collector = new BloodCollector();
 		ritual_crystal = new RitualCrystal();
+		ladle = new Ladle();
 	}
 	
 	public static void reg()
@@ -91,6 +94,7 @@ public class HarshenItems
 		regItem(pontus_world_gate_spawner,1);
 		regItem(light_emitted_essence,8);
 		regItem(light_emitted_seed,16);
+		regItem(ladle,1);
 		
 		regMetaItem(blood_collector, 1, BloodLevels.getNames(), "blood_collector_");
 		regMetaItem(ritual_crystal, CrystalAcive.getNames(), "ritual_crystal_");

@@ -29,6 +29,7 @@ item.blood_collector.4.name=Blood Collector
 item.blood_collector.5.name=Blood Collector
 item.ritual_crystal.passive.name=Ritual Crystal (passive)
 item.ritual_crystal.active.name=Ritual Crystal (active)
+item.ladle.name=Ladle
 
 #blocks
 tile.harshen_soul_ore.name=Harshen Soul Ore
