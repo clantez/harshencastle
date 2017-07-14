@@ -27,7 +27,7 @@ public class SoulHarsherSword extends ItemSword
 	
 	@Override
 	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
-		((EntityLivingBase)entity).addPotionEffect(new PotionEffect(Potion.getPotionById(20), 200, 1));
+		((EntityLivingBase)entity).addPotionEffect(new PotionEffect(Potion.getPotionById(20), 150, 1));
 		return super.onLeftClickEntity(stack, player, entity);
 	}
 	
@@ -40,7 +40,5 @@ public class SoulHarsherSword extends ItemSword
 		tooltip.add("\u00a74" + new TextComponentTranslation("sword3").getFormattedText());
 		tooltip.add("\u00a74" + new TextComponentTranslation("sword4").getFormattedText());
 		super.addInformation(stack, worldIn, tooltip, flagIn);
-		
 	}
-
 }
