@@ -2,8 +2,8 @@ package kenijey.harshencastle;
 
 import java.util.ArrayList;
 
-import kenijey.harshencastle.itemenum.EnumBloodCollectorHandler.BloodLevels;
-import kenijey.harshencastle.itemenum.EnumRitualCrystalItemHandler.CrystalAcive;
+import kenijey.harshencastle.enums.items.EnumBloodCollectorHandler.BloodLevels;
+import kenijey.harshencastle.enums.items.EnumRitualCrystalItemHandler.CrystalAcive;
 import kenijey.harshencastle.items.BloodCollector;
 import kenijey.harshencastle.items.BloodEssence;
 import kenijey.harshencastle.items.BloodyEarring;
@@ -144,13 +144,8 @@ public class HarshenItems
 	public static void regRenderMeta()
 	{
 		for(int i = 0; i < allMetaItems.size(); i++)
-		{
 			for(int j = 0; j < allMetaNames.get(i).length; j++)
 				regRender(allMetaItems.get(i), j, allMetaPrefix.get(i) + allMetaNames.get(i)[j]);
-			System.out.println(allMetaItems.get(i));
-			System.out.println(allMetaNames.get(i));
-			System.out.println(allMetaPrefix.get(i));
-		}
 			
 	}
 	

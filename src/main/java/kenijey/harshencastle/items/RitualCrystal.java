@@ -2,8 +2,8 @@ package kenijey.harshencastle.items;
 
 import java.util.List;
 
-import kenijey.harshencastle.itemenum.EnumBloodCollectorHandler.BloodLevels;
-import kenijey.harshencastle.itemenum.EnumRitualCrystalItemHandler.CrystalAcive;
+import kenijey.harshencastle.enums.items.EnumBloodCollectorHandler.BloodLevels;
+import kenijey.harshencastle.enums.items.EnumRitualCrystalItemHandler.CrystalAcive;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;

@@ -50,9 +50,6 @@ public class HarshenCastle {
     public void init(FMLInitializationEvent event) 
     {
     	proxy.init(event);
-    	Recipes.init();
-    	GameRegistry.registerWorldGenerator(new WorldGen(100), 0);
-    	GameRegistry.registerTileEntity(TileEntityHarshenDimensionalPedestal.class, MODID + "HarshenDimensionalPedestalTileEntity");
     }
 
     @Mod.EventHandler

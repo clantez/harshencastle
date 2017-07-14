@@ -1,6 +1,6 @@
-package kenijey.harshencastle.itemenum;
+package kenijey.harshencastle.enums.items;
 
-import kenijey.harshencastle.itemenum.EnumBloodCollectorHandler.BloodLevels;
+import kenijey.harshencastle.enums.items.EnumBloodCollectorHandler.BloodLevels;
 import net.minecraft.util.IStringSerializable;
 
 public class EnumRitualCrystalItemHandler 

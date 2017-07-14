@@ -1,41 +1,91 @@
 package kenijey.harshencastle.blocks;
 
 import java.util.Arrays;
+import java.util.List;
 
-import net.minecraft.block.BlockCauldron;
-import net.minecraft.block.BlockLog;
+import javax.annotation.Nullable;
+
+import kenijey.harshencastle.base.BaseBlockHarshenSingleInventory;
+import kenijey.harshencastle.enums.blocks.EnumHetericCauldronFluidType.EnumLiquid;
+import kenijey.harshencastle.tileentity.TileEntityHereticCauldron;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.UniversalBucket;
 
-public class HereticCauldron extends BlockCauldron
+public class HereticCauldron extends BaseBlockHarshenSingleInventory
 {
 	
-	public static PropertyEnum<EnumLiquid> LIQUID =  PropertyEnum.<EnumLiquid>create("liquid_type", EnumLiquid.class);
+	public static final PropertyEnum<EnumLiquid> LIQUID =  PropertyEnum.<EnumLiquid>create("liquid_type", EnumLiquid.class);
+	public static final PropertyInteger LEVEL = PropertyInteger.create("level", 0, 3);
+	
+	protected static final AxisAlignedBB AABB_LEGS = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.3125D, 1.0D);
+	protected static final AxisAlignedBB AABB_WALL_NORTH = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 0.125D);
+	protected static final AxisAlignedBB AABB_WALL_SOUTH = new AxisAlignedBB(0.0D, 0.0D, 0.875D, 1.0D, 1.0D, 1.0D);
+	protected static final AxisAlignedBB AABB_WALL_EAST = new AxisAlignedBB(0.875D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
+	protected static final AxisAlignedBB AABB_WALL_WEST = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.125D, 1.0D, 1.0D);
+
+	@Override
+	public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean p_185477_7_)
+    {
+        addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_LEGS);
+        addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_WALL_WEST);
+        addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_WALL_NORTH);
+        addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_WALL_EAST);
+        addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_WALL_SOUTH);
+    }
+
+	@Override
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+    {
+        return FULL_BLOCK_AABB;
+    }
+
+	@Override
+	public boolean isOpaqueCube(IBlockState state)
+    {
+        return false;
+    }
+
+	@Override
+	public boolean isFullCube(IBlockState state)
+    {
+        return false;
+    }    
+	 
 	
 	public HereticCauldron() {
+		super(Material.IRON);
 		setRegistryName("heretic_cauldron");
 		setUnlocalizedName("heretic_cauldron");
-		this.setDefaultState(this.blockState.getBaseState().withProperty(LIQUID, EnumLiquid.NONE));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(LIQUID, EnumLiquid.NONE).withProperty(LEVEL, 0));
 	}
 	
+	@Override
+	public TileEntity getTile() {
+		return new TileEntityHereticCauldron();
+	}
 	
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
@@ -44,9 +94,7 @@ public class HereticCauldron extends BlockCauldron
         Item item = itemstack.getItem();
         int i = ((Integer)state.getValue(LEVEL)).intValue();
         if (itemstack.isEmpty())
-        {
-            return false;
-        }
+        	return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitZ, hitZ, hitZ);
         if(item instanceof UniversalBucket)
         {
                  String[] stList = itemstack.serializeNBT().getTag("tag").toString().split(":");
@@ -101,15 +149,22 @@ public class HereticCauldron extends BlockCauldron
                 return true;
             }
             else
-            	return false;
+            	return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitZ, hitZ, hitZ);
+    }
+	
+	private void setWaterLevel(World worldIn, BlockPos pos, IBlockState state, int level)
+    {
+        worldIn.setBlockState(pos, state.withProperty(LEVEL, Integer.valueOf(MathHelper.clamp(level, 0, 3))), 2);
+        worldIn.updateComparatorOutputLevel(pos, this);
     }
 	
 	@Override
 	public int getMetaFromState(IBlockState state) {
 		if(state.getValue(LIQUID) == EnumLiquid.NONE || state.getValue(LEVEL) == 0)
 			return 0;
-		return (state.getValue(LIQUID).getId() * 3) - 3 + super.getMetaFromState(state);
+		return (state.getValue(LIQUID).getId() * 3) - 3 + ((Integer)state.getValue(LEVEL)).intValue();
 	}
+	
 	
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
@@ -122,49 +177,4 @@ public class HereticCauldron extends BlockCauldron
 	protected BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, new IProperty[] {LIQUID, LEVEL});
 	}
-	
-	public static enum EnumLiquid implements IStringSerializable
-	{
-		NONE("none", 0),
-		HARSHING_WATER("harshing_water", 1),
-		HARSHEN_DIMENSIONAL_FLUID("harshen_dimensional_fluid", 2);
-		
-		private final String name;
-		private final int id;
-		
-		EnumLiquid(String name, int id)
-		{
-			this.name = name;
-			this.id = id;
-		}
-		
-		@Override
-		public String getName() {
-			return this.name;
-		}
-		
-		public int getId(){
-			return this.id;
-		}
-		
-		public static EnumLiquid getMatch(int id)
-		{
-			for(EnumLiquid liquid : EnumLiquid.values())
-				if(liquid.getId() == id)
-					return liquid;
-			return NONE;
-		}
-		
-		public static EnumLiquid getMatch(String name)
-		{
-			for(EnumLiquid liquid : EnumLiquid.values())
-				if(liquid.getName().equals(name))
-					return liquid;
-			return NONE;
-		}
-		
-		
-	}
-	
-	
 }

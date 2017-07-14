@@ -7,6 +7,7 @@ import org.omg.PortableInterceptor.ACTIVE;
 
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenItems;
+import kenijey.harshencastle.base.BaseTileEntityHarshenSingleItemInventory;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.init.Blocks;
@@ -24,18 +25,11 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class TileEntityHarshenDimensionalPedestal extends TileEntity implements net.minecraft.util.ITickable, ICapabilityProvider
+public class TileEntityHarshenDimensionalPedestal extends BaseTileEntityHarshenSingleItemInventory
 {
-	private final ItemStackHandler handler;
-	private boolean hasItem = false;
 	private int rotation = 0, activeTimer = 0;
 	public static ArrayList<BlockPos> positionsOfGo = new ArrayList<BlockPos>(); 
 	private boolean isActive = false;
-
-	
-	public TileEntityHarshenDimensionalPedestal(){
-		this.handler = new ItemStackHandler(1);
-	}
 	
 	public float getMove()
 	{
@@ -95,18 +89,7 @@ public class TileEntityHarshenDimensionalPedestal extends TileEntity implements 
 			}
 	}
 	
-	public boolean canAddItem()
-	{	 
-		return this.handler.getStackInSlot(0).getItem() == Item.getItemFromBlock(Blocks.AIR);
-	}
-	
-	public void addItem(ItemStack item)
-	{
-		item.setCount(1);
-		dirty();
-		this.handler.setStackInSlot(0, item);
-	}
-	
+
 	private void checkForCompleation()
 	{
 		ArrayList<Item> localItems = new ArrayList<Item>(Arrays.asList(
@@ -177,77 +160,4 @@ public class TileEntityHarshenDimensionalPedestal extends TileEntity implements 
 	{
 		return isActive;
 	}
-	
-	private void dirty()
-	{
-		markDirty();
-		IBlockState state = world.getBlockState(pos);
-		world.notifyBlockUpdate(pos, state, state, 3);
-	}
-	
-	@Override
-	public <T> T getCapability(Capability<T> capability, EnumFacing facing)
-	{
-		if (capability  == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
-			return (T) this.handler;
-		return super.getCapability(capability, facing);
-	}
-	
-	@Override
-	public boolean hasCapability(Capability<?> capability, EnumFacing facing)
-	{
-		if (capability  == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
-			return true;
-		return super.hasCapability(capability, facing);
-	}
-
-	@Override
-	public void readFromNBT(NBTTagCompound nbt)
-	{
-		this.handler.deserializeNBT(nbt.getCompoundTag("ItemStackHandler"));
-		super.readFromNBT(nbt);
-	}
-	
-	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound nbt)
-	{
-		nbt.setTag("ItemStackHandler", this.handler.serializeNBT());
-		return super.writeToNBT(nbt);
-	}
-	
-	@Override
-	public SPacketUpdateTileEntity getUpdatePacket() {
-		NBTTagCompound nbt = new NBTTagCompound();
-		this.writeToNBT(nbt);
-		int metadata = getBlockMetadata();
-		return new SPacketUpdateTileEntity(this.pos, metadata, nbt);
-	}
-
-	@Override
-	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
-		this.readFromNBT(pkt.getNbtCompound());
-	}
-
-	@Override
-	public NBTTagCompound getUpdateTag() {
-		NBTTagCompound nbt = new NBTTagCompound();
-		this.writeToNBT(nbt);
-		return nbt;
-	}
-
-	@Override
-	public void handleUpdateTag(NBTTagCompound tag) {
-		this.readFromNBT(tag);
-	}
-
-	@Override
-	public NBTTagCompound getTileData() {
-		NBTTagCompound nbt = new NBTTagCompound();
-		this.writeToNBT(nbt);
-		return nbt;
-	}
-
-
-	
-
 }

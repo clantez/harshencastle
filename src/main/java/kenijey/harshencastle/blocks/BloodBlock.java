@@ -58,6 +58,12 @@ public class BloodBlock extends Block
 	}
 	
 	@Override
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+		if(!worldIn.getBlockState(pos.down()).getBlock().isNormalCube(worldIn.getBlockState(pos.down()), worldIn, pos))
+			worldIn.setBlockToAir(pos);
+	}
+	
+	@Override
 	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
 		if(!worldIn.getBlockState(pos.down()).getBlock().isNormalCube(worldIn.getBlockState(pos.down()), worldIn, pos))
 			worldIn.setBlockToAir(pos);
