@@ -2,6 +2,7 @@ package kenijey.harshencastle.items;
 
 import java.util.List;
 
+import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.enums.items.EnumBloodCollectorHandler.BloodLevels;
 import kenijey.harshencastle.enums.items.EnumRitualCrystalItemHandler.CrystalAcive;
 import net.minecraft.client.util.ITooltipFlag;
@@ -25,8 +26,9 @@ public class RitualCrystal extends Item
 	@Override
 	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) 
 	{
-		for(int i = 0; i < CrystalAcive.values().length; i++)
-			items.add(new ItemStack(this, 1, i));
+		if(tab.equals(HarshenCastle.harshenTab))
+			for(int i = 0; i < CrystalAcive.values().length; i++)
+				items.add(new ItemStack(this, 1, i));
 	}
 	
 	@Override

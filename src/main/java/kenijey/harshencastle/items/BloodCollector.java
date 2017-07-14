@@ -2,6 +2,7 @@ package kenijey.harshencastle.items;
 
 import java.util.List;
 
+import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.enums.items.EnumBloodCollectorHandler.BloodLevels;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
@@ -24,8 +25,10 @@ public class BloodCollector extends Item
 	@Override
 	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) 
 	{
-		items.add(new ItemStack(this, 1, 0));
+		if(tab.equals(HarshenCastle.harshenTab))
+			items.add(new ItemStack(this, 1, 0));	
 	}
+	
 	
 	@Override
 	public String getUnlocalizedName(ItemStack stack) 
@@ -72,6 +75,11 @@ public class BloodCollector extends Item
         player.setHeldItem(hand, stack);
         
 		return flag;
+	}
+	
+	public void remove(int amount)
+	{
+		//TODO
 	}
 	
 	
