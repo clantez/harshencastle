@@ -21,7 +21,7 @@ GUIDANCE OF HARSHEN WORLD
 -guide book of harshen castle
 
 SOUL HARSHER PICKAXE
--can break all harshen blocks BUT ONLY IN PONTUS WORLD (dimension check)
+-can break HD dirt and HD rock BUT ONLY IN PONTUS WORLD (dimension check)
 
 HARSHING FLUID
 -kills anything that tries to swim in it
@@ -40,10 +40,10 @@ BLADE
 -if used <1 time, item texture will replace with bloody one forever for that item
 
 HERETIC CAULDRON
--can only be filled with HD fluid, blood and harshing water
+-can only be filled with HD fluid, blood(by blood collector) and harshing water
 
 Pontus World Gate (First-Second-Third) Part(s)
--found in chests in structures in overworld
+-found in chests in main structures in overworld
 
 PONTUS WORLD GATE
 -it's multiblock, made from dimensional stones and the real gate in it (small area, 3x4x5)
@@ -81,7 +81,7 @@ HARSHEN STUNSHIP
 -has same gate parts in castle
 
 HARSHEN GIGANTIC CAVE
--has the boss harshen dimensional golem(no special name)
+-has the boss Harshen Dimensional Golem
 -has NO gate part
 -spawns not only 1 time, spawns all over the world infinite
 -has only 1 custom mob(Golem Part) except the golem boss
