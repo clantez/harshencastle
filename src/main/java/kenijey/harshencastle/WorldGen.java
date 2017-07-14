@@ -32,8 +32,8 @@ public class WorldGen implements IWorldGenerator
 		if(dim == 0)
 		{
 			oreGenerator(this.soulore, world, random, chunkX, chunkZ, 10, 0, 20);
-	    	flowerGenerator(HarshenBlocks.harshen_soul_flower, world, random, chunkX, chunkZ, 20);
-	    	flowerGenerator(HarshenBlocks.plant_of_gleam, world, random, chunkX, chunkZ, 20);
+	    	flowerGenerator(HarshenBlocks.harshen_soul_flower, world, random, chunkX, chunkZ, 15);
+	    	flowerGenerator(HarshenBlocks.plant_of_gleam, world, random, chunkX, chunkZ, 15);
 		}
 		else if(dim == DimensionPontus.DIMENSION_ID)
 		{
