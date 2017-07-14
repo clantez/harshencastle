@@ -8,7 +8,8 @@ public class EnumHetericCauldronFluidType {
 	{
 		NONE("none", 0),
 		HARSHING_WATER("harshing_water", 1),
-		HARSHEN_DIMENSIONAL_FLUID("harshen_dimensional_fluid", 2);
+		HARSHEN_DIMENSIONAL_FLUID("harshen_dimensional_fluid", 2),
+		BLOOD("blood", 3);
 		
 		private final String name;
 		private final int id;
