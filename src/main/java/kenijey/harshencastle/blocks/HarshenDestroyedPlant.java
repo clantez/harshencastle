@@ -69,6 +69,9 @@ public class HarshenDestroyedPlant extends Block
 		if(!(worldIn.getBlockState(pos.add(0, -1, 0)).getBlock() instanceof HarshenDimensionalDirt))
 			worldIn.setBlockToAir(pos);
 	}
-
-
+	
+	public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos)
+	{
+	        return true;
+	}
 }

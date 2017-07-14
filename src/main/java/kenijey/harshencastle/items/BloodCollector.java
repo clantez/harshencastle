@@ -50,7 +50,7 @@ public class BloodCollector extends Item
 	    	nbt = new NBTTagCompound();
 
 		if (nbt.hasKey("Blood"))
-			if(nbt.getInteger("Blood") < 60)
+			if(nbt.getInteger("Blood") < 50)
 			{
 				nbt.setInteger("Blood", nbt.getInteger("Blood") + 1);
 				flag = true;
@@ -71,8 +71,6 @@ public class BloodCollector extends Item
         stack.setTagCompound(nbt);
         player.setHeldItem(hand, stack);
         
-        
-        
 		return flag;
 	}
 	
@@ -80,7 +78,7 @@ public class BloodCollector extends Item
 	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 		if(stack.hasTagCompound() && stack.getTagCompound().hasKey("Blood"))
-			tooltip.add(Integer.toString(stack.getTagCompound().getInteger("Blood")) + " / 60 blood");
+			tooltip.add("Blood: " + Integer.toString(stack.getTagCompound().getInteger("Blood")) + " / 50");
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 	}
 }

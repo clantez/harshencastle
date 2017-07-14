@@ -57,5 +57,9 @@ public class PlantOfGleam extends BlockFlower
 	public EnumFlowerColor getBlockType() {
 		return EnumFlowerColor.YELLOW;
 	}
-
+	
+	public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos)
+	{
+	        return true;
+	}
 }

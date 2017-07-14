@@ -52,10 +52,13 @@ public class HarshenSoulFlower extends BlockFlower
 		return null;
 	}
 	
-
 	@Override
 	public EnumFlowerColor getBlockType() {
 		return EnumFlowerColor.YELLOW;
 	}
-
+	
+	public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos)
+	{
+	        return true;
+	}
 }

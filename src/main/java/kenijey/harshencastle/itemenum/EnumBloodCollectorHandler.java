@@ -7,11 +7,11 @@ public class EnumBloodCollectorHandler
 	public static enum BloodLevels implements IStringSerializable
 	{
 		ZERO(0, 0),
-		TWELVE(1, 12),
-		TWENTYFOUR(2, 24),
-		THIRTYSIX(3, 36),
-		FOURTYEIGHT(4, 48),
-		SIXTY(5, 60);
+		TEN(1, 10),
+		TWENTY(2, 20),
+		THIRTY(3, 30),
+		FOURTY(4, 40),
+		FIFTY(5, 50);
 		
 		private int id;
 		private int changeAmount;

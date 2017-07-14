@@ -42,4 +42,9 @@ public class CropOfGleam extends BlockCrops
     {
         return CROPS_AABB[((Integer)state.getValue(this.getAgeProperty())).intValue()];
     }
+	
+	public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos)
+	{
+	        return true;
+	}
 }

@@ -85,4 +85,9 @@ public class BloodBlock extends Block
 	{
 		return false;
 	}
+	
+	public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos)
+	{
+	        return true;
+	}
 }
