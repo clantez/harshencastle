@@ -7,8 +7,8 @@ public class EnumRitualCrystalItemHandler
 {
 	public static enum CrystalAcive implements IStringSerializable
 	{
-		ACTIVE("active", true),
-		PASSIVE("passive", false);
+		PASSIVE("passive", false),
+		ACTIVE("active", true);
 		
 		private boolean active;
 		private String name;

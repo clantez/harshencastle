@@ -35,7 +35,7 @@ public class BloodBlock extends Block
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
 			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		
-		if(playerIn.getHeldItem(hand).getItem() instanceof BloodCollector && ((BloodCollector)playerIn.getHeldItem(hand).getItem()).fill(worldIn, playerIn, hand))
+		if(playerIn.getHeldItem(hand).getItem() instanceof BloodCollector && ((BloodCollector)playerIn.getHeldItem(hand).getItem()).fill(worldIn, playerIn, hand, 1))
 			worldIn.setBlockToAir(pos);
 		return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
 	}

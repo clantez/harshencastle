@@ -22,6 +22,7 @@ import kenijey.harshencastle.blocks.HarshenHiddenPlateActive;
 import kenijey.harshencastle.blocks.HarshenSoulFlower;
 import kenijey.harshencastle.blocks.HarshenSoulOre;
 import kenijey.harshencastle.blocks.HereticCauldron;
+import kenijey.harshencastle.blocks.HereticCauldronTop;
 import kenijey.harshencastle.blocks.ItiumOre;
 import kenijey.harshencastle.blocks.PlantOfGleam;
 import kenijey.harshencastle.blocks.PontusDeadLeaves;
@@ -59,6 +60,7 @@ public class HarshenBlocks {
 	public static Block harshen_dimensional_pedestal;
 	public static Block harshen_dimensional_gate;
 	public static Block heretic_cauldron;
+	public static Block heretic_cauldron_top;
 	public static Block blood_block;
 	public static Block pontus_dead_leaves;
 	
@@ -92,6 +94,7 @@ public class HarshenBlocks {
 		harshen_dimensional_gate = new HarshenDimensionalGate();
 		crop_of_gleam = new CropOfGleam();
 		heretic_cauldron = new HereticCauldron();
+		heretic_cauldron_top = new HereticCauldronTop();
 		blood_block = new BloodBlock();
 		pontus_dead_wood = new PontusDeadWood();
 		pontus_dead_leaves = new PontusDeadLeaves();
@@ -121,6 +124,7 @@ public class HarshenBlocks {
 		regBlock(plant_of_gleam, 64);
 		regBlock(blood_block, 1);
 		
+		regSingleBlock(heretic_cauldron_top);
 		regSingleBlock(crop_of_gleam);
 		regSingleBlock(harshen_dimensional_door);
 		regSingleBlock(harshen_hidden_plate_active);
@@ -147,10 +151,6 @@ public class HarshenBlocks {
 
 	public static void regRender(Block block) {
 		block.setCreativeTab(HarshenCastle.harshenTab);
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, new ModelResourceLocation(block.getRegistryName(), "inventory"));
-	}
-	
-	public static void regRender(Block block, boolean creativeTab) {
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, new ModelResourceLocation(block.getRegistryName(), "inventory"));
 	}
 }

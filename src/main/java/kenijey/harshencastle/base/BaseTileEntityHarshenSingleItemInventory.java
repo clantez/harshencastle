@@ -34,17 +34,17 @@ public abstract class BaseTileEntityHarshenSingleItemInventory extends TileEntit
 	}
 	
 	
-	public void addItem(ItemStack item)
+	public void setItem(ItemStack item)
 	{
 		item.setCount(1);
-		dirty();
 		this.handler.setStackInSlot(0, item);
+		dirty();
 	}
 		
 	public void delItem()
 	{
-		dirty();
 		this.handler.setStackInSlot(0, new ItemStack(Blocks.AIR));
+		dirty();
 	}
 	
 	public boolean hasItem()
