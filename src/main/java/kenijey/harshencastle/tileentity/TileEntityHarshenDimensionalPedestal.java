@@ -78,7 +78,7 @@ public class TileEntityHarshenDimensionalPedestal extends BaseTileEntityHarshenS
 							{
 								world.addWeatherEffect(new EntityLightningBolt(world, pos.getX(), pos.getY(), pos.getZ(), true));
 								if(!world.isRemote)
-									InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(HarshenBlocks.harshen_dimensional_gate));
+									InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(HarshenItems.pontus_world_gate_spawner));
 								rem = pos;
 								break;
 							}
