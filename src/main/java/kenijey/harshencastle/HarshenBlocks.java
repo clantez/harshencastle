@@ -17,6 +17,7 @@ import kenijey.harshencastle.blocks.HarshenDimensionalRock;
 import kenijey.harshencastle.blocks.HarshenDimensionalStairs;
 import kenijey.harshencastle.blocks.HarshenDimensionalStone;
 import kenijey.harshencastle.blocks.HarshenDimensionalWoodCrate;
+import kenijey.harshencastle.blocks.HarshenDisplayBlock;
 import kenijey.harshencastle.blocks.HarshenHiddenPlate;
 import kenijey.harshencastle.blocks.HarshenHiddenPlateActive;
 import kenijey.harshencastle.blocks.HarshenSoulFlower;
@@ -43,6 +44,7 @@ public class HarshenBlocks {
 	
 	public static Block harshen_soul_ore;
 	public static Block harshen_dimensional_stone;
+	public static Block harshen_display_block;
 	public static Block harshen_dimensional_door;
 	public static Block harshen_hidden_plate;
 	public static Block harshen_hidden_plate_active;
@@ -74,6 +76,7 @@ public class HarshenBlocks {
 	public static void preInit() {
 		harshen_soul_ore = new HarshenSoulOre();
 		harshen_dimensional_stone = new HarshenDimensionalStone();
+		harshen_display_block = new HarshenDisplayBlock();
 		harshen_dimensional_door = new HarshenDimensionalDoor();
 		harshen_hidden_plate = new HarshenHiddenPlate();
 		harshen_hidden_plate_active = new HarshenHiddenPlateActive();
@@ -109,6 +112,7 @@ public class HarshenBlocks {
 		regBlock(harshen_dimensional_glass,64);
 		regBlock(harshen_dimensional_ladder,64);
 		regBlock(harshen_dimensional_wood_crate, 64);
+		regBlock(harshen_display_block, 64);
 		regBlock(harshen_dimensional_dirt, 64);
 		regBlock(harshen_dimensional_gate, 1);
 		regBlock(pontus_dead_wood, 64);

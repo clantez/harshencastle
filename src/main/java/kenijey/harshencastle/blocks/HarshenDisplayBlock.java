@@ -1,0 +1,33 @@
+package kenijey.harshencastle.blocks;
+
+import kenijey.harshencastle.base.BaseBlockHarshenSingleInventory;
+import kenijey.harshencastle.tileentity.TileEntityHarshenDisplayBlock;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.tileentity.TileEntity;
+
+public class HarshenDisplayBlock extends BaseBlockHarshenSingleInventory
+{
+
+	public HarshenDisplayBlock() {
+		super(Material.ROCK);
+		setRegistryName("harshen_display_block");
+		setUnlocalizedName("harshen_display_block");
+	}
+
+	@Override
+	public TileEntity getTile() {
+		return new TileEntityHarshenDisplayBlock();
+	}
+	
+	@Override
+	public boolean isFullCube(IBlockState state) {
+		return false;
+	}
+	
+	@Override
+	public boolean isOpaqueCube(IBlockState state) {
+		return false;
+	}
+
+}

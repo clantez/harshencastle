@@ -11,6 +11,7 @@ import kenijey.harshencastle.dimensions.HarshenDimensions;
 import kenijey.harshencastle.fluids.HarshenFluids;
 import kenijey.harshencastle.items.Recipes;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDimensionalPedestal;
+import kenijey.harshencastle.tileentity.TileEntityHarshenDisplayBlock;
 import kenijey.harshencastle.tileentity.TileEntityHereticCauldron;
 import net.minecraft.block.Block;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -44,7 +45,7 @@ public class CommonProxy
     {
     	GameRegistry.registerTileEntity(TileEntityHarshenDimensionalPedestal.class, HarshenCastle.MODID + "HarshenDimensionalPedestalTileEntity");
     	GameRegistry.registerTileEntity(TileEntityHereticCauldron.class, HarshenCastle.MODID + "TileEntityHereticCauldron");
-
+    	GameRegistry.registerTileEntity(TileEntityHarshenDisplayBlock.class, HarshenCastle.MODID + "TileEntityHarshenDisplayBlock");
     	
     	Recipes.init();
     	
