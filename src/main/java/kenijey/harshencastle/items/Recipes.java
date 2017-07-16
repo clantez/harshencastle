@@ -2,7 +2,7 @@ package kenijey.harshencastle.items;
 
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenItems;
-import kenijey.harshencastle.armor.ArmorInit;
+import kenijey.harshencastle.armor.HarshenArmor;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -55,7 +55,7 @@ public class Recipes
 				'b', HarshenItems.blood_essence);
 		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "harshen_jaguar_armor_helmet"), new ResourceLocation("harshen_items"),
-				new ItemStack(ArmorInit.harshen_jaguar_armor_helmet),
+				new ItemStack(HarshenArmor.harshen_jaguar_armor_helmet),
 				"iii",
 				"i i",
 				"   ",
@@ -63,7 +63,7 @@ public class Recipes
 				'i', HarshenItems.harshen_soul_ingot);
 		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "harshen_jaguar_armor_chestplate"), new ResourceLocation("harshen_items"),
-				new ItemStack(ArmorInit.harshen_jaguar_armor_chestplate),
+				new ItemStack(HarshenArmor.harshen_jaguar_armor_chestplate),
 				"i i",
 				"iii",
 				"iii",
@@ -71,7 +71,7 @@ public class Recipes
 				'i', HarshenItems.harshen_soul_ingot);
 		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "harshen_jaguar_armor_leggings"), new ResourceLocation("harshen_items"),
-				new ItemStack(ArmorInit.harshen_jaguar_armor_leggings),
+				new ItemStack(HarshenArmor.harshen_jaguar_armor_leggings),
 				"iii",
 				"i i",
 				"i i",
@@ -79,7 +79,7 @@ public class Recipes
 				'i', HarshenItems.harshen_soul_ingot);
 		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "harshen_jaguar_armor_boots"), new ResourceLocation("harshen_items"),
-				new ItemStack(ArmorInit.harshen_jaguar_armor_boots),
+				new ItemStack(HarshenArmor.harshen_jaguar_armor_boots),
 				"   ",
 				"i i",
 				"i i",

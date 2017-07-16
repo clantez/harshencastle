@@ -13,6 +13,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -31,6 +32,9 @@ public class HarshenCastle {
     public static CommonProxy proxy;
 
     public static final CreativeTabs harshenTab = new HarshenTab("harshenTab");
+    
+    @Instance(MODID)
+    public static HarshenCastle instance;
     
 	static 
 	{

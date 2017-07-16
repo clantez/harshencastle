@@ -5,9 +5,10 @@ import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.HarshenSounds;
 import kenijey.harshencastle.WorldGen;
-import kenijey.harshencastle.armor.ArmorInit;
+import kenijey.harshencastle.armor.HarshenArmor;
 import kenijey.harshencastle.biomes.HarshenBiomes;
 import kenijey.harshencastle.dimensions.HarshenDimensions;
+import kenijey.harshencastle.entity.HarshenEntities;
 import kenijey.harshencastle.fluids.HarshenFluids;
 import kenijey.harshencastle.items.Recipes;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDimensionalPedestal;
@@ -31,8 +32,8 @@ public class CommonProxy
 		HarshenBlocks.reg();
 		HarshenItems.reg();
 		
-		ArmorInit.init();
-		ArmorInit.register();
+		HarshenArmor.init();
+		HarshenArmor.register();
 		
 		HarshenDimensions.register();
 		
@@ -43,6 +44,8 @@ public class CommonProxy
 
     public void init(FMLInitializationEvent event) 
     {
+    	HarshenEntities.init();
+    	
     	GameRegistry.registerTileEntity(TileEntityHarshenDimensionalPedestal.class, HarshenCastle.MODID + "HarshenDimensionalPedestalTileEntity");
     	GameRegistry.registerTileEntity(TileEntityHereticCauldron.class, HarshenCastle.MODID + "TileEntityHereticCauldron");
     	GameRegistry.registerTileEntity(TileEntityHarshenDisplayBlock.class, HarshenCastle.MODID + "TileEntityHarshenDisplayBlock");
