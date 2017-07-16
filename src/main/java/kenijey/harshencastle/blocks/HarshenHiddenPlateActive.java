@@ -3,6 +3,7 @@ package kenijey.harshencastle.blocks;
 import java.util.Random;
 
 import kenijey.harshencastle.HarshenBlocks;
+import kenijey.harshencastle.base.BaseHarshenBlockCastle;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -16,7 +17,7 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class HarshenHiddenPlateActive extends HarshenBlockCastle
+public class HarshenHiddenPlateActive extends BaseHarshenBlockCastle
 {
 	
 	public HarshenHiddenPlateActive() {

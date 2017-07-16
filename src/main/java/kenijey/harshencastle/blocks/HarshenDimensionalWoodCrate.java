@@ -1,5 +1,6 @@
 package kenijey.harshencastle.blocks;
 
+import kenijey.harshencastle.base.BaseHarshenBlockCastle;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -10,7 +11,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
-public class HarshenDimensionalWoodCrate extends HarshenBlockCastle
+public class HarshenDimensionalWoodCrate extends BaseHarshenBlockCastle
 {
 	public HarshenDimensionalWoodCrate()
 	{

@@ -1,7 +1,6 @@
 package kenijey.harshencastle.blocks;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
+import net.minecraft.block.BlockChest;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
@@ -10,27 +9,13 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
-public class HarshenBlockCastle extends Block
+public class HarshenChest extends BlockChest
 {
-
-	public HarshenBlockCastle() {
-		this(Material.ROCK, "pickaxe");
-	}
-	
-	public HarshenBlockCastle(Material material)
-	{
-		this(material, "pickaxe");
-	}
-	
-	public HarshenBlockCastle(String harvestTool)
-	{
-		this(Material.ROCK, harvestTool);
-	}
-	
-	public HarshenBlockCastle(Material material,String harvestTool)
-	{
-		super(material);
-		setHarvestLevel(harvestTool, 3);
+	public HarshenChest() {
+		super(BlockChest.Type.BASIC);
+		setRegistryName("harshen_chest");
+		setUnlocalizedName("harshen_chest");
+		setHarvestLevel("pickaxe", 3);
 		setHardness(2500f);
 		setResistance(2500f);
 	}
@@ -48,6 +33,5 @@ public class HarshenBlockCastle extends Block
 		{
 			player.sendMessage((ITextComponent) new TextComponentTranslation("message.broken"));
 		}
-	}
-
+	}	
 }

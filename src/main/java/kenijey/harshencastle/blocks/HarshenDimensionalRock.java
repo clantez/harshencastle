@@ -2,6 +2,7 @@ package kenijey.harshencastle.blocks;
 
 import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.HarshenItems;
+import kenijey.harshencastle.base.BaseHarshenBlockCastle;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -13,7 +14,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
-public class HarshenDimensionalRock extends HarshenBlockCastle 
+public class HarshenDimensionalRock extends BaseHarshenBlockCastle 
 {
 	public HarshenDimensionalRock() 
 	{

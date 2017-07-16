@@ -2,6 +2,7 @@ package kenijey.harshencastle.blocks;
 
 import java.util.Random;
 
+import kenijey.harshencastle.base.BaseHarshenBlockCastle;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPressurePlate;
 import net.minecraft.block.material.Material;
@@ -17,7 +18,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class HarshenDimensionalPlate extends HarshenBlockCastle {
+public class HarshenDimensionalPlate extends BaseHarshenBlockCastle {
 	
 	
     public static final PropertyBool POWERED = PropertyBool.create("powered");
