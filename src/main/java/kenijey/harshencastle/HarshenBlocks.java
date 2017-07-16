@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import kenijey.harshencastle.blocks.BloodBlock;
 import kenijey.harshencastle.blocks.CropOfGleam;
-import kenijey.harshencastle.blocks.HarshenChest;
 import kenijey.harshencastle.blocks.HarshenDestroyedPlant;
 import kenijey.harshencastle.blocks.HarshenDimensionalDirt;
 import kenijey.harshencastle.blocks.HarshenDimensionalDoor;
@@ -30,7 +29,6 @@ import kenijey.harshencastle.blocks.PontusDeadLeaves;
 import kenijey.harshencastle.blocks.PontusDeadWood;
 import kenijey.harshencastle.blocks.SoulReminder;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockChest;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.block.BlockLog;
@@ -72,8 +70,6 @@ public class HarshenBlocks {
 	public static BlockFlower plant_of_gleam;
 	
 	public static BlockLog pontus_dead_wood;
-	
-	public static BlockChest harshen_chest;
 
 	public static void preInit() {
 		harshen_soul_ore = new HarshenSoulOre();
@@ -102,7 +98,6 @@ public class HarshenBlocks {
 		blood_block = new BloodBlock();
 		pontus_dead_wood = new PontusDeadWood();
 		pontus_dead_leaves = new PontusDeadLeaves();
-		harshen_chest = new HarshenChest();
 	}
 
 	public static void reg() {
@@ -128,7 +123,6 @@ public class HarshenBlocks {
 		regBlock(harshen_dimensional_pedestal, 8);
 		regBlock(plant_of_gleam, 64);
 		regBlock(blood_block, 1);
-		regBlock(harshen_chest, 64);
 		
 		regSingleBlock(heretic_cauldron_top);
 		regSingleBlock(crop_of_gleam);
