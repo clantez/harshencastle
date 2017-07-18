@@ -15,7 +15,8 @@ public class TileEntityHarshenSpawner extends BaseTileEntityHarshenSingleItemInv
 	
 	public EntityLivingBase getEntity(ItemStack stack)
 	{
-		if(stack.getItem() == Item.getItemFromBlock(Blocks.AIR))
+		if(stack.getItem() == Item.getItemFromBlock(Blocks.AIR)
+				|| stack.equals(ItemStack.EMPTY))
 		{
 			this.entity = null;
 			return null;
@@ -34,17 +35,17 @@ public class TileEntityHarshenSpawner extends BaseTileEntityHarshenSingleItemInv
 	protected void tick() 
 	{
 		EntityPlayer player = world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 10, false);
-		if(player != null && !player.capabilities.isCreativeMode)
+		if(player != null && !player.capabilities.isCreativeMode && getEntity(getItem()) != null)
 			activate(player);
 	}
 	
 	private void activate(EntityPlayer player)
 	{
-		if(this.entity == null)
-			getEntity(getItem());
+		delItem();
 		this.entity.setPosition(pos.getX(), pos.getY(), pos.getZ());
 		this.entity.setRotationYawHead(player.getPosition().subtract(pos).getY());
-		world.spawnEntity(this.entity);
+		if(!world.isRemote)
+			world.spawnEntity(this.entity);
 		world.setBlockToAir(pos);
 	}
 }
