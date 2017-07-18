@@ -26,8 +26,7 @@ public class RendererHarshenDisplayBlock extends TileEntitySpecialRenderer<TileE
 		GlStateManager.pushMatrix();
 		{
 			GlStateManager.translate(x, y, z);
-			GlStateManager.translate(0.5f, 0.9f,0.5f);
-			GlStateManager.scale(2, 2, 2);
+			GlStateManager.translate(0.5f, 1f,0.5f);
 			GlStateManager.translate(0, Math.sin(te.getTimer() / 10f) / 15f, 0);
 			GlStateManager.rotate(te.getTimer() % 360 * 5, 0, 1, 0);
 			Minecraft.getMinecraft().getRenderManager().doRenderEntity(ITEM, 0f, 0f, 0f, 0f, 0f, false);
