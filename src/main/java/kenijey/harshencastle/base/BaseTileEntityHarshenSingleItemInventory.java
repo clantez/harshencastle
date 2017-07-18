@@ -14,11 +14,11 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-public abstract class BaseTileEntityHarshenSingleItemInventory extends TileEntity implements net.minecraft.util.ITickable, ICapabilityProvider
+public abstract class BaseTileEntityHarshenSingleItemInventory extends BaseHarshenTileEntity implements net.minecraft.util.ITickable, ICapabilityProvider
 {
 	protected final ItemStackHandler handler;
 	protected boolean hasItem = false;
-
+	protected int timer;
 	
 	public BaseTileEntityHarshenSingleItemInventory(){
 		this.handler = new ItemStackHandler(1);
@@ -26,7 +26,21 @@ public abstract class BaseTileEntityHarshenSingleItemInventory extends TileEntit
 	
 	
 	@Override
-	public abstract void update();
+	public void update()
+	{
+		timer ++;
+	}
+	
+	public int getTimer()
+	{
+		return timer;
+	}
+	
+	protected void tick()
+	{
+		
+	}
+	
 	
 	public boolean canAddItem()
 	{	 
@@ -34,11 +48,12 @@ public abstract class BaseTileEntityHarshenSingleItemInventory extends TileEntit
 	}
 	
 	
-	public void setItem(ItemStack item)
+	public boolean setItem(ItemStack item)
 	{
 		item.setCount(1);
 		this.handler.setStackInSlot(0, item);
 		dirty();
+		return true;
 	}
 		
 	public void delItem()
@@ -79,55 +94,18 @@ public abstract class BaseTileEntityHarshenSingleItemInventory extends TileEntit
 			return true;
 		return super.hasCapability(capability, facing);
 	}
-
+	
 	@Override
-	public void readFromNBT(NBTTagCompound nbt)
-	{
-		this.handler.deserializeNBT(nbt.getCompoundTag("ItemStackHandler"));
-		super.readFromNBT(nbt);
+	public void readFromNBT(NBTTagCompound compound) {
+		this.handler.deserializeNBT(compound.getCompoundTag("ItemStackHandler"));
+		super.readFromNBT(compound);
 	}
 	
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound nbt)
-	{
+	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		nbt.setTag("ItemStackHandler", this.handler.serializeNBT());
 		return super.writeToNBT(nbt);
 	}
-	
-	@Override
-	public SPacketUpdateTileEntity getUpdatePacket() {
-		NBTTagCompound nbt = new NBTTagCompound();
-		this.writeToNBT(nbt);
-		int metadata = getBlockMetadata();
-		return new SPacketUpdateTileEntity(this.pos, metadata, nbt);
-	}
-
-	@Override
-	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
-		this.readFromNBT(pkt.getNbtCompound());
-	}
-
-	@Override
-	public NBTTagCompound getUpdateTag() {
-		NBTTagCompound nbt = new NBTTagCompound();
-		this.writeToNBT(nbt);
-		return nbt;
-	}
-
-	@Override
-	public void handleUpdateTag(NBTTagCompound tag) {
-		this.readFromNBT(tag);
-	}
-
-	@Override
-	public NBTTagCompound getTileData() {
-		NBTTagCompound nbt = new NBTTagCompound();
-		this.writeToNBT(nbt);
-		return nbt;
-	}
-
-
-	
 
 }
 

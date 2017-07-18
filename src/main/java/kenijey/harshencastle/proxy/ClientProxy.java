@@ -8,9 +8,11 @@ import kenijey.harshencastle.entity.EntitySoullessKnight;
 import kenijey.harshencastle.entityrender.RenderSoullessKnight;
 import kenijey.harshencastle.itemrenderer.RendererDimensionalPedestal;
 import kenijey.harshencastle.itemrenderer.RendererHarshenDisplayBlock;
+import kenijey.harshencastle.itemrenderer.RendererHarshenSpawner;
 import kenijey.harshencastle.itemrenderer.RendererHereticCauldron;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDimensionalPedestal;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDisplayBlock;
+import kenijey.harshencastle.tileentity.TileEntityHarshenSpawner;
 import kenijey.harshencastle.tileentity.TileEntityHereticCauldron;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -61,7 +63,7 @@ public class ClientProxy extends CommonProxy
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHarshenDimensionalPedestal.class, new RendererDimensionalPedestal());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHereticCauldron.class, new RendererHereticCauldron());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHarshenDisplayBlock.class, new RendererHarshenDisplayBlock());
-		
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHarshenSpawner.class, new RendererHarshenSpawner());
 		
 		
 		RenderingRegistry.registerEntityRenderingHandler(EntitySoullessKnight.class, new IRenderFactory<Entity>() 

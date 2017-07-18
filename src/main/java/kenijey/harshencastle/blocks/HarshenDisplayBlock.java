@@ -19,15 +19,4 @@ public class HarshenDisplayBlock extends BaseBlockHarshenSingleInventory
 	public TileEntity getTile() {
 		return new TileEntityHarshenDisplayBlock();
 	}
-	
-	@Override
-	public boolean isFullCube(IBlockState state) {
-		return false;
-	}
-	
-	@Override
-	public boolean isOpaqueCube(IBlockState state) {
-		return false;
-	}
-
 }

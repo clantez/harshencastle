@@ -68,18 +68,6 @@ public class HereticCauldron extends BaseBlockHarshenSingleInventory
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
         return new AxisAlignedBB(0, 0, 0, 1, 1.001, 1);
-    }
-
-	@Override
-	public boolean isOpaqueCube(IBlockState state)
-    {
-        return false;
-    }
-
-	@Override
-	public boolean isFullCube(IBlockState state)
-    {
-        return false;
     }    
 	 
 	@SideOnly(Side.CLIENT)

@@ -8,7 +8,6 @@ import net.minecraft.item.ItemStack;
 public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemInventory
 {
 	
-	int active = 0;
 	private int activeTimer = 0;
 	int layersDrained = 0;
 	public boolean isActive = false;
@@ -16,8 +15,7 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 	private int[] drainPos = {50, 75, 100, Integer.MAX_VALUE};
 	
 	@Override
-	public void update() {
-		active++;
+	public void tick() {
 		if(isActive)
 		{
 			if(activeTimer++ > 175)
@@ -32,15 +30,12 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 			if(layersDrained == 2)
 				setItem(switchedItem);
 			world.setBlockState(pos, ((HereticCauldron)world.getBlockState(pos).getBlock()).removeLayer((world.getBlockState(pos))), 3);
-			((TileEntityHereticCauldron)world.getTileEntity(pos)).setActiveTimer(activeTimer).setTimer(active).setActive(isActive).setHoldingItem(getItem()).setlayersDrained(layersDrained + 1).setSwitchedItem(switchedItem);
+			((TileEntityHereticCauldron)world.getTileEntity(pos)).setActiveTimer(activeTimer).setTimer(this.timer).setActive(isActive).setHoldingItem(getItem()).setlayersDrained(layersDrained + 1).setSwitchedItem(switchedItem);
 		}
 			
 	}
 	
-	public int getTimer()
-	{
-		return active;
-	}
+
 	
 	public int getActiveTimer()
 	{
@@ -61,7 +56,7 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 	
 	public TileEntityHereticCauldron setTimer(int timer)
 	{
-		this.active = timer;
+		this.timer = timer;
 		return this;
 	}
 	

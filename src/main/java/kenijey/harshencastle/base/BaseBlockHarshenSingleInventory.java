@@ -54,8 +54,9 @@ public abstract class BaseBlockHarshenSingleInventory extends Block implements I
 			if(tileEntity instanceof BaseTileEntityHarshenSingleItemInventory)
 				if(((BaseTileEntityHarshenSingleItemInventory)tileEntity).canAddItem() && Item.getItemFromBlock(Blocks.AIR) != item.getItem())
 				{
-					playerIn.setHeldItem(hand, new ItemStack(item.getItem(), item.getCount()-1, item.getMetadata(), item.serializeNBT()));
-					((BaseTileEntityHarshenSingleItemInventory)tileEntity).setItem(item);
+					if(((BaseTileEntityHarshenSingleItemInventory)tileEntity).setItem(item))
+						playerIn.setHeldItem(hand, new ItemStack(item.getItem(), item.getCount()-1, item.getMetadata(), item.serializeNBT()));
+					
 				}
 				else if (((BaseTileEntityHarshenSingleItemInventory) tileEntity).hasItem())
 				{
@@ -69,6 +70,16 @@ public abstract class BaseBlockHarshenSingleInventory extends Block implements I
 				
 		}
 		return true;
+	}
+	
+	@Override
+	public boolean isFullCube(IBlockState state) {
+		return false;
+	}
+	
+	@Override
+	public boolean isOpaqueCube(IBlockState state) {
+		return false;
 	}
 
 }

@@ -27,7 +27,7 @@ import net.minecraftforge.items.ItemStackHandler;
 
 public class TileEntityHarshenDimensionalPedestal extends BaseTileEntityHarshenSingleItemInventory
 {
-	private int rotation = 0, activeTimer = 0;
+	int activeTimer = 0;
 	public static ArrayList<BlockPos> positionsOfGo = new ArrayList<BlockPos>(); 
 	private boolean isActive = false;
 	
@@ -48,16 +48,10 @@ public class TileEntityHarshenDimensionalPedestal extends BaseTileEntityHarshenS
 	}
 	
 	@Override
-	public void update() {
+	public void tick() {
 		boolean flag = handler.getStackInSlot(0).getItem() == Item.getItemFromBlock(Blocks.AIR);
-		if(!flag)
-		{
-			if(hasItem)
-				checkForCompleation();
-			rotation += 6;
-		}
-		else
-			rotation = 0;
+		if(flag)
+			timer = 0;
 		if(flag != hasItem)
 		{
 			hasItem = flag;
@@ -149,11 +143,6 @@ public class TileEntityHarshenDimensionalPedestal extends BaseTileEntityHarshenS
 	public ItemStack getItem()
 	{
 		return handler.getStackInSlot(0);
-	}
-	
-	public int getRotation()
-	{
-		return rotation;
 	}
 	
 	public boolean isActive()
