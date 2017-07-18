@@ -19,6 +19,7 @@ public abstract class BaseTileEntityHarshenSingleItemInventory extends BaseHarsh
 	protected final ItemStackHandler handler;
 	protected boolean hasItem = false;
 	protected int timer;
+	private int dirtyTimer;
 	
 	public BaseTileEntityHarshenSingleItemInventory(){
 		this.handler = new ItemStackHandler(1);
@@ -30,6 +31,9 @@ public abstract class BaseTileEntityHarshenSingleItemInventory extends BaseHarsh
 	{
 		timer ++;
 		tick();
+		if(dirtyTimer++ % 10 == 0)
+			dirty();
+		
 	}
 	
 	public int getTimer()
@@ -41,6 +45,8 @@ public abstract class BaseTileEntityHarshenSingleItemInventory extends BaseHarsh
 	{
 		
 	}
+	
+	
 	
 	
 	public boolean canAddItem()
