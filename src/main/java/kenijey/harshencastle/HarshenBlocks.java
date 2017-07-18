@@ -22,6 +22,7 @@ import kenijey.harshencastle.blocks.HarshenHiddenPlate;
 import kenijey.harshencastle.blocks.HarshenHiddenPlateActive;
 import kenijey.harshencastle.blocks.HarshenSoulFlower;
 import kenijey.harshencastle.blocks.HarshenSoulOre;
+import kenijey.harshencastle.blocks.HarshenSpawner;
 import kenijey.harshencastle.blocks.HereticCauldron;
 import kenijey.harshencastle.blocks.HereticCauldronTop;
 import kenijey.harshencastle.blocks.ItiumOre;
@@ -65,6 +66,7 @@ public class HarshenBlocks {
 	public static Block heretic_cauldron_top;
 	public static Block blood_block;
 	public static Block pontus_dead_leaves;
+	public static Block harshen_spawner;
 	
 	public static BlockCrops crop_of_gleam;
 
@@ -101,6 +103,7 @@ public class HarshenBlocks {
 		blood_block = new BloodBlock();
 		pontus_dead_wood = new PontusDeadWood();
 		pontus_dead_leaves = new PontusDeadLeaves();
+		harshen_spawner = new HarshenSpawner();
 	}
 
 	public static void reg() {
@@ -115,6 +118,7 @@ public class HarshenBlocks {
 		regBlock(harshen_display_block, 64);
 		regBlock(harshen_dimensional_dirt, 64);
 		regBlock(harshen_dimensional_gate, 1);
+		regBlock(harshen_spawner, 64);
 		regBlock(pontus_dead_wood, 64);
 		regBlock(pontus_dead_leaves, 64);
 		regBlock(heretic_cauldron, 64);
