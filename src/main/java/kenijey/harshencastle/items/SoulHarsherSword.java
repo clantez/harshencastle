@@ -26,12 +26,6 @@ public class SoulHarsherSword extends ItemSword
 	}
 	
 	@Override
-	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
-		((EntityLivingBase)entity).addPotionEffect(new PotionEffect(Potion.getPotionById(20), 150, 1));
-		return super.onLeftClickEntity(stack, player, entity);
-	}
-	
-	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 		tooltip.add(new TextComponentTranslation(" ").getFormattedText());
 		tooltip.add("\u00A73" + new TextComponentTranslation("sword1").getFormattedText());

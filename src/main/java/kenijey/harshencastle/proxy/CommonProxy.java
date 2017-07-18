@@ -10,11 +10,14 @@ import kenijey.harshencastle.biomes.HarshenBiomes;
 import kenijey.harshencastle.dimensions.HarshenDimensions;
 import kenijey.harshencastle.entity.HarshenEntities;
 import kenijey.harshencastle.fluids.HarshenFluids;
+import kenijey.harshencastle.handlers.HandlerSoulHarsherSword;
 import kenijey.harshencastle.items.Recipes;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDimensionalPedestal;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDisplayBlock;
 import kenijey.harshencastle.tileentity.TileEntityHereticCauldron;
 import net.minecraft.block.Block;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -53,6 +56,14 @@ public class CommonProxy
     	Recipes.init();
     	
     	GameRegistry.registerWorldGenerator(new WorldGen(100), 0);
+    	
+    	Object[] handlers = {new HandlerSoulHarsherSword()};
+    	for(Object o : handlers)
+    	{
+    		MinecraftForge.EVENT_BUS.register(o);
+        	FMLCommonHandler.instance().bus().register(o);
+    	}
+    	
     }
 
     public void postInit(FMLPostInitializationEvent event) 
