@@ -29,6 +29,7 @@ public abstract class BaseTileEntityHarshenSingleItemInventory extends BaseHarsh
 	public void update()
 	{
 		timer ++;
+		tick();
 	}
 	
 	public int getTimer()

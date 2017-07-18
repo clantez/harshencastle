@@ -14,7 +14,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class RendererHarshenDisplayBlock extends TileEntitySpecialRenderer<TileEntityHarshenDisplayBlock>
 {
 	
-	public static EntityItem ITEM = new EntityItem(Minecraft.getMinecraft().world, 0, 0, 0, new ItemStack(Blocks.STONE));
+	public static EntityItem ITEM;
 	
 	@SideOnly(Side.CLIENT)
 	@Override

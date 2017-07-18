@@ -16,7 +16,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class RendererHereticCauldron extends TileEntitySpecialRenderer<TileEntityHereticCauldron>
 {
 	
-	public static EntityItem ITEM = new EntityItem(Minecraft.getMinecraft().world, 0, 0, 0, new ItemStack(Blocks.STONE));
+	public static EntityItem ITEM;
 	private boolean switched = false, switchedItem = false;
 	public boolean finished = false;
 	

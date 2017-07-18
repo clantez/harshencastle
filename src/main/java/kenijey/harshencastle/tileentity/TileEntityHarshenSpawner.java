@@ -2,12 +2,11 @@ package kenijey.harshencastle.tileentity;
 
 import kenijey.harshencastle.base.BaseTileEntityHarshenSingleItemInventory;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemMonsterPlacer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 public class TileEntityHarshenSpawner extends BaseTileEntityHarshenSingleItemInventory
@@ -16,7 +15,6 @@ public class TileEntityHarshenSpawner extends BaseTileEntityHarshenSingleItemInv
 	
 	public EntityLivingBase getEntity(ItemStack stack)
 	{
-		System.out.println(stack);
 		if(stack.getItem() == Item.getItemFromBlock(Blocks.AIR))
 		{
 			this.entity = null;
@@ -31,14 +29,22 @@ public class TileEntityHarshenSpawner extends BaseTileEntityHarshenSingleItemInv
 		}
 		return this.entity;
 	}
-
+	
 	@Override
-	public boolean setItem(ItemStack item) {
-		if(item.getItem() instanceof ItemMonsterPlacer && getEntity(item) != null)
-		{
-			return super.setItem(item);
-		}
-		return false;
-			
+	protected void tick() 
+	{
+		EntityPlayer player = world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 10, false);
+		if(player != null && !player.capabilities.isCreativeMode)
+			activate(player);
+	}
+	
+	private void activate(EntityPlayer player)
+	{
+		if(this.entity == null)
+			getEntity(getItem());
+		this.entity.setPosition(pos.getX(), pos.getY(), pos.getZ());
+		this.entity.setRotationYawHead(player.getPosition().subtract(pos).getY());
+		world.spawnEntity(this.entity);
+		world.setBlockToAir(pos);
 	}
 }

@@ -4,6 +4,7 @@ import kenijey.harshencastle.tileentity.TileEntityHarshenDimensionalPedestal;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -13,7 +14,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class RendererDimensionalPedestal extends TileEntitySpecialRenderer<TileEntityHarshenDimensionalPedestal>
 {
 	
-	public static EntityItem ITEM = new EntityItem(Minecraft.getMinecraft().world, 0, 0, 0, new ItemStack(Blocks.STONE));
+	public static EntityItem ITEM;
+	public static Entity ENTITY;
 	
 	@SideOnly(Side.CLIENT)
 	@Override
