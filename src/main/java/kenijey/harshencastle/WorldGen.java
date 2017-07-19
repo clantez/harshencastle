@@ -5,12 +5,18 @@ import java.util.Random;
 import kenijey.harshencastle.dimensions.DimensionPontus;
 import kenijey.harshencastle.worldgenerators.pontus.PontusWorldGeneratorIniumOre;
 import net.minecraft.block.BlockFlower;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraft.world.gen.structure.template.PlacementSettings;
+import net.minecraft.world.gen.structure.template.Template;
+import net.minecraft.world.gen.structure.template.TemplateManager;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 public class WorldGen implements IWorldGenerator
@@ -31,6 +37,8 @@ public class WorldGen implements IWorldGenerator
 		int dim = world.provider.getDimension();
 		if(dim == 0)
 		{
+			if(chunkX == 44 && chunkZ == 44)
+				loadStructure(world, "harshencastlevol1",world.getTopSolidOrLiquidBlock(new BlockPos(chunkX * 16, 1, chunkX * 16)).add(-36, -20, 1));
 			oreGenerator(this.soulore, world, random, chunkX, chunkZ, 10, 0, 20);
 	    	flowerGenerator(HarshenBlocks.harshen_soul_flower, world, random, chunkX, chunkZ, 15);
 	    	flowerGenerator(HarshenBlocks.plant_of_gleam, world, random, chunkX, chunkZ, 15);
@@ -52,6 +60,12 @@ public class WorldGen implements IWorldGenerator
 	        int z = chunk_Z * 16 + rand.nextInt(16);
 	        generator.generate(world, rand, new BlockPos(x, y, z));
 	    }
+	}
+	
+	private void loadStructure(World world, String name, BlockPos pos)
+	{
+		((WorldServer)world).getStructureTemplateManager().get(world.getMinecraftServer(), new ResourceLocation(HarshenCastle.MODID, name))
+		.addBlocksToWorld(world, pos, new PlacementSettings().setIgnoreEntities(false).setIgnoreStructureBlock(false));
 	}
 	
 	
