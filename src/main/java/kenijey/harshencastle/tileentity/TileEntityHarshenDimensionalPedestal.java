@@ -79,10 +79,17 @@ public class TileEntityHarshenDimensionalPedestal extends BaseTileEntityHarshenS
 					if(rem == null)
 						break;
 				}
-				positionsOfGo.remove(rem);
+				if(!world.isRemote)
+					positionsOfGo.remove(rem);
 			}
 	}
 	
+	@Override
+	public boolean setItem(ItemStack item) {
+		super.setItem(item);
+		checkForCompleation();
+		return true;
+	}
 
 	private void checkForCompleation()
 	{

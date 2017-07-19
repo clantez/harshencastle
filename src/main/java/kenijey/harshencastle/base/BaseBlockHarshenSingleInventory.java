@@ -48,28 +48,22 @@ public abstract class BaseBlockHarshenSingleInventory extends Block implements I
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
 		ItemStack item = playerIn.getHeldItem(hand);
-		if(!worldIn.isRemote)
-		{
-			TileEntity tileEntity = worldIn.getTileEntity(pos);
-			if(tileEntity instanceof BaseTileEntityHarshenSingleItemInventory)
-				if(((BaseTileEntityHarshenSingleItemInventory)tileEntity).canAddItem() && Item.getItemFromBlock(Blocks.AIR) != item.getItem())
-				{
-					int i =  item.getCount() - 1;
-					if(((BaseTileEntityHarshenSingleItemInventory)tileEntity).setItem(item))
-						playerIn.setHeldItem(hand, new ItemStack(item.getItem(), i, item.getMetadata(), item.serializeNBT()));
-					
-				}
-				else if (((BaseTileEntityHarshenSingleItemInventory) tileEntity).hasItem())
-				{
-					ItemStack stack = ((BaseTileEntityHarshenSingleItemInventory)tileEntity).getItem();
-					((BaseTileEntityHarshenSingleItemInventory)tileEntity).delItem();
-					InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY() + 0.7f, pos.getZ(), stack);
-				}
-
-
-
+		TileEntity tileEntity = worldIn.getTileEntity(pos);
+		if(tileEntity instanceof BaseTileEntityHarshenSingleItemInventory)
+			if(((BaseTileEntityHarshenSingleItemInventory)tileEntity).canAddItem() && Item.getItemFromBlock(Blocks.AIR) != item.getItem())
+			{
+				int i =  item.getCount() - 1;
+				if(((BaseTileEntityHarshenSingleItemInventory)tileEntity).setItem(item))
+					playerIn.setHeldItem(hand, new ItemStack(item.getItem(), i, item.getMetadata(), item.serializeNBT()));
 				
-		}
+			}
+			else if (((BaseTileEntityHarshenSingleItemInventory) tileEntity).hasItem())
+			{
+				ItemStack stack = ((BaseTileEntityHarshenSingleItemInventory)tileEntity).getItem();
+				((BaseTileEntityHarshenSingleItemInventory)tileEntity).delItem();
+				InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY() + 0.7f, pos.getZ(), stack);
+			}
+
 		return true;
 	}
 	
