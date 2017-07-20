@@ -4,7 +4,9 @@ import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.armor.HarshenArmors;
+import kenijey.harshencastle.entity.EntitySoulPart;
 import kenijey.harshencastle.entity.EntitySoullessKnight;
+import kenijey.harshencastle.entityrender.RenderSoulPart;
 import kenijey.harshencastle.entityrender.RenderSoullessKnight;
 import kenijey.harshencastle.itemrenderer.RendererDimensionalPedestal;
 import kenijey.harshencastle.itemrenderer.RendererHarshenDisplayBlock;
@@ -66,15 +68,8 @@ public class ClientProxy extends CommonProxy
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHarshenSpawner.class, new RendererHarshenSpawner());
 		
 		
-		RenderingRegistry.registerEntityRenderingHandler(EntitySoullessKnight.class, new IRenderFactory<Entity>() 
-		{
-
-			@Override
-			public Render<? super Entity> createRenderFor(RenderManager manager) {
-				return new RenderSoullessKnight(manager);
-			}
-	
-		});
+		RenderingRegistry.registerEntityRenderingHandler(EntitySoullessKnight.class, EntitySoullessKnight.FACTORY);
+		RenderingRegistry.registerEntityRenderingHandler(EntitySoulPart.class, EntitySoulPart.FACTORY);
     }
     
     

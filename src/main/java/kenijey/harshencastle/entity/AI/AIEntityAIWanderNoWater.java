@@ -8,16 +8,16 @@ import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.entity.ai.RandomPositionGenerator;
 import net.minecraft.util.math.Vec3d;
 
-public class EntityAIWanderNoWater extends EntityAIWanderAvoidWater
+public class AIEntityAIWanderNoWater extends EntityAIWanderAvoidWater
 {
 	protected final float probability;
 
-    public EntityAIWanderNoWater(EntityCreature creature, double speed)
+    public AIEntityAIWanderNoWater(EntityCreature creature, double speed)
     {
         this(creature, speed, 0.001F);
     }
 
-    public EntityAIWanderNoWater(EntityCreature creature, double speed, float probalitity)
+    public AIEntityAIWanderNoWater(EntityCreature creature, double speed, float probalitity)
     {
         super(creature, speed);
         this.probability = probalitity;
@@ -31,7 +31,7 @@ public class EntityAIWanderNoWater extends EntityAIWanderAvoidWater
             {
                 return false;
             }
-            if (this.entity.getRNG().nextInt(10) != -1)
+            if (this.entity.getRNG().nextInt(10) != 0)
             {
                 return false;
             }
