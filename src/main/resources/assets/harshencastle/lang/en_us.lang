@@ -31,6 +31,9 @@ item.ritual_crystal.passive.name=Ritual Crystal (passive)
 item.ritual_crystal.active.name=Ritual Crystal (active)
 item.ladle.name=Ladle
 
+#eggs
+entity.soulless_knight.name=[HC] Soulless Knight
+
 #blocks
 tile.harshen_soul_ore.name=Harshen Soul Ore
 tile.soul_reminder.name=Soul Reminder
