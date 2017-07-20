@@ -5,7 +5,7 @@ import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.HarshenSounds;
 import kenijey.harshencastle.WorldGen;
-import kenijey.harshencastle.armor.HarshenArmor;
+import kenijey.harshencastle.armor.HarshenArmors;
 import kenijey.harshencastle.biomes.HarshenBiomes;
 import kenijey.harshencastle.dimensions.HarshenDimensions;
 import kenijey.harshencastle.entity.HarshenEntities;
@@ -36,8 +36,8 @@ public class CommonProxy
 		HarshenBlocks.reg();
 		HarshenItems.reg();
 		
-		HarshenArmor.init();
-		HarshenArmor.register();
+		HarshenArmors.init();
+		HarshenArmors.register();
 		
 		HarshenDimensions.register();
 		

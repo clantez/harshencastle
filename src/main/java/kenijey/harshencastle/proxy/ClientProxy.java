@@ -3,7 +3,7 @@ package kenijey.harshencastle.proxy;
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.HarshenItems;
-import kenijey.harshencastle.armor.HarshenArmor;
+import kenijey.harshencastle.armor.HarshenArmors;
 import kenijey.harshencastle.entity.EntitySoullessKnight;
 import kenijey.harshencastle.entityrender.RenderSoullessKnight;
 import kenijey.harshencastle.itemrenderer.RendererDimensionalPedestal;
@@ -58,7 +58,7 @@ public class ClientProxy extends CommonProxy
     	
 		HarshenItems.regRenders();
 		
-		HarshenArmor.regRenders();
+		HarshenArmors.regRenders();
 		
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHarshenDimensionalPedestal.class, new RendererDimensionalPedestal());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHereticCauldron.class, new RendererHereticCauldron());
