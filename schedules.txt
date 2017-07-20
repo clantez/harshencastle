@@ -81,12 +81,19 @@ HARSHEN STUNSHIP
 -has same gate parts in castle
 
 HARSHEN GIGANTIC CAVE
--has the boss Harshen Dimensional Golem
+-has the boss Harshen Rock Golem
 -has NO gate part
 -spawns not only 1 time, spawns all over the world infinite
 -has only 1 custom mob(Golem Part) except the golem boss
 -4. structure in world
 -made from HD rock
+
+HARSHEN LOST CITY
+-5. structure in world
+-has no gate part
+-spawns infinite times in world
+-spawns like SAME AS Ocean monument (that has Guardian(vanilla) mobs, in the ocean)
+-has the boss Atlantic Golem
 
 BLOODY MARY'S HORROR HOUSE
 -has scary paintings (custom)
