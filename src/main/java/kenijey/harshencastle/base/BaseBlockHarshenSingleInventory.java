@@ -62,7 +62,8 @@ public abstract class BaseBlockHarshenSingleInventory extends Block implements I
 			{
 				ItemStack stack = ((BaseTileEntityHarshenSingleItemInventory)tileEntity).getItem();
 				((BaseTileEntityHarshenSingleItemInventory)tileEntity).delItem();
-				InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY() + 0.7f, pos.getZ(), stack);
+				if(!worldIn.isRemote)
+					InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY() + 0.7f, pos.getZ(), stack);
 			}
 
 		return true;
