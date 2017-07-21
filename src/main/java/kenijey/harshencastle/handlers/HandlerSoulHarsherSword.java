@@ -22,8 +22,6 @@ public class HandlerSoulHarsherSword
 	{
 		try
 		{
-			System.out.println();
-
 			if((event.getSource() instanceof EntityDamageSource && ((EntityDamageSource)event.getSource()).getTrueSource() instanceof EntityLivingBase
 					&& Arrays.asList(new ItemStack(HarshenItems.props, 1, 0).getItem(), new ItemStack(HarshenItems.soul_harsher_sword).getItem())
 					.contains(((EntityLivingBase)((EntityDamageSource)event.getSource()).getTrueSource()).getHeldItemMainhand().getItem())

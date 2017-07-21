@@ -3,7 +3,7 @@ package kenijey.harshencastle.entity;
 import java.util.Random;
 
 import kenijey.harshencastle.HarshenItems;
-import kenijey.harshencastle.entity.AI.AIEntityAIWanderNoWater;
+import kenijey.harshencastle.entity.AI.AIEntityWanderNoWater;
 import kenijey.harshencastle.entityrender.RenderSoullessKnight;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -38,7 +38,7 @@ public class EntitySoullessKnight extends EntityMob
 		this.tasks.addTask(0, new EntityAISwimming(this));
 		this.tasks.addTask(0, new EntityAIAttackMelee(this, 1d, true));
 		this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntityEnderman.class, 50f, 1d, 2d));
-		this.tasks.addTask(0, new AIEntityAIWanderNoWater(this, 1d, 0));
+		this.tasks.addTask(0, new AIEntityWanderNoWater(this, 1d, 0));
 		this.tasks.addTask(0, new EntityAIMoveTowardsTarget(this, 1d, 100));
 		
 		this.targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
@@ -58,7 +58,7 @@ public class EntitySoullessKnight extends EntityMob
 	
 	@Override
 	public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData livingdata) {
-		setItemStackToSlot(this.isLeftHanded() ? EntityEquipmentSlot.OFFHAND : EntityEquipmentSlot.MAINHAND, new ItemStack(HarshenItems.soul_harsher_sword));
+		setItemStackToSlot(this.isLeftHanded() ? EntityEquipmentSlot.OFFHAND : EntityEquipmentSlot.MAINHAND, new ItemStack(HarshenItems.props, 1, 0));
 		setItemStackToSlot(this.isLeftHanded() ? EntityEquipmentSlot.MAINHAND : EntityEquipmentSlot.OFFHAND, new ItemStack(Items.SHIELD));
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).applyModifier(new AttributeModifier("Random spawn bonus", this.rand.nextGaussian() * 0.05D, 1));
         this.setLeftHanded(false);
