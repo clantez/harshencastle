@@ -1,25 +1,31 @@
 package kenijey.harshencastle.blocks;
 
 import java.util.List;
+import java.util.Random;
 
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.dimensions.DimensionPontus;
 import kenijey.harshencastle.items.PontusWorldGateSpawner;
+import kenijey.harshencastle.tileentity.TileEntityHarshenDimensionalGate;
 import net.minecraft.block.Block;
+import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.server.SPacketEntityEffect;
 import net.minecraft.network.play.server.SPacketPlayerAbilities;
 import net.minecraft.network.play.server.SPacketRespawn;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -29,7 +35,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 
-public class HarshenDimensionalGate extends Block
+public class HarshenDimensionalGate extends Block implements ITileEntityProvider
 {
 
 	public static final PropertyBool ACTIVE = PropertyBool.create("active");
@@ -40,7 +46,14 @@ public class HarshenDimensionalGate extends Block
 		super(Material.ROCK);
 		setRegistryName("harshen_dimensional_gate");
 		setUnlocalizedName("harshen_dimensional_gate");
-		this.setDefaultState(this.blockState.getBaseState().withProperty(ACTIVE, Boolean.valueOf(false)));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(ACTIVE, false).withProperty(FOREVER, false));
+	}
+	
+	public void deactivate(World worldIn, BlockPos pos)
+	{
+		System.out.println("k");
+		worldIn.setBlockState(pos, this.getDefaultState(), 3);
+		//sound?
 	}
 	
 	@Override
@@ -175,18 +188,23 @@ public class HarshenDimensionalGate extends Block
 	
 	public IBlockState getStateFromMeta(int meta)
     {
-        return this.getDefaultState().withProperty(ACTIVE, Boolean.valueOf(meta == 1));
+        return this.getDefaultState().withProperty(ACTIVE, Boolean.valueOf(Math.floorDiv(meta, 2) == 1)).withProperty(FOREVER, meta % 2 == 0);
     }
 
     public int getMetaFromState(IBlockState state)
     {
-        return ((Boolean)state.getValue(ACTIVE)).booleanValue() ? 1 : 0;
+        return (((Boolean)state.getValue(FOREVER)).booleanValue() ? 1 : 0) + (((Boolean)state.getValue(ACTIVE)).booleanValue() ? 2 : 0);
     }
     
 
     protected BlockStateContainer createBlockState()
     {
-        return new BlockStateContainer(this, new IProperty[] {ACTIVE});
+        return new BlockStateContainer(this, new IProperty[] {ACTIVE, FOREVER});
     }
+
+	@Override
+	public TileEntity createNewTileEntity(World worldIn, int meta) {
+		return new TileEntityHarshenDimensionalGate();
+	}
 
 }
