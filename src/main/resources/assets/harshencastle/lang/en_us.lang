@@ -15,10 +15,11 @@ item.harshen_jaguar_armor_chestplate.name=Harshen Jaguar Armor Chestplate
 item.harshen_jaguar_armor_leggings.name=Harshen Jaguar Armor Leggings
 item.harshen_jaguar_armor_boots.name=Harshen Jaguar Armor Boots
 item.harshen_dimensional_fluid_bucket.name=Harshen Dimensional Fluid Bucket
-item.pontus_world_gate_part_1.name=Pontus World Gate Spawner First Part
-item.pontus_world_gate_part_2.name=Pontus World Gate Spawner Second Part
-item.pontus_world_gate_part_3.name=Pontus World Gate Spawner Third Part
-item.pontus_world_gate_spawner.name=Pontus World Gate Spawner
+item.pontus_world_gate_part.1.name=Pontus World Gate Spawner First Part
+item.pontus_world_gate_part.2.name=Pontus World Gate Spawner Second Part
+item.pontus_world_gate_part.3.name=Pontus World Gate Spawner Third Part
+item.pontus_world_gate_spawner.normal.name=Pontus World Gate Spawner
+item.pontus_world_gate_spawner.enhanced.name=Enhanced Pontus World Gate Spawner
 item.light_emitted_seed.name=Light Emitted Seed
 item.light_emitted_essence.name=Light Emitted Essence
 item.blood_collector.0.name=Blood Collector (empty)
@@ -30,9 +31,11 @@ item.blood_collector.5.name=Blood Collector (full)
 item.ritual_crystal.passive.name=Ritual Crystal (passive)
 item.ritual_crystal.active.name=Ritual Crystal (active)
 item.ladle.name=Ladle
+item.prop.knight_sword.name=Soulless Knight Sword Prop
 
-#eggs
+#entities
 entity.soulless_knight.name=[HC] Soulless Knight
+entity.soul_part.name=[HC] Soul Part
 
 #blocks
 tile.harshen_soul_ore.name=Harshen Soul Ore
@@ -87,8 +90,8 @@ sword2=of Kazzendre
 sword3=Drains the soul
 sword4=of the target you hit
 itium1=Very expensive matter.
-itium2=Not craftable, not belongs
-itium3=to the earth.
+itium2=Not craftable, nor belongs
+itium3=to this earth.
 earring1=Regenerates 1 heart
 earring2=every 10 seconds
 pickaxe1=A pickaxe used to
@@ -100,8 +103,10 @@ ore2=if broken without
 ore3=Soul Harsher Pickaxe
 gatepart1=A part of the gate that
 gatepart2=opens to Pontus World
-gatespawner1=Opens the Gate
-gatespawner2=of the Pontus World
+gatespawner1=Opens a temporary Gate
+gatespawner2=to the Pontus World
+gatespawnerenhanced1=Opens a permanent Gate
+gatespawnerenhanced2=to the Pontus World
 seed1=Plantable only on
 seed2=Harshen Dimensional Dirt
 
