@@ -33,6 +33,8 @@ public class HarshenDimensionalGate extends Block
 {
 
 	public static final PropertyBool ACTIVE = PropertyBool.create("active");
+	public static final PropertyBool FOREVER = PropertyBool.create("forever");
+
 	
 	public HarshenDimensionalGate() {
 		super(Material.ROCK);
@@ -71,8 +73,6 @@ public class HarshenDimensionalGate extends Block
 					else
 						transferPlayerToDimension((EntityPlayerMP) playerIn, DimensionPontus.DIMENSION_ID, true, pos);
 			}
-			else if(playerIn.getHeldItemMainhand().getItem() instanceof PontusWorldGateSpawner || (playerIn.getHeldItemMainhand().getItem().equals(Item.getItemFromBlock(Blocks.AIR)) && playerIn.getHeldItemOffhand().getItem() instanceof PontusWorldGateSpawner))
-				worldIn.setBlockState(pos, getStateFromMeta(1), 3);
 		return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
 	}
 	

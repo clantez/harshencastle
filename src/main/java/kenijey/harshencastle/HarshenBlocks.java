@@ -2,6 +2,8 @@ package kenijey.harshencastle;
 
 import java.util.ArrayList;
 
+import com.mojang.authlib.properties.Property;
+
 import kenijey.harshencastle.blocks.BloodBlock;
 import kenijey.harshencastle.blocks.CropOfGleam;
 import kenijey.harshencastle.blocks.HarshenDestroyedPlant;
@@ -34,14 +36,20 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.block.BlockLog;
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class HarshenBlocks {
 	private static ArrayList<Block> blocksWithItems = new ArrayList<Block>();
+	private static ArrayList<Block> blocksWithCustomStateMap = new ArrayList<Block>();
+	private static ArrayList<IProperty<?>[]> propertiesToIgnoreCustomStateMap = new ArrayList<IProperty<?>[]>();
 	
 	public static Block harshen_soul_ore;
 	public static Block harshen_dimensional_stone;
@@ -117,7 +125,7 @@ public class HarshenBlocks {
 		regBlock(harshen_dimensional_wood_crate, 64);
 		regBlock(harshen_display_block, 64);
 		regBlock(harshen_dimensional_dirt, 64);
-		regBlock(harshen_dimensional_gate, 1);
+		regBlock(harshen_dimensional_gate, 1, HarshenDimensionalGate.FOREVER);
 		regBlock(harshen_spawner, 64);
 		regBlock(pontus_dead_wood, 64);
 		regBlock(pontus_dead_leaves, 64);
@@ -134,11 +142,13 @@ public class HarshenBlocks {
 		
 		regSingleBlock(heretic_cauldron_top);
 		regSingleBlock(crop_of_gleam);
-		regSingleBlock(harshen_dimensional_door);
+		regSingleBlock(harshen_dimensional_door, HarshenDimensionalDoor.POWERED);
 		regSingleBlock(harshen_hidden_plate_active);
 	}
 
 	public static void regRenders() {
+		for(int i = 0; i < blocksWithCustomStateMap.size(); i++)
+			createStateMappers(blocksWithCustomStateMap.get(i), propertiesToIgnoreCustomStateMap.get(i));
 		for(Block b : blocksWithItems)
 			regRender(b);
 	}
@@ -152,8 +162,28 @@ public class HarshenBlocks {
 		ForgeRegistries.ITEMS.register(item);
 	}
 	
+	public static void regBlock(Block block, int stackSize, IProperty<?>... toIgnore)
+	{
+		blocksWithCustomStateMap.add(block);
+		propertiesToIgnoreCustomStateMap.add(toIgnore);
+		regBlock(block, stackSize);
+	}
+	
+	@SideOnly(Side.CLIENT)
+	public static void createStateMappers(Block block, IProperty<?>[] toIgnore)
+	{
+		ModelLoader.setCustomStateMapper(block, (new StateMap.Builder().ignore(toIgnore)).build());
+	}
+	
 	public static void regSingleBlock(Block block)
 	{
+		ForgeRegistries.BLOCKS.register(block);
+	}
+	
+	public static void regSingleBlock(Block block,  IProperty<?>... toIgnore)
+	{
+		blocksWithCustomStateMap.add(block);
+		propertiesToIgnoreCustomStateMap.add(toIgnore);
 		ForgeRegistries.BLOCKS.register(block);
 	}
 
