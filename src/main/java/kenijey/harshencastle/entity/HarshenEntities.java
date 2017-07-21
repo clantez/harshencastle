@@ -16,7 +16,6 @@ public class HarshenEntities
 	
 	public static void init()
 	{
-		registerEntity(EntitySoullessKnight.class, EntitySoullessKnight.id() ,"soulless_knight", 0xa62323, 0xaed1515);
 		registerEntity(EntitySoulPart.class, EntitySoulPart.id(), "soul_part", 0xa62323, 0xaed1515);
 	}
 	
