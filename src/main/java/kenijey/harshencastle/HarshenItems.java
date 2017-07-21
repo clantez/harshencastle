@@ -2,8 +2,8 @@ package kenijey.harshencastle;
 
 import java.util.ArrayList;
 
-import kenijey.harshencastle.enums.items.EnumBloodCollectorHandler.BloodLevels;
-import kenijey.harshencastle.enums.items.EnumRitualCrystalItemHandler.CrystalAcive;
+import kenijey.harshencastle.enums.items.EnumBloodCollector;
+import kenijey.harshencastle.enums.items.EnumRitualCrystal;
 import kenijey.harshencastle.items.BloodCollector;
 import kenijey.harshencastle.items.BloodEssence;
 import kenijey.harshencastle.items.BloodyEarring;
@@ -96,8 +96,8 @@ public class HarshenItems
 		regItem(light_emitted_seed,16);
 		regItem(ladle,1);
 		
-		regMetaItem(blood_collector, 1, BloodLevels.getNames(), "blood_collector_");
-		regMetaItem(ritual_crystal, CrystalAcive.getNames(), "ritual_crystal_");
+		regMetaItem(blood_collector, 1, EnumBloodCollector.getNames(), "blood_collector_");
+		regMetaItem(ritual_crystal, EnumRitualCrystal.getNames(), "ritual_crystal_");
 	}
 	
 	public static ArrayList<Item> items = new ArrayList<Item>();

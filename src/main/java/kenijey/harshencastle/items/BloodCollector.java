@@ -3,7 +3,7 @@ package kenijey.harshencastle.items;
 import java.util.List;
 
 import kenijey.harshencastle.HarshenCastle;
-import kenijey.harshencastle.enums.items.EnumBloodCollectorHandler.BloodLevels;
+import kenijey.harshencastle.enums.items.EnumBloodCollector;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -33,10 +33,10 @@ public class BloodCollector extends Item
 	@Override
 	public String getUnlocalizedName(ItemStack stack) 
 	{
-		for(int i = 0; i < BloodLevels.values().length; i ++)
+		for(int i = 0; i < EnumBloodCollector.values().length; i ++)
 			if(stack.getItemDamage() == i)
-				return this.getUnlocalizedName() + "." + BloodLevels.values()[i].getName();
-		return this.getUnlocalizedName() + "." + BloodLevels.ZERO.getName();
+				return this.getUnlocalizedName() + "." + EnumBloodCollector.values()[i].getName();
+		return this.getUnlocalizedName() + "." + EnumBloodCollector.ZERO.getName();
 	}
 	
 	public boolean fill(World world, EntityPlayer player, EnumHand hand, int amount)
@@ -90,9 +90,9 @@ public class BloodCollector extends Item
 	
 	private int metaChange(NBTTagCompound nbt)
 	{
-		for(int i = 0; i < BloodLevels.values().length; i ++)
+		for(int i = 0; i < EnumBloodCollector.values().length; i ++)
 		{
-			if(BloodLevels.values()[i].getAmount() <= nbt.getInteger("Blood") && (i + 1 == BloodLevels.values().length || BloodLevels.values()[i + 1].getAmount() > nbt.getInteger("Blood")))
+			if(EnumBloodCollector.values()[i].getAmount() <= nbt.getInteger("Blood") && (i + 1 == EnumBloodCollector.values().length || EnumBloodCollector.values()[i + 1].getAmount() > nbt.getInteger("Blood")))
 				return i;
 		}
 		return 0;

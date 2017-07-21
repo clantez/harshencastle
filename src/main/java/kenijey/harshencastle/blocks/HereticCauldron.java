@@ -8,7 +8,7 @@ import javax.annotation.Nullable;
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.base.BaseBlockHarshenSingleInventory;
-import kenijey.harshencastle.enums.blocks.EnumHetericCauldronFluidType.EnumLiquid;
+import kenijey.harshencastle.enums.blocks.EnumHetericCauldronFluidType;
 import kenijey.harshencastle.items.BloodCollector;
 import kenijey.harshencastle.tileentity.TileEntityHereticCauldron;
 import net.minecraft.block.material.Material;
@@ -19,12 +19,10 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
@@ -45,7 +43,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class HereticCauldron extends BaseBlockHarshenSingleInventory
 {
 	
-	public static final PropertyEnum<EnumLiquid> LIQUID =  PropertyEnum.<EnumLiquid>create("liquid_type", EnumLiquid.class);
+	public static final PropertyEnum<EnumHetericCauldronFluidType> LIQUID =  PropertyEnum.<EnumHetericCauldronFluidType>create("liquid_type", EnumHetericCauldronFluidType.class);
 	public static final PropertyInteger LEVEL = PropertyInteger.create("level", 0, 3);
 	
 	protected static final AxisAlignedBB AABB_LEGS = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.3125D, 1.0D);
@@ -80,7 +78,7 @@ public class HereticCauldron extends BaseBlockHarshenSingleInventory
 		super(Material.IRON);
 		setRegistryName("heretic_cauldron");
 		setUnlocalizedName("heretic_cauldron");
-		this.setDefaultState(this.blockState.getBaseState().withProperty(LIQUID, EnumLiquid.NONE).withProperty(LEVEL, 0));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(LIQUID, EnumHetericCauldronFluidType.NONE).withProperty(LEVEL, 0));
 	}
 	
 	@Override
@@ -119,13 +117,13 @@ public class HereticCauldron extends BaseBlockHarshenSingleInventory
                          {
                              playerIn.setHeldItem(hand, new ItemStack(Items.BUCKET));
                          }
-                         setState(worldIn, pos, state.withProperty(LIQUID, EnumLiquid.getMatch(s)).withProperty(LEVEL, 3));
+                         setState(worldIn, pos, state.withProperty(LIQUID, EnumHetericCauldronFluidType.getMatch(s)).withProperty(LEVEL, 3));
                          worldIn.playSound((EntityPlayer)null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
                      }
                  }
                  return true;
         	}
-            else if (item == Items.BUCKET && state.getValue(LIQUID) != EnumLiquid.BLOOD)
+            else if (item == Items.BUCKET && state.getValue(LIQUID) != EnumHetericCauldronFluidType.BLOOD)
             {
                 if (i == 3 && !worldIn.isRemote)
                 {
@@ -142,24 +140,24 @@ public class HereticCauldron extends BaseBlockHarshenSingleInventory
                             playerIn.dropItem(FluidUtil.getFilledBucket(new FluidStack(FluidRegistry.getFluid(state.getValue(LIQUID).getName()), 1000)), false);
                         }
                     }
-                    setState(worldIn, pos, state.withProperty(LIQUID, EnumLiquid.NONE).withProperty(LEVEL, 0));
+                    setState(worldIn, pos, state.withProperty(LIQUID, EnumHetericCauldronFluidType.NONE).withProperty(LEVEL, 0));
                     worldIn.playSound((EntityPlayer)null, pos, SoundEvents.ITEM_BUCKET_FILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
                 }
 
                 return true;
             }
-            else if(item instanceof BloodCollector && (state.getValue(LIQUID) ==  EnumLiquid.BLOOD || i == 0))
+            else if(item instanceof BloodCollector && (state.getValue(LIQUID) ==  EnumHetericCauldronFluidType.BLOOD || i == 0))
             {
             	if(i != 3 && !playerIn.isSneaking() && !worldIn.isRemote)
             		if (playerIn.capabilities.isCreativeMode || (!playerIn.capabilities.isCreativeMode && ((BloodCollector)item).remove(worldIn, playerIn, hand, 3)))
                     {
             			worldIn.playSound((EntityPlayer)null, pos, SoundEvents.ITEM_BOTTLE_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
-        				setState(worldIn, pos, this.blockState.getBaseState().withProperty(LIQUID, EnumLiquid.BLOOD).withProperty(LEVEL, i + 1));
+        				setState(worldIn, pos, this.blockState.getBaseState().withProperty(LIQUID, EnumHetericCauldronFluidType.BLOOD).withProperty(LEVEL, i + 1));
 
                     }
             	return true;
             }
-            else if(item == HarshenItems.ladle && state.getValue(LIQUID) == EnumLiquid.BLOOD && i == 3 &&
+            else if(item == HarshenItems.ladle && state.getValue(LIQUID) == EnumHetericCauldronFluidType.BLOOD && i == 3 &&
             		((TileEntityHereticCauldron)worldIn.getTileEntity(pos)).getItem().getItem() == HarshenItems.ritual_crystal && 
             		((TileEntityHereticCauldron)worldIn.getTileEntity(pos)).getItem().getItemDamage() == 0)
             {
@@ -187,12 +185,12 @@ public class HereticCauldron extends BaseBlockHarshenSingleInventory
 	public IBlockState removeLayer(IBlockState state)
 	{ 
 		return HarshenBlocks.heretic_cauldron.getDefaultState().withProperty(LEVEL, Integer.valueOf(MathHelper.clamp(state.getValue(LEVEL) - 1, 0, 3)))
-				.withProperty(LIQUID, Integer.valueOf(MathHelper.clamp(state.getValue(LEVEL) - 1, 0, 3))!= 0 ? state.getValue(LIQUID) : EnumLiquid.NONE);
+				.withProperty(LIQUID, Integer.valueOf(MathHelper.clamp(state.getValue(LEVEL) - 1, 0, 3))!= 0 ? state.getValue(LIQUID) : EnumHetericCauldronFluidType.NONE);
 	}
 	
 	@Override
 	public int getMetaFromState(IBlockState state) {
-		if(state.getValue(LIQUID) == EnumLiquid.NONE || state.getValue(LEVEL) == 0)
+		if(state.getValue(LIQUID) == EnumHetericCauldronFluidType.NONE || state.getValue(LEVEL) == 0)
 			return 0;
 		return (state.getValue(LIQUID).getId() * 3) - 3 + ((Integer)state.getValue(LEVEL)).intValue();
 	}
@@ -202,7 +200,7 @@ public class HereticCauldron extends BaseBlockHarshenSingleInventory
 	public IBlockState getStateFromMeta(int meta) {
 		if(meta == 0)
 			return this.getDefaultState();
-		return this.getDefaultState().withProperty(LEVEL, ((meta - 1) % 3) + 1).withProperty(LIQUID, EnumLiquid.getMatch((int) Math.ceil(meta / 3)));
+		return this.getDefaultState().withProperty(LEVEL, ((meta - 1) % 3) + 1).withProperty(LIQUID, EnumHetericCauldronFluidType.getMatch((int) Math.ceil(meta / 3)));
 	}
 	
 	@Override
