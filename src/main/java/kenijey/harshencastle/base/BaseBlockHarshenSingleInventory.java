@@ -41,7 +41,8 @@ public abstract class BaseBlockHarshenSingleInventory extends Block implements I
 		super.breakBlock(worldIn, pos, state);
 		IItemHandler handler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
 		ItemStack stack = handler.getStackInSlot(0);
-		InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), stack);
+		if(!worldIn.isRemote)
+			InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), stack);
 	}
 	
 	@Override
