@@ -1,5 +1,6 @@
 package kenijey.harshencastle.entityrender;
 
+import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.entity.EntitySoulPart;
 import kenijey.harshencastle.models.ModelSoulPart;
 import net.minecraft.client.renderer.GlStateManager;
@@ -9,7 +10,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderSoulPart extends RenderBiped<EntitySoulPart>
 {
-    private static final ResourceLocation TEXTURE = new ResourceLocation("textures/entity/illager/vex.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(HarshenCastle.MODID, "textures/entity/soul_part.png");
     private int modelVersion;
 
     public RenderSoulPart(RenderManager p_i47190_1_)
