@@ -12,7 +12,6 @@ public class TileEntityHarshenDimensionalGate extends BaseHarshenTileEntity impl
 
 	@Override
 	public void update() {
-		System.out.println(ticksLeft);
 		if(getBlockMetadata() == 2)
 			if(ticksLeft-- == 0)
 				((HarshenDimensionalGate)world.getBlockState(pos).getBlock()).deactivate(world, pos);

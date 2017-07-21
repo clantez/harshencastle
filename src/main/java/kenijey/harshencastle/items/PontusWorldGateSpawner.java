@@ -40,7 +40,7 @@ public class PontusWorldGateSpawner extends Item
 			EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if(!worldIn.isAirBlock(pos.offset(facing)))
 			return EnumActionResult.FAIL;
-		worldIn.setBlockState(pos.offset(facing), HarshenBlocks.harshen_dimensional_gate.getDefaultState().withProperty(HarshenDimensionalGate.ACTIVE, true), 3);
+		worldIn.setBlockState(pos.offset(facing), HarshenBlocks.harshen_dimensional_gate.getStateFromMeta(3), 3);
 		if(!player.capabilities.isCreativeMode)
 			player.setHeldItem(hand, ItemStack.EMPTY);
 		return EnumActionResult.SUCCESS;
