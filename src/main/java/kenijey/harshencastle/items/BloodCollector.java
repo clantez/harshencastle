@@ -20,7 +20,6 @@ public class BloodCollector extends BaseItemMetaData
 	public BloodCollector() {
 		setRegistryName("blood_collector");
 		setUnlocalizedName("blood_collector");
-		this.setHasSubtypes(true);
 	}
 	
 	@Override

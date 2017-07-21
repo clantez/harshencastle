@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import kenijey.harshencastle.enums.items.EnumBloodCollector;
 import kenijey.harshencastle.enums.items.EnumPontusGateSpawner;
+import kenijey.harshencastle.enums.items.EnumPontusGateSpawnerParts;
 import kenijey.harshencastle.enums.items.EnumProp;
 import kenijey.harshencastle.enums.items.EnumRitualCrystal;
 import kenijey.harshencastle.items.BloodCollector;
@@ -87,13 +88,12 @@ public class HarshenItems
 		regItem(pontus_ring, 1);
 		regItem(bloody_earring, 1);
 		regItem(blood_essence, 8);
-
-		regItem(pontus_world_gate_spawner,1);
 		regItem(light_emitted_essence,8);
 		regItem(light_emitted_seed,16);
 		regItem(ladle,1);
 		
-		regMetaItem(pontus_world_gate_parts, 1, EnumPontusGateSpawner.getNames(), "pontus_world_gate_part_");
+		regMetaItem(pontus_world_gate_spawner, 1, EnumPontusGateSpawner.getNames(), "pontus_world_gate_spawner_");
+		regMetaItem(pontus_world_gate_parts, 1, EnumPontusGateSpawnerParts.getNames(), "pontus_world_gate_part_");
 		regMetaItem(props, 1, EnumProp.getNames(), "prop_");
 		regMetaItem(blood_collector, 1, EnumBloodCollector.getNames(), "blood_collector_");
 		regMetaItem(ritual_crystal, EnumRitualCrystal.getNames(), "ritual_crystal_");

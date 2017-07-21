@@ -3,7 +3,7 @@ package kenijey.harshencastle.items;
 import java.util.List;
 
 import kenijey.harshencastle.base.BaseItemMetaData;
-import kenijey.harshencastle.enums.items.EnumPontusGateSpawner;
+import kenijey.harshencastle.enums.items.EnumPontusGateSpawnerParts;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -15,9 +15,7 @@ public class PontusWorldGatePart extends BaseItemMetaData
 	public PontusWorldGatePart()
 	{
 		setUnlocalizedName("pontus_world_gate_part");
-		setRegistryName("pontus_world_gate_part");
-		setHasSubtypes(true);
-		
+		setRegistryName("pontus_world_gate_part");		
 	}
 	
 	@Override
@@ -31,7 +29,7 @@ public class PontusWorldGatePart extends BaseItemMetaData
 
 	@Override
 	protected String[] getNames() {
-		return EnumPontusGateSpawner.getNames();
+		return EnumPontusGateSpawnerParts.getNames();
 	}
 
 }

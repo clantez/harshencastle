@@ -2,15 +2,16 @@ package kenijey.harshencastle.enums.items;
 
 import net.minecraft.util.IStringSerializable;
 
-public enum EnumPontusGateSpawner implements IStringSerializable
+public enum EnumPontusGateSpawnerParts implements IStringSerializable
 {
-	Normal("normal", 0),
-	Enhanced("enhanced", 0);
+	Part1("1", 0),
+	Part2("2", 0),
+	Part3("3", 0);
 	
 	private int meta;
 	private String name;
 	
-	private EnumPontusGateSpawner(String name, int meta)
+	private EnumPontusGateSpawnerParts(String name, int meta)
 	{
 		this.name = name;
 		this.meta = meta;
@@ -34,7 +35,7 @@ public enum EnumPontusGateSpawner implements IStringSerializable
 	public static String[] getNames()
 	{
 		String s = "";
-		for(EnumPontusGateSpawner l : EnumPontusGateSpawner.values())
+		for(EnumPontusGateSpawnerParts l : EnumPontusGateSpawnerParts.values())
 			s += l.getName() + " ";
 		return s.split(" ");
 	}

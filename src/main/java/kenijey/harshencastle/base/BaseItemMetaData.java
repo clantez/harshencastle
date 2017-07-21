@@ -7,6 +7,12 @@ import net.minecraft.util.IStringSerializable;
 
 public abstract class BaseItemMetaData extends Item
 {
+	
+	public BaseItemMetaData() {
+		setHasSubtypes(true);
+	}
+	
+	
 	@Override
 	public String getUnlocalizedName(ItemStack stack) {
 		for(int i = 0; i < getNames().length; i ++)

@@ -13,7 +13,6 @@ public class HarshenProps extends BaseItemMetaData
 	{
 		setRegistryName("props");
 		setUnlocalizedName("prop");
-		setHasSubtypes(true);
 	}
 	
 	@Override
