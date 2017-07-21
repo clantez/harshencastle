@@ -51,7 +51,6 @@ public class HarshenDimensionalGate extends Block implements ITileEntityProvider
 	
 	public void deactivate(World worldIn, BlockPos pos)
 	{
-		System.out.println("k");
 		worldIn.setBlockState(pos, this.getDefaultState(), 3);
 		//sound?
 	}
@@ -77,7 +76,7 @@ public class HarshenDimensionalGate extends Block implements ITileEntityProvider
 			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) 
 	{
 		if(!worldIn.isRemote)
-			if(state == getStateFromMeta(1))
+			if(((Boolean)state.getValue(ACTIVE)).booleanValue())
 			{
 				Boolean goHome = playerIn.dimension == DimensionPontus.DIMENSION_ID;
 				if(playerIn instanceof EntityPlayerMP)
