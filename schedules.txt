@@ -47,7 +47,7 @@ Pontus World Gate (First-Second-Third) Part(s)
 
 PONTUS WORLD GATE
 -it's multiblock, made from dimensional stones and the real gate in it (small area, 3x4x5)
--will be despawn(destroyed) after 1 min after placed(only portal will be destroyed, not the structure)
+-will be despawn(destroyed) after 10 min after placed(only portal will be destroyed, not the structure)
 
 -----------ACCESSORY/ARMOR-----------
 slots:earrings(x2) pendant(x1) rings(x2) goggles(x1) //todo
