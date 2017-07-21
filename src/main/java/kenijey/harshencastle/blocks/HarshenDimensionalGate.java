@@ -1,11 +1,9 @@
 package kenijey.harshencastle.blocks;
 
 import java.util.List;
-import java.util.Random;
 
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.dimensions.DimensionPontus;
-import kenijey.harshencastle.items.PontusWorldGateSpawner;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDimensionalGate;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
@@ -18,9 +16,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.server.SPacketEntityEffect;
 import net.minecraft.network.play.server.SPacketPlayerAbilities;
 import net.minecraft.network.play.server.SPacketRespawn;
@@ -31,7 +26,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 
@@ -39,7 +33,7 @@ public class HarshenDimensionalGate extends Block implements ITileEntityProvider
 {
 
 	public static final PropertyBool ACTIVE = PropertyBool.create("active");
-	public static final PropertyBool FOREVER = PropertyBool.create("forever");
+	public static final PropertyBool FOREVER = PropertyBool.create("ignore_countdown");
 
 	
 	public HarshenDimensionalGate() {
@@ -58,7 +52,8 @@ public class HarshenDimensionalGate extends Block implements ITileEntityProvider
 	@Override
 	public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox,
 			List<AxisAlignedBB> collidingBoxes, Entity entityIn, boolean p_185477_7_) {
-		addCollisionBoxToList(pos, entityBox, collidingBoxes, new AxisAlignedBB(0.0625f, 0.0625f, 0.0625f, 0.9375f, 0.9375f, 0.9375f));
+		if(entityIn instanceof EntityLivingBase)
+			addCollisionBoxToList(pos, entityBox, collidingBoxes, new AxisAlignedBB(0.0625f, 0.0625f, 0.0625f, 0.9375f, 0.9375f, 0.9375f));
 		addCollisionBoxToList(pos, entityBox, collidingBoxes, new AxisAlignedBB(0f, 0f, 0f, 1, 0.0625, 0.0625));
 		addCollisionBoxToList(pos, entityBox, collidingBoxes, new AxisAlignedBB(0f, 0f, 0f, 0.0625, 0.0625, 1));
 		addCollisionBoxToList(pos, entityBox, collidingBoxes,  new AxisAlignedBB(0f, 0f, 0f, 0.0625, 0.0625, 1));
@@ -160,7 +155,7 @@ public class HarshenDimensionalGate extends Block implements ITileEntityProvider
             	BlockPos p = new BlockPos(pos.getX(), y, pos.getZ());
                 entityIn.setLocationAndAngles(p.getX(), p.getY(), p.getZ(), entityIn.rotationYaw, entityIn.rotationPitch);
                 if(placeBlock && !toWorldIn.getBlockState(p.add(0, -1, 0)).equals(HarshenBlocks.harshen_dimensional_gate.getDefaultState().withProperty(HarshenDimensionalGate.ACTIVE, true)))
-                	toWorldIn.setBlockState(p.add(0, -1, 0), getStateFromMeta(2), 3);
+                	toWorldIn.setBlockState(p.add(0, -1, 0), getStateFromMeta(3), 3);
                 toWorldIn.spawnEntity(entityIn);
                 toWorldIn.updateEntityWithOptionalForce(entityIn, false);
             }
@@ -187,12 +182,12 @@ public class HarshenDimensionalGate extends Block implements ITileEntityProvider
 	
 	public IBlockState getStateFromMeta(int meta)
     {
-        return this.getDefaultState().withProperty(ACTIVE, Boolean.valueOf(Math.floorDiv(meta, 2) == 1)).withProperty(FOREVER, meta % 2 == 0);
+        return this.getDefaultState().withProperty(ACTIVE, Boolean.valueOf(Math.floorDiv(meta, 2) == 1)).withProperty(FOREVER, meta % 2 == 1);
     }
 
     public int getMetaFromState(IBlockState state)
     {
-        return (((Boolean)state.getValue(FOREVER)).booleanValue() ? 1 : 0) + (((Boolean)state.getValue(ACTIVE)).booleanValue() ? 2 : 0);
+        return (((Boolean)state.getValue(FOREVER)).booleanValue() ? 1 : 0) + (((Boolean)state.getValue(ACTIVE)).booleanValue() ? 0 : 2);
     }
     
 

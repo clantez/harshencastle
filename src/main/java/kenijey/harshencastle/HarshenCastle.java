@@ -4,7 +4,6 @@ import kenijey.harshencastle.commands.CommandDelFlatPlate;
 import kenijey.harshencastle.commands.CommandFlatPlate;
 import kenijey.harshencastle.creativetabs.HarshenTab;
 import kenijey.harshencastle.dimensions.DimensionPontus;
-import kenijey.harshencastle.items.Recipes;
 import kenijey.harshencastle.proxy.CommonProxy;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDimensionalPedestal;
 import net.minecraft.creativetab.CreativeTabs;

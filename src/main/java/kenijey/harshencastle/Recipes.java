@@ -1,7 +1,5 @@
-package kenijey.harshencastle.items;
+package kenijey.harshencastle;
 
-import kenijey.harshencastle.HarshenBlocks;
-import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.armor.HarshenArmors;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -95,7 +93,7 @@ public class Recipes
 				'i', HarshenItems.harshen_soul_ingot);
 		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "harshen_dimensional_dirt"), new ResourceLocation("harshen_items"),
-				new ItemStack(HarshenBlocks.harshen_dimensional_dirt),
+				new ItemStack(HarshenBlocks.harshen_dimensional_dirt, 3),
 				" e ",
 				"ede",
 				" e ",
@@ -112,5 +110,15 @@ public class Recipes
 				'e', Items.ENDER_EYE,
 				'c', HarshenItems.harshen_crystal,
 				'l', HarshenItems.light_emitted_essence);
+		
+		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "pontus_gate_spawner_enhanced"), new ResourceLocation("harshen_items"),
+				new ItemStack(HarshenItems.pontus_world_gate_spawner, 1, 1),
+				" s ",
+				"ese",
+				" n ",
+				
+				's', new ItemStack(HarshenItems.pontus_world_gate_spawner, 1, 0),
+				'n', new ItemStack(Items.NETHER_STAR),
+				'e', new ItemStack(Blocks.EMERALD_BLOCK));
 	}
 }
