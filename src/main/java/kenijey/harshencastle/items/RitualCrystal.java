@@ -1,13 +1,14 @@
 package kenijey.harshencastle.items;
 
 import kenijey.harshencastle.HarshenCastle;
+import kenijey.harshencastle.base.BaseItemMetaData;
 import kenijey.harshencastle.enums.items.EnumRitualCrystal;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 
-public class RitualCrystal extends Item
+public class RitualCrystal extends BaseItemMetaData
 {		
 	public RitualCrystal() {
 		setRegistryName("ritual_crystal");
@@ -22,13 +23,10 @@ public class RitualCrystal extends Item
 			for(int i = 0; i < EnumRitualCrystal.values().length; i++)
 				items.add(new ItemStack(this, 1, i));
 	}
-	
+
 	@Override
-	public String getUnlocalizedName(ItemStack stack) 
-	{
-		for(int i = 0; i < EnumRitualCrystal.values().length; i ++)
-			if(stack.getItemDamage() == i)
-				return this.getUnlocalizedName() + "." + EnumRitualCrystal.values()[i].getName();
-		return this.getUnlocalizedName() + "." + EnumRitualCrystal.values()[0].getName();
+	protected String[] getNames() {
+		return EnumRitualCrystal.getNames();
 	}
+	
 }

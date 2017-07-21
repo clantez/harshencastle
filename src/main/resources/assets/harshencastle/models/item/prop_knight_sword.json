@@ -1,0 +1,6 @@
+{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "harshencastle:items/soul_harsher_sword_knight"
+    }
+}

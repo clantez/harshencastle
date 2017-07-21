@@ -93,11 +93,11 @@ public class TileEntityHarshenDimensionalPedestal extends BaseTileEntityHarshenS
 
 	private void checkForCompleation()
 	{
-		ArrayList<Item> localItems = new ArrayList<Item>(Arrays.asList(
-				HarshenItems.pontus_world_gate_part_1,
-				HarshenItems.pontus_world_gate_part_2,
-				HarshenItems.pontus_world_gate_part_3,
-				HarshenItems.harshen_soul_fragment));
+		ArrayList<ItemStack> localItems = new ArrayList<ItemStack>(Arrays.asList(
+				new ItemStack(HarshenItems.pontus_world_gate_parts, 1, 0),
+				new ItemStack(HarshenItems.pontus_world_gate_parts, 1, 1),
+				new ItemStack(HarshenItems.pontus_world_gate_parts, 1 ,2),
+				new ItemStack(HarshenItems.harshen_soul_fragment)));
 		for(EnumFacing facing : EnumFacing.HORIZONTALS)
 		{
 			BlockPos position = pos.offset(facing);

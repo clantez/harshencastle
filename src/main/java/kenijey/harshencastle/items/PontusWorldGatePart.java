@@ -2,18 +2,21 @@ package kenijey.harshencastle.items;
 
 import java.util.List;
 
+import kenijey.harshencastle.base.BaseItemMetaData;
+import kenijey.harshencastle.enums.items.EnumPontusGateSpawner;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
-public class PontusWorldGatePart1 extends Item
+public class PontusWorldGatePart extends BaseItemMetaData
 {
-	public PontusWorldGatePart1()
+	public PontusWorldGatePart()
 	{
-		setUnlocalizedName("pontus_world_gate_part_1");
-		setRegistryName("pontus_world_gate_part_1");
+		setUnlocalizedName("pontus_world_gate_part");
+		setRegistryName("pontus_world_gate_part");
+		setHasSubtypes(true);
 		
 	}
 	
@@ -24,6 +27,11 @@ public class PontusWorldGatePart1 extends Item
 		tooltip.add("\u00a73" + new TextComponentTranslation("gatepart2").getFormattedText());
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 		
+	}
+
+	@Override
+	protected String[] getNames() {
+		return EnumPontusGateSpawner.getNames();
 	}
 
 }

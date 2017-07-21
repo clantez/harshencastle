@@ -3,12 +3,15 @@ package kenijey.harshencastle;
 import java.util.ArrayList;
 
 import kenijey.harshencastle.enums.items.EnumBloodCollector;
+import kenijey.harshencastle.enums.items.EnumPontusGateSpawner;
+import kenijey.harshencastle.enums.items.EnumProp;
 import kenijey.harshencastle.enums.items.EnumRitualCrystal;
 import kenijey.harshencastle.items.BloodCollector;
 import kenijey.harshencastle.items.BloodEssence;
 import kenijey.harshencastle.items.BloodyEarring;
 import kenijey.harshencastle.items.HarshenCrystal;
 import kenijey.harshencastle.items.HarshenDimensionalDoor;
+import kenijey.harshencastle.items.HarshenProps;
 import kenijey.harshencastle.items.HarshenSoulFragment;
 import kenijey.harshencastle.items.HarshenSoulIngot;
 import kenijey.harshencastle.items.Itium;
@@ -16,9 +19,7 @@ import kenijey.harshencastle.items.Ladle;
 import kenijey.harshencastle.items.LightEmittedEssence;
 import kenijey.harshencastle.items.LightEmittedSeed;
 import kenijey.harshencastle.items.PontusRing;
-import kenijey.harshencastle.items.PontusWorldGatePart1;
-import kenijey.harshencastle.items.PontusWorldGatePart2;
-import kenijey.harshencastle.items.PontusWorldGatePart3;
+import kenijey.harshencastle.items.PontusWorldGatePart;
 import kenijey.harshencastle.items.PontusWorldGateSpawner;
 import kenijey.harshencastle.items.RitualCrystal;
 import kenijey.harshencastle.items.SoulHarsherPickaxe;
@@ -42,15 +43,14 @@ public class HarshenItems
 	public static Item pontus_ring;
 	public static Item bloody_earring;
 	public static Item blood_essence;
-	public static Item pontus_world_gate_part_1;
-	public static Item pontus_world_gate_part_2;
-	public static Item pontus_world_gate_part_3;
+	public static Item pontus_world_gate_parts;
 	public static Item pontus_world_gate_spawner;
 	public static Item light_emitted_seed;
 	public static Item light_emitted_essence;
 	public static Item blood_collector;
 	public static Item ritual_crystal;
 	public static Item ladle;
+	public static Item props;
 	
 	
 	public static void preInit()
@@ -65,15 +65,14 @@ public class HarshenItems
 		pontus_ring = new PontusRing();
 		bloody_earring = new BloodyEarring();
 		blood_essence = new BloodEssence();
-		pontus_world_gate_part_1 = new PontusWorldGatePart1();
-		pontus_world_gate_part_2 = new PontusWorldGatePart2();
-		pontus_world_gate_part_3 = new PontusWorldGatePart3();
+		pontus_world_gate_parts = new PontusWorldGatePart();
 		pontus_world_gate_spawner = new PontusWorldGateSpawner();
 		light_emitted_seed = new LightEmittedSeed();
 		light_emitted_essence = new LightEmittedEssence();
 		blood_collector = new BloodCollector();
 		ritual_crystal = new RitualCrystal();
 		ladle = new Ladle();
+		props = new HarshenProps();
 	}
 	
 	public static void reg()
@@ -88,14 +87,14 @@ public class HarshenItems
 		regItem(pontus_ring, 1);
 		regItem(bloody_earring, 1);
 		regItem(blood_essence, 8);
-		regItem(pontus_world_gate_part_1,1);
-		regItem(pontus_world_gate_part_2,1);
-		regItem(pontus_world_gate_part_3,1);
+
 		regItem(pontus_world_gate_spawner,1);
 		regItem(light_emitted_essence,8);
 		regItem(light_emitted_seed,16);
 		regItem(ladle,1);
 		
+		regMetaItem(pontus_world_gate_parts, 1, EnumPontusGateSpawner.getNames(), "pontus_world_gate_part_");
+		regMetaItem(props, 1, EnumProp.getNames(), "prop_");
 		regMetaItem(blood_collector, 1, EnumBloodCollector.getNames(), "blood_collector_");
 		regMetaItem(ritual_crystal, EnumRitualCrystal.getNames(), "ritual_crystal_");
 	}

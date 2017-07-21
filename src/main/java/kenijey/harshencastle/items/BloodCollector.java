@@ -3,6 +3,7 @@ package kenijey.harshencastle.items;
 import java.util.List;
 
 import kenijey.harshencastle.HarshenCastle;
+import kenijey.harshencastle.base.BaseItemMetaData;
 import kenijey.harshencastle.enums.items.EnumBloodCollector;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
@@ -14,7 +15,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 
-public class BloodCollector extends Item
+public class BloodCollector extends BaseItemMetaData
 {		
 	public BloodCollector() {
 		setRegistryName("blood_collector");
@@ -27,16 +28,6 @@ public class BloodCollector extends Item
 	{
 		if(tab.equals(HarshenCastle.harshenTab))
 			items.add(new ItemStack(this, 1, 0));	
-	}
-	
-	
-	@Override
-	public String getUnlocalizedName(ItemStack stack) 
-	{
-		for(int i = 0; i < EnumBloodCollector.values().length; i ++)
-			if(stack.getItemDamage() == i)
-				return this.getUnlocalizedName() + "." + EnumBloodCollector.values()[i].getName();
-		return this.getUnlocalizedName() + "." + EnumBloodCollector.ZERO.getName();
 	}
 	
 	public boolean fill(World world, EntityPlayer player, EnumHand hand, int amount)
@@ -106,5 +97,10 @@ public class BloodCollector extends Item
 		else
 			tooltip.add("Blood: 0 / 50");
 		super.addInformation(stack, worldIn, tooltip, flagIn);
+	}
+
+	@Override
+	protected String[] getNames() {
+		return EnumBloodCollector.getNames();
 	}
 }
