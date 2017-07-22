@@ -28,6 +28,7 @@ import kenijey.harshencastle.blocks.HarshenSpawner;
 import kenijey.harshencastle.blocks.HereticCauldron;
 import kenijey.harshencastle.blocks.HereticCauldronTop;
 import kenijey.harshencastle.blocks.ItiumOre;
+import kenijey.harshencastle.blocks.PedestalSlab;
 import kenijey.harshencastle.blocks.PlantOfGleam;
 import kenijey.harshencastle.blocks.PontusDeadLeaves;
 import kenijey.harshencastle.blocks.PontusDeadWood;
@@ -75,6 +76,7 @@ public class HarshenBlocks {
 	public static Block blood_block;
 	public static Block pontus_dead_leaves;
 	public static Block harshen_spawner;
+	public static Block pedestal_slab;
 	
 	public static BlockCrops crop_of_gleam;
 
@@ -83,6 +85,7 @@ public class HarshenBlocks {
 	
 	public static BlockLog pontus_dead_wood;
 
+	
 	public static void preInit() {
 		harshen_soul_ore = new HarshenSoulOre();
 		harshen_dimensional_stone = new HarshenDimensionalStone();
@@ -112,6 +115,7 @@ public class HarshenBlocks {
 		pontus_dead_wood = new PontusDeadWood();
 		pontus_dead_leaves = new PontusDeadLeaves();
 		harshen_spawner = new HarshenSpawner();
+		pedestal_slab = new PedestalSlab();
 	}
 
 	public static void reg() {
@@ -139,6 +143,7 @@ public class HarshenBlocks {
 		regBlock(harshen_dimensional_pedestal, 8);
 		regBlock(plant_of_gleam, 64);
 		regBlock(blood_block, 1);
+		regBlock(pedestal_slab, 64);
 		
 		regSingleBlock(heretic_cauldron_top);
 		regSingleBlock(crop_of_gleam);
