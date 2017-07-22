@@ -137,5 +137,25 @@ public class Recipes
 				"iii",
 				
 				'i', new ItemStack(HarshenItems.harshen_soul_ingot));
+		
+		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "ladle"), new ResourceLocation("harshen_items"),
+				new ItemStack(HarshenItems.ladle),
+				"  s",
+				"  s",
+				" p ",
+				
+				's', new ItemStack(Items.STICK),
+				'p', new ItemStack(Blocks.PLANKS));
+		
+		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "blood_collector"), new ResourceLocation("harshen_items"),
+				new ItemStack(HarshenItems.blood_collector, 0, 0),
+				"  i",
+				"rbi",
+				"nri",
+				
+				'b', new ItemStack(Blocks.IRON_BLOCK),
+				'i', new ItemStack(Items.IRON_INGOT),
+				'r', new ItemStack(Blocks.IRON_BARS),
+				'n', new ItemStack(Items.IRON_NUGGET));
 	}
 }
