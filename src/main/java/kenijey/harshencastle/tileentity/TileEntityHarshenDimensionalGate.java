@@ -27,7 +27,7 @@ public class TileEntityHarshenDimensionalGate extends BaseHarshenTileEntity impl
 					
 			
 		if(getBlockMetadata() == 2)
-			if(ticksLeft-- == 0)
+			if(ticksLeft-- <= 0)
 				((HarshenDimensionalGate)world.getBlockState(pos).getBlock()).deactivate(world, pos);
 	}
 	
