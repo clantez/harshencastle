@@ -121,5 +121,21 @@ public class Recipes
 				'n', new ItemStack(Items.NETHER_STAR),
 				'e', new ItemStack(Blocks.EMERALD_BLOCK),
 				'i', new ItemStack(HarshenItems.itium));
+		
+		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "pedestal_slab"), new ResourceLocation("harshen_items"),
+				new ItemStack(HarshenBlocks.pedestal_slab),
+				"   ",
+				"i i",
+				"iii",
+				
+				'i', new ItemStack(HarshenItems.harshen_soul_ingot));
+		
+		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "heretic_cauldron"), new ResourceLocation("harshen_items"),
+				new ItemStack(HarshenBlocks.heretic_cauldron),
+				"i i",
+				"i i",
+				"iii",
+				
+				'i', new ItemStack(HarshenItems.harshen_soul_ingot));
 	}
 }
