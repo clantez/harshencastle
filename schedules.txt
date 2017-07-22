@@ -18,10 +18,6 @@ SOUL HARSHER PICKAXE //TODO need consider it more
 HARSHING FLUID
 -applies harshed effect level 3 when u try to swim in
 
-SOUL HARSHER SWORD
--has 3 soul slots (0/3)
--can be filled by killing the 3 main bosses in 3 main structures that spawns in overworld
-
 Pontus World Gate (First-Second-Third) Part(s)
 -found in chests in main structures in overworld
 
