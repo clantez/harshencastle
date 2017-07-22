@@ -5,8 +5,8 @@ import net.minecraft.util.IStringSerializable;
 public enum EnumPontusGateSpawnerParts implements IStringSerializable
 {
 	Part1("1", 0),
-	Part2("2", 0),
-	Part3("3", 0);
+	Part2("2", 1),
+	Part3("3", 2);
 	
 	private int meta;
 	private String name;
