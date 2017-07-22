@@ -47,7 +47,7 @@ public class HereticCauldronTop extends Block
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
-        return new AxisAlignedBB(0, -1, 0, 1, 0.001, 1);
+        return new AxisAlignedBB(0.1, 0, 0.3, 0.9, 0.7, 0.7);
     }
 	
 	@Override

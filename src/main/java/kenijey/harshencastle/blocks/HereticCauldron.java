@@ -66,7 +66,7 @@ public class HereticCauldron extends BaseBlockHarshenSingleInventory
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
         return new AxisAlignedBB(0, 0, 0, 1, 1.001, 1);
-    }    
+    }
 	 
 	@SideOnly(Side.CLIENT)
     public BlockRenderLayer getBlockLayer()
