@@ -19,12 +19,15 @@ HARSHING FLUID
 -applies harshed effect level 3 when u try to swim in
 
 SOUL HARSHER SWORD
--has 
 -has 3 soul slots (0/3)
 -can be filled by killing the 3 main bosses in 3 main structures that spawns in overworld
 
 Pontus World Gate (First-Second-Third) Part(s)
 -found in chests in main structures in overworld
+
+Empowered Soul Harsher Sword
+-can be crafted with normal soul harsher sword + itium (i will add recipe)
+-has same properties with soul harsher sword, but it can kill
 
 -----------ACCESSORY/ARMOR-----------
 slots:earrings(x2) pendant(x1) rings(x2) goggles(x1) //todo
@@ -44,6 +47,7 @@ HARSHEN JAGUAR ARMOR
 -some ruins can be found that built with HD wood crate and (different) HD stone (STRUCTURE)
 
 ----------------------------STRUCTURES--------------------------
+----OVERWORLD----
 HARSHEN FLYLAND 
 -second structure, such a flying island on sky
 -made from harshen dimensional dirt(mainly)
@@ -71,6 +75,11 @@ HARSHEN LOST CITY
 -spawns like SAME AS Ocean monument (that has Guardian(vanilla) mobs, in the ocean)
 -has the boss Atlantic Golem
 
+----PONTUS WORLD----
+FERRUM ZONE
+-has the boss FERRUM KING inside
+-around is clean, just like the harshen castle but empty inside (will build)
+
 BLOODY MARY'S HORROR HOUSE
 -has scary paintings (custom)
 -we should build it like a normal house but scary
@@ -78,6 +87,13 @@ BLOODY MARY'S HORROR HOUSE
 -scary sound effects
 
 --------------------------MOBS---------------------------------
+FERRUM KING
+-main/final boss of pontus world
+-has 1000 hp
+-it's a dragon but NOT flying
+-it blows out pink fire (like harshing water) (dragon breath)
+-can be only killed with the item Empowered Soul Harsher Sword
+
 BLOODY MARY
 -has its own structure in pontus world
 -drops bloody essence (x1)
