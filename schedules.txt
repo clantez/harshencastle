@@ -8,10 +8,7 @@ HARSHED EFFECT
 BLOOD
 -players, villages and witch will bleed randomly by getting hit (piercing/cutting hits, if specifiable)
 
---------------------------ITEMS/BLOCKS----------------------------
-RITUAL CRYSTAL
--active crystal is obtainable by putting 3x blood and passive crystal into cauldron, then suffle it with LADLE
- 
+--------------------------ITEMS/BLOCKS---------------------------- 
 GUIDANCE OF HARSHEN WORLD
 -guide book of harshen castle
 
@@ -22,6 +19,7 @@ HARSHING FLUID
 -applies harshed effect level 3 when u try to swim in
 
 SOUL HARSHER SWORD
+-has 
 -has 3 soul slots (0/3)
 -can be filled by killing the 3 main bosses in 3 main structures that spawns in overworld
 
