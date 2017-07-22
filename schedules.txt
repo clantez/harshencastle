@@ -6,38 +6,24 @@ HARSHED EFFECT
 -third level causes 5 hp damage per second, 5 seconds slowness and 5 seconds weakness
 
 BLOOD
--player can bleed himself with Blade item (damages 2 hp and become withered for 6 seconds)
--player will bleed randomly by getting hit (piercing/cutting hits, if specifiable)
--if player bleed, blood block will be placed RANDOMLY AGAIN around close to player standing on
+-players, villages and witch will bleed randomly by getting hit (piercing/cutting hits, if specifiable)
 
 --------------------------ITEMS/BLOCKS----------------------------
-LADLE
--used to shuffle the heretic cauldron
-
 RITUAL CRYSTAL
 -active crystal is obtainable by putting 3x blood and passive crystal into cauldron, then suffle it with LADLE
  
 GUIDANCE OF HARSHEN WORLD
 -guide book of harshen castle
 
-SOUL HARSHER PICKAXE
+SOUL HARSHER PICKAXE //TODO need consider it more
 -can break HD dirt and HD rock BUT ONLY IN PONTUS WORLD (dimension check)
 
 HARSHING FLUID
--kills anything that tries to swim in it
--hits 20 damage per second
+-applies harshed effect level 3 when u try to swim in
 
 SOUL HARSHER SWORD
 -has 3 soul slots (0/3)
 -can be filled by killing the 3 main bosses in 3 main structures that spawns in overworld
-
-BLADE
--can be used to bleed the player by himself (by shift+right click)
--and normal right click to bleed SOME of the mobs(villagers, witch, another player) (whitelist) with same procedure (put blood block around)
--it will damage to player 2 hp and become withered for 6 seconds per use
--not useable on mobs (exactly only on player)
--a little sound effect for bleeding player by himself
--if used <1 time, item texture will replace with bloody one forever for that item
 
 HERETIC CAULDRON
 -can only be filled with HD fluid, blood(by blood collector) and harshing water
@@ -56,12 +42,11 @@ BLOODY EARRING
 -regenerates 1 heart (2 hp) every 10 seconds
 
 HARSHEN JAGUAR ARMOR
--should be 3d
+-should be 3d asap
 -when worn full set, applies night vision 1 and fire resistance 1 effects
 
 ------------------------PONTUS WORLD------------------------------
 -some ruins can be found that built with HD wood crate and (different) HD stone (STRUCTURE)
--if player dies in pontus world, he will respawn on the first point he came from overworld
 
 ----------------------------STRUCTURES--------------------------
 HARSHEN FLYLAND 
