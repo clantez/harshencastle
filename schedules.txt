@@ -45,10 +45,6 @@ HERETIC CAULDRON
 Pontus World Gate (First-Second-Third) Part(s)
 -found in chests in main structures in overworld
 
-PONTUS WORLD GATE
--it's multiblock, made from dimensional stones and the real gate in it (small area, 3x4x5)
--will be despawn(destroyed) after 10 min after placed(only portal will be destroyed, not the structure)
-
 -----------ACCESSORY/ARMOR-----------
 slots:earrings(x2) pendant(x1) rings(x2) goggles(x1) //todo
 IMPORTANT: accessory, or u can say harshen tab will be added in inventory as a tab. (just like galacticraft)
