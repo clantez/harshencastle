@@ -5,7 +5,7 @@ import net.minecraft.util.IStringSerializable;
 public enum EnumPontusGateSpawner implements IStringSerializable
 {
 	Normal("normal", 0),
-	Enhanced("enhanced", 0);
+	Enhanced("enhanced", 1);
 	
 	private int meta;
 	private String name;
