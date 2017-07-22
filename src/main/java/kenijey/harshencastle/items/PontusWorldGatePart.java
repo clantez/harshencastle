@@ -19,6 +19,13 @@ public class PontusWorldGatePart extends BaseItemMetaData
 	}
 	
 	@Override
+	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+		if(tab instanceof HarshenTab)
+			for(EnumPontusGateSpawnerParts l : EnumPontusGateSpawnerParts.values())
+				items.add(new ItemStack(this, 1, l.getMeta()));
+	}
+	
+	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 		tooltip.add(new TextComponentTranslation(" ").getFormattedText());
 		tooltip.add("\u00A73" + new TextComponentTranslation("gatepart1").getFormattedText());
