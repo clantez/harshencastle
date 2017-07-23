@@ -8,6 +8,7 @@ import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.base.BaseHarshenBlockCastle;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
+import net.minecraft.block.BlockReed;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -45,7 +46,7 @@ public class HarshenDimensionalDirt extends BaseHarshenBlockCastle
 	@Override
 	public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction,
 			IPlantable plantable) {
-		return true;
+		return !Arrays.asList(Blocks.REEDS, Blocks.BROWN_MUSHROOM, Blocks.RED_MUSHROOM).contains(plantable.getPlant(world, pos).getBlock());
 	}
 	
 }
