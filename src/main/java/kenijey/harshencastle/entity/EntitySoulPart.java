@@ -9,34 +9,51 @@ import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityFlying;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.ai.EntityAIFindEntityNearest;
 import net.minecraft.entity.ai.EntityAIFindEntityNearestPlayer;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.monster.EntityVex;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.pathfinding.PathNavigateFlying;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 
-public class EntitySoulPart extends EntityFlying
+public class EntitySoulPart extends EntityMob
 {
 
 	public EntitySoulPart(World worldIn) {
 		super(worldIn);
-		this.navigator = new PathNavigateorSoulPart(this, worldIn);
-		this.moveHelper = new MoveHelperSoulPart(this);
+		this.isImmuneToFire = true;
+        this.moveHelper = new MoveHelperSoulPart(this);
+        this.experienceValue = 3;
 	}
 	
 	@Override
 	protected void initEntityAI() {
-		this.tasks.addTask(0, new AIEntityFlyingTowardsPlayer(this, 2));
-		this.tasks.addTask(1, new AIEntityFlyRandomly(this));
+		this.tasks.addTask(8, new AIEntityFlyingTowardsPlayer(this));
         this.tasks.addTask(9, new EntityAIWatchClosest(this, EntityPlayer.class, 3.0F, 1.0F));
         this.tasks.addTask(10, new EntityAIWatchClosest(this, EntityLiving.class, 8.0F));
-	
-        this.targetTasks.addTask(1, new EntityAIFindEntityNearestPlayer(this));
+        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true, new Class[] {EntityVex.class}));
+        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 	}
+	
+	public void onUpdate()
+    {
+        this.noClip = true;
+        super.onUpdate();
+        this.noClip = false;
+        this.setNoGravity(true);
+    }
+	
+	
 	
 	@Override
     protected SoundEvent getAmbientSound() {

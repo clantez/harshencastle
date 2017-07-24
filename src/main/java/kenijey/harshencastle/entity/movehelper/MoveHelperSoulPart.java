@@ -1,69 +1,56 @@
 package kenijey.harshencastle.entity.movehelper;
 
-import kenijey.harshencastle.entity.EntitySoulPart;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityMoveHelper;
-import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.entity.monster.EntityVex;
 import net.minecraft.util.math.MathHelper;
 
 public class MoveHelperSoulPart extends EntityMoveHelper
 {
-    private final EntitySoulPart parentEntity;
-    private int courseChangeCooldown;
-
-    public MoveHelperSoulPart(EntitySoulPart soul)
+	
+	private EntityLiving entity;
+	public MoveHelperSoulPart(EntityLiving entity)
     {
-        super(soul);
-        this.parentEntity = soul;
+        super(entity);
+		this.entity = entity;
     }
 
     public void onUpdateMoveHelper()
     {
         if (this.action == EntityMoveHelper.Action.MOVE_TO)
         {
-            double d0 = this.posX - this.parentEntity.posX;
-            double d1 = this.posY - this.parentEntity.posY;
-            double d2 = this.posZ - this.parentEntity.posZ;
+            double d0 = this.posX - this.entity.posX;
+            double d1 = this.posY - this.entity.posY;
+            double d2 = this.posZ - this.entity.posZ;
             double d3 = d0 * d0 + d1 * d1 + d2 * d2;
+            d3 = (double)MathHelper.sqrt(d3);
 
-            if (this.courseChangeCooldown-- <= 0)
+            if (d3 < this.entity.getEntityBoundingBox().getAverageEdgeLength())
             {
-                this.courseChangeCooldown += this.parentEntity.getRNG().nextInt(5) + 2;
-                d3 = (double)MathHelper.sqrt(d3);
+                this.action = EntityMoveHelper.Action.WAIT;
+                this.entity.motionX *= 0.5D;
+                this.entity.motionY *= 0.5D;
+                this.entity.motionZ *= 0.5D;
+            }
+            else
+            {
+                this.entity.motionX += d0 / d3 * 0.05D * this.speed;
+                this.entity.motionY += d1 / d3 * 0.05D * this.speed;
+                this.entity.motionZ += d2 / d3 * 0.05D * this.speed;
 
-                if (this.isNotColliding(this.posX, this.posY, this.posZ, d3))
+                if (this.entity.getAttackTarget() == null)
                 {
-                    this.parentEntity.motionX += d0 / d3 * 0.1D;
-                    this.parentEntity.motionY += d1 / d3 * 0.1D;
-                    this.parentEntity.motionZ += d2 / d3 * 0.1D;
+                    this.entity.rotationYaw = -((float)MathHelper.atan2(this.entity.motionX, this.entity.motionZ)) * (180F / (float)Math.PI);
+                    this.entity.renderYawOffset = this.entity.rotationYaw;
                 }
                 else
                 {
-                    this.action = EntityMoveHelper.Action.WAIT;
+                    double d4 = this.entity.getAttackTarget().posX - this.entity.posX;
+                    double d5 = this.entity.getAttackTarget().posZ - this.entity.posZ;
+                    this.entity.rotationYaw = -((float)MathHelper.atan2(d4, d5)) * (180F / (float)Math.PI);
+                    this.entity.renderYawOffset = this.entity.rotationYaw;
                 }
             }
         }
-    }
-
-    /**
-     * Checks if entity bounding box is not colliding with terrain
-     */
-    private boolean isNotColliding(double x, double y, double z, double p_179926_7_)
-    {
-        double d0 = (x - this.parentEntity.posX) / p_179926_7_;
-        double d1 = (y - this.parentEntity.posY) / p_179926_7_;
-        double d2 = (z - this.parentEntity.posZ) / p_179926_7_;
-        AxisAlignedBB axisalignedbb = this.parentEntity.getEntityBoundingBox();
-
-        for (int i = 1; (double)i < p_179926_7_; ++i)
-        {
-            axisalignedbb = axisalignedbb.offset(d0, d1, d2);
-
-            if (!this.parentEntity.world.getCollisionBoxes(this.parentEntity, axisalignedbb).isEmpty())
-            {
-                return false;
-            }
-        }
-
-        return true;
     }
 }
