@@ -4,6 +4,7 @@ import java.util.Random;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.EntityAIMoveTowardsTarget;
 import net.minecraft.entity.ai.EntityMoveHelper;
@@ -21,39 +22,24 @@ public class AIEntityFlyingTowardsPlayer extends EntityAIBase
         this.setMutexBits(1);
     }
 
-    /**
-     * Returns whether the EntityAIBase should begin execution.
-     */
     public boolean shouldExecute()
     {
-        return !entity.getMoveHelper().isUpdating() && entity.getRNG().nextInt(7) == 0;
+        return !entity.getMoveHelper().isUpdating() && entity.getAttackTarget() != null;
     }
 
-    /**
-     * Returns whether an in-progress EntityAIBase should continue executing
-     */
     public boolean shouldContinueExecuting()
     {
         return false;
     }
 
-    /**
-     * Keep ticking a continuous task that has already been started
-     */
     public void updateTask()
     {
-        BlockPos blockpos = new BlockPos(entity);
+        BlockPos blockpos = new BlockPos(entity.getAttackTarget());
         for (int i = 0; i < 3; ++i)
         {
         	boolean flag = false;
-        	BlockPos blockpos1 = BlockPos.ORIGIN;
-        	while(!flag)
-        	{
-        		flag = true;
-                blockpos1 = blockpos.add(entity.getRNG().nextInt(15) - 7, entity.getRNG().nextInt(11) - 5, entity.getRNG().nextInt(15) - 7);
-                if(entity.getAttackTarget() == null || blockpos1.distanceSq(entity.getAttackTarget().getPosition()) < 625 || entity.getAttackTarget().getDistanceSq(blockpos) > 600)
-                	flag = true;
-        	}
+        	BlockPos blockpos1 = blockpos.add(entity.getRNG().nextInt(15) - 7, entity.getRNG().nextInt(11) - 5, entity.getRNG().nextInt(15) - 7);
+
 
             if (entity.world.isAirBlock(blockpos1))
             {

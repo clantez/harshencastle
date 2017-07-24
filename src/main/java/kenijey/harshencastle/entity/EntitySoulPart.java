@@ -1,39 +1,35 @@
 package kenijey.harshencastle.entity;
 
-import kenijey.harshencastle.entity.AI.AIEntityFlyRandomly;
 import kenijey.harshencastle.entity.AI.AIEntityFlyingTowardsPlayer;
+import kenijey.harshencastle.entity.damagesource.DamageSourceSoulPart;
 import kenijey.harshencastle.entity.movehelper.MoveHelperSoulPart;
-import kenijey.harshencastle.entity.pathnavigator.PathNavigateorSoulPart;
 import kenijey.harshencastle.entityrender.RenderSoulPart;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.EntityFlying;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.ai.EntityAIFindEntityNearest;
-import net.minecraft.entity.ai.EntityAIFindEntityNearestPlayer;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.monster.EntityVex;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.pathfinding.PathNavigateFlying;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 
 public class EntitySoulPart extends EntityMob
 {
-
+	
+	private int cooldownTicks = 0;
+	
 	public EntitySoulPart(World worldIn) {
 		super(worldIn);
 		this.isImmuneToFire = true;
         this.moveHelper = new MoveHelperSoulPart(this);
         this.experienceValue = 3;
+        
 	}
 	
 	@Override
@@ -41,9 +37,17 @@ public class EntitySoulPart extends EntityMob
 		this.tasks.addTask(8, new AIEntityFlyingTowardsPlayer(this));
         this.tasks.addTask(9, new EntityAIWatchClosest(this, EntityPlayer.class, 3.0F, 1.0F));
         this.tasks.addTask(10, new EntityAIWatchClosest(this, EntityLiving.class, 8.0F));
-        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true, new Class[] {EntityVex.class}));
-        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+        
+        this.targetTasks.addTask(0, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, false));
 	}
+	
+	public void applyEntityAttributes()
+	{
+	        super.applyEntityAttributes();
+	        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(14.0D);
+	        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4.0D);
+	        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(1000D);
+	}  
 	
 	public void onUpdate()
     {
@@ -51,6 +55,8 @@ public class EntitySoulPart extends EntityMob
         super.onUpdate();
         this.noClip = false;
         this.setNoGravity(true);
+        if(this.getAttackTarget() != null && this.getPosition().distanceSq(this.getAttackTarget().getPosition()) < 20)
+        	this.getAttackTarget().attackEntityFrom(DamageSourceSoulPart.getSource(this),  4f);
     }
 	
 	
