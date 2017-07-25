@@ -13,12 +13,14 @@ import kenijey.harshencastle.dimensions.HarshenDimensions;
 import kenijey.harshencastle.entity.HarshenEntities;
 import kenijey.harshencastle.fluids.HarshenFluids;
 import kenijey.harshencastle.handlers.HandlerSoulHarsherSword;
+import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDimensionalGate;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDimensionalPedestal;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDisplayBlock;
 import kenijey.harshencastle.tileentity.TileEntityHarshenSpawner;
 import kenijey.harshencastle.tileentity.TileEntityHereticCauldron;
 import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -46,6 +48,8 @@ public class CommonProxy
 		HarshenBiomes.register();
 		
 		HarshenSounds.preInit();
+		
+		HarshenNetwork.preInit();
     }
 
     public void init(FMLInitializationEvent event) 
@@ -82,4 +86,6 @@ public class CommonProxy
 	{
 		
 	}
+
+	public EntityPlayer getPlayer() {return null;}
 }

@@ -1,11 +1,9 @@
 package kenijey.harshencastle.handlers;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.items.ItemStackHandler;
 
@@ -35,12 +33,12 @@ public class HandlerHarshenInventory
 		return this.handler.getStackInSlot(0).getItem() == Item.getItemFromBlock(Blocks.AIR);
 	}
 	
-	public ItemStack setItem(ItemStack item)
+	public ItemStack setItem(EntityPlayer player, ItemStack item)
 	{
 		item.setCount(1);
 		ItemStack stack = handler.getStackInSlot(0);
 		this.handler.setStackInSlot(0, item);
-		save(Minecraft.getMinecraft().player);
+		save(player);
 		return stack;
 	}
 		

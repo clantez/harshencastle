@@ -18,8 +18,10 @@ import kenijey.harshencastle.tileentity.TileEntityHarshenSpawner;
 import kenijey.harshencastle.tileentity.TileEntityHereticCauldron;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -48,6 +50,11 @@ public class ClientProxy extends CommonProxy
     		MinecraftForge.EVENT_BUS.register(o);
         	FMLCommonHandler.instance().bus().register(o);
     	}
+    }
+    
+    @Override
+    public EntityPlayer getPlayer() {
+    	return Minecraft.getMinecraft().player;
     }
 
     @Override

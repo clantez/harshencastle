@@ -3,6 +3,9 @@ package kenijey.harshencastle;
 import org.lwjgl.input.Keyboard;
 
 import kenijey.harshencastle.handlers.HandlerHarshenInventory;
+import kenijey.harshencastle.network.HarshenNetwork;
+import kenijey.harshencastle.network.events.NetworkEventHarshenInvToggle;
+import kenijey.harshencastle.network.packets.MessagePacketHarshenInvToggle;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.init.Blocks;
@@ -36,31 +39,8 @@ public class HarshenKeybinding
 	public void voidKeyOpenSlot()
 	{
 		if(key_openSlot.isPressed())
-			Minecraft.getMinecraft().player.setHeldItem(EnumHand.MAIN_HAND, (weightedItemstack(Minecraft.getMinecraft().player.getHeldItemMainhand())));		
+			HarshenNetwork.sendToServer(new MessagePacketHarshenInvToggle());
+
 	}
 	
-	public ItemStack weightedItemstack(ItemStack stack)
-	{
-		ItemStack newStack = stack.copy();
-		int count  = stack.getCount();
-		if(stack.getItem() == Item.getItemFromBlock(Blocks.AIR))
-		{
-			ItemStack item = HandlerHarshenInventory.instance.getItem();
-			HandlerHarshenInventory.instance.delItem();
-			return item;
-		}
-		if(HandlerHarshenInventory.instance.hasItem())
-		{
-			count += 2;
-			HandlerHarshenInventory.instance.delItem();
-		}
-		else
-		{
-			HandlerHarshenInventory.instance.setItem(stack);
-			if(newStack.getCount() == 1)
-				Minecraft.getMinecraft().player.playSound(SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 1f, 1f);
-		}
-		newStack.setCount(count - 1);
-		return newStack;
-	}
 }
