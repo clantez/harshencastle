@@ -4,13 +4,15 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class HandlerHarshenInventory 
+public class HandlerHarshenInventoryClient 
 {
 	
-	public static HandlerHarshenInventory instance = new HandlerHarshenInventory();
+	public static HandlerHarshenInventoryClient instance = new HandlerHarshenInventoryClient();
 	
 	private ItemStackHandler handler = new ItemStackHandler(1);
 	public void save(EntityPlayer player)
@@ -23,6 +25,7 @@ public class HandlerHarshenInventory
 		this.handler.deserializeNBT(player.getEntityData().getCompoundTag("ItemStackHandler"));
 	}
 	
+	@SubscribeEvent
 	public void playerLoggedIn(PlayerLoggedInEvent event)
 	{
 		this.load(event.player);
@@ -38,7 +41,6 @@ public class HandlerHarshenInventory
 		item.setCount(1);
 		ItemStack stack = handler.getStackInSlot(0);
 		this.handler.setStackInSlot(0, item);
-		save(player);
 		return stack;
 	}
 		

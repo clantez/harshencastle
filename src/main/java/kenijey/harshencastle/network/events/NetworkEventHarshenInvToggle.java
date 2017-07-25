@@ -1,6 +1,6 @@
 package kenijey.harshencastle.network.events;
 
-import kenijey.harshencastle.handlers.HandlerHarshenInventory;
+import kenijey.harshencastle.handlers.HandlerHarshenInventoryClient;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
@@ -15,12 +15,13 @@ public class NetworkEventHarshenInvToggle {
 		ItemStack stack = player.getHeldItemMainhand();
 		ItemStack newStack = stack.copy();
 		int count  = stack.getCount();
-		HandlerHarshenInventory inv = HandlerHarshenInventory.instance;
+		HandlerHarshenInventoryClient inv = HandlerHarshenInventoryClient.instance;
 		if(stack.getItem() == Item.getItemFromBlock(Blocks.AIR))
 		{
 			ItemStack item = inv.getItem();
 			inv.delItem();
 			player.setHeldItem(EnumHand.MAIN_HAND, item);
+			inv.save(player);
 			return;
 		}
 		if(inv.hasItem())
@@ -35,6 +36,7 @@ public class NetworkEventHarshenInvToggle {
 			inv.setItem(player, stack);
 		}
 		newStack.setCount(count - 1);
+		inv.save(player);
 		player.setHeldItem(EnumHand.MAIN_HAND, newStack);
 	}
 

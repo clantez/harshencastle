@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 import org.lwjgl.input.Keyboard;
 
-import kenijey.harshencastle.handlers.HandlerHarshenInventory;
+import kenijey.harshencastle.handlers.HandlerHarshenInventoryClient;
 import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.network.events.NetworkEventHarshenInvToggle;
 import kenijey.harshencastle.network.packets.MessagePacketHarshenInvToggle;
@@ -42,11 +42,11 @@ public class HarshenKeybinding
 	{
 		if(key_openSlot.isPressed())
 		{
-			if((Arrays.asList(Minecraft.getMinecraft().player.getHeldItemMainhand().getItem(), HandlerHarshenInventory.instance.getItem().getItem()).contains(Item.getItemFromBlock(Blocks.AIR)) ||
-					(Minecraft.getMinecraft().player.getHeldItemMainhand().getItem() == HandlerHarshenInventory.instance.getItem().getItem() && 
+			if((Arrays.asList(Minecraft.getMinecraft().player.getHeldItemMainhand().getItem(), HandlerHarshenInventoryClient.instance.getItem().getItem()).contains(Item.getItemFromBlock(Blocks.AIR)) ||
+					(Minecraft.getMinecraft().player.getHeldItemMainhand().getItem() == HandlerHarshenInventoryClient.instance.getItem().getItem() && 
 					Minecraft.getMinecraft().player.getHeldItemMainhand().getCount() < Minecraft.getMinecraft().player.getHeldItemMainhand().getMaxStackSize()))
 					 && !(Minecraft.getMinecraft().player.getHeldItemMainhand().getItem() == Item.getItemFromBlock(Blocks.AIR) &&
-								HandlerHarshenInventory.instance.getItem().getItem() == Item.getItemFromBlock(Blocks.AIR)))
+								HandlerHarshenInventoryClient.instance.getItem().getItem() == Item.getItemFromBlock(Blocks.AIR)))
 						
 				Minecraft.getMinecraft().player.playSound(SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 1, 1);
 			HarshenNetwork.sendToServer(new MessagePacketHarshenInvToggle());

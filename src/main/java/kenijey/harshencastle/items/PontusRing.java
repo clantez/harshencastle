@@ -2,13 +2,16 @@ package kenijey.harshencastle.items;
 
 import java.util.List;
 
+import kenijey.harshencastle.base.BaseItemCustomInvEffect;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
-public class PontusRing extends Item
+public class PontusRing extends BaseItemCustomInvEffect
 {
 	public PontusRing()
 	{
@@ -22,5 +25,11 @@ public class PontusRing extends Item
 		tooltip.add("\u00a73" + new TextComponentTranslation("pontus2").getFormattedText());
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 	}
+
+	@Override
+	public Potion getPotion() {
+		return Potion.getPotionFromResourceLocation("strength");
+	}
+
 
 }
