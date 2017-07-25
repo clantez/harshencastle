@@ -31,7 +31,7 @@ public abstract class BaseBlockHarshenSingleInventory extends Block implements I
 		return getTile();
 	}
 	
-	public abstract TileEntity getTile();
+	public abstract BaseTileEntityHarshenSingleItemInventory getTile();
 	
 	
 	@Override

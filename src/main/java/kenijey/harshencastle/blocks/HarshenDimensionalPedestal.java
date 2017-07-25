@@ -3,6 +3,7 @@ package kenijey.harshencastle.blocks;
 import java.util.List;
 
 import kenijey.harshencastle.base.BaseBlockHarshenSingleInventory;
+import kenijey.harshencastle.base.BaseTileEntityHarshenSingleItemInventory;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDimensionalPedestal;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
@@ -37,7 +38,7 @@ public class HarshenDimensionalPedestal extends BaseBlockHarshenSingleInventory
 	}
 	
 	@Override
-	public TileEntity getTile() {
+	public BaseTileEntityHarshenSingleItemInventory getTile() {
 		return new TileEntityHarshenDimensionalPedestal();
 	}
 	

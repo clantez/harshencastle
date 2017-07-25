@@ -8,6 +8,7 @@ import javax.annotation.Nullable;
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.base.BaseBlockHarshenSingleInventory;
+import kenijey.harshencastle.base.BaseTileEntityHarshenSingleItemInventory;
 import kenijey.harshencastle.enums.blocks.EnumHetericCauldronFluidType;
 import kenijey.harshencastle.items.BloodCollector;
 import kenijey.harshencastle.tileentity.TileEntityHereticCauldron;
@@ -82,7 +83,7 @@ public class HereticCauldron extends BaseBlockHarshenSingleInventory
 	}
 	
 	@Override
-	public TileEntity getTile() {
+	public BaseTileEntityHarshenSingleItemInventory getTile() {
 		return new TileEntityHereticCauldron();
 	}
 	

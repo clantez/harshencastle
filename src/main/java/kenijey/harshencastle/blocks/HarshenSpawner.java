@@ -3,6 +3,7 @@ package kenijey.harshencastle.blocks;
 import java.util.Random;
 
 import kenijey.harshencastle.base.BaseBlockHarshenSingleInventory;
+import kenijey.harshencastle.base.BaseTileEntityHarshenSingleItemInventory;
 import kenijey.harshencastle.tileentity.TileEntityHarshenSpawner;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -45,7 +46,7 @@ public class HarshenSpawner extends BaseBlockHarshenSingleInventory implements I
 	}
 
 	@Override
-	public TileEntity getTile() {
+	public BaseTileEntityHarshenSingleItemInventory getTile() {
 		return new TileEntityHarshenSpawner();
 	}
 	

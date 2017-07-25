@@ -1,6 +1,7 @@
 package kenijey.harshencastle.blocks;
 
 import kenijey.harshencastle.base.BaseBlockHarshenSingleInventory;
+import kenijey.harshencastle.base.BaseTileEntityHarshenSingleItemInventory;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
@@ -19,8 +20,7 @@ public class PedestalSlab extends BaseBlockHarshenSingleInventory
 	}
 
 	@Override
-	public TileEntity getTile() {
-		// TODO Auto-generated method stub
+	public BaseTileEntityHarshenSingleItemInventory getTile() {
 		return null;
 	}
 
