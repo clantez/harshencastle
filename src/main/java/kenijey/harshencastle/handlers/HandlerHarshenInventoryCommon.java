@@ -66,7 +66,7 @@ public class HandlerHarshenInventoryCommon
 				
 				this.handler.setStackInSlot(0, ItemStack.EMPTY);
 				player.getEntityData().setTag("ItemStackHandler", handler.serializeNBT());
-				HandlerHarshenInventoryClient.instance.load(player);	
+				HandlerHarshenInventoryClient.getInvForPlayer(player.getCachedUniqueIdString()).load(player);	
 				player.setHealth(1.0F);
 				player.clearActivePotions();
 				player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 900, 1));

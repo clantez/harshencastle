@@ -6,16 +6,13 @@ import org.lwjgl.input.Keyboard;
 
 import kenijey.harshencastle.handlers.HandlerHarshenInventoryClient;
 import kenijey.harshencastle.network.HarshenNetwork;
-import kenijey.harshencastle.network.events.NetworkEventHarshenInvToggle;
 import kenijey.harshencastle.network.packets.MessagePacketHarshenInvToggle;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.SoundEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent.KeyInputEvent;
@@ -42,11 +39,12 @@ public class HarshenKeybinding
 	{
 		if(key_openSlot.isPressed())
 		{
-			if((Arrays.asList(Minecraft.getMinecraft().player.getHeldItemMainhand().getItem(), HandlerHarshenInventoryClient.instance.getItem().getItem()).contains(Item.getItemFromBlock(Blocks.AIR)) ||
-					(Minecraft.getMinecraft().player.getHeldItemMainhand().getItem() == HandlerHarshenInventoryClient.instance.getItem().getItem() && 
+			EntityPlayer player = Minecraft.getMinecraft().player;
+			if((Arrays.asList(Minecraft.getMinecraft().player.getHeldItemMainhand().getItem(), HandlerHarshenInventoryClient.getInvForPlayer(player.getCachedUniqueIdString()).getItem().getItem()).contains(Item.getItemFromBlock(Blocks.AIR)) ||
+					(Minecraft.getMinecraft().player.getHeldItemMainhand().getItem() == HandlerHarshenInventoryClient.getInvForPlayer(player.getCachedUniqueIdString()).getItem().getItem() && 
 					Minecraft.getMinecraft().player.getHeldItemMainhand().getCount() < Minecraft.getMinecraft().player.getHeldItemMainhand().getMaxStackSize()))
 					 && !(Minecraft.getMinecraft().player.getHeldItemMainhand().getItem() == Item.getItemFromBlock(Blocks.AIR) &&
-								HandlerHarshenInventoryClient.instance.getItem().getItem() == Item.getItemFromBlock(Blocks.AIR)))
+								HandlerHarshenInventoryClient.getInvForPlayer(player.getCachedUniqueIdString()).getItem().getItem() == Item.getItemFromBlock(Blocks.AIR)))
 						
 				Minecraft.getMinecraft().player.playSound(SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 1, 1);
 			HarshenNetwork.sendToServer(new MessagePacketHarshenInvToggle());

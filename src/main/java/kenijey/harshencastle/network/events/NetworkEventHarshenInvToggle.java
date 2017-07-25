@@ -15,13 +15,12 @@ public class NetworkEventHarshenInvToggle {
 		ItemStack stack = player.getHeldItemMainhand();
 		ItemStack newStack = stack.copy();
 		int count  = stack.getCount();
-		HandlerHarshenInventoryClient inv = HandlerHarshenInventoryClient.instance;
+		HandlerHarshenInventoryClient inv = HandlerHarshenInventoryClient.getInvForPlayer(player.getCachedUniqueIdString());
 		if(stack.getItem() == Item.getItemFromBlock(Blocks.AIR))
 		{
 			ItemStack item = inv.getItem();
 			inv.delItem();
 			player.setHeldItem(EnumHand.MAIN_HAND, item);
-			inv.save(player);
 			return;
 		}
 		if(inv.hasItem())
@@ -32,11 +31,9 @@ public class NetworkEventHarshenInvToggle {
 			inv.delItem();
 		}
 		else
-		{
 			inv.setItem(player, stack);
-		}
+
 		newStack.setCount(count - 1);
-		inv.save(player);
 		player.setHeldItem(EnumHand.MAIN_HAND, newStack);
 	}
 
