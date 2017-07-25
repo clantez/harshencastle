@@ -25,7 +25,7 @@ public class NetworkEventHarshenInvToggle {
 		}
 		if(inv.hasItem())
 		{
-			if(stack.getItem() == inv.getItem().getItem() || stack.getCount() <= 64)
+			if(stack.getItem() != inv.getItem().getItem() || stack.getCount() == 64)
 				return;
 			count += 2;
 			inv.delItem();

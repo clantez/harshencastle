@@ -39,7 +39,12 @@ public class HarshenKeybinding
 	public void voidKeyOpenSlot()
 	{
 		if(key_openSlot.isPressed())
+		{
+			if(Minecraft.getMinecraft().player.getHeldItemMainhand().getItem() != Item.getItemFromBlock(Blocks.AIR) || HandlerHarshenInventory.instance.hasItem())
+				Minecraft.getMinecraft().player.playSound(SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 1, 1);
 			HarshenNetwork.sendToServer(new MessagePacketHarshenInvToggle());
+			
+		}
 
 	}
 	
