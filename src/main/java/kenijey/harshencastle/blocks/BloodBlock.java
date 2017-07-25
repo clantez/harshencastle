@@ -26,8 +26,6 @@ public class BloodBlock extends Block
 		 setUnlocalizedName("blood_block");
 	     setRegistryName("blood_block");
 	     blockSoundType = blockSoundType.SLIME;
-	     setHardness(-1);
-	     setResistance(-1);
 	     setTickRandomly(true);
 	}
 	
@@ -47,7 +45,7 @@ public class BloodBlock extends Block
 	
 	@Override
 	public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
-		if(ticks++ == 3)
+		if(ticks++ >= 3)
 			worldIn.setBlockToAir(pos);
 	}
 	

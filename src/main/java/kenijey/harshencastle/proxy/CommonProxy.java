@@ -12,6 +12,7 @@ import kenijey.harshencastle.biomes.HarshenBiomes;
 import kenijey.harshencastle.dimensions.HarshenDimensions;
 import kenijey.harshencastle.entity.HarshenEntities;
 import kenijey.harshencastle.fluids.HarshenFluids;
+import kenijey.harshencastle.handlers.HandlerBloodOnHurt;
 import kenijey.harshencastle.handlers.HandlerHarshenInventoryCommon;
 import kenijey.harshencastle.handlers.HandlerSoulHarsherSword;
 import kenijey.harshencastle.network.HarshenNetwork;
@@ -70,7 +71,7 @@ public class CommonProxy
     	
     	GameRegistry.registerWorldGenerator(new WorldGen(100), 0);
     	
-    	Object[] handlers = {new HandlerSoulHarsherSword(), new HandlerHarshenInventoryCommon()};
+    	Object[] handlers = {new HandlerSoulHarsherSword(), new HandlerHarshenInventoryCommon(), new HandlerBloodOnHurt()};
     	for(Object o : handlers)
     	{
     		MinecraftForge.EVENT_BUS.register(o);
