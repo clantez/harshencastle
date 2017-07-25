@@ -15,21 +15,24 @@ public class NetworkEventHarshenInvToggle {
 		ItemStack stack = player.getHeldItemMainhand();
 		ItemStack newStack = stack.copy();
 		int count  = stack.getCount();
+		HandlerHarshenInventory inv = HandlerHarshenInventory.instance;
 		if(stack.getItem() == Item.getItemFromBlock(Blocks.AIR))
 		{
-			ItemStack item = HandlerHarshenInventory.instance.getItem();
-			HandlerHarshenInventory.instance.delItem();
+			ItemStack item = inv.getItem();
+			inv.delItem();
 			player.setHeldItem(EnumHand.MAIN_HAND, item);
 			return;
 		}
-		if(HandlerHarshenInventory.instance.hasItem())
+		if(inv.hasItem())
 		{
+			if(stack.getItem() == inv.getItem().getItem() || stack.getCount() <= 64)
+				return;
 			count += 2;
-			HandlerHarshenInventory.instance.delItem();
+			inv.delItem();
 		}
 		else
 		{
-			HandlerHarshenInventory.instance.setItem(player, stack);
+			inv.setItem(player, stack);
 			if(newStack.getCount() == 1)
 				player.playSound(SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 1f, 1f);
 		}
