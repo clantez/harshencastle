@@ -2,14 +2,14 @@ package kenijey.harshencastle.items;
 import java.util.List;
 
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityFireworkRocket;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionAbsorption;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
@@ -23,6 +23,20 @@ public class SoulHarsherSword extends ItemSword
 		setUnlocalizedName("soul_harsher_sword");
 		setRegistryName("soul_harsher_sword");
 		setNoRepair();
+	}
+	
+	
+	@Override
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+		if(playerIn.isElytraFlying() && !worldIn.isRemote)
+		{
+			playerIn.getHeldItem(handIn).damageItem(25, playerIn);
+			worldIn.spawnEntity(new EntityFireworkRocket(worldIn, new ItemStack(Items.FIREWORKS), playerIn));
+	        return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
+
+		}
+			
+		return super.onItemRightClick(worldIn, playerIn, handIn);
 	}
 	
 	@Override
