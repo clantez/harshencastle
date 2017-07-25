@@ -42,9 +42,12 @@ public class HarshenKeybinding
 	{
 		if(key_openSlot.isPressed())
 		{
-			if(Arrays.asList(Minecraft.getMinecraft().player.getHeldItemMainhand().getItem(), HandlerHarshenInventory.instance.getItem().getItem()).contains(Item.getItemFromBlock(Blocks.AIR)) ||
+			if((Arrays.asList(Minecraft.getMinecraft().player.getHeldItemMainhand().getItem(), HandlerHarshenInventory.instance.getItem().getItem()).contains(Item.getItemFromBlock(Blocks.AIR)) ||
 					(Minecraft.getMinecraft().player.getHeldItemMainhand().getItem() == HandlerHarshenInventory.instance.getItem().getItem() && 
 					Minecraft.getMinecraft().player.getHeldItemMainhand().getCount() < Minecraft.getMinecraft().player.getHeldItemMainhand().getMaxStackSize()))
+					 && !(Minecraft.getMinecraft().player.getHeldItemMainhand().getItem() == Item.getItemFromBlock(Blocks.AIR) &&
+								HandlerHarshenInventory.instance.getItem().getItem() == Item.getItemFromBlock(Blocks.AIR)))
+						
 				Minecraft.getMinecraft().player.playSound(SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 1, 1);
 			HarshenNetwork.sendToServer(new MessagePacketHarshenInvToggle());
 			
