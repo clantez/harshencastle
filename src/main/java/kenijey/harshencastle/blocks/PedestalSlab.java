@@ -2,9 +2,9 @@ package kenijey.harshencastle.blocks;
 
 import kenijey.harshencastle.base.BaseBlockHarshenSingleInventory;
 import kenijey.harshencastle.base.BaseTileEntityHarshenSingleItemInventory;
+import kenijey.harshencastle.tileentity.TileEntityPedestalSlab;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -21,7 +21,7 @@ public class PedestalSlab extends BaseBlockHarshenSingleInventory
 
 	@Override
 	public BaseTileEntityHarshenSingleItemInventory getTile() {
-		return null;
+		return new TileEntityPedestalSlab();
 	}
 
 	@Override

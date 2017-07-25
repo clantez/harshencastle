@@ -20,6 +20,7 @@ import kenijey.harshencastle.tileentity.TileEntityHarshenDimensionalPedestal;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDisplayBlock;
 import kenijey.harshencastle.tileentity.TileEntityHarshenSpawner;
 import kenijey.harshencastle.tileentity.TileEntityHereticCauldron;
+import kenijey.harshencastle.tileentity.TileEntityPedestalSlab;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.MinecraftForge;
@@ -62,6 +63,8 @@ public class CommonProxy
     	GameRegistry.registerTileEntity(TileEntityHarshenDisplayBlock.class, HarshenCastle.MODID + "TileEntityHarshenDisplayBlock");
     	GameRegistry.registerTileEntity(TileEntityHarshenSpawner.class, HarshenCastle.MODID + "TileEntityHarshenSpawner");
     	GameRegistry.registerTileEntity(TileEntityHarshenDimensionalGate.class, HarshenCastle.MODID + "TileEntityHarshenDimensionalGate");
+    	GameRegistry.registerTileEntity(TileEntityPedestalSlab.class, HarshenCastle.MODID + "TileEntityPedestalSlab");
+
     	
     	Recipes.init();
     	
