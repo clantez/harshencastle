@@ -16,8 +16,8 @@ public class HarshenEntities
 	
 	public static void init()
 	{
-		registerEntity(EntitySoullessKnight.class, EntitySoullessKnight.id() ,"soulless_knight", 0x19232C, 295051);
-		registerEntity(EntitySoulPart.class, EntitySoulPart.id(), "soul_part", 0xa62323, 0xaed1515);
+		registerEntity(EntitySoullessKnight.class, HarshenIds.SoullessKnight ,"soulless_knight", 0x19232C, 295051);
+		registerEntity(EntitySoulPart.class, HarshenIds.SoulPart, "soul_part", 0xa62323, 0xaed1515);
 	}
 	
 	public static void registerEntity(Class entityClass, int id, String entityName, int solidColor, int spotColor)

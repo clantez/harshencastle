@@ -3,6 +3,7 @@ package kenijey.harshencastle.proxy;
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.HarshenItems;
+import kenijey.harshencastle.HarshenKeybinding;
 import kenijey.harshencastle.HarshenSounds;
 import kenijey.harshencastle.Recipes;
 import kenijey.harshencastle.WorldGen;

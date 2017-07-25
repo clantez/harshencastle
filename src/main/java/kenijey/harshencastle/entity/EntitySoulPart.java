@@ -1,5 +1,7 @@
 package kenijey.harshencastle.entity;
 
+import com.google.common.base.Predicate;
+
 import kenijey.harshencastle.entity.AI.AIEntityFlyingTowardsPlayer;
 import kenijey.harshencastle.entity.damagesource.DamageSourceSoulPart;
 import kenijey.harshencastle.entity.movehelper.MoveHelperSoulPart;
@@ -8,6 +10,7 @@ import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
@@ -39,6 +42,14 @@ public class EntitySoulPart extends EntityMob
         this.tasks.addTask(10, new EntityAIWatchClosest(this, EntityLiving.class, 8.0F));
         
         this.targetTasks.addTask(0, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, false));
+        this.targetTasks.addTask(10, new EntityAINearestAttackableTarget<>(this, EntityLiving.class, 10, false, false, new Predicate<Entity>() {
+
+			@Override
+			public boolean apply(Entity input) {
+				return !(input instanceof EntitySoulPart) && ((EntityLivingBase)input).attackable();
+			}
+		}));
+
 	}
 	
 	public void applyEntityAttributes()
@@ -77,11 +88,6 @@ public class EntitySoulPart extends EntityMob
     }
     
     public static Factory FACTORY = new Factory();
-    
-    public static int id()
-    {
-    	return 183;
-    }
     
     public static class Factory implements IRenderFactory<EntitySoulPart> 
     {

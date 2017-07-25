@@ -91,11 +91,6 @@ public class EntitySoullessKnight extends EntityMob
     
     public static Factory FACTORY = new Factory();
     
-    public static int id()
-    {
-    	return 182;
-    }
-    
     public static class Factory implements IRenderFactory<EntitySoullessKnight> 
     {
 

@@ -3,11 +3,11 @@ package kenijey.harshencastle.proxy;
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.HarshenItems;
+import kenijey.harshencastle.HarshenKeybinding;
 import kenijey.harshencastle.armor.HarshenArmors;
 import kenijey.harshencastle.entity.EntitySoulPart;
 import kenijey.harshencastle.entity.EntitySoullessKnight;
-import kenijey.harshencastle.entityrender.RenderSoulPart;
-import kenijey.harshencastle.entityrender.RenderSoullessKnight;
+import kenijey.harshencastle.handlers.HandlerSoulHarsherSword;
 import kenijey.harshencastle.itemrenderer.RendererDimensionalPedestal;
 import kenijey.harshencastle.itemrenderer.RendererHarshenDisplayBlock;
 import kenijey.harshencastle.itemrenderer.RendererHarshenSpawner;
@@ -20,17 +20,14 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.Entity;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 public class ClientProxy extends CommonProxy 
 {
@@ -44,6 +41,13 @@ public class ClientProxy extends CommonProxy
     public void init(FMLInitializationEvent event) 
     {
     	super.init(event);
+    	
+    	Object[] handlers = {new HarshenKeybinding()};
+    	for(Object o : handlers)
+    	{
+    		MinecraftForge.EVENT_BUS.register(o);
+        	FMLCommonHandler.instance().bus().register(o);
+    	}
     }
 
     @Override
