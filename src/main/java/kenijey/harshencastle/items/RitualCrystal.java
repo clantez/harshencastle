@@ -1,5 +1,7 @@
 package kenijey.harshencastle.items;
 
+import java.util.List;
+
 import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.base.BaseItemMetaData;
 import kenijey.harshencastle.enums.items.EnumRitualCrystal;
@@ -17,16 +19,13 @@ public class RitualCrystal extends BaseItemMetaData
 	}
 	
 	@Override
-	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) 
-	{
-		if(tab.equals(HarshenCastle.harshenTab))
-			for(int i = 0; i < EnumRitualCrystal.values().length; i++)
-				items.add(new ItemStack(this, 1, i));
+	protected String[] getNames() {
+		return EnumRitualCrystal.getNames();
 	}
 
 	@Override
-	protected String[] getNames() {
-		return EnumRitualCrystal.getNames();
+	protected List<Integer> getMetaForTab() {
+		return null;
 	}
 	
 }

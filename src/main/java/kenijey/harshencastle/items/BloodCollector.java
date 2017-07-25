@@ -1,32 +1,24 @@
 package kenijey.harshencastle.items;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.base.BaseItemMetaData;
 import kenijey.harshencastle.enums.items.EnumBloodCollector;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 
 public class BloodCollector extends BaseItemMetaData
 {		
+
 	public BloodCollector() {
 		setRegistryName("blood_collector");
 		setUnlocalizedName("blood_collector");
-	}
-	
-	@Override
-	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) 
-	{
-		if(tab.equals(HarshenCastle.harshenTab))
-			items.add(new ItemStack(this, 1, 0));	
 	}
 	
 	public boolean fill(World world, EntityPlayer player, EnumHand hand, int amount)
@@ -101,5 +93,10 @@ public class BloodCollector extends BaseItemMetaData
 	@Override
 	protected String[] getNames() {
 		return EnumBloodCollector.getNames();
+	}
+
+	@Override
+	protected List<Integer> getMetaForTab() {
+		return Arrays.asList(0);
 	}
 }

@@ -42,4 +42,9 @@ public class PontusWorldGatePart extends BaseItemMetaData
 		return EnumPontusGateSpawnerParts.getNames();
 	}
 
+	@Override
+	protected List<Integer> getMetaForTab() {
+		return null;
+	}
+
 }

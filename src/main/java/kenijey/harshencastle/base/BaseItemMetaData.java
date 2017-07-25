@@ -1,15 +1,36 @@
 package kenijey.harshencastle.base;
 
-import kenijey.harshencastle.enums.items.EnumProp;
+import java.util.ArrayList;
+import java.util.List;
+
+import kenijey.harshencastle.HarshenCastle;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.NonNullList;
 
 public abstract class BaseItemMetaData extends Item
 {
 	
+	/**
+	 * Leave null for all
+	 */
+	protected abstract List<Integer> getMetaForTab();
+	
 	public BaseItemMetaData() {
 		setHasSubtypes(true);
+	}
+	
+	@Override
+	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) 
+	{
+		if(tab.equals(HarshenCastle.harshenTab) || tab.equals(CreativeTabs.SEARCH))
+			if(getMetaForTab() == null)
+				for(int i = 0; i < getNames().length; i++)
+					items.add(new ItemStack(this, 1, i));
+			else
+				for(int i : getMetaForTab())
+					items.add(new ItemStack(this, 1, i));
 	}
 	
 	
@@ -22,4 +43,5 @@ public abstract class BaseItemMetaData extends Item
 	}
 	
 	protected abstract String[] getNames();
+	
 }

@@ -1,5 +1,7 @@
 package kenijey.harshencastle.items;
 
+import java.util.List;
+
 import kenijey.harshencastle.base.BaseItemMetaData;
 import kenijey.harshencastle.enums.items.EnumProp;
 import net.minecraft.creativetab.CreativeTabs;
@@ -23,5 +25,10 @@ public class HarshenProps extends BaseItemMetaData
 	@Override
 	protected String[] getNames() {
 		return EnumProp.getNames();
+	}
+
+	@Override
+	protected List<Integer> getMetaForTab() {
+		return null;
 	}
 }
