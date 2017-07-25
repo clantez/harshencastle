@@ -33,8 +33,6 @@ public class NetworkEventHarshenInvToggle {
 		else
 		{
 			inv.setItem(player, stack);
-			if(newStack.getCount() == 1)
-				player.playSound(SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 1f, 1f);
 		}
 		newStack.setCount(count - 1);
 		player.setHeldItem(EnumHand.MAIN_HAND, newStack);
