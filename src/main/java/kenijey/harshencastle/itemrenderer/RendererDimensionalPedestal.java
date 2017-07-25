@@ -15,7 +15,6 @@ public class RendererDimensionalPedestal extends TileEntitySpecialRenderer<TileE
 {
 	
 	public static EntityItem ITEM;
-	public static Entity ENTITY;
 	
 	@SideOnly(Side.CLIENT)
 	@Override
