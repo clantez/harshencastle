@@ -1,7 +1,9 @@
 package kenijey.harshencastle.dimensions.pontus;
 
+import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.biomes.HarshenBiomes;
 import kenijey.harshencastle.dimensions.DimensionPontus;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Biomes;
 import net.minecraft.nbt.NBTTagCompound;
@@ -73,7 +75,8 @@ public class PontusWorldProvider extends WorldProvider
 	@SideOnly(Side.CLIENT)
 	public Vec3d getFogColor(float p_76562_1_, float p_76562_2_)
 	{
-		return new Vec3d(0.7, 0, 0);
+		float i = (1f / HarshenCastle.proxy.getrenderDistance()) * 7;
+		return new Vec3d(i*i, 0, 0);
 	}
 
 	@Override
