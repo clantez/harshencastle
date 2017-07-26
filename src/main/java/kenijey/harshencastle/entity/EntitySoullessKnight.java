@@ -7,7 +7,6 @@ import kenijey.harshencastle.entity.AI.AIEntityWanderNoWater;
 import kenijey.harshencastle.entityrender.RenderSoullessKnight;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
@@ -24,6 +23,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.JsonToNBT;
+import net.minecraft.nbt.NBTException;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.DifficultyInstance;
@@ -59,7 +60,11 @@ public class EntitySoullessKnight extends EntityMob
 	@Override
 	public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData livingdata) {
 		setItemStackToSlot(this.isLeftHanded() ? EntityEquipmentSlot.OFFHAND : EntityEquipmentSlot.MAINHAND, new ItemStack(HarshenItems.props, 1, 0));
-		setItemStackToSlot(this.isLeftHanded() ? EntityEquipmentSlot.MAINHAND : EntityEquipmentSlot.OFFHAND, new ItemStack(Items.SHIELD));
+		try {
+			setItemStackToSlot(this.isLeftHanded() ? EntityEquipmentSlot.MAINHAND : EntityEquipmentSlot.OFFHAND, new ItemStack(JsonToNBT.getTagFromJson("{id:\"minecraft:shield\",Count:1b,tag:{BlockEntityTag:{Patterns:[{Pattern:\"ss\",Color:6},{Pattern:\"flo\",Color:1}],Base:8}},Damage:0s}")));
+		} catch (NBTException e) {
+			e.printStackTrace();
+		}
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).applyModifier(new AttributeModifier("Random spawn bonus", this.rand.nextGaussian() * 0.05D, 1));
         this.setLeftHanded(false);
 		return livingdata;
