@@ -33,7 +33,7 @@ item.ritual_crystal.active.name=Ritual Crystal (active)
 item.ladle.name=Ladle
 item.prop.knight_sword.name=Soulless Knight Sword Prop
 
-#entities
+#entity eggs
 entity.soulless_knight.name=[HC] Soulless Knight
 entity.soul_part.name=[HC] Soul Part
 
