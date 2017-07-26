@@ -6,7 +6,7 @@ import kenijey.harshencastle.entity.AI.AIEntityFlyingTowardsPlayer;
 import kenijey.harshencastle.entity.damagesource.DamageSourceSoulPart;
 import kenijey.harshencastle.entity.movehelper.MoveHelperSoulPart;
 import kenijey.harshencastle.entityrender.RenderSoulPart;
-import kenijey.harshencastle.potioneffects.HarshenPotions;
+import kenijey.harshencastle.potions.HarshenPotions;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityLiving;

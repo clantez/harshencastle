@@ -1,4 +1,4 @@
-package kenijey.harshencastle.potioneffects;
+package kenijey.harshencastle.potions;
 
 import kenijey.harshencastle.HarshenCastle;
 import net.minecraft.client.Minecraft;
@@ -8,10 +8,10 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class PotionEffectSoulless extends Potion
+public class PotionSoulless extends Potion
 {
 
-	protected PotionEffectSoulless() {
+	protected PotionSoulless() {
 		super(false, 0xa6afbf);
 		setRegistryName("soulless");
 		setPotionName("Soulless");

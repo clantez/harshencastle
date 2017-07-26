@@ -1,4 +1,4 @@
-package kenijey.harshencastle.potioneffects;
+package kenijey.harshencastle.potions;
 
 import net.minecraft.potion.Potion;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
@@ -10,7 +10,7 @@ public class HarshenPotions
 	
 	public static void preInit()
 	{
-		effectSoulless = new PotionEffectSoulless();
+		effectSoulless = new PotionSoulless();
 	}
 	
 	public static void register()
