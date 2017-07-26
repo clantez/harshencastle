@@ -84,6 +84,11 @@ public class CommonProxy
     {
     	
     }
+    
+    public int getrenderDistance()
+    {
+    	return 0;
+    }
 
 	public void registerFluidBlockRendering(Block block, String name) {}
 

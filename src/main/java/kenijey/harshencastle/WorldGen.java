@@ -68,7 +68,7 @@ public class WorldGen implements IWorldGenerator
 	
 	private void structureGenerator(World world, Random rand, int chunk_X, int chunk_Z, int chancesToSpawn, String names, boolean useRuin, BlockPos size, BlockPos... addPositions)
 	{
-		if( rand.nextInt(1000) < chancesToSpawn) {
+		if( rand.nextInt(100000) < chancesToSpawn) {
 	        int x = chunk_X * 16 + rand.nextInt(16);
 	        int z = chunk_Z * 16 + rand.nextInt(16);
 	        int y = world.getTopSolidOrLiquidBlock(new BlockPos(x, 0, z)).getY();

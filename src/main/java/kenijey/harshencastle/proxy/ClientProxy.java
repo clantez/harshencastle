@@ -36,6 +36,32 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 public class ClientProxy extends CommonProxy 
 {
 	@Override
+    public void regRenders(FMLPreInitializationEvent event) {
+    	super.regRenders(event);
+    	
+    	HarshenBlocks.regRenders();
+    	
+		HarshenItems.regRenders();
+		
+		HarshenArmors.regRenders();
+		
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHarshenDimensionalPedestal.class, new RendererDimensionalPedestal());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHereticCauldron.class, new RendererHereticCauldron());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHarshenDisplayBlock.class, new RendererHarshenDisplayBlock());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHarshenSpawner.class, new RendererHarshenSpawner());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPedestalSlab.class, new RendererPedestalSlab());
+
+		
+		RenderingRegistry.registerEntityRenderingHandler(EntitySoullessKnight.class, EntitySoullessKnight.FACTORY);
+		RenderingRegistry.registerEntityRenderingHandler(EntitySoulPart.class, EntitySoulPart.FACTORY);
+    }
+	
+	 @Override
+	public int getrenderDistance() {
+		return Minecraft.getMinecraft().gameSettings.renderDistanceChunks;
+	}
+	
+	@Override
     public void preInit(FMLPreInitializationEvent event) 
     {
     	super.preInit(event);
@@ -63,27 +89,6 @@ public class ClientProxy extends CommonProxy
     public void postInit(FMLPostInitializationEvent event) 
     {
     	super.postInit(event);
-    }
-    
-    @Override
-    public void regRenders(FMLPreInitializationEvent event) {
-    	super.regRenders(event);
-    	
-    	HarshenBlocks.regRenders();
-    	
-		HarshenItems.regRenders();
-		
-		HarshenArmors.regRenders();
-		
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHarshenDimensionalPedestal.class, new RendererDimensionalPedestal());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHereticCauldron.class, new RendererHereticCauldron());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHarshenDisplayBlock.class, new RendererHarshenDisplayBlock());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHarshenSpawner.class, new RendererHarshenSpawner());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPedestalSlab.class, new RendererPedestalSlab());
-
-		
-		RenderingRegistry.registerEntityRenderingHandler(EntitySoullessKnight.class, EntitySoullessKnight.FACTORY);
-		RenderingRegistry.registerEntityRenderingHandler(EntitySoulPart.class, EntitySoulPart.FACTORY);
     }
     
     
