@@ -38,7 +38,7 @@ entity.soulless_knight.name=[HC] Soulless Knight
 entity.soul_part.name=[HC] Soul Part
 
 #damage sources
-death.attack.entitySoulPart=%1$s 's soul was taken away.
+death.attack.entitySoulPart=%1$s's soul was taken away.
 
 #blocks
 tile.harshen_soul_ore.name=Harshen Soul Ore

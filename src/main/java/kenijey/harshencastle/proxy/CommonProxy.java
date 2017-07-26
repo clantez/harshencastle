@@ -16,6 +16,7 @@ import kenijey.harshencastle.handlers.HandlerBloodOnHurt;
 import kenijey.harshencastle.handlers.HandlerHarshenInventoryCommon;
 import kenijey.harshencastle.handlers.HandlerSoulHarsherSword;
 import kenijey.harshencastle.network.HarshenNetwork;
+import kenijey.harshencastle.potioneffects.HarshenPotions;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDimensionalGate;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDimensionalPedestal;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDisplayBlock;
@@ -43,8 +44,11 @@ public class CommonProxy
 		HarshenBlocks.reg();
 		HarshenItems.reg();
 		
-		HarshenArmors.init();
+		HarshenArmors.preInit();
 		HarshenArmors.register();
+		
+		HarshenPotions.preInit();
+		HarshenPotions.register();
 		
 		HarshenDimensions.register();
 		

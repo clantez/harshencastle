@@ -6,9 +6,9 @@ import kenijey.harshencastle.entity.AI.AIEntityFlyingTowardsPlayer;
 import kenijey.harshencastle.entity.damagesource.DamageSourceSoulPart;
 import kenijey.harshencastle.entity.movehelper.MoveHelperSoulPart;
 import kenijey.harshencastle.entityrender.RenderSoulPart;
+import kenijey.harshencastle.potioneffects.HarshenPotions;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -23,7 +23,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 
-public class EntitySoulPart extends EntityMob
+public class EntitySoulPart<T extends EntityLivingBase> extends EntityMob
 {
 	
 	private int cooldownTicks = 0;
@@ -43,10 +43,16 @@ public class EntitySoulPart extends EntityMob
         this.tasks.addTask(10, new EntityAIWatchClosest(this, EntityLiving.class, 8.0F));
 		this.tasks.addTask(11, new EntityAILookIdle(this));
 
-        
-        this.targetTasks.addTask(0, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, false));
+		this.targetTasks.addTask(0, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, 10, false, false, new Predicate<EntityLivingBase>() {
+
+			@Override
+			public boolean apply(EntityLivingBase input) {
+				return !input.isPotionActive(HarshenPotions.effectSoulless);
+			}
+		}));
 
 	}
+
 	
 	public void applyEntityAttributes()
 	{

@@ -23,7 +23,7 @@ public class HarshenArmors
 	public static ItemArmor harshen_jaguar_armor_leggings;
 	public static ItemArmor harshen_jaguar_armor_boots;
 	
-	public static void init()
+	public static void preInit()
 	{
 		harshen_jaguar_armor_helmet = new HarshenJaguarArmor(harshen_material, 1, EntityEquipmentSlot.HEAD, "harshen_jaguar_armor_helmet");
 		harshen_jaguar_armor_chestplate = new HarshenJaguarArmor(harshen_material, 1, EntityEquipmentSlot.CHEST, "harshen_jaguar_armor_chestplate");
