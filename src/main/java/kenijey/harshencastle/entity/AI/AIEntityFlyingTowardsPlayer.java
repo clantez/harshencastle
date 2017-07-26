@@ -1,17 +1,8 @@
 package kenijey.harshencastle.entity.AI;
 
-import java.util.Random;
-
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.entity.ai.EntityAIMoveTowardsTarget;
-import net.minecraft.entity.ai.EntityMoveHelper;
-import net.minecraft.entity.ai.RandomPositionGenerator;
-import net.minecraft.entity.monster.EntityVex;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 
 public class AIEntityFlyingTowardsPlayer extends EntityAIBase
 {
