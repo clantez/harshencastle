@@ -6,6 +6,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class Recipes 
 {
@@ -20,7 +21,7 @@ public class Recipes
 				
 				's', new ItemStack(HarshenItems.harshen_soul_fragment),
 				'h', new ItemStack(HarshenItems.harshen_crystal),
-				'i', new ItemStack(Items.IRON_INGOT));
+				'i', "ingotIron");
 		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "harshen_soul_ingot"), new ResourceLocation("harshen_items"),
 				new ItemStack(HarshenItems.harshen_soul_ingot),
@@ -30,7 +31,7 @@ public class Recipes
 				
 				'c', new ItemStack(HarshenItems.harshen_crystal),
 				's', new ItemStack(HarshenItems.harshen_soul_fragment),
-				'e', new ItemStack(Items.EMERALD));
+				'e', "gemEmerald");
 		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "pontus_ring"), new ResourceLocation("harshen_items"),
 				new ItemStack(HarshenItems.pontus_ring),
@@ -40,7 +41,7 @@ public class Recipes
 				
 				'i', new ItemStack(HarshenItems.itium),
 				's', new ItemStack(HarshenItems.harshen_soul_fragment),
-				'g', new ItemStack(Items.GOLD_NUGGET));
+				'g', "nuggetGold");
 		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "bloody_earring"), new ResourceLocation("harshen_items"),
 				new ItemStack(HarshenItems.bloody_earring),
@@ -99,7 +100,7 @@ public class Recipes
 				" e ",
 				
 				'e', new ItemStack(HarshenItems.harshen_crystal),
-				'd', new ItemStack(Blocks.DIRT));
+				'd', "dirt");
 		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "ritual_crystal.passive"), new ResourceLocation("harshen_items"),
 				new ItemStack(HarshenItems.ritual_crystal, 1, 0),
@@ -118,8 +119,8 @@ public class Recipes
 				"ini",
 				
 				's', new ItemStack(HarshenItems.pontus_world_gate_spawner, 1, 0),
-				'n', new ItemStack(Items.NETHER_STAR),
-				'e', new ItemStack(Blocks.EMERALD_BLOCK),
+				'n', "netherStar",
+				'e', "blockEmerald",
 				'i', new ItemStack(HarshenItems.itium));
 		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "pedestal_slab"), new ResourceLocation("harshen_items"),
@@ -144,8 +145,8 @@ public class Recipes
 				"  s",
 				" p ",
 				
-				's', new ItemStack(Items.STICK),
-				'p', new ItemStack(Blocks.PLANKS));
+				's', "stickWood",
+				'p', "plankWood");
 		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "blood_collector"), new ResourceLocation("harshen_items"),
 				new ItemStack(HarshenItems.blood_collector, 0, 0),
@@ -153,9 +154,9 @@ public class Recipes
 				"rbi",
 				"nri",
 				
-				'b', new ItemStack(Blocks.IRON_BLOCK),
-				'i', new ItemStack(Items.IRON_INGOT),
+				'b', "blockIron",
+				'i', "ingotIron",
 				'r', new ItemStack(Blocks.IRON_BARS),
-				'n', new ItemStack(Items.IRON_NUGGET));
+				'n', "nuggetIron");
 	}
 }
