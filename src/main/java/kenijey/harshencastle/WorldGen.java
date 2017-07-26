@@ -4,10 +4,13 @@ import java.util.Random;
 
 import kenijey.harshencastle.dimensions.DimensionPontus;
 import kenijey.harshencastle.worldgenerators.pontus.PontusWorldGeneratorIniumOre;
+import kenijey.harshencastle.worldgenerators.pontus.PontusWorldRuinGenerator;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Rotations;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.IChunkProvider;
@@ -23,6 +26,7 @@ public class WorldGen implements IWorldGenerator
 {
     private final WorldGenMinable soulore = new WorldGenMinable(HarshenBlocks.harshen_soul_ore.getDefaultState(), 3);
     private final WorldGenerator itiumOre = new PontusWorldGeneratorIniumOre();
+    private final WorldGenerator ruinGenerator = new PontusWorldRuinGenerator();
     private final int chanceForNodeToSpawn;
 	public WorldGen(int chanceForNodeToSpawn)
 	{
@@ -46,7 +50,7 @@ public class WorldGen implements IWorldGenerator
 		else if(dim == DimensionPontus.DIMENSION_ID)
 		{
 	    	oreGenerator(this.itiumOre, world, random, chunkX, chunkZ, 10, 0, 255);
-	    	//structureGenerator(world, random, chunkX, chunkZ, 10, "pontus/struc1,pontus/struc2,pontus/struc3,pontus/struc4");
+	    	structureGenerator(world, random, chunkX, chunkZ, 25, "pontus/struc1", true, new BlockPos(-8, 0, -12));
 		}
 		
 	}
@@ -62,22 +66,26 @@ public class WorldGen implements IWorldGenerator
 	    }
 	}
 	
-	private void structureGenerator(World world, Random rand, int chunk_X, int chunk_Z, int chancesToSpawn, String names)
+	
+	private void structureGenerator(World world, Random rand, int chunk_X, int chunk_Z, int chancesToSpawn, String names, boolean useRuin, BlockPos... addPositions)
 	{
-		if( rand.nextInt(100) < chancesToSpawn) {
+		if( rand.nextInt(1000) < chancesToSpawn) {
 	        int x = chunk_X * 16 + rand.nextInt(16);
 	        int z = chunk_Z * 16 + rand.nextInt(16);
 	        int y = world.getTopSolidOrLiquidBlock(new BlockPos(x, 0, z)).getY();
-	        loadStructure(world, names.split(",")[rand.nextInt(names.split(",").length)], new BlockPos(x, y, z));;
+	        int i = rand.nextInt(names.split(",").length);
+	        loadStructure(world, names.split(",")[i], new BlockPos(x, y, z).add(addPositions[i]));
+	        if(useRuin)
+	        	ruinGenerator.generate(world, rand, new BlockPos(x, y, z));
+
 		}
 	}
 	
 	private void loadStructure(World world, String name, BlockPos pos)
 	{
 		((WorldServer)world).getStructureTemplateManager().get(world.getMinecraftServer(), new ResourceLocation(HarshenCastle.MODID, name))
-		.addBlocksToWorld(world, pos, new PlacementSettings().setIgnoreEntities(false).setIgnoreStructureBlock(false));
+		.addBlocksToWorld(world, pos, new PlacementSettings().setIgnoreEntities(false).setIgnoreStructureBlock(true));
 	}
-	
 	
 	private void flowerGenerator(BlockFlower flower, World worldIn, Random rand, int chunk_X, int chunk_Z, int chancesToSpawn)
 	{
