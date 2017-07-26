@@ -6,6 +6,7 @@ import org.lwjgl.input.Keyboard;
 
 import kenijey.harshencastle.handlers.HandlerHarshenInventoryClient;
 import kenijey.harshencastle.network.HarshenNetwork;
+import kenijey.harshencastle.network.events.NetworkEventHarshenInvToggle;
 import kenijey.harshencastle.network.packets.MessagePacketHarshenInvToggle;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
@@ -40,14 +41,15 @@ public class HarshenKeybinding
 		if(key_openSlot.isPressed())
 		{
 			EntityPlayer player = Minecraft.getMinecraft().player;
-			if((Arrays.asList(Minecraft.getMinecraft().player.getHeldItemMainhand().getItem(), HandlerHarshenInventoryClient.getInvForPlayer(player.getCachedUniqueIdString()).getItem().getItem()).contains(Item.getItemFromBlock(Blocks.AIR)) ||
-					(Minecraft.getMinecraft().player.getHeldItemMainhand().getItem() == HandlerHarshenInventoryClient.getInvForPlayer(player.getCachedUniqueIdString()).getItem().getItem() && 
-					Minecraft.getMinecraft().player.getHeldItemMainhand().getCount() < Minecraft.getMinecraft().player.getHeldItemMainhand().getMaxStackSize()))
-					 && !(Minecraft.getMinecraft().player.getHeldItemMainhand().getItem() == Item.getItemFromBlock(Blocks.AIR) &&
-								HandlerHarshenInventoryClient.getInvForPlayer(player.getCachedUniqueIdString()).getItem().getItem() == Item.getItemFromBlock(Blocks.AIR)))
+			if((Arrays.asList(player.getHeldItemMainhand().getItem(), NetworkEventHarshenInvToggle.getInvForPlayer(player).getItem().getItem()).contains(Item.getItemFromBlock(Blocks.AIR)) ||
+					(player.getHeldItemMainhand().getItem() == NetworkEventHarshenInvToggle.getInvForPlayer(player).getItem().getItem() && 
+					player.getHeldItemMainhand().getCount() < player.getHeldItemMainhand().getMaxStackSize()))
+					 && !(player.getHeldItemMainhand().getItem() == Item.getItemFromBlock(Blocks.AIR) &&
+							 NetworkEventHarshenInvToggle.getInvForPlayer(player).getItem().getItem() == Item.getItemFromBlock(Blocks.AIR)))
 						
-				Minecraft.getMinecraft().player.playSound(SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 1, 1);
+				player.playSound(SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 1, 1);
 			HarshenNetwork.sendToServer(new MessagePacketHarshenInvToggle());
+			NetworkEventHarshenInvToggle.go(player);
 			
 		}
 

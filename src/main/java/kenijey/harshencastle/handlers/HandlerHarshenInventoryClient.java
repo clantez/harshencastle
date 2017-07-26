@@ -1,9 +1,7 @@
 package kenijey.harshencastle.handlers;
 
-import java.util.ArrayList;
-
 import kenijey.harshencastle.HarshenCastle;
-import net.minecraft.client.Minecraft;
+import kenijey.harshencastle.network.events.NetworkEventHarshenInvToggle;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -15,21 +13,14 @@ import net.minecraftforge.items.ItemStackHandler;
 public class HandlerHarshenInventoryClient 
 {
 	
-	public static HandlerHarshenInventoryClient getInvForPlayer(String UUID)
-	{
-		for(HandlerHarshenInventoryClient handler : all)
-			if(UUID.equals(handler.getPlayerUID()))
-				return handler;
-		return new HandlerHarshenInventoryClient();
-	}
-	
-	private static ArrayList<HandlerHarshenInventoryClient> all = new ArrayList<HandlerHarshenInventoryClient>();
 	private final String UUID;
+	private final EntityPlayer player;
 	
-	public HandlerHarshenInventoryClient()
+	public HandlerHarshenInventoryClient(EntityPlayer playerIn)
 	{
-		all.add(this);
-		UUID = HarshenCastle.proxy.getPlayer().getCachedUniqueIdString();
+		this.player = playerIn;
+		NetworkEventHarshenInvToggle.all.add(this);
+		UUID = this.player.getCachedUniqueIdString();
 	}
 	
 	public String getPlayerUID()
@@ -66,7 +57,7 @@ public class HandlerHarshenInventoryClient
 		item.setCount(1);
 		ItemStack stack = handler.getStackInSlot(0);
 		this.handler.setStackInSlot(0, item);
-		this.save(Minecraft.getMinecraft().player);
+		this.save(this.player);
 
 		return stack;
 	}
@@ -74,7 +65,7 @@ public class HandlerHarshenInventoryClient
 	public void delItem()
 	{
 		this.handler.setStackInSlot(0, new ItemStack(Blocks.AIR));
-		this.save(Minecraft.getMinecraft().player);
+		this.save(this.player);
 	}
 	
 	public boolean hasItem()
@@ -84,7 +75,7 @@ public class HandlerHarshenInventoryClient
 	
 	public ItemStack getItem()
 	{
-		load(Minecraft.getMinecraft().player);
+		load(this.player);
 		return handler.getStackInSlot(0);
 	}
 }

@@ -18,7 +18,7 @@ public class MessagePacketHarshenInvToggle extends BaseMessagePacket<MessagePack
 	}
 
 	@Override
-	public void handleServerSide(MessagePacketHarshenInvToggle message, EntityPlayer player) {		
+	public void handleServerSide(MessagePacketHarshenInvToggle message, EntityPlayer player) {	
 		NetworkEventHarshenInvToggle.go(player);
 	}
 

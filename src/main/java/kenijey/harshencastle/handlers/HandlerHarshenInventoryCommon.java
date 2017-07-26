@@ -3,6 +3,7 @@ package kenijey.harshencastle.handlers;
 import java.util.Arrays;
 
 import kenijey.harshencastle.base.BaseItemCustomInvEffect;
+import kenijey.harshencastle.network.events.NetworkEventHarshenInvToggle;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -66,7 +67,7 @@ public class HandlerHarshenInventoryCommon
 				
 				this.handler.setStackInSlot(0, ItemStack.EMPTY);
 				player.getEntityData().setTag("ItemStackHandler", handler.serializeNBT());
-				HandlerHarshenInventoryClient.getInvForPlayer(player.getCachedUniqueIdString()).load(player);	
+				NetworkEventHarshenInvToggle.getInvForPlayer(player).load(player);	
 				player.setHealth(1.0F);
 				player.clearActivePotions();
 				player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 900, 1));
