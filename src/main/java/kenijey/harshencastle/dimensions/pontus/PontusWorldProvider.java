@@ -45,7 +45,7 @@ public class PontusWorldProvider extends WorldProvider
 	
 	@Override
 	protected void generateLightBrightnessTable() {
-		float[] d = {0.1f,0.1f,0.1f,0.1f,0.1f,0.1f,0.1f,0.1f,0.017543858f, 0.058823526f, 0.11111113f, 0.1794872f, 0.2727273f, 0.40740743f, 0.61904764f, 1.0f};
+		float[] d = {0.03f,0.03f,0.03f,0.03f,0.03f,0.03f,0.03f,0.03f,0.017543858f, 0.058823526f, 0.11111113f, 0.1794872f, 0.2727273f, 0.40740743f, 0.61904764f, 1.0f};
         for (int i = 0; i <= 15; ++i)
         	this.lightBrightnessTable[i] = d[i];
 	}
@@ -73,7 +73,7 @@ public class PontusWorldProvider extends WorldProvider
 	@SideOnly(Side.CLIENT)
 	public Vec3d getFogColor(float p_76562_1_, float p_76562_2_)
 	{
-		return new Vec3d(0.02, 0, 0);
+		return new Vec3d(0.7, 0, 0);
 	}
 
 	@Override
