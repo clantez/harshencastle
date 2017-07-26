@@ -26,7 +26,6 @@ public class WorldGen implements IWorldGenerator
 {
     private final WorldGenMinable soulore = new WorldGenMinable(HarshenBlocks.harshen_soul_ore.getDefaultState(), 3);
     private final WorldGenerator itiumOre = new PontusWorldGeneratorIniumOre();
-    private final WorldGenerator ruinGenerator = new PontusWorldRuinGenerator();
     private final int chanceForNodeToSpawn;
 	public WorldGen(int chanceForNodeToSpawn)
 	{
@@ -50,7 +49,7 @@ public class WorldGen implements IWorldGenerator
 		else if(dim == DimensionPontus.DIMENSION_ID)
 		{
 	    	oreGenerator(this.itiumOre, world, random, chunkX, chunkZ, 10, 0, 255);
-	    	structureGenerator(world, random, chunkX, chunkZ, 25, "pontus/struc1", true, new BlockPos(-8, 0, -12));
+	    	structureGenerator(world, random, chunkX, chunkZ, 5, "pontus/struc1", true, new BlockPos(26, 22, 26), new BlockPos(-8, 0, -12));
 		}
 		
 	}
@@ -67,7 +66,7 @@ public class WorldGen implements IWorldGenerator
 	}
 	
 	
-	private void structureGenerator(World world, Random rand, int chunk_X, int chunk_Z, int chancesToSpawn, String names, boolean useRuin, BlockPos... addPositions)
+	private void structureGenerator(World world, Random rand, int chunk_X, int chunk_Z, int chancesToSpawn, String names, boolean useRuin, BlockPos size, BlockPos... addPositions)
 	{
 		if( rand.nextInt(1000) < chancesToSpawn) {
 	        int x = chunk_X * 16 + rand.nextInt(16);
@@ -76,7 +75,8 @@ public class WorldGen implements IWorldGenerator
 	        int i = rand.nextInt(names.split(",").length);
 	        loadStructure(world, names.split(",")[i], new BlockPos(x, y, z).add(addPositions[i]));
 	        if(useRuin)
-	        	ruinGenerator.generate(world, rand, new BlockPos(x, y, z));
+	        	new PontusWorldRuinGenerator(size, HarshenBlocks.harshen_dimensional_wood_crate, HarshenBlocks.pontus_dead_wood, HarshenBlocks.harshen_dimensional_glass)
+	        	.generate(world, rand, new BlockPos(x, y, z).add(addPositions[i]));
 
 		}
 	}
