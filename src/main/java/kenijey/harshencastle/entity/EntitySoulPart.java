@@ -12,6 +12,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
@@ -40,15 +41,10 @@ public class EntitySoulPart extends EntityMob
 		this.tasks.addTask(8, new AIEntityFlyingTowardsPlayer(this));
         this.tasks.addTask(9, new EntityAIWatchClosest(this, EntityPlayer.class, 3.0F, 1.0F));
         this.tasks.addTask(10, new EntityAIWatchClosest(this, EntityLiving.class, 8.0F));
+		this.tasks.addTask(11, new EntityAILookIdle(this));
+
         
         this.targetTasks.addTask(0, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, false));
-        this.targetTasks.addTask(10, new EntityAINearestAttackableTarget<>(this, EntityLiving.class, 10, false, false, new Predicate<Entity>() {
-
-			@Override
-			public boolean apply(Entity input) {
-				return !(input instanceof EntitySoulPart) && ((EntityLivingBase)input).attackable();
-			}
-		}));
 
 	}
 	
@@ -66,7 +62,7 @@ public class EntitySoulPart extends EntityMob
         super.onUpdate();
         this.noClip = false;
         this.setNoGravity(true);
-        if(this.getAttackTarget() != null && this.getPosition().distanceSq(this.getAttackTarget().getPosition()) < 20)
+        if(this.getAttackTarget() != null && this.getPosition().distanceSq(this.getAttackTarget().getPosition()) < 10)
         	this.getAttackTarget().attackEntityFrom(DamageSourceSoulPart.getSource(this),  4f);
     }
 	
