@@ -1,7 +1,7 @@
 ------------FEATURES--------------
 HARSHED EFFECT
 -has 3 levels
--first level causes 1 hp damage per second, 9 seconds slowness and 9 seconds nausea
+-first level causes 9 seconds slowness and 9 seconds nausea
 -second level causes 2 hp damage per second, 11 seconds slowness and 4 seconds nausea
 -third level causes 5 hp damage per second, 5 seconds slowness and 5 seconds weakness
 
