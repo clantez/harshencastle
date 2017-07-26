@@ -15,7 +15,7 @@ public class HarshenTab extends CreativeTabs
 	@Override
 	public ItemStack getTabIconItem() 
 	{
-		return new ItemStack(HarshenItems.harshen_soul_fragment);
+		return new ItemStack(HarshenItems.pontus_world_gate_spawner);
 	}
 
 }
