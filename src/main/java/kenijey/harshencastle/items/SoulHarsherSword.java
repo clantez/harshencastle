@@ -20,7 +20,7 @@ import net.minecraftforge.common.util.EnumHelper;
 
 public class SoulHarsherSword extends ItemSword
 {
-	private static ToolMaterial toolMaterial = EnumHelper.addToolMaterial("soul_harsher_sword", 3, 2000, 13.5f, 13f, 30);
+	private static ToolMaterial toolMaterial = EnumHelper.addToolMaterial("soul_harsher_sword", 3, 5000, 13.5f, 13f, 30);
 	public SoulHarsherSword()
 	{
 		super(toolMaterial);
