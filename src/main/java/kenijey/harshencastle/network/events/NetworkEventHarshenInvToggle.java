@@ -1,5 +1,7 @@
 package kenijey.harshencastle.network.events;
 
+import java.util.ArrayList;
+
 import kenijey.harshencastle.handlers.HandlerHarshenInventoryClient;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -7,20 +9,26 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class NetworkEventHarshenInvToggle {
+	
+	public static ArrayList<HandlerHarshenInventoryClient> all = new ArrayList<HandlerHarshenInventoryClient>();
+
 	
 	public static void go(EntityPlayer player)
 	{
 		ItemStack stack = player.getHeldItemMainhand();
 		ItemStack newStack = stack.copy();
 		int count  = stack.getCount();
-		HandlerHarshenInventoryClient inv = HandlerHarshenInventoryClient.getInvForPlayer(player.getCachedUniqueIdString());
+		HandlerHarshenInventoryClient inv = getInvForPlayer(player);
 		if(stack.getItem() == Item.getItemFromBlock(Blocks.AIR))
 		{
 			ItemStack item = inv.getItem();
 			inv.delItem();
-			player.setHeldItem(EnumHand.MAIN_HAND, item);
+			if(!player.world.isRemote)
+				player.setHeldItem(EnumHand.MAIN_HAND, item);
 			return;
 		}
 		if(inv.hasItem())
@@ -34,7 +42,16 @@ public class NetworkEventHarshenInvToggle {
 			inv.setItem(player, stack);
 
 		newStack.setCount(count - 1);
-		player.setHeldItem(EnumHand.MAIN_HAND, newStack);
+		if(!player.world.isRemote)
+			player.setHeldItem(EnumHand.MAIN_HAND, newStack);
+	}
+	
+	public static HandlerHarshenInventoryClient getInvForPlayer(EntityPlayer player)
+	{
+		for(HandlerHarshenInventoryClient handler : all)
+			if(player.getCachedUniqueIdString().equals(handler.getPlayerUID()))
+				return handler;
+		return new HandlerHarshenInventoryClient(player);
 	}
 
 }
