@@ -1,15 +1,19 @@
 package kenijey.harshencastle.items;
 import java.util.List;
+import java.util.Random;
 
+import kenijey.harshencastle.HarshenSounds;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.item.EntityFireworkRocket;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
@@ -28,10 +32,18 @@ public class SoulHarsherSword extends ItemSword
 	
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
-		if(playerIn.isElytraFlying() && !worldIn.isRemote)
+		if(playerIn.isElytraFlying())
 		{
-			playerIn.getHeldItem(handIn).damageItem(25, playerIn);
-			worldIn.spawnEntity(new EntityFireworkRocket(worldIn, new ItemStack(Items.FIREWORKS), playerIn));
+			if(!worldIn.isRemote)
+			{
+				playerIn.getHeldItem(handIn).damageItem(new Random().nextInt(10) + 20, playerIn);
+				EntityFireworkRocket rocket = new EntityFireworkRocket(worldIn, new ItemStack(Items.FIREWORKS), playerIn);
+				rocket.setSilent(true);
+				worldIn.spawnEntity(rocket);
+			}
+
+			worldIn.playSound(playerIn.getPosition().getX(), playerIn.getPosition().getY(), playerIn.getPosition().getZ(),
+					HarshenSounds.swordFireWork, SoundCategory.AMBIENT, 2f, 1f, false);
 	        return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
 
 		}
