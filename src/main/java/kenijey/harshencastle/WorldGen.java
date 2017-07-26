@@ -46,7 +46,7 @@ public class WorldGen implements IWorldGenerator
 		else if(dim == DimensionPontus.DIMENSION_ID)
 		{
 	    	oreGenerator(this.itiumOre, world, random, chunkX, chunkZ, 10, 0, 255);
-
+	    	//structureGenerator(world, random, chunkX, chunkZ, 10, "pontus/struc1,pontus/struc2,pontus/struc3,pontus/struc4");
 		}
 		
 	}
@@ -60,6 +60,16 @@ public class WorldGen implements IWorldGenerator
 	        int z = chunk_Z * 16 + rand.nextInt(16);
 	        generator.generate(world, rand, new BlockPos(x, y, z));
 	    }
+	}
+	
+	private void structureGenerator(World world, Random rand, int chunk_X, int chunk_Z, int chancesToSpawn, String names)
+	{
+		if( rand.nextInt(100) < chancesToSpawn) {
+	        int x = chunk_X * 16 + rand.nextInt(16);
+	        int z = chunk_Z * 16 + rand.nextInt(16);
+	        int y = world.getTopSolidOrLiquidBlock(new BlockPos(x, 0, z)).getY();
+	        loadStructure(world, names.split(",")[rand.nextInt(names.split(",").length)], new BlockPos(x, y, z));;
+		}
 	}
 	
 	private void loadStructure(World world, String name, BlockPos pos)
