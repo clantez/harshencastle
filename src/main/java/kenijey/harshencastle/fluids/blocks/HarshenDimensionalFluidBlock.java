@@ -43,7 +43,7 @@ public class HarshenDimensionalFluidBlock extends BaseFluidBlock
 		ArrayList<PotionEffect> effects = new ArrayList<PotionEffect>();
 		effects.add(new PotionEffect(Potion.getPotionById(9), 250));
 		effects.add(new PotionEffect(Potion.getPotionById(2), 250));
-		return null;
+		return effects;
 	}
 
 	@Override
