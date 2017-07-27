@@ -87,6 +87,12 @@ commands.delflat.notfound=Harshen Dimensional Flat Plate was not found in the ar
 commands.delflat.success=Removed %s Harshen Dimensional Flat Plate%s
 commands.delflat.toobig=%s is too big, maximum of 250
 
+#gui
+gui.category.mobs=Mobs
+gui.category.potions=Potions
+gui.category.structure=Structure
+gui.category.dimension=Dimension
+gui.category.ritual=Ritual
 
 #tooltips
 sword1=Reminds the wraith

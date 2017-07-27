@@ -13,6 +13,7 @@ import kenijey.harshencastle.items.BloodCollector;
 import kenijey.harshencastle.items.BloodEssence;
 import kenijey.harshencastle.items.BloodyEarring;
 import kenijey.harshencastle.items.GlassContainer;
+import kenijey.harshencastle.items.GuidanceOfHarshenCastle;
 import kenijey.harshencastle.items.HarshenCrystal;
 import kenijey.harshencastle.items.HarshenDimensionalDoor;
 import kenijey.harshencastle.items.HarshenProps;
@@ -38,6 +39,7 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 public class HarshenItems 
 {
+	public static Item harshen_book;
 	public static Item harshen_soul_fragment;
 	public static Item soul_harsher_sword;
 	public static Item soul_harsher_pickaxe;
@@ -61,6 +63,7 @@ public class HarshenItems
 	
 	public static void preInit()
 	{
+		harshen_book = new GuidanceOfHarshenCastle();
 		harshen_soul_fragment = new HarshenSoulFragment();
 		soul_harsher_sword = new SoulHarsherSword();
 		soul_harsher_pickaxe = new SoulHarsherPickaxe();
@@ -84,6 +87,7 @@ public class HarshenItems
 	
 	public static void reg()
 	{
+		regItem(harshen_book, 1);
 		regItem(harshen_soul_fragment, 8);
 		regItem(soul_harsher_sword, 1);
 		regItem(soul_harsher_pickaxe, 1);
