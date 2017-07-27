@@ -1,11 +1,19 @@
 package kenijey.harshencastle.handlers;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
+import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.potions.HarshenPotions;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -14,10 +22,32 @@ public class HandlerPotion {
 	
 	private static ArrayList<EntityLivingBase> arrayLivingWithEffect = new ArrayList<EntityLivingBase>();
 	private static ArrayList<HandlerHarshenEffect> arrayEffectManager = new ArrayList<HandlerHarshenEffect>();
+	private static ArrayList<EntityLivingBase> arrayLivingNoSoul = new ArrayList<EntityLivingBase>();
 	
 	@SubscribeEvent
 	public void livingTick(LivingUpdateEvent event)
 	{
+		if(event.getEntityLiving().isPotionActive(HarshenPotions.potionSoulless))
+		{
+			if(!arrayLivingNoSoul.contains(event.getEntityLiving()))
+			{
+				arrayLivingNoSoul.add(event.getEntityLiving());
+				IAttributeInstance attribute = event.getEntityLiving().getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH);
+				AttributeModifier modifier = new AttributeModifier(UUID.fromString("81c41407-0bb1-435d-91ca-449b8c8a0eec"), "healthTo1", -(event.getEntityLiving().getMaxHealth() - 1D), 0).setSaved(true);
+				if(!attribute.hasModifier(modifier))	
+					attribute.applyModifier(modifier);
+			}
+			if(!Minecraft.getMinecraft().entityRenderer.isShaderActive() && event.getEntity().world.isRemote && event.getEntityLiving().equals(HarshenCastle.proxy.getPlayer()))
+				Minecraft.getMinecraft().entityRenderer.loadShader(new ResourceLocation("minecraft", "shaders/post/desaturate.json"));
+		}
+			
+		else if(arrayLivingNoSoul.contains(event.getEntityLiving()))
+		{
+			if(event.getEntity().world.isRemote && event.getEntityLiving().equals(HarshenCastle.proxy.getPlayer()))
+				Minecraft.getMinecraft().entityRenderer.stopUseShader();
+			event.getEntityLiving().getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).removeModifier(UUID.fromString("81c41407-0bb1-435d-91ca-449b8c8a0eec"));
+			arrayLivingNoSoul.remove(event.getEntityLiving());
+		}
 		if(event.getEntity().world.isRemote)
 			return;
 		if(event.getEntityLiving().isPotionActive(HarshenPotions.potionHarshed))

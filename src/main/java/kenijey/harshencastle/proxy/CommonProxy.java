@@ -16,6 +16,7 @@ import kenijey.harshencastle.handlers.HandlerHarshenArmourEffects;
 import kenijey.harshencastle.handlers.HandlerHarshenInventoryCommon;
 import kenijey.harshencastle.handlers.HandlerPotion;
 import kenijey.harshencastle.handlers.HandlerSoulHarsherSword;
+import kenijey.harshencastle.items.GlassContainer;
 import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.potions.HarshenPotions;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDimensionalGate;
@@ -82,6 +83,8 @@ public class CommonProxy
     		MinecraftForge.EVENT_BUS.register(o);
         	FMLCommonHandler.instance().bus().register(o);
     	}
+    	
+    	GlassContainer.initEffects();
     	
     }
 

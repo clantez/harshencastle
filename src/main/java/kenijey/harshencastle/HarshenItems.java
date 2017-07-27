@@ -2,7 +2,9 @@ package kenijey.harshencastle;
 
 import java.util.ArrayList;
 
+import kenijey.harshencastle.base.BaseItemMetaData;
 import kenijey.harshencastle.enums.items.EnumBloodCollector;
+import kenijey.harshencastle.enums.items.EnumGlassContainer;
 import kenijey.harshencastle.enums.items.EnumPontusGateSpawner;
 import kenijey.harshencastle.enums.items.EnumPontusGateSpawnerParts;
 import kenijey.harshencastle.enums.items.EnumProp;
@@ -10,6 +12,7 @@ import kenijey.harshencastle.enums.items.EnumRitualCrystal;
 import kenijey.harshencastle.items.BloodCollector;
 import kenijey.harshencastle.items.BloodEssence;
 import kenijey.harshencastle.items.BloodyEarring;
+import kenijey.harshencastle.items.GlassContainer;
 import kenijey.harshencastle.items.HarshenCrystal;
 import kenijey.harshencastle.items.HarshenDimensionalDoor;
 import kenijey.harshencastle.items.HarshenProps;
@@ -27,6 +30,7 @@ import kenijey.harshencastle.items.SoulHarsherPickaxe;
 import kenijey.harshencastle.items.SoulHarsherSword;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemPotion;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
@@ -44,14 +48,15 @@ public class HarshenItems
 	public static Item pontus_ring;
 	public static Item bloody_earring;
 	public static Item blood_essence;
-	public static Item pontus_world_gate_parts;
-	public static Item pontus_world_gate_spawner;
+	public static BaseItemMetaData pontus_world_gate_parts;
+	public static BaseItemMetaData pontus_world_gate_spawner;
 	public static Item light_emitted_seed;
 	public static Item light_emitted_essence;
-	public static Item blood_collector;
-	public static Item ritual_crystal;
+	public static BaseItemMetaData blood_collector;
+	public static BaseItemMetaData ritual_crystal;
 	public static Item ladle;
-	public static Item props;
+	public static BaseItemMetaData props;
+	public static BaseItemMetaData glass_container;
 	
 	
 	public static void preInit()
@@ -74,6 +79,7 @@ public class HarshenItems
 		ritual_crystal = new RitualCrystal();
 		ladle = new Ladle();
 		props = new HarshenProps();
+		glass_container = new GlassContainer();
 	}
 	
 	public static void reg()
@@ -97,6 +103,7 @@ public class HarshenItems
 		regMetaItem(props, 1, EnumProp.getNames(), "prop_");
 		regMetaItem(blood_collector, 1, EnumBloodCollector.getNames(), "blood_collector_");
 		regMetaItem(ritual_crystal, EnumRitualCrystal.getNames(), "ritual_crystal_");
+		regMetaItem(glass_container, 1, EnumGlassContainer.getNames(), "glass_container_");
 	}
 	
 	public static ArrayList<Item> items = new ArrayList<Item>();
@@ -115,7 +122,7 @@ public class HarshenItems
 		ForgeRegistries.ITEMS.register(item);
 	}
 	
-	public static void regMetaItem(Item item, int stackSize, String[] names, String prefix)
+	public static void regMetaItem(BaseItemMetaData item, int stackSize, String[] names, String prefix)
 	{
 		item.setMaxStackSize(stackSize);
 		regMetaItem(item, names, prefix);
@@ -125,7 +132,7 @@ public class HarshenItems
 	private static ArrayList<String[]> allMetaNames = new ArrayList<String[]>();
 	private static ArrayList<String> allMetaPrefix = new ArrayList<String>();
 	
-	public static void regMetaItem(Item item, String[] names, String prefix)
+	public static void regMetaItem(BaseItemMetaData item, String[] names, String prefix)
 	{
 		ForgeRegistries.ITEMS.register(item);
 		allMetaItems.add(item);
