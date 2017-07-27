@@ -1,20 +1,6 @@
-------------FEATURES--------------
-HARSHED EFFECT
--has 3 levels
--first level causes slowness and nausea
--second level causes 2 hp damage per second, slowness and nausea
--third level causes 5 hp damage per second, slowness and weakness
-
-
 --------------------------ITEMS/BLOCKS---------------------------- 
 GUIDANCE OF HARSHEN WORLD
 -guide book of harshen castle
-
-SOUL HARSHER PICKAXE //TODO need consider it more
--can break HD dirt and HD rock BUT ONLY IN PONTUS WORLD (dimension check)
-
-HARSHING FLUID
--applies harshed effect level 3 when u try to swim in
 
 Pontus World Gate (First-Second-Third) Part(s)
 -found in chests in main structures in overworld
@@ -22,9 +8,6 @@ Pontus World Gate (First-Second-Third) Part(s)
 Empowered Soul Harsher Sword
 -can be crafted with normal soul harsher sword + itium (i will add recipe)
 -has same properties with soul harsher sword, but it can kill
-
------------ACCESSORY/ARMOR-----------
-I did this as a single slot. The way to do it as galacticraft did it is seemingly impossible in 1.12
 
 HARSHEN JAGUAR ARMOR
 -should be 3d asap

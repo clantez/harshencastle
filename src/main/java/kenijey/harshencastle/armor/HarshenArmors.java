@@ -3,7 +3,6 @@ package kenijey.harshencastle.armor;
 import java.util.ArrayList;
 
 import kenijey.harshencastle.HarshenCastle;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;

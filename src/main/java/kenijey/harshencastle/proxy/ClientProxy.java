@@ -7,7 +7,6 @@ import kenijey.harshencastle.HarshenKeybinding;
 import kenijey.harshencastle.armor.HarshenArmors;
 import kenijey.harshencastle.entity.EntitySoulPart;
 import kenijey.harshencastle.entity.EntitySoullessKnight;
-import kenijey.harshencastle.handlers.HandlerSoulHarsherSword;
 import kenijey.harshencastle.itemrenderer.RendererDimensionalPedestal;
 import kenijey.harshencastle.itemrenderer.RendererHarshenDisplayBlock;
 import kenijey.harshencastle.itemrenderer.RendererHarshenSpawner;

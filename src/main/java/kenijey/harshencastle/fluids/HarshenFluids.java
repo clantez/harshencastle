@@ -4,17 +4,9 @@ import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.fluids.blocks.HarshenDimensionalFluidBlock;
 import kenijey.harshencastle.fluids.blocks.HarshingWaterBlock;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.ModelBakery;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.renderer.block.statemap.StateMapperBase;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fluids.IFluidBlock;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 public class HarshenFluids {
@@ -30,11 +22,11 @@ public class HarshenFluids {
 	{
 		harshen_dimensional_fluid = HarshenDimensionalFluid.instance;
         FluidRegistry.addBucketForFluid(harshen_dimensional_fluid);
-        harshen_dimensional_fluid_block = registerFluidBlock(harshen_dimensional_fluid, new HarshenDimensionalFluidBlock(harshen_dimensional_fluid), HarshenDimensionalFluid.name);
+        harshen_dimensional_fluid_block = registerFluidBlock(harshen_dimensional_fluid, new HarshenDimensionalFluidBlock(), HarshenDimensionalFluid.name);
         
         harshing_water = HarshingWater.instance;
         FluidRegistry.addBucketForFluid(harshing_water);
-        harshing_water_block = registerFluidBlock(harshing_water, new HarshingWaterBlock(harshing_water), HarshingWater.name);
+        harshing_water_block = registerFluidBlock(harshing_water, new HarshingWaterBlock(), HarshingWater.name);
 
 	}
 	

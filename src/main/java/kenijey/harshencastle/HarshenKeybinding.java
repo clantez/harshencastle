@@ -4,7 +4,6 @@ import java.util.Arrays;
 
 import org.lwjgl.input.Keyboard;
 
-import kenijey.harshencastle.handlers.HandlerHarshenInventoryClient;
 import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.network.events.NetworkEventHarshenInvToggle;
 import kenijey.harshencastle.network.packets.MessagePacketHarshenInvToggle;

@@ -1,12 +1,8 @@
 package kenijey.harshencastle.entity;
 
-import java.util.BitSet;
-
 import kenijey.harshencastle.HarshenCastle;
-import net.minecraft.entity.EntityList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
-import net.minecraftforge.registries.GameData;
 
 public class HarshenEntities 
 {

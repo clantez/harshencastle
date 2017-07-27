@@ -1,13 +1,10 @@
 package kenijey.harshencastle.items;
 
-import net.minecraft.item.ItemPickaxe;
-import net.minecraft.item.ItemStack;
-
 import java.util.List;
 
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.Entity;
-import net.minecraft.item.Item.ToolMaterial;
+import net.minecraft.item.ItemPickaxe;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;

@@ -6,16 +6,19 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 public class HarshenPotions 
 {
 	
-	public static Potion effectSoulless;
+	public static Potion potionSoulless;
+	public static Potion potionHarshed;
 	
 	public static void preInit()
 	{
-		effectSoulless = new PotionSoulless();
+		potionSoulless = new PotionSoulless();
+		potionHarshed = new PotionHarshed();
 	}
 	
 	public static void register()
 	{
-		reg(effectSoulless);
+		reg(potionSoulless);
+		reg(potionHarshed);
 	}
 	
 	private static void reg(Potion potion)

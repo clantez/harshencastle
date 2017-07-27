@@ -1,8 +1,6 @@
 package kenijey.harshencastle.models;
 
 import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.model.ModelZombie;
-import net.minecraft.entity.Entity;
 
 public class ModelSoullessKnight extends ModelBiped
 {	

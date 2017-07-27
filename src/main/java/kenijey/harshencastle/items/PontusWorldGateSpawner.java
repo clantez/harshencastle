@@ -4,16 +4,12 @@ import java.util.List;
 
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.base.BaseItemMetaData;
-import kenijey.harshencastle.blocks.HarshenDimensionalGate;
 import kenijey.harshencastle.creativetabs.HarshenTab;
 import kenijey.harshencastle.enums.items.EnumPontusGateSpawner;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;

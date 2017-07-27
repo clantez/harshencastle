@@ -5,7 +5,6 @@ import kenijey.harshencastle.commands.CommandFlatPlate;
 import kenijey.harshencastle.creativetabs.HarshenTab;
 import kenijey.harshencastle.dimensions.DimensionPontus;
 import kenijey.harshencastle.proxy.CommonProxy;
-import kenijey.harshencastle.tileentity.TileEntityHarshenDimensionalPedestal;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -18,7 +17,6 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 @Mod(modid = HarshenCastle.MODID, name = HarshenCastle.MODNAME, version = HarshenCastle.VERSION, useMetadata = true/*, dependencies = "required-after:Forge@[14.21.1.2400,)"*/)
 public class HarshenCastle {

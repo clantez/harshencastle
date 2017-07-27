@@ -1,6 +1,6 @@
 package kenijey.harshencastle.tileentity;
 
-import akka.actor.FSM.State;
+import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.base.BaseHarshenTileEntity;
 import kenijey.harshencastle.blocks.HarshenDimensionalGate;
@@ -16,7 +16,7 @@ public class TileEntityHarshenDimensionalGate extends BaseHarshenTileEntity impl
 
 	@Override
 	public void update() {
-		if(!world.getBlockState(pos).getValue(HarshenDimensionalGate.ACTIVE) && !world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos, pos.add(1, 1, 1))).isEmpty())
+		if(blockType == HarshenBlocks.harshen_dimensional_gate && !world.getBlockState(pos).getValue(HarshenDimensionalGate.ACTIVE) && !world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos, pos.add(1, 1, 1))).isEmpty())
 			for(EntityItem entityitem : world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos, pos.add(1, 1, 1))))
 				if(entityitem.getItem().getItem() == HarshenItems.ritual_crystal && entityitem.getItem().getMetadata() == 1)
 				{

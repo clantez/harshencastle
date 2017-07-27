@@ -1,13 +1,10 @@
 package kenijey.harshencastle.itemrenderer;
 
 import kenijey.harshencastle.tileentity.TileEntityHarshenDisplayBlock;
-import kenijey.harshencastle.tileentity.TileEntityHereticCauldron;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 

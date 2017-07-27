@@ -2,11 +2,8 @@ package kenijey.harshencastle.potions;
 
 import kenijey.harshencastle.HarshenCastle;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.texture.ITextureObject;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class PotionSoulless extends Potion
 {

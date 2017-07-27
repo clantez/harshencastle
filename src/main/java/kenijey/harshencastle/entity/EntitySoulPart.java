@@ -23,7 +23,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 
-public class EntitySoulPart<T extends EntityLivingBase> extends EntityMob
+public class EntitySoulPart extends EntityMob
 {
 	
 	private int cooldownTicks = 0;
@@ -47,7 +47,7 @@ public class EntitySoulPart<T extends EntityLivingBase> extends EntityMob
 
 			@Override
 			public boolean apply(EntityLivingBase input) {
-				return !input.isPotionActive(HarshenPotions.effectSoulless);
+				return !input.isPotionActive(HarshenPotions.potionSoulless);
 			}
 		}));
 

@@ -7,7 +7,6 @@ import kenijey.harshencastle.creativetabs.HarshenTab;
 import kenijey.harshencastle.enums.items.EnumPontusGateSpawnerParts;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.TextComponentTranslation;

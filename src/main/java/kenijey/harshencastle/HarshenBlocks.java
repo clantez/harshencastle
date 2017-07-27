@@ -2,8 +2,6 @@ package kenijey.harshencastle;
 
 import java.util.ArrayList;
 
-import com.mojang.authlib.properties.Property;
-
 import kenijey.harshencastle.blocks.BloodBlock;
 import kenijey.harshencastle.blocks.CropOfGleam;
 import kenijey.harshencastle.blocks.HarshenDestroyedPlant;

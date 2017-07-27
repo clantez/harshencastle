@@ -1,19 +1,15 @@
 package kenijey.harshencastle.blocks;
 
-import java.util.Random;
-
 import kenijey.harshencastle.base.BaseBlockHarshenSingleInventory;
 import kenijey.harshencastle.base.BaseTileEntityHarshenSingleItemInventory;
 import kenijey.harshencastle.tileentity.TileEntityHarshenSpawner;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemMonsterPlacer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;

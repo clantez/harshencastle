@@ -6,7 +6,6 @@ import com.google.common.collect.Lists;
 
 import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.armor.HarshenArmors;
-import kenijey.harshencastle.items.SoulHarsherSword;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;

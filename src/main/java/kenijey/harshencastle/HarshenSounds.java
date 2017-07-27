@@ -1,7 +1,6 @@
 package kenijey.harshencastle;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;

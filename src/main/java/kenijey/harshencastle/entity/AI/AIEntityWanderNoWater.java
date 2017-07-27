@@ -3,7 +3,6 @@ package kenijey.harshencastle.entity.AI;
 import javax.annotation.Nullable;
 
 import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.entity.ai.RandomPositionGenerator;
 import net.minecraft.util.math.Vec3d;

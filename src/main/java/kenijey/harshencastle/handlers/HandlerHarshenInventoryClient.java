@@ -1,6 +1,5 @@
 package kenijey.harshencastle.handlers;
 
-import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.network.events.NetworkEventHarshenInvToggle;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;

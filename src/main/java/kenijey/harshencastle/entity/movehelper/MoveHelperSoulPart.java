@@ -2,7 +2,6 @@ package kenijey.harshencastle.entity.movehelper;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityMoveHelper;
-import net.minecraft.entity.monster.EntityVex;
 import net.minecraft.util.math.MathHelper;
 
 public class MoveHelperSoulPart extends EntityMoveHelper

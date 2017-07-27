@@ -3,9 +3,7 @@ package kenijey.harshencastle.items;
 import java.util.List;
 
 import kenijey.harshencastle.HarshenBlocks;
-import net.minecraft.block.Block;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemSeeds;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentTranslation;

@@ -2,7 +2,6 @@ package kenijey.harshencastle.tileentity;
 
 import kenijey.harshencastle.base.BaseTileEntityHarshenSingleItemInventory;
 import kenijey.harshencastle.blocks.HereticCauldron;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemInventory

@@ -2,13 +2,8 @@ package kenijey.harshencastle.items;
 
 import java.util.List;
 
-import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.base.BaseItemMetaData;
 import kenijey.harshencastle.enums.items.EnumRitualCrystal;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
 
 public class RitualCrystal extends BaseItemMetaData
 {		

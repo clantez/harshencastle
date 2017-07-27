@@ -5,7 +5,6 @@ import java.util.List;
 import kenijey.harshencastle.base.BaseItemMetaData;
 import kenijey.harshencastle.enums.items.EnumProp;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 

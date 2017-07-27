@@ -5,10 +5,9 @@ import java.util.Arrays;
 import java.util.Random;
 
 import kenijey.harshencastle.HarshenBlocks;
-import kenijey.harshencastle.base.BaseHarshenBlockCastle;
+import kenijey.harshencastle.base.BaseHarshenBlockBreakableInPontus;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
-import net.minecraft.block.BlockReed;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -18,7 +17,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
 
-public class HarshenDimensionalDirt extends BaseHarshenBlockCastle
+public class HarshenDimensionalDirt extends BaseHarshenBlockBreakableInPontus
 {
 	public HarshenDimensionalDirt() 
 	{
