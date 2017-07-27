@@ -63,7 +63,6 @@ public class GlassContainer extends BaseItemMetaData
 	
 	@Override
 	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving) {
-		System.out.println(new PotionEffect((Potion)effects.get(stack.getMetadata()).get(0).get(0), (Integer)effects.get(stack.getMetadata()).get(1).get(0)));
 		if(effects.containsKey(stack.getMetadata()))
 			for(int i = 0; i < effects.get(stack.getMetadata()).get(0).size(); i++)
 				entityLiving.addPotionEffect(new PotionEffect((Potion)effects.get(stack.getMetadata()).get(0).get(i), (Integer)effects.get(stack.getMetadata()).get(1).get(i)));

@@ -24,7 +24,6 @@ public class BloodCollector extends BaseItemMetaData
 	{
 		if(world.isRemote)
 			return false;
-		System.out.println("fil");
 		boolean flag = false; 
 		ItemStack stack = player.getHeldItem(hand);
 		NBTTagCompound nbt = getNBT(stack);

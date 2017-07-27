@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 import kenijey.harshencastle.HarshenCastle;
+import kenijey.harshencastle.entity.EntitySoulPart;
 import kenijey.harshencastle.potions.HarshenPotions;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
@@ -24,9 +25,17 @@ public class HandlerPotion {
 	private static ArrayList<HandlerHarshenEffect> arrayEffectManager = new ArrayList<HandlerHarshenEffect>();
 	private static ArrayList<EntityLivingBase> arrayLivingNoSoul = new ArrayList<EntityLivingBase>();
 	
+	
 	@SubscribeEvent
 	public void livingTick(LivingUpdateEvent event)
 	{
+		try
+		{
+			if(event.getEntityLiving() instanceof EntitySoulPart && ((EntityLiving)event.getEntityLiving()).getAttackTarget().isPotionActive(HarshenPotions.potionSoulless))
+				((EntityLiving)event.getEntityLiving()).setAttackTarget(null);
+		}
+		catch (NullPointerException e) {
+		}
 		if(event.getEntityLiving().isPotionActive(HarshenPotions.potionSoulless))
 		{
 			if(!arrayLivingNoSoul.contains(event.getEntityLiving()))
@@ -44,9 +53,11 @@ public class HandlerPotion {
 		else if(arrayLivingNoSoul.contains(event.getEntityLiving()))
 		{
 			if(event.getEntity().world.isRemote && event.getEntityLiving().equals(HarshenCastle.proxy.getPlayer()))
+			{
+				arrayLivingNoSoul.remove(event.getEntityLiving());
 				Minecraft.getMinecraft().entityRenderer.stopUseShader();
+			}
 			event.getEntityLiving().getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).removeModifier(UUID.fromString("81c41407-0bb1-435d-91ca-449b8c8a0eec"));
-			arrayLivingNoSoul.remove(event.getEntityLiving());
 		}
 		if(event.getEntity().world.isRemote)
 			return;
