@@ -32,7 +32,7 @@ public class GlassContainer extends BaseItemMetaData
 	
 	public static void initEffects()
 	{
-		effects.put(1, Arrays.asList(Arrays.asList(HarshenPotions.potionHarshed), Arrays.asList(600)));
+		effects.put(1, Arrays.asList(Arrays.asList(HarshenPotions.potionSoulless), Arrays.asList(600)));
 	}
 	
 	@Override
