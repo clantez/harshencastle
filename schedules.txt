@@ -7,7 +7,7 @@ Pontus World Gate (First-Second-Third) Part(s)
 
 Empowered Soul Harsher Sword
 -can be crafted with normal soul harsher sword + itium (i will add recipe)
--has same properties with soul harsher sword, but it can kill
+-has same properties with soul harsher sword, but it can kill FERRUM KING
 
 HARSHEN JAGUAR ARMOR
 -should be 3d asap
