@@ -1,11 +1,13 @@
 package kenijey.harshencastle.enums.gui;
 
+import java.util.Arrays;
+
 public enum EnumGuiPage {
-	MOBS("mobs", 0),
-	POTIONS("potions", 1),
-	STRUCTURE("structure", 2),
-	DIMENSION("dimension", 3),
-	RITUAL("ritual", 4);
+	MOBS("Mobs", 0),
+	POTIONS("Potions", 1),
+	STRUCTURE("Structure", 2),
+	DIMENSION("Dimension", 3),
+	RITUAL("Ritual", 4);
 	
 	
 	private final String name;
