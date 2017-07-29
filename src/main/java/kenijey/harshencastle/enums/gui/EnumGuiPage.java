@@ -1,8 +1,9 @@
 package kenijey.harshencastle.enums.gui;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 
 public enum EnumGuiPage {
+	MAIN("Main", -1),
 	MOBS("Mobs", 0),
 	POTIONS("Potions", 1),
 	STRUCTURE("Structure", 2),
@@ -11,15 +12,31 @@ public enum EnumGuiPage {
 	
 	
 	private final String name;
-	private int id;
+	private final int id;
+	private final String tag;
 	
 	private EnumGuiPage(String name, int id)
 	{
-		this.name = name;
-		this.id = id;
+		this(name, id, name);
 	}
 	
-
+	private EnumGuiPage(String name, int id, String tag)
+	{
+		this.name = name;
+		this.id = id;
+		this.tag = tag;
+	}
+	
+	public static EnumGuiPage[] buttonPages()
+	{
+		ArrayList<EnumGuiPage> editedPages = new ArrayList<EnumGuiPage>();
+		for(EnumGuiPage page : EnumGuiPage.values())
+			if(page.getId() >= 0)
+				editedPages.add(page);
+		EnumGuiPage[] type = new EnumGuiPage[editedPages.size()];
+		return editedPages.toArray(type);
+	}
+	
 	public int getId()
 	{
 		return id;
@@ -28,5 +45,10 @@ public enum EnumGuiPage {
 	public String getName()
 	{
 		return this.name;
+	}
+	
+	public String getTag()
+	{
+		return this.tag;
 	}
 }

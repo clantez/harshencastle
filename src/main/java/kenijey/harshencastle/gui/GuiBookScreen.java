@@ -45,16 +45,17 @@ public class GuiBookScreen extends GuiScreen
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 		this.drawDefaultBackground();
-		this.drawCenteredString(this.fontRenderer, "Harshen Castle " + mode.getName(), this.width / 2, 4, 16777215);
+		this.drawCenteredString(this.fontRenderer, "Harshen Castle " + mode.getTag(), this.width / 2, 4, 16777215);
 		super.drawScreen(mouseX, mouseY, partialTicks);
 	}	
 	
 	@Override
 	public void handleMouseInput() throws IOException {
-		if(Mouse.getEventDWheel() == -120)
-			scroll += 15;
-		else if(Mouse.getEventDWheel() == 120)
-			scroll -= 15;
+		if(mode.getId() != -1)
+			if(Mouse.getEventDWheel() == -120)
+				scroll += 15;
+			else if(Mouse.getEventDWheel() == 120)
+				scroll -= 15;
 		super.handleMouseInput();
 	}
 	
@@ -75,16 +76,16 @@ public class GuiBookScreen extends GuiScreen
 	protected void actionPerformed(GuiButton button){
 		if(button.id == 0)
 			this.mc.displayGuiScreen((GuiScreen)null);
-		if(button.id > 8000)
-			this.mode = EnumGuiPage.values()[button.id - 8800];
+		if(button.id >= 8800)
+			this.mode = EnumGuiPage.buttonPages()[button.id - 8800];
 	}
 	
 	
 	private void categorybuttons()
 	{
-		for(EnumGuiPage page : EnumGuiPage.values())
+		for(EnumGuiPage page : EnumGuiPage.buttonPages())
 			categoryButtons.add(button(page.getId() + 8800, (page.getId() * (75 + 10)) + this.width / 2 - (((75 + 10)
-					* EnumGuiPage.values().length - 10) / 2), 15, 75, 20, "gui.category." + page.getName().toLowerCase()));
+					* EnumGuiPage.buttonPages().length - 10) / 2), 15, 75, 20, "gui.category." + page.getName().toLowerCase()));
 		for(GuiButton b : categoryButtons)
 			allComponants.add(b);
 	}
