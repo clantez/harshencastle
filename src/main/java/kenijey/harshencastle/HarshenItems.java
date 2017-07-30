@@ -12,6 +12,7 @@ import kenijey.harshencastle.enums.items.EnumRitualCrystal;
 import kenijey.harshencastle.items.BloodCollector;
 import kenijey.harshencastle.items.BloodEssence;
 import kenijey.harshencastle.items.BloodyEarring;
+import kenijey.harshencastle.items.EmpoweredSoulHarsherSword;
 import kenijey.harshencastle.items.GlassContainer;
 import kenijey.harshencastle.items.GuidanceOfHarshenCastle;
 import kenijey.harshencastle.items.HarshenCrystal;
@@ -42,6 +43,7 @@ public class HarshenItems
 	public static Item harshen_book;
 	public static Item harshen_soul_fragment;
 	public static Item soul_harsher_sword;
+	public static Item empowered_soul_harsher_sword;
 	public static Item soul_harsher_pickaxe;
 	public static Item item_harshen_dimensional_door;
 	public static Item itium;
@@ -66,6 +68,7 @@ public class HarshenItems
 		harshen_book = new GuidanceOfHarshenCastle();
 		harshen_soul_fragment = new HarshenSoulFragment();
 		soul_harsher_sword = new SoulHarsherSword();
+		empowered_soul_harsher_sword = new EmpoweredSoulHarsherSword();
 		soul_harsher_pickaxe = new SoulHarsherPickaxe();
 		item_harshen_dimensional_door = new HarshenDimensionalDoor();
 		itium = new Itium();
@@ -90,6 +93,7 @@ public class HarshenItems
 		regItem(harshen_book, 1);
 		regItem(harshen_soul_fragment, 8);
 		regItem(soul_harsher_sword, 1);
+		regItem(empowered_soul_harsher_sword, 1);
 		regItem(soul_harsher_pickaxe, 1);
 		regItem(item_harshen_dimensional_door,8);
 		regItem(itium,8);

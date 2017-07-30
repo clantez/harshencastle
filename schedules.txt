@@ -1,20 +1,6 @@
 --------------------------ITEMS/BLOCKS---------------------------- 
-GUIDANCE OF HARSHEN WORLD
--guide book of harshen castle
-
-Empowered Soul Harsher Sword
--can be crafted with normal soul harsher sword + itium (i will add recipe)
--has same properties with soul harsher sword, but it can kill FERRUM KING
-
 HARSHEN JAGUAR ARMOR
 -should be 3d asap
-
------------ACCESSORY------------
--inventory tab or with a button (baubles)
--2x earring slots, 1x pendant slot, 2x ring slots
-
-------------------------PONTUS WORLD------------------------------
--some ruins can be found that built with HD wood crate and (different) HD stone (STRUCTURE)
 
 ----------------------------STRUCTURES--------------------------
 

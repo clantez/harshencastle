@@ -6,6 +6,8 @@ import com.google.common.collect.Lists;
 
 import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.armor.HarshenArmors;
+import kenijey.harshencastle.base.BaseHarshenSword;
+import kenijey.harshencastle.items.HarshenProps;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
@@ -22,8 +24,8 @@ public class HandlerSoulHarsherSword
 		try
 		{
 			if((event.getSource() instanceof EntityDamageSource && ((EntityDamageSource)event.getSource()).getTrueSource() instanceof EntityLivingBase
-					&& Arrays.asList(new ItemStack(HarshenItems.props, 1, 0).getItem(), new ItemStack(HarshenItems.soul_harsher_sword).getItem())
-					.contains(((EntityLivingBase)((EntityDamageSource)event.getSource()).getTrueSource()).getHeldItemMainhand().getItem())
+					&& (((EntityLivingBase)((EntityDamageSource)event.getSource()).getTrueSource()).getHeldItemMainhand().getItem() instanceof BaseHarshenSword ||
+						((EntityLivingBase)((EntityDamageSource)event.getSource()).getTrueSource()).getHeldItemMainhand().getItem() instanceof HarshenProps)
 				   &&!(Lists.newArrayList(event.getEntityLiving().getArmorInventoryList().iterator()).get(3).getItem() == HarshenArmors.harshen_jaguar_armor_helmet
 					&& Lists.newArrayList(event.getEntityLiving().getArmorInventoryList().iterator()).get(2).getItem() == HarshenArmors.harshen_jaguar_armor_chestplate
 					&& Lists.newArrayList(event.getEntityLiving().getArmorInventoryList().iterator()).get(1).getItem() == HarshenArmors.harshen_jaguar_armor_leggings

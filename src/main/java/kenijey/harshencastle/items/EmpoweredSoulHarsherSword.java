@@ -1,16 +1,17 @@
 package kenijey.harshencastle.items;
+
 import kenijey.harshencastle.base.BaseHarshenSword;
 
-public class SoulHarsherSword extends BaseHarshenSword
-{
+public class EmpoweredSoulHarsherSword extends BaseHarshenSword {
 
 	@Override
 	protected String getSwordType() {
-		return "sword";
+		return "empowered_sword";
 	}
 
 	@Override
 	protected String getName() {
-		return "soul_harsher_sword";
+		return "empowered_soul_harsher_sword";
 	}
+
 }

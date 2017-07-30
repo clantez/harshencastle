@@ -1,0 +1,6 @@
+{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "harshencastle:items/empowered_soul_harsher_sword"
+    }
+}
