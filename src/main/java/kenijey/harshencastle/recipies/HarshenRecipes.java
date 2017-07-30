@@ -1,17 +1,39 @@
-package kenijey.harshencastle;
+package kenijey.harshencastle.recipies;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import kenijey.harshencastle.HarshenBlocks;
+import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.armor.HarshenArmors;
+import kenijey.harshencastle.enums.blocks.EnumHetericCauldronFluidType;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class Recipes 
-{
-	public static void init()
+public class HarshenRecipes {
+	
+	
+	public static void register()
 	{
+		craftingRegistry();
 		
+		RitualRecipes.addRecipe(Arrays.asList(new ItemStack(HarshenItems.pontus_world_gate_parts, 1, 0), new ItemStack(HarshenItems.pontus_world_gate_parts, 1, 1),
+				new ItemStack(HarshenItems.pontus_world_gate_parts, 1 ,2), new ItemStack(HarshenItems.harshen_soul_fragment)), new ItemStack(HarshenItems.pontus_world_gate_spawner, 1, 0), true);
+	
+		CauldronRecipes.addRecipe(new ItemStack(HarshenItems.ritual_crystal, 1, 0), new ItemStack(HarshenItems.ritual_crystal, 1, 1), EnumHetericCauldronFluidType.BLOOD);
+		
+	}
+	
+	
+	
+	
+	
+	
+	public static void craftingRegistry()
+	{
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "soul_harsher_sword"), new ResourceLocation("harshen_items"),
 				new ItemStack(HarshenItems.soul_harsher_sword),
 				" h ",

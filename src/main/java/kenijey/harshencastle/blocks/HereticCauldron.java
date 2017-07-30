@@ -11,6 +11,7 @@ import kenijey.harshencastle.base.BaseBlockHarshenSingleInventory;
 import kenijey.harshencastle.base.BaseTileEntityHarshenSingleItemInventory;
 import kenijey.harshencastle.enums.blocks.EnumHetericCauldronFluidType;
 import kenijey.harshencastle.items.BloodCollector;
+import kenijey.harshencastle.recipies.CauldronRecipes;
 import kenijey.harshencastle.tileentity.TileEntityHereticCauldron;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -39,6 +40,7 @@ import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.UniversalBucket;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import scala.reflect.reify.phases.Calculate;
 
 public class HereticCauldron extends BaseBlockHarshenSingleInventory
 {
@@ -157,19 +159,18 @@ public class HereticCauldron extends BaseBlockHarshenSingleInventory
                     }
             	return true;
             }
-            else if(item == HarshenItems.ladle && state.getValue(LIQUID) == EnumHetericCauldronFluidType.BLOOD && i == 3 &&
-            		((TileEntityHereticCauldron)worldIn.getTileEntity(pos)).getItem().getItem() == HarshenItems.ritual_crystal && 
-            		((TileEntityHereticCauldron)worldIn.getTileEntity(pos)).getItem().getItemDamage() == 0)
+            else if(item == HarshenItems.ladle && i == 3)
             {
-            	((TileEntityHereticCauldron)worldIn.getTileEntity(pos)).isActive = true;
-            	((TileEntityHereticCauldron)worldIn.getTileEntity(pos)).setSwitchedItem(new ItemStack(HarshenItems.ritual_crystal, 1, 1));
-            	return true;
-            }
-            else
-            {
-            	return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitZ, hitZ, hitZ);
+            	ItemStack stack = ((BaseTileEntityHarshenSingleItemInventory) worldIn.getTileEntity(pos)).getItem();
+            	if(CauldronRecipes.getRecipe(stack) != null && CauldronRecipes.getRecipe(stack).getCatalyst() == state.getValue(LIQUID))
+                {
+                	((TileEntityHereticCauldron)worldIn.getTileEntity(pos)).isActive = true;
+                	((TileEntityHereticCauldron)worldIn.getTileEntity(pos)).setSwitchedItem(CauldronRecipes.getRecipe(stack).getOutput());
+                	return true;
+                }
+    		}		
+    		return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitZ, hitZ, hitZ);
 
-            }
     }
 	
 	
