@@ -20,7 +20,7 @@ public class GuidanceOfHarshenCastle extends Item
 	
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
-		HarshenCastle.proxy.bookClicked();
+		HarshenCastle.proxy.openGui(new GuiBookScreen());
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
 	}
 }

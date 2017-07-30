@@ -1,8 +1,5 @@
 {
     "variants": {
-    "facing=east": { "model": "harshencastle:harshen_chest" },
-	"facing=west": { "model": "harshencastle:harshen_chest" },
-	"facing=north": { "model": "harshencastle:harshen_chest" },
-	"facing=south": { "model": "harshencastle:harshen_chest" }
+    "normal": { "model": "harshencastle:harshen_chest" }
     }
 }

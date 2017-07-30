@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import kenijey.harshencastle.blocks.BloodBlock;
 import kenijey.harshencastle.blocks.CropOfGleam;
+import kenijey.harshencastle.blocks.HarshenChest;
 import kenijey.harshencastle.blocks.HarshenDestroyedPlant;
 import kenijey.harshencastle.blocks.HarshenDimensionalDirt;
 import kenijey.harshencastle.blocks.HarshenDimensionalDoor;
@@ -75,6 +76,7 @@ public class HarshenBlocks {
 	public static Block pontus_dead_leaves;
 	public static Block harshen_spawner;
 	public static Block pedestal_slab;
+	public static Block harshen_chest;
 	
 	public static BlockCrops crop_of_gleam;
 
@@ -114,6 +116,7 @@ public class HarshenBlocks {
 		pontus_dead_leaves = new PontusDeadLeaves();
 		harshen_spawner = new HarshenSpawner();
 		pedestal_slab = new PedestalSlab();
+		harshen_chest = new HarshenChest();
 	}
 
 	public static void reg() {
@@ -142,6 +145,7 @@ public class HarshenBlocks {
 		regBlock(plant_of_gleam, 64);
 		regBlock(blood_block, 1);
 		regBlock(pedestal_slab, 64);
+		regBlock(harshen_chest, 64);
 		
 		regSingleBlock(heretic_cauldron_top);
 		regSingleBlock(crop_of_gleam);
