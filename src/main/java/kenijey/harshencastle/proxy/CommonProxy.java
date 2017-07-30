@@ -4,7 +4,6 @@ import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.HarshenSounds;
-import kenijey.harshencastle.Recipes;
 import kenijey.harshencastle.WorldGen;
 import kenijey.harshencastle.armor.HarshenArmors;
 import kenijey.harshencastle.biomes.HarshenBiomes;
@@ -19,6 +18,7 @@ import kenijey.harshencastle.handlers.HandlerSoulHarsherSword;
 import kenijey.harshencastle.items.GlassContainer;
 import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.potions.HarshenPotions;
+import kenijey.harshencastle.recipies.HarshenRecipes;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDimensionalGate;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDimensionalPedestal;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDisplayBlock;
@@ -71,9 +71,6 @@ public class CommonProxy
     	GameRegistry.registerTileEntity(TileEntityHarshenSpawner.class, HarshenCastle.MODID + "TileEntityHarshenSpawner");
     	GameRegistry.registerTileEntity(TileEntityHarshenDimensionalGate.class, HarshenCastle.MODID + "TileEntityHarshenDimensionalGate");
     	GameRegistry.registerTileEntity(TileEntityPedestalSlab.class, HarshenCastle.MODID + "TileEntityPedestalSlab");
-
-    	
-    	Recipes.init();
     	
     	GameRegistry.registerWorldGenerator(new WorldGen(100), 0);
     	
@@ -86,9 +83,16 @@ public class CommonProxy
     	
     	GlassContainer.initEffects();
     	
+    	HarshenRecipes.register();
+    	
     }
 
     public void postInit(FMLPostInitializationEvent event) 
+    {
+    	
+    }
+    
+    public void bookClicked()
     {
     	
     }

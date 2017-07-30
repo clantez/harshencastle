@@ -7,6 +7,7 @@ import kenijey.harshencastle.HarshenKeybinding;
 import kenijey.harshencastle.armor.HarshenArmors;
 import kenijey.harshencastle.entity.EntitySoulPart;
 import kenijey.harshencastle.entity.EntitySoullessKnight;
+import kenijey.harshencastle.gui.GuiBookScreen;
 import kenijey.harshencastle.itemrenderer.RendererDimensionalPedestal;
 import kenijey.harshencastle.itemrenderer.RendererHarshenDisplayBlock;
 import kenijey.harshencastle.itemrenderer.RendererHarshenSpawner;
@@ -65,6 +66,11 @@ public class ClientProxy extends CommonProxy
     {
     	super.preInit(event);
     }
+	
+	@Override
+	public void bookClicked() {
+		Minecraft.getMinecraft().displayGuiScreen(new GuiBookScreen());
+	}
     
     @Override
     public void init(FMLInitializationEvent event) 

@@ -1,5 +1,6 @@
 package kenijey.harshencastle.items;
 
+import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.gui.GuiBookScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,8 +20,7 @@ public class GuidanceOfHarshenCastle extends Item
 	
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
-		if(worldIn.isRemote)
-			Minecraft.getMinecraft().displayGuiScreen(new GuiBookScreen());
+		HarshenCastle.proxy.bookClicked();
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
 	}
 }
