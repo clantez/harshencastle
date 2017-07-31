@@ -19,7 +19,6 @@ import kenijey.harshencastle.items.GlassContainer;
 import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.potions.HarshenPotions;
 import kenijey.harshencastle.recipies.HarshenRecipes;
-import kenijey.harshencastle.tileentity.TileEntityHarshenChest;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDimensionalGate;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDimensionalPedestal;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDisplayBlock;
@@ -27,7 +26,6 @@ import kenijey.harshencastle.tileentity.TileEntityHarshenSpawner;
 import kenijey.harshencastle.tileentity.TileEntityHereticCauldron;
 import kenijey.harshencastle.tileentity.TileEntityPedestalSlab;
 import net.minecraft.block.Block;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -73,8 +71,6 @@ public class CommonProxy
     	GameRegistry.registerTileEntity(TileEntityHarshenSpawner.class, HarshenCastle.MODID + "TileEntityHarshenSpawner");
     	GameRegistry.registerTileEntity(TileEntityHarshenDimensionalGate.class, HarshenCastle.MODID + "TileEntityHarshenDimensionalGate");
     	GameRegistry.registerTileEntity(TileEntityPedestalSlab.class, HarshenCastle.MODID + "TileEntityPedestalSlab");
-    	GameRegistry.registerTileEntity(TileEntityHarshenChest.class, HarshenCastle.MODID + "TileEntityHarshenChest");
-
     	
     	GameRegistry.registerWorldGenerator(new WorldGen(100), 0);
     	
@@ -96,7 +92,7 @@ public class CommonProxy
     	
     }
     
-    public void openGui(GuiScreen screen)
+    public void bookClicked()
     {
     	
     }
