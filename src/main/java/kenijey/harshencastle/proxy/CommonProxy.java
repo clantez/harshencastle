@@ -3,6 +3,7 @@ package kenijey.harshencastle.proxy;
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.HarshenItems;
+import kenijey.harshencastle.HarshenLootTables;
 import kenijey.harshencastle.HarshenSounds;
 import kenijey.harshencastle.WorldGen;
 import kenijey.harshencastle.armor.HarshenArmors;
@@ -26,6 +27,7 @@ import kenijey.harshencastle.tileentity.TileEntityHarshenSpawner;
 import kenijey.harshencastle.tileentity.TileEntityHereticCauldron;
 import kenijey.harshencastle.tileentity.TileEntityPedestalSlab;
 import net.minecraft.block.Block;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -59,6 +61,8 @@ public class CommonProxy
 		HarshenSounds.preInit();
 		
 		HarshenNetwork.preInit();
+		
+		HarshenLootTables.preInit();
     }
 
     public void init(FMLInitializationEvent event) 
@@ -74,6 +78,8 @@ public class CommonProxy
     	
     	GameRegistry.registerWorldGenerator(new WorldGen(100), 0);
     	
+    	HarshenRecipes.register();
+    	
     	Object[] handlers = {new HandlerSoulHarsherSword(), new HandlerHarshenInventoryCommon(), new HandlerBloodOnHurt(), new HandlerPotion(), new HandlerHarshenArmourEffects()};
     	for(Object o : handlers)
     	{
@@ -83,16 +89,9 @@ public class CommonProxy
     	
     	GlassContainer.initEffects();
     	
-    	HarshenRecipes.register();
-    	
     }
 
     public void postInit(FMLPostInitializationEvent event) 
-    {
-    	
-    }
-    
-    public void bookClicked()
     {
     	
     }
@@ -112,5 +111,9 @@ public class CommonProxy
 	public EntityPlayer getPlayer() 
 	{
 		return null;
+	}
+
+	public void book() {
+		
 	}
 }

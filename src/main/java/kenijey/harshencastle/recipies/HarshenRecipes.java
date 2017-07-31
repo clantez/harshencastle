@@ -170,7 +170,7 @@ public class HarshenRecipes {
 				'p', "plankWood");
 		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "blood_collector"), new ResourceLocation("harshen_items"),
-				new ItemStack(HarshenItems.blood_collector, 0, 0),
+				new ItemStack(HarshenItems.blood_collector, 1, 0),
 				"  i",
 				"rbi",
 				"nri",

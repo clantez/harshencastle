@@ -21,6 +21,7 @@ import kenijey.harshencastle.tileentity.TileEntityPedestalSlab;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -68,7 +69,8 @@ public class ClientProxy extends CommonProxy
     }
 	
 	@Override
-	public void bookClicked() {
+	public void book()
+	{
 		Minecraft.getMinecraft().displayGuiScreen(new GuiBookScreen());
 	}
     

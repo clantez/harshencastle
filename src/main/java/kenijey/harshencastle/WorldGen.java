@@ -1,8 +1,10 @@
 package kenijey.harshencastle;
 
+import java.net.URL;
 import java.util.Random;
 
 import kenijey.harshencastle.dimensions.DimensionPontus;
+import kenijey.harshencastle.worldgenerators.castle.ChestGenerator;
 import kenijey.harshencastle.worldgenerators.pontus.PontusWorldGeneratorIniumOre;
 import kenijey.harshencastle.worldgenerators.pontus.PontusWorldRuinGenerator;
 import net.minecraft.block.BlockFlower;
@@ -36,7 +38,13 @@ public class WorldGen implements IWorldGenerator
 		if(dim == 0)
 		{
 			if(chunkX == 44 && chunkZ == 44)
-				loadStructure(world, "harshencastlevol1",world.getTopSolidOrLiquidBlock(new BlockPos(chunkX * 16, 1, chunkX * 16)).add(-36, -20, 1));
+				{
+					BlockPos position = world.getTopSolidOrLiquidBlock(new BlockPos(chunkX * 16, 1, chunkX * 16)).add(-36, -20, 1);
+					loadStructure(world, "harshencastlevol2", position);
+					new ChestGenerator(getSizeFromName(world, "harshencastlevol2"), 0.02f, HarshenLootTables.harshen_castle_other).generate(world, random, position.add(1, 1, 2));
+					new ChestGenerator(getSizeFromName(world, "harshencastlevol2"), 0.05f, HarshenLootTables.harshen_castle_other).generate(world, random, position.add(1, 5, 2));
+					new ChestGenerator(getSizeFromName(world, "harshencastlevol2"), 0.05f, HarshenLootTables.harshen_castle_other).generate(world, random, position.add(1, 9, 2));
+				}
 			oreGenerator(this.soulore, world, random, chunkX, chunkZ, 10, 0, 20);
 	    	flowerGenerator(HarshenBlocks.harshen_soul_flower, world, random, chunkX, chunkZ, 15);
 	    	flowerGenerator(HarshenBlocks.plant_of_gleam, world, random, chunkX, chunkZ, 15);
@@ -80,6 +88,11 @@ public class WorldGen implements IWorldGenerator
 	{
 		((WorldServer)world).getStructureTemplateManager().get(world.getMinecraftServer(), new ResourceLocation(HarshenCastle.MODID, name))
 		.addBlocksToWorld(world, pos, new PlacementSettings().setIgnoreEntities(false).setIgnoreStructureBlock(true));
+	}
+	
+	private BlockPos getSizeFromName(World world, String name)
+	{
+		return ((WorldServer)world).getStructureTemplateManager().get(world.getMinecraftServer(), new ResourceLocation(HarshenCastle.MODID, name)).getSize();
 	}
 	
 	private void flowerGenerator(BlockFlower flower, World worldIn, Random rand, int chunk_X, int chunk_Z, int chancesToSpawn)
