@@ -1,7 +1,5 @@
 package kenijey.harshencastle;
 
-import java.net.URL;
-import java.util.List;
 import java.util.Random;
 
 import kenijey.harshencastle.dimensions.DimensionPontus;
@@ -10,8 +8,9 @@ import kenijey.harshencastle.worldgenerators.pontus.PontusWorldGeneratorIniumOre
 import kenijey.harshencastle.worldgenerators.pontus.PontusWorldRuinGenerator;
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.BlockFlower;
+import net.minecraft.block.BlockLiquid;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
@@ -19,6 +18,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.feature.WorldGenMinable;
@@ -45,9 +45,9 @@ public class WorldGen implements IWorldGenerator
 		int dim = world.provider.getDimension();
 		if(dim == 0)
 		{
-			if(random.nextFloat() < 0.01f)
+			if(random.nextFloat() < 1f)
 			{
-				BlockPos position = world.getTopSolidOrLiquidBlock(new BlockPos(chunkX * 16, 1, chunkZ * 16).add(random.nextInt(16), 0, random.nextInt(16)).add(-3, -1, -3));
+				BlockPos position = getTopBlock(world, new BlockPos(chunkX * 16, 1, chunkZ * 16).add(random.nextInt(16), 0, random.nextInt(16)).add(-3, -1, -3)).down();
 				loadStructure(world, "shrine", position);
 				position = position.add(3, 1, 3);
 				world.setBlockState(position, Blocks.CHEST.getDefaultState().withProperty(BlockChest.FACING, EnumFacing.HORIZONTALS[random.nextInt(4)]), 3);
@@ -57,7 +57,7 @@ public class WorldGen implements IWorldGenerator
 			}
 			if(chunkX == 44 && chunkZ == 44)
 				{
-					BlockPos position = world.getTopSolidOrLiquidBlock(new BlockPos(chunkX * 16, 1, chunkZ * 16)).add(-36, -20, 1);
+					BlockPos position = getTopBlock(world, new BlockPos(chunkX * 16, 1, chunkZ * 16)).add(-36, -20, 1);
 					loadStructure(world, "harshencastlevol2", position);
 					new ChestGenerator(getSizeFromName(world, "harshencastlevol2"), 0.015f, HarshenLootTables.harshen_castle).generate(world, random, position.add(1, 1, 2));
 					new ChestGenerator(getSizeFromName(world, "harshencastlevol2"), 0.015f, HarshenLootTables.harshen_castle).generate(world, random, position.add(1, 5, 2));
@@ -111,6 +111,27 @@ public class WorldGen implements IWorldGenerator
 	private BlockPos getSizeFromName(World world, String name)
 	{
 		return ((WorldServer)world).getStructureTemplateManager().get(world.getMinecraftServer(), new ResourceLocation(HarshenCastle.MODID, name)).getSize();
+	}
+	
+	private BlockPos getTopBlock(World world, BlockPos pos)
+	{
+		Chunk chunk = world.getChunkFromBlockCoords(pos);
+        BlockPos blockpos;
+        BlockPos blockpos1;
+
+        for (blockpos = new BlockPos(pos.getX(), chunk.getTopFilledSegment() + 16, pos.getZ()); blockpos.getY() >= 0; blockpos = blockpos1)
+        {
+            blockpos1 = blockpos.down();
+            IBlockState state = chunk.getBlockState(blockpos1);
+            if ((state.getMaterial().blocksMovement() && !state.getBlock().isLeaves(state, world, blockpos1) && !state.getBlock().isFoliage(world, blockpos1))
+            		|| state.getBlock() instanceof BlockLiquid)
+            {
+                break;
+            }
+        }
+
+        return blockpos;
+			
 	}
 	
 	private void flowerGenerator(BlockFlower flower, World worldIn, Random rand, int chunk_X, int chunk_Z, int chancesToSpawn)
