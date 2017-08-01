@@ -1,13 +1,20 @@
 package kenijey.harshencastle;
 
 import java.net.URL;
+import java.util.List;
 import java.util.Random;
 
 import kenijey.harshencastle.dimensions.DimensionPontus;
 import kenijey.harshencastle.worldgenerators.castle.ChestGenerator;
 import kenijey.harshencastle.worldgenerators.pontus.PontusWorldGeneratorIniumOre;
 import kenijey.harshencastle.worldgenerators.pontus.PontusWorldRuinGenerator;
+import net.minecraft.block.BlockChest;
 import net.minecraft.block.BlockFlower;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -17,6 +24,7 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraft.world.gen.structure.template.PlacementSettings;
+import net.minecraft.world.storage.loot.LootContext;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 public class WorldGen implements IWorldGenerator
@@ -37,13 +45,23 @@ public class WorldGen implements IWorldGenerator
 		int dim = world.provider.getDimension();
 		if(dim == 0)
 		{
+			if(random.nextFloat() < 0.01f)
+			{
+				BlockPos position = world.getTopSolidOrLiquidBlock(new BlockPos(chunkX * 16, 1, chunkZ * 16).add(random.nextInt(16), 0, random.nextInt(16)).add(-3, -1, -3));
+				loadStructure(world, "shrine", position);
+				position = position.add(3, 1, 3);
+				world.setBlockState(position, Blocks.CHEST.getDefaultState().withProperty(BlockChest.FACING, EnumFacing.HORIZONTALS[random.nextInt(4)]), 3);
+				if(world instanceof WorldServer)
+					((TileEntityChest)world.getTileEntity(position)).setInventorySlotContents(13, world.getLootTableManager().getLootTableFromLocation(HarshenLootTables.shrine).generateLootForPools(random, 
+							new LootContext(1f, (WorldServer) world, world.getLootTableManager(), null, world.getClosestPlayer(position.getX(), position.getY(), position.getZ(), Integer.MAX_VALUE, false), DamageSource.MAGIC)).get(0));
+			}
 			if(chunkX == 44 && chunkZ == 44)
 				{
-					BlockPos position = world.getTopSolidOrLiquidBlock(new BlockPos(chunkX * 16, 1, chunkX * 16)).add(-36, -20, 1);
+					BlockPos position = world.getTopSolidOrLiquidBlock(new BlockPos(chunkX * 16, 1, chunkZ * 16)).add(-36, -20, 1);
 					loadStructure(world, "harshencastlevol2", position);
-					new ChestGenerator(getSizeFromName(world, "harshencastlevol2"), 0.02f, HarshenLootTables.harshen_castle_other).generate(world, random, position.add(1, 1, 2));
-					new ChestGenerator(getSizeFromName(world, "harshencastlevol2"), 0.05f, HarshenLootTables.harshen_castle_other).generate(world, random, position.add(1, 5, 2));
-					new ChestGenerator(getSizeFromName(world, "harshencastlevol2"), 0.05f, HarshenLootTables.harshen_castle_other).generate(world, random, position.add(1, 9, 2));
+					new ChestGenerator(getSizeFromName(world, "harshencastlevol2"), 0.015f, HarshenLootTables.harshen_castle).generate(world, random, position.add(1, 1, 2));
+					new ChestGenerator(getSizeFromName(world, "harshencastlevol2"), 0.015f, HarshenLootTables.harshen_castle).generate(world, random, position.add(1, 5, 2));
+					new ChestGenerator(getSizeFromName(world, "harshencastlevol2"), 0.015f, HarshenLootTables.harshen_castle).generate(world, random, position.add(1, 9, 2));
 				}
 			oreGenerator(this.soulore, world, random, chunkX, chunkZ, 10, 0, 20);
 	    	flowerGenerator(HarshenBlocks.harshen_soul_flower, world, random, chunkX, chunkZ, 15);

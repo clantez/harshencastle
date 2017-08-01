@@ -8,10 +8,8 @@ import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.LockCode;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import net.minecraft.world.storage.loot.LootTableList;
 
 public class ChestGenerator extends WorldGenerator
 {
@@ -28,6 +26,12 @@ public class ChestGenerator extends WorldGenerator
 	
 	@Override
 	public boolean generate(World worldIn, Random rand, BlockPos position) {
+		if(size.equals(BlockPos.ORIGIN) && rand.nextFloat() < this.chance)
+		{
+			worldIn.setBlockState(position, Blocks.CHEST.getDefaultState().withProperty(BlockChest.FACING, EnumFacing.HORIZONTALS[rand.nextInt(4)]), 3);
+			((TileEntityChest)worldIn.getTileEntity(position)).setLootTable(lootTable, rand.nextLong());
+			return false;
+		}
 		for(int x = 0; x < size.getX(); x++)
 			for(int z = 0; z < size.getZ(); z++)
 				if(rand.nextFloat() < this.chance)
