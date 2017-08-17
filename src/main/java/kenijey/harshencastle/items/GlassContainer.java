@@ -1,17 +1,13 @@
 package kenijey.harshencastle.items;
 
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
 import kenijey.harshencastle.base.BaseItemMetaData;
 import kenijey.harshencastle.enums.items.EnumGlassContainer;
-import kenijey.harshencastle.potions.HarshenPotions;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
@@ -22,17 +18,10 @@ import net.minecraft.world.World;
 
 public class GlassContainer extends BaseItemMetaData
 {
-	
-	public static HashMap<Integer, List<List<Object>>> effects = new HashMap<Integer, List<List<Object>>>();
 	public GlassContainer() {
 		setRegistryName("glass_container");
 		setUnlocalizedName("glass_container");
 		setHasSubtypes(true);
-	}
-	
-	public static void initEffects()
-	{
-		effects.put(1, Arrays.asList(Arrays.asList(HarshenPotions.potionSoulless), Arrays.asList(600)));
 	}
 	
 	@Override
@@ -49,12 +38,19 @@ public class GlassContainer extends BaseItemMetaData
 	@Override
 	 public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
     {
-		if(playerIn.getHeldItem(handIn).getMetadata() == 0)
-            return new ActionResult<ItemStack>(EnumActionResult.FAIL, playerIn.getHeldItem(handIn));
-
-        playerIn.setActiveHand(handIn);
-        return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
+		playerIn.setActiveHand(handIn);
+        return new ActionResult<ItemStack>(hasDrinkEffect(playerIn, handIn) ? EnumActionResult.SUCCESS : EnumActionResult.FAIL, playerIn.getHeldItem(handIn));
     }
+	
+	private boolean hasDrinkEffect(EntityPlayer playerIn, EnumHand handIn)
+	{
+		return hasDrinkEffect(playerIn.getHeldItem(handIn).getMetadata());
+	}
+	
+	private boolean hasDrinkEffect(int meta)
+	{
+		return EnumGlassContainer.getContainerFromMeta(meta).getEffects()[0] != null;
+	}
 	
 	@Override
 	public int getMaxItemUseDuration(ItemStack stack) {
@@ -63,15 +59,16 @@ public class GlassContainer extends BaseItemMetaData
 	
 	@Override
 	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving) {
-		if(effects.containsKey(stack.getMetadata()))
-			for(int i = 0; i < effects.get(stack.getMetadata()).get(0).size(); i++)
-				entityLiving.addPotionEffect(new PotionEffect((Potion)effects.get(stack.getMetadata()).get(0).get(i), (Integer)effects.get(stack.getMetadata()).get(1).get(i)));
+		EnumGlassContainer enu = EnumGlassContainer.getContainerFromMeta(stack.getMetadata());
+		if(enu.getEffects()[0] != null)
+			for(PotionEffect effect : enu.getEffects())
+				entityLiving.addPotionEffect(effect);
 		return ItemStack.EMPTY;
 	}
 	
 	@Override
 	public EnumAction getItemUseAction(ItemStack stack) {
-		return EnumAction.DRINK;
+		return hasDrinkEffect(stack.getMetadata()) ? EnumAction.DRINK : EnumAction.NONE;
 	}
 
 	@Override

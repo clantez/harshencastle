@@ -1,24 +1,43 @@
 package kenijey.harshencastle.enums.items;
 
+import kenijey.harshencastle.potions.HarshenPotions;
+import net.minecraft.init.MobEffects;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.IStringSerializable;
 
 public enum EnumGlassContainer implements IStringSerializable
 {
-	EMPTY("empty", 0),
-	VOID("void", 1);
+	EMPTY("empty", 0, (PotionEffect)null),
+	VOID("void", 1, new PotionEffect(HarshenPotions.potionSoulless, 600)),
+	REGEN("regen", 2, new PotionEffect(MobEffects.INSTANT_HEALTH, 10, 2));
 	
 	private int meta;
 	private String name;
+	private PotionEffect[] effects;
 	
-	private EnumGlassContainer(String name, int meta)
+	private EnumGlassContainer(String name, int meta, PotionEffect... effects)
 	{
 		this.name = name;
 		this.meta = meta;
+		this.effects = effects;
 	}
 
 	@Override
 	public String getName() {
 		return name;
+	}
+	
+	public static EnumGlassContainer getContainerFromMeta(int meta)
+	{
+		for(EnumGlassContainer cycleEnu : EnumGlassContainer.values())
+			if(cycleEnu.getMeta() == meta)
+				return cycleEnu;
+		return EnumGlassContainer.EMPTY;
+	}
+	
+	public PotionEffect[] getEffects() 
+	{
+		return effects;
 	}
 	
 	public int getMeta()
