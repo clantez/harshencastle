@@ -5,6 +5,7 @@ import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.HarshenKeybinding;
 import kenijey.harshencastle.armor.HarshenArmors;
+import kenijey.harshencastle.entity.EntityFactories;
 import kenijey.harshencastle.entity.EntitySoulPart;
 import kenijey.harshencastle.entity.EntitySoullessKnight;
 import kenijey.harshencastle.gui.GuiBookScreen;
@@ -53,8 +54,8 @@ public class ClientProxy extends CommonProxy
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPedestalSlab.class, new RendererPedestalSlab());
 
 		
-		RenderingRegistry.registerEntityRenderingHandler(EntitySoullessKnight.class, EntitySoullessKnight.FACTORY);
-		RenderingRegistry.registerEntityRenderingHandler(EntitySoulPart.class, EntitySoulPart.FACTORY);
+		RenderingRegistry.registerEntityRenderingHandler(EntitySoullessKnight.class, new EntityFactories.FactorySoullessKnight());
+		RenderingRegistry.registerEntityRenderingHandler(EntitySoulPart.class, new EntityFactories.FactorySoulPart());
     }
 	
 	 @Override

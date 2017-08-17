@@ -29,6 +29,8 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntitySoullessKnight extends EntityMob
 {
@@ -92,16 +94,4 @@ public class EntitySoullessKnight extends EntityMob
     protected SoundEvent getDeathSound() {
     	return null;
     }
-    
-    public static Factory FACTORY = new Factory();
-    
-    public static class Factory implements IRenderFactory<EntitySoullessKnight> 
-    {
-
-        @Override
-        public Render<? super EntitySoullessKnight> createRenderFor(RenderManager manager) {
-          return new RenderSoullessKnight(manager);
-        }
-    }
-
 }

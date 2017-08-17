@@ -22,6 +22,8 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntitySoulPart extends EntityMob
 {
@@ -87,16 +89,5 @@ public class EntitySoulPart extends EntityMob
     @Override
     protected SoundEvent getDeathSound() {
     	return SoundEvents.ENTITY_VEX_HURT;
-    }
-    
-    public static Factory FACTORY = new Factory();
-    
-    public static class Factory implements IRenderFactory<EntitySoulPart> 
-    {
-
-        @Override
-        public Render<? super EntitySoulPart> createRenderFor(RenderManager manager) {
-          return new RenderSoulPart(manager);
-        }
-    }
+    }    
 }

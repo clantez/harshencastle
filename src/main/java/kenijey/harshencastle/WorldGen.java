@@ -45,7 +45,7 @@ public class WorldGen implements IWorldGenerator
 		int dim = world.provider.getDimension();
 		if(dim == 0)
 		{
-			if(random.nextFloat() < 1f)
+			if(random.nextFloat() < 0.05f)
 			{
 				BlockPos position = getTopBlock(world, new BlockPos(chunkX * 16, 1, chunkZ * 16).add(random.nextInt(16), 0, random.nextInt(16)).add(-3, -1, -3)).down();
 				loadStructure(world, "shrine", position);

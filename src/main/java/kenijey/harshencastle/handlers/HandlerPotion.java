@@ -46,7 +46,7 @@ public class HandlerPotion {
 				if(!attribute.hasModifier(modifier))	
 					attribute.applyModifier(modifier);
 			}
-			if(!Minecraft.getMinecraft().entityRenderer.isShaderActive() && event.getEntity().world.isRemote && event.getEntityLiving().equals(HarshenCastle.proxy.getPlayer()))
+			if(event.getEntity().world.isRemote && !Minecraft.getMinecraft().entityRenderer.isShaderActive() && event.getEntityLiving().equals(HarshenCastle.proxy.getPlayer()))
 				Minecraft.getMinecraft().entityRenderer.loadShader(new ResourceLocation("minecraft", "shaders/post/desaturate.json"));
 		}
 			
