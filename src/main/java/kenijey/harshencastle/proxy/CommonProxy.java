@@ -12,6 +12,7 @@ import kenijey.harshencastle.dimensions.HarshenDimensions;
 import kenijey.harshencastle.entity.HarshenEntities;
 import kenijey.harshencastle.fluids.HarshenFluids;
 import kenijey.harshencastle.handlers.HandlerBloodOnHurt;
+import kenijey.harshencastle.handlers.HandlerGlassContainer;
 import kenijey.harshencastle.handlers.HandlerHarshenArmourEffects;
 import kenijey.harshencastle.handlers.HandlerHarshenInventoryCommon;
 import kenijey.harshencastle.handlers.HandlerPotion;
@@ -27,7 +28,6 @@ import kenijey.harshencastle.tileentity.TileEntityHarshenSpawner;
 import kenijey.harshencastle.tileentity.TileEntityHereticCauldron;
 import kenijey.harshencastle.tileentity.TileEntityPedestalSlab;
 import net.minecraft.block.Block;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -40,6 +40,9 @@ public class CommonProxy
 {
     public void preInit(FMLPreInitializationEvent event) 
     {
+    	HarshenPotions.preInit();
+		HarshenPotions.register();
+		
     	HarshenFluids.register();
 		
 		HarshenBlocks.preInit();
@@ -51,9 +54,6 @@ public class CommonProxy
 		HarshenArmors.preInit();
 		HarshenArmors.register();
 		
-		HarshenPotions.preInit();
-		HarshenPotions.register();
-		
 		HarshenDimensions.register();
 		
 		HarshenBiomes.register();
@@ -63,6 +63,7 @@ public class CommonProxy
 		HarshenNetwork.preInit();
 		
 		HarshenLootTables.preInit();
+		
     }
 
     public void init(FMLInitializationEvent event) 
@@ -80,14 +81,13 @@ public class CommonProxy
     	
     	HarshenRecipes.register();
     	
-    	Object[] handlers = {new HandlerSoulHarsherSword(), new HandlerHarshenInventoryCommon(), new HandlerBloodOnHurt(), new HandlerPotion(), new HandlerHarshenArmourEffects()};
+    	Object[] handlers = {new HandlerSoulHarsherSword(), new HandlerHarshenInventoryCommon(), new HandlerBloodOnHurt(), new HandlerPotion(), new HandlerHarshenArmourEffects(),
+    			new HandlerGlassContainer()};
     	for(Object o : handlers)
     	{
     		MinecraftForge.EVENT_BUS.register(o);
         	FMLCommonHandler.instance().bus().register(o);
     	}
-    	
-    	GlassContainer.initEffects();
     	
     }
 
