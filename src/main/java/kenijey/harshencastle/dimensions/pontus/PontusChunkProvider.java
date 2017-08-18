@@ -56,7 +56,6 @@ public class PontusChunkProvider implements IChunkGenerator
     private IBlockState oceanBlock = HarshenFluids.harshen_dimensional_fluid_block.getDefaultState();
     private double[] depthBuffer = new double[256];
     private MapGenBase caveGenerator = new MapGenCaves();
-    private MapGenMineshaft mineshaftGenerator = new MapGenMineshaft();
     private MapGenBase ravineGenerator = new MapGenRavine();
     private Biome biomesForGeneration = HarshenBiomes.pontus_dimensional_biome;
     double[] mainNoiseRegion;
@@ -68,7 +67,6 @@ public class PontusChunkProvider implements IChunkGenerator
     {
         {
             caveGenerator = net.minecraftforge.event.terraingen.TerrainGen.getModdedMapGen(caveGenerator, net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.CAVE);
-            mineshaftGenerator = (MapGenMineshaft)net.minecraftforge.event.terraingen.TerrainGen.getModdedMapGen(mineshaftGenerator, net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.MINESHAFT);
             ravineGenerator = net.minecraftforge.event.terraingen.TerrainGen.getModdedMapGen(ravineGenerator, net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.RAVINE);
         }
         this.world = worldIn;
@@ -403,7 +401,7 @@ public class PontusChunkProvider implements IChunkGenerator
 
         biome.decorate(this.world, this.rand, new BlockPos(i, 0, j));
         if (net.minecraftforge.event.terraingen.TerrainGen.populate(this, this.world, this.rand, x, z, flag, net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.ANIMALS))
-        performWorldGenSpawning(this.world, EntityEndermite.class, i + 8, j + 8, 16, 16, this.rand);
+        performWorldGenSpawning(this.world, world.getBiome(new BlockPos(x*16, 100, z*16)).getSpawnableList(EnumCreatureType.CREATURE) , i + 8, j + 8, 16, 16, this.rand);
         net.minecraftforge.event.ForgeEventFactory.onChunkPopulate(false, this, this.world, this.rand, x, z, flag);
 
         BlockFalling.fallInstantly = false;
@@ -411,12 +409,12 @@ public class PontusChunkProvider implements IChunkGenerator
     
     
     
-    private void performWorldGenSpawning(World worldIn, Class<? extends EntityLiving> entity, int p_77191_2_, int p_77191_3_, int p_77191_4_, int p_77191_5_, Random randomIn)
+    private void performWorldGenSpawning(World worldIn, List<SpawnListEntry> enteries, int p_77191_2_, int p_77191_3_, int p_77191_4_, int p_77191_5_, Random randomIn)
     {
-    	while (randomIn.nextFloat() < 0.1f)
+    	SpawnListEntry entry = enteries.get(rand.nextInt(enteries.size()));
+    	while (randomIn.nextFloat() < 0.3f)
         {
-            Biome.SpawnListEntry biome$spawnlistentry = new SpawnListEntry(entity, 2, 1, 3);
-            int i = biome$spawnlistentry.minGroupCount + randomIn.nextInt(1 + biome$spawnlistentry.maxGroupCount - biome$spawnlistentry.minGroupCount);
+            int i = entry.minGroupCount + randomIn.nextInt(1 + entry.maxGroupCount - entry.minGroupCount);
             IEntityLivingData ientitylivingdata = null;
             int j = p_77191_2_ + randomIn.nextInt(p_77191_4_);
             int k = p_77191_3_ + randomIn.nextInt(p_77191_5_);
@@ -437,7 +435,7 @@ public class PontusChunkProvider implements IChunkGenerator
 
                         try
                         {
-                            entityliving = biome$spawnlistentry.newInstance(worldIn);
+                            entityliving = entry.newInstance(worldIn);
                         }
                         catch (Exception exception)
                         {

@@ -48,8 +48,8 @@ public class HarshenKeybinding
 						
 				player.playSound(SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 1, 1);
 			HarshenNetwork.sendToServer(new MessagePacketHarshenInvToggle());
-			try { String s = Minecraft.getMinecraft().getCurrentServerData().serverIP; NetworkEventHarshenInvToggle.go(player); }
-			catch (NullPointerException e) {}
+			if(Minecraft.getMinecraft().getCurrentServerData() != null)
+				NetworkEventHarshenInvToggle.go(player);
 			
 		}
 

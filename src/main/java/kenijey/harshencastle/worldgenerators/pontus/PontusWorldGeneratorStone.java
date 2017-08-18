@@ -14,8 +14,16 @@ public class PontusWorldGeneratorStone extends WorldGenerator
 {
 	
 	private final int numberOfBlocks = 7;
-    private final IBlockState state = HarshenBlocks.harshen_dimensional_stone.getDefaultState();
+    private final IBlockState state;
     
+    public PontusWorldGeneratorStone() {
+		this(HarshenBlocks.harshen_dimensional_stone.getDefaultState());
+	}
+    
+    public PontusWorldGeneratorStone(IBlockState state)
+    {
+    	this.state = state;
+    }
 
 	@Override
 	public boolean generate(World worldIn, Random rand, BlockPos position) {

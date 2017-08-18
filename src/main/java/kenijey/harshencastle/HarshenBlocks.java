@@ -28,6 +28,8 @@ import kenijey.harshencastle.blocks.HereticCauldronTop;
 import kenijey.harshencastle.blocks.ItiumOre;
 import kenijey.harshencastle.blocks.PedestalSlab;
 import kenijey.harshencastle.blocks.PlantOfGleam;
+import kenijey.harshencastle.blocks.PontusChaoticLeaves;
+import kenijey.harshencastle.blocks.PontusChaoticWood;
 import kenijey.harshencastle.blocks.PontusDeadLeaves;
 import kenijey.harshencastle.blocks.PontusDeadWood;
 import kenijey.harshencastle.blocks.SoulReminder;
@@ -75,6 +77,7 @@ public class HarshenBlocks {
 	public static Block pontus_dead_leaves;
 	public static Block harshen_spawner;
 	public static Block pedestal_slab;
+	public static Block pontus_chaotic_leaves;
 	
 	public static BlockCrops crop_of_gleam;
 
@@ -82,6 +85,7 @@ public class HarshenBlocks {
 	public static BlockFlower plant_of_gleam;
 	
 	public static BlockLog pontus_dead_wood;
+	public static BlockLog pontus_chaotic_wood;
 
 	
 	public static void preInit() {
@@ -114,6 +118,8 @@ public class HarshenBlocks {
 		pontus_dead_leaves = new PontusDeadLeaves();
 		harshen_spawner = new HarshenSpawner();
 		pedestal_slab = new PedestalSlab();
+		pontus_chaotic_wood = new PontusChaoticWood();
+		pontus_chaotic_leaves = new PontusChaoticLeaves();
 	}
 
 	public static void reg() {
@@ -131,6 +137,8 @@ public class HarshenBlocks {
 		regBlock(harshen_spawner, 64);
 		regBlock(pontus_dead_wood, 64);
 		regBlock(pontus_dead_leaves, 64);
+		regBlock(pontus_chaotic_wood, 64);
+		regBlock(pontus_chaotic_leaves, 64);
 		regBlock(heretic_cauldron, 64);
 		regBlock(harshen_soul_ore, 64);
 		regBlock(itium_ore, 64);

@@ -2,11 +2,11 @@ package kenijey.harshencastle.blocks;
 
 import kenijey.harshencastle.base.BaseHarshenLeaves;
 
-public class PontusDeadLeaves extends BaseHarshenLeaves
+public class PontusChaoticLeaves extends BaseHarshenLeaves
 {
 	@Override
 	protected String getName() {
-		return "pontus_dead_leaves";
+		return "pontus_chaotic_leaves";
 	}
 
 }

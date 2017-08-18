@@ -1,10 +1,14 @@
 package kenijey.harshencastle;
 
+import java.util.Arrays;
+
+import kenijey.harshencastle.commands.CommandAccessPontusOuter;
 import kenijey.harshencastle.commands.CommandDelFlatPlate;
 import kenijey.harshencastle.commands.CommandFlatPlate;
 import kenijey.harshencastle.creativetabs.HarshenTab;
 import kenijey.harshencastle.dimensions.DimensionPontus;
 import kenijey.harshencastle.proxy.CommonProxy;
+import net.minecraft.command.ICommand;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -62,8 +66,8 @@ public class HarshenCastle {
     @EventHandler
 	public void serverLoad(FMLServerStartingEvent event)
 	{
-		event.registerServerCommand(new CommandFlatPlate());
-		event.registerServerCommand(new CommandDelFlatPlate());
+		for(ICommand command : Arrays.asList(new CommandFlatPlate(), new CommandDelFlatPlate(), new CommandAccessPontusOuter()))
+			event.registerServerCommand(command);
 	}	
     
     public World getPontusWorld() {

@@ -6,11 +6,11 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 
-public class PontusDeadWood extends BaseHarshenLog
+public class PontusChaoticWood extends BaseHarshenLog
 {
 	@Override
 	protected String getName() {
-		return "pontus_dead_wood";
+		return "pontus_chaotic_wood";
 	}
 
 }

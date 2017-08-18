@@ -7,7 +7,7 @@ import net.minecraftforge.common.DimensionManager;
 
 public class DimensionPontus 
 {
-	public static final int DIMENSION_ID = DimensionManager.getNextFreeDimId();//DimensionManager.getNextFreeDimId();
+	public static final int DIMENSION_ID = DimensionManager.getNextFreeDimId();
 	public static final String DIM_NAME = "Pontus Dimension";
 	public static final DimensionType PONTUS_DIMENSION = DimensionType.register("PONTUS", "_pontus", DIMENSION_ID, PontusWorldProvider.class, false);
 			

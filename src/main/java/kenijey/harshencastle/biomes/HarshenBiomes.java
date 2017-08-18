@@ -1,5 +1,7 @@
 package kenijey.harshencastle.biomes;
 
+import java.util.ArrayList;
+
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
@@ -11,12 +13,18 @@ public class HarshenBiomes
 	}
 	
 	public static Biome pontus_dimensional_biome;
-
-	
+	public static Biome pontus_outer_biome;
+		
 	public static void initBiomes()
 	{
-		pontus_dimensional_biome = new PontusBiome();
-		ForgeRegistries.BIOMES.register(pontus_dimensional_biome);
+		pontus_dimensional_biome = initAndRegBiome(new PontusBiome());
+		pontus_outer_biome = initAndRegBiome(new PontusOuterBiome());
+	}
+	
+	private static Biome initAndRegBiome(Biome biome)
+	{
+		ForgeRegistries.BIOMES.register(biome);
+		return biome;
 	}
 	
 //	public static void regBiome()
