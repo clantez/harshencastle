@@ -7,29 +7,21 @@ import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.base.BaseLargeTreeGenerator;
 import kenijey.harshencastle.base.BasePontusResourceBiome;
 import kenijey.harshencastle.dimensions.PontusBiomeDecorator;
-import kenijey.harshencastle.worldgenerators.pontus.NullGenerator;
 import kenijey.harshencastle.worldgenerators.pontus.PontusWorldGeneratorDestroyedPlants;
 import kenijey.harshencastle.worldgenerators.pontus.PontusWorldGeneratorStone;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.boss.EntityDragon;
-import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.monster.EntityEndermite;
-import net.minecraft.entity.monster.EntitySilverfish;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biome.SpawnListEntry;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
-import net.minecraft.world.gen.feature.WorldGenTrees;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class PontusOuterBiome extends BasePontusResourceBiome {
 		
 	public PontusOuterBiome() {
-		super(new Biome.BiomeProperties("Pontus_Chaotic").setTemperature(5f).setRainDisabled().setBaseHeight(10f).setHeightVariation(0.5f));
+		super(new Biome.BiomeProperties("Pontus_Chaotic").setTemperature(5f).setRainDisabled().setBaseHeight(1f).setHeightVariation(15f));
 		
 		setRegistryName(HarshenCastle.MODID, "Pontus_Chaotic");
 
@@ -63,7 +55,7 @@ public class PontusOuterBiome extends BasePontusResourceBiome {
         {
             int j = rand.nextInt(16) + 8;
             int k = rand.nextInt(16) + 8;
-            new PontusWorldGeneratorStone(Blocks.OBSIDIAN.getDefaultState()).generate(worldIn, rand, worldIn.getTopSolidOrLiquidBlock(pos.add(j, 0, k)));
+            new PontusWorldGeneratorStone().generate(worldIn, rand, worldIn.getTopSolidOrLiquidBlock(pos.add(j, 0, k)));
         }
 	}
 	

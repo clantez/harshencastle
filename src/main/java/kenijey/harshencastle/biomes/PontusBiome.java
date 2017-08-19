@@ -6,7 +6,6 @@ import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.base.BasePontusResourceBiome;
 import kenijey.harshencastle.dimensions.PontusBiomeDecorator;
-import kenijey.harshencastle.worldgenerators.pontus.NullGenerator;
 import kenijey.harshencastle.worldgenerators.pontus.PontusWorldGeneratorDestroyedPlants;
 import kenijey.harshencastle.worldgenerators.pontus.PontusWorldGeneratorStone;
 import net.minecraft.block.state.IBlockState;

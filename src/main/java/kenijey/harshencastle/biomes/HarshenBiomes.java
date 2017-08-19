@@ -2,6 +2,7 @@ package kenijey.harshencastle.biomes;
 
 import java.util.ArrayList;
 
+import kenijey.harshencastle.base.BasePontusResourceBiome;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
@@ -12,8 +13,8 @@ public class HarshenBiomes
 		initBiomes();
 	}
 	
-	public static Biome pontus_dimensional_biome;
-	public static Biome pontus_outer_biome;
+	public static BasePontusResourceBiome pontus_dimensional_biome;
+	public static BasePontusResourceBiome pontus_outer_biome;
 		
 	public static void initBiomes()
 	{
@@ -21,7 +22,7 @@ public class HarshenBiomes
 		pontus_outer_biome = initAndRegBiome(new PontusOuterBiome());
 	}
 	
-	private static Biome initAndRegBiome(Biome biome)
+	private static BasePontusResourceBiome initAndRegBiome(BasePontusResourceBiome biome)
 	{
 		ForgeRegistries.BIOMES.register(biome);
 		return biome;

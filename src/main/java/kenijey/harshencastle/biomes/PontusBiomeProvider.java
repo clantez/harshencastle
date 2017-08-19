@@ -2,11 +2,14 @@ package kenijey.harshencastle.biomes;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 import javax.annotation.Nullable;
 
+import kenijey.harshencastle.base.BasePontusResourceBiome;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeProvider;
@@ -14,9 +17,16 @@ import net.minecraft.world.biome.BiomeProvider;
 public class PontusBiomeProvider extends BiomeProvider
 {
 	
+	private static HashMap<BasePontusResourceBiome, Integer> distanceWhenStart = new HashMap<>();
+	
+	public PontusBiomeProvider() {
+		distanceWhenStart.put(HarshenBiomes.pontus_dimensional_biome, -1);
+		distanceWhenStart.put(HarshenBiomes.pontus_outer_biome, 7500);
+	}
+		
 	@Override
 	public Biome getBiome(BlockPos pos) {
-		return getbiomeFromBlockPos(pos);
+		return biomeFromPosition(pos);
 	}
 	
 	@Override
@@ -26,7 +36,7 @@ public class PontusBiomeProvider extends BiomeProvider
             biomes = new Biome[width * height];
         }
 
-        Arrays.fill(biomes, 0, width * height, getbiomeFromBlockPos(new BlockPos(x, 100, z)));
+        Arrays.fill(biomes, 0, width * height, biomeFromPosition(new BlockPos(x, 0, z)));
         return biomes;
 	}
 	
@@ -46,8 +56,38 @@ public class PontusBiomeProvider extends BiomeProvider
         return this.getBiomes(listToReuse, x, z, width, length);
     }
 	
-	private Biome getbiomeFromBlockPos(BlockPos pos)
+	public static Biome biomeFromPosition(BlockPos pos)
 	{
-		return pos.add(0, pos.getX() + 100, 0).getDistance(0, 100, 0) > 7500 ? HarshenBiomes.pontus_outer_biome : HarshenBiomes.pontus_dimensional_biome;
+		double distance = new BlockPos(pos).getDistance(0, pos.getY(), 0);
+		for(int i = 0; i < distanceWhenStart.size(); i ++)
+		{
+			BasePontusResourceBiome biomeToCheck = biomeList(distanceWhenStart.keySet()).get(i);
+			if(i + 1 != distanceWhenStart.size())
+				if(distanceWhenStart.get(biomeToCheck) <= distance && distanceWhenStart.get(biomeList(distanceWhenStart.keySet()).get(i + 1)) > distance)
+					return biomeToCheck;
+				else;
+			else
+				return biomeToCheck;
+		}
+			
+		return HarshenBiomes.pontus_dimensional_biome;
+	}
+	
+	public static ArrayList<BasePontusResourceBiome> biomeList(Set<BasePontusResourceBiome> set)
+	{
+		ArrayList<BasePontusResourceBiome> list = new ArrayList<>();
+		for(BasePontusResourceBiome biome : set)
+			list.add(biome);
+		return list;
+	}
+	
+	public static Biome biomeFromPosition(int chunk_X, int chunk_Z)
+	{
+		return biomeFromPosition(new BlockPos(chunk_X * 16, 0, chunk_Z * 16));
+	}
+	
+	public static Biome biomeFromPosition(int x, int z, Object n)
+	{
+		return biomeFromPosition(new BlockPos(x, 0, z));
 	}
 }

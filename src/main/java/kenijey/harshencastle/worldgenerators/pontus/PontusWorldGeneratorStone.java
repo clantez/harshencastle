@@ -4,10 +4,12 @@ import java.util.Arrays;
 import java.util.Random;
 
 import kenijey.harshencastle.HarshenBlocks;
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class PontusWorldGeneratorStone extends WorldGenerator
@@ -15,14 +17,25 @@ public class PontusWorldGeneratorStone extends WorldGenerator
 	
 	private final int numberOfBlocks = 7;
     private final IBlockState state;
+    private ChunkPrimer primer;
     
     public PontusWorldGeneratorStone() {
 		this(HarshenBlocks.harshen_dimensional_stone.getDefaultState());
 	}
     
+    public PontusWorldGeneratorStone(Block block) {
+    	this(block.getDefaultState());
+    }
+    
     public PontusWorldGeneratorStone(IBlockState state)
     {
     	this.state = state;
+    }
+    
+    public PontusWorldGeneratorStone setPrimer(ChunkPrimer primer)
+    {
+    	this.primer = primer;
+    	return this;
     }
 
 	@Override
@@ -73,9 +86,10 @@ public class PontusWorldGeneratorStone extends WorldGenerator
                                 {
                                     BlockPos blockpos = new BlockPos(l1, i2, j2);
                                     if(Arrays.asList(HarshenBlocks.harshen_dimensional_dirt, HarshenBlocks.harshen_dimensional_rock).contains(worldIn.getBlockState(blockpos).getBlock()))
-                                        worldIn.setBlockState(blockpos, this.state, 2);	
-
-                                    
+                                    	if(primer == null)
+                                    		worldIn.setBlockState(blockpos, this.state, 2);
+                                    	else
+                                    		primer.setBlockState(blockpos.getX(), blockpos.getY(), blockpos.getZ(), state);
                                 }
                             }
                         }

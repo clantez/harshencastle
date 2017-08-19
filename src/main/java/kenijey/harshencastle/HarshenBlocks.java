@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import kenijey.harshencastle.blocks.BloodBlock;
 import kenijey.harshencastle.blocks.CropOfGleam;
+import kenijey.harshencastle.blocks.HarshenChaoticRock;
 import kenijey.harshencastle.blocks.HarshenDestroyedPlant;
 import kenijey.harshencastle.blocks.HarshenDimensionalDirt;
 import kenijey.harshencastle.blocks.HarshenDimensionalDoor;
@@ -69,6 +70,7 @@ public class HarshenBlocks {
 	public static Block itium_ore;
 	public static Block harshen_destroyed_plant;
 	public static Block harshen_dimensional_rock;
+	public static Block harshen_chaotic_rock;
 	public static Block harshen_dimensional_pedestal;
 	public static Block harshen_dimensional_gate;
 	public static Block heretic_cauldron;
@@ -120,6 +122,7 @@ public class HarshenBlocks {
 		pedestal_slab = new PedestalSlab();
 		pontus_chaotic_wood = new PontusChaoticWood();
 		pontus_chaotic_leaves = new PontusChaoticLeaves();
+		harshen_chaotic_rock = new HarshenChaoticRock();
 	}
 
 	public static void reg() {
@@ -133,11 +136,13 @@ public class HarshenBlocks {
 		regBlock(harshen_dimensional_wood_crate, 64);
 		regBlock(harshen_display_block, 64);
 		regBlock(harshen_dimensional_dirt, 64);
+		regBlock(harshen_dimensional_rock, 64);
+		regBlock(harshen_chaotic_rock, 64);
 		regBlock(harshen_dimensional_gate, 1, HarshenDimensionalGate.FOREVER);
 		regBlock(harshen_spawner, 64);
 		regBlock(pontus_dead_wood, 64);
-		regBlock(pontus_dead_leaves, 64);
 		regBlock(pontus_chaotic_wood, 64);
+		regBlock(pontus_dead_leaves, 64);
 		regBlock(pontus_chaotic_leaves, 64);
 		regBlock(heretic_cauldron, 64);
 		regBlock(harshen_soul_ore, 64);
@@ -145,7 +150,6 @@ public class HarshenBlocks {
 		regBlock(harshen_destroyed_plant,64);
 		regBlock(harshen_soul_flower, 64);
 		regBlock(soul_reminder,1);
-		regBlock(harshen_dimensional_rock, 64);
 		regBlock(harshen_dimensional_pedestal, 8);
 		regBlock(plant_of_gleam, 64);
 		regBlock(blood_block, 1);
