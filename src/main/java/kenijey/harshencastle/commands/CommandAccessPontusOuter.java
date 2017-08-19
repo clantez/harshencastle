@@ -1,12 +1,11 @@
 package kenijey.harshencastle.commands;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import kenijey.harshencastle.base.BaseHarshenCommand;
 import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.network.packets.MessagePacketPlayerHasAccess;
-import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,21 +13,11 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
 
-public class CommandAccessPontusOuter extends CommandBase {
+public class CommandAccessPontusOuter extends BaseHarshenCommand {
 
 	@Override
 	public String getName() {
-		return "accesspontus";
-	}
-
-	@Override
-	public String getUsage(ICommandSender sender) {
-		return "commands.pontus.usage";
-	}
-	
-	@Override
-	public int getRequiredPermissionLevel() {
-		return 2;
+		return "pontuslevel";
 	}
 	
 	@Override
@@ -46,16 +35,10 @@ public class CommandAccessPontusOuter extends CommandBase {
 			player = getPlayer(server, sender, args[0]);
 			rawInt = args[1];
 		}
-		try
-		{
-			int i = Integer.valueOf(rawInt);
-		}
-		catch (NumberFormatException e) {
-			notifyCommandListener(sender, this, "commands.pontuslevel.number", rawInt);
-		}
-		player.getEntityData().setInteger("PontusBiomeLevel", Integer.valueOf(rawInt));
+		int i = parseInt(rawInt);
+		player.getEntityData().setInteger("PontusBiomeLevel", i);
 		HarshenNetwork.sendToPlayer((EntityPlayerMP) player, new MessagePacketPlayerHasAccess(player));
-		notifyCommandListener(sender, this, "commands.allowpontus.achive", player.getName());
+		message(sender, "achive", player.getName());
 	}
 	
 	@Override
