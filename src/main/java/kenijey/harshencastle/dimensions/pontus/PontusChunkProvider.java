@@ -11,6 +11,7 @@ import javax.annotation.Nullable;
 
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenUtils;
+import kenijey.harshencastle.base.BasePontusResourceBiome;
 import kenijey.harshencastle.biomes.HarshenBiomes;
 import kenijey.harshencastle.biomes.PontusBiomeProvider;
 import kenijey.harshencastle.dimensions.PontusBiomeDecorator;
@@ -175,8 +176,15 @@ public class PontusChunkProvider implements IChunkGenerator
                             for (int l2 = 0; l2 < 4; ++l2)
                             	if ((lvt_45_1_ += d16) > 0.0D)
                             	{
-                                    primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, getRandomBlock(floorMap.get(PontusBiomeProvider.biomeFromPosition(x, z))).getDefaultState());
-                                    
+                            		for(Biome biome : HarshenBiomes.allBiomes)
+                            			if(PontusBiomeProvider.distanceWhenStart.get(biome) < 0)
+                            				continue;
+                            			else if(PontusBiomeProvider.getDistance(HarshenUtils.chunkToPos(x, z)) > PontusBiomeProvider.distanceWhenStart.get(biome) - 500 &&
+                            					PontusBiomeProvider.getDistance(HarshenUtils.chunkToPos(x, z)) < PontusBiomeProvider.distanceWhenStart.get(biome) + 500)
+                            			{
+                            				//System.out.println(Math.abs(PontusBiomeProvider.getDistance(HarshenUtils.chunkToPos(x, z)) - PontusBiomeProvider.distanceWhenStart.get(biome)));
+                            			}
+                                    primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, getRandomBlock(floorMap.get(PontusBiomeProvider.biomeFromPosition(x, z))).getDefaultState());   
                             	}
                                 else if (i2 * 8 + j2 < this.settings.seaLevel)
                                     primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, this.oceanBlock);

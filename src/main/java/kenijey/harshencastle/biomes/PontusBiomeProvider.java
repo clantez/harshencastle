@@ -2,6 +2,7 @@ package kenijey.harshencastle.biomes;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
@@ -17,7 +18,7 @@ import net.minecraft.world.biome.BiomeProvider;
 public class PontusBiomeProvider extends BiomeProvider
 {
 	
-	private static HashMap<BasePontusResourceBiome, Integer> distanceWhenStart = new HashMap<>();
+	public static HashMap<BasePontusResourceBiome, Integer> distanceWhenStart = new HashMap<>();
 	
 	public PontusBiomeProvider() {
 		distanceWhenStart.put(HarshenBiomes.pontus_dimensional_biome, -1);
@@ -63,35 +64,39 @@ public class PontusBiomeProvider extends BiomeProvider
 		{
 			BasePontusResourceBiome biomeToCheck = biomeList(distanceWhenStart.keySet()).get(i);
 			if(i + 1 != distanceWhenStart.size())
+			{
 				if(distanceWhenStart.get(biomeToCheck) <= distance && distanceWhenStart.get(biomeList(distanceWhenStart.keySet()).get(i + 1)) > distance)
 					return biomeToCheck;
 				else;
+			}
 			else
-				return highestDistance(distanceWhenStart.keySet());
+				return biomeList(distanceWhenStart.keySet()).get(biomeList(distanceWhenStart.keySet()).size() - 1);
 		}
 	
 		return HarshenBiomes.pontus_dimensional_biome;
 	}
 	
+	public static double getDistance(BlockPos pos)
+	{
+		return new BlockPos(pos).getDistance(0, pos.getY(), 0);
+	}
+	
 	public static ArrayList<BasePontusResourceBiome> biomeList(Set<BasePontusResourceBiome> set)
 	{
 		ArrayList<BasePontusResourceBiome> list = new ArrayList<>();
+		ArrayList<BasePontusResourceBiome> finalList = new ArrayList<>();
+		ArrayList<Integer> listOrder = new ArrayList<>();
 		for(BasePontusResourceBiome biome : set)
+		{
 			list.add(biome);
-		return list;
-	}
-	
-	public static BasePontusResourceBiome highestDistance(Set<BasePontusResourceBiome> set)
-	{
-		int i = 0;
-		BasePontusResourceBiome biomeToReturn = HarshenBiomes.pontus_dimensional_biome;
-		for(BasePontusResourceBiome biome : set)
-			if(distanceWhenStart.get(biome) > i)
-			{
-				i = distanceWhenStart.get(biome);
-				biomeToReturn = biome;
-			}
-		return biomeToReturn;
+			listOrder.add(distanceWhenStart.get(biome));
+		}
+		Collections.sort(listOrder);
+		for(int i : listOrder)
+			for(BasePontusResourceBiome biome : list)
+				if(distanceWhenStart.get(biome) == i)
+					finalList.add(biome);
+		return finalList;
 	}
 	
 	public static Biome biomeFromPosition(int chunk_X, int chunk_Z)

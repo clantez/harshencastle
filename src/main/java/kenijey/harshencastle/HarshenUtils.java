@@ -40,15 +40,4 @@ public class HarshenUtils
 	{
 		return (int) Math.floor(num);
 	}
-	
-	public static Block getRandomDiffrencBlock(Block[] blockList1, Block[] blockList2)
-	{
-		ArrayList<Block> diffrences = new ArrayList<Block>();
-		for(Block block : blockList1)
-			if(!Arrays.asList(blockList2).contains(block))
-				diffrences.add(block);
-		if(diffrences.isEmpty())
-			return null;
-		return diffrences.get(new Random().nextInt(diffrences.size()));
-	}
 }

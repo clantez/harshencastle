@@ -21,7 +21,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 public class PontusOuterBiome extends BasePontusResourceBiome {
 		
 	public PontusOuterBiome() {
-		super(new Biome.BiomeProperties("Pontus_Chaotic").setTemperature(5f).setRainDisabled().setBaseHeight(1f).setHeightVariation(15f));
+		super(new Biome.BiomeProperties("Pontus_Chaotic").setTemperature(5f).setRainDisabled().setBaseHeight(0.7f).setHeightVariation(2f));
 		
 		setRegistryName(HarshenCastle.MODID, "Pontus_Chaotic");
 
