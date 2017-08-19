@@ -67,9 +67,9 @@ public class PontusBiomeProvider extends BiomeProvider
 					return biomeToCheck;
 				else;
 			else
-				return biomeToCheck;
+				return highestDistance(distanceWhenStart.keySet());
 		}
-			
+	
 		return HarshenBiomes.pontus_dimensional_biome;
 	}
 	
@@ -79,6 +79,19 @@ public class PontusBiomeProvider extends BiomeProvider
 		for(BasePontusResourceBiome biome : set)
 			list.add(biome);
 		return list;
+	}
+	
+	public static BasePontusResourceBiome highestDistance(Set<BasePontusResourceBiome> set)
+	{
+		int i = 0;
+		BasePontusResourceBiome biomeToReturn = HarshenBiomes.pontus_dimensional_biome;
+		for(BasePontusResourceBiome biome : set)
+			if(distanceWhenStart.get(biome) > i)
+			{
+				i = distanceWhenStart.get(biome);
+				biomeToReturn = biome;
+			}
+		return biomeToReturn;
 	}
 	
 	public static Biome biomeFromPosition(int chunk_X, int chunk_Z)
