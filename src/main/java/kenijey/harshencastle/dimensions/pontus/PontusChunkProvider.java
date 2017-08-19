@@ -1,14 +1,22 @@
 package kenijey.harshencastle.dimensions.pontus;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javax.annotation.Nullable;
 
 import kenijey.harshencastle.HarshenBlocks;
+import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.biomes.HarshenBiomes;
+import kenijey.harshencastle.biomes.PontusBiomeProvider;
+import kenijey.harshencastle.dimensions.PontusBiomeDecorator;
 import kenijey.harshencastle.fluids.HarshenFluids;
+import kenijey.harshencastle.worldgenerators.pontus.PontusWorldGeneratorStone;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.state.IBlockState;
@@ -16,6 +24,8 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.monster.EntityEndermite;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
@@ -23,7 +33,9 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldEntitySpawner;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.world.biome.Biome.SpawnListEntry;
+import net.minecraft.world.biome.BiomeProvider;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.ChunkGeneratorSettings;
@@ -35,11 +47,11 @@ import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
 import net.minecraft.world.gen.feature.WorldGenDungeons;
 import net.minecraft.world.gen.feature.WorldGenLakes;
-import net.minecraft.world.gen.structure.MapGenMineshaft;
+import net.minecraft.world.storage.WorldInfo;
 
 public class PontusChunkProvider implements IChunkGenerator
 {
-    protected static final IBlockState[] STONE = {HarshenBlocks.harshen_dimensional_rock.getDefaultState(), HarshenBlocks.harshen_dimensional_dirt.getDefaultState()};
+	protected static final HashMap<Biome, Block[]> floorMap = new HashMap<>();
     private final Random rand;
     private NoiseGeneratorOctaves minLimitPerlinNoise;
     private NoiseGeneratorOctaves maxLimitPerlinNoise;
@@ -57,7 +69,6 @@ public class PontusChunkProvider implements IChunkGenerator
     private double[] depthBuffer = new double[256];
     private MapGenBase caveGenerator = new MapGenCaves();
     private MapGenBase ravineGenerator = new MapGenRavine();
-    private Biome biomesForGeneration = HarshenBiomes.pontus_dimensional_biome;
     double[] mainNoiseRegion;
     double[] minLimitRegion;
     double[] maxLimitRegion;
@@ -65,6 +76,10 @@ public class PontusChunkProvider implements IChunkGenerator
 
     public PontusChunkProvider(World worldIn, long seed, String generatorOptions)
     {
+    	floorMap.put(HarshenBiomes.pontus_dimensional_biome, getBlocks(HarshenBlocks.harshen_dimensional_rock, HarshenBlocks.harshen_dimensional_dirt));
+    	floorMap.put(HarshenBiomes.pontus_outer_biome, getBlocks(HarshenBlocks.harshen_dimensional_rock, HarshenBlocks.harshen_chaotic_rock));
+    	
+    	
         {
             caveGenerator = net.minecraftforge.event.terraingen.TerrainGen.getModdedMapGen(caveGenerator, net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.CAVE);
             ravineGenerator = net.minecraftforge.event.terraingen.TerrainGen.getModdedMapGen(ravineGenerator, net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.RAVINE);
@@ -109,7 +124,12 @@ public class PontusChunkProvider implements IChunkGenerator
         this.depthNoise = ctx.getDepth();
         this.forestNoise = ctx.getForest();
     }
-
+    
+    public Block[] getBlocks(Block... blocks)
+    {
+    	return blocks;
+    }
+    
     public void setBlocksInChunk(int x, int z, ChunkPrimer primer)
     {
         this.generateHeightmap(x * 4, 0, z * 4);
@@ -153,17 +173,13 @@ public class PontusChunkProvider implements IChunkGenerator
                             double lvt_45_1_ = d10 - d16;
 
                             for (int l2 = 0; l2 < 4; ++l2)
-                            {
-                                if ((lvt_45_1_ += d16) > 0.0D)
-                                {
-                                    primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, STONE[rand.nextInt(2)]);
-                                }
+                            	if ((lvt_45_1_ += d16) > 0.0D)
+                            	{
+                                    primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, getRandomBlock(floorMap.get(PontusBiomeProvider.biomeFromPosition(x, z))).getDefaultState());
+                                    
+                            	}
                                 else if (i2 * 8 + j2 < this.settings.seaLevel)
-                                {
                                     primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, this.oceanBlock);
-                                }
-                            }
-
                             d10 += d12;
                             d11 += d13;
                         }
@@ -176,6 +192,11 @@ public class PontusChunkProvider implements IChunkGenerator
                 }
             }
         }
+    }
+    
+    public Block getRandomBlock(Block... blocks)
+    {
+    	return blocks[new Random().nextInt(blocks.length)];
     }
 
     public void replaceBiomeBlocks(int x, int z, ChunkPrimer primer, Biome biomeIn)
@@ -198,9 +219,8 @@ public class PontusChunkProvider implements IChunkGenerator
         ChunkPrimer chunkprimer = new ChunkPrimer();
         this.setBlocksInChunk(x, z, chunkprimer);
 
-
-        this.replaceBiomeBlocks(x, z, chunkprimer, this.biomesForGeneration);
-
+        this.replaceBiomeBlocks(x, z, chunkprimer, PontusBiomeProvider.biomeFromPosition(x, z));
+        
         if (this.settings.useCaves)
         {
             this.caveGenerator.generate(this.world, x, z, chunkprimer);
@@ -247,13 +267,12 @@ public class PontusChunkProvider implements IChunkGenerator
                 float f3 = 0.0F;
                 float f4 = 0.0F;
                 int i1 = 2;
-                Biome biome = this.biomesForGeneration;
 
                 for (int j1 = -2; j1 <= 2; ++j1)
                 {
                     for (int k1 = -2; k1 <= 2; ++k1)
                     {
-                        Biome biome1 = this.biomesForGeneration;
+                        Biome biome1 = PontusBiomeProvider.biomeFromPosition(p_185978_1_ / 4, p_185978_3_ / 4);
                         float f5 = this.settings.biomeDepthOffSet + biome1.getBaseHeight() * this.settings.biomeDepthWeight;
                         float f6 = this.settings.biomeScaleOffset + biome1.getHeightVariation() * this.settings.biomeScaleWeight;
 
@@ -264,11 +283,6 @@ public class PontusChunkProvider implements IChunkGenerator
                         }
 
                         float f7 = this.biomeWeights[j1 + 2 + (k1 + 2) * 5] / (f5 + 2.0F);
-
-                        if (biome1.getBaseHeight() > biome.getBaseHeight())
-                        {
-                            f7 /= 2.0F;
-                        }
 
                         f2 += f6 * f7;
                         f3 += f5 * f7;
@@ -398,7 +412,6 @@ public class PontusChunkProvider implements IChunkGenerator
                 (new WorldGenDungeons()).generate(this.world, this.rand, blockpos.add(i3, l3, l1));
             }
         }
-
         biome.decorate(this.world, this.rand, new BlockPos(i, 0, j));
         if (net.minecraftforge.event.terraingen.TerrainGen.populate(this, this.world, this.rand, x, z, flag, net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.ANIMALS))
         performWorldGenSpawning(this.world, world.getBiome(new BlockPos(x*16, 100, z*16)).getSpawnableList(EnumCreatureType.CREATURE) , i + 8, j + 8, 16, 16, this.rand);
@@ -457,7 +470,7 @@ public class PontusChunkProvider implements IChunkGenerator
                     }
                 }
             }
-        }   
+        }
     }
 
 
