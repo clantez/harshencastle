@@ -34,7 +34,7 @@ public class JEIRitualWrapper extends BaseJeiWrapper
 
 	@Override
 	public void getIngredients(@Nonnull IIngredients ingredients) {
-		ingredients.setInput(ItemStack.class, input);
+		ingredients.setInputLists(ItemStack.class, input);
 		ingredients.setOutput(ItemStack.class, output);
 	}
 

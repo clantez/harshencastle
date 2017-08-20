@@ -3,9 +3,6 @@ package kenijey.harshencastle.intergration.jei.ritual;
 import javax.annotation.Nonnull;
 
 import kenijey.harshencastle.base.BaseJeiHandler;
-import kenijey.harshencastle.intergration.jei.cauldron.JEICauldronCategory;
-import kenijey.harshencastle.intergration.jei.cauldron.JEICauldronWrapper;
-import kenijey.harshencastle.recipies.CauldronRecipes;
 import kenijey.harshencastle.recipies.RitualRecipes;
 import mezz.jei.api.recipe.IRecipeWrapper;
 
@@ -19,7 +16,7 @@ public class JEIRitualHandler extends BaseJeiHandler<RitualRecipes>
 
 	@Override
 	public String getRecipeCategoryUid(RitualRecipes recipe) {
-		return JEICauldronCategory.UID;
+		return JEIRitualCategory.UID;
 	}
 
 	@Override
