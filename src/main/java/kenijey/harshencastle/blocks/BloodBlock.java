@@ -49,7 +49,7 @@ public class BloodBlock extends Block
 		if(ticks++ > 41)
 		{
 			worldIn.setBlockToAir(pos);
-			ticks=0;
+			//ticks=0;
 		}
 	}
 	
