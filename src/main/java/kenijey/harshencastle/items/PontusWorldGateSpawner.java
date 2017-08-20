@@ -4,6 +4,7 @@ import java.util.List;
 
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.base.BaseItemMetaData;
+import kenijey.harshencastle.blocks.HarshenDimensionalGate;
 import kenijey.harshencastle.creativetabs.HarshenTab;
 import kenijey.harshencastle.enums.items.EnumPontusGateSpawner;
 import net.minecraft.client.util.ITooltipFlag;
@@ -46,8 +47,8 @@ public class PontusWorldGateSpawner extends BaseItemMetaData
 	@Override
 	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand,
 			EnumFacing facing, float hitX, float hitY, float hitZ) {
-		if(!worldIn.isAirBlock(pos.offset(facing)))
-			return EnumActionResult.FAIL;
+		if(!worldIn.isAirBlock(pos.offset(facing)) || worldIn.getBlockState(pos).getBlock() instanceof HarshenDimensionalGate)
+			return EnumActionResult.PASS;
 		worldIn.setBlockState(pos.offset(facing), HarshenBlocks.harshen_dimensional_gate.getStateFromMeta(player.getHeldItem(hand).getMetadata() == 0? 2 : 3), 3);
 		if(!player.capabilities.isCreativeMode)
 			player.setHeldItem(hand, ItemStack.EMPTY);

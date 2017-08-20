@@ -3,13 +3,18 @@ package kenijey.harshencastle.items;
 import java.util.Arrays;
 import java.util.List;
 
+import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.base.BaseItemMetaData;
 import kenijey.harshencastle.enums.items.EnumBloodCollector;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class BloodCollector extends BaseItemMetaData
@@ -43,8 +48,8 @@ public class BloodCollector extends BaseItemMetaData
 	
 	public boolean remove(World world, EntityPlayer player, EnumHand hand, int amount)
 	{
-		if(world.isRemote)
-			return false;
+		if(player.capabilities.isCreativeMode)
+			return true;
 		ItemStack stack = player.getHeldItem(hand);
 		NBTTagCompound nbt = getNBT(stack);
 		if(nbt.getInteger("Blood") - amount <= 0)
@@ -86,6 +91,15 @@ public class BloodCollector extends BaseItemMetaData
 		else
 			tooltip.add("Blood: 0 / 50");
 		super.addInformation(stack, worldIn, tooltip, flagIn);
+	}
+
+	@Override
+	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand,
+			EnumFacing facing, float hitX, float hitY, float hitZ) {
+		if(player.isSneaking() && remove(worldIn, player, hand, 3) && 
+				worldIn.getBlockState(pos.offset(facing).down()).getBlock().isTopSolid(worldIn.getBlockState(pos.offset(facing).down())))
+			worldIn.setBlockState(pos.offset(facing), HarshenBlocks.blood_block.getDefaultState(), 3);
+		return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
 	}
 
 	@Override
