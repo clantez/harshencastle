@@ -14,9 +14,9 @@ import net.minecraft.util.ResourceLocation;
 public abstract class BaseJeiCategory implements IRecipeCategory{
 
 	public static String UID = "harshencastle.";
-	private final IDrawable background;
-	private final String localizedName;
-	private final IDrawable overlay;
+	protected final IDrawable background;
+	protected final String localizedName;
+	protected final IDrawable overlay;
 
 	public BaseJeiCategory(String name, IGuiHelper guiHelper) {
 		UID += name;
@@ -24,6 +24,7 @@ public abstract class BaseJeiCategory implements IRecipeCategory{
 		localizedName = I18n.format("jei." + UID + ".name");
 		overlay = guiHelper.createDrawable(new ResourceLocation(HarshenCastle.MODID, "textures/gui/jei/" + UID.split("\\.")[UID.split("\\.").length-1] + ".png"),
 				0, 0, 150, 110);
+		createDrawable(guiHelper);
 	}
 	
 	@Override
@@ -53,6 +54,10 @@ public abstract class BaseJeiCategory implements IRecipeCategory{
 		overlay.draw(minecraft);
 		GlStateManager.disableBlend();
 		GlStateManager.disableAlpha();
+	}
+	
+	protected void createDrawable(IGuiHelper helper)
+	{
 	}
 }
 	
