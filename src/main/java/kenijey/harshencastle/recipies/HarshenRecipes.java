@@ -28,7 +28,11 @@ public class HarshenRecipes {
 	
 		
 		
+		
+		
 		CauldronRecipes.addRecipe(new ItemStack(HarshenItems.ritual_crystal, 1, 0), new ItemStack(HarshenItems.ritual_crystal, 1, 1), EnumHetericCauldronFluidType.BLOOD);
+		
+		CauldronRecipes.addRecipe(new ItemStack(HarshenItems.harshen_soul_ingot, 1, 0), new ItemStack(HarshenItems.soul_infused_ingot, 1, 0), EnumHetericCauldronFluidType.HARSHING_WATER);
 		
 	}
 	
