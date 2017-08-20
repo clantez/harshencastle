@@ -22,7 +22,7 @@ import net.minecraft.world.World;
 public class BloodBlock extends Block
 {
 	private static HashMap<BlockPos, Integer> tickMap = new HashMap<>();
-	public BloodBlock()
+	public BloodBlock() 
 	{
 		 super(Material.CARPET);
 		 setUnlocalizedName("blood_block");
