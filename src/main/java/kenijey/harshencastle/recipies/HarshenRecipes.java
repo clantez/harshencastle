@@ -22,10 +22,16 @@ public class HarshenRecipes {
 		
 		RitualRecipes.addRecipe(Arrays.asList(new ItemStack(HarshenItems.pontus_world_gate_parts, 1, 0), new ItemStack(HarshenItems.pontus_world_gate_parts, 1, 1),
 				new ItemStack(HarshenItems.pontus_world_gate_parts, 1 ,2), new ItemStack(HarshenItems.harshen_soul_fragment)), new ItemStack(HarshenItems.pontus_world_gate_spawner, 1, 0), true);
+		
+		RitualRecipes.addRecipe(Arrays.asList(new ItemStack(HarshenItems.soul_harsher_sword, 1, 0), new ItemStack(HarshenItems.ritual_crystal, 1, 1),
+				new ItemStack(HarshenItems.light_emitted_essence, 1 ,0), new ItemStack(HarshenItems.blood_essence)), new ItemStack(HarshenItems.empowered_soul_harsher_sword, 1, 0), true);
 	
+		
+		
 		CauldronRecipes.addRecipe(new ItemStack(HarshenItems.ritual_crystal, 1, 0), new ItemStack(HarshenItems.ritual_crystal, 1, 1), EnumHetericCauldronFluidType.BLOOD);
 		
 	}
+	
 	
 	
 	
