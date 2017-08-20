@@ -46,8 +46,11 @@ public class BloodBlock extends Block
 	
 	@Override
 	public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
-		if(ticks++ >= 3)
+		if(ticks++ > 41)
+		{
 			worldIn.setBlockToAir(pos);
+			ticks=0;
+		}
 	}
 	
 	@Override
