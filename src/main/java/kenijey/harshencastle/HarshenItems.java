@@ -30,6 +30,7 @@ import kenijey.harshencastle.items.PontusWorldGateSpawner;
 import kenijey.harshencastle.items.RitualCrystal;
 import kenijey.harshencastle.items.SoulHarsherPickaxe;
 import kenijey.harshencastle.items.SoulHarsherSword;
+import kenijey.harshencastle.items.SoulInfusedIngot;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemPotion;
@@ -61,6 +62,7 @@ public class HarshenItems
 	public static Item ladle;
 	public static BaseItemMetaData props;
 	public static BaseItemMetaData glass_container;
+	public static Item soul_infused_ingot;
 	
 	
 	public static void preInit()
@@ -86,6 +88,7 @@ public class HarshenItems
 		ladle = new Ladle();
 		props = new HarshenProps();
 		glass_container = new GlassContainer();
+		soul_infused_ingot = new SoulInfusedIngot();
 	}
 	
 	public static void reg()
@@ -105,6 +108,7 @@ public class HarshenItems
 		regItem(light_emitted_essence,8);
 		regItem(light_emitted_seed,16);
 		regItem(ladle,1);
+		regItem(soul_infused_ingot, 2);
 		
 		regMetaItem(pontus_world_gate_spawner, 1, EnumPontusGateSpawner.getNames(), "pontus_world_gate_spawner_");
 		regMetaItem(pontus_world_gate_parts, 1, EnumPontusGateSpawnerParts.getNames(), "pontus_world_gate_part_");
