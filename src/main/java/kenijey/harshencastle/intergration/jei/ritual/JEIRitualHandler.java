@@ -6,29 +6,29 @@ import kenijey.harshencastle.base.BaseJeiHandler;
 import kenijey.harshencastle.intergration.jei.cauldron.JEICauldronCategory;
 import kenijey.harshencastle.intergration.jei.cauldron.JEICauldronWrapper;
 import kenijey.harshencastle.recipies.CauldronRecipes;
+import kenijey.harshencastle.recipies.RitualRecipes;
 import mezz.jei.api.recipe.IRecipeWrapper;
 
-public class JEIRitualHandler extends BaseJeiHandler<CauldronRecipes> {
-
+public class JEIRitualHandler extends BaseJeiHandler<RitualRecipes> 
+{
 	@Nonnull
 	@Override
-	public Class<CauldronRecipes> getRecipeClass() {
-		return CauldronRecipes.class;
+	public Class<RitualRecipes> getRecipeClass() {
+		return RitualRecipes.class;
 	}
 
 	@Override
-	public String getRecipeCategoryUid(CauldronRecipes recipe) {
+	public String getRecipeCategoryUid(RitualRecipes recipe) {
 		return JEICauldronCategory.UID;
 	}
 
 	@Override
-	public IRecipeWrapper getRecipeWrapper(CauldronRecipes recipe) {
-		return new JEICauldronWrapper(recipe);
+	public IRecipeWrapper getRecipeWrapper(RitualRecipes recipe) {
+		return new JEIRitualWrapper(recipe);
 	}
 
 	@Override
-	public boolean isRecipeValid(CauldronRecipes recipe) {
-		return true;
+	public boolean isRecipeValid(RitualRecipes recipe) {
+		return recipe.getInputs().size() == 4;
 	}
-
 }
