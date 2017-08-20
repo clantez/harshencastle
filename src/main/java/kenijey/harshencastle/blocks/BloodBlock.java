@@ -1,5 +1,6 @@
 package kenijey.harshencastle.blocks;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -20,7 +21,7 @@ import net.minecraft.world.World;
 
 public class BloodBlock extends Block
 {
-	private int ticks;
+	private static HashMap<BlockPos, Integer> tickMap = new HashMap<>();
 	public BloodBlock()
 	{
 		 super(Material.CARPET);
@@ -33,7 +34,6 @@ public class BloodBlock extends Block
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
 			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		
 		if(playerIn.getHeldItem(hand).getItem() instanceof BloodCollector && ((BloodCollector)playerIn.getHeldItem(hand).getItem()).fill(worldIn, playerIn, hand, 1))
 			worldIn.setBlockToAir(pos);
 		return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
@@ -46,11 +46,11 @@ public class BloodBlock extends Block
 	
 	@Override
 	public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
-		if(ticks++ > 41)
-		{
+		if(!tickMap.containsKey(pos))
+			tickMap.put(pos, 0);
+		tickMap.put(pos, tickMap.get(pos) + 1);
+		if(tickMap.get(pos) > 5)
 			worldIn.setBlockToAir(pos);
-			ticks=0;
-		}
 	}
 	
 	@Override
