@@ -13,20 +13,21 @@ import net.minecraft.util.ResourceLocation;
 
 public abstract class BaseJeiCategory implements IRecipeCategory{
 
-	public static String UID = "harshencastle.";
 	protected final IDrawable background;
 	protected final String localizedName;
 	protected final IDrawable overlay;
+	protected final String UID;
 
-	public BaseJeiCategory(String name, IGuiHelper guiHelper) {
-		UID += name;
+	public BaseJeiCategory(String UID, IGuiHelper guiHelper) {
+		this.UID = UID;
+		String name = UID.split("\\.")[UID.split("\\.").length-1];
 		background = guiHelper.createBlankDrawable(150, 110);
-		localizedName = I18n.format("jei." + UID + ".name");
-		overlay = guiHelper.createDrawable(new ResourceLocation(HarshenCastle.MODID, "textures/gui/jei/" + UID.split("\\.")[UID.split("\\.").length-1] + ".png"),
+		localizedName = I18n.format("jei." + name + ".name");
+		overlay = guiHelper.createDrawable(new ResourceLocation(HarshenCastle.MODID, "textures/gui/jei/" + name + ".png"),
 				0, 0, 150, 110);
 		createDrawable(guiHelper);
 	}
-	
+
 	@Override
 	public String getUid() {
 		return UID;

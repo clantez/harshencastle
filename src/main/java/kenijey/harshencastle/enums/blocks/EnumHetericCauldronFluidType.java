@@ -19,7 +19,7 @@ public enum EnumHetericCauldronFluidType implements IStringSerializable
 	{
 		this.name = name;
 		this.id = id;
-		this.resourceLoc = new ResourceLocation(HarshenCastle.MODID, "textures/blocks/" + name + ".png");
+		this.resourceLoc = new ResourceLocation(HarshenCastle.MODID, "textures/blocks/" + name + "_still.png");
 	}
 	
 	@Override

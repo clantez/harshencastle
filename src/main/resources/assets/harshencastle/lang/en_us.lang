@@ -14,7 +14,6 @@ item.harshen_jaguar_armor_helmet.name=Harshen Jaguar Armor Helmet
 item.harshen_jaguar_armor_chestplate.name=Harshen Jaguar Armor Chestplate
 item.harshen_jaguar_armor_leggings.name=Harshen Jaguar Armor Leggings
 item.harshen_jaguar_armor_boots.name=Harshen Jaguar Armor Boots
-item.harshen_dimensional_fluid_bucket.name=Harshen Dimensional Fluid Bucket
 item.pontus_world_gate_part.1.name=Pontus World Gate Spawner First Part
 item.pontus_world_gate_part.2.name=Pontus World Gate Spawner Second Part
 item.pontus_world_gate_part.3.name=Pontus World Gate Spawner Third Part
@@ -80,6 +79,7 @@ tile.harshen_display_block.name=Harshen Display Block
 #fluids
 fluid.harshen_dimensional_fluid=Harshen Dimensional Fluid
 fluid.harshing_water=Harshing Water
+fluid.blood=Blood
 
 
 #commands

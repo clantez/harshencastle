@@ -47,7 +47,7 @@ public class CauldronRecipes
 	
 	public static void addRecipe(ItemStack input, ItemStack output, EnumHetericCauldronFluidType catalyst)
 	{
-		new CauldronRecipes(input, output, catalyst);
+		HarshenRecipes.allCauldronRecipes.add(new CauldronRecipes(input, output, catalyst));
 	}
 	
 }

@@ -16,6 +16,8 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class HarshenRecipes {
 	
 	public static ArrayList<RitualRecipes> allRitualRecipes = new ArrayList<>();
+	public static ArrayList<CauldronRecipes> allCauldronRecipes = new ArrayList<>();
+
 	
 	public static void register()
 	{
@@ -35,13 +37,7 @@ public class HarshenRecipes {
 		
 		CauldronRecipes.addRecipe(new ItemStack(HarshenItems.harshen_soul_ingot, 1, 0), new ItemStack(HarshenItems.soul_infused_ingot, 1, 0), EnumHetericCauldronFluidType.HARSHING_WATER);
 		
-	}
-	
-	public static void addRitual(RitualRecipes recipe)
-	{
-		allRitualRecipes.add(recipe);
-	}
-	
+	}	
 	
 	public static void craftingRegistry()
 	{

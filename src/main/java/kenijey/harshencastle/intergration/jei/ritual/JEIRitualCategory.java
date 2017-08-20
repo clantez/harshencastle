@@ -20,7 +20,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 public class JEIRitualCategory extends BaseJeiCategory
-{
+{	
 	public JEIRitualCategory(String name, IGuiHelper guiHelper) {
 		super(name, guiHelper);
 	}
@@ -30,18 +30,17 @@ public class JEIRitualCategory extends BaseJeiCategory
 		if(!(recipeWrapper instanceof JEIRitualWrapper))
 			return;
 		JEIRitualWrapper wrapper = (JEIRitualWrapper) recipeWrapper;
-		
 		for(int i = 0; i < 4; i++)
 			addSlot(recipeLayout, ingredients.getInputs(ItemStack.class), i);
 		recipeLayout.getItemStacks().init(4, false, 103, 17);
 		recipeLayout.getItemStacks().set(4, ingredients.getOutputs(ItemStack.class).get(0));
 	}
 	
-	Dimension[] positionsOfSlots = {new Dimension(20, 20), new Dimension(130, 20), new Dimension(20, 90), new Dimension(90, 90)};
+	Dimension[] positionsOfSlots = {new Dimension(20, 20), new Dimension(90, 20), new Dimension(20, 50), new Dimension(90, 50)};
 	
 	private void addSlot(IRecipeLayout recipeLayout, List<List<ItemStack>> list, int id)
 	{
-		recipeLayout.getItemStacks().init(id, true,positionsOfSlots[id].width, positionsOfSlots[id].height);
+		recipeLayout.getItemStacks().init(id, true, positionsOfSlots[id].width, positionsOfSlots[id].height);
 		recipeLayout.getItemStacks().set(id, list.get(id));
 	}
 

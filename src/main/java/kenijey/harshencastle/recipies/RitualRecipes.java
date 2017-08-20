@@ -55,10 +55,8 @@ public class RitualRecipes {
 		return this.useLightning;
 	}
 	
-	public static RitualRecipes addRecipe(List<ItemStack> inputs, ItemStack output, boolean useLightning)
+	public static void addRecipe(List<ItemStack> inputs, ItemStack output, boolean useLightning)
 	{
-		RitualRecipes rec = new RitualRecipes(inputs, output, useLightning);
-		HarshenRecipes.addRitual(rec);
-		return rec;
+		HarshenRecipes.allRitualRecipes.add(new RitualRecipes(inputs, output, useLightning));
 	}
 }
