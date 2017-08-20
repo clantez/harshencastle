@@ -10,6 +10,7 @@ import java.util.Set;
 
 import javax.annotation.Nullable;
 
+import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.base.BasePontusResourceBiome;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
@@ -73,6 +74,11 @@ public class PontusBiomeProvider extends BiomeProvider
 	public static double getDistance(BlockPos pos)
 	{
 		return new BlockPos(pos).getDistance(0, pos.getY(), 0);
+	}
+	
+	public static double getDistance(int x, int z)
+	{
+		return getDistance(HarshenUtils.chunkToPos(x, z));
 	}
 	
 	public static BasePontusResourceBiome biomeFromPosition(int chunk_X, int chunk_Z)

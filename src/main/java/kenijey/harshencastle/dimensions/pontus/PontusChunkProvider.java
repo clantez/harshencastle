@@ -181,8 +181,8 @@ public class PontusChunkProvider implements IChunkGenerator
                             				for(int i3 = 0; i3 < 19; i3 ++)
                             					blockList.addAll(HarshenUtils.toArrayBlock(PontusBiomeProvider.biomeFromPosition(x, z).getGroundBlocks()));
                             				for(int i3 = 0; i3 < Math.floorDiv(Math.round(80 - Math.abs(PontusBiomeProvider.getDistance(HarshenUtils.chunkToPos(x, z)) - biome.distanceStartSpawn())), 4); i3 ++)
-                            				blockList.add(HarshenBiomes.allBiomes.get(HarshenBiomes.allBiomes.indexOf(PontusBiomeProvider.biomeFromPosition(x, z))
-                            						+ (PontusBiomeProvider.getDistance(HarshenUtils.chunkToPos(x, z)) - biome.distanceStartSpawn() < 0 ? 1 : -1)).getMergerBlock());
+	                            				blockList.add(HarshenBiomes.allBiomes.get(HarshenBiomes.allBiomes.indexOf(PontusBiomeProvider.biomeFromPosition(x, z))
+	                            						+ (PontusBiomeProvider.getDistance(HarshenUtils.chunkToPos(x, z)) - biome.distanceStartSpawn() < 0 ? 1 : -1)).getMergerBlock());
                             				break;
                             			}
                                     primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, getRandomBlock(blockList).getDefaultState()); 
@@ -280,22 +280,24 @@ public class PontusChunkProvider implements IChunkGenerator
                 float f3 = 0.0F;
                 float f4 = 0.0F;
                 int i1 = 2;
-
+                int x = p_185978_1_ / 4;
+                int z = p_185978_3_ / 4;
+                Biome biome2 = PontusBiomeProvider.biomeFromPosition(x, z);
                 for (int j1 = -2; j1 <= 2; ++j1)
                 {
                     for (int k1 = -2; k1 <= 2; ++k1)
                     {
-                        Biome biome1 = PontusBiomeProvider.biomeFromPosition(p_185978_1_ / 4, p_185978_3_ / 4);
+                        Biome biome1 = PontusBiomeProvider.biomeFromPosition(x + j1,z + k1);
+                        
                         float f5 = this.settings.biomeDepthOffSet + biome1.getBaseHeight() * this.settings.biomeDepthWeight;
                         float f6 = this.settings.biomeScaleOffset + biome1.getHeightVariation() * this.settings.biomeScaleWeight;
 
-                        if (this.terrainType == WorldType.AMPLIFIED && f5 > 0.0F)
-                        {
-                            f5 = 1.0F + f5 * 2.0F;
-                            f6 = 1.0F + f6 * 4.0F;
-                        }
-
                         float f7 = this.biomeWeights[j1 + 2 + (k1 + 2) * 5] / (f5 + 2.0F);
+                        
+                        if (biome1.getBaseHeight() > biome2.getBaseHeight())
+                        {
+                            f7 /= 2.0F;
+                        }
 
                         f2 += f6 * f7;
                         f3 += f5 * f7;
