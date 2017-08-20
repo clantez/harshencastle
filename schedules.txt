@@ -1,3 +1,5 @@
+MOD PROGRESS: %9
+
 --------------------------ITEMS/BLOCKS---------------------------- 
 BLOOD COLLECTOR
 -sound effect (ready)(need to code)
