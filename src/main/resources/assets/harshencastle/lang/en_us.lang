@@ -32,6 +32,8 @@ item.ritual_crystal.passive.name=Ritual Crystal (passive)
 item.ritual_crystal.active.name=Ritual Crystal (active)
 item.ladle.name=Ladle
 item.prop.knight_sword.name=Soulless Knight Sword Prop
+item.empowered_soul_harsher_sword.name=Empowered Soul Harsher Sword
+item.harshen_book.name=Harshen Book
 
 #entity eggs
 entity.soulless_knight.name=[HC] Soulless Knight
@@ -119,6 +121,10 @@ gatespawnerenhanced1=Opens a permanent Gate
 gatespawnerenhanced2=to the Pontus World
 seed1=Plantable only on
 seed2=Harshen Dimensional Dirt
+empowered_sword1=Reminds the power
+empowered_sword2=of Kazzendre
+empowered_sword3=It can kill
+empowered_sword4=Ferrum King
 
 #misc
 itemGroup.harshenTab=Harshen Castle
