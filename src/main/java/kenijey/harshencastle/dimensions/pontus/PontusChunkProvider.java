@@ -52,7 +52,7 @@ import net.minecraft.world.storage.WorldInfo;
 
 public class PontusChunkProvider implements IChunkGenerator
 {
-	protected static final HashMap<Biome, Block[]> floorMap = new HashMap<>();
+	protected static final HashMap<BasePontusResourceBiome, Block[]> floorMap = new HashMap<>();
     private final Random rand;
     private NoiseGeneratorOctaves minLimitPerlinNoise;
     private NoiseGeneratorOctaves maxLimitPerlinNoise;
@@ -176,15 +176,23 @@ public class PontusChunkProvider implements IChunkGenerator
                             for (int l2 = 0; l2 < 4; ++l2)
                             	if ((lvt_45_1_ += d16) > 0.0D)
                             	{
+                            		ArrayList<Block> blockList = HarshenUtils.toArrayBlock(floorMap.get(PontusBiomeProvider.biomeFromPosition(x, z)));
                             		for(Biome biome : HarshenBiomes.allBiomes)
                             			if(PontusBiomeProvider.distanceWhenStart.get(biome) < 0)
                             				continue;
-                            			else if(PontusBiomeProvider.getDistance(HarshenUtils.chunkToPos(x, z)) > PontusBiomeProvider.distanceWhenStart.get(biome) - 500 &&
-                            					PontusBiomeProvider.getDistance(HarshenUtils.chunkToPos(x, z)) < PontusBiomeProvider.distanceWhenStart.get(biome) + 500)
+                            			else if(PontusBiomeProvider.getDistance(HarshenUtils.chunkToPos(x, z)) > PontusBiomeProvider.distanceWhenStart.get(biome) - 100 &&
+                            					PontusBiomeProvider.getDistance(HarshenUtils.chunkToPos(x, z)) < PontusBiomeProvider.distanceWhenStart.get(biome) + 100)
                             			{
-                            				//System.out.println(Math.abs(PontusBiomeProvider.getDistance(HarshenUtils.chunkToPos(x, z)) - PontusBiomeProvider.distanceWhenStart.get(biome)));
+                            				for(int i3 = 0; i3 < 4; i3 ++)
+                            					blockList.addAll(HarshenUtils.toArrayBlock(floorMap.get(PontusBiomeProvider.biomeFromPosition(x, z))));
+                            				for(int i3 = 0; i3 < Math.floorDiv(Math.round(100 - Math.abs(PontusBiomeProvider.getDistance(HarshenUtils.chunkToPos(x, z)) -
+                            						PontusBiomeProvider.distanceWhenStart.get(biome))), 18); i3 ++)
+                            				blockList.add(getLastBlock(floorMap.get(PontusBiomeProvider.biomeList(floorMap.keySet()).get(PontusBiomeProvider.biomeList(floorMap.keySet()).
+                    								indexOf(PontusBiomeProvider.biomeFromPosition(x, z)) + (PontusBiomeProvider.getDistance(HarshenUtils.chunkToPos(x, z))
+                    										- PontusBiomeProvider.distanceWhenStart.get(biome) < 0 ? 1 : -1)))));
+                            				break;
                             			}
-                                    primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, getRandomBlock(floorMap.get(PontusBiomeProvider.biomeFromPosition(x, z))).getDefaultState());   
+                                    primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, getRandomBlock(blockList).getDefaultState());   
                             	}
                                 else if (i2 * 8 + j2 < this.settings.seaLevel)
                                     primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, this.oceanBlock);
@@ -202,9 +210,18 @@ public class PontusChunkProvider implements IChunkGenerator
         }
     }
     
-    public Block getRandomBlock(Block... blocks)
+    public Block getRandomBlock(ArrayList<Block> blockList) {
+		return blockList.get(new Random().nextInt(blockList.size() - 1));
+	}
+
+	public Block getRandomBlock(Block... blocks)
     {
     	return blocks[new Random().nextInt(blocks.length)];
+    }
+    
+    public Block getLastBlock(Block... blocks)
+    {
+    	return blocks[blocks.length - 1];
     }
 
     public void replaceBiomeBlocks(int x, int z, ChunkPrimer primer, Biome biomeIn)
