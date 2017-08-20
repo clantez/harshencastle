@@ -25,8 +25,14 @@ public class JEIRitualWrapper extends BaseJeiWrapper
 	@SuppressWarnings("unchecked")
 	public JEIRitualWrapper(RitualRecipes recipe) {
 		ImmutableList.Builder<List<ItemStack>> builder = ImmutableList.builder();
-		for(Object o : recipe.getInputs())
-			builder.add(ImmutableList.of((ItemStack) o));
+		for(Object o : recipe.getInputs()) {
+			if(o instanceof ItemStack) {
+				builder.add(ImmutableList.of((ItemStack) o));
+			}
+			if(o instanceof String) {
+				builder.add(OreDictionary.getOres((String) o));
+			}
+		}
 		input = builder.build();
 		output = recipe.getOutput();
 	}
@@ -34,7 +40,7 @@ public class JEIRitualWrapper extends BaseJeiWrapper
 
 	@Override
 	public void getIngredients(@Nonnull IIngredients ingredients) {
-		ingredients.setInput(ItemStack.class, input);
+		ingredients.setInputLists(ItemStack.class, input);
 		ingredients.setOutput(ItemStack.class, output);
 	}
 

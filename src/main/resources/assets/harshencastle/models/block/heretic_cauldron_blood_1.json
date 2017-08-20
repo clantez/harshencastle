@@ -1,6 +1,6 @@
 {
     "textures": {
-		"text":"harshencastle:blocks/blood",
+		"text":"harshencastle:blocks/harshen_cauldron_blood",
         "particle": "blocks/cauldron_side",
         "0": "blocks/cauldron_inner",
         "1": "blocks/cauldron_side"

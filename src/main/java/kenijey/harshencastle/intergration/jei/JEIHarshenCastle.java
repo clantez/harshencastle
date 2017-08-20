@@ -17,6 +17,7 @@ public class JEIHarshenCastle implements IModPlugin
 	public void register(IModRegistry registry) { 
 		registry.addRecipeHandlers(new JEIRitualHandler());
 		
+		
 		registry.addRecipes(HarshenRecipes.allRitualRecipes, JEIRitualCategory.UID);
 		
 		
