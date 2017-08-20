@@ -15,13 +15,14 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class HarshenRecipes {
 	
+	public static ArrayList<RitualRecipes> allRitualRecipes = new ArrayList<>();
 	
 	public static void register()
 	{
 		craftingRegistry();
 		
 		RitualRecipes.addRecipe(Arrays.asList(new ItemStack(HarshenItems.pontus_world_gate_parts, 1, 0), new ItemStack(HarshenItems.pontus_world_gate_parts, 1, 1),
-				new ItemStack(HarshenItems.pontus_world_gate_parts, 1 ,2), new ItemStack(HarshenItems.harshen_soul_fragment)), new ItemStack(HarshenItems.pontus_world_gate_spawner, 1, 0), true);
+				new ItemStack(HarshenItems.pontus_world_gate_parts, 1 ,2), new ItemStack(HarshenItems.harshen_soul_fragment)), new ItemStack(HarshenItems.pontus_world_gate_spawner, 1, 0), true);		
 		
 		RitualRecipes.addRecipe(Arrays.asList(new ItemStack(HarshenItems.soul_harsher_sword, 1, 0), new ItemStack(HarshenItems.ritual_crystal, 1, 1),
 				new ItemStack(HarshenItems.light_emitted_essence, 1 ,0), new ItemStack(HarshenItems.blood_essence)), new ItemStack(HarshenItems.empowered_soul_harsher_sword, 1, 0), true);
@@ -36,7 +37,10 @@ public class HarshenRecipes {
 		
 	}
 	
-	
+	public static void addRitual(RitualRecipes recipe)
+	{
+		allRitualRecipes.add(recipe);
+	}
 	
 	
 	public static void craftingRegistry()
