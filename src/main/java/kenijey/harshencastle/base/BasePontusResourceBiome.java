@@ -1,6 +1,6 @@
 package kenijey.harshencastle.base;
 
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.block.Block;
 import net.minecraft.world.biome.Biome;
 
 public abstract class BasePontusResourceBiome extends Biome
@@ -10,4 +10,10 @@ public abstract class BasePontusResourceBiome extends Biome
 	}
 	
 	public abstract int getLevel();
+	
+	public abstract Block[] getGroundBlocks();
+	
+	public abstract Block getMergerBlock();
+	
+	public abstract int distanceStartSpawn();
 }

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
+import kenijey.harshencastle.HarshenSounds;
 import kenijey.harshencastle.items.BloodCollector;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -14,6 +15,7 @@ import net.minecraft.item.Item;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -35,7 +37,10 @@ public class BloodBlock extends Block
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
 			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if(playerIn.getHeldItem(hand).getItem() instanceof BloodCollector && ((BloodCollector)playerIn.getHeldItem(hand).getItem()).fill(worldIn, playerIn, hand, 1))
-			worldIn.setBlockToAir(pos);
+			{
+				worldIn.playSound(pos.getX(), pos.getY(), pos.getZ(), HarshenSounds.bloodCollectorUse, SoundCategory.BLOCKS, 3f, new Random().nextFloat(), false);
+				worldIn.setBlockToAir(pos);
+			}
 		return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
 	}
 	

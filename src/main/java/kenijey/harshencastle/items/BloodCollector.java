@@ -2,8 +2,10 @@ package kenijey.harshencastle.items;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 import kenijey.harshencastle.HarshenBlocks;
+import kenijey.harshencastle.HarshenSounds;
 import kenijey.harshencastle.base.BaseItemMetaData;
 import kenijey.harshencastle.enums.items.EnumBloodCollector;
 import net.minecraft.client.util.ITooltipFlag;
@@ -14,6 +16,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -98,7 +101,10 @@ public class BloodCollector extends BaseItemMetaData
 			EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if(player.isSneaking() && remove(worldIn, player, hand, 3) && 
 				worldIn.getBlockState(pos.offset(facing).down()).getBlock().isTopSolid(worldIn.getBlockState(pos.offset(facing).down())))
+		{
 			worldIn.setBlockState(pos.offset(facing), HarshenBlocks.blood_block.getDefaultState(), 3);
+			worldIn.playSound(pos.getX(), pos.getY(), pos.getZ(), HarshenSounds.bloodCollectorUse, SoundCategory.BLOCKS, 3f, new Random().nextFloat(), false);
+		}
 		return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
 	}
 

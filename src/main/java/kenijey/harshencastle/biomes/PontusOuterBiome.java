@@ -4,11 +4,13 @@ import java.util.Random;
 
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenCastle;
+import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.base.BaseLargeTreeGenerator;
 import kenijey.harshencastle.base.BasePontusResourceBiome;
 import kenijey.harshencastle.dimensions.PontusBiomeDecorator;
 import kenijey.harshencastle.worldgenerators.pontus.PontusWorldGeneratorDestroyedPlants;
 import kenijey.harshencastle.worldgenerators.pontus.PontusWorldGeneratorStone;
+import net.minecraft.block.Block;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.monster.EntityEndermite;
 import net.minecraft.init.Blocks;
@@ -37,7 +39,6 @@ public class PontusOuterBiome extends BasePontusResourceBiome {
 		
 	}
 	
-	
 	@Override
 	public WorldGenAbstractTree getRandomTreeFeature(Random rand) {
 		return new BaseLargeTreeGenerator(false, HarshenBlocks.pontus_chaotic_leaves.getDefaultState(), HarshenBlocks.pontus_chaotic_wood);
@@ -63,5 +64,22 @@ public class PontusOuterBiome extends BasePontusResourceBiome {
 	public int getLevel() {
 		return 1;
 	}
+	
+	@Override
+	public int distanceStartSpawn() {
+		return 7500;
+	}
+
+
+	@Override
+	public Block[] getGroundBlocks() {
+		return HarshenUtils.blockList(HarshenBlocks.harshen_dimensional_rock, HarshenBlocks.harshen_chaotic_rock);
+	}
+
+
+	@Override
+	public Block getMergerBlock() {
+		return HarshenBlocks.harshen_chaotic_rock;
+	}	
 
 }

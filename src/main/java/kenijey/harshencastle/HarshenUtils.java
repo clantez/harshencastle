@@ -46,4 +46,9 @@ public class HarshenUtils
 			arrayBlocks.add(block);
 		return arrayBlocks;
 	}
+	
+	public static Block[] blockList(Block...blocks)
+	{
+		return blocks;
+	}
 }

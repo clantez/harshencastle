@@ -9,10 +9,12 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 public class HarshenSounds {
 	
 	public static SoundEvent swordFireWork;
+	public static SoundEvent bloodCollectorUse;
 	
 	public static void preInit()
 	{
 		swordFireWork = reg("sword.firework");
+		bloodCollectorUse = reg("blood.collector");
 	}
 	
 	private static ArrayList<SoundEvent> reg(String... name)
