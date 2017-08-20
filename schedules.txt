@@ -2,6 +2,10 @@
 HARSHEN JAGUAR ARMOR
 -should be 3d asap
 
+/////////////ACCESSORY TAB///////////////
+2x earring, 1 pendant, 2x ring slots
+it should be accessable by a button in the inventory
+
 ----------------------------STRUCTURES--------------------------
 
 -------OVERWORLD------
