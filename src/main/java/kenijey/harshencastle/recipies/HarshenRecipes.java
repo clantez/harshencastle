@@ -29,9 +29,6 @@ public class HarshenRecipes {
 	
 	
 	
-	
-	
-	
 	public static void craftingRegistry()
 	{
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "soul_harsher_sword"), new ResourceLocation("harshen_items"),
