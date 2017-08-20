@@ -180,13 +180,13 @@ public class PontusChunkProvider implements IChunkGenerator
                             		for(Biome biome : HarshenBiomes.allBiomes)
                             			if(PontusBiomeProvider.distanceWhenStart.get(biome) < 0)
                             				continue;
-                            			else if(PontusBiomeProvider.getDistance(HarshenUtils.chunkToPos(x, z)) > PontusBiomeProvider.distanceWhenStart.get(biome) - 50 &&
-                            					PontusBiomeProvider.getDistance(HarshenUtils.chunkToPos(x, z)) < PontusBiomeProvider.distanceWhenStart.get(biome) + 50)
+                            			else if(PontusBiomeProvider.getDistance(HarshenUtils.chunkToPos(x, z)) > PontusBiomeProvider.distanceWhenStart.get(biome) - 80 &&
+                            					PontusBiomeProvider.getDistance(HarshenUtils.chunkToPos(x, z)) < PontusBiomeProvider.distanceWhenStart.get(biome) + 80)
                             			{
-                            				for(int i3 = 0; i3 < 4; i3 ++)
+                            				for(int i3 = 0; i3 < 19; i3 ++)
                             					blockList.addAll(HarshenUtils.toArrayBlock(floorMap.get(PontusBiomeProvider.biomeFromPosition(x, z))));
-                            				for(int i3 = 0; i3 < Math.floorDiv(Math.round(50 - Math.abs(PontusBiomeProvider.getDistance(HarshenUtils.chunkToPos(x, z)) -
-                            						PontusBiomeProvider.distanceWhenStart.get(biome))), 9); i3 ++)
+                            				for(int i3 = 0; i3 < Math.floorDiv(Math.round(80 - Math.abs(PontusBiomeProvider.getDistance(HarshenUtils.chunkToPos(x, z)) -
+                            						PontusBiomeProvider.distanceWhenStart.get(biome))), 4); i3 ++)
                             				blockList.add(getLastBlock(floorMap.get(PontusBiomeProvider.biomeList(floorMap.keySet()).get(PontusBiomeProvider.biomeList(floorMap.keySet()).
                     								indexOf(PontusBiomeProvider.biomeFromPosition(x, z)) + (PontusBiomeProvider.getDistance(HarshenUtils.chunkToPos(x, z))
                     										- PontusBiomeProvider.distanceWhenStart.get(biome) < 0 ? 1 : -1)))));
