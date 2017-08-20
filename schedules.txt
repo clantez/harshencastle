@@ -1,4 +1,7 @@
 --------------------------ITEMS/BLOCKS---------------------------- 
+BLOOD COLLECTOR
+-sound effect (ready)(need to code)
+
 HARSHEN JAGUAR ARMOR
 -should be 3d asap
 
