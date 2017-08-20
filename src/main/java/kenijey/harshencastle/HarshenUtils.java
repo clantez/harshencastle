@@ -1,8 +1,6 @@
 package kenijey.harshencastle;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
 
 import kenijey.harshencastle.base.BasePontusResourceBiome;
 import kenijey.harshencastle.handlers.HandlerPontusAllowed;
@@ -11,7 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class HarshenUtils 
+public class HarshenUtils
 {
 	public static boolean isLevelAcceptable(World world, BlockPos pos, EntityPlayer player)
 	{
@@ -39,5 +37,13 @@ public class HarshenUtils
 	public static int floor(int num)
 	{
 		return (int) Math.floor(num);
+	}
+	
+	public static ArrayList<Block> toArrayBlock(Block... blocks)
+	{
+		ArrayList<Block> arrayBlocks = new ArrayList<>();
+		for(Block block : blocks)
+			arrayBlocks.add(block);
+		return arrayBlocks;
 	}
 }
