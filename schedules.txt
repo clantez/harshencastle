@@ -5,7 +5,10 @@ HARSHEN JAGUAR ARMOR
 /////////////ACCESSORY TAB///////////////
 2x earring, 1 pendant, 2x ring slots
 it should be accessable by a button in the inventory
+-----accessory properties-----
 
+PONTUS RING
+-applies strength 1, resistance 1
 ----------------------------STRUCTURES--------------------------
 
 -------OVERWORLD------
