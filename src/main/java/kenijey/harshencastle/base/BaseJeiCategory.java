@@ -55,6 +55,7 @@ public abstract class BaseJeiCategory implements IRecipeCategory{
 		GlStateManager.enableAlpha();
 		GlStateManager.enableBlend();
 		overlay.draw(minecraft);
+		drawMore(minecraft);
 		GlStateManager.disableBlend();
 		GlStateManager.disableAlpha();
 	}
