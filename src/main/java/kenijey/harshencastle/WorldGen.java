@@ -51,7 +51,7 @@ public class WorldGen implements IWorldGenerator
 				loadStructure(world, "shrine", position);
 				position = position.add(3, 1, 3);
 				world.setBlockState(position, Blocks.CHEST.getDefaultState().withProperty(BlockChest.FACING, EnumFacing.HORIZONTALS[random.nextInt(4)]), 3);
-				if(world instanceof WorldServer)
+				if(world instanceof WorldServer && world.getTileEntity(position) != null)
 					((TileEntityChest)world.getTileEntity(position)).setInventorySlotContents(13, world.getLootTableManager().getLootTableFromLocation(HarshenLootTables.shrine).generateLootForPools(random, 
 							new LootContext(1f, (WorldServer) world, world.getLootTableManager(), null, world.getClosestPlayer(position.getX(), position.getY(), position.getZ(), Integer.MAX_VALUE, false), DamageSource.MAGIC)).get(0));
 			}
