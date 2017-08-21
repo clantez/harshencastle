@@ -16,7 +16,7 @@ public class TileEntityHarshenDimensionalGate extends BaseHarshenTileEntity impl
 
 	@Override
 	public void update() {
-		if(blockType == HarshenBlocks.harshen_dimensional_gate && !world.getBlockState(pos).getValue(HarshenDimensionalGate.ACTIVE) && !world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos, pos.add(1, 1, 1))).isEmpty())
+		if(getBlockType() == HarshenBlocks.harshen_dimensional_gate && !world.getBlockState(pos).getValue(HarshenDimensionalGate.ACTIVE) && !world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos, pos.add(1, 1, 1))).isEmpty())
 			for(EntityItem entityitem : world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos, pos.add(1, 1, 1))))
 				if(entityitem.getItem().getItem() == HarshenItems.ritual_crystal && entityitem.getItem().getMetadata() == 1)
 				{
@@ -24,7 +24,6 @@ public class TileEntityHarshenDimensionalGate extends BaseHarshenTileEntity impl
 							.withProperty(HarshenDimensionalGate.FOREVER, world.getBlockState(pos).getValue(HarshenDimensionalGate.FOREVER)), 3);
 					entityitem.getItem().setCount(entityitem.getItem().getCount() - 1);
 				}
-					
 			
 		if(getBlockMetadata() == 2)
 			if(ticksLeft-- <= 0)

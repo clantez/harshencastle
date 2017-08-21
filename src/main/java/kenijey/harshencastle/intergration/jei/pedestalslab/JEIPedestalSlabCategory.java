@@ -20,10 +20,10 @@ public class JEIPedestalSlabCategory extends BaseJeiCategory
 		if(!(recipeWrapper instanceof JEIPedestalSlabWrapper))
 			return;
 		JEIPedestalSlabWrapper wrapper = (JEIPedestalSlabWrapper) recipeWrapper;
-		recipeLayout.getItemStacks().init(0, true, 67, 30);
+		recipeLayout.getItemStacks().init(0, true, 56, 19);
 		recipeLayout.getItemStacks().set(0, ingredients.getInputs(ItemStack.class).get(0));
-		recipeLayout.getItemStacks().init(4, false, 103, 17);
-		recipeLayout.getItemStacks().set(4, ingredients.getOutputs(ItemStack.class).get(0));
+		recipeLayout.getItemStacks().init(1, false, 123, 31);
+		recipeLayout.getItemStacks().set(1, ingredients.getOutputs(ItemStack.class).get(0));
 	}
 
 }
