@@ -51,4 +51,9 @@ public class HarshenUtils
 	{
 		return blocks;
 	}
+	
+	public static EntityPlayer getClosestPlayer(World world, BlockPos position)
+	{
+		return world.getClosestPlayer(position.getX(), position.getY(), position.getZ(), Integer.MAX_VALUE, false);
+	}
 }
