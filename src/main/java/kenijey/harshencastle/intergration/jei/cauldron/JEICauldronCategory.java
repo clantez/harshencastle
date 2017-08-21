@@ -11,6 +11,7 @@ import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
+import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -19,10 +20,10 @@ import net.minecraft.util.text.TextComponentTranslation;
 
 public class JEICauldronCategory extends BaseJeiCategory
 {
-	public JEICauldronCategory(String name, IGuiHelper guiHelper) {
-		super(name, guiHelper);
+	public JEICauldronCategory(String UID, IRecipeCategoryRegistration reg) {
+		super(UID, reg);
 	}
-	
+
 	private static HashMap<EnumHetericCauldronFluidType, IDrawable> fluidTypes = new HashMap<>();
 	
 	private IDrawable currentFluid;
@@ -48,13 +49,8 @@ public class JEICauldronCategory extends BaseJeiCategory
 	}
 	
 	@Override
-	public void drawExtras(Minecraft minecraft) {
-		GlStateManager.enableAlpha();
-		GlStateManager.enableBlend();
-		overlay.draw(minecraft);
+	protected void drawMore(Minecraft minecraft) {
 		currentFluid.draw(minecraft);
-		GlStateManager.disableBlend();
-		GlStateManager.disableAlpha();
 	}
 	
 	@Override

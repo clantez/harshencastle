@@ -21,12 +21,12 @@ item.pontus_world_gate_spawner.normal.name=Pontus World Gate Spawner
 item.pontus_world_gate_spawner.enhanced.name=Enhanced Pontus World Gate Spawner
 item.light_emitted_seed.name=Light Emitted Seed
 item.light_emitted_essence.name=Light Emitted Essence
-item.blood_collector.0.name=Blood Collector (empty)
+item.blood_collector.0.name=Blood Collector
 item.blood_collector.1.name=Blood Collector
 item.blood_collector.2.name=Blood Collector
 item.blood_collector.3.name=Blood Collector
 item.blood_collector.4.name=Blood Collector
-item.blood_collector.5.name=Blood Collector (full)
+item.blood_collector.5.name=Blood Collector
 item.ritual_crystal.passive.name=Ritual Crystal (passive)
 item.ritual_crystal.active.name=Ritual Crystal (active)
 item.ladle.name=Ladle
@@ -34,6 +34,9 @@ item.prop.knight_sword.name=Soulless Knight Sword Prop
 item.empowered_soul_harsher_sword.name=Empowered Soul Harsher Sword
 item.harshen_book.name=Harshen Book
 item.soul_infused_ingot.name=Soul Infused Ingot
+item.glass_container.empty.name=Empty Glass Container
+item.glass_container.void.name=Void filled Glass Container
+item.glass_container.regen.name=Blood filled Glass Container
 
 #entity eggs
 entity.soulless_knight.name=[HC] Soulless Knight
@@ -75,6 +78,8 @@ tile.harshen_chaotic_rock.name=Pontus Chaotic Rock
 tile.pontus_chaotic_wood.name=Pontus Chaotic Wood
 tile.pontus_chaotic_leaves.name=Pontus Chaotic Leaves
 tile.harshen_display_block.name=Harshen Display Block
+tile.harshen_spawner.name=Harshen Spawner
+
 
 #fluids
 fluid.harshen_dimensional_fluid=Harshen Dimensional Fluid
@@ -138,4 +143,13 @@ message.success=Kazzendre: You hurt my soul...
 message.broken=Kazzendre: Don't touch any particle of me
 
 #JEI Recipies
-jei.harshencastle.ritual.name=4x Ritual Pedestal Ritual
+jei.ritual.name=4x Ritual Pedestal Ritual
+jei.cauldron.name=HarshenCastle Cauldron Recipe
+jei.pedestalslab.name=HarshenCastle PedestalSlab
+
+#JEI Description
+jei.harshen_soul_fragment.description=Soul Frag Description
+jei.harshen_crystal.description=Crystal Description
+jei.light_emitted_seed.description=Seed Description
+jei.light_emitted_essence.description=Essence Description
+jei.soul_harsher_pickaxe.description=Pickaxe Description

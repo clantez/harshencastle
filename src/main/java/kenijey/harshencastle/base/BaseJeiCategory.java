@@ -6,6 +6,7 @@ import kenijey.harshencastle.HarshenCastle;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.recipe.IRecipeCategory;
+import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
@@ -18,7 +19,8 @@ public abstract class BaseJeiCategory implements IRecipeCategory{
 	protected final IDrawable overlay;
 	protected final String UID;
 
-	public BaseJeiCategory(String UID, IGuiHelper guiHelper) {
+	public BaseJeiCategory(String UID, IRecipeCategoryRegistration reg) {
+		IGuiHelper guiHelper = reg.getJeiHelpers().getGuiHelper();
 		this.UID = UID;
 		String name = UID.split("\\.")[UID.split("\\.").length-1];
 		background = guiHelper.createBlankDrawable(150, 110);
@@ -55,6 +57,10 @@ public abstract class BaseJeiCategory implements IRecipeCategory{
 		overlay.draw(minecraft);
 		GlStateManager.disableBlend();
 		GlStateManager.disableAlpha();
+	}
+	
+	protected void drawMore(@Nonnull Minecraft minecraft)
+	{
 	}
 	
 	protected void createDrawable(IGuiHelper helper)

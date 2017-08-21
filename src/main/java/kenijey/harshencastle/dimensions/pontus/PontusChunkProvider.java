@@ -64,7 +64,6 @@ public class PontusChunkProvider implements IChunkGenerator
     private final WorldType terrainType;
     private final double[] heightMap;
     private final float[] biomeWeights;
-    private ChunkGeneratorSettings settings;
     private IBlockState oceanBlock = HarshenFluids.harshen_dimensional_fluid_block.getDefaultState();
     private double[] depthBuffer = new double[256];
     private MapGenBase caveGenerator = new MapGenCaves();
@@ -73,8 +72,26 @@ public class PontusChunkProvider implements IChunkGenerator
     double[] minLimitRegion;
     double[] maxLimitRegion;
     double[] depthRegion;
+    
+    private final int seaLevel = 52;
+    private final double depthNoiseScaleX = 200;
+    private final double depthNoiseScaleZ = 200;
+    private final double depthNoiseScaleExponent = 0.5;
+    private final float coordinateScale = 676.94366f;
+    private final float heightScale = 684.412f;
+    private final float mainNoiseScaleX = 80;
+    private final float mainNoiseScaleY = 300;
+    private final float mainNoiseScaleZ = 80;
+    private final float biomeDepthOffSet = 0;
+    private final float biomeDepthWeight = 1;
+    private final float biomeScaleOffset = 0;
+    private final float biomeScaleWeight = 1;
+    private final double baseSize = 8.5;
+    private final double stretchY = 24;
+    private final double lowerLimitScale = 512;
+    private final double upperLimitScale = 512;
 
-    public PontusChunkProvider(World worldIn, long seed, String generatorOptions)
+    public PontusChunkProvider(World worldIn, long seed)
     {
         {
             caveGenerator = net.minecraftforge.event.terraingen.TerrainGen.getModdedMapGen(caveGenerator, net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.CAVE);
@@ -102,12 +119,8 @@ public class PontusChunkProvider implements IChunkGenerator
             }
         }
 
-        if (generatorOptions != null)
-        {
-            this.settings = ChunkGeneratorSettings.Factory.jsonToFactory(generatorOptions).build();
-            this.oceanBlock = this.settings.useLavaOceans ? HarshenFluids.harshing_water_block.getDefaultState() : HarshenFluids.harshen_dimensional_fluid_block.getDefaultState();
-            worldIn.setSeaLevel(this.settings.seaLevel);
-        }
+        this.oceanBlock = HarshenFluids.harshen_dimensional_fluid_block.getDefaultState();
+        worldIn.setSeaLevel(this.seaLevel);
 
         net.minecraftforge.event.terraingen.InitNoiseGensEvent.ContextOverworld ctx =
                 new net.minecraftforge.event.terraingen.InitNoiseGensEvent.ContextOverworld(minLimitPerlinNoise, maxLimitPerlinNoise, mainPerlinNoise, surfaceNoise, scaleNoise, depthNoise, forestNoise);
@@ -187,7 +200,7 @@ public class PontusChunkProvider implements IChunkGenerator
                             			}
                                     primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, getRandomBlock(blockList).getDefaultState()); 
                             	}
-                                else if (i2 * 8 + j2 < this.settings.seaLevel)
+                                else if (i2 * 8 + j2 < this.seaLevel)
                                     primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, this.oceanBlock);
                             d10 += d12;
                             d11 += d13;
@@ -227,22 +240,16 @@ public class PontusChunkProvider implements IChunkGenerator
      * Generates the chunk at the specified position, from scratch
      */
     public Chunk generateChunk(int x, int z)
-    {
+    {	
         this.rand.setSeed((long)x * 341873128712L + (long)z * 132897987541L);
         ChunkPrimer chunkprimer = new ChunkPrimer();
         this.setBlocksInChunk(x, z, chunkprimer);
 
         this.replaceBiomeBlocks(x, z, chunkprimer, PontusBiomeProvider.biomeFromPosition(x, z));
         
-        if (this.settings.useCaves)
-        {
-            this.caveGenerator.generate(this.world, x, z, chunkprimer);
-        }
+        this.caveGenerator.generate(this.world, x, z, chunkprimer);
 
-        if (this.settings.useRavines)
-        {
-            this.ravineGenerator.generate(this.world, x, z, chunkprimer);
-        }
+        this.ravineGenerator.generate(this.world, x, z, chunkprimer);
 
         Chunk chunk = new Chunk(this.world, chunkprimer, x, z);
         chunk.generateSkylightMap();
@@ -263,10 +270,10 @@ public class PontusChunkProvider implements IChunkGenerator
 
     private void generateHeightmap(int p_185978_1_, int p_185978_2_, int p_185978_3_)
     {
-        this.depthRegion = this.depthNoise.generateNoiseOctaves(this.depthRegion, p_185978_1_, p_185978_3_, 5, 5, (double)this.settings.depthNoiseScaleX, (double)this.settings.depthNoiseScaleZ, (double)this.settings.depthNoiseScaleExponent);
-        float f = this.settings.coordinateScale;
-        float f1 = this.settings.heightScale;
-        this.mainNoiseRegion = this.mainPerlinNoise.generateNoiseOctaves(this.mainNoiseRegion, p_185978_1_, p_185978_2_, p_185978_3_, 5, 33, 5, (double)(f / this.settings.mainNoiseScaleX), (double)(f1 / this.settings.mainNoiseScaleY), (double)(f / this.settings.mainNoiseScaleZ));
+        this.depthRegion = this.depthNoise.generateNoiseOctaves(this.depthRegion, p_185978_1_, p_185978_3_, 5, 5, (double)this.depthNoiseScaleX, (double)this.depthNoiseScaleZ, (double)this.depthNoiseScaleExponent);
+        float f = this.coordinateScale;
+        float f1 = this.heightScale;
+        this.mainNoiseRegion = this.mainPerlinNoise.generateNoiseOctaves(this.mainNoiseRegion, p_185978_1_, p_185978_2_, p_185978_3_, 5, 33, 5, (double)(f / this.mainNoiseScaleX), (double)(f1 / this.mainNoiseScaleY), (double)(f / this.mainNoiseScaleZ));
         this.minLimitRegion = this.minLimitPerlinNoise.generateNoiseOctaves(this.minLimitRegion, p_185978_1_, p_185978_2_, p_185978_3_, 5, 33, 5, (double)f, (double)f1, (double)f);
         this.maxLimitRegion = this.maxLimitPerlinNoise.generateNoiseOctaves(this.maxLimitRegion, p_185978_1_, p_185978_2_, p_185978_3_, 5, 33, 5, (double)f, (double)f1, (double)f);
         int i = 0;
@@ -289,8 +296,8 @@ public class PontusChunkProvider implements IChunkGenerator
                     {
                         Biome biome1 = PontusBiomeProvider.biomeFromPosition(x + j1,z + k1);
                         
-                        float f5 = this.settings.biomeDepthOffSet + biome1.getBaseHeight() * this.settings.biomeDepthWeight;
-                        float f6 = this.settings.biomeScaleOffset + biome1.getHeightVariation() * this.settings.biomeScaleWeight;
+                        float f5 = this.biomeDepthOffSet + biome1.getBaseHeight() * this.biomeDepthWeight;
+                        float f6 = this.biomeScaleOffset + biome1.getHeightVariation() * this.biomeScaleWeight;
 
                         float f7 = this.biomeWeights[j1 + 2 + (k1 + 2) * 5] / (f5 + 2.0F);
                         
@@ -344,20 +351,20 @@ public class PontusChunkProvider implements IChunkGenerator
                 double d8 = (double)f3;
                 double d9 = (double)f2;
                 d8 = d8 + d7 * 0.2D;
-                d8 = d8 * (double)this.settings.baseSize / 8.0D;
-                double d0 = (double)this.settings.baseSize + d8 * 4.0D;
+                d8 = d8 * (double)this.baseSize / 8.0D;
+                double d0 = (double)this.baseSize + d8 * 4.0D;
 
                 for (int l1 = 0; l1 < 33; ++l1)
                 {
-                    double d1 = ((double)l1 - d0) * (double)this.settings.stretchY * 128.0D / 256.0D / d9;
+                    double d1 = ((double)l1 - d0) * (double)this.stretchY * 128.0D / 256.0D / d9;
 
                     if (d1 < 0.0D)
                     {
                         d1 *= 4.0D;
                     }
 
-                    double d2 = this.minLimitRegion[i] / (double)this.settings.lowerLimitScale;
-                    double d3 = this.maxLimitRegion[i] / (double)this.settings.upperLimitScale;
+                    double d2 = this.minLimitRegion[i] / (double)this.lowerLimitScale;
+                    double d3 = this.maxLimitRegion[i] / (double)this.upperLimitScale;
                     double d4 = (this.mainNoiseRegion[i] / 10.0D + 1.0D) / 2.0D;
                     double d5 = MathHelper.clampedLerp(d2, d3, d4) - d1;
 
@@ -388,14 +395,13 @@ public class PontusChunkProvider implements IChunkGenerator
         long k = this.rand.nextLong() / 2L * 2L + 1L;
         long l = this.rand.nextLong() / 2L * 2L + 1L;
         this.rand.setSeed((long)x * k + (long)z * l ^ this.world.getSeed());
-        boolean flag = false;
         ChunkPos chunkpos = new ChunkPos(x, z);
 
-        net.minecraftforge.event.ForgeEventFactory.onChunkPopulate(true, this, this.world, this.rand, x, z, flag);
+        net.minecraftforge.event.ForgeEventFactory.onChunkPopulate(true, this, this.world, this.rand, x, z, false);
 
 
-        if (this.settings.useWaterLakes && !flag && this.rand.nextInt(this.settings.waterLakeChance) == 0)
-        if (net.minecraftforge.event.terraingen.TerrainGen.populate(this, this.world, this.rand, x, z, flag, net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.LAKE))
+        if (this.rand.nextInt(1) == 0)
+        if (net.minecraftforge.event.terraingen.TerrainGen.populate(this, this.world, this.rand, x, z, false, net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.LAKE))
         {
             int i1 = this.rand.nextInt(16) + 8;
             int j1 = this.rand.nextInt(256);
@@ -403,34 +409,22 @@ public class PontusChunkProvider implements IChunkGenerator
             (new WorldGenLakes(HarshenFluids.harshen_dimensional_fluid_block)).generate(this.world, this.rand, blockpos.add(i1, j1, k1));
         }
 
-        if (!flag && this.rand.nextInt(this.settings.lavaLakeChance / 10) == 0 && this.settings.useLavaLakes)
-        if (net.minecraftforge.event.terraingen.TerrainGen.populate(this, this.world, this.rand, x, z, flag, net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.LAVA))
+        if (this.rand.nextInt(1) == 0)
+        if (net.minecraftforge.event.terraingen.TerrainGen.populate(this, this.world, this.rand, x, z, false, net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.LAVA))
         {
             int i2 = this.rand.nextInt(16) + 8;
             int l2 = this.rand.nextInt(this.rand.nextInt(248) + 8);
             int k3 = this.rand.nextInt(16) + 8;
 
-            if (l2 < this.world.getSeaLevel() || this.rand.nextInt(this.settings.lavaLakeChance / 8) == 0)
+            if (l2 < this.world.getSeaLevel() || this.rand.nextInt(1) == 0)
             {
                 (new WorldGenLakes(HarshenFluids.harshing_water_block)).generate(this.world, this.rand, blockpos.add(i2, l2, k3));
             }
         }
-
-        if (this.settings.useDungeons)
-        if (net.minecraftforge.event.terraingen.TerrainGen.populate(this, this.world, this.rand, x, z, flag, net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.DUNGEON))
-        {
-            for (int j2 = 0; j2 < this.settings.dungeonChance; ++j2)
-            {
-                int i3 = this.rand.nextInt(16) + 8;
-                int l3 = this.rand.nextInt(256);
-                int l1 = this.rand.nextInt(16) + 8;
-                (new WorldGenDungeons()).generate(this.world, this.rand, blockpos.add(i3, l3, l1));
-            }
-        }
         biome.decorate(this.world, this.rand, new BlockPos(i, 0, j));
-        if (net.minecraftforge.event.terraingen.TerrainGen.populate(this, this.world, this.rand, x, z, flag, net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.ANIMALS))
+        if (net.minecraftforge.event.terraingen.TerrainGen.populate(this, this.world, this.rand, x, z, false, net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.ANIMALS))
         performWorldGenSpawning(this.world, world.getBiome(new BlockPos(x*16, 100, z*16)).getSpawnableList(EnumCreatureType.CREATURE) , i + 8, j + 8, 16, 16, this.rand);
-        net.minecraftforge.event.ForgeEventFactory.onChunkPopulate(false, this, this.world, this.rand, x, z, flag);
+        net.minecraftforge.event.ForgeEventFactory.onChunkPopulate(false, this, this.world, this.rand, x, z, false);
 
         BlockFalling.fallInstantly = false;
     }

@@ -90,7 +90,7 @@ public class TileEntityHarshenDimensionalPedestal extends BaseTileEntityHarshenS
 	private void activate(BlockPos pos, ArrayList<BlockPos> positions)
 	{
 		for(BlockPos position : positions)
-			((TileEntityHarshenDimensionalPedestal) world.getTileEntity(position)).resetActive();
+			((TileEntityHarshenDimensionalPedestal) world.getTileEntity(position)).activateRecipe();
 	}
 	@Override
 	protected int getTicksUntillDone() {

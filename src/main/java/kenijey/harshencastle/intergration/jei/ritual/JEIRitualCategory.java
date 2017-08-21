@@ -12,6 +12,7 @@ import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategory;
+import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -21,8 +22,8 @@ import net.minecraft.util.ResourceLocation;
 
 public class JEIRitualCategory extends BaseJeiCategory
 {	
-	public JEIRitualCategory(String name, IGuiHelper guiHelper) {
-		super(name, guiHelper);
+	public JEIRitualCategory(String UID, IRecipeCategoryRegistration reg) {
+		super(UID, reg);
 	}
 
 	@Override

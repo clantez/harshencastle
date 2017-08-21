@@ -19,6 +19,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenTrees;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraftforge.common.BiomeDictionary.Type;
 
 public class PontusBiome extends BasePontusResourceBiome
 {
@@ -79,6 +80,12 @@ public class PontusBiome extends BasePontusResourceBiome
 	@Override
 	public Block getMergerBlock() {
 		return HarshenBlocks.harshen_dimensional_dirt;
+	}
+
+
+	@Override
+	public Type[] getTypes() {
+		return new Type[]{Type.DRY, Type.HILLS};
 	}	
 
 }

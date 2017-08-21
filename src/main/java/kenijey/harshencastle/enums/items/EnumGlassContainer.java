@@ -9,7 +9,7 @@ public enum EnumGlassContainer implements IStringSerializable
 {
 	EMPTY("empty", 0, (PotionEffect)null),
 	VOID("void", 1, new PotionEffect(HarshenPotions.potionSoulless, 600)),
-	REGEN("regen", 2, new PotionEffect(MobEffects.INSTANT_HEALTH, 10, 2));
+	REGEN("regen", 2, new PotionEffect(MobEffects.REGENERATION, 100, 200));
 	
 	private int meta;
 	private String name;

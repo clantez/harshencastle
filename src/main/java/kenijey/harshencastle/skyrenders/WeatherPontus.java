@@ -113,7 +113,7 @@ public class WeatherPontus extends IRenderHandler
                     }
 
                     double d8 = (double)(-((float)(update & 511) + partialTicks) / 512.0F);
-                    double d9 = 0.5 + (double)f1 * 0.01D * 0.5;
+                    double d9 = 0.5 + (double)f1 * 0.01D;
                     double d10 = 0.5 + (double)(f1 * 0.5) * 0.001D;
                     double d11 = (double)((float)l1 + 0.5F) - entity.posX;
                     double d12 = (double)((float)k1 + 0.5F) - entity.posZ;

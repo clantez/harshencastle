@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import kenijey.harshencastle.base.BasePontusResourceBiome;
 import net.minecraft.world.biome.Biome;
+import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import scala.xml.dtd.impl.Base;
 
@@ -29,16 +30,11 @@ public class HarshenBiomes
 	{
 		ForgeRegistries.BIOMES.register(biome);
 		allBiomes.add(biome);
+		BiomeDictionary.addTypes(biome, biome.getTypes());
 		return biome;
 	}
 	
 	public static ArrayList<BasePontusResourceBiome> getAllBiomes() {
 		return allBiomes;
 	}
-	
-//	public static void regBiome()
-//	{
-//		BiomeManager.addSpawnBiome(pontus_dimensional_biome);
-//	}
-	
 }

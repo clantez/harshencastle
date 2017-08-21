@@ -45,7 +45,7 @@ public abstract class BaseTileEntityHarshenSingleItemInventoryActive extends Bas
 		return activeTimer;
 	}
 	
-	protected void resetActive()
+	protected void activateRecipe()
 	{
 		this.activeTimer = 0;
 		this.isActive = true;

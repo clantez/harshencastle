@@ -19,6 +19,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraftforge.common.BiomeDictionary.Type;
 
 public class PontusOuterBiome extends BasePontusResourceBiome {
 		
@@ -80,6 +81,11 @@ public class PontusOuterBiome extends BasePontusResourceBiome {
 	@Override
 	public Block getMergerBlock() {
 		return HarshenBlocks.harshen_chaotic_rock;
+	}	
+	
+	@Override
+	public Type[] getTypes() {
+		return new Type[]{Type.DRY, Type.MOUNTAIN};
 	}	
 
 }

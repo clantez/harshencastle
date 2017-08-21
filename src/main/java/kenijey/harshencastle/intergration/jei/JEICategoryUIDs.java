@@ -4,5 +4,6 @@ public class JEICategoryUIDs
 {
 	public static final String ritual = "harshencastle.ritual";
 	public static final String cauldron = "harshencastle.cauldron";
+	public static final String pedestalslab = "harshencastle.pedestalslab";
 
 }
