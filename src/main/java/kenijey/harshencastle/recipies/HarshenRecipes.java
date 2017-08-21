@@ -17,7 +17,7 @@ public class HarshenRecipes {
 	
 	public static ArrayList<RitualRecipes> allRitualRecipes = new ArrayList<>();
 	public static ArrayList<CauldronRecipes> allCauldronRecipes = new ArrayList<>();
-
+	public static ArrayList<PedestalSlabRecipes> allPedestalRecipes = new ArrayList<>();
 	
 	public static void register()
 	{
@@ -25,16 +25,14 @@ public class HarshenRecipes {
 		
 		RitualRecipes.addRecipe(Arrays.asList(new ItemStack(HarshenItems.pontus_world_gate_parts, 1, 0), new ItemStack(HarshenItems.pontus_world_gate_parts, 1, 1),
 				new ItemStack(HarshenItems.pontus_world_gate_parts, 1 ,2), new ItemStack(HarshenItems.harshen_soul_fragment)), new ItemStack(HarshenItems.pontus_world_gate_spawner, 1, 0), true);		
-		
 		RitualRecipes.addRecipe(Arrays.asList(new ItemStack(HarshenItems.soul_harsher_sword, 1, 0), new ItemStack(HarshenItems.ritual_crystal, 1, 1),
 				new ItemStack(HarshenItems.light_emitted_essence, 1 ,0), new ItemStack(HarshenItems.blood_essence)), new ItemStack(HarshenItems.empowered_soul_harsher_sword, 1, 0), true);
 	
 		
-		
+		PedestalSlabRecipes.addRecipe(new ItemStack(HarshenBlocks.harshen_dimensional_rock), new ItemStack(HarshenBlocks.harshen_chaotic_rock));
 		
 		
 		CauldronRecipes.addRecipe(new ItemStack(HarshenItems.ritual_crystal, 1, 0), new ItemStack(HarshenItems.ritual_crystal, 1, 1), EnumHetericCauldronFluidType.BLOOD);
-		
 		CauldronRecipes.addRecipe(new ItemStack(HarshenItems.harshen_soul_ingot, 1, 0), new ItemStack(HarshenItems.soul_infused_ingot, 1, 0), EnumHetericCauldronFluidType.HARSHING_WATER);
 		
 	}	

@@ -57,7 +57,13 @@ public abstract class BaseTileEntityHarshenSingleItemInventory extends BaseHarsh
 		item.setCount(1);
 		this.handler.setStackInSlot(0, item);
 		dirty();
+		onItemAdded();
 		return true;
+	}
+	
+	protected void onItemAdded()
+	{
+		
 	}
 		
 	public void delItem()

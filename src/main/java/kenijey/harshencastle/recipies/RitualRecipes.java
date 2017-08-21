@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.BlockPos;
 
 public class RitualRecipes {
 
@@ -11,6 +12,7 @@ public class RitualRecipes {
 	private final List<ItemStack> inputs;
 	private final ItemStack output;
 	private final boolean useLightning;
+	private BlockPos positionOfRitual;
 	
 	private RitualRecipes(List<ItemStack> inputs, ItemStack output, boolean useLightning) 
 	{
@@ -20,6 +22,12 @@ public class RitualRecipes {
 		this.output = output;
 		this.useLightning = useLightning;
 		allRecipies.add(this);
+	}
+	
+	private RitualRecipes(List<ItemStack> inputs, ItemStack output, boolean useLightning, BlockPos position) 
+	{
+		this(inputs, output, useLightning);
+		this.positionOfRitual = position;
 	}
 	
 	public static ArrayList<RitualRecipes> getRecipes(ItemStack stack)
@@ -34,6 +42,15 @@ public class RitualRecipes {
 	public List<ItemStack> getInputs()
 	{
 		return inputs;
+	}
+	
+	public RitualRecipes setUpRitual(BlockPos position)
+	{
+		return new RitualRecipes(inputs, output, useLightning, position);
+	}
+	
+	public BlockPos getPositionOfRitual() {
+		return positionOfRitual;
 	}
 	
 	public ItemStack getOutput()

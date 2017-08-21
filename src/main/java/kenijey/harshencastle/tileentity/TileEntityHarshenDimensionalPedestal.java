@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import kenijey.harshencastle.HarshenItems;
-import kenijey.harshencastle.base.BaseTileEntityHarshenSingleItemInventory;
+import kenijey.harshencastle.base.BaseTileEntityHarshenSingleItemInventoryActive;
+import kenijey.harshencastle.recipies.HarshenRecipes;
 import kenijey.harshencastle.recipies.RitualRecipes;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.init.Blocks;
@@ -14,28 +15,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 
-public class TileEntityHarshenDimensionalPedestal extends BaseTileEntityHarshenSingleItemInventory
+public class TileEntityHarshenDimensionalPedestal extends BaseTileEntityHarshenSingleItemInventoryActive
 {
-	int activeTimer = 0;
-	public static ArrayList<BlockPos> positionsOfGo = new ArrayList<BlockPos>(); 
-	private boolean isActive = false;
+	//public static ArrayList<BlockPos> positionsOfGo = new ArrayList<BlockPos>(); 
 	private RitualRecipes workingRecipe;
-	
-	public float getMove()
-	{
-		return activeTimer / 100f;
-	}
-	
-	public BlockPos getMoveDirection()
-	{
-		for(BlockPos pos : positionsOfGo)
-			if(pos.distanceSq(this.pos) < 2)
-				for(EnumFacing face : EnumFacing.HORIZONTALS)
-					if(this.pos.offset(face).equals(pos))
-						return new BlockPos(0, 0, 0).offset(face);
-				
-		return null;
-	}
 	
 	@Override
 	public void tick() {
@@ -47,44 +30,19 @@ public class TileEntityHarshenDimensionalPedestal extends BaseTileEntityHarshenS
 			hasItem = flag;
 			dirty();
 		}
-		
-		if(isActive)
-			if(activeTimer++ == 100)
-			{
-				BlockPos rem = null;
-				isActive = false;
-				handler.setStackInSlot(0, new ItemStack(Blocks.AIR));
-				for(BlockPos pos : positionsOfGo)
-				{
-					if(pos.distanceSq(this.pos) < 2)
-						for(EnumFacing face : EnumFacing.HORIZONTALS)
-							if(this.pos.offset(face).equals(pos))
-							{
-								if(workingRecipe == null)
-									continue;
-								if(workingRecipe.lightning())
-									world.addWeatherEffect(new EntityLightningBolt(world, pos.getX(), pos.getY(), pos.getZ(), true));
-								if(!world.isRemote)
-									InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), workingRecipe.getOutput());
-								rem = pos;
-								break;
-							}
-					if(rem == null)
-						break;
-				}
-				if(!world.isRemote)
-					positionsOfGo.remove(rem);
-			}
+		if(isActive() && workingRecipe != null && !checkForCompleation(true))
+			deactivateAll();
 	}
 	
-	@Override
-	public boolean setItem(ItemStack item) {
-		super.setItem(item);
-		checkForCompleation();
-		return true;
+	private void deactivateAll() 
+	{
+		isActive = false;
+		for(EnumFacing facing : EnumFacing.HORIZONTALS)
+			((TileEntityHarshenDimensionalPedestal) world.getTileEntity(workingRecipe.getPositionOfRitual().offset(facing))).deactivate();	
 	}
 
-	private void checkForCompleation()
+	@Override
+	protected boolean checkForCompleation(boolean checkingUp)
 	{
 		boolean found = false;
 		for(RitualRecipes recipe : RitualRecipes.getRecipes(getItem()))
@@ -114,33 +72,44 @@ public class TileEntityHarshenDimensionalPedestal extends BaseTileEntityHarshenS
 							localItems.remove(((TileEntityHarshenDimensionalPedestal) world.getTileEntity(position.offset(face))).getItem().getItem());
 					if(localItems.isEmpty())
 					{
-						this.workingRecipe = recipe;
-						activate(position, blocks);
+						if(!checkingUp)
+						{
+							this.workingRecipe = recipe.setUpRitual(position);
+							activate(position, blocks);
+						}
 						found = true;
 						break;
 					}
 				}
 			}
 		}
+		return found;
 			
 	}
 	
 	private void activate(BlockPos pos, ArrayList<BlockPos> positions)
 	{
-		positionsOfGo.clear();
-		positionsOfGo.add(pos);
 		for(BlockPos position : positions)
-			((TileEntityHarshenDimensionalPedestal) world.getTileEntity(position)).setActive();
+			((TileEntityHarshenDimensionalPedestal) world.getTileEntity(position)).resetActive();
 	}
-	
-	public void setActive()
-	{
-		isActive = true;
-		activeTimer = 0;
+	@Override
+	protected int getTicksUntillDone() {
+		return 100;
 	}
-	
-	public boolean isActive()
-	{
-		return isActive;
+
+	@Override
+	protected void finishedTicking() {
+		handler.setStackInSlot(0, new ItemStack(Blocks.AIR));
+		if(world.isRemote || workingRecipe == null)
+			return;
+		BlockPos pos = workingRecipe.getPositionOfRitual();
+		for(EnumFacing face : EnumFacing.HORIZONTALS)
+			if(this.pos.offset(face).equals(pos))
+			{
+				if(workingRecipe.lightning())
+					world.addWeatherEffect(new EntityLightningBolt(world, pos.getX(), pos.getY(), pos.getZ(), true));
+				InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), workingRecipe.getOutput());
+				return;
+			}
 	}
 }
