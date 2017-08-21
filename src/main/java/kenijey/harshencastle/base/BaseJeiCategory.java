@@ -24,7 +24,7 @@ public abstract class BaseJeiCategory implements IRecipeCategory{
 		background = guiHelper.createBlankDrawable(150, 110);
 		localizedName = I18n.format("jei." + name + ".name");
 		overlay = guiHelper.createDrawable(new ResourceLocation(HarshenCastle.MODID, "textures/gui/jei/" + name + ".png"),
-				0, 0, 150, 110);
+				0, 0, 150, 110, 150, 110);
 		createDrawable(guiHelper);
 	}
 
