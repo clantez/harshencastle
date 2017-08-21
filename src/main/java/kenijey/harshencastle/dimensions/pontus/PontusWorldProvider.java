@@ -1,5 +1,6 @@
 package kenijey.harshencastle.dimensions.pontus;
 
+import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.biomes.PontusBiomeProvider;
 import kenijey.harshencastle.dimensions.DimensionPontus;
 import kenijey.harshencastle.skyrenders.WeatherPontus;
@@ -18,8 +19,7 @@ public class PontusWorldProvider extends WorldProvider
 	protected void init() {
 		this.hasSkyLight = false;
 		this.biomeProvider = new PontusBiomeProvider();
-		this.setWeatherRenderer(new WeatherPontus());
-		
+		HarshenCastle.proxy.setWorldRenderer(this);
 	}
 	
 	@Override

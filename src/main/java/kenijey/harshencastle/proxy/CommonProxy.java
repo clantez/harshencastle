@@ -9,6 +9,7 @@ import kenijey.harshencastle.WorldGen;
 import kenijey.harshencastle.armor.HarshenArmors;
 import kenijey.harshencastle.biomes.HarshenBiomes;
 import kenijey.harshencastle.dimensions.HarshenDimensions;
+import kenijey.harshencastle.dimensions.pontus.PontusWorldProvider;
 import kenijey.harshencastle.entity.HarshenEntities;
 import kenijey.harshencastle.fluids.HarshenFluids;
 import kenijey.harshencastle.handlers.HandlerBloodOnHurt;
@@ -116,5 +117,8 @@ public class CommonProxy
 
 	public void book() {
 		
+	}
+
+	public void setWorldRenderer(PontusWorldProvider prov) {		
 	}
 }

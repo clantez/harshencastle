@@ -5,6 +5,7 @@ import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.HarshenKeybinding;
 import kenijey.harshencastle.armor.HarshenArmors;
+import kenijey.harshencastle.dimensions.pontus.PontusWorldProvider;
 import kenijey.harshencastle.entity.EntityFactories;
 import kenijey.harshencastle.entity.EntitySoulPart;
 import kenijey.harshencastle.entity.EntitySoullessKnight;
@@ -14,6 +15,7 @@ import kenijey.harshencastle.itemrenderer.RendererHarshenDisplayBlock;
 import kenijey.harshencastle.itemrenderer.RendererHarshenSpawner;
 import kenijey.harshencastle.itemrenderer.RendererHereticCauldron;
 import kenijey.harshencastle.itemrenderer.RendererPedestalSlab;
+import kenijey.harshencastle.skyrenders.WeatherPontus;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDimensionalPedestal;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDisplayBlock;
 import kenijey.harshencastle.tileentity.TileEntityHarshenSpawner;
@@ -75,6 +77,11 @@ public class ClientProxy extends CommonProxy
 		Minecraft.getMinecraft().displayGuiScreen(new GuiBookScreen());
 	}
     
+	@Override
+	public void setWorldRenderer(PontusWorldProvider prov) {
+		prov.setWeatherRenderer(new WeatherPontus());
+	}
+	
     @Override
     public void init(FMLInitializationEvent event) 
     {

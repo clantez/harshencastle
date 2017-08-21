@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.List;
 
 import kenijey.harshencastle.base.BaseHarshenCommand;
+import kenijey.harshencastle.handlers.HandlerPontusAllowed;
 import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.network.packets.MessagePacketPlayerHasAccess;
 import net.minecraft.command.CommandException;
@@ -38,6 +39,7 @@ public class CommandAccessPontusOuter extends BaseHarshenCommand {
 		int i = parseInt(rawInt);
 		player.getEntityData().setInteger("PontusBiomeLevel", i);
 		HarshenNetwork.sendToPlayer((EntityPlayerMP) player, new MessagePacketPlayerHasAccess(player));
+		HandlerPontusAllowed.setAllowed(player, i);
 		message(sender, "achive", player.getName());
 	}
 	

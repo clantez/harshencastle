@@ -18,6 +18,7 @@ public class HandlerPontusAllowed
 	@SubscribeEvent
 	public void playerTick(PlayerTickEvent event)
 	{
+		//System.out.println(playersLevelMap.get(event.player.getUniqueID().toString()));
 		if(!playersLevelMap.containsKey(event.player.getUniqueID().toString()))
 			setAllowed(event.player, event.player.getEntityData().getInteger("PontusBiomeLevel"));
 		if(!event.player.world.isRemote && !HarshenUtils.isLevelAcceptable(event.player.world, event.player.getPosition(), event.player))
