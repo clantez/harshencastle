@@ -1,4 +1,4 @@
-package kenijey.harshencastle.entity.damagesource;
+package kenijey.harshencastle.damagesource;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;

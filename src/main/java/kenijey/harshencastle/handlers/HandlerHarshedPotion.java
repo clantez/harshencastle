@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 import kenijey.harshencastle.HarshenCastle;
+import kenijey.harshencastle.damagesource.DamageSourceHarshed;
 import kenijey.harshencastle.entity.EntitySoulPart;
 import kenijey.harshencastle.potions.HarshenPotions;
 import net.minecraft.client.Minecraft;
@@ -19,7 +20,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-public class HandlerPotion {
+public class HandlerHarshedPotion {
 	
 	private static ArrayList<EntityLivingBase> arrayLivingWithEffect = new ArrayList<EntityLivingBase>();
 	private static ArrayList<HandlerHarshenEffect> arrayEffectManager = new ArrayList<HandlerHarshenEffect>();
@@ -82,7 +83,7 @@ public class HandlerPotion {
 
 class HandlerHarshenEffect
 {
-	private int timer;
+	private int timer = 1;
 	private final int level;
 	private final EntityLivingBase entity;
 	private BlockPos position;
@@ -98,7 +99,7 @@ class HandlerHarshenEffect
 		if(timer++ >= 20)
 		{
 			timer = 0;
-			this.entity.attackEntityFrom(DamageSource.MAGIC, (float) Math.floor(this.level * 2.5f));
+			this.entity.attackEntityFrom(DamageSourceHarshed.getSource(), (float) Math.floor(this.level * 2.5f));
 		}
 	}
 }

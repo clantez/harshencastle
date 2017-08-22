@@ -2,13 +2,10 @@ package kenijey.harshencastle.entity;
 
 import com.google.common.base.Predicate;
 
+import kenijey.harshencastle.damagesource.DamageSourceSoulPart;
 import kenijey.harshencastle.entity.AI.AIEntityFlyingTowardsPlayer;
-import kenijey.harshencastle.entity.damagesource.DamageSourceSoulPart;
 import kenijey.harshencastle.entity.movehelper.MoveHelperSoulPart;
-import kenijey.harshencastle.entityrender.RenderSoulPart;
 import kenijey.harshencastle.potions.HarshenPotions;
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -21,9 +18,6 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.client.registry.IRenderFactory;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntitySoulPart extends EntityMob
 {
