@@ -37,7 +37,7 @@ public class JEIRitualCategory extends BaseJeiCategory
 		recipeLayout.getItemStacks().set(4, ingredients.getOutputs(ItemStack.class).get(0));
 	}
 	
-	Dimension[] positionsOfSlots = {new Dimension(21, 6), new Dimension(56, 6), new Dimension(12, 26), new Dimension(69, 22)};
+	Dimension[] positionsOfSlots = {new Dimension(21, 6), new Dimension(56, 6), new Dimension(9, 28), new Dimension(69, 24)};
 	
 	private void addSlot(IRecipeLayout recipeLayout, List<List<ItemStack>> list, int id)
 	{
