@@ -34,7 +34,7 @@ public class HereticCauldronTop extends Block
 	@SideOnly(Side.CLIENT)
     public BlockRenderLayer getBlockLayer()
     {
-        return BlockRenderLayer.CUTOUT;
+        return BlockRenderLayer.TRANSLUCENT;
     }
 	
 	@Override
@@ -73,6 +73,11 @@ public class HereticCauldronTop extends Block
     {
         return false;
     }
+	
+	@Override
+	public boolean isOpaqueCube(IBlockState state) {
+		return false;
+	}
 
 	@Override
     protected boolean canSilkHarvest()

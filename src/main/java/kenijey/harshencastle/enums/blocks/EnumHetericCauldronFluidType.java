@@ -40,10 +40,10 @@ public enum EnumHetericCauldronFluidType implements IStringSerializable
 		return this.id * 4;
 	}
 	
-	public static EnumHetericCauldronFluidType getMatch(int id)
+	public static EnumHetericCauldronFluidType getMatch(int meta)
 	{
 		for(EnumHetericCauldronFluidType liquid : EnumHetericCauldronFluidType.values())
-			if(liquid.getId() == id)
+			if(liquid.getId() == meta)
 				return liquid;
 		return NONE;
 	}

@@ -150,7 +150,7 @@ public class HereticCauldron extends BaseBlockHarshenSingleInventory
             }
             else if(item instanceof BloodCollector && (state.getValue(LIQUID) ==  EnumHetericCauldronFluidType.BLOOD || i == 0))
             {
-            	if(i != 3 && !playerIn.isSneaking() && !worldIn.isRemote)
+            	if(i != 3 && !worldIn.isRemote)
             		if (playerIn.capabilities.isCreativeMode || (!playerIn.capabilities.isCreativeMode && ((BloodCollector)item).remove(playerIn, hand, 3)))
                     {
             			worldIn.playSound((EntityPlayer)null, pos, SoundEvents.ITEM_BOTTLE_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
@@ -191,17 +191,13 @@ public class HereticCauldron extends BaseBlockHarshenSingleInventory
 	
 	@Override
 	public int getMetaFromState(IBlockState state) {
-		if(state.getValue(LIQUID) == EnumHetericCauldronFluidType.NONE || state.getValue(LEVEL) == 0)
-			return 0;
-		return (state.getValue(LIQUID).getId() * 3) - 3 + ((Integer)state.getValue(LEVEL)).intValue();
+		return state.getValue(LIQUID).getMetaId() + state.getValue(LEVEL);
 	}
 	
 	
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		if(meta == 0)
-			return this.getDefaultState();
-		return this.getDefaultState().withProperty(LEVEL, ((meta - 1) % 3) + 1).withProperty(LIQUID, EnumHetericCauldronFluidType.getMatch((int) Math.ceil(meta / 3)));
+		return this.getDefaultState().withProperty(LEVEL, meta % 4).withProperty(LIQUID, EnumHetericCauldronFluidType.getMatch(Math.floorDiv(meta, 4)));
 	}
 	
 	@Override

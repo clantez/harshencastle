@@ -442,8 +442,6 @@ public class PontusChunkProvider implements IChunkGenerator
         BlockFalling.fallInstantly = false;
     }
     
-    
-    
     private void performWorldGenSpawning(World worldIn, EnumCreatureType type, BlockPos pos ,int p_77191_2_, int p_77191_3_, int p_77191_4_, int p_77191_5_, Random randomIn)
     {
     	float amount;
