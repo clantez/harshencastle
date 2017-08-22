@@ -7,6 +7,7 @@ import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.base.BasePontusResourceBiome;
 import kenijey.harshencastle.dimensions.PontusBiomeDecorator;
+import kenijey.harshencastle.entity.EntitySoulPart;
 import kenijey.harshencastle.worldgenerators.pontus.PontusWorldGeneratorDestroyedPlants;
 import kenijey.harshencastle.worldgenerators.pontus.PontusWorldGeneratorStone;
 import net.minecraft.block.Block;
@@ -25,17 +26,13 @@ public class PontusBiome extends BasePontusResourceBiome
 {
 	
 	public PontusBiome() {
-		super(new Biome.BiomeProperties("Pontus").setTemperature(5f).setRainDisabled().setBaseHeight(0.7f).setHeightVariation(2f));
+		super("Pontus");
 		
-		setRegistryName(HarshenCastle.MODID, "Pontus");
-
 		this.spawnableCaveCreatureList.clear();
 		this.spawnableCaveCreatureList.add(new SpawnListEntry(EntityEnderman.class, 25, 2, 5));
 		
 		this.spawnableCreatureList.clear();
-		this.spawnableCreatureList.add(new SpawnListEntry(EntityEndermite.class, 50, 1, 10));
-		
-		this.decorator = new PontusBiomeDecorator();	
+		this.spawnableCreatureList.add(new SpawnListEntry(EntityEndermite.class, 50, 1, 10));	
 	}
 	
 	

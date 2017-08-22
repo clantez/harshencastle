@@ -9,12 +9,14 @@ import kenijey.harshencastle.dimensions.pontus.PontusWorldProvider;
 import kenijey.harshencastle.entity.EntityFactories;
 import kenijey.harshencastle.entity.EntitySoulPart;
 import kenijey.harshencastle.entity.EntitySoullessKnight;
+import kenijey.harshencastle.enums.particle.EnumHarshenParticle;
 import kenijey.harshencastle.gui.GuiBookScreen;
 import kenijey.harshencastle.itemrenderer.RendererDimensionalPedestal;
 import kenijey.harshencastle.itemrenderer.RendererHarshenDisplayBlock;
 import kenijey.harshencastle.itemrenderer.RendererHarshenSpawner;
 import kenijey.harshencastle.itemrenderer.RendererHereticCauldron;
 import kenijey.harshencastle.itemrenderer.RendererPedestalSlab;
+import kenijey.harshencastle.particle.ParticleBlood;
 import kenijey.harshencastle.skyrenders.WeatherPontus;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDimensionalPedestal;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDisplayBlock;
@@ -24,10 +26,14 @@ import kenijey.harshencastle.tileentity.TileEntityPedestalSlab;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -39,6 +45,8 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 public class ClientProxy extends CommonProxy 
 {
+    public static ResourceLocation particleTexturesLocation = new ResourceLocation(HarshenCastle.MODID, "textures/particles/particles.png");
+	
 	@Override
     public void regRenders(FMLPreInitializationEvent event) {
     	super.regRenders(event);
@@ -120,5 +128,21 @@ public class ClientProxy extends CommonProxy
                 return fluidLocation;
             }
         });
+    }
+    
+    @Override
+    public void spawnParticle(EnumHarshenParticle type, Vec3d position, Vec3d directionSpeed, Object... info) {
+    	Minecraft minecraft = Minecraft.getMinecraft();
+        Particle entityFx = null;
+        if(minecraft.world !=  null)
+	        switch (type)
+	        {
+		        case BLOOD:
+		            entityFx = new ParticleBlood(minecraft.world, position.x, position.y, position.z, directionSpeed.x, directionSpeed.y, directionSpeed.z);
+		            break;
+		        default:
+		            break;
+	        }
+        if (entityFx != null) {minecraft.effectRenderer.addEffect(entityFx);}
     }
 }

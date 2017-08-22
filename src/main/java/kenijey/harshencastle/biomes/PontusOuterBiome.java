@@ -24,19 +24,15 @@ import net.minecraftforge.common.BiomeDictionary.Type;
 public class PontusOuterBiome extends BasePontusResourceBiome {
 		
 	public PontusOuterBiome() {
-		super(new Biome.BiomeProperties("Pontus_Chaotic").setTemperature(5f).setRainDisabled().setBaseHeight(0.7f).setHeightVariation(2f));
+		super("Pontus_Chaotic");
 		
-		setRegistryName(HarshenCastle.MODID, "Pontus_Chaotic");
-
 		this.spawnableCaveCreatureList.clear();
 		this.spawnableCaveCreatureList.add(new SpawnListEntry(EntityEnderman.class, 10, 2, 7));
 		
 		this.spawnableCreatureList.clear();
 		this.spawnableCreatureList.add(new SpawnListEntry(EntityEndermite.class, 100, 5, 17));
 
-		this.decorator = new PontusBiomeDecorator();
-		this.decorator.extraTreeChance = 0.5f;
-		
+		this.decorator.extraTreeChance = 0.5f;		
 		
 	}
 	

@@ -40,7 +40,6 @@ public abstract class BaseTileEntityHarshenSingleItemInventory extends BaseHarsh
 	
 	protected void tick()
 	{
-		
 	}
 	
 	

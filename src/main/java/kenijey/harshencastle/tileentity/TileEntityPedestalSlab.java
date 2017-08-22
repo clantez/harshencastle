@@ -1,31 +1,31 @@
 package kenijey.harshencastle.tileentity;
 
+import java.util.Random;
+
 import kenijey.harshencastle.HarshenBlocks;
-import kenijey.harshencastle.base.BaseTileEntityHarshenSingleItemInventory;
+import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.base.BaseTileEntityHarshenSingleItemInventoryActive;
+import kenijey.harshencastle.enums.particle.EnumHarshenParticle;
 import kenijey.harshencastle.recipies.HarshenRecipes;
 import kenijey.harshencastle.recipies.PedestalSlabRecipes;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 
 public class TileEntityPedestalSlab extends BaseTileEntityHarshenSingleItemInventoryActive
 {
-	
-	private boolean isactive;
 	private PedestalSlabRecipes workingRecipe;
 	
 	@Override
 	protected boolean checkForCompleation(boolean checkingUp) {
 		boolean flag = false;
-		if(!checkingUp)
-			for(PedestalSlabRecipes recipe : HarshenRecipes.allPedestalRecipes)
-				if(recipe.getInput().getItem() == getItem().getItem())
-				{
-					if(!checkingUp)
-						workingRecipe = recipe;
-					flag = true;
-				}
+		for(PedestalSlabRecipes recipe : HarshenRecipes.allPedestalRecipes)
+			if(recipe.getInput().getItem() == getItem().getItem())
+			{
+				if(!checkingUp)
+					workingRecipe = recipe;
+				flag = true;
+			}
 		if(!flag)
 			return false;
 		for(int x = -1; x < 2; x++)
@@ -34,6 +34,28 @@ public class TileEntityPedestalSlab extends BaseTileEntityHarshenSingleItemInven
 				(world.getBlockState(pos.add(x, 0, z)).getBlock() == HarshenBlocks.blood_block || (x == 0 && z == 0))))
 					flag = false;
 		return flag;
+	}
+	
+	@Override
+	protected void tick() {
+		if(!checkForCompleation(true) && isActive())
+			deactivate();
+		else if(isActive())
+		{
+			for(int x = -1; x < 2; x++)
+				for(int z = -1; z < 2; z++)
+					if(!(x == 0 && z == 0))
+						for(int i = 0; i < 8; i ++)
+						{
+							Vec3d pos = new Vec3d(this.pos.add(x, 0, z)).addVector(new Random().nextDouble(), -0.1, new Random().nextDouble());
+							HarshenCastle.proxy.spawnParticle(EnumHarshenParticle.BLOOD, pos, 
+									new Vec3d((this.pos.getX() + 0.5 - pos.x) / 20D, (this.pos.getY() + 0.5 - pos.y) / 20D, (this.pos.getZ() + 0.5 - pos.z) / 20D));
+
+						}
+			
+		}	
+		else if(checkForCompleation(false))
+			activateRecipe();
 	}
 	
 	@Override
@@ -52,6 +74,16 @@ public class TileEntityPedestalSlab extends BaseTileEntityHarshenSingleItemInven
 		for(int x = -1; x < 2; x++)
 			for(int z = -1; z < 2; z++)
 				if(!(x == 0 && z == 0))
+				{
 					world.setBlockToAir(pos.add(x, 0, z));
+					for(int i = 0; i < new Random().nextInt(10) + 100; i++)
+						HarshenCastle.proxy.spawnParticle(EnumHarshenParticle.BLOOD, new Vec3d(pos.add(x, 0, z)).addVector(randPos(), 0, randPos()), new Vec3d(0, 0.01, 0));
+				}
+					
+	}
+	
+	private double randPos()
+	{
+		return MathHelper.clamp(new Random().nextDouble(), 0.1, 0.9);
 	}
 }

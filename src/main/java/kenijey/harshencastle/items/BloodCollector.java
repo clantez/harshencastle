@@ -28,10 +28,8 @@ public class BloodCollector extends BaseItemMetaData
 		setUnlocalizedName("blood_collector");
 	}
 	
-	public boolean fill(World world, EntityPlayer player, EnumHand hand, int amount)
+	public boolean fill(EntityPlayer player, EnumHand hand, int amount)
 	{
-		if(world.isRemote)
-			return false;
 		boolean flag = false; 
 		ItemStack stack = player.getHeldItem(hand);
 		NBTTagCompound nbt = getNBT(stack);
@@ -49,13 +47,13 @@ public class BloodCollector extends BaseItemMetaData
 		return flag;
 	}
 	
-	public boolean remove(World world, EntityPlayer player, EnumHand hand, int amount)
+	public boolean remove(EntityPlayer player, EnumHand hand, int amount)
 	{
 		if(player.capabilities.isCreativeMode)
 			return true;
 		ItemStack stack = player.getHeldItem(hand);
 		NBTTagCompound nbt = getNBT(stack);
-		if(nbt.getInteger("Blood") - amount <= 0)
+		if(nbt.getInteger("Blood") - amount < 0)
 			return false;
 		nbt.setInteger("Blood", nbt.getInteger("Blood") - amount);
 		stack.setItemDamage(metaChange(nbt));
@@ -71,7 +69,7 @@ public class BloodCollector extends BaseItemMetaData
 	    	nbt = new NBTTagCompound();
 		
 		if (!nbt.hasKey("Blood"))
-			nbt.setInteger("Blood", 1);
+			nbt.setInteger("Blood", 0);
 
 		return nbt;
 	}
@@ -99,10 +97,10 @@ public class BloodCollector extends BaseItemMetaData
 	@Override
 	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand,
 			EnumFacing facing, float hitX, float hitY, float hitZ) {
-		if(player.isSneaking() && remove(worldIn, player, hand, 3) && 
-				worldIn.getBlockState(pos.offset(facing).down()).getBlock().isTopSolid(worldIn.getBlockState(pos.offset(facing).down())))
+		if(player.isSneaking() && remove(player, hand, 3) && worldIn.getBlockState(pos.offset(facing).down()).isSideSolid(worldIn, pos, EnumFacing.UP))
 		{
 			worldIn.setBlockState(pos.offset(facing), HarshenBlocks.blood_block.getDefaultState(), 3);
+			worldIn.getBlockState(pos.offset(facing)).getBlock().onBlockAdded(worldIn, pos, worldIn.getBlockState(pos.offset(facing))); 
 			worldIn.playSound(pos.getX(), pos.getY(), pos.getZ(), HarshenSounds.bloodCollectorUse, SoundCategory.BLOCKS, 3f, new Random().nextFloat(), false);
 		}
 		return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);

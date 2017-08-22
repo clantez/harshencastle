@@ -418,21 +418,25 @@ public class PontusChunkProvider implements IChunkGenerator
             (new WorldGenLakes(HarshenFluids.harshen_dimensional_fluid_block)).generate(this.world, this.rand, blockpos.add(i1, j1, k1));
         }
 
-        if (this.rand.nextInt(1) == 0)
+        if (this.rand.nextInt(5) == 0)
         if (net.minecraftforge.event.terraingen.TerrainGen.populate(this, this.world, this.rand, x, z, false, net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.LAVA))
         {
             int i2 = this.rand.nextInt(16) + 8;
             int l2 = this.rand.nextInt(this.rand.nextInt(248) + 8);
             int k3 = this.rand.nextInt(16) + 8;
 
-            if (l2 < this.world.getSeaLevel() || this.rand.nextInt(1) == 0)
+            if (l2 < this.world.getSeaLevel() || this.rand.nextInt(2) == 0)
             {
                 (new WorldGenLakes(HarshenFluids.harshing_water_block)).generate(this.world, this.rand, blockpos.add(i2, l2, k3));
             }
         }
         biome.decorate(this.world, this.rand, new BlockPos(i, 0, j));
         if (net.minecraftforge.event.terraingen.TerrainGen.populate(this, this.world, this.rand, x, z, false, net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.ANIMALS))
-        performWorldGenSpawning(this.world, world.getBiome(new BlockPos(x*16, 100, z*16)).getSpawnableList(EnumCreatureType.CREATURE) , i + 8, j + 8, 16, 16, this.rand);
+        	{
+        		performWorldGenSpawning(this.world, EnumCreatureType.CREATURE, new BlockPos(x*16, 100, z*16), i + 8, j + 8, 16, 16, this.rand);
+        		performWorldGenSpawning(this.world, EnumCreatureType.MONSTER, new BlockPos(x*16, 100, z*16) , i + 8, j + 8, 16, 16, this.rand);
+        	}
+
         net.minecraftforge.event.ForgeEventFactory.onChunkPopulate(false, this, this.world, this.rand, x, z, false);
 
         BlockFalling.fallInstantly = false;
@@ -440,10 +444,20 @@ public class PontusChunkProvider implements IChunkGenerator
     
     
     
-    private void performWorldGenSpawning(World worldIn, List<SpawnListEntry> enteries, int p_77191_2_, int p_77191_3_, int p_77191_4_, int p_77191_5_, Random randomIn)
+    private void performWorldGenSpawning(World worldIn, EnumCreatureType type, BlockPos pos ,int p_77191_2_, int p_77191_3_, int p_77191_4_, int p_77191_5_, Random randomIn)
     {
+    	float amount;
+    	switch (type) {
+		case MONSTER:
+			amount = 0.1f;
+			break;
+		default:
+			amount = 0.3f;
+			break;
+		}
+    	List<SpawnListEntry> enteries = world.getBiome(pos).getSpawnableList(type);
     	SpawnListEntry entry = enteries.get(rand.nextInt(enteries.size()));
-    	while (randomIn.nextFloat() < 0.3f)
+    	while (randomIn.nextFloat() < amount)
         {
             int i = entry.minGroupCount + randomIn.nextInt(1 + entry.maxGroupCount - entry.minGroupCount);
             IEntityLivingData ientitylivingdata = null;
