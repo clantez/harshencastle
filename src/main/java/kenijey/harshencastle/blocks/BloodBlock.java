@@ -41,7 +41,7 @@ public class BloodBlock extends Block
 			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if(playerIn.getHeldItem(hand).getItem() instanceof BloodCollector && ((BloodCollector)playerIn.getHeldItem(hand).getItem()).fill(playerIn, hand, 1))
 		{
-			worldIn.playSound(pos.getX(), pos.getY(), pos.getZ(), HarshenSounds.bloodCollectorUse, SoundCategory.BLOCKS, 3f, new Random().nextFloat(), false);
+			worldIn.playSound(pos.getX(), pos.getY(), pos.getZ(), HarshenSounds.bloodCollectorUse, SoundCategory.BLOCKS, 0.5f, new Random().nextFloat(), false);
 			worldIn.setBlockToAir(pos);
 		}	
 		return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
@@ -54,6 +54,8 @@ public class BloodBlock extends Block
 	
 	@Override
 	public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
+		if(!tickMap.containsKey(pos))
+			tickMap.put(pos, 0);
 		tickMap.put(pos, tickMap.get(pos) + 1);
 		if(tickMap.get(pos) > 17)
 			worldIn.setBlockToAir(pos);
