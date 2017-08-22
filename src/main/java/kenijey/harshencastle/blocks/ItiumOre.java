@@ -1,5 +1,6 @@
 package kenijey.harshencastle.blocks;
 
+import java.util.List;
 import java.util.Random;
 
 import kenijey.harshencastle.HarshenCastle;
@@ -8,11 +9,14 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.particle.ParticleManager;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
@@ -62,5 +66,11 @@ public class ItiumOre extends Block
 	@Override
 	public int getExpDrop(IBlockState state, IBlockAccess world, BlockPos pos, int fortune) {
 		return new Random().nextInt(2) + fortune;
+	}
+	
+	@Override
+	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+		tooltip.add("\u00A73" + new TextComponentTranslation("itiumore1").getFormattedText());
+		super.addInformation(stack, worldIn, tooltip, flagIn);
 	}
 }
