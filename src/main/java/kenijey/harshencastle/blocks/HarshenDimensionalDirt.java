@@ -45,7 +45,7 @@ public class HarshenDimensionalDirt extends BaseHarshenBlockBreakableInPontus
 	@Override
 	public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction,
 			IPlantable plantable) {
-		return !Arrays.asList(Blocks.REEDS, Blocks.BROWN_MUSHROOM, Blocks.RED_MUSHROOM).contains(plantable.getPlant(world, pos).getBlock());
+		return true;
 	}
 	
 }
