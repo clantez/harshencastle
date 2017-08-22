@@ -40,6 +40,7 @@ public class HarshenRecipes {
 		CauldronRecipes.addRecipe(new ItemStack(HarshenItems.harshen_soul_ingot, 1, 0), new ItemStack(HarshenItems.soul_infused_ingot, 1, 0), EnumHetericCauldronFluidType.HARSHING_WATER);
 		CauldronRecipes.addRecipe(new ItemStack(Blocks.SAND, 1, 0), new ItemStack(Blocks.SOUL_SAND, 1, 0), EnumHetericCauldronFluidType.HARSHEN_DIMENSIONAL_FLUID);
 		CauldronRecipes.addRecipe(new ItemStack(Blocks.COBBLESTONE, 1, 0), new ItemStack(Blocks.NETHERRACK, 1, 0), EnumHetericCauldronFluidType.BLOOD);
+		CauldronRecipes.addRecipe(new ItemStack(Blocks.COBBLESTONE), new ItemStack(Blocks.OBSIDIAN), EnumHetericCauldronFluidType.LAVA);
 	}	
 	
 	public static void craftingRegistry()

@@ -50,7 +50,6 @@ public class HandlerPotionEffects {
 			if(event.getEntity().world.isRemote && !Minecraft.getMinecraft().entityRenderer.isShaderActive() && event.getEntityLiving().equals(HarshenCastle.proxy.getPlayer()))
 				Minecraft.getMinecraft().entityRenderer.loadShader(new ResourceLocation("minecraft", "shaders/post/desaturate.json"));
 		}
-			
 		else if(arrayLivingNoSoul.contains(event.getEntityLiving()))
 		{
 			if(event.getEntity().world.isRemote && event.getEntityLiving().equals(HarshenCastle.proxy.getPlayer()))

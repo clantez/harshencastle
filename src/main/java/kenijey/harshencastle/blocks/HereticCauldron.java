@@ -1,6 +1,6 @@
 package kenijey.harshencastle.blocks;
 
-import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Nullable;
@@ -34,25 +34,26 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.UniversalBucket;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import scala.reflect.reify.phases.Calculate;
 
 public class HereticCauldron extends BaseBlockHarshenSingleInventory
 {
 	
 	public static final PropertyEnum<EnumHetericCauldronFluidType> LIQUID =  PropertyEnum.<EnumHetericCauldronFluidType>create("liquid_type", EnumHetericCauldronFluidType.class);
-	public static final PropertyInteger LEVEL = PropertyInteger.create("level", 0, 3);
+	public static final PropertyInteger LEVEL = PropertyInteger.create("level", 1, 3);
 	
 	protected static final AxisAlignedBB AABB_LEGS = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.3125D, 1.0D);
 	protected static final AxisAlignedBB AABB_WALL_NORTH = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 0.125D);
 	protected static final AxisAlignedBB AABB_WALL_SOUTH = new AxisAlignedBB(0.0D, 0.0D, 0.875D, 1.0D, 1.0D, 1.0D);
 	protected static final AxisAlignedBB AABB_WALL_EAST = new AxisAlignedBB(0.875D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
 	protected static final AxisAlignedBB AABB_WALL_WEST = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.125D, 1.0D, 1.0D);
+	private static final HashMap<EnumHetericCauldronFluidType, Item> fluidMap = new HashMap<>();
 
 	@Override
 	public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean p_185477_7_)
@@ -80,7 +81,8 @@ public class HereticCauldron extends BaseBlockHarshenSingleInventory
 		super(Material.IRON);
 		setRegistryName("heretic_cauldron");
 		setUnlocalizedName("heretic_cauldron");
-		this.setDefaultState(this.blockState.getBaseState().withProperty(LIQUID, EnumHetericCauldronFluidType.NONE).withProperty(LEVEL, 0));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(LIQUID, EnumHetericCauldronFluidType.NONE).withProperty(LEVEL, 1));
+		fluidMap.put(EnumHetericCauldronFluidType.LAVA, Items.LAVA_BUCKET);
 	}
 	
 	@Override
@@ -98,81 +100,78 @@ public class HereticCauldron extends BaseBlockHarshenSingleInventory
         	return true;
         if (itemstack.isEmpty())
         	return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitZ, hitZ, hitZ);
-        if(item instanceof UniversalBucket)
+        
+        if(item instanceof BloodCollector && (state.getValue(LIQUID) ==  EnumHetericCauldronFluidType.BLOOD || state.getValue(LIQUID) == EnumHetericCauldronFluidType.NONE))
         {
-                 String[] stList = itemstack.serializeNBT().getTag("tag").toString().split(":");
-                 int occurance = 0;
-                 String s = "";
-                 for(char c : stList[1].toCharArray())
-                 {
-                 	if(c == '"'){
-                 		occurance++; continue;}
-                 	if(occurance == 2)
-                 		break;
-                 	s += c;
-                 }
-                 if (Arrays.asList("harshen_dimensional_fluid harshing_water".split(" ")).contains(s))
-                 {
-                     if (i < 3 && !worldIn.isRemote)
-                     {
-                         if (!playerIn.capabilities.isCreativeMode)
-                         {
-                             playerIn.setHeldItem(hand, new ItemStack(Items.BUCKET));
-                         }
-                         setState(worldIn, pos, state.withProperty(LIQUID, EnumHetericCauldronFluidType.getMatch(s)).withProperty(LEVEL, 3));
-                         worldIn.playSound((EntityPlayer)null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                     }
-                 }
-                 return true;
-        	}
-            else if (item == Items.BUCKET && state.getValue(LIQUID) != EnumHetericCauldronFluidType.BLOOD)
-            {
-                if (i == 3 && !worldIn.isRemote)
+        	if(i != 3 && !worldIn.isRemote)
+        		if (playerIn.capabilities.isCreativeMode || (!playerIn.capabilities.isCreativeMode && ((BloodCollector)item).remove(playerIn, hand, 3)))
                 {
-                    if (!playerIn.capabilities.isCreativeMode)
-                    {
-                        itemstack.shrink(1);
-
-                        if (itemstack.isEmpty())
-                        {
-                            playerIn.setHeldItem(hand, FluidUtil.getFilledBucket(new FluidStack(FluidRegistry.getFluid(state.getValue(LIQUID).getName()), 1000)));
-                        }
-                        else if (!playerIn.inventory.addItemStackToInventory(FluidUtil.getFilledBucket(new FluidStack(FluidRegistry.getFluid(state.getValue(LIQUID).getName()), 1000))))
-                        {
-                            playerIn.dropItem(FluidUtil.getFilledBucket(new FluidStack(FluidRegistry.getFluid(state.getValue(LIQUID).getName()), 1000)), false);
-                        }
-                    }
-                    setState(worldIn, pos, state.withProperty(LIQUID, EnumHetericCauldronFluidType.NONE).withProperty(LEVEL, 0));
-                    worldIn.playSound((EntityPlayer)null, pos, SoundEvents.ITEM_BUCKET_FILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
+        			worldIn.playSound((EntityPlayer)null, pos, SoundEvents.ITEM_BOTTLE_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
+    				setState(worldIn, pos, this.blockState.getBaseState().withProperty(LIQUID, EnumHetericCauldronFluidType.BLOOD).withProperty(LEVEL, i + (state.getValue(LIQUID) ==  EnumHetericCauldronFluidType.BLOOD ? 1 : 0)));
                 }
-
-                return true;
-            }
-            else if(item instanceof BloodCollector && (state.getValue(LIQUID) ==  EnumHetericCauldronFluidType.BLOOD || i == 0))
+        	return true;
+        }
+        if(fluidMap.containsValue(item) && state.getValue(LIQUID) == EnumHetericCauldronFluidType.NONE)
+        {
+        	EnumHetericCauldronFluidType[] type = new EnumHetericCauldronFluidType[fluidMap.keySet().size()];
+        	setState(worldIn, pos, this.blockState.getBaseState().withProperty(LIQUID, fluidMap.keySet().toArray(type)[valueOfLevel(item)]).withProperty(LEVEL, 3));
+	        worldIn.playSound((EntityPlayer)null, pos, SoundEvents.ITEM_BUCKET_FILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
+	        return true;
+        }
+        else if(item instanceof UniversalBucket)
+        {
+        	setState(worldIn, pos, state.withProperty(LIQUID, EnumHetericCauldronFluidType.getFromFluid(((UniversalBucket)item).getFluid(itemstack).getFluid())).withProperty(LEVEL, 3));
+	        worldIn.playSound((EntityPlayer)null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
+	        return true;
+        }
+        else if (item == Items.BUCKET && state.getValue(LIQUID) != EnumHetericCauldronFluidType.BLOOD)
+        {
+            if (i == 3 && !worldIn.isRemote)
             {
-            	if(i != 3 && !worldIn.isRemote)
-            		if (playerIn.capabilities.isCreativeMode || (!playerIn.capabilities.isCreativeMode && ((BloodCollector)item).remove(playerIn, hand, 3)))
-                    {
-            			worldIn.playSound((EntityPlayer)null, pos, SoundEvents.ITEM_BOTTLE_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
-        				setState(worldIn, pos, this.blockState.getBaseState().withProperty(LIQUID, EnumHetericCauldronFluidType.BLOOD).withProperty(LEVEL, i + 1));
-
-                    }
+                if (!playerIn.capabilities.isCreativeMode)
+                	itemstack.shrink(1);
+                setState(worldIn, pos, state.withProperty(LIQUID, EnumHetericCauldronFluidType.NONE).withProperty(LEVEL, 1));
+                worldIn.playSound((EntityPlayer)null, pos, SoundEvents.ITEM_BUCKET_FILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
+            	if(fluidMap.containsKey(state.getValue(LIQUID)))
+            		return give(playerIn, hand, new ItemStack(fluidMap.get(state.getValue(LIQUID))));
+            	give(playerIn, hand, FluidUtil.getFilledBucket(new FluidStack(FluidRegistry.getFluid(state.getValue(LIQUID).getName()), 1000)));
+            }
+            return true;
+        }
+        else if(item == HarshenItems.ladle && i == 3)
+        {
+        	ItemStack stack = ((BaseTileEntityHarshenSingleItemInventory) worldIn.getTileEntity(pos)).getItem();
+        	if(CauldronRecipes.getRecipe(stack) != null && CauldronRecipes.getRecipe(stack).getCatalyst() == state.getValue(LIQUID))
+            {
+            	((TileEntityHereticCauldron)worldIn.getTileEntity(pos)).isActive = true;
+            	((TileEntityHereticCauldron)worldIn.getTileEntity(pos)).setSwitchedItem(CauldronRecipes.getRecipe(stack).getOutput());
             	return true;
             }
-            else if(item == HarshenItems.ladle && i == 3)
-            {
-            	ItemStack stack = ((BaseTileEntityHarshenSingleItemInventory) worldIn.getTileEntity(pos)).getItem();
-            	if(CauldronRecipes.getRecipe(stack) != null && CauldronRecipes.getRecipe(stack).getCatalyst() == state.getValue(LIQUID))
-                {
-                	((TileEntityHereticCauldron)worldIn.getTileEntity(pos)).isActive = true;
-                	((TileEntityHereticCauldron)worldIn.getTileEntity(pos)).setSwitchedItem(CauldronRecipes.getRecipe(stack).getOutput());
-                	return true;
-                }
-    		}		
-    		return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitZ, hitZ, hitZ);
-
+		}		
+		return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitZ, hitZ, hitZ);
     }
 	
+	private int valueOfLevel(Item item)
+	{
+		int i = 0;
+		for(Item type : fluidMap.values())
+		{
+			if(type == item)
+				break;
+			i++;
+		}
+		return i;
+			
+	}
+	
+	private boolean give(EntityPlayer playerIn, EnumHand hand, ItemStack stack)
+	{
+		if (stack.isEmpty())
+            playerIn.setHeldItem(hand, stack);
+        else if (!playerIn.inventory.addItemStackToInventory(stack))
+            playerIn.dropItem(stack, false);
+		return true;
+	}
 	
 	private void setState(World world, BlockPos pos, IBlockState state)
 	{
@@ -185,8 +184,8 @@ public class HereticCauldron extends BaseBlockHarshenSingleInventory
 	
 	public IBlockState removeLayer(IBlockState state)
 	{ 
-		return HarshenBlocks.heretic_cauldron.getDefaultState().withProperty(LEVEL, Integer.valueOf(MathHelper.clamp(state.getValue(LEVEL) - 1, 0, 3)))
-				.withProperty(LIQUID, Integer.valueOf(MathHelper.clamp(state.getValue(LEVEL) - 1, 0, 3))!= 0 ? state.getValue(LIQUID) : EnumHetericCauldronFluidType.NONE);
+		return HarshenBlocks.heretic_cauldron.getDefaultState().withProperty(LEVEL, Integer.valueOf(MathHelper.clamp(state.getValue(LEVEL) - 1, 1, 3)))
+				.withProperty(LIQUID, Integer.valueOf(MathHelper.clamp(state.getValue(LEVEL) - 1, 1, 3)) != 1 ? state.getValue(LIQUID) : EnumHetericCauldronFluidType.NONE);
 	}
 	
 	@Override
@@ -197,7 +196,7 @@ public class HereticCauldron extends BaseBlockHarshenSingleInventory
 	
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		return this.getDefaultState().withProperty(LEVEL, meta % 4).withProperty(LIQUID, EnumHetericCauldronFluidType.getMatch(Math.floorDiv(meta, 4)));
+		return this.getDefaultState().withProperty(LEVEL, (meta % 3) + 1).withProperty(LIQUID, EnumHetericCauldronFluidType.getMatch(Math.floorDiv(meta, 3)));
 	}
 	
 	@Override

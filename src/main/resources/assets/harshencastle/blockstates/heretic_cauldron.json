@@ -1,23 +1,23 @@
 {
     "variants": {
-        "level=0,liquid_type=none": { "model": "harshencastle:heretic_cauldron" },
         "level=1,liquid_type=none": { "model": "harshencastle:heretic_cauldron" },
         "level=2,liquid_type=none": { "model": "harshencastle:heretic_cauldron" },
         "level=3,liquid_type=none": { "model": "harshencastle:heretic_cauldron" },
         
-        "level=0,liquid_type=harshing_water": { "model": "harshencastle:heretic_cauldron" },
         "level=1,liquid_type=harshing_water": { "model": "harshencastle:heretic_cauldron_harshingwater_1" },
         "level=2,liquid_type=harshing_water": { "model": "harshencastle:heretic_cauldron_harshingwater_2" },
         "level=3,liquid_type=harshing_water": { "model": "harshencastle:heretic_cauldron_harshingwater_3" },
 		
-		"level=0,liquid_type=harshen_dimensional_fluid": { "model": "harshencastle:heretic_cauldron" },
 		"level=1,liquid_type=harshen_dimensional_fluid": { "model": "harshencastle:heretic_cauldron_harshen_fluid_1" },
         "level=2,liquid_type=harshen_dimensional_fluid": { "model": "harshencastle:heretic_cauldron_harshen_fluid_2" },
         "level=3,liquid_type=harshen_dimensional_fluid": { "model": "harshencastle:heretic_cauldron_harshen_fluid_3" },
 		
-		"level=0,liquid_type=blood": { "model": "harshencastle:heretic_cauldron" },
 		"level=1,liquid_type=blood": { "model": "harshencastle:heretic_cauldron_blood_1" },
         "level=2,liquid_type=blood": { "model": "harshencastle:heretic_cauldron_blood_2" },
-        "level=3,liquid_type=blood": { "model": "harshencastle:heretic_cauldron_blood_3" }
+        "level=3,liquid_type=blood": { "model": "harshencastle:heretic_cauldron_blood_3" },
+		
+		"level=1,liquid_type=lava": { "model": "harshencastle:heretic_cauldron_lava_1" },
+        "level=2,liquid_type=lava": { "model": "harshencastle:heretic_cauldron_lava_2" },
+        "level=3,liquid_type=lava": { "model": "harshencastle:heretic_cauldron_lava_3" }
     }
 }

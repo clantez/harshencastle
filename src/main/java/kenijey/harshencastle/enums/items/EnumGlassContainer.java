@@ -37,7 +37,10 @@ public enum EnumGlassContainer implements IStringSerializable
 	
 	public PotionEffect[] getEffects() 
 	{
-		return effects;
+		PotionEffect[] returnEffects = new PotionEffect[effects.length];
+		for(int i = 0; i < effects.length; i++)
+			returnEffects[i] = new PotionEffect(effects[i].getPotion(), effects[i].getDuration(), effects[i].getAmplifier(), effects[i].getIsAmbient(), effects[i].doesShowParticles());
+		return returnEffects;
 	}
 	
 	public int getMeta()
