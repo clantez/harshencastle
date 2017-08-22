@@ -143,9 +143,9 @@ message.success=Kazzendre: You hurt my soul...
 message.broken=Kazzendre: Don't touch any particle of me
 
 #JEI Recipies
-jei.ritual.name=4x Ritual Pedestal Ritual
-jei.cauldron.name=HarshenCastle Cauldron Recipe
-jei.pedestalslab.name=HarshenCastle PedestalSlab
+jei.ritual.name=Ritual Pedestal Ritual
+jei.cauldron.name=Heretic Cauldron Ritual
+jei.pedestalslab.name=Pedestal Slab Blood Ritual
 
 #JEI Description
 jei.harshen_soul_fragment.description=Soul Frag Description

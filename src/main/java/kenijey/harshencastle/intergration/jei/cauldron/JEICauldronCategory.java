@@ -40,11 +40,11 @@ public class JEICauldronCategory extends BaseJeiCategory
 		JEICauldronWrapper wrapper = (JEICauldronWrapper) recipeWrapper;
 		currentFluid = fluidTypes.get(wrapper.getCatalyst());
 		name = "fluid." + wrapper.getCatalyst().getName();
-		recipeLayout.getItemStacks().init(0, true, 65, 1);
+		recipeLayout.getItemStacks().init(0, true, 66, 0);
 		recipeLayout.getItemStacks().set(0, ingredients.getInputs(ItemStack.class).get(0));
 		recipeLayout.getItemStacks().init(1, false, 66, 29);
 		recipeLayout.getItemStacks().set(1, Arrays.asList(new ItemStack(HarshenItems.ladle)));
-		recipeLayout.getItemStacks().init(2, false, 132, 41);
+		recipeLayout.getItemStacks().init(2, false, 134, 46);
 		recipeLayout.getItemStacks().set(2, ingredients.getOutputs(ItemStack.class).get(0));
 	}
 	
