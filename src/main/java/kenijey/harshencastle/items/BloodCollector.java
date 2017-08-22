@@ -97,7 +97,7 @@ public class BloodCollector extends BaseItemMetaData
 	@Override
 	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand,
 			EnumFacing facing, float hitX, float hitY, float hitZ) {
-		if(player.isSneaking() && remove(player, hand, 3) && worldIn.getBlockState(pos.offset(facing).down()).isSideSolid(worldIn, pos, EnumFacing.UP))
+		if(player.isSneaking() && remove(player, hand, 1) && worldIn.getBlockState(pos.offset(facing).down()).isSideSolid(worldIn, pos, EnumFacing.UP))
 		{
 			worldIn.setBlockState(pos.offset(facing), HarshenBlocks.blood_block.getDefaultState(), 3);
 			worldIn.getBlockState(pos.offset(facing)).getBlock().onBlockAdded(worldIn, pos, worldIn.getBlockState(pos.offset(facing))); 
