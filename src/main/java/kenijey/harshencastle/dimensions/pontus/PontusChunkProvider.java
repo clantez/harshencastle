@@ -184,7 +184,8 @@ public class PontusChunkProvider implements IChunkGenerator
                             for (int l2 = 0; l2 < 4; ++l2)
                             	if ((lvt_45_1_ += d16) > 0.0D)
                             	{
-                            		ArrayList<Block> blockList = HarshenUtils.toArrayBlock(PontusBiomeProvider.biomeFromPosition(x, z).getGroundBlocks());
+                            		BasePontusResourceBiome thisBiome = PontusBiomeProvider.biomeFromPosition(x, z);
+                            		ArrayList<Block> blockList = HarshenUtils.toArrayBlock(thisBiome.getGroundBlocks());
                             		for(BasePontusResourceBiome biome : HarshenBiomes.allBiomes)
                             			if(biome.distanceStartSpawn() < 0)
                             				continue;
@@ -192,12 +193,20 @@ public class PontusChunkProvider implements IChunkGenerator
                             					PontusBiomeProvider.getDistance(HarshenUtils.chunkToPos(x, z)) < biome.distanceStartSpawn()  + 80)
                             			{
                             				for(int i3 = 0; i3 < 19; i3 ++)
-                            					blockList.addAll(HarshenUtils.toArrayBlock(PontusBiomeProvider.biomeFromPosition(x, z).getGroundBlocks()));
+                            					blockList.addAll(HarshenUtils.toArrayBlock(thisBiome.getGroundBlocks()));
                             				for(int i3 = 0; i3 < Math.floorDiv(Math.round(80 - Math.abs(PontusBiomeProvider.getDistance(HarshenUtils.chunkToPos(x, z)) - biome.distanceStartSpawn())), 4); i3 ++)
-	                            				blockList.add(HarshenBiomes.allBiomes.get(HarshenBiomes.allBiomes.indexOf(PontusBiomeProvider.biomeFromPosition(x, z))
+	                            				blockList.add(HarshenBiomes.allBiomes.get(HarshenBiomes.allBiomes.indexOf(thisBiome)
 	                            						+ (PontusBiomeProvider.getDistance(HarshenUtils.chunkToPos(x, z)) - biome.distanceStartSpawn() < 0 ? 1 : -1)).getMergerBlock());
                             				break;
                             			}
+                            		if(i2 * 8 + j2 > thisBiome.getHeightForNonHeightBlocks() && thisBiome.getNonHightBlocks() != null)
+                            		{
+                            			ArrayList<Block> blockList1 = HarshenUtils.toArrayBlock(thisBiome.getGroundBlocks());
+                            			for(Block block : blockList)
+                            				if(!HarshenUtils.toArrayBlock(thisBiome.getNonHightBlocks()).contains(block))
+                            					blockList1.add(block);
+                            			blockList = blockList1;
+                            		}
                                     primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, getRandomBlock(blockList).getDefaultState()); 
                             	}
                                 else if (i2 * 8 + j2 < this.seaLevel)

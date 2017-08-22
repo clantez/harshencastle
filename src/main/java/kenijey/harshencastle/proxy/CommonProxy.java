@@ -17,7 +17,7 @@ import kenijey.harshencastle.handlers.HandlerGlassContainer;
 import kenijey.harshencastle.handlers.HandlerHarshenArmourEffects;
 import kenijey.harshencastle.handlers.HandlerHarshenInventoryCommon;
 import kenijey.harshencastle.handlers.HandlerPontusAllowed;
-import kenijey.harshencastle.handlers.HandlerHarshedPotion;
+import kenijey.harshencastle.handlers.HandlerPotionEffects;
 import kenijey.harshencastle.handlers.HandlerSoulHarsherSword;
 import kenijey.harshencastle.items.GlassContainer;
 import kenijey.harshencastle.network.HarshenNetwork;
@@ -83,7 +83,7 @@ public class CommonProxy
     	
     	HarshenRecipes.register();
     	
-    	Object[] handlers = {new HandlerSoulHarsherSword(), new HandlerHarshenInventoryCommon(), new HandlerBloodOnHurt(), new HandlerHarshedPotion(), new HandlerHarshenArmourEffects(),
+    	Object[] handlers = {new HandlerSoulHarsherSword(), new HandlerHarshenInventoryCommon(), new HandlerBloodOnHurt(), new HandlerPotionEffects(), new HandlerHarshenArmourEffects(),
     			new HandlerGlassContainer(), new HandlerPontusAllowed()};
     	for(Object o : handlers)
     	{

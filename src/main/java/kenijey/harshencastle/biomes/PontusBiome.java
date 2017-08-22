@@ -59,6 +59,11 @@ public class PontusBiome extends BasePontusResourceBiome
             new PontusWorldGeneratorStone().generate(worldIn, rand, worldIn.getTopSolidOrLiquidBlock(pos.add(j, 0, k)));
         }
 	}
+	
+	@Override
+	public Block[] getNonHightBlocks() {
+		return HarshenUtils.blockList(HarshenBlocks.harshen_dimensional_dirt);
+	}
 
 	@Override
 	public int getLevel() {

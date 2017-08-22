@@ -20,7 +20,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-public class HandlerHarshedPotion {
+public class HandlerPotionEffects {
 	
 	private static ArrayList<EntityLivingBase> arrayLivingWithEffect = new ArrayList<EntityLivingBase>();
 	private static ArrayList<HandlerHarshenEffect> arrayEffectManager = new ArrayList<HandlerHarshenEffect>();
@@ -99,7 +99,7 @@ class HandlerHarshenEffect
 		if(timer++ >= 20)
 		{
 			timer = 0;
-			this.entity.attackEntityFrom(DamageSourceHarshed.getSource(), (float) Math.floor(this.level * 2.5f));
+			this.entity.attackEntityFrom(DamageSourceHarshed.getSource(), (float) Math.floor(this.level * 2.5f) + 1);
 		}
 	}
 }
