@@ -99,6 +99,8 @@ commands.delflat.notfound=Harshen Dimensional Flat Plate was not found in the ar
 commands.delflat.success=Removed %s Harshen Dimensional Flat Plate%s
 commands.delflat.toobig=%s is too big, maximum of 250
 
+commands.pontuslevel.success=%s's access level was set to %s
+
 #gui
 gui.category.mobs=Mobs
 gui.category.potions=Potions
