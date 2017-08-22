@@ -33,7 +33,7 @@ public class HarshenRecipes {
 				new ItemStack(HarshenItems.ritual_crystal, 1 ,1), new ItemStack(Items.QUARTZ)), new ItemStack(Items.NETHER_STAR, 1, 0), true);
 	
 		
-		PedestalSlabRecipes.addRecipe(new ItemStack(HarshenBlocks.harshen_dimensional_rock), new ItemStack(HarshenBlocks.harshen_chaotic_rock));
+		PedestalSlabRecipes.addRecipe(new ItemStack(Blocks.COBBLESTONE), new ItemStack(Blocks.NETHERRACK));
 		
 		
 		CauldronRecipes.addRecipe(new ItemStack(HarshenItems.ritual_crystal, 1, 0), new ItemStack(HarshenItems.ritual_crystal, 1, 1), EnumHetericCauldronFluidType.BLOOD);
