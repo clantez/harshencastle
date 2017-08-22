@@ -40,7 +40,9 @@ public class HarshenDimensionalGate extends Block implements ITileEntityProvider
 		super(Material.ROCK);
 		setRegistryName("harshen_dimensional_gate");
 		setUnlocalizedName("harshen_dimensional_gate");
-		this.setDefaultState(this.blockState.getBaseState().withProperty(ACTIVE, false).withProperty(FOREVER, false));
+		setDefaultState(this.blockState.getBaseState().withProperty(ACTIVE, false).withProperty(FOREVER, false));
+		setHardness(2f);
+		setResistance(50f);
 	}
 	
 	public void deactivate(World worldIn, BlockPos pos)
