@@ -135,6 +135,8 @@ empowered_sword1=Reminds the power
 empowered_sword2=of Kazzendre
 empowered_sword3=It can kill
 empowered_sword4=Ferrum King
+blood1=Bloooooooooood!
+blood2=Everyone bleeds! (mostly)
 
 #misc
 itemGroup.harshenTab=Harshen Castle
@@ -153,3 +155,4 @@ jei.harshen_crystal.description=It's obtainable from Harshen Soul Flower which s
 jei.light_emitted_seed.description=You can obtain it by destroying the Plant of Gleam that spawns in overworld.
 jei.light_emitted_essence.description=The Essence of Sunlight. This essence is obtainable from Light Emitted Seed plant. It's bonemealable!
 jei.soul_harsher_pickaxe.description=Need this? Find the Kazzendre's Castle and kill Kazzendre. Then you will find this pickaxe in the treasure room in that castle. And last thing, it can break ANY block in Pontus World.
+jei.blood_block.description=Need it? Use Blood Collector.

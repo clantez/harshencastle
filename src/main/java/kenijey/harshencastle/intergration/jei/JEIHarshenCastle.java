@@ -2,6 +2,7 @@ package kenijey.harshencastle.intergration.jei;
 
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenItems;
+import kenijey.harshencastle.fluids.HarshenFluids;
 import kenijey.harshencastle.intergration.jei.cauldron.JEICauldronCategory;
 import kenijey.harshencastle.intergration.jei.cauldron.JEICauldronHandler;
 import kenijey.harshencastle.intergration.jei.pedestalslab.JEIPedestalSlabCategory;
@@ -42,6 +43,8 @@ public class JEIHarshenCastle implements IModPlugin
 		info(HarshenItems.light_emitted_essence);
 		info(HarshenItems.light_emitted_seed);
 		info(HarshenItems.soul_harsher_pickaxe);
+		
+		info(HarshenBlocks.blood_block);
 	}
 
 	private void info(Block block)
