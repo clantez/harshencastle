@@ -40,7 +40,7 @@ public class CommandAccessPontusOuter extends BaseHarshenCommand {
 		player.getEntityData().setInteger("PontusBiomeLevel", i);
 		HarshenNetwork.sendToPlayer((EntityPlayerMP) player, new MessagePacketPlayerHasAccess(player));
 		HandlerPontusAllowed.setAllowed(player, i);
-		message(sender, "achive", player.getName());
+		message(sender, "success", player.getName(), i);
 	}
 	
 	@Override
