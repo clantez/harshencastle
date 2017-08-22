@@ -27,6 +27,8 @@ public class HarshenRecipes {
 				new ItemStack(HarshenItems.pontus_world_gate_parts, 1 ,2), new ItemStack(HarshenItems.harshen_soul_fragment)), new ItemStack(HarshenItems.pontus_world_gate_spawner, 1, 0), true);		
 		RitualRecipes.addRecipe(Arrays.asList(new ItemStack(HarshenItems.soul_harsher_sword, 1, 0), new ItemStack(HarshenItems.ritual_crystal, 1, 1),
 				new ItemStack(HarshenItems.light_emitted_essence, 1 ,0), new ItemStack(HarshenItems.blood_essence)), new ItemStack(HarshenItems.empowered_soul_harsher_sword, 1, 0), true);
+		RitualRecipes.addRecipe(Arrays.asList(new ItemStack(HarshenItems.pontus_world_gate_spawner, 1, 0), new ItemStack(HarshenItems.ritual_crystal, 1, 1),
+				new ItemStack(HarshenItems.itium, 1 ,0), new ItemStack(Items.NETHER_STAR)), new ItemStack(HarshenItems.pontus_world_gate_spawner, 1, 1), true);
 	
 		
 		PedestalSlabRecipes.addRecipe(new ItemStack(HarshenBlocks.harshen_dimensional_rock), new ItemStack(HarshenBlocks.harshen_chaotic_rock));
@@ -138,16 +140,6 @@ public class HarshenRecipes {
 				'c', new ItemStack(HarshenItems.harshen_crystal),
 				'l', new ItemStack(HarshenItems.light_emitted_essence));
 		
-		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "pontus_gate_spawner_enhanced"), new ResourceLocation("harshen_items"),
-				new ItemStack(HarshenItems.pontus_world_gate_spawner, 1, 1),
-				"isi",
-				"ese",
-				"ini",
-				
-				's', new ItemStack(HarshenItems.pontus_world_gate_spawner, 1, 0),
-				'n', "netherStar",
-				'e', "blockEmerald",
-				'i', new ItemStack(HarshenItems.itium));
 		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "pedestal_slab"), new ResourceLocation("harshen_items"),
 				new ItemStack(HarshenBlocks.pedestal_slab),
