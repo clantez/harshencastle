@@ -148,8 +148,8 @@ jei.cauldron.name=Heretic Cauldron Ritual
 jei.pedestalslab.name=Pedestal Slab Blood Ritual
 
 #JEI Description
-jei.harshen_soul_fragment.description=Soul Frag Description
-jei.harshen_crystal.description=Crystal Description
-jei.light_emitted_seed.description=Seed Description
-jei.light_emitted_essence.description=Essence Description
-jei.soul_harsher_pickaxe.description=Pickaxe Description
+jei.harshen_soul_fragment.description=You can mine Harshen Soul Ore, but you need to use Soul Harsher Pickaxe to do that. Neither way, you will die in pain.
+jei.harshen_crystal.description=It's obtainable from Harshen Soul Flower which spawns on overworld.
+jei.light_emitted_seed.description=You can obtain it by destroying the Plant of Gleam that spawns in overworld.
+jei.light_emitted_essence.description=The Essence of Sunlight. This essence is obtainable from Light Emitted Seed plant. It's bonemealable!
+jei.soul_harsher_pickaxe.description=Need this? Find the Kazzendre's Castle and kill Kazzendre. Then you will find this pickaxe in the treasure room in that castle.
