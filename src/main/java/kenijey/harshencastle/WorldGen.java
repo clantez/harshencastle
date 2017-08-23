@@ -7,6 +7,7 @@ import com.google.common.collect.Lists;
 
 import kenijey.harshencastle.dimensions.DimensionPontus;
 import kenijey.harshencastle.worldgenerators.castle.ChestGenerator;
+import kenijey.harshencastle.worldgenerators.castle.MazeGenerator;
 import kenijey.harshencastle.worldgenerators.pontus.PontusWorldGeneratorIniumOre;
 import kenijey.harshencastle.worldgenerators.pontus.PontusWorldRuinGenerator;
 import net.minecraft.block.Block;
@@ -79,10 +80,11 @@ public class WorldGen implements IWorldGenerator
 			if(chunkX == 44 && chunkZ == 44)
 				{
 					BlockPos position = getTopBlock(world, new BlockPos(chunkX * 16, 1, chunkZ * 16)).add(-36, -20, 1);
-					loadStructure(world, "harshencastlevol2", position);
-					new ChestGenerator(getSizeFromName(world, "harshencastlevol2"), 0.015f, HarshenLootTables.harshen_castle).generate(world, random, position.add(1, 1, 2));
-					new ChestGenerator(getSizeFromName(world, "harshencastlevol2"), 0.015f, HarshenLootTables.harshen_castle).generate(world, random, position.add(1, 5, 2));
-					new ChestGenerator(getSizeFromName(world, "harshencastlevol2"), 0.015f, HarshenLootTables.harshen_castle).generate(world, random, position.add(1, 9, 2));
+					for(int i = 0; i < 4; i++)
+						new MazeGenerator(new BlockPos(getSizeFromName(world, "harshencastlevol3").getX(), 3, getSizeFromName(world, "harshencastlevol3").getZ()), HarshenBlocks.harshen_dimensional_stone.getDefaultState(), 0.35f).generate(world, random, position.add(1, 1 + (i * 4), 2));
+					loadStructure(world, "harshencastlevol3", position);
+					for(int i = 0; i < 3; i++)
+						new ChestGenerator(getSizeFromName(world, "harshencastlevol3"), 0.015f, HarshenLootTables.harshen_castle).generate(world, random, position.add(1, 1 + (i * 4), 2));
 				}
 			oreGenerator(this.soulore, world, random, chunkX, chunkZ, 10, 0, 20);
 	    	flowerGenerator(HarshenBlocks.harshen_soul_flower, world, random, chunkX, chunkZ, 15);
