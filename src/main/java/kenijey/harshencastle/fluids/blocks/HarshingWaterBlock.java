@@ -19,7 +19,7 @@ public class HarshingWaterBlock extends BaseFluidBlock
 
 	@Override
 	protected ArrayList<PotionEffect> getPotions() {
-		return new ArrayList<PotionEffect>(Arrays.asList(new PotionEffect(HarshenPotions.potionHarshed, 250)));
+		return new ArrayList<PotionEffect>(Arrays.asList(new PotionEffect(HarshenPotions.potionHarshed, 250, 1)));
 	}
 
 	@Override
