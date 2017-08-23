@@ -78,14 +78,18 @@ public class WorldGen implements IWorldGenerator
 				}
 			}
 			if(chunkX == 44 && chunkZ == 44)
-				{
-					BlockPos position = getTopBlock(world, new BlockPos(chunkX * 16, 1, chunkZ * 16)).add(-36, -20, 1);
-					for(int i = 0; i < 4; i++)
-						new MazeGenerator(new BlockPos(getSizeFromName(world, "harshencastlevol3").getX(), 3, getSizeFromName(world, "harshencastlevol3").getZ()), HarshenBlocks.harshen_dimensional_stone.getDefaultState(), 0.35f).generate(world, random, position.add(1, 1 + (i * 4), 2));
-					loadStructure(world, "harshencastlevol3", position);
-					for(int i = 0; i < 3; i++)
-						new ChestGenerator(getSizeFromName(world, "harshencastlevol3"), 0.015f, HarshenLootTables.harshen_castle).generate(world, random, position.add(1, 1 + (i * 4), 2));
-				}
+			{
+				BlockPos[] positionsOfFillableChests = {new BlockPos(9, 20, 36), new BlockPos(15, 20, 40), new BlockPos(15, 20, 40), new BlockPos(19, 20, 31)};
+				BlockPos position = getTopBlock(world, new BlockPos(chunkX * 16, 1, chunkZ * 16)).add(-36, -20, 1);
+				BlockPos castleSize = getSizeFromName(world, "harshencastlevol3");
+				for(int i = 0; i < 4; i++)
+					new MazeGenerator(new BlockPos(castleSize.getX(), 3, castleSize.getZ()), HarshenBlocks.harshen_dimensional_stone.getDefaultState(), 0.35f).generate(world, random, position.add(1, 1 + (i * 4), 2));
+				loadStructure(world, "harshencastlevol3", position);
+				for(int i = 0; i < 3; i++)
+					new ChestGenerator(castleSize, 0.015f, HarshenLootTables.harshen_castle, true).generate(world, random, position.add(1, 1 + (i * 4), 2));
+				for(BlockPos pos : positionsOfFillableChests)
+					new ChestGenerator(BlockPos.ORIGIN, 1f, HarshenLootTables.harshen_castle, false).generate(world, random, position.add(pos));
+			}
 			oreGenerator(this.soulore, world, random, chunkX, chunkZ, 10, 0, 20);
 	    	flowerGenerator(HarshenBlocks.harshen_soul_flower, world, random, chunkX, chunkZ, 15);
 	    	flowerGenerator(HarshenBlocks.plant_of_gleam, world, random, chunkX, chunkZ, 15);
