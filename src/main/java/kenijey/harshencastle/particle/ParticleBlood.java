@@ -5,7 +5,9 @@ import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.FMLClientHandler;
 
@@ -71,7 +73,21 @@ public class ParticleBlood extends Particle
     @Override
     public int getBrightnessForRender(float p_189214_1_)
     {
-        return super.getBrightnessForRender(p_189214_1_);
+    	BlockPos blockpos = new BlockPos(this.posX, this.posY, this.posZ);
+        return this.world.isBlockLoaded(blockpos) ? getLightCombonation(blockpos, 0) : 0;
+    }
+    
+    private int getLightCombonation(BlockPos pos, int lightValue)
+    {
+    	int i = world.getLightFromNeighborsFor(EnumSkyBlock.SKY, pos);
+        int j = world.getLightFromNeighborsFor(EnumSkyBlock.BLOCK, pos.add(0, 1, 0));
+
+        if (j < lightValue)
+        {
+            j = lightValue;
+        }
+
+        return i << 20 | j << 4;
     }
     
     @Override
