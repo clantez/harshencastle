@@ -101,6 +101,11 @@ public class HarshenSoulOre extends Block
 	}
 	
 	@Override
+	protected boolean canSilkHarvest() {
+		return false;
+	}
+	
+	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 		tooltip.add("\u00A74" + new TextComponentTranslation("ore1").getFormattedText());
 		tooltip.add("\u00A74" + new TextComponentTranslation("ore2").getFormattedText());

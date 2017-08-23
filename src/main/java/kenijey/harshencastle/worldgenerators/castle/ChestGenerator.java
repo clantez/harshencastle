@@ -16,11 +16,13 @@ public class ChestGenerator extends WorldGenerator
 	private final BlockPos size;
 	private final float chance;
 	private final ResourceLocation lootTable;
+	private final boolean setBlock;
 	
-	public ChestGenerator(BlockPos size, float chance, ResourceLocation lootTable) {
+	public ChestGenerator(BlockPos size, float chance, ResourceLocation lootTable, boolean setBlock) {
 		this.lootTable = lootTable;
 		this.chance = chance;
 		this.size = size; 
+		this.setBlock = setBlock;
 	}
 	
 	
@@ -43,7 +45,8 @@ public class ChestGenerator extends WorldGenerator
 							flag = true;
 					if(flag || !worldIn.isAirBlock(blockpos))
 						continue;
-					worldIn.setBlockState(blockpos, Blocks.CHEST.getDefaultState().withProperty(BlockChest.FACING, EnumFacing.HORIZONTALS[rand.nextInt(4)]), 3);
+					if(setBlock)
+						worldIn.setBlockState(blockpos, Blocks.CHEST.getDefaultState().withProperty(BlockChest.FACING, EnumFacing.HORIZONTALS[rand.nextInt(4)]), 3);
 					((TileEntityChest)worldIn.getTileEntity(blockpos)).setLootTable(lootTable, rand.nextLong());
 				}
 		return false;
