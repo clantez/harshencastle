@@ -63,7 +63,7 @@ public class GlassContainer extends BaseItemMetaData
 		if(enu.getEffects()[0] != null)
 			for(PotionEffect effect : enu.getEffects())
 				entityLiving.addPotionEffect(effect);
-		return ItemStack.EMPTY;
+		return new ItemStack(this);
 	}
 	
 	@Override
