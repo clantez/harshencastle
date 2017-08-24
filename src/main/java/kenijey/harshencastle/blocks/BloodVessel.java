@@ -58,7 +58,7 @@ public class BloodVessel extends Block implements ITileEntityProvider
 	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer,
 			ItemStack stack) {
-		((TileEntityBloodVessel)worldIn.getTileEntity(pos)).setBloodLevel(stack.serializeNBT().getInteger("BloodLevel"));
+		((TileEntityBloodVessel)worldIn.getTileEntity(pos)).setBloodLevel(stack.serializeNBT().getCompoundTag("tag").getInteger("BloodLevel"));
 	}
 	
 	@Override
