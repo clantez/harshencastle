@@ -13,7 +13,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 public class HandlerPontusAllowed 
 {
 	
-	private static HashMap<String, Integer> playersLevelMap = new HashMap<String, Integer>();
+	private static HashMap<String, Integer> playersLevelMap = new HashMap<String, Integer>(HarshenUtils.HASH_LIMIT);
 	
 	@SubscribeEvent
 	public void playerTick(PlayerTickEvent event)

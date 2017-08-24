@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import kenijey.harshencastle.HarshenSounds;
+import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.items.BloodCollector;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -26,7 +27,7 @@ import net.minecraft.world.World;
 
 public class BloodBlock extends Block
 {
-	private static HashMap<BlockPos, Integer> tickMap = new HashMap<>();
+	private static HashMap<BlockPos, Integer> tickMap = new HashMap<>(HarshenUtils.HASH_LIMIT);
 	public BloodBlock() 
 	{
 		 super(Material.CARPET);

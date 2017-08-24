@@ -7,12 +7,13 @@ import java.util.Random;
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenSounds;
 import kenijey.harshencastle.base.BaseItemMetaData;
+import kenijey.harshencastle.blocks.BloodVessel;
 import kenijey.harshencastle.enums.items.EnumBloodCollector;
+import kenijey.harshencastle.tileentity.TileEntityBloodVessel;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -43,7 +44,6 @@ public class BloodCollector extends BaseItemMetaData
 		stack.setItemDamage(metaChange(nbt));
         stack.setTagCompound(nbt);
         player.setHeldItem(hand, stack);
-        
 		return flag;
 	}
 	
@@ -87,17 +87,25 @@ public class BloodCollector extends BaseItemMetaData
 	
 	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-		if(stack.hasTagCompound() && stack.getTagCompound().hasKey("Blood"))
-			tooltip.add("Blood: " + Integer.toString(stack.getTagCompound().getInteger("Blood")) + " / 50");
-		else
-			tooltip.add("Blood: 0 / 50");
+		tooltip.add("Blood: " + Integer.toString(getNBT(stack).getInteger("Blood")) + " / 50");
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 	}
 
 	@Override
 	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand,
 			EnumFacing facing, float hitX, float hitY, float hitZ) {
-		if(player.isSneaking() && remove(player, hand, 1) && worldIn.getBlockState(pos.offset(facing).down()).isSideSolid(worldIn, pos, EnumFacing.UP))
+		int tileEntityRemove = player.isSneaking() ? 50 - getNBT(player.getHeldItem(hand)).getInteger("Blood") : 1;
+		boolean flag = false;
+		if(worldIn.getBlockState(pos).getBlock() instanceof BloodVessel)
+		{
+			if(!((TileEntityBloodVessel)worldIn.getTileEntity(pos)).canAdd(tileEntityRemove) && remove(player, hand, tileEntityRemove))
+				tileEntityRemove = ((TileEntityBloodVessel)worldIn.getTileEntity(pos)).getPossibleAdd();
+			if(tileEntityRemove > getNBT(player.getHeldItem(hand)).getInteger("Blood"))
+				flag = true;
+			if(!flag && ((TileEntityBloodVessel)worldIn.getTileEntity(pos)).canAdd(tileEntityRemove))
+				remove(player, hand, ((TileEntityBloodVessel)worldIn.getTileEntity(pos)).add(tileEntityRemove));
+		}
+		else if(!flag && player.isSneaking() && remove(player, hand, 1) && worldIn.getBlockState(pos.offset(facing).down()).isSideSolid(worldIn, pos, EnumFacing.UP))
 		{
 			worldIn.setBlockState(pos.offset(facing), HarshenBlocks.blood_block.getDefaultState(), 3);
 			worldIn.getBlockState(pos.offset(facing)).getBlock().onBlockAdded(worldIn, pos, worldIn.getBlockState(pos.offset(facing))); 

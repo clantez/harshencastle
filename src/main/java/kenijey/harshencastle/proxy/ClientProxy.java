@@ -11,6 +11,7 @@ import kenijey.harshencastle.entity.EntitySoulPart;
 import kenijey.harshencastle.entity.EntitySoullessKnight;
 import kenijey.harshencastle.enums.particle.EnumHarshenParticle;
 import kenijey.harshencastle.gui.GuiBookScreen;
+import kenijey.harshencastle.handlers.client.HandlerGameOverlay;
 import kenijey.harshencastle.itemrenderer.RendererDimensionalPedestal;
 import kenijey.harshencastle.itemrenderer.RendererHarshenDisplayBlock;
 import kenijey.harshencastle.itemrenderer.RendererHarshenSpawner;
@@ -95,7 +96,7 @@ public class ClientProxy extends CommonProxy
     {
     	super.init(event);
     	
-    	Object[] handlers = {new HarshenKeybinding()};
+    	Object[] handlers = {new HarshenKeybinding(), new HandlerGameOverlay()};
     	for(Object o : handlers)
     	{
     		MinecraftForge.EVENT_BUS.register(o);

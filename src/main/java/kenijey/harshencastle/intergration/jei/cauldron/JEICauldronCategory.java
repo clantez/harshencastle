@@ -27,7 +27,7 @@ public class JEICauldronCategory extends BaseJeiCategory
 		super(UID, reg);
 	}
 
-	private static HashMap<EnumHetericCauldronFluidType, IDrawable> fluidTypes = new HashMap<>();
+	private static HashMap<EnumHetericCauldronFluidType, IDrawable> fluidTypes = new HashMap<>(EnumHetericCauldronFluidType.values().length);
 	
 	private IDrawable currentFluid;
 	private IDrawable frontOfCauldron;

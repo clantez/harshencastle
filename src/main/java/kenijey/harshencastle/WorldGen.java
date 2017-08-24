@@ -38,11 +38,6 @@ public class WorldGen implements IWorldGenerator
 {
     private final WorldGenMinable soulore = new WorldGenMinable(HarshenBlocks.harshen_soul_ore.getDefaultState(), 3);
     private final WorldGenerator itiumOre = new PontusWorldGeneratorIniumOre();
-    private final int chanceForNodeToSpawn;
-	public WorldGen(int chanceForNodeToSpawn)
-	{
-		this.chanceForNodeToSpawn = chanceForNodeToSpawn;
-	}
 	
 	
 	@Override

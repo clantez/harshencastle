@@ -23,6 +23,7 @@ import kenijey.harshencastle.handlers.HandlerSoulHarsherSword;
 import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.potions.HarshenPotions;
 import kenijey.harshencastle.recipies.HarshenRecipes;
+import kenijey.harshencastle.tileentity.TileEntityBloodVessel;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDimensionalGate;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDimensionalPedestal;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDisplayBlock;
@@ -80,8 +81,9 @@ public class CommonProxy
     	GameRegistry.registerTileEntity(TileEntityHarshenSpawner.class, HarshenCastle.MODID + "TileEntityHarshenSpawner");
     	GameRegistry.registerTileEntity(TileEntityHarshenDimensionalGate.class, HarshenCastle.MODID + "TileEntityHarshenDimensionalGate");
     	GameRegistry.registerTileEntity(TileEntityPedestalSlab.class, HarshenCastle.MODID + "TileEntityPedestalSlab");
+    	GameRegistry.registerTileEntity(TileEntityBloodVessel.class, HarshenCastle.MODID + "TileEntityBloodVessel");
     	
-    	GameRegistry.registerWorldGenerator(new WorldGen(100), 0);
+    	GameRegistry.registerWorldGenerator(new WorldGen(), 0);
     	
     	HarshenRecipes.register();
     	
