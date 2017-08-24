@@ -2,6 +2,7 @@ package kenijey.harshencastle.network;
 
 import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.network.packets.MessagePacketHarshenInvToggle;
+import kenijey.harshencastle.network.packets.MessagePacketOpenInv;
 import kenijey.harshencastle.network.packets.MessagePacketPlayerHasAccess;
 import kenijey.harshencastle.network.packets.MessagePacketTileEntityBloodPlacerUpdated;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -20,8 +21,8 @@ public class HarshenNetwork
 		INSTANCE.registerMessage(MessagePacketHarshenInvToggle.class, MessagePacketHarshenInvToggle.class, 0, Side.SERVER);
 		INSTANCE.registerMessage(MessagePacketPlayerHasAccess.class, MessagePacketPlayerHasAccess.class, 1, Side.CLIENT);
 		INSTANCE.registerMessage(MessagePacketTileEntityBloodPlacerUpdated.class, MessagePacketTileEntityBloodPlacerUpdated.class, 2, Side.CLIENT);
+		INSTANCE.registerMessage(MessagePacketOpenInv.class, MessagePacketOpenInv.class, 3, Side.SERVER);
 	}
-	
 	public static void sendToServer(IMessage message)
 	{
 		INSTANCE.sendToServer(message);

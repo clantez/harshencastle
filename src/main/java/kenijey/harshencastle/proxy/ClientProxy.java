@@ -12,12 +12,15 @@ import kenijey.harshencastle.entity.EntitySoullessKnight;
 import kenijey.harshencastle.enums.particle.EnumHarshenParticle;
 import kenijey.harshencastle.gui.GuiBookScreen;
 import kenijey.harshencastle.handlers.client.HandlerGameOverlay;
+import kenijey.harshencastle.handlers.client.HandlerGuiEvent;
+import kenijey.harshencastle.inventory.GuiHandler;
 import kenijey.harshencastle.itemrenderer.RendererBloodFactory;
 import kenijey.harshencastle.itemrenderer.RendererDimensionalPedestal;
 import kenijey.harshencastle.itemrenderer.RendererHarshenDisplayBlock;
 import kenijey.harshencastle.itemrenderer.RendererHarshenSpawner;
 import kenijey.harshencastle.itemrenderer.RendererHereticCauldron;
 import kenijey.harshencastle.itemrenderer.RendererPedestalSlab;
+import kenijey.harshencastle.models.ModelArmour;
 import kenijey.harshencastle.particle.ParticleBlood;
 import kenijey.harshencastle.skyrenders.WeatherPontus;
 import kenijey.harshencastle.tileentity.TileEntityBloodFactory;
@@ -29,13 +32,12 @@ import kenijey.harshencastle.tileentity.TileEntityPedestalSlab;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
@@ -45,6 +47,7 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 public class ClientProxy extends CommonProxy 
 {
@@ -99,7 +102,10 @@ public class ClientProxy extends CommonProxy
     {
     	super.init(event);
     	
-    	Object[] handlers = {new HarshenKeybinding(), new HandlerGameOverlay()};
+		NetworkRegistry.INSTANCE.registerGuiHandler(HarshenCastle.instance, new GuiHandler());
+
+    	
+    	Object[] handlers = {new HarshenKeybinding(), new HandlerGameOverlay(), new HandlerGuiEvent()};
     	for(Object o : handlers)
     	{
     		MinecraftForge.EVENT_BUS.register(o);
@@ -148,5 +154,16 @@ public class ClientProxy extends CommonProxy
 		            break;
 	        }
         if (entityFx != null) {minecraft.effectRenderer.addEffect(entityFx);}
+    }
+    
+    @Override
+    public ModelBiped getArmorModel(int id) {
+    	switch (id) {
+    	 case 0:
+    	 return new ModelArmour(1.0f);
+    	 case 1:
+    	 return new ModelArmour(0.5f);
+    	}
+    	return null;
     }
 }

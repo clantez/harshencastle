@@ -31,7 +31,7 @@ public class HarshenCastle {
 
     @SidedProxy(clientSide = "kenijey.harshencastle.proxy.ClientProxy", serverSide = "kenijey.harshencastle.proxy.ServerProxy")
     public static CommonProxy proxy;
-
+    
     public static final CreativeTabs harshenTab = new HarshenTab("harshenTab");
     
     @Instance(MODID)

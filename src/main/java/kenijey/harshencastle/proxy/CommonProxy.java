@@ -32,8 +32,8 @@ import kenijey.harshencastle.tileentity.TileEntityHarshenSpawner;
 import kenijey.harshencastle.tileentity.TileEntityHereticCauldron;
 import kenijey.harshencastle.tileentity.TileEntityPedestalSlab;
 import net.minecraft.block.Block;
+import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -130,4 +130,9 @@ public class CommonProxy
 	}
 	
 	public void spawnParticle(EnumHarshenParticle type, Vec3d position, Vec3d directionSpeed, Object... info){}
+	
+	public ModelBiped getArmorModel(int id)
+	{
+		return null;
+	};
 }
