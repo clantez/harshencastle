@@ -1,11 +1,3 @@
 {
-    "parent": "block/cube",
-    "textures": {
-        "up": "harshencastle:blocks/blood_placer_top",
-		"down": "harshencastle:blocks/blood_placer_bottom",
-        "north": "harshencastle:blocks/blood_placer_front",
-        "east": "harshencastle:blocks/blood_placer_right",
-		"south": "harshencastle:blocks/blood_placer_back",
-		"west": "harshencastle:blocks/blood_placer_left"
-    }
+    "parent": "harshencastle:block/blood_placer"
 }

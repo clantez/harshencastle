@@ -1,6 +1,3 @@
 {
-    "parent": "block/cube_all",
-    "textures": {
-        "all": "harshencastle:blocks/itium_ore"
-     }
+    "parent": "harshencastle:block/itium_ore"
 }

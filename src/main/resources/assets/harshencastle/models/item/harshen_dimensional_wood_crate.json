@@ -1,6 +1,3 @@
 {
-    "parent": "block/cube_all",
-    "textures": {
-        "all": "harshencastle:blocks/harshen_dimensional_wood_crate"
-     }
+    "parent": "harshencastle:block/harshen_dimensional_wood_crate"
 }

@@ -1,4 +1,5 @@
 {
+	"parent": "block/block",
     "textures": {
         "0": "harshencastle:blocks/harshen_dimensional_gate_closed",
 		"-1": "harshencastle:blocks/harshen_dimensional_gate_sides",

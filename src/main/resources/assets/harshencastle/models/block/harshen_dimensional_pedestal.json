@@ -1,4 +1,5 @@
 {
+	"parent": "block/block",
     "textures": {
         "particle": "harshencastle:blocks/harshen_dimensional_stone",
         "-1": "harshencastle:blocks/harshen_dimensional_stone"
