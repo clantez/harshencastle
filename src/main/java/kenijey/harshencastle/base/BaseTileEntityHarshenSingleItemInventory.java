@@ -1,5 +1,6 @@
 package kenijey.harshencastle.base;
 
+import kenijey.harshencastle.itemstackhandlers.HarshenItemStackHandler;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -9,17 +10,16 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
 
 public abstract class BaseTileEntityHarshenSingleItemInventory extends BaseHarshenTileEntity implements net.minecraft.util.ITickable, ICapabilityProvider
 {
-	protected final ItemStackHandler handler;
+	protected final HarshenItemStackHandler handler;
 	protected boolean hasItem = false;
 	protected int timer;
 	private int dirtyTimer;
 	
 	public BaseTileEntityHarshenSingleItemInventory(){
-		this.handler = new ItemStackHandler(1);
+		this.handler = new HarshenItemStackHandler(1);
 	}
 	
 	
