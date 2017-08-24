@@ -32,6 +32,8 @@ public class HarshenDisplayBlock extends BaseBlockHarshenSingleInventory
 		super(Material.ROCK);
 		setRegistryName("harshen_display_block");
 		setUnlocalizedName("harshen_display_block");
+		setHardness(25.0F);
+		setResistance(25.0F);
 	}
 
 	@Override
