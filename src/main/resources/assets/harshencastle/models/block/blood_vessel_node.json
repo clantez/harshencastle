@@ -2,7 +2,7 @@
 	"parent": "block/block",
     "textures": {
         "0": "harshencastle:blocks/blood_vessel",
-		"particle": "harshencastle:blocks/blood_vessel"
+		"particle" : "harshencastle:blocks/blood_vessel"
     },
     "elements": [
         {
@@ -120,6 +120,19 @@
                 "west": { "texture": "#0", "uv": [ 3.0, 0.0, 13.0, 1.0 ] },
                 "up": { "texture": "#0", "uv": [ 0.0, 3.0, 1.0, 13.0 ] },
                 "down": { "texture": "#0", "uv": [ 0.0, 6.0, 1.0, 16.0 ] }
+            }
+        },
+		{
+            "name": "Cube",
+            "from": [ 7.0, 13.0, 7.0 ], 
+            "to": [ 9.0, 16.0, 9.0 ], 
+            "faces": {
+                "north": { "texture": "#0", "uv": [ 1.0, 1.0, 3.0, 4.0 ] },
+                "east": { "texture": "#0", "uv": [ 1.0, 1.0, 3.0, 4.0 ] },
+                "south": { "texture": "#0", "uv": [ 1.0, 1.0, 3.0, 4.0 ] },
+                "west": { "texture": "#0", "uv": [ 1.0, 1.0, 3.0, 4.0 ] },
+                "up": { "texture": "#0", "uv": [ 1.0, 4.0, 3.0, 6.0 ] },
+                "down": { "texture": "#0", "uv": [ 1.0, 6.0, 3.0, 8.0 ] }
             }
         }
     ]

@@ -42,9 +42,6 @@ public abstract class BaseTileEntityHarshenSingleItemInventory extends BaseHarsh
 	{
 	}
 	
-	
-	
-	
 	public boolean canAddItem()
 	{	 
 		return this.handler.getStackInSlot(0).getItem() == Item.getItemFromBlock(Blocks.AIR);

@@ -12,6 +12,7 @@ import kenijey.harshencastle.entity.EntitySoullessKnight;
 import kenijey.harshencastle.enums.particle.EnumHarshenParticle;
 import kenijey.harshencastle.gui.GuiBookScreen;
 import kenijey.harshencastle.handlers.client.HandlerGameOverlay;
+import kenijey.harshencastle.itemrenderer.RendererBloodFactory;
 import kenijey.harshencastle.itemrenderer.RendererDimensionalPedestal;
 import kenijey.harshencastle.itemrenderer.RendererHarshenDisplayBlock;
 import kenijey.harshencastle.itemrenderer.RendererHarshenSpawner;
@@ -19,6 +20,7 @@ import kenijey.harshencastle.itemrenderer.RendererHereticCauldron;
 import kenijey.harshencastle.itemrenderer.RendererPedestalSlab;
 import kenijey.harshencastle.particle.ParticleBlood;
 import kenijey.harshencastle.skyrenders.WeatherPontus;
+import kenijey.harshencastle.tileentity.TileEntityBloodFactory;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDimensionalPedestal;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDisplayBlock;
 import kenijey.harshencastle.tileentity.TileEntityHarshenSpawner;
@@ -63,6 +65,7 @@ public class ClientProxy extends CommonProxy
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHarshenDisplayBlock.class, new RendererHarshenDisplayBlock());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHarshenSpawner.class, new RendererHarshenSpawner());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPedestalSlab.class, new RendererPedestalSlab());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBloodFactory.class, new RendererBloodFactory());
 
 		
 		RenderingRegistry.registerEntityRenderingHandler(EntitySoullessKnight.class, new EntityFactories.FactorySoullessKnight());
@@ -139,7 +142,7 @@ public class ClientProxy extends CommonProxy
 	        switch (type)
 	        {
 		        case BLOOD:
-		            entityFx = new ParticleBlood(minecraft.world, position.x, position.y, position.z, directionSpeed.x, directionSpeed.y, directionSpeed.z);
+		            entityFx = new ParticleBlood(minecraft.world, position.x, position.y, position.z, directionSpeed.x, directionSpeed.y, directionSpeed.z, (float)info[0], (boolean) info[1]);
 		            break;
 		        default:
 		            break;

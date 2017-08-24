@@ -15,10 +15,12 @@ public class ParticleBlood extends Particle
 {
 	public ParticleBlood(World world, double xCoordIn, double yCoordIn, double zCoordIn, double motionXIn, double motionYIn, double motionZIn)
     {
-        this(world, xCoordIn, yCoordIn, zCoordIn, motionXIn, motionYIn, motionZIn, 1.0F);
+        this(world, xCoordIn, yCoordIn, zCoordIn, motionXIn, motionYIn, motionZIn, 1.0F, false);
     }
     
-    public ParticleBlood(World world, double xCoordIn, double yCoordIn, double zCoordIn, double motionXIn, double motionYIn, double motionZIn, float par14)
+	private boolean disableMoving;
+	
+    public ParticleBlood(World world, double xCoordIn, double yCoordIn, double zCoordIn, double motionXIn, double motionYIn, double motionZIn, float par14, boolean disableMoving)
     {
         super(world, xCoordIn, yCoordIn, zCoordIn, 0.0D, 0.0D, 0.0D);
         
@@ -42,9 +44,9 @@ public class ParticleBlood extends Particle
         this.particleGreen = 1.0F;
         this.particleBlue = 1.0F;
         this.canCollide = false;
+        this.disableMoving = disableMoving;
     }
-    
-    @Override
+	@Override
     public int getFXLayer()
     {
         return 2;
@@ -103,8 +105,15 @@ public class ParticleBlood extends Particle
         }
 
         this.particleTextureIndexX = 7 - particleAge * 8 / particleMaxAge;
+        if(!disableMoving)
+    	{
+        	motionX = 0;
+        	motionY = 0;
+        	motionZ = 0;
+        	if(world.isAirBlock(new BlockPos(posX, posY, posZ)))
+        		this.setExpired();
+    	}
         this.move(motionX, motionY, motionZ);
-
         if (posY == prevPosY)
         {
             motionX *= 1.1D;

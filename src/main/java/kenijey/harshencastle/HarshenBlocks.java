@@ -3,6 +3,7 @@ package kenijey.harshencastle;
 import java.util.ArrayList;
 
 import kenijey.harshencastle.blocks.BloodBlock;
+import kenijey.harshencastle.blocks.BloodFactory;
 import kenijey.harshencastle.blocks.BloodPlacer;
 import kenijey.harshencastle.blocks.BloodVessel;
 import kenijey.harshencastle.blocks.CropOfGleam;
@@ -84,6 +85,7 @@ public class HarshenBlocks {
 	public static Block pontus_chaotic_leaves;
 	public static Block blood_placer;
 	public static Block blood_vessel;
+	public static Block blood_factory;
 	
 	public static BlockCrops crop_of_gleam;
 
@@ -129,6 +131,7 @@ public class HarshenBlocks {
 		harshen_chaotic_rock = new HarshenChaoticRock();
 		blood_placer = new BloodPlacer();
 		blood_vessel = new BloodVessel();
+		blood_factory = new BloodFactory();
 	}
 
 	public static void reg() {
@@ -160,8 +163,9 @@ public class HarshenBlocks {
 		regBlock(plant_of_gleam, 64);
 		regBlock(blood_block, 1);
 		regBlock(blood_placer, 64);
-		regBlock(pedestal_slab, 64);
 		regBlock(blood_vessel, 64);
+		regBlock(blood_factory, 64);
+		regBlock(pedestal_slab, 64);
 		
 		regSingleBlock(heretic_cauldron_top);
 		regSingleBlock(crop_of_gleam);

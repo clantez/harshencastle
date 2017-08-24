@@ -12,9 +12,8 @@ public abstract class BaseTileEntityHarshenSingleItemInventoryActive extends Bas
 		if(isActive)
 			if(activeTimer++ == getTicksUntillDone())
 			{
-				isActive = false;
-				activeTimer = 0;
-				finishedTicking();		
+				finishedTicking();
+				deactivate();
 			}
 			else;
 		else activeTimer = 0;

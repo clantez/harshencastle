@@ -1,5 +1,6 @@
 {
     "variants": {
-        "normal": { "model": "harshencastle:blood_vessel" }
-    }
+        "node_active=true": { "model": "harshencastle:blood_vessel_node" },
+		"node_active=false": { "model": "harshencastle:blood_vessel" }
+	}
 }
