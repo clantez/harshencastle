@@ -29,10 +29,11 @@ public class TileEntityPedestalSlab extends BaseTileEntityHarshenSingleItemInven
 		if(!flag)
 			return false;
 		for(int x = -1; x < 2; x++)
-			for(int z = -1; z < 2; z++)
-				if(!(world.getBlockState(pos.add(x, -1, z)).getBlock() == Blocks.SOUL_SAND && 
-				(world.getBlockState(pos.add(x, 0, z)).getBlock() == HarshenBlocks.blood_block || (x == 0 && z == 0))))
+			for(int z = -1; z < 2; z++){
+				if((world.getBlockState(pos.add(x, -1, z)).getBlock() != Blocks.SOUL_SAND || 
+				world.getBlockState(pos.add(x, 0, z)).getBlock() != HarshenBlocks.blood_block) && !(x == 0 && z == 0))
 					flag = false;
+			}
 		return flag;
 	}
 	
@@ -49,13 +50,13 @@ public class TileEntityPedestalSlab extends BaseTileEntityHarshenSingleItemInven
 						{
 							Vec3d pos = new Vec3d(this.pos.add(x, 0, z)).addVector(randPos(), -0.1, randPos());
 							HarshenCastle.proxy.spawnParticle(EnumHarshenParticle.BLOOD, pos, 
-									new Vec3d((this.pos.getX() + 0.5 - pos.x) / 20D, (this.pos.getY() + 0.5 - pos.y) / 20D, (this.pos.getZ() + 0.5 - pos.z) / 20D));
+									new Vec3d((this.pos.getX() + 0.5 - pos.x) / 20D, (this.pos.getY() + 0.5 - pos.y) / 20D, (this.pos.getZ() + 0.5 - pos.z) / 20D), 1f, true);
 
 						}
 			
 		}	
 		else if(checkForCompleation(false))
-			activateRecipe();
+			activateRecipe();			
 	}
 	
 	@Override
@@ -77,7 +78,7 @@ public class TileEntityPedestalSlab extends BaseTileEntityHarshenSingleItemInven
 				{
 					world.setBlockToAir(pos.add(x, 0, z));
 					for(int i = 0; i < new Random().nextInt(10) + 100; i++)
-						HarshenCastle.proxy.spawnParticle(EnumHarshenParticle.BLOOD, new Vec3d(pos.add(x, 0, z)).addVector(randPos(), 0, randPos()), new Vec3d(0, 0.01, 0));
+						HarshenCastle.proxy.spawnParticle(EnumHarshenParticle.BLOOD, new Vec3d(pos.add(x, 0, z)).addVector(randPos(), 0, randPos()), new Vec3d(0, 0.01, 0), 1f, true);
 				}
 					
 	}
