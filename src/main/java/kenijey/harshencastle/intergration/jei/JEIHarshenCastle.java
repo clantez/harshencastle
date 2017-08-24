@@ -44,6 +44,7 @@ public class JEIHarshenCastle implements IModPlugin
 		info(HarshenItems.light_emitted_seed);
 		info(HarshenItems.soul_harsher_pickaxe);
 		
+		info(HarshenBlocks.harshen_soul_flower);
 		info(HarshenBlocks.blood_block);
 	}
 

@@ -79,6 +79,8 @@ tile.pontus_chaotic_wood.name=Pontus Chaotic Wood
 tile.pontus_chaotic_leaves.name=Pontus Chaotic Leaves
 tile.harshen_display_block.name=Harshen Display Block
 tile.harshen_spawner.name=Harshen Spawner
+tile.blood_placer.name=Blood Placer
+tile.blood_vessel.name=Blood Vessel
 
 
 #fluids
@@ -140,6 +142,8 @@ empowered_sword4=Ferrum King
 blood1=Bloooooooooood!
 blood2=Everyone bleeds! (mostly)
 itiumore1=Found in Pontus World
+vessel1=Blood Storage
+bessence1=Mary hates you.
 
 #misc
 itemGroup.harshenTab=Harshen Castle
@@ -159,3 +163,4 @@ jei.light_emitted_seed.description=You can obtain it by destroying the Plant of 
 jei.light_emitted_essence.description=The Essence of Sunlight. This essence is obtainable from Light Emitted Seed plant. It's bonemealable!
 jei.soul_harsher_pickaxe.description=Need this? Find the Kazzendre's Castle and kill Kazzendre. Then you will find this pickaxe in the treasure room in that castle. And last thing, it can break ANY block in Pontus World.
 jei.blood_block.description=Need it? Use Blood Collector.
+jei.harshen_soul_flower.description=No enough drops? You may need Fortune enchantment for your tool.
