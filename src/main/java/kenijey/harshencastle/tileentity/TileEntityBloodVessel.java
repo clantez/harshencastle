@@ -2,6 +2,7 @@ package kenijey.harshencastle.tileentity;
 
 import kenijey.harshencastle.base.BaseHarshenTileEntity;
 import kenijey.harshencastle.interfaces.IHudDisplay;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.MathHelper;
 
 public class TileEntityBloodVessel extends BaseHarshenTileEntity implements IHudDisplay
@@ -9,18 +10,14 @@ public class TileEntityBloodVessel extends BaseHarshenTileEntity implements IHud
 	private int bloodLevel = 0;
 	public static final int maxLevel = 50;
 	
-	public int add(int amount)
+	public void add(int amount)
 	{
-		int ret = amount - (bloodLevel + amount <= maxLevel ? 0 : amount - (maxLevel - bloodLevel));
 		bloodLevel = MathHelper.clamp(bloodLevel += amount, 0, maxLevel);
-		return ret;
 	}
 	
-	public int remove(int amount)
+	public void remove(int amount)
 	{
-		int ret = bloodLevel - amount >= 0 ? amount : bloodLevel;
 		bloodLevel = MathHelper.clamp(bloodLevel -= amount, 0, maxLevel);
-		return ret;
 	}
 	
 	public boolean canRemove(int amount)
@@ -32,7 +29,7 @@ public class TileEntityBloodVessel extends BaseHarshenTileEntity implements IHud
 	{
 		return bloodLevel + amount <= maxLevel;
 	}
-	
+		
 	@Override
 	public String getText() {
 		return String.valueOf(bloodLevel) + "/" + String.valueOf(maxLevel);
@@ -43,8 +40,29 @@ public class TileEntityBloodVessel extends BaseHarshenTileEntity implements IHud
 		return maxLevel - bloodLevel;
 	}
 	
+	public void setBloodLevel(int bloodLevel) {
+		this.bloodLevel = bloodLevel;
+	}
+	
 	public int getPossibleRemove()
 	{
 		return bloodLevel;
+	}
+	
+	public int getMax()
+	{
+		return this.maxLevel;
+	}
+	
+	@Override
+	public void readFromNBT(NBTTagCompound compound) {
+		this.bloodLevel = compound.getInteger("BloodLevel");
+		super.readFromNBT(compound);
+	}
+	
+	@Override
+	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
+		nbt.setInteger("BloodLevel", this.bloodLevel);
+		return super.writeToNBT(nbt);
 	}
 }

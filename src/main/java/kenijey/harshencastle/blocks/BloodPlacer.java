@@ -5,7 +5,11 @@ import java.util.Random;
 
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenUtils;
+import kenijey.harshencastle.base.BaseTileEntityHarshenSingleItemInventory;
 import kenijey.harshencastle.interfaces.IHudDisplay;
+import kenijey.harshencastle.network.HarshenNetwork;
+import kenijey.harshencastle.network.packets.MessagePacketTileEntityBloodPlacerUpdated;
+import kenijey.harshencastle.tileentity.TileEntityBloodVessel;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
@@ -16,13 +20,22 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
 
 public class BloodPlacer extends BlockHorizontal
 {
@@ -41,9 +54,14 @@ public class BloodPlacer extends BlockHorizontal
 	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
 		if(worldIn.isBlockPowered(pos) && worldIn.getBlockState(pos.offset(state.getValue(FACING))).getBlock().canPlaceBlockAt(worldIn, pos.offset(state.getValue(FACING)))
-				&& !blocksOnMap.containsKey(pos) && worldIn.isSideSolid(pos.offset(state.getValue(FACING)).down(), EnumFacing.UP))
+				&& !(worldIn.getBlockState(pos.offset(state.getValue(FACING))).getBlock() instanceof BloodBlock)
+				&& !blocksOnMap.containsKey(pos) && worldIn.isSideSolid(pos.offset(state.getValue(FACING)).down(), EnumFacing.UP)
+				&& worldIn.getBlockState(pos.up()).getBlock() instanceof BloodVessel 
+				&& ((TileEntityBloodVessel)worldIn.getTileEntity(pos.up())).canRemove(1))
 		{
 			blocksOnMap.put(pos, true);
+			((TileEntityBloodVessel)worldIn.getTileEntity(pos.up())).remove(1);
+			HarshenNetwork.sendToAll(new MessagePacketTileEntityBloodPlacerUpdated(pos.up(), ((TileEntityBloodVessel)worldIn.getTileEntity(pos.up())).getPossibleRemove()));
 			worldIn.setBlockState(pos.offset(state.getValue(FACING)), HarshenBlocks.blood_block.getDefaultState(), 3);
 		}
 		else if(!worldIn.isBlockPowered(pos) && blocksOnMap.containsKey(pos))

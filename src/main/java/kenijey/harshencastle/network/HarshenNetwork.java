@@ -3,6 +3,7 @@ package kenijey.harshencastle.network;
 import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.network.packets.MessagePacketHarshenInvToggle;
 import kenijey.harshencastle.network.packets.MessagePacketPlayerHasAccess;
+import kenijey.harshencastle.network.packets.MessagePacketTileEntityBloodPlacerUpdated;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -18,6 +19,7 @@ public class HarshenNetwork
 		INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel(HarshenCastle.MODID);
 		INSTANCE.registerMessage(MessagePacketHarshenInvToggle.class, MessagePacketHarshenInvToggle.class, 0, Side.SERVER);
 		INSTANCE.registerMessage(MessagePacketPlayerHasAccess.class, MessagePacketPlayerHasAccess.class, 1, Side.CLIENT);
+		INSTANCE.registerMessage(MessagePacketTileEntityBloodPlacerUpdated.class, MessagePacketTileEntityBloodPlacerUpdated.class, 2, Side.CLIENT);
 	}
 	
 	public static void sendToServer(IMessage message)
@@ -28,5 +30,10 @@ public class HarshenNetwork
 	public static void sendToPlayer(EntityPlayerMP player, IMessage message)
 	{
 		INSTANCE.sendTo(message, player);
+	}
+	
+	public static void sendToAll(IMessage message)
+	{
+		INSTANCE.sendToAll(message);
 	}
 }
