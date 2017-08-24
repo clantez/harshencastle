@@ -2,10 +2,11 @@
     "parent": "block/cube",
     "textures": {
         "up": "harshencastle:blocks/harshen_display_block_top",
-        "down": "harshencastle:blocks/harshen_dimensional_stone",
+		"down": "harshencastle:blocks/harshen_dimensional_stone",
         "north": "harshencastle:blocks/harshen_display_block_edge",
         "east": "harshencastle:blocks/harshen_display_block_edge",
-        "south": "harshencastle:blocks/harshen_display_block_edge",
-        "west": "harshencastle:blocks/harshen_display_block_edge"
+		"south": "harshencastle:blocks/harshen_display_block_edge",
+		"west": "harshencastle:blocks/harshen_display_block_edge",
+		"particle": "harshencastle:blocks/harshen_display_block_top"
     }
 }

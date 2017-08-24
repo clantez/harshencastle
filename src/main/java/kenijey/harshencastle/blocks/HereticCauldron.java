@@ -84,6 +84,8 @@ public class HereticCauldron extends BaseBlockHarshenSingleInventory
 		setUnlocalizedName("heretic_cauldron");
 		this.setDefaultState(this.blockState.getBaseState().withProperty(LIQUID, EnumHetericCauldronFluidType.NONE).withProperty(LEVEL, 1));
 		fluidMap.put(EnumHetericCauldronFluidType.LAVA, Items.LAVA_BUCKET);
+		setHardness(5.0F);
+		setResistance(5.0F);
 	}
 	
 	@Override

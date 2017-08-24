@@ -29,6 +29,8 @@ public class HereticCauldronTop extends Block
 		super(Material.IRON);
 		setRegistryName("heretic_cauldron_top");
 		setUnlocalizedName("heretic_cauldron");
+		setHardness(10.0F);
+		setResistance(10.0F);
 	}
 	
 	@SideOnly(Side.CLIENT)

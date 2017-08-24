@@ -1,6 +1,7 @@
 package kenijey.harshencastle.blocks;
 
 import java.util.HashMap;
+import java.util.List;
 
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.tileentity.TileEntityBloodVessel;
@@ -12,9 +13,12 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
 public class BloodVessel extends Block implements ITileEntityProvider
@@ -71,5 +75,10 @@ public class BloodVessel extends Block implements ITileEntityProvider
 	public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
 		creativeBreakMap.put(pos, player.capabilities.isCreativeMode);
 		super.onBlockHarvested(worldIn, pos, state, player);
+	}
+
+	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+		tooltip.add("\u00A74" + new TextComponentTranslation("vessel1").getFormattedText());
+		super.addInformation(stack, worldIn, tooltip, flagIn);
 	}
 }

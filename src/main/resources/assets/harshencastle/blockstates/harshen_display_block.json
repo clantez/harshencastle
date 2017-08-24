@@ -1,5 +1,8 @@
 {
     "variants": {
-        "normal": { "model": "harshencastle:harshen_dimensional_stone" }
+        "facing=north": { "model": "harshencastle:harshen_display_block" },
+        "facing=south": { "model": "harshencastle:harshen_display_block", "y": 180 },
+        "facing=west":  { "model": "harshencastle:harshen_display_block", "y": 270 },
+        "facing=east":  { "model": "harshencastle:harshen_display_block", "y": 90 }
     }
 }
