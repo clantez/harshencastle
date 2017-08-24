@@ -1,7 +1,9 @@
 package kenijey.harshencastle.blocks;
 
+import java.util.HashMap;
 import java.util.Random;
 
+import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.base.BaseBlockHarshenSingleInventory;
 import kenijey.harshencastle.base.BaseTileEntityHarshenSingleItemInventory;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDisplayBlock;
@@ -27,6 +29,8 @@ import net.minecraftforge.items.ItemStackHandler;
 
 public class HarshenDisplayBlock extends BaseBlockHarshenSingleInventory
 {
+	private static HashMap<BlockPos, Boolean> creativeBreakMap = new HashMap<>(HarshenUtils.HASH_LIMIT);
+
 
 	public HarshenDisplayBlock() {
 		super(Material.ROCK);
@@ -68,7 +72,15 @@ public class HarshenDisplayBlock extends BaseBlockHarshenSingleInventory
 	        stack.setTagCompound(nbttagcompound);
 	        stack.setStackDisplayName("§r" + getLocalizedName() + " (" + I18n.translateToLocal(handlerStack.getStackInSlot(0).getItem().getUnlocalizedName() + ".name") + ")");
 		}
-		worldIn.spawnEntity(new EntityItem(worldIn, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, stack));
+		if(!creativeBreakMap.get(pos))
+			worldIn.spawnEntity(new EntityItem(worldIn, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, stack));
+		creativeBreakMap.remove(pos);
+	}
+	
+	@Override
+	public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
+		creativeBreakMap.put(pos, player.capabilities.isCreativeMode);
+		super.onBlockHarvested(worldIn, pos, state, player);
 	}
 	
 	@Override
