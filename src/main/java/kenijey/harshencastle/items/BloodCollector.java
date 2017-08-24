@@ -41,7 +41,7 @@ public class BloodCollector extends BaseItemMetaData
 			nbt.setInteger("Blood", nbt.getInteger("Blood") + amount);
 			flag = true;
 		}
-		
+		System.out.println(amount);
 		stack.setItemDamage(metaChange(nbt));
         stack.setTagCompound(nbt);
         player.setHeldItem(hand, stack);
@@ -96,8 +96,6 @@ public class BloodCollector extends BaseItemMetaData
 	@Override
 	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand,
 			EnumFacing facing, float hitX, float hitY, float hitZ) {
-		getNBT(player.getHeldItem(hand)).setInteger("Blood", 50);
-
 		boolean flag = false;
 		if(worldIn.getBlockState(pos).getBlock() instanceof BloodVessel)
 		{
