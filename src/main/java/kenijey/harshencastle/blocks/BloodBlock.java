@@ -95,7 +95,6 @@ public class BloodBlock extends Block
 	public boolean isOpaqueCube(IBlockState state)
 	{
 		return false;
-
 	}
 	
 	@Override

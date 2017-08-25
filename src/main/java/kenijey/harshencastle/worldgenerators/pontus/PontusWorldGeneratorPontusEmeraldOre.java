@@ -13,7 +13,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 public class PontusWorldGeneratorPontusEmeraldOre extends WorldGenerator
 {
 	
-	private int numberOfBlocks = 10;
+	private int numberOfBlocks = 5;
 	private IBlockState state = HarshenBlocks.pontus_emerald_ore.getDefaultState();
 	
 	@Override
