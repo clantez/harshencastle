@@ -19,7 +19,7 @@ public class BloodyEarring extends BaseItemCustomInvEffect
 
 	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-		tooltip.add("\u00A75" + new TextComponentTranslation("accessoryitem").getFormattedText());
+		tooltip.add("\u00A75" + new TextComponentTranslation("accessoryitem").getFormattedText() + " \u00A77" + new TextComponentTranslation("earring").getFormattedText());
 		tooltip.add(" ");
 		tooltip.add("\u00A73" + new TextComponentTranslation("bearring1").getFormattedText());
 		tooltip.add("\u00A73" + new TextComponentTranslation("bearring2").getFormattedText());

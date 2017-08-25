@@ -18,7 +18,7 @@ public class Fearring extends Item
 
 	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-		tooltip.add("\u00A75" + new TextComponentTranslation("accessoryitem").getFormattedText());
+		tooltip.add("\u00A75" + new TextComponentTranslation("accessoryitem").getFormattedText() + " \u00A77" + new TextComponentTranslation("earring").getFormattedText());
 		tooltip.add(" ");
 		tooltip.add("\u00A72" + new TextComponentTranslation("fearring1").getFormattedText());
 		tooltip.add(" ");
