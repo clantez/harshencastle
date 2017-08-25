@@ -2,11 +2,9 @@ package kenijey.harshencastle.items;
 
 import java.util.List;
 
-import kenijey.harshencastle.base.BaseItemCustomInvEffect;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
