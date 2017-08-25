@@ -3,7 +3,6 @@ package kenijey.harshencastle.proxy;
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.HarshenItems;
-import kenijey.harshencastle.HarshenKeybinding;
 import kenijey.harshencastle.armor.HarshenArmors;
 import kenijey.harshencastle.dimensions.pontus.PontusWorldProvider;
 import kenijey.harshencastle.entity.EntityFactories;
@@ -105,7 +104,7 @@ public class ClientProxy extends CommonProxy
 		NetworkRegistry.INSTANCE.registerGuiHandler(HarshenCastle.instance, new GuiHandler());
 
     	
-    	Object[] handlers = {new HarshenKeybinding(), new HandlerGameOverlay(), new HandlerGuiEvent()};
+    	Object[] handlers = {new HandlerGameOverlay(), new HandlerGuiEvent()};
     	for(Object o : handlers)
     	{
     		MinecraftForge.EVENT_BUS.register(o);
