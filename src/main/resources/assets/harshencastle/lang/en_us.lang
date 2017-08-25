@@ -150,6 +150,8 @@ itemGroup.harshenTab=Harshen Castle
 message.failed=You should use Soul Harsher Pickaxe.
 message.success=Kazzendre: You hurt my soul...
 message.broken=Kazzendre: Don't touch any particle of me
+button.baubles=Accessory
+button.normal=Inventory
 
 #JEI Recipies
 jei.ritual.name=Ritual Pedestal Ritual
