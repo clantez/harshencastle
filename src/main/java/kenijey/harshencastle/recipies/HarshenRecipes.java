@@ -197,5 +197,18 @@ public class HarshenRecipes {
 				'e', new ItemStack(Items.ENDER_EYE),
 				's', new ItemStack(HarshenItems.light_emitted_essence),
 				'g', new ItemStack(Items.GOLD_INGOT));
+		
+		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "archive"), new ResourceLocation("harshen_blocks"),
+				new ItemStack(HarshenBlocks.archive),
+				"bb ",
+				"bb ",
+				
+				'b', new ItemStack(Items.BOOK));
+		
+		GameRegistry.addShapedRecipe(new ResourceLocation("Items", "book"), new ResourceLocation("Items"),
+				new ItemStack(Items.BOOK, 4),
+				"a  ",
+				
+				'a', new ItemStack(HarshenBlocks.archive));
 	}
 }
