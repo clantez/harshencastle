@@ -10,11 +10,11 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
-public class PontusWorldGeneratorIniumOre extends WorldGenerator
+public class PontusWorldGeneratorPontusEmeraldOre extends WorldGenerator
 {
 	
-	private int numberOfBlocks = 3;
-	private IBlockState state = HarshenBlocks.itium_ore.getDefaultState();
+	private int numberOfBlocks = 10;
+	private IBlockState state = HarshenBlocks.pontus_emerald_ore.getDefaultState();
 	
 	@Override
 	public boolean generate(World worldIn, Random rand, BlockPos position) {
