@@ -38,6 +38,7 @@ item.glass_container.empty.name=Empty Glass Container
 item.glass_container.void.name=Void filled Glass Container
 item.glass_container.regen.name=Blood filled Glass Container
 item.feather_earring.name=Feather Earring
+item.fearring.name=Fearring
 
 #entity eggs
 entity.soulless_knight.name=[HC] Soulless Knight
@@ -145,8 +146,10 @@ blood2=Everyone bleeds! (mostly)
 itiumore1=Found in Pontus World
 vessel1=Blood Storage
 bessence1=Mary hates you.
-fearring1="Am I flying?"
-fearring2=You can jump more. (enough to pass over a fence)
+featherearring1="Am I flying?"
+featherearring2=You can jump more. (enough to pass over a fence)
+fearring1="I'm not scared~"
+fearring2=Target you hit now blind, more than you.
 
 #misc
 itemGroup.harshenTab=Harshen Castle

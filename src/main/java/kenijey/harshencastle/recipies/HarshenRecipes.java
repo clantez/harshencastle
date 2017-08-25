@@ -188,5 +188,14 @@ public class HarshenRecipes {
 				
 				'f', "feather",
 				'i', new ItemStack(HarshenItems.itium));
+		
+		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "fearring"), new ResourceLocation("harshen_items"),
+				new ItemStack(HarshenItems.fearring),
+				"es ",
+				"g  ",
+				
+				'e', new ItemStack(Items.ENDER_EYE),
+				's', new ItemStack(HarshenItems.light_emitted_essence),
+				'g', new ItemStack(Items.GOLD_INGOT));
 	}
 }
