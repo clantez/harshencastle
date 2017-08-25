@@ -15,8 +15,8 @@ public class HandlerGuiEvent
 
 		if (event.getGui() instanceof GuiInventory || event.getGui() instanceof GuiPlayerInventoryExtended) {
 			GuiContainer gui = (GuiContainer) event.getGui();
-			event.getButtonList().add(new GuiHarshenButton(55, gui, 64, 9, 10, 10,
-					I18n.translateToLocalFormatted((event.getGui() instanceof GuiInventory) ? "button.baubles" : "button.normal")));
+			event.getButtonList().add(new GuiHarshenButton(8178, gui, 140, 51, 24, 24,
+					I18n.translateToLocalFormatted((event.getGui() instanceof GuiInventory) ? "button.harsheninventory" : "button.normal"), event.getGui() instanceof GuiInventory));
 		}
 	}
 }

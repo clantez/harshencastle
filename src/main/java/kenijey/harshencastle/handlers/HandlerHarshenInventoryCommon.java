@@ -15,6 +15,7 @@ public class HandlerHarshenInventoryCommon
 	@SubscribeEvent
 	public void playerTick(PlayerTickEvent event)
 	{
+		tickTimer++;
 		if(event.player.world.isRemote)
 			return;
 		HarshenItemStackHandler handler = HarshenUtils.getHandler(event.player);
