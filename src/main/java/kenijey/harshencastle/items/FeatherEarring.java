@@ -20,6 +20,8 @@ public class FeatherEarring extends Item
 
 	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+		tooltip.add("\u00A75" + new TextComponentTranslation("accessoryitem").getFormattedText());
+		tooltip.add(" ");
 		tooltip.add("\u00A72" + new TextComponentTranslation("featherearring1").getFormattedText());
 		tooltip.add(" ");
 		tooltip.add("\u00A73" + new TextComponentTranslation("featherearring2").getFormattedText());

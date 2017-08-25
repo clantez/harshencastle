@@ -150,6 +150,7 @@ featherearring1="Am I flying?"
 featherearring2=You can jump more. (enough to pass over a fence)
 fearring1="I'm not scared~"
 fearring2=Target you hit now blind, more than you.
+accessoryitem=Accessory Item
 
 #misc
 itemGroup.harshenTab=Harshen Castle
