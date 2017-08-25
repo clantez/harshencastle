@@ -1,5 +1,6 @@
 package kenijey.harshencastle.inventory;
 
+import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
 import kenijey.harshencastle.itemstackhandlers.HarshenItemStackHandler;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,11 +13,11 @@ import net.minecraftforge.items.SlotItemHandler;
 public class ContainerPlayerInventory extends net.minecraft.inventory.Container
 {
 	
-	HarshenItemStackHandler handler = new HarshenItemStackHandler(EnumInventorySlots.values().length);
+	private final HarshenItemStackHandler handler;
 	public ContainerPlayerInventory(EntityPlayer player)
 	{
 		IInventory playerInv = player.inventory;
-		handler.deserializeNBT(player.getEntityData().getCompoundTag("harshenInventory"));
+		this.handler = HarshenUtils.getHandler(player);
 		for(EnumInventorySlots slot : EnumInventorySlots.values())
 			this.addSlotToContainer(new SlotHarshenInventory(handler, slot, slot.getId(), slot.getDimension().width, slot.getDimension().height));
 		int xPos = 8;

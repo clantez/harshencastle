@@ -3,7 +3,9 @@ package kenijey.harshencastle;
 import java.util.ArrayList;
 
 import kenijey.harshencastle.base.BasePontusResourceBiome;
+import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
 import kenijey.harshencastle.handlers.HandlerPontusAllowed;
+import kenijey.harshencastle.itemstackhandlers.HarshenItemStackHandler;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
@@ -55,6 +57,13 @@ public class HarshenUtils
 	public static Block[] blockList(Block...blocks)
 	{
 		return blocks;
+	}
+	
+	public static HarshenItemStackHandler getHandler(EntityPlayer player)
+	{
+		HarshenItemStackHandler handler = new HarshenItemStackHandler(EnumInventorySlots.values().length);
+		handler.deserializeNBT(player.getEntityData());
+		return handler;
 	}
 	
 	public static EntityPlayer getClosestPlayer(World world, BlockPos position)

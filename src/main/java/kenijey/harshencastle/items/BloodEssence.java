@@ -6,8 +6,11 @@ import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
 import kenijey.harshencastle.interfaces.IBloodSupply;
 import kenijey.harshencastle.interfaces.IHarshenProvider;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
@@ -39,4 +42,11 @@ public class BloodEssence extends Item implements IBloodSupply, IHarshenProvider
 	public EnumInventorySlots getSlot() {
 		return EnumInventorySlots.LEFT_EAR;
 	}
+
+	@Override
+	public void onTick(EntityPlayer player, int tick) {
+		if(tick == 0)
+			player.heal(1f);
+	}
+
 }
