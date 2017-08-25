@@ -47,18 +47,16 @@ public class GuiHarshenButton extends GuiButton {
 		{
 			int x = this.x + this.parentGui.getGuiLeft();
 			FontRenderer fontrenderer = mc.fontRenderer;
-			mc.getTextureManager().bindTexture(new ResourceLocation(HarshenCastle.MODID, "textures/gui/buttons.png"));
+			int k = this.getHoverState(this.hovered);
+			mc.getTextureManager().bindTexture(new ResourceLocation(HarshenCastle.MODID, "textures/gui/accessory_button" + (k==1? "" : "_over") + ".png"));
 			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 			this.hovered = mouseX >= x && mouseY >= this.y && mouseX < x + this.width && mouseY < this.y + this.height;
-			int k = this.getHoverState(this.hovered);
 			GlStateManager.enableBlend();
 			GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
 			GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 			GlStateManager.pushMatrix();
 			GlStateManager.translate(0, 0, 200);
-			this.drawTexturedModalRect(x, this.y, 0, k * 20, this.width, this.height);
-//			mc.getTextureManager().bindTexture(new ResourceLocation(HarshenCastle.MODID, "textures/gui/accessory_button.png"));
-//			this.drawModalRectWithCustomSizedTexture(x, this.y, 0, 0, 24, 24, 24, 24);
+			this.drawModalRectWithCustomSizedTexture(x, this.y, 0, 0, 24, 24, 24, 24);
 			if (k!=1)
 				this.drawCenteredString(fontrenderer, I18n.translateToLocalFormatted(this.displayString), x + 5, this.y + this.height, 0xffffff);
 			GlStateManager.popMatrix();

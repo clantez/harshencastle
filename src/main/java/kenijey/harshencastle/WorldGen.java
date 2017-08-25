@@ -8,9 +8,8 @@ import com.google.common.collect.Lists;
 import kenijey.harshencastle.dimensions.DimensionPontus;
 import kenijey.harshencastle.worldgenerators.castle.ChestGenerator;
 import kenijey.harshencastle.worldgenerators.castle.MazeGenerator;
-import kenijey.harshencastle.worldgenerators.pontus.PontusWorldGeneratorIniumOre;
+import kenijey.harshencastle.worldgenerators.pontus.PontusWorldGeneratorItiumOre;
 import kenijey.harshencastle.worldgenerators.pontus.PontusWorldRuinGenerator;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.block.BlockLiquid;
@@ -37,7 +36,7 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 public class WorldGen implements IWorldGenerator
 {
     private final WorldGenMinable soulore = new WorldGenMinable(HarshenBlocks.harshen_soul_ore.getDefaultState(), 3);
-    private final WorldGenerator itiumOre = new PontusWorldGeneratorIniumOre();
+    private final WorldGenerator itiumOre = new PontusWorldGeneratorItiumOre();
 	
 	
 	@Override
