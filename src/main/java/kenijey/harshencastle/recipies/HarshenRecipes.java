@@ -205,7 +205,7 @@ public class HarshenRecipes {
 				
 				'b', new ItemStack(Items.BOOK));
 		
-		GameRegistry.addShapedRecipe(new ResourceLocation("Items", "book"), new ResourceLocation("Items"),
+		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "book"), new ResourceLocation("Items"),
 				new ItemStack(Items.BOOK, 4),
 				"a  ",
 				
