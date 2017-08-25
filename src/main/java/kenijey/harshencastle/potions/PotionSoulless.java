@@ -18,7 +18,7 @@ public class PotionSoulless extends Potion
 	
 	@Override
 	public int getStatusIconIndex() {
-		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(HarshenCastle.MODID, "textures/gui/icons.png"));
+		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(HarshenCastle.MODID, "textures/gui/inventory.png"));
 		return super.getStatusIconIndex();
 	}
 }

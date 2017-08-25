@@ -1,5 +1,7 @@
 package kenijey.harshencastle.inventory;
 
+import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
+import kenijey.harshencastle.itemstackhandlers.HarshenItemStackHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
@@ -10,17 +12,15 @@ import net.minecraftforge.items.SlotItemHandler;
 public class ContainerPlayerInventory extends net.minecraft.inventory.Container
 {
 	
-	ItemStackHandler handler = new ItemStackHandler(3);
+	HarshenItemStackHandler handler = new HarshenItemStackHandler(EnumInventorySlots.values().length);
 	public ContainerPlayerInventory(EntityPlayer player)
 	{
 		IInventory playerInv = player.inventory;
 		handler.deserializeNBT(player.getEntityData().getCompoundTag("harshenInventory"));
-		this.addSlotToContainer(new SlotItemHandler(handler, 0, 44, 20));
-		this.addSlotToContainer(new SlotItemHandler(handler, 1, 62, 20));
-		this.addSlotToContainer(new SlotItemHandler(handler, 2, 107, 20));		
+		for(EnumInventorySlots slot : EnumInventorySlots.values())
+			this.addSlotToContainer(new SlotHarshenInventory(handler, slot, slot.getId(), slot.getDimension().width, slot.getDimension().height));
 		int xPos = 8;
-		int yPos = 51;
-				
+		int yPos = 84;			
 		for (int y = 0; y < 3; ++y) {
 			for (int x = 0; x < 9; ++x) {
 				this.addSlotToContainer(new Slot(playerInv, x + y * 9 + 9, xPos + x * 18, yPos + y * 18));
