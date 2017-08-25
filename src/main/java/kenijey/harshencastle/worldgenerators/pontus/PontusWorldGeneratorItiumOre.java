@@ -10,7 +10,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
-public class PontusWorldGeneratorIniumOre extends WorldGenerator
+public class PontusWorldGeneratorItiumOre extends WorldGenerator
 {
 	
 	private int numberOfBlocks = 3;
