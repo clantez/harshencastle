@@ -13,6 +13,7 @@ import kenijey.harshencastle.items.BloodCollector;
 import kenijey.harshencastle.items.BloodEssence;
 import kenijey.harshencastle.items.BloodyEarring;
 import kenijey.harshencastle.items.EmpoweredSoulHarsherSword;
+import kenijey.harshencastle.items.FeatherEarring;
 import kenijey.harshencastle.items.GlassContainer;
 import kenijey.harshencastle.items.GuidanceOfHarshenCastle;
 import kenijey.harshencastle.items.HarshenCrystal;
@@ -63,6 +64,7 @@ public class HarshenItems
 	public static BaseItemMetaData props;
 	public static BaseItemMetaData glass_container;
 	public static Item soul_infused_ingot;
+	public static Item feather_earring;
 	
 	
 	public static void preInit()
@@ -89,6 +91,7 @@ public class HarshenItems
 		props = new HarshenProps();
 		glass_container = new GlassContainer();
 		soul_infused_ingot = new SoulInfusedIngot();
+		feather_earring = new FeatherEarring();
 	}
 	
 	public static void reg()
@@ -109,6 +112,7 @@ public class HarshenItems
 		regItem(light_emitted_seed,16);
 		regItem(ladle,1);
 		regItem(soul_infused_ingot, 2);
+		regItem(feather_earring, 1);
 		
 		regMetaItem(pontus_world_gate_spawner, 1, EnumPontusGateSpawner.getNames(), "pontus_world_gate_spawner_");
 		regMetaItem(pontus_world_gate_parts, 1, EnumPontusGateSpawnerParts.getNames(), "pontus_world_gate_part_");

@@ -180,5 +180,13 @@ public class HarshenRecipes {
 				'i', "ingotIron",
 				'r', new ItemStack(Blocks.IRON_BARS),
 				'n', "nuggetIron");
+		
+		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "feather_earring"), new ResourceLocation("harshen_items"),
+				new ItemStack(HarshenItems.feather_earring),
+				" i ",
+				"f f",
+				
+				'f', "feather",
+				'i', new ItemStack(HarshenItems.itium));
 	}
 }

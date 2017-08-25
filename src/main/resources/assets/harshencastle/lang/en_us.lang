@@ -37,6 +37,7 @@ item.soul_infused_ingot.name=Soul Infused Ingot
 item.glass_container.empty.name=Empty Glass Container
 item.glass_container.void.name=Void filled Glass Container
 item.glass_container.regen.name=Blood filled Glass Container
+item.feather_earring.name=Feather Earring
 
 #entity eggs
 entity.soulless_knight.name=[HC] Soulless Knight
@@ -118,11 +119,11 @@ sword4=of the target you hit
 itium1=Very expensive matter.
 itium2=Not craftable, nor belongs
 itium3=to this earth.
-earring1=Regenerates 1 heart
-earring2=every 4 seconds
+bearring1=Regenerates 1 heart
+bearring2=every 4 seconds
 pickaxe1=A pickaxe used to
 pickaxe2=mine Harshen Soul Ore
-pontus1=Inveokes the power
+pontus1=Invokes the power
 pontus2=of the old Koschei
 ore1=May contain Death
 ore2=if broken without
@@ -144,6 +145,8 @@ blood2=Everyone bleeds! (mostly)
 itiumore1=Found in Pontus World
 vessel1=Blood Storage
 bessence1=Mary hates you.
+fearring1="Am I flying?"
+fearring2=You can jump more. (enough to pass over a fence)
 
 #misc
 itemGroup.harshenTab=Harshen Castle
