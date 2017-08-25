@@ -13,7 +13,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 public class PontusWorldGeneratorItiumOre extends WorldGenerator
 {
 	
-	private int numberOfBlocks = 3;
+	private int numberOfBlocks = 2;
 	private IBlockState state = HarshenBlocks.itium_ore.getDefaultState();
 	
 	@Override

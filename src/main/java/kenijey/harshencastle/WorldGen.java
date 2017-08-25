@@ -9,7 +9,10 @@ import kenijey.harshencastle.dimensions.DimensionPontus;
 import kenijey.harshencastle.worldgenerators.castle.ChestGenerator;
 import kenijey.harshencastle.worldgenerators.castle.MazeGenerator;
 import kenijey.harshencastle.worldgenerators.pontus.PontusWorldGeneratorItiumOre;
+import kenijey.harshencastle.worldgenerators.pontus.PontusWorldGeneratorPontusEmeraldOre;
+import kenijey.harshencastle.worldgenerators.pontus.PontusWorldGeneratorItiumOre;
 import kenijey.harshencastle.worldgenerators.pontus.PontusWorldRuinGenerator;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.block.BlockLiquid;
@@ -36,7 +39,10 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 public class WorldGen implements IWorldGenerator
 {
     private final WorldGenMinable soulore = new WorldGenMinable(HarshenBlocks.harshen_soul_ore.getDefaultState(), 3);
+
     private final WorldGenerator itiumOre = new PontusWorldGeneratorItiumOre();
+    private final WorldGenerator pontusEmeraldOre = new PontusWorldGeneratorPontusEmeraldOre();
+
 	
 	
 	@Override
@@ -90,7 +96,8 @@ public class WorldGen implements IWorldGenerator
 		}
 		else if(dim == DimensionPontus.DIMENSION_ID)
 		{
-	    	oreGenerator(this.itiumOre, world, random, chunkX, chunkZ, 10, 0, 255);
+	    	oreGenerator(this.itiumOre, world, random, chunkX, chunkZ, 15, 0, 255);
+	    	oreGenerator(this.pontusEmeraldOre, world, random, chunkX, chunkZ, 25, 0, 255);
 	    	structureGenerator(world, random, chunkX, chunkZ, 5, "pontus/struc1", true, new BlockPos(26, 22, 26), new BlockPos(-8, 0, -12));
 		}
 	}
