@@ -8,7 +8,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class HandlerHarshenInventoryCommon 
+public class HandlerHarshenInventory 
 {	
 	int tickTimer = 0;
 	
