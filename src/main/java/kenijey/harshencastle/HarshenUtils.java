@@ -62,7 +62,7 @@ public class HarshenUtils
 	public static HarshenItemStackHandler getHandler(EntityPlayer player)
 	{
 		HarshenItemStackHandler handler = new HarshenItemStackHandler(EnumInventorySlots.values().length);
-		handler.deserializeNBT(player.getEntityData());
+		handler.deserializeNBT(player.getEntityData().getCompoundTag("harshenInventory"));
 		return handler;
 	}
 	
