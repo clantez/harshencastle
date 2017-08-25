@@ -36,6 +36,7 @@ import kenijey.harshencastle.blocks.PontusChaoticLeaves;
 import kenijey.harshencastle.blocks.PontusChaoticWood;
 import kenijey.harshencastle.blocks.PontusDeadLeaves;
 import kenijey.harshencastle.blocks.PontusDeadWood;
+import kenijey.harshencastle.blocks.PontusEmeraldOre;
 import kenijey.harshencastle.blocks.SoulReminder;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
@@ -86,6 +87,7 @@ public class HarshenBlocks {
 	public static Block blood_placer;
 	public static Block blood_vessel;
 	public static Block blood_factory;
+	public static Block pontus_emerald_ore;
 	
 	public static BlockCrops crop_of_gleam;
 
@@ -132,6 +134,7 @@ public class HarshenBlocks {
 		blood_placer = new BloodPlacer();
 		blood_vessel = new BloodVessel();
 		blood_factory = new BloodFactory();
+		pontus_emerald_ore = new PontusEmeraldOre();
 	}
 
 	public static void reg() {
@@ -166,6 +169,7 @@ public class HarshenBlocks {
 		regBlock(blood_vessel, 64);
 		regBlock(blood_factory, 64);
 		regBlock(pedestal_slab, 64);
+		regBlock(pontus_emerald_ore, 64);
 		
 		regSingleBlock(heretic_cauldron_top);
 		regSingleBlock(crop_of_gleam);

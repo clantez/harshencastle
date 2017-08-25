@@ -83,6 +83,7 @@ tile.harshen_display_block.name=Harshen Display Block
 tile.harshen_spawner.name=Harshen Spawner
 tile.blood_placer.name=Blood Placer
 tile.blood_vessel.name=Blood Vessel
+tile.pontus_emerald_ore.name=Pontus Emerald Ore
 
 
 #fluids
