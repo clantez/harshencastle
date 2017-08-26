@@ -20,8 +20,6 @@ public class Itium extends Item
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 		tooltip.add("\u00A73" + new TextComponentTranslation("itium1").getFormattedText());
 		tooltip.add(new TextComponentTranslation(" ").getFormattedText());
-		tooltip.add("\u00a73" + new TextComponentTranslation("itium2").getFormattedText());
-		tooltip.add("\u00a73" + new TextComponentTranslation("itium3").getFormattedText());
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 	}
 }
