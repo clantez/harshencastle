@@ -1,0 +1,15 @@
+{
+  "type": "forge:ore_shapeless",
+  "group": "harshen_items",
+  "ingredients": [
+    {
+      "item": "harshencastle:harshen_soul_fragment"
+    },
+	{
+      "item": "harshencastle:itium"
+    }
+  ],
+  "result": {
+    "item": "harshencastle:criminal_pendant"
+  }
+}

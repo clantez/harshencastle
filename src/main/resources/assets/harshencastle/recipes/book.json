@@ -1,0 +1,22 @@
+{
+  "type": "forge:ore_shapeless",
+  "group": "harshen_items",
+  "ingredients": [
+    {
+      "item": "harshencastle:archive"
+    },
+	{
+      "item": "harshencastle:archive"
+    },
+    {
+      "item": "harshencastle:archive"
+    },
+	{
+      "item": "harshencastle:archive"
+    }
+  ],
+  "result": {
+    "item": "minecraft:book",
+	 "count": 4
+  }
+}

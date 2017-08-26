@@ -195,39 +195,12 @@ public class HarshenRecipes {
 				'n', "nuggetIron");
 		
 		
-		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "feather_earring"), new ResourceLocation("harshen_items"),
-				new ItemStack(HarshenItems.feather_earring),
-				" i ",
-				"f f",
-//TODO THIS NEEDS TO BE SHAPELESS
-				'f', "feather",
-				'i', new ItemStack(HarshenItems.itium));
-		
-		
-		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "fearring"), new ResourceLocation("harshen_items"),
-				new ItemStack(HarshenItems.fearring),
-				"es ",
-				"g  ",
-//TODO THIS NEEDS TO BE SHAPELESS		
-				'e', new ItemStack(Items.ENDER_EYE),
-				's', new ItemStack(HarshenItems.light_emitted_essence),
-				'g', new ItemStack(Items.GOLD_INGOT));
-		
-		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "archive"), new ResourceLocation("harshen_blocks"),
 				new ItemStack(HarshenBlocks.archive),
 				"bb ",
 				"bb ",
 				
 				'b', new ItemStack(Items.BOOK));
-		
-		
-		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "book"), new ResourceLocation("Items"),
-				new ItemStack(Items.BOOK, 4),
-				"a  ",
-//TODO THIS NEEDS TO BE SHAPELESS
-				'a', new ItemStack(HarshenBlocks.archive));
-		
 		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "one_ring"), new ResourceLocation("harshen_items"),
 				new ItemStack(HarshenItems.one_ring),
@@ -248,16 +221,6 @@ public class HarshenRecipes {
 				'i', new ItemStack(HarshenItems.itium),
 				'e', new ItemStack(HarshenItems.blood_infused_ender_eye),
 				'g', new ItemStack(Items.GOLDEN_CARROT));
-		
-		
-		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "criminal_pendant"), new ResourceLocation("harshen_items"),
-				new ItemStack(HarshenItems.criminal_pendant),
-				"i  ",
-				"s  ",
-//TODO THIS NEEDS TO BE SHAPELESS
-				'i', new ItemStack(HarshenItems.itium),
-				's', new ItemStack(HarshenItems.harshen_soul_fragment));
-		
 		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "glass_container"), new ResourceLocation("harshen_items"),
 				new ItemStack(HarshenItems.glass_container),
