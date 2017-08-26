@@ -178,9 +178,9 @@ button.harsheninventory=Harshen Accessories
 button.normal=Inventory
 
 #JEI Recipies
-jei.ritual.name=Ritual Pedestal Ritual
-jei.cauldron.name=Heretic Cauldron Ritual
-jei.pedestalslab.name=Pedestal Slab Blood Ritual
+jei.ritual.name=Lightning Ritual
+jei.cauldron.name=Heretic Cauldron Experiment
+jei.pedestalslab.name=Blood Ritual
 
 #JEI Description
 jei.harshen_soul_fragment.description=You can mine Harshen Soul Ore, but you need to use Soul Harsher Pickaxe to do that. Neither way, you will die in pain.
