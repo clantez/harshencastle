@@ -1,68 +1,78 @@
 package kenijey.harshencastle.models;
 
-import net.minecraft.client.model.ModelBiped;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import kenijey.harshencastle.base.BaseHarshenBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.math.Vec3i;
 
-public class ModelArmour extends ModelBiped
+public class ModelArmour extends BaseHarshenBiped
 {
-	 private ModelRenderer Spaulder;
-	 private ModelRenderer Headpart1;
-	 private ModelRenderer Headpart2;
-	 private ModelRenderer KneePad;
+	 private ArrayList<ModelRenderer> helmet = new ArrayList<>();
+	 
+	 private HashMap<ModelRenderer, Vec3i> rotations = new HashMap<>();
 
 	 public ModelArmour(float scale)
 	 {
-	 super(scale, 0, 64, 64);
+		 super(scale, 0, 32, 64);
+		 
+		 textureWidth = 32;
+		 textureHeight = 64;
+	
+		 addRenderer(helmet, 10, 1, 8, -5, -9, -3, 0, 0);
+		 addRenderer(helmet, 10, 3, 1, -5, -7, 4, 36, 0);
+		 addRenderer(helmet, 10, 3, 1, -5, -3, 4, 36, 4);
+		 addRenderer(helmet, 1, 10, 1, 1, -8, 4, 0, 9);
+		 addRenderer(helmet, 1, 10, 1, -2, -8, 4, 4, 9);
+		 addRenderer(helmet, 1, 1, 7, 4, -1, -5, 8, 9);
+		 addRenderer(helmet, 1, 3, 1, 4, -1, 2, 40, 9);
+		 addRenderer(helmet, 1, 3, 1, -5, -1, 2, 44, 9);
+		 addRenderer(helmet, 1, 1, 2, 4, -3, -2, 58, 0);
+		 addRenderer(helmet, 1, 1, 2, -5, -3, -2, 58, 3);
+		 addRenderer(helmet, 1, 5, 1, -5, -6, 0, 0, 20);
+		 addRenderer(helmet, 1, 5, 1, 4, -6, 0, 4, 20);
+		 addRenderer(helmet, 1, 1, 2, -6, -3, 0, 0, 26);
+		 addRenderer(helmet, 1, 1, 2, 5, -3, 0, 0, 29);
+		 addRenderer(helmet, 1, 1, 4, -5, -5, -2, 6, 27);
+		 addRenderer(helmet, 1, 1, 4, 4, -5, -2, 16, 27);
+		 addRenderer(helmet, 1, 6, 1, 4, -8, 2, 26, 25);
+		 addRenderer(helmet, 1, 6, 1, -5, -8, 2, 30, 25);
+		 addRenderer(helmet, 1, 3, 1, -5, -4, -3, 48, 9);
+		 addRenderer(helmet, 1, 3, 1, 4, -4, -3, 52, 9);
+		 addRenderer(helmet, 1, 1, 1, -6, -4, 1, 8, 24);
+		 addRenderer(helmet, 1, 1, 1, 5, -4, 1, 12, 24);
+		 rotations.put(addRenderer(helmet, 1, 5, 1, 4, -10, -2, 40, 13), new Vec3i(8.521d, 0, 0));
+		 rotations.put(addRenderer(helmet, 1, 5, 1, -5, -10, -2, 44, 13), new Vec3i(8.521d, 0, 0));
+		 addRenderer(helmet, 8, 1, 6, -4, -10, -2, 8, 17);
+		 
+		 for(ModelRenderer renderer : helmet)
+			 bipedHead.addChild(renderer);
+	 }
 	 
-	 textureWidth = 64;
-	 textureHeight = 64;
-
-	 Spaulder = new ModelRenderer(this, 0, 55);
-	 Spaulder.addBox(-1F, -3F, -2.5F, 5, 4, 5);
-	 Spaulder.setRotationPoint(5F, 2F, 0F);
-	 Spaulder.setTextureSize(64, 64);
-	 Spaulder.mirror = true;
-	 setRotation(Spaulder, 0F, 0F, 0.3F);
-	 Headpart1 = new ModelRenderer(this, 0, 41);
-	 Headpart1.addBox(-6F, -6F, -1F, 2, 4, 4);
-	 Headpart1.setRotationPoint(0F, 0F, 0F);
-	 Headpart1.setTextureSize(64, 64);
-	 Headpart1.mirror = true;
-	 setRotation(Headpart1, 0F, 0F, 0F);
-	 Headpart2 = new ModelRenderer(this, 0, 36);
-	 Headpart2.addBox(-6F, -10F, 2F, 1, 4, 1);
-	 Headpart2.setRotationPoint(0F, 0F, 0F);
-	 Headpart2.setTextureSize(64, 64);
-	 Headpart2.mirror = true;
-	 setRotation(Headpart2, 0F, 0F, 0F);
-	 KneePad = new ModelRenderer(this, 0, 50);
-	 KneePad.addBox(-2F, 4F, -3F, 4, 2, 1);
-	 KneePad.setRotationPoint(2F, 12F, 0F);
-	 KneePad.setTextureSize(64, 64);
-	 KneePad.mirror = true;
-	 setRotation(KneePad, 0F, 0F, 0F);
-
-	 bipedLeftArm.addChild(Spaulder);
-	 bipedLeftLeg.addChild(KneePad);
-	 bipedHead.addChild(Headpart1);
-	 bipedHead.addChild(Headpart2);
-	 }
-
-	 public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-	 {
-	 super.render(entity, f, f1, f2, f3, f4, f5);
-	 setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-	 Spaulder.render(f5);
-	 Headpart1.render(f5);
-	 Headpart2.render(f5);
-	 KneePad.render(f5);
-	 }
-
-	 private void setRotation(ModelRenderer model, float x, float y, float z)
-	 {
-	 model.rotateAngleX = x;
-	 model.rotateAngleY = y;
-	 model.rotateAngleZ = z;
-	 }
+	private ModelRenderer addRenderer(ArrayList listToAdd, int dimensionX, int dimensionY, int dimensionZ,
+			float offsetX, float offsetY, float offsetZ, int textureX, int textureY) 
+	{
+		ModelRenderer r = newRender(dimensionX, dimensionY, dimensionZ, 0, 0, 0, offsetX, offsetY, offsetZ, textureX, textureY, false, this);
+		listToAdd.add(r);
+		return r;
 	}
+
+	public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
+	{
+		setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entityIn);
+		for(ModelRenderer renderer : helmet)
+		{
+			copyModelAngles(bipedHead, renderer);
+			renderer.render(scale);
+		}
+		for(ModelRenderer r : rotations.keySet())
+		{
+			Vec3i vec = rotations.get(r);
+			r.rotateAngleX += vec.getX();
+			r.rotateAngleY += vec.getY();
+			r.rotateAngleZ += vec.getZ();
+		}
+	}
+}
