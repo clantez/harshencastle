@@ -8,17 +8,21 @@ public class HarshenPotions
 	
 	public static Potion potionSoulless;
 	public static Potion potionHarshed;
+	public static Potion potionPure;
+
 	
 	public static void preInit()
 	{
 		potionSoulless = new PotionSoulless();
 		potionHarshed = new PotionHarshed();
+		potionPure = new PotionPure();
 	}
 	
 	public static void register()
 	{
 		reg(potionSoulless);
 		reg(potionHarshed);
+		reg(potionPure);
 	}
 	
 	private static void reg(Potion potion)

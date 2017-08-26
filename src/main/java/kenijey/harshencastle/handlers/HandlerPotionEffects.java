@@ -1,7 +1,6 @@
 package kenijey.harshencastle.handlers;
 
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.UUID;
 
 import kenijey.harshencastle.HarshenCastle;
@@ -15,6 +14,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -23,10 +23,11 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class HandlerPotionEffects {
 	
-	private static ArrayList<EntityLivingBase> arrayLivingWithEffect = new ArrayList<EntityLivingBase>();
-	private static ArrayList<HandlerHarshenEffect> arrayEffectManager = new ArrayList<HandlerHarshenEffect>();
-	private static ArrayList<EntityLivingBase> arrayLivingNoSoul = new ArrayList<EntityLivingBase>();
-	
+	private ArrayList<EntityLivingBase> arrayLivingWithEffect = new ArrayList<EntityLivingBase>();
+	private ArrayList<HandlerHarshenEffect> arrayEffectManager = new ArrayList<HandlerHarshenEffect>();
+	private ArrayList<EntityLivingBase> arrayLivingNoSoul = new ArrayList<EntityLivingBase>();
+	private ArrayList<EntityLivingBase> arrayNeedingToBeCured = new ArrayList<EntityLivingBase>();
+
 	
 	@SubscribeEvent
 	public void livingTick(LivingUpdateEvent event)
@@ -61,8 +62,6 @@ public class HandlerPotionEffects {
 			event.getEntityLiving().getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).removeModifier(UUID.fromString("81c41407-0bb1-435d-91ca-449b8c8a0eec"));
 			event.getEntityLiving().setHealth(event.getEntityLiving().getHealth());
 		}
-		if(event.getEntity().world.isRemote)
-			return;
 		if(event.getEntityLiving().isPotionActive(HarshenPotions.potionHarshed))
 		{
 			if(!arrayLivingWithEffect.contains(event.getEntityLiving()))
@@ -78,7 +77,19 @@ public class HandlerPotionEffects {
 		{
 			arrayEffectManager.remove(arrayLivingWithEffect.indexOf(event.getEntityLiving()));
 			arrayLivingWithEffect.remove(event.getEntityLiving());
-		}		
+		}
+		if(event.getEntityLiving().isPotionActive(HarshenPotions.potionPure) && !arrayNeedingToBeCured.contains(event.getEntityLiving()))
+		{
+			arrayNeedingToBeCured.add(event.getEntityLiving());
+			ArrayList<Potion> potionsToRemove = new ArrayList<>();
+			for(PotionEffect effect : event.getEntityLiving().getActivePotionEffects())
+				if(effect.getPotion().isBadEffect())
+					potionsToRemove.add(effect.getPotion());
+			for(Potion potion : potionsToRemove)
+				event.getEntityLiving().removePotionEffect(potion);
+		}
+		else if(!event.getEntityLiving().isPotionActive(HarshenPotions.potionPure) && arrayNeedingToBeCured.contains(event.getEntityLiving()))
+			arrayNeedingToBeCured.remove(event.getEntityLiving());
 	}
 }
 

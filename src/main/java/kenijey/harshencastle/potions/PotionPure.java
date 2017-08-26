@@ -2,18 +2,21 @@ package kenijey.harshencastle.potions;
 
 import kenijey.harshencastle.HarshenCastle;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AbstractAttributeMap;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
 
-public class PotionSoulless extends Potion
+public class PotionPure extends Potion
 {
 
-	protected PotionSoulless() {
+	protected PotionPure() {
 		super(false, 0xa6afbf);
-		setRegistryName("soulless");
-		setPotionName("Soulless");
-		setIconIndex(0, 0);
+		setRegistryName("cure");
+		setPotionName("Cured");
+		setIconIndex(2, 0);
 		setBeneficial();
 	}
 	
@@ -22,4 +25,5 @@ public class PotionSoulless extends Potion
 		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(HarshenCastle.MODID, "textures/gui/inventory.png"));
 		return super.getStatusIconIndex();
 	}
+
 }
