@@ -7,10 +7,14 @@ import kenijey.harshencastle.interfaces.IBloodSupply;
 import kenijey.harshencastle.interfaces.IHarshenProvider;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class FeatherEarring extends Item implements IHarshenProvider
 {
@@ -37,7 +41,7 @@ public class FeatherEarring extends Item implements IHarshenProvider
 
 	@Override
 	public void onTick(EntityPlayer player, int tick) {
-		// TODO Auto-generated method stub
+		player.addPotionEffect(new PotionEffect(MobEffects.JUMP_BOOST, 50, 0, false, false));
 		
 	}
 
