@@ -195,13 +195,6 @@ public class HarshenRecipes {
 				'n', "nuggetIron");
 		
 		
-		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "archive"), new ResourceLocation("harshen_blocks"),
-				new ItemStack(HarshenBlocks.archive),
-				"bb ",
-				"bb ",
-				
-				'b', new ItemStack(Items.BOOK));
-		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "one_ring"), new ResourceLocation("harshen_items"),
 				new ItemStack(HarshenItems.one_ring),
 				" g ",
