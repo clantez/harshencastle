@@ -2,6 +2,7 @@ package kenijey.harshencastle.blocks;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.tileentity.TileEntityBloodVessel;
@@ -16,6 +17,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.client.util.ITooltipFlag;
@@ -137,5 +139,10 @@ public class BloodVessel extends Block implements ITileEntityProvider
 	public BlockStateContainer createBlockState()
 	{
 		return new BlockStateContainer(this, new IProperty[] {NODE});
+	}
+	
+	@Override
+	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+		return null;
 	}
 }
