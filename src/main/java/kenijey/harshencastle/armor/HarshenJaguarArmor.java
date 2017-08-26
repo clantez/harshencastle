@@ -19,6 +19,11 @@ public class HarshenJaguarArmor extends ItemArmor
 	}
 	
 	@Override
+	public boolean hasOverlay(ItemStack stack) {
+		return false;
+	}
+	
+	@Override
 	public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, EntityEquipmentSlot armorSlot,
 			ModelBiped _default) {
 		if (itemStack != null) {
@@ -41,7 +46,7 @@ public class HarshenJaguarArmor extends ItemArmor
 
 				armorModel.bipedHead.showModel = armorSlot == EntityEquipmentSlot.HEAD;
 				armorModel.bipedHeadwear.showModel = armorSlot == EntityEquipmentSlot.HEAD;
-				armorModel.bipedBody.showModel = (armorSlot == EntityEquipmentSlot.CHEST);
+				armorModel.bipedBody.showModel = armorSlot == EntityEquipmentSlot.CHEST;
 				armorModel.bipedRightArm.showModel = armorSlot == EntityEquipmentSlot.CHEST;
 				armorModel.bipedLeftArm.showModel = armorSlot == EntityEquipmentSlot.CHEST;
 				armorModel.bipedRightLeg.showModel = (armorSlot == EntityEquipmentSlot.LEGS);
