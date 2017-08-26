@@ -150,7 +150,7 @@ public class HarshenRecipes {
 				"cec",
 				" l ",
 				
-				'e', new ItemStack(Items.ENDER_EYE),
+				'e', new ItemStack(HarshenItems.harshen_soul_fragment),
 				'c', new ItemStack(HarshenItems.harshen_crystal),
 				'l', new ItemStack(HarshenItems.light_emitted_essence));
 		
