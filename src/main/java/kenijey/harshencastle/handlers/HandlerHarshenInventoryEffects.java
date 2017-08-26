@@ -44,8 +44,7 @@ public class HandlerHarshenInventoryEffects
 	{
 		if(event.player.world.isRemote)
 			return;
-		if(event.player.isSneaking() && event.player.getHeldItemMainhand().getItem() == Item.getItemFromBlock(Blocks.AIR)
-				&& event.player.getHeldItemOffhand().getItem() == Item.getItemFromBlock(Blocks.AIR) && !cooldownMap.containsKey(event.player) && containsItem(event.player, HarshenItems.telering))
+		if(event.player.isSneaking() && event.player.getHeldItemOffhand().getItem() == Item.getItemFromBlock(Blocks.AIR) && !cooldownMap.containsKey(event.player) && containsItem(event.player, HarshenItems.telering))
 		{
 			if(chargeMap.containsKey(event.player))
 				chargeMap.put(event.player, chargeMap.get(event.player) + 1);
