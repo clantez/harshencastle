@@ -21,6 +21,6 @@ public class HandlerHarshenInventory
 		HarshenItemStackHandler handler = HarshenUtils.getHandler(event.player);
 		for(int slot = 0; slot < handler.getSlots(); slot++)
 			if(handler.getStackInSlot(slot).getItem() instanceof IHarshenProvider)
-				((IHarshenProvider)handler.getStackInSlot(slot).getItem()).onTick(event.player, tickTimer % 20);
+				((IHarshenProvider)handler.getStackInSlot(slot).getItem()).onTick(event.player, tickTimer);
 	}
 }
