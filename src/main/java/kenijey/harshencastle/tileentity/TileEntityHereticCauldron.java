@@ -98,8 +98,7 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
         {
             if (level == 3)
             {
-                if (!playerIn.capabilities.isCreativeMode)
-                	itemstack.shrink(1);
+                itemstack.shrink(1);
                 this.world.playSound((EntityPlayer)null, pos, SoundEvents.ITEM_BUCKET_FILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
                 if(fluidMap.containsKey(fluid))
                 {
@@ -129,7 +128,7 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 	
 	private boolean give(EntityPlayer playerIn, EnumHand hand, ItemStack stack)
 	{
-		if (playerIn.getHeldItem(hand).isEmpty())
+		if(playerIn.getHeldItem(hand).isEmpty())
             playerIn.setHeldItem(hand, stack);
         else if (!playerIn.inventory.addItemStackToInventory(stack))
             playerIn.dropItem(stack, false);
@@ -140,8 +139,16 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 		return fluid;
 	}
 	
+	public void setFluid(EnumHetericCauldronFluidType fluid) {
+		this.fluid = fluid;
+	}
+	
 	public int getLevel() {
 		return level;
+	}
+	
+	public void setLevel(int level) {
+		this.level = level;
 	}
 	
 	private int valueOfLevel(Item item)

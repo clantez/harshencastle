@@ -67,7 +67,7 @@ public class HereticCauldron extends BaseBlockHarshenSingleInventory
 	
 	@Override
 	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
-		return getTile(worldIn, pos) != null ?this.getDefaultState().withProperty(LIQUID, getTile(worldIn, pos).getFluid()).withProperty(LEVEL, getTile(worldIn, pos).getLevel()) : this.getDefaultState();
+		return getTile(worldIn, pos) != null ? this.getDefaultState().withProperty(LIQUID, getTile(worldIn, pos).getFluid()).withProperty(LEVEL, getTile(worldIn, pos).getLevel()) : this.getDefaultState();
 	}
 
 	@Override
@@ -91,7 +91,6 @@ public class HereticCauldron extends BaseBlockHarshenSingleInventory
 		TileEntityHereticCauldron.fluidMap.put(EnumHetericCauldronFluidType.MILK, Items.MILK_BUCKET);
 		setHardness(5.0F);
 		setResistance(5.0F);
-		//tickRate(worldIn)
 	}
 	
 	@Override
@@ -103,8 +102,16 @@ public class HereticCauldron extends BaseBlockHarshenSingleInventory
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
 		boolean flag = getTile(worldIn, pos).onActivated(playerIn, hand);
-		if(flag);//TODO make faster
-		return flag ? flag : super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitZ, hitZ, hitZ);
+		if(flag)
+		{
+			EnumHetericCauldronFluidType liquid = getTile(worldIn, pos).getFluid();
+			int level = getTile(worldIn, pos).getLevel();
+			worldIn.setBlockState(pos, getActualState(state, worldIn, pos), 3);
+			getTile(worldIn, pos).setFluid(liquid);
+			getTile(worldIn, pos).setLevel(level);
+			return true;
+		}
+		return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitZ, hitZ, hitZ);
     }
 	
 	@Override
