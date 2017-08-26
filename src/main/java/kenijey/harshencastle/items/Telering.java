@@ -37,6 +37,6 @@ public class Telering extends Item implements IHarshenProvider
 
 	@Override
 	public void onTick(EntityPlayer player, int tick) {
-		
+		player.addPotionEffect(new PotionEffect(MobEffects.LUCK, 100, 0, false, false));
 	}
 }
