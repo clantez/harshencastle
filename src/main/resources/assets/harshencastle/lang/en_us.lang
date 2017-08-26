@@ -97,6 +97,7 @@ fluid.harshen_dimensional_fluid=Harshen Dimensional Fluid
 fluid.harshing_water=Harshing Water
 fluid.blood=Blood
 fluid.lava=Lava
+fluid.milk=Milk
 
 
 #commands
