@@ -82,7 +82,10 @@ public class BloodBlock extends Block
 	
 	@Override
 	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
-		tickMap.put(pos, 0);
+		if(!worldIn.getBlockState(pos.down()).getBlock().isNormalCube(worldIn.getBlockState(pos.down()), worldIn, pos))
+			worldIn.setBlockToAir(pos);
+		else
+			tickMap.put(pos, 0);
 		
 	}
 	
