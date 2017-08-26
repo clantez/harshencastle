@@ -35,6 +35,8 @@ public class HarshenRecipes {
 		RitualRecipes.addRecipe(Arrays.asList(new ItemStack(HarshenItems.itium, 1, 0), new ItemStack(HarshenItems.light_emitted_essence, 1, 0),
 				new ItemStack(HarshenItems.ritual_crystal, 1 ,1), new ItemStack(Items.QUARTZ)), new ItemStack(Items.NETHER_STAR, 1, 0), true);
 		
+		RitualRecipes.addRecipe(Arrays.asList(new ItemStack(HarshenItems.harshen_soul_ingot, 1, 0), new ItemStack(HarshenItems.harshen_soul_fragment, 1, 0),
+				new ItemStack(HarshenItems.ritual_crystal, 1 ,1), new ItemStack(Items.DIAMOND_SWORD)), new ItemStack(HarshenItems.soul_harsher_sword, 1, 0), true);
 		
 		
 		
@@ -53,18 +55,7 @@ public class HarshenRecipes {
 	}	
 	
 	public static void craftingRegistry()
-	{
-		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "soul_harsher_sword"), new ResourceLocation("harshen_items"),
-				new ItemStack(HarshenItems.soul_harsher_sword),
-				" h ",
-				"hsh",
-				" i ",
-				
-				's', new ItemStack(HarshenItems.harshen_soul_fragment),
-				'h', new ItemStack(HarshenItems.harshen_crystal),
-				'i', "ingotIron");
-		
-		
+	{		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "harshen_soul_ingot"), new ResourceLocation("harshen_items"),
 				new ItemStack(HarshenItems.harshen_soul_ingot),
 				"e e",
