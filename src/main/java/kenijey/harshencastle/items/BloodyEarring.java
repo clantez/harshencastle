@@ -48,6 +48,7 @@ public class BloodyEarring extends Item implements IBloodSupply, IHarshenProvide
 	@Override
 	public void onTick(EntityPlayer player, int tick) {
 		if(tick == 0)
-			player.heal(1f);
+			player.heal(2f);
+		System.out.println(tick);
 	}
 }
