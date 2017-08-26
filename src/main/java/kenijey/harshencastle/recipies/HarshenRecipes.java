@@ -208,7 +208,7 @@ public class HarshenRecipes {
 				new ItemStack(HarshenItems.feather_earring),
 				" i ",
 				"f f",
-//THIS NEEDS TO BE SHAPELESS
+//TODO THIS NEEDS TO BE SHAPELESS
 				'f', "feather",
 				'i', new ItemStack(HarshenItems.itium));
 		
@@ -217,7 +217,7 @@ public class HarshenRecipes {
 				new ItemStack(HarshenItems.fearring),
 				"es ",
 				"g  ",
-//THIS NEEDS TO BE SHAPELESS		
+//TODO THIS NEEDS TO BE SHAPELESS		
 				'e', new ItemStack(Items.ENDER_EYE),
 				's', new ItemStack(HarshenItems.light_emitted_essence),
 				'g', new ItemStack(Items.GOLD_INGOT));
@@ -234,7 +234,7 @@ public class HarshenRecipes {
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "book"), new ResourceLocation("Items"),
 				new ItemStack(Items.BOOK, 4),
 				"a  ",
-//THIS NEEDS TO BE SHAPELESS
+//TODO THIS NEEDS TO BE SHAPELESS
 				'a', new ItemStack(HarshenBlocks.archive));
 		
 		
@@ -263,7 +263,7 @@ public class HarshenRecipes {
 				new ItemStack(HarshenItems.criminal_pendant),
 				"i  ",
 				"s  ",
-//THIS NEEDS TO BE SHAPELESS
+//TODO THIS NEEDS TO BE SHAPELESS
 				'i', new ItemStack(HarshenItems.itium),
 				's', new ItemStack(HarshenItems.harshen_soul_fragment));
 		
