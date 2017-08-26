@@ -14,7 +14,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
-public class BloodEssence extends Item implements IBloodSupply, IHarshenProvider
+public class BloodEssence extends Item
 {
 	public BloodEssence()
 	{
@@ -26,27 +26,6 @@ public class BloodEssence extends Item implements IBloodSupply, IHarshenProvider
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 		tooltip.add("\u00A74" + new TextComponentTranslation("bessence1").getFormattedText());
 		super.addInformation(stack, worldIn, tooltip, flagIn);
-	}
-
-	@Override
-	public int getAmountPerSecond() {
-		return 1;
-	}
-
-	@Override
-	public int ticksUntillUsed() {
-		return 100;
-	}
-
-	@Override
-	public EnumInventorySlots getSlot() {
-		return EnumInventorySlots.LEFT_EAR;
-	}
-
-	@Override
-	public void onTick(EntityPlayer player, int tick) {
-		if(tick == 0)
-			player.heal(1f);
 	}
 
 }
