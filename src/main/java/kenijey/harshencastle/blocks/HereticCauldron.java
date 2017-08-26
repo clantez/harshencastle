@@ -88,6 +88,7 @@ public class HereticCauldron extends BaseBlockHarshenSingleInventory
 		setUnlocalizedName("heretic_cauldron");
 		this.setDefaultState(this.blockState.getBaseState().withProperty(LIQUID, EnumHetericCauldronFluidType.NONE).withProperty(LEVEL, 1));
 		TileEntityHereticCauldron.fluidMap.put(EnumHetericCauldronFluidType.LAVA, Items.LAVA_BUCKET);
+		TileEntityHereticCauldron.fluidMap.put(EnumHetericCauldronFluidType.MILK, Items.MILK_BUCKET);
 		setHardness(5.0F);
 		setResistance(5.0F);
 		//tickRate(worldIn)

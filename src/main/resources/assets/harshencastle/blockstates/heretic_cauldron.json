@@ -18,6 +18,10 @@
 		
 		"level=1,liquid_type=lava": { "model": "harshencastle:heretic_cauldron_lava_1" },
         "level=2,liquid_type=lava": { "model": "harshencastle:heretic_cauldron_lava_2" },
-        "level=3,liquid_type=lava": { "model": "harshencastle:heretic_cauldron_lava_3" }
+        "level=3,liquid_type=lava": { "model": "harshencastle:heretic_cauldron_lava_3" },
+		
+		"level=1,liquid_type=milk": { "model": "harshencastle:heretic_cauldron_milk_1" },
+        "level=2,liquid_type=milk": { "model": "harshencastle:heretic_cauldron_milk_2" },
+        "level=3,liquid_type=milk": { "model": "harshencastle:heretic_cauldron_milk_3" }
     }
 }
