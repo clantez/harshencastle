@@ -1,8 +1,28 @@
 package kenijey.harshencastle.tileentity;
 
+import java.util.HashMap;
+
+import kenijey.harshencastle.HarshenBlocks;
+import kenijey.harshencastle.HarshenItems;
+import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.base.BaseTileEntityHarshenSingleItemInventory;
 import kenijey.harshencastle.blocks.HereticCauldron;
+import kenijey.harshencastle.enums.blocks.EnumHetericCauldronFluidType;
+import kenijey.harshencastle.items.BloodCollector;
+import kenijey.harshencastle.recipies.CauldronRecipes;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidUtil;
+import net.minecraftforge.fluids.UniversalBucket;
 
 public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemInventory
 {
@@ -12,6 +32,9 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 	public boolean isActive = false;
 	private ItemStack switchedItem;
 	private int[] drainPos = {50, 75, 100, Integer.MAX_VALUE};
+	public static final HashMap<EnumHetericCauldronFluidType, Item> fluidMap = new HashMap<>(HarshenUtils.HASH_LIMIT);
+	private EnumHetericCauldronFluidType fluid = EnumHetericCauldronFluidType.NONE;
+	private int level = 1;
 	
 	@Override
 	public void tick() {
@@ -28,12 +51,111 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 		{
 			if(layersDrained == 2)
 				setItem(switchedItem);
-			world.setBlockState(pos, ((HereticCauldron)world.getBlockState(pos).getBlock()).removeLayer((world.getBlockState(pos))), 3);
+			level = MathHelper.clamp(level - 1, 1, 3);
 			((TileEntityHereticCauldron)world.getTileEntity(pos)).setActiveTimer(activeTimer).setTimer(this.timer).setActive(isActive).setHoldingItem(getItem()).setlayersDrained(layersDrained + 1).setSwitchedItem(switchedItem);
 		}
 			
 	}
 	
+	public boolean onActivated(EntityPlayer playerIn, EnumHand hand)
+	{
+		ItemStack itemstack = playerIn.getHeldItem(hand);
+        Item item = itemstack.getItem();
+        if(isActive)
+        	return true;
+        if (itemstack.isEmpty())
+        	return false;
+        
+        if(item instanceof BloodCollector && (fluid ==  EnumHetericCauldronFluidType.BLOOD || fluid == EnumHetericCauldronFluidType.NONE))
+        {
+        	if(level != 3)
+        		if (playerIn.capabilities.isCreativeMode || (!playerIn.capabilities.isCreativeMode && ((BloodCollector)item).remove(playerIn, hand, 3)))
+                {
+        			this.world.playSound((EntityPlayer)null, pos, SoundEvents.ITEM_BOTTLE_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
+        			level += fluid == EnumHetericCauldronFluidType.BLOOD ? 1 : 0;
+        			fluid = EnumHetericCauldronFluidType.BLOOD;
+        		}
+        	return true;
+        }
+        if(fluidMap.containsValue(item) && fluid == EnumHetericCauldronFluidType.NONE)
+        {
+        	EnumHetericCauldronFluidType[] type = new EnumHetericCauldronFluidType[fluidMap.keySet().size()];
+        	playerIn.setHeldItem(hand, ItemStack.EMPTY);
+        	give(playerIn, hand, new ItemStack(Items.BUCKET));
+        	level = 3;
+			fluid = fluidMap.keySet().toArray(type)[valueOfLevel(item)];
+	        this.world.playSound((EntityPlayer)null, pos, SoundEvents.ITEM_BUCKET_FILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
+	        return true;
+        }
+        else if(item instanceof UniversalBucket)
+        {
+        	level = 3;
+        	fluid = EnumHetericCauldronFluidType.getFromFluid(((UniversalBucket)item).getFluid(itemstack).getFluid());
+	        this.world.playSound((EntityPlayer)null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
+	        return true;
+        }
+        else if (item == Items.BUCKET && fluid != EnumHetericCauldronFluidType.BLOOD)
+        {
+            if (level == 3)
+            {
+                if (!playerIn.capabilities.isCreativeMode)
+                	itemstack.shrink(1);
+                this.world.playSound((EntityPlayer)null, pos, SoundEvents.ITEM_BUCKET_FILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                if(fluidMap.containsKey(fluid))
+                {
+                	ItemStack stack = new ItemStack(fluidMap.get(fluid));
+                	level = 1;
+                    fluid = EnumHetericCauldronFluidType.NONE;
+                    return give(playerIn, hand, stack);
+                }
+                level = 1;
+                fluid = EnumHetericCauldronFluidType.NONE;	
+            	give(playerIn, hand, FluidUtil.getFilledBucket(new FluidStack(FluidRegistry.getFluid(fluid.getName()), 1000)));
+            }
+            return true;
+        }
+        else if(item == HarshenItems.ladle && level == 3)
+        {
+        	ItemStack stack = getItem();
+        	if(CauldronRecipes.getRecipe(stack) != null && CauldronRecipes.getRecipe(stack).getCatalyst() == fluid)
+            {
+        		isActive = true;
+            	setSwitchedItem(CauldronRecipes.getRecipe(stack).getOutput());
+            	return true;
+            }
+		}
+        return false;
+	}
+	
+	private boolean give(EntityPlayer playerIn, EnumHand hand, ItemStack stack)
+	{
+		if (playerIn.getHeldItem(hand).isEmpty())
+            playerIn.setHeldItem(hand, stack);
+        else if (!playerIn.inventory.addItemStackToInventory(stack))
+            playerIn.dropItem(stack, false);
+		return true;
+	}
+	
+	public EnumHetericCauldronFluidType getFluid() {
+		return fluid;
+	}
+	
+	public int getLevel() {
+		return level;
+	}
+	
+	private int valueOfLevel(Item item)
+	{
+		int i = 0;
+		for(Item type : fluidMap.values())
+		{
+			if(type == item)
+				break;
+			i++;
+		}
+		return i;
+			
+	}
 
 	
 	public int getActiveTimer()

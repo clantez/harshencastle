@@ -54,7 +54,6 @@ public class HereticCauldron extends BaseBlockHarshenSingleInventory
 	protected static final AxisAlignedBB AABB_WALL_SOUTH = new AxisAlignedBB(0.0D, 0.0D, 0.875D, 1.0D, 1.0D, 1.0D);
 	protected static final AxisAlignedBB AABB_WALL_EAST = new AxisAlignedBB(0.875D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
 	protected static final AxisAlignedBB AABB_WALL_WEST = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.125D, 1.0D, 1.0D);
-	private static final HashMap<EnumHetericCauldronFluidType, Item> fluidMap = new HashMap<>(HarshenUtils.HASH_LIMIT);
 
 	@Override
 	public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean p_185477_7_)
@@ -65,6 +64,11 @@ public class HereticCauldron extends BaseBlockHarshenSingleInventory
         addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_WALL_EAST);
         addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_WALL_SOUTH);
     }
+	
+	@Override
+	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
+		return getTile(worldIn, pos) != null ?this.getDefaultState().withProperty(LIQUID, getTile(worldIn, pos).getFluid()).withProperty(LEVEL, getTile(worldIn, pos).getLevel()) : this.getDefaultState();
+	}
 
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
@@ -83,9 +87,10 @@ public class HereticCauldron extends BaseBlockHarshenSingleInventory
 		setRegistryName("heretic_cauldron");
 		setUnlocalizedName("heretic_cauldron");
 		this.setDefaultState(this.blockState.getBaseState().withProperty(LIQUID, EnumHetericCauldronFluidType.NONE).withProperty(LEVEL, 1));
-		fluidMap.put(EnumHetericCauldronFluidType.LAVA, Items.LAVA_BUCKET);
+		TileEntityHereticCauldron.fluidMap.put(EnumHetericCauldronFluidType.LAVA, Items.LAVA_BUCKET);
 		setHardness(5.0F);
 		setResistance(5.0F);
+		//tickRate(worldIn)
 	}
 	
 	@Override
@@ -96,110 +101,20 @@ public class HereticCauldron extends BaseBlockHarshenSingleInventory
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
-        ItemStack itemstack = playerIn.getHeldItem(hand);
-        Item item = itemstack.getItem();
-        int i = ((Integer)state.getValue(LEVEL)).intValue();
-        if(((TileEntityHereticCauldron)worldIn.getTileEntity(pos)).isActive)
-        	return true;
-        if (itemstack.isEmpty())
-        	return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitZ, hitZ, hitZ);
-        
-        if(item instanceof BloodCollector && (state.getValue(LIQUID) ==  EnumHetericCauldronFluidType.BLOOD || state.getValue(LIQUID) == EnumHetericCauldronFluidType.NONE))
-        {
-        	if(i != 3 && !worldIn.isRemote)
-        		if (playerIn.capabilities.isCreativeMode || (!playerIn.capabilities.isCreativeMode && ((BloodCollector)item).remove(playerIn, hand, 3)))
-                {
-        			worldIn.playSound((EntityPlayer)null, pos, SoundEvents.ITEM_BOTTLE_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
-    				setState(worldIn, pos, this.blockState.getBaseState().withProperty(LIQUID, EnumHetericCauldronFluidType.BLOOD).withProperty(LEVEL, i + (state.getValue(LIQUID) ==  EnumHetericCauldronFluidType.BLOOD ? 1 : 0)));
-                }
-        	return true;
-        }
-        if(fluidMap.containsValue(item) && state.getValue(LIQUID) == EnumHetericCauldronFluidType.NONE)
-        {
-        	EnumHetericCauldronFluidType[] type = new EnumHetericCauldronFluidType[fluidMap.keySet().size()];
-        	setState(worldIn, pos, this.blockState.getBaseState().withProperty(LIQUID, fluidMap.keySet().toArray(type)[valueOfLevel(item)]).withProperty(LEVEL, 3));
-	        worldIn.playSound((EntityPlayer)null, pos, SoundEvents.ITEM_BUCKET_FILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
-	        return true;
-        }
-        else if(item instanceof UniversalBucket)
-        {
-        	setState(worldIn, pos, state.withProperty(LIQUID, EnumHetericCauldronFluidType.getFromFluid(((UniversalBucket)item).getFluid(itemstack).getFluid())).withProperty(LEVEL, 3));
-	        worldIn.playSound((EntityPlayer)null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
-	        return true;
-        }
-        else if (item == Items.BUCKET && state.getValue(LIQUID) != EnumHetericCauldronFluidType.BLOOD)
-        {
-            if (i == 3 && !worldIn.isRemote)
-            {
-                if (!playerIn.capabilities.isCreativeMode)
-                	itemstack.shrink(1);
-                setState(worldIn, pos, state.withProperty(LIQUID, EnumHetericCauldronFluidType.NONE).withProperty(LEVEL, 1));
-                worldIn.playSound((EntityPlayer)null, pos, SoundEvents.ITEM_BUCKET_FILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
-            	if(fluidMap.containsKey(state.getValue(LIQUID)))
-            		return give(playerIn, hand, new ItemStack(fluidMap.get(state.getValue(LIQUID))));
-            	give(playerIn, hand, FluidUtil.getFilledBucket(new FluidStack(FluidRegistry.getFluid(state.getValue(LIQUID).getName()), 1000)));
-            }
-            return true;
-        }
-        else if(item == HarshenItems.ladle && i == 3)
-        {
-        	ItemStack stack = ((BaseTileEntityHarshenSingleItemInventory) worldIn.getTileEntity(pos)).getItem();
-        	if(CauldronRecipes.getRecipe(stack) != null && CauldronRecipes.getRecipe(stack).getCatalyst() == state.getValue(LIQUID))
-            {
-            	((TileEntityHereticCauldron)worldIn.getTileEntity(pos)).isActive = true;
-            	((TileEntityHereticCauldron)worldIn.getTileEntity(pos)).setSwitchedItem(CauldronRecipes.getRecipe(stack).getOutput());
-            	return true;
-            }
-		}		
-		return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitZ, hitZ, hitZ);
+		boolean flag = getTile(worldIn, pos).onActivated(playerIn, hand);
+		if(flag);//TODO make faster
+		return flag ? flag : super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitZ, hitZ, hitZ);
     }
-	
-	private int valueOfLevel(Item item)
-	{
-		int i = 0;
-		for(Item type : fluidMap.values())
-		{
-			if(type == item)
-				break;
-			i++;
-		}
-		return i;
-			
-	}
-	
-	private boolean give(EntityPlayer playerIn, EnumHand hand, ItemStack stack)
-	{
-		if (stack.isEmpty())
-            playerIn.setHeldItem(hand, stack);
-        else if (!playerIn.inventory.addItemStackToInventory(stack))
-            playerIn.dropItem(stack, false);
-		return true;
-	}
-	
-	private void setState(World world, BlockPos pos, IBlockState state)
-	{
-		ItemStack stack = ((TileEntityHereticCauldron)world.getTileEntity(pos)).getItem();
-		world.setBlockState(pos, state, 3);
-		((TileEntityHereticCauldron)world.getTileEntity(pos)).setItem(stack);
-        world.updateComparatorOutputLevel(pos, this);
-
-	}
-	
-	public IBlockState removeLayer(IBlockState state)
-	{ 
-		return HarshenBlocks.heretic_cauldron.getDefaultState().withProperty(LEVEL, Integer.valueOf(MathHelper.clamp(state.getValue(LEVEL) - 1, 1, 3)))
-				.withProperty(LIQUID, Integer.valueOf(MathHelper.clamp(state.getValue(LEVEL) - 1, 1, 3)) != 1 ? state.getValue(LIQUID) : EnumHetericCauldronFluidType.NONE);
-	}
 	
 	@Override
 	public int getMetaFromState(IBlockState state) {
-		return state.getValue(LIQUID).getMetaId() + state.getValue(LEVEL);
+		return 0;//state.getValue(LIQUID).getMetaId() + state.getValue(LEVEL);
 	}
 	
 	
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		return this.getDefaultState().withProperty(LEVEL, (meta % 3) + 1).withProperty(LIQUID, EnumHetericCauldronFluidType.getMatch(Math.floorDiv(meta, 3)));
+		return this.getDefaultState();//this.getDefaultState().withProperty(LEVEL, (meta % 3) + 1).withProperty(LIQUID, EnumHetericCauldronFluidType.getMatch(Math.floorDiv(meta, 3)));
 	}
 	
 	@Override
@@ -232,4 +147,14 @@ public class HereticCauldron extends BaseBlockHarshenSingleInventory
     {
         return ((Integer)blockState.getValue(LEVEL)).intValue();
     }
+	
+	private TileEntityHereticCauldron getTile(World worldIn, BlockPos pos)
+	{
+		return ((TileEntityHereticCauldron)worldIn.getTileEntity(pos));
+	}
+	
+	private TileEntityHereticCauldron getTile(IBlockAccess worldIn, BlockPos pos)
+	{
+		return ((TileEntityHereticCauldron)worldIn.getTileEntity(pos));
+	}
 }
