@@ -87,8 +87,10 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 	        this.world.playSound((EntityPlayer)null, pos, SoundEvents.ITEM_BUCKET_FILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
 	        return true;
         }
-        else if(item instanceof UniversalBucket)
+        else if(item instanceof UniversalBucket && fluid == EnumHetericCauldronFluidType.NONE)
         {
+        	itemstack.shrink(1);
+        	give(playerIn, hand, new ItemStack(Items.BUCKET));
         	level = 3;
         	fluid = EnumHetericCauldronFluidType.getFromFluid(((UniversalBucket)item).getFluid(itemstack).getFluid());
 	        this.world.playSound((EntityPlayer)null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
@@ -100,16 +102,10 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
             {
                 itemstack.shrink(1);
                 this.world.playSound((EntityPlayer)null, pos, SoundEvents.ITEM_BUCKET_FILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                if(fluidMap.containsKey(fluid))
-                {
-                	ItemStack stack = new ItemStack(fluidMap.get(fluid));
-                	level = 1;
-                    fluid = EnumHetericCauldronFluidType.NONE;
-                    return give(playerIn, hand, stack);
-                }
-                level = 1;
+                ItemStack stack = fluidMap.containsKey(fluid) ?  new ItemStack(fluidMap.get(fluid)) : FluidUtil.getFilledBucket(new FluidStack(FluidRegistry.getFluid(fluid.getName()), 1000));
+            	give(playerIn, hand, stack);
+            	level = 1;
                 fluid = EnumHetericCauldronFluidType.NONE;	
-            	give(playerIn, hand, FluidUtil.getFilledBucket(new FluidStack(FluidRegistry.getFluid(fluid.getName()), 1000)));
             }
             return true;
         }
