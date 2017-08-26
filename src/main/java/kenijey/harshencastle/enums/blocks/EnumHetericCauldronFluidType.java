@@ -12,7 +12,9 @@ public enum EnumHetericCauldronFluidType implements IStringSerializable
 	HARSHING_WATER("harshing_water", 1, HarshenFluids.harshing_water),
 	HARSHEN_DIMENSIONAL_FLUID("harshen_dimensional_fluid", 2, HarshenFluids.harshen_dimensional_fluid),
 	BLOOD("blood", 3),
-	LAVA("lava", 4, new ResourceLocation("minecraft", "textures/blocks/lava_still.png"));
+	LAVA("lava", 4, new ResourceLocation("minecraft", "textures/blocks/lava_still.png")),
+	MILK("milk", 4, new ResourceLocation("minecraft", "textures/blocks/lava_still.png"));
+;
 	
 	private final String name;
 	private final int id;
