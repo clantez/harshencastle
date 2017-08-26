@@ -7,9 +7,12 @@ import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
 import kenijey.harshencastle.handlers.HandlerPontusAllowed;
 import kenijey.harshencastle.itemstackhandlers.HarshenItemStackHandler;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockLiquid;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.Chunk;
 
 public class HarshenUtils
 {
@@ -69,5 +72,26 @@ public class HarshenUtils
 	public static EntityPlayer getClosestPlayer(World world, BlockPos position)
 	{
 		return world.getClosestPlayer(position.getX(), position.getY(), position.getZ(), Integer.MAX_VALUE, false);
+	}
+	
+	public static BlockPos getTopBlock(World world, BlockPos pos)
+	{
+		Chunk chunk = world.getChunkFromBlockCoords(pos);
+        BlockPos blockpos;
+        BlockPos blockpos1;
+
+        for (blockpos = new BlockPos(pos.getX(), chunk.getTopFilledSegment() + 16, pos.getZ()); blockpos.getY() >= 0; blockpos = blockpos1)
+        {
+            blockpos1 = blockpos.down();
+            IBlockState state = chunk.getBlockState(blockpos1);
+            if ((state.getMaterial().blocksMovement() && !state.getBlock().isLeaves(state, world, blockpos1) && !state.getBlock().isFoliage(world, blockpos1))
+            		|| state.getBlock() instanceof BlockLiquid)
+            {
+                break;
+            }
+        }
+
+        return blockpos;
+			
 	}
 }

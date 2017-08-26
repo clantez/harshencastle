@@ -54,7 +54,7 @@ public class WorldGen implements IWorldGenerator
 		{
 			if(random.nextFloat() < 0.001f)
 			{
-				BlockPos position = getTopBlock(world, new BlockPos(chunkX * 16, 1, chunkZ * 16).add(random.nextInt(16), 0, random.nextInt(16))).add(-3, -1, -3);
+				BlockPos position = HarshenUtils.getTopBlock(world, new BlockPos(chunkX * 16, 1, chunkZ * 16).add(random.nextInt(16), 0, random.nextInt(16))).add(-3, -1, -3);
 				loadStructure(world, "shrine", position);
 				position = position.add(3, 1, 3);
 				world.setBlockState(position, Blocks.CHEST.getDefaultState().withProperty(BlockChest.FACING, EnumFacing.HORIZONTALS[random.nextInt(4)]), 3);
@@ -80,7 +80,7 @@ public class WorldGen implements IWorldGenerator
 			if(chunkX == 44 && chunkZ == 44)
 			{
 				BlockPos[] positionsOfFillableChests = {new BlockPos(9, 20, 36), new BlockPos(15, 20, 40), new BlockPos(15, 20, 40), new BlockPos(19, 20, 31)};
-				BlockPos position = getTopBlock(world, new BlockPos(chunkX * 16, 1, chunkZ * 16)).add(-36, -20, 1);
+				BlockPos position = HarshenUtils.getTopBlock(world, new BlockPos(chunkX * 16, 1, chunkZ * 16)).add(-36, -20, 1);
 				BlockPos castleSize = getSizeFromName(world, "harshencastlevol4");
 				for(int i = 0; i < 4; i++)
 					new MazeGenerator(new BlockPos(castleSize.getX(), 3, castleSize.getZ()), HarshenBlocks.harshen_dimensional_stone.getDefaultState(), 0.35f).generate(world, random, position.add(1, 1 + (i * 4), 2));
@@ -138,27 +138,6 @@ public class WorldGen implements IWorldGenerator
 	private BlockPos getSizeFromName(World world, String name)
 	{
 		return ((WorldServer)world).getStructureTemplateManager().get(world.getMinecraftServer(), new ResourceLocation(HarshenCastle.MODID, name)).getSize();
-	}
-	
-	private BlockPos getTopBlock(World world, BlockPos pos)
-	{
-		Chunk chunk = world.getChunkFromBlockCoords(pos);
-        BlockPos blockpos;
-        BlockPos blockpos1;
-
-        for (blockpos = new BlockPos(pos.getX(), chunk.getTopFilledSegment() + 16, pos.getZ()); blockpos.getY() >= 0; blockpos = blockpos1)
-        {
-            blockpos1 = blockpos.down();
-            IBlockState state = chunk.getBlockState(blockpos1);
-            if ((state.getMaterial().blocksMovement() && !state.getBlock().isLeaves(state, world, blockpos1) && !state.getBlock().isFoliage(world, blockpos1))
-            		|| state.getBlock() instanceof BlockLiquid)
-            {
-                break;
-            }
-        }
-
-        return blockpos;
-			
 	}
 	
 	private void flowerGenerator(BlockFlower flower, World worldIn, Random rand, int chunk_X, int chunk_Z, int chancesToSpawn)
