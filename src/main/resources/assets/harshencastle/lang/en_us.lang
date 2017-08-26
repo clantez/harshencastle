@@ -89,6 +89,7 @@ tile.blood_placer.name=Blood Placer
 tile.blood_vessel.name=Blood Vessel
 tile.pontus_emerald_ore.name=Pontus Emerald Ore
 tile.archive.name=Archive
+tile.blood_factory.name=Blood Factory
 
 
 #fluids
@@ -189,3 +190,4 @@ jei.light_emitted_essence.description=The Essence of Sunlight. This essence is o
 jei.soul_harsher_pickaxe.description=Need this? Find the Kazzendre's Castle and kill Kazzendre. Then you will find this pickaxe in the treasure room in that castle. And last thing, it can break ANY block in Pontus World.
 jei.blood_block.description=Need it? Use Blood Collector.
 jei.harshen_soul_flower.description=No enough drops? You may need Fortune enchantment for your tool.
+jei.pontus_world_gate_part.description=This parts found in chests in Kazzendre's Harshen castle. It spawns in overworld, but there's only 1. Also found in a small shrine in overworld surface.
