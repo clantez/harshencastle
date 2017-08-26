@@ -37,7 +37,7 @@ public class Fearring extends Item implements IHarshenProvider
 
 	@Override
 	public void onTick(EntityPlayer player, int tick) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
