@@ -5,6 +5,7 @@ import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.InventoryEffectRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 public class GuiPlayerInventoryExtended extends InventoryEffectRenderer
@@ -38,6 +39,7 @@ public class GuiPlayerInventoryExtended extends InventoryEffectRenderer
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 		super.drawScreen(mouseX, mouseY, partialTicks);
+		this.renderHoveredToolTip(mouseX, mouseY);
 		this.oldMouseX = (float)mouseX;
         this.oldMouseY = (float)mouseY;
 	}
