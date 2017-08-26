@@ -11,7 +11,9 @@ import kenijey.harshencastle.enums.items.EnumProp;
 import kenijey.harshencastle.enums.items.EnumRitualCrystal;
 import kenijey.harshencastle.items.BloodCollector;
 import kenijey.harshencastle.items.BloodEssence;
+import kenijey.harshencastle.items.BloodInfusedEnderEye;
 import kenijey.harshencastle.items.BloodyEarring;
+import kenijey.harshencastle.items.CriminalPendant;
 import kenijey.harshencastle.items.EmpoweredSoulHarsherSword;
 import kenijey.harshencastle.items.Fearring;
 import kenijey.harshencastle.items.FeatherEarring;
@@ -34,6 +36,7 @@ import kenijey.harshencastle.items.RitualCrystal;
 import kenijey.harshencastle.items.SoulHarsherPickaxe;
 import kenijey.harshencastle.items.SoulHarsherSword;
 import kenijey.harshencastle.items.SoulInfusedIngot;
+import kenijey.harshencastle.items.Telering;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemPotion;
@@ -69,6 +72,9 @@ public class HarshenItems
 	public static Item feather_earring;
 	public static Item fearring;
 	public static Item one_ring;
+	public static Item criminal_pendant;
+	public static Item telering;
+	public static Item blood_infused_ender_eye;
 	
 	
 	public static void preInit()
@@ -98,6 +104,9 @@ public class HarshenItems
 		feather_earring = new FeatherEarring();
 		fearring = new Fearring();
 		one_ring = new OneRing();
+		criminal_pendant = new CriminalPendant();
+		telering = new Telering();
+		blood_infused_ender_eye = new BloodInfusedEnderEye();
 	}
 	
 	public static void reg()
@@ -121,6 +130,9 @@ public class HarshenItems
 		regItem(feather_earring, 1);
 		regItem(fearring, 1);
 		regItem(one_ring, 1);
+		regItem(criminal_pendant, 1);
+		regItem(telering, 1);
+		regItem(blood_infused_ender_eye, 1);
 		
 		regMetaItem(pontus_world_gate_spawner, 1, EnumPontusGateSpawner.getNames(), "pontus_world_gate_spawner_");
 		regMetaItem(pontus_world_gate_parts, 1, EnumPontusGateSpawnerParts.getNames(), "pontus_world_gate_part_");

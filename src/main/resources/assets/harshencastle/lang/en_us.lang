@@ -40,6 +40,9 @@ item.glass_container.regen.name=Blood filled Glass Container
 item.feather_earring.name=Feather Earring
 item.fearring.name=Fearring
 item.one_ring.name=One Ring
+item.criminal_pendant.name=Criminal Pendant
+item.telering.name=Telering
+item.blood_infused_ender_eye.name=Blood Infused Ender Eye
 
 #entity eggs
 entity.soulless_knight.name=[HC] Soulless Knight
@@ -92,6 +95,7 @@ tile.archive.name=Archive
 fluid.harshen_dimensional_fluid=Harshen Dimensional Fluid
 fluid.harshing_water=Harshing Water
 fluid.blood=Blood
+fluid.lava=Lava
 
 
 #commands
@@ -160,6 +164,9 @@ earring=Earring
 archive1=Need to be organized.
 onering1=One ring to lead all,
 onering2=one ring to be destroyed
+telering1=Teleportation ring. You can teleport
+telering2=by right click with your empty hand.
+cpendant=You are more powerful.
 
 #misc
 itemGroup.harshenTab=Harshen Castle

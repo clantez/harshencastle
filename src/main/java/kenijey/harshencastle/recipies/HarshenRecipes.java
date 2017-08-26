@@ -34,6 +34,7 @@ public class HarshenRecipes {
 	
 		
 		PedestalSlabRecipes.addRecipe(new ItemStack(Blocks.COBBLESTONE), new ItemStack(Blocks.NETHERRACK));
+		PedestalSlabRecipes.addRecipe(new ItemStack(Items.ENDER_EYE), new ItemStack(HarshenItems.blood_infused_ender_eye));
 		
 		
 		CauldronRecipes.addRecipe(new ItemStack(HarshenItems.ritual_crystal, 1, 0), new ItemStack(HarshenItems.ritual_crystal, 1, 1), EnumHetericCauldronFluidType.BLOOD);
@@ -55,6 +56,7 @@ public class HarshenRecipes {
 				'h', new ItemStack(HarshenItems.harshen_crystal),
 				'i', "ingotIron");
 		
+		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "harshen_soul_ingot"), new ResourceLocation("harshen_items"),
 				new ItemStack(HarshenItems.harshen_soul_ingot),
 				"e e",
@@ -64,6 +66,7 @@ public class HarshenRecipes {
 				'c', new ItemStack(HarshenItems.harshen_crystal),
 				's', new ItemStack(HarshenItems.harshen_soul_fragment),
 				'e', "gemEmerald");
+		
 		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "pontus_ring"), new ResourceLocation("harshen_items"),
 				new ItemStack(HarshenItems.pontus_ring),
@@ -75,6 +78,7 @@ public class HarshenRecipes {
 				's', new ItemStack(HarshenItems.harshen_soul_fragment),
 				'g', "nuggetGold");
 		
+		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "bloody_earring"), new ResourceLocation("harshen_items"),
 				new ItemStack(HarshenItems.bloody_earring),
 				" i ",
@@ -85,6 +89,7 @@ public class HarshenRecipes {
 				's', new ItemStack(HarshenItems.harshen_soul_fragment),
 				'b', new ItemStack(HarshenItems.blood_essence));
 		
+		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "harshen_jaguar_armor_helmet"), new ResourceLocation("harshen_items"),
 				new ItemStack(HarshenArmors.harshen_jaguar_armor_helmet),
 				"iii",
@@ -92,6 +97,7 @@ public class HarshenRecipes {
 				"   ",
 				
 				'i', new ItemStack(HarshenItems.harshen_soul_ingot));
+		
 		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "harshen_jaguar_armor_chestplate"), new ResourceLocation("harshen_items"),
 				new ItemStack(HarshenArmors.harshen_jaguar_armor_chestplate),
@@ -101,6 +107,7 @@ public class HarshenRecipes {
 				
 				'i', new ItemStack(HarshenItems.harshen_soul_ingot));
 		
+		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "harshen_jaguar_armor_leggings"), new ResourceLocation("harshen_items"),
 				new ItemStack(HarshenArmors.harshen_jaguar_armor_leggings),
 				"iii",
@@ -108,6 +115,7 @@ public class HarshenRecipes {
 				"i i",
 				
 				'i', new ItemStack(HarshenItems.harshen_soul_ingot));
+		
 		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "harshen_jaguar_armor_boots"), new ResourceLocation("harshen_items"),
 				new ItemStack(HarshenArmors.harshen_jaguar_armor_boots),
@@ -117,6 +125,7 @@ public class HarshenRecipes {
 				
 				'i', new ItemStack(HarshenItems.harshen_soul_ingot));
 		
+		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "harshen_dimensional_pedestal"), new ResourceLocation("harshen_items"),
 				new ItemStack(HarshenBlocks.harshen_dimensional_pedestal),
 				" i ",
@@ -124,6 +133,7 @@ public class HarshenRecipes {
 				" i ",
 				
 				'i', new ItemStack(HarshenItems.harshen_soul_ingot));
+		
 		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "harshen_dimensional_dirt"), new ResourceLocation("harshen_items"),
 				new ItemStack(HarshenBlocks.harshen_dimensional_dirt, 3),
@@ -133,6 +143,7 @@ public class HarshenRecipes {
 				
 				'e', new ItemStack(HarshenItems.harshen_crystal),
 				'd', "dirt");
+		
 		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "ritual_crystal.passive"), new ResourceLocation("harshen_items"),
 				new ItemStack(HarshenItems.ritual_crystal, 1, 0),
@@ -153,6 +164,7 @@ public class HarshenRecipes {
 				
 				'i', new ItemStack(HarshenItems.harshen_soul_ingot));
 		
+		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "heretic_cauldron"), new ResourceLocation("harshen_items"),
 				new ItemStack(HarshenBlocks.heretic_cauldron),
 				"i i",
@@ -160,6 +172,7 @@ public class HarshenRecipes {
 				"iii",
 				
 				'i', new ItemStack(HarshenItems.harshen_soul_ingot));
+		
 		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "ladle"), new ResourceLocation("harshen_items"),
 				new ItemStack(HarshenItems.ladle),
@@ -169,6 +182,7 @@ public class HarshenRecipes {
 				
 				's', "stickWood",
 				'p', "plankWood");
+		
 		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "blood_collector"), new ResourceLocation("harshen_items"),
 				new ItemStack(HarshenItems.blood_collector, 1, 0),
@@ -181,6 +195,7 @@ public class HarshenRecipes {
 				'r', new ItemStack(Blocks.IRON_BARS),
 				'n', "nuggetIron");
 		
+		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "feather_earring"), new ResourceLocation("harshen_items"),
 				new ItemStack(HarshenItems.feather_earring),
 				" i ",
@@ -188,6 +203,7 @@ public class HarshenRecipes {
 //THIS NEEDS TO BE SHAPELESS
 				'f', "feather",
 				'i', new ItemStack(HarshenItems.itium));
+		
 		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "fearring"), new ResourceLocation("harshen_items"),
 				new ItemStack(HarshenItems.fearring),
@@ -198,6 +214,7 @@ public class HarshenRecipes {
 				's', new ItemStack(HarshenItems.light_emitted_essence),
 				'g', new ItemStack(Items.GOLD_INGOT));
 		
+		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "archive"), new ResourceLocation("harshen_blocks"),
 				new ItemStack(HarshenBlocks.archive),
 				"bb ",
@@ -205,11 +222,13 @@ public class HarshenRecipes {
 				
 				'b', new ItemStack(Items.BOOK));
 		
+		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "book"), new ResourceLocation("Items"),
 				new ItemStack(Items.BOOK, 4),
 				"a  ",
 //THIS NEEDS TO BE SHAPELESS
 				'a', new ItemStack(HarshenBlocks.archive));
+		
 		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "one_ring"), new ResourceLocation("harshen_items"),
 				new ItemStack(HarshenItems.one_ring),
@@ -219,5 +238,25 @@ public class HarshenRecipes {
 				
 				'e', new ItemStack(HarshenItems.light_emitted_essence),
 				'g', new ItemStack(Items.GOLD_INGOT));
+		
+		
+		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "telering"), new ResourceLocation("harshen_items"),
+				new ItemStack(HarshenItems.telering),
+				" i ",
+				"geg",
+				" g ",
+				
+				'i', new ItemStack(HarshenItems.itium),
+				'e', new ItemStack(HarshenItems.blood_infused_ender_eye),
+				'g', new ItemStack(Items.GOLDEN_CARROT));
+		
+		
+		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "criminal_pendant"), new ResourceLocation("harshen_items"),
+				new ItemStack(HarshenItems.criminal_pendant),
+				"i  ",
+				"s  ",
+//THIS NEEDS TO BE SHAPELESS
+				'i', new ItemStack(HarshenItems.itium),
+				's', new ItemStack(HarshenItems.harshen_soul_fragment));
 	}
 }
