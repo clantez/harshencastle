@@ -39,6 +39,7 @@ item.glass_container.void.name=Void filled Glass Container
 item.glass_container.regen.name=Blood filled Glass Container
 item.feather_earring.name=Feather Earring
 item.fearring.name=Fearring
+item.one_ring.name=One Ring
 
 #entity eggs
 entity.soulless_knight.name=[HC] Soulless Knight
@@ -157,6 +158,8 @@ ring=Ring
 pendant=Pendant
 earring=Earring
 archive1=Need to be organized.
+onering1=One ring to lead all,
+onering2=one ring to be destroyed
 
 #misc
 itemGroup.harshenTab=Harshen Castle

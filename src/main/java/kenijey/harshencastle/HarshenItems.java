@@ -26,6 +26,7 @@ import kenijey.harshencastle.items.Itium;
 import kenijey.harshencastle.items.Ladle;
 import kenijey.harshencastle.items.LightEmittedEssence;
 import kenijey.harshencastle.items.LightEmittedSeed;
+import kenijey.harshencastle.items.OneRing;
 import kenijey.harshencastle.items.PontusRing;
 import kenijey.harshencastle.items.PontusWorldGatePart;
 import kenijey.harshencastle.items.PontusWorldGateSpawner;
@@ -67,6 +68,7 @@ public class HarshenItems
 	public static Item soul_infused_ingot;
 	public static Item feather_earring;
 	public static Item fearring;
+	public static Item one_ring;
 	
 	
 	public static void preInit()
@@ -95,6 +97,7 @@ public class HarshenItems
 		soul_infused_ingot = new SoulInfusedIngot();
 		feather_earring = new FeatherEarring();
 		fearring = new Fearring();
+		one_ring = new OneRing();
 	}
 	
 	public static void reg()
@@ -117,6 +120,7 @@ public class HarshenItems
 		regItem(soul_infused_ingot, 2);
 		regItem(feather_earring, 1);
 		regItem(fearring, 1);
+		regItem(one_ring, 1);
 		
 		regMetaItem(pontus_world_gate_spawner, 1, EnumPontusGateSpawner.getNames(), "pontus_world_gate_spawner_");
 		regMetaItem(pontus_world_gate_parts, 1, EnumPontusGateSpawnerParts.getNames(), "pontus_world_gate_part_");
