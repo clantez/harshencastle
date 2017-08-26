@@ -1,0 +1,20 @@
+{
+  "type": "forge:ore_shapeless",
+  "group": "harshen_items",
+  "ingredients": [
+    {
+      "type": "forge:ore_dict",
+      "ore": "feather"
+    },
+	{
+      "type": "forge:ore_dict",
+      "ore": "feather"
+    },
+    {
+      "item": "harshencastle:itium"
+    }
+  ],
+  "result": {
+    "item": "harshencastle:feather_earring"
+  }
+}
