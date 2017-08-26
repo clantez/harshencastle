@@ -44,6 +44,8 @@ public class BloodVessel extends Block implements ITileEntityProvider
 		setRegistryName("blood_vessel");
 		setUnlocalizedName("blood_vessel");
 		setDefaultState(this.blockState.getBaseState().withProperty(NODE, false));
+		setHardness(5.0F);
+		setResistance(5.0F);
 	}
 	
 	@Override
