@@ -22,7 +22,54 @@ public class ModelArmour extends BaseHarshenBiped
 		textureWidth = 32;
 		textureHeight = 64;
 	
+		addRenderer(helmet,10,1,8,-5,-9,-3,0,0);
+		addRenderer(helmet,10,3,1,-5,-7,4,36,0);
+		addRenderer(helmet,10,3,1,-5,-3,4,36,4);
+		addRenderer(helmet,1,10,1,1,-8,4,0,9);
+		addRenderer(helmet,1,10,1,-2,-8,4,4,9);
+		addRenderer(helmet,1,1,7,4,-1,-5,8,9);
+		addRenderer(helmet,1,1,7,-5,-1,-5,24,9);
+		addRenderer(helmet,1,3,1,4,-1,2,40,9);
+		addRenderer(helmet,1,3,1,-5,-1,2,44,9);
+		addRenderer(helmet,1,1,2,4,-3,-2,58,0);
+		addRenderer(helmet,1,1,2,-5,-3,-2,58,3);
+		addRenderer(helmet,1,5,1,-5,-6,0,0,20);
+		addRenderer(helmet,1,5,1,4,-6,0,4,20);
+		addRenderer(helmet,1,1,2,-6,-3,0,0,26);
+		addRenderer(helmet,1,1,2,5,-3,0,0,29);
+		addRenderer(helmet,1,1,4,-5,-5,-2,6,27);
+		addRenderer(helmet,1,1,4,4,-5,-2,16,27);
+		addRenderer(helmet,1,6,1,4,-8,2,26,25);
+		addRenderer(helmet,1,6,1,-5,-8,2,30,25);
+		addRenderer(helmet,1,3,1,-5,-4,-3,48,9);
+		addRenderer(helmet,1,3,1,4,-4,-3,52,9);
+		addRenderer(helmet,1,1,1,-6,-4,1,8,24);
+		addRenderer(helmet,1,1,1,5,-4,1,12,24);
+		rotations.put(addRenderer(helmet,1,5,1,4,-10,-2,40,13), new Vec3d(8.521d,0,0));
+		rotations.put(addRenderer(helmet,1,5,1,-5,-10,-2,44,13), new Vec3d(8.521d,0,0));
+		addRenderer(helmet,8,1,6,-4,-10,-2,8,17);
 		 
+		addRenderer(chestplate,8,11,1,-4,0,-3,0,32);
+		addRenderer(chestplate,4,4,1,-3,1,-4,18,32);
+		addRenderer(chestplate,1,3,1,-3,5,-4,18,37);
+		addRenderer(chestplate,1,1,1,3,1,-4,22,37);
+		addRenderer(chestplate,2,2,1,-2,2,-5,18,41);
+		addRenderer(chestplate,3,1,1,1,2,-4,22,39);
+		addRenderer(chestplate,2,1,1,1,4,-4,26,37);
+		addRenderer(chestplate,1,2,1,-2,7,-4,28,32);
+		addRenderer(chestplate,1,3,1,3,7,-4,32,32);
+		addRenderer(chestplate,1,1,1,-3,0,-3,28,35);
+		addRenderer(chestplate,1,1,1,0,5,-4,32,36);
+		addRenderer(chestplate,1,1,1,-4,3,-4,24,41);
+		addRenderer(chestplate,1,1,1,-4,1,-4,28,41);
+		addRenderer(chestplate,1,2,1,1,6,-4,36,32);
+		addRenderer(chestplate,8,3,1,-4,8,2,40,32);
+		addRenderer(chestplate,8,3,1,-4,0,2,40,36);
+		addRenderer(chestplate,8,3,1,-4,4,2,40,40);
+		addRenderer(chestplate,1,5,1,1,3,2,36,35);
+		addRenderer(chestplate,1,2,1,3,11,2,32,38);
+		addRenderer(chestplate,1,5,1,-2,3,2,58,32);
+		addRenderer(chestplate,1,2,1,-4,11,2,58,38);
 		 
 		for(ModelRenderer renderer : helmet)
 			bipedHead.addChild(renderer);
@@ -31,6 +78,7 @@ public class ModelArmour extends BaseHarshenBiped
 			 bipedBody.addChild(renderer);
 	}
 	 
+	private ModelRenderer addRenderer(ArrayList chestplate, int dimensionX, int dimensionY, int dimensionZ,
 		float offsetX, float offsetY, float offsetZ, int textureX, int textureY) 
 	{
 		ModelRenderer r = newRender(dimensionX, dimensionY, dimensionZ, 0, 0, 0, offsetX, offsetY, offsetZ, textureX, textureY, false, this);
