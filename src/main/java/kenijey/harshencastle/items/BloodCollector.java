@@ -89,7 +89,7 @@ public class BloodCollector extends BaseItemMetaData
 	
 	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-		tooltip.add("Blood: " + Integer.toString(getNBT(stack).getInteger("Blood")) + " / 50");
+		tooltip.add("\u00A74" + "Blood: " + Integer.toString(getNBT(stack).getInteger("Blood")) + " / 50");
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 	}
 

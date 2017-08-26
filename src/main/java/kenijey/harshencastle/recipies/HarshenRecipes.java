@@ -76,7 +76,7 @@ public class HarshenRecipes {
 				
 				'i', new ItemStack(HarshenItems.itium),
 				's', new ItemStack(HarshenItems.harshen_soul_fragment),
-				'g', new ItemStack(Items.GOLD_INGOT));
+				'g', new ItemStack(Items.GOLDEN_APPLE));
 		
 		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "bloody_earring"), new ResourceLocation("harshen_items"),
