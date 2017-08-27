@@ -37,4 +37,11 @@ public enum EnumRitualStick implements IStringSerializable, IIDSet
 	public String getName() {
 		return this.name().toLowerCase();
 	}
+
+	public static String[] getNames() {
+		String[] names = new String[values().length];
+		for(int i = 0; i < values().length; i ++)
+			names[i] = values()[i].getName();
+		return names;
+	}
 }

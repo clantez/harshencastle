@@ -3,6 +3,7 @@ package kenijey.harshencastle.items;
 import java.util.List;
 
 import kenijey.harshencastle.base.BaseItemMetaData;
+import kenijey.harshencastle.enums.items.EnumRitualStick;
 
 public class RitualStick extends BaseItemMetaData
 {
@@ -19,7 +20,7 @@ public class RitualStick extends BaseItemMetaData
 
 	@Override
 	protected String[] getNames() {
-		return null;
+		return EnumRitualStick.getNames();
 	}
 
 }
