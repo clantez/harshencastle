@@ -39,7 +39,7 @@ public class HarshenRecipes {
 				new ItemStack(HarshenItems.ritual_crystal, 1 ,1), new ItemStack(Items.DIAMOND_SWORD)), new ItemStack(HarshenItems.soul_harsher_sword, 1, 0), true);
 		
 		RitualRecipes.addRecipe(Arrays.asList(new ItemStack(HarshenItems.itium, 1, 0), new ItemStack(Items.MAGMA_CREAM),
-				new ItemStack(Items.PRISMARINE_SHARD), new ItemStack(Items.GOLDEN_APPLE)), new ItemStack(HarshenItems.soul_harsher_sword, 1, 0), true);
+				new ItemStack(Items.PRISMARINE_SHARD), new ItemStack(Items.GOLDEN_APPLE)), new ItemStack(HarshenItems.elemental_pendant, 1, 0), true);
 		
 		
 		
