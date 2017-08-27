@@ -3,7 +3,6 @@ package kenijey.harshencastle.dimensions.pontus;
 import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.biomes.PontusBiomeProvider;
 import kenijey.harshencastle.dimensions.DimensionPontus;
-import kenijey.harshencastle.skyrenders.WeatherPontus;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;

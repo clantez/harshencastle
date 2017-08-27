@@ -4,9 +4,6 @@ import java.util.Random;
 
 import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.entity.AI.AIEntityWanderNoWater;
-import kenijey.harshencastle.entityrender.RenderSoullessKnight;
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
@@ -28,9 +25,6 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.client.registry.IRenderFactory;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntitySoullessKnight extends EntityMob
 {

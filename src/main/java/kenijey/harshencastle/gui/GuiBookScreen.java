@@ -1,17 +1,10 @@
 package kenijey.harshencastle.gui;
 
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.List;
 
 import org.lwjgl.input.Mouse;
-
-import com.google.common.collect.Lists;
 
 import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.enums.gui.EnumGuiPage;
@@ -20,11 +13,9 @@ import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.obj.OBJModel.Texture;
 
 public class GuiBookScreen extends GuiScreen
 {

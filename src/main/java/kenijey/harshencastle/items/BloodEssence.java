@@ -2,15 +2,9 @@ package kenijey.harshencastle.items;
 
 import java.util.List;
 
-import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
-import kenijey.harshencastle.interfaces.IBloodSupply;
-import kenijey.harshencastle.interfaces.IHarshenProvider;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 

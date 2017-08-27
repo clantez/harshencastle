@@ -2,7 +2,6 @@ package kenijey.harshencastle.enums.inventory;
 
 import java.awt.Dimension;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public enum EnumInventorySlots 
 {

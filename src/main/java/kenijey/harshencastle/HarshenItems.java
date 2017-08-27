@@ -40,7 +40,6 @@ import kenijey.harshencastle.items.SoulInfusedIngot;
 import kenijey.harshencastle.items.Telering;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemPotion;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;

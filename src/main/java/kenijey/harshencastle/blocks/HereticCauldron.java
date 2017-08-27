@@ -1,18 +1,13 @@
 package kenijey.harshencastle.blocks;
 
-import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Nullable;
 
 import kenijey.harshencastle.HarshenBlocks;
-import kenijey.harshencastle.HarshenItems;
-import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.base.BaseBlockHarshenSingleInventory;
 import kenijey.harshencastle.base.BaseTileEntityHarshenSingleItemInventory;
 import kenijey.harshencastle.enums.blocks.EnumHetericCauldronFluidType;
-import kenijey.harshencastle.items.BloodCollector;
-import kenijey.harshencastle.recipies.CauldronRecipes;
 import kenijey.harshencastle.tileentity.TileEntityHereticCauldron;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -23,23 +18,13 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidUtil;
-import net.minecraftforge.fluids.UniversalBucket;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 

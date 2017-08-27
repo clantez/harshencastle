@@ -3,15 +3,8 @@ package kenijey.harshencastle.particle;
 import java.util.Random;
 
 import kenijey.harshencastle.base.BaseHarshenParticle;
-import net.minecraft.client.renderer.BufferBuilder;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.client.FMLClientHandler;
 
 public class ParticleCauldron extends BaseHarshenParticle
 { 

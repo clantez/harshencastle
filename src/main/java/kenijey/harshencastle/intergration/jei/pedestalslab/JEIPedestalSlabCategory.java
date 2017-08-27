@@ -1,7 +1,6 @@
 package kenijey.harshencastle.intergration.jei.pedestalslab;
 
 import kenijey.harshencastle.base.BaseJeiCategory;
-import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;

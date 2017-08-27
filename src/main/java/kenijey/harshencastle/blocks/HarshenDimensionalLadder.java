@@ -1,7 +1,6 @@
 package kenijey.harshencastle.blocks;
 
 import net.minecraft.block.BlockLadder;
-import net.minecraft.block.material.Material;
 
 public class HarshenDimensionalLadder extends BlockLadder
 {

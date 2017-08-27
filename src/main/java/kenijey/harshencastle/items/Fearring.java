@@ -3,7 +3,6 @@ package kenijey.harshencastle.items;
 import java.util.List;
 
 import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
-import kenijey.harshencastle.interfaces.IBloodSupply;
 import kenijey.harshencastle.interfaces.IHarshenProvider;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;

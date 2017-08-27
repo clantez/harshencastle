@@ -6,16 +6,11 @@ import javax.annotation.Nonnull;
 
 import com.google.common.collect.ImmutableList;
 
-import kenijey.harshencastle.base.BaseJeiCategory;
 import kenijey.harshencastle.base.BaseJeiWrapper;
 import kenijey.harshencastle.enums.blocks.EnumHetericCauldronFluidType;
 import kenijey.harshencastle.recipies.CauldronRecipes;
 import mezz.jei.api.ingredients.IIngredients;
-import mezz.jei.api.recipe.IRecipeWrapper;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
 
 public class JEICauldronWrapper extends BaseJeiWrapper
 {

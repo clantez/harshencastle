@@ -2,10 +2,6 @@ package kenijey.harshencastle.potions;
 
 import kenijey.harshencastle.HarshenCastle;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.attributes.AbstractAttributeMap;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
 

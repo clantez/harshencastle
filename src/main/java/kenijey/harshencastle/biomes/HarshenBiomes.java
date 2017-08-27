@@ -3,10 +3,8 @@ package kenijey.harshencastle.biomes;
 import java.util.ArrayList;
 
 import kenijey.harshencastle.base.BasePontusResourceBiome;
-import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import scala.xml.dtd.impl.Base;
 
 public class HarshenBiomes 
 {

@@ -2,15 +2,12 @@ package kenijey.harshencastle.handlers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import kenijey.harshencastle.armor.HarshenArmors;
 import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.inventory.EntityEquipmentSlot.Type;
 import net.minecraft.item.ItemArmor;
-import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;

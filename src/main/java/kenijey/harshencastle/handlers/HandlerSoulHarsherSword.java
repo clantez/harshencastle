@@ -1,15 +1,11 @@
 package kenijey.harshencastle.handlers;
 
-import java.util.Arrays;
-
 import com.google.common.collect.Lists;
 
-import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.armor.HarshenArmors;
 import kenijey.harshencastle.base.BaseHarshenSword;
 import kenijey.harshencastle.items.HarshenProps;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EntityDamageSource;

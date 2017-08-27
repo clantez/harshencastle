@@ -1,11 +1,8 @@
 package kenijey.harshencastle.tileentity;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
-import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.base.BaseTileEntityHarshenSingleItemInventoryActive;
-import kenijey.harshencastle.recipies.HarshenRecipes;
 import kenijey.harshencastle.recipies.RitualRecipes;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.init.Blocks;

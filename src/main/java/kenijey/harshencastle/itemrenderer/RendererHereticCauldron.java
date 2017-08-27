@@ -1,7 +1,6 @@
 package kenijey.harshencastle.itemrenderer;
 
 import kenijey.harshencastle.HarshenCastle;
-import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.enums.particle.EnumHarshenParticle;
 import kenijey.harshencastle.tileentity.TileEntityHereticCauldron;
 import net.minecraft.client.Minecraft;

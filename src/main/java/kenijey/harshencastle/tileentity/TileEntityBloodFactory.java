@@ -1,9 +1,7 @@
 package kenijey.harshencastle.tileentity;
 
 import kenijey.harshencastle.base.BaseTileEntityHarshenSingleItemInventoryActive;
-import kenijey.harshencastle.blocks.BloodVessel;
 import kenijey.harshencastle.interfaces.IBloodSupply;
-import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.item.ItemStack;
 
 public class TileEntityBloodFactory extends BaseTileEntityHarshenSingleItemInventoryActive

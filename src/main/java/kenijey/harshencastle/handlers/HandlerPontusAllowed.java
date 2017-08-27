@@ -3,7 +3,6 @@ package kenijey.harshencastle.handlers;
 import java.util.HashMap;
 
 import kenijey.harshencastle.HarshenUtils;
-import kenijey.harshencastle.biomes.HarshenBiomes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;

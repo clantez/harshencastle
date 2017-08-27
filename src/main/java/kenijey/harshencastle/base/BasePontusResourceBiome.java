@@ -5,7 +5,6 @@ import kenijey.harshencastle.dimensions.PontusBiomeDecorator;
 import kenijey.harshencastle.entity.EntitySoulPart;
 import net.minecraft.block.Block;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biome.SpawnListEntry;
 import net.minecraftforge.common.BiomeDictionary;
 
 public abstract class BasePontusResourceBiome extends Biome

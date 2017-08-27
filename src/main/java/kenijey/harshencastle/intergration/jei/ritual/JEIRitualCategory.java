@@ -3,22 +3,12 @@ package kenijey.harshencastle.intergration.jei.ritual;
 import java.awt.Dimension;
 import java.util.List;
 
-import javax.annotation.Nonnull;
-
-import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.base.BaseJeiCategory;
-import mezz.jei.api.IGuiHelper;
-import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
-import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.IRecipeWrapper;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 
 public class JEIRitualCategory extends BaseJeiCategory
 {	

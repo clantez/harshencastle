@@ -1,17 +1,9 @@
 package kenijey.harshencastle.base;
 
-import java.util.Collections;
-import java.util.List;
-
-import kenijey.harshencastle.network.HarshenNetwork;
-import kenijey.harshencastle.network.packets.MessagePacketPlayerHasAccess;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.math.BlockPos;
 
 public abstract class BaseHarshenCommand extends CommandBase 
 {

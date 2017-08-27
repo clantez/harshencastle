@@ -1,7 +1,5 @@
 package kenijey.harshencastle.base;
 
-import net.minecraft.util.math.BlockPos;
-
 public abstract class BaseTileEntityHarshenSingleItemInventoryActive extends BaseTileEntityHarshenSingleItemInventory 
 {
 	protected boolean isActive;

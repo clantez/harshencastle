@@ -2,7 +2,6 @@ package kenijey.harshencastle.inventory;
 
 import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
 import kenijey.harshencastle.interfaces.IHarshenProvider;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;

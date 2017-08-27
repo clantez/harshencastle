@@ -2,7 +2,6 @@ package kenijey.harshencastle.recipies;
 
 import java.util.ArrayList;
 
-import kenijey.harshencastle.enums.blocks.EnumHetericCauldronFluidType;
 import net.minecraft.item.ItemStack;
 
 public class PedestalSlabRecipes 

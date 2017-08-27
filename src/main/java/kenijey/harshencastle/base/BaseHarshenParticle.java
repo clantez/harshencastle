@@ -1,8 +1,5 @@
 package kenijey.harshencastle.base;
 
-import java.util.Random;
-
-import kenijey.harshencastle.proxy.ClientProxy;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;

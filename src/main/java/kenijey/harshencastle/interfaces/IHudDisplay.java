@@ -1,11 +1,9 @@
 package kenijey.harshencastle.interfaces;
 
-import io.netty.util.internal.StringUtil;
 import kenijey.harshencastle.HarshenUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
