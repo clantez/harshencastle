@@ -11,8 +11,14 @@ import kenijey.harshencastle.biomes.HarshenBiomes;
 import kenijey.harshencastle.dimensions.HarshenDimensions;
 import kenijey.harshencastle.dimensions.pontus.PontusWorldProvider;
 import kenijey.harshencastle.entity.HarshenEntities;
+import kenijey.harshencastle.enums.SetIds;
 import kenijey.harshencastle.enums.blocks.EnumHetericCauldronFluidType;
+import kenijey.harshencastle.enums.items.EnumBloodCollector;
 import kenijey.harshencastle.enums.items.EnumGlassContainer;
+import kenijey.harshencastle.enums.items.EnumPontusGateSpawner;
+import kenijey.harshencastle.enums.items.EnumPontusGateSpawnerParts;
+import kenijey.harshencastle.enums.items.EnumProp;
+import kenijey.harshencastle.enums.items.EnumRitualStick;
 import kenijey.harshencastle.enums.particle.EnumHarshenParticle;
 import kenijey.harshencastle.fluids.HarshenFluids;
 import kenijey.harshencastle.handlers.HandlerBloodOnHurt;
@@ -49,6 +55,8 @@ public class CommonProxy
 {
     public void preInit(FMLPreInitializationEvent event) 
     {
+    	setUpEnumValues();
+    	
     	HarshenPotions.preInit();
 		HarshenPotions.register();
 		
@@ -73,13 +81,17 @@ public class CommonProxy
 		
 		HarshenLootTables.preInit();
 		
-		int i = 0;
-		for(EnumHetericCauldronFluidType type : EnumHetericCauldronFluidType.values())
-			type.setId(i++);
-		
-		int i1 = 0;
-		for(EnumGlassContainer type : EnumGlassContainer.values())
-			type.setMeta(i1++);
+    }
+    
+    private void setUpEnumValues()
+    {
+		SetIds.setup(EnumGlassContainer.values());
+		SetIds.setup(EnumHetericCauldronFluidType.values());
+		SetIds.setup(EnumBloodCollector.values());
+		SetIds.setup(EnumPontusGateSpawner.values());
+		SetIds.setup(EnumPontusGateSpawnerParts.values());
+		SetIds.setup(EnumProp.values());
+		SetIds.setup(EnumRitualStick.values());
     }
 
     public void init(FMLInitializationEvent event) 

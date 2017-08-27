@@ -26,7 +26,7 @@ import kenijey.harshencastle.items.HarshenProps;
 import kenijey.harshencastle.items.HarshenSoulFragment;
 import kenijey.harshencastle.items.HarshenSoulIngot;
 import kenijey.harshencastle.items.Itium;
-import kenijey.harshencastle.items.Ladle;
+import kenijey.harshencastle.items.RitualStick;
 import kenijey.harshencastle.items.LightEmittedEssence;
 import kenijey.harshencastle.items.LightEmittedSeed;
 import kenijey.harshencastle.items.OneRing;
@@ -98,7 +98,7 @@ public class HarshenItems
 		light_emitted_essence = new LightEmittedEssence();
 		blood_collector = new BloodCollector();
 		ritual_crystal = new RitualCrystal();
-		ladle = new Ladle();
+		ladle = new RitualStick();
 		props = new HarshenProps();
 		glass_container = new GlassContainer();
 		soul_infused_ingot = new SoulInfusedIngot();

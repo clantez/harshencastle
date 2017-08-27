@@ -144,13 +144,22 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
         else if(item == HarshenItems.ladle && level == 3)
         {
         	ItemStack stack = getItem();
-        	if(CauldronRecipes.getRecipe(stack, fluid) != null)
-            {
-        		isActive = true;
-            	setSwitchedItem(CauldronRecipes.getRecipe(stack, fluid).getOutput());
-            	workingFluid = fluid;
-            	return true;
-            }
+        	switch (itemstack.getMetadata()) {
+			case 0:
+				if(CauldronRecipes.getRecipe(stack, fluid) != null)
+	            {
+	        		isActive = true;
+	            	setSwitchedItem(CauldronRecipes.getRecipe(stack, fluid).getOutput());
+	            	workingFluid = fluid;
+	            	return true;
+	            }
+				break;
+			case 1:
+				//TODO testing and executing of new
+				break;
+			default:
+				break;
+			}
 		}
         return false;
 	}

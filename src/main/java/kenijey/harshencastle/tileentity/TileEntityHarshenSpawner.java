@@ -41,7 +41,7 @@ public class TileEntityHarshenSpawner extends BaseTileEntityHarshenSingleItemInv
 	
 	private void activate(EntityPlayer player)
 	{
-		delItem();
+		setItemAir();
 		this.entity.setPosition(pos.getX(), pos.getY(), pos.getZ());
 		this.entity.setRotationYawHead(player.getPosition().subtract(pos).getY());
 		if(!world.isRemote)

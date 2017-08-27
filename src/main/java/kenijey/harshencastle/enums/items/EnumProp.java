@@ -1,18 +1,18 @@
 package kenijey.harshencastle.enums.items;
 
+import kenijey.harshencastle.interfaces.IIDSet;
 import net.minecraft.util.IStringSerializable;
 
-public enum EnumProp implements IStringSerializable
+public enum EnumProp implements IStringSerializable, IIDSet
 {
-	KnightSword("knight_sword", 0);
+	KnightSword("knight_sword");
 	
 	private int meta;
 	private String name;
 	
-	private EnumProp(String name, int meta)
+	private EnumProp(String name)
 	{
 		this.name = name;
-		this.meta = meta;
 	}
 
 	@Override
@@ -36,5 +36,10 @@ public enum EnumProp implements IStringSerializable
 		for(EnumProp l : EnumProp.values())
 			s += l.getName() + " ";
 		return s.split(" ");
+	}
+
+	@Override
+	public void setId(int id) {
+		this.meta = id;
 	}
 }

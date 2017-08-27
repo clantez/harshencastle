@@ -1,22 +1,22 @@
 package kenijey.harshencastle.enums.items;
 
+import kenijey.harshencastle.interfaces.IIDSet;
 import net.minecraft.util.IStringSerializable;
 
-public enum EnumBloodCollector implements IStringSerializable
+public enum EnumBloodCollector implements IStringSerializable, IIDSet
 {
-	ZERO(0, 0),
-	TEN(1, 10),
-	TWENTY(2, 20),
-	THIRTY(3, 30),
-	FOURTY(4, 40),
-	FIFTY(5, 50);
+	ZERO(0),
+	TEN(10),
+	TWENTY(20),
+	THIRTY(30),
+	FOURTY(40),
+	FIFTY(50);
 	
 	private int id;
 	private int changeAmount;
 	
-	private EnumBloodCollector(int id, int changeAmount)
+	private EnumBloodCollector(int changeAmount)
 	{
-		this.id = id;
 		this.changeAmount = changeAmount;
 	}
 
@@ -46,5 +46,10 @@ public enum EnumBloodCollector implements IStringSerializable
 		for(EnumBloodCollector l : EnumBloodCollector.values())
 			s += l.getName() + " ";
 		return s.split(" ");
+	}
+
+	@Override
+	public void setId(int id) {
+		this.id = id;
 	}
 }

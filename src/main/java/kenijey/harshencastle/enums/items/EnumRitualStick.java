@@ -1,0 +1,40 @@
+package kenijey.harshencastle.enums.items;
+
+import kenijey.harshencastle.interfaces.IIDSet;
+import net.minecraft.util.IStringSerializable;
+
+public enum EnumRitualStick implements IStringSerializable, IIDSet
+{
+	NormalCauldron(0x6E4D0E),
+	AdvancedCauldron(0xE45511);
+	
+	private int color;
+	private int meta;
+	
+	private EnumRitualStick(int color)
+	{
+		this.color = color;
+	}
+	
+	public static int getColorFromMeta(int meta)
+	{
+		for(EnumRitualStick stick : EnumRitualStick.values())
+			if(stick.meta == meta)
+				return stick.color;
+		return -1;
+	}
+	
+	@Override
+	public void setId(int id) {
+		this.meta = id;
+	}
+	
+	public int getColor() {
+		return color;
+	}
+
+	@Override
+	public String getName() {
+		return this.name().toLowerCase();
+	}
+}

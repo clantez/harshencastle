@@ -2,11 +2,12 @@ package kenijey.harshencastle.enums.blocks;
 
 import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.fluids.HarshenFluids;
+import kenijey.harshencastle.interfaces.IIDSet;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 
-public enum EnumHetericCauldronFluidType implements IStringSerializable
+public enum EnumHetericCauldronFluidType implements IStringSerializable, IIDSet
 {
 	NONE("none"),
 	HARSHING_WATER("harshing_water", HarshenFluids.harshing_water),
@@ -38,6 +39,8 @@ public enum EnumHetericCauldronFluidType implements IStringSerializable
 		return id;
 	}
 	
+	
+	@Override
 	public void setId(int id) {
 		this.id = id;
 	}

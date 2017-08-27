@@ -1,19 +1,19 @@
 package kenijey.harshencastle.enums.items;
 
+import kenijey.harshencastle.interfaces.IIDSet;
 import net.minecraft.util.IStringSerializable;
 
-public enum EnumPontusGateSpawner implements IStringSerializable
+public enum EnumPontusGateSpawner implements IStringSerializable, IIDSet
 {
-	Normal("normal", 0),
-	Enhanced("enhanced", 1);
+	Normal("normal"),
+	Enhanced("enhanced");
 	
 	private int meta;
 	private String name;
 	
-	private EnumPontusGateSpawner(String name, int meta)
+	private EnumPontusGateSpawner(String name)
 	{
 		this.name = name;
-		this.meta = meta;
 	}
 
 	@Override
@@ -37,5 +37,10 @@ public enum EnumPontusGateSpawner implements IStringSerializable
 		for(EnumPontusGateSpawner l : EnumPontusGateSpawner.values())
 			s += l.getName() + " ";
 		return s.split(" ");
+	}
+
+	@Override
+	public void setId(int id) {
+		this.meta = id;
 	}
 }

@@ -1,12 +1,13 @@
 package kenijey.harshencastle.enums.items;
 
 import kenijey.harshencastle.enums.blocks.EnumHetericCauldronFluidType;
+import kenijey.harshencastle.interfaces.IIDSet;
 import kenijey.harshencastle.potions.HarshenPotions;
 import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.IStringSerializable;
 
-public enum EnumGlassContainer implements IStringSerializable
+public enum EnumGlassContainer implements IStringSerializable, IIDSet
 {
 	EMPTY("empty", -1, (PotionEffect)null),
 	VOID("void", 0, new PotionEffect(HarshenPotions.potionSoulless, 600)),
@@ -42,7 +43,9 @@ public enum EnumGlassContainer implements IStringSerializable
 		this.effects = effects;
 	}
 	
-	public void setMeta(int meta) {
+	@Override
+	public void setId(int meta) {
+		System.out.println(meta);
 		this.meta = meta;
 	}
 	
