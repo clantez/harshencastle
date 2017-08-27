@@ -14,6 +14,7 @@ import kenijey.harshencastle.items.BloodEssence;
 import kenijey.harshencastle.items.BloodInfusedEnderEye;
 import kenijey.harshencastle.items.BloodyEarring;
 import kenijey.harshencastle.items.CriminalPendant;
+import kenijey.harshencastle.items.ElementalPendant;
 import kenijey.harshencastle.items.EmpoweredSoulHarsherSword;
 import kenijey.harshencastle.items.Fearring;
 import kenijey.harshencastle.items.FeatherEarring;
@@ -75,6 +76,7 @@ public class HarshenItems
 	public static Item criminal_pendant;
 	public static Item telering;
 	public static Item blood_infused_ender_eye;
+	public static Item elemental_pendant;
 	
 	
 	public static void preInit()
@@ -107,6 +109,7 @@ public class HarshenItems
 		criminal_pendant = new CriminalPendant();
 		telering = new Telering();
 		blood_infused_ender_eye = new BloodInfusedEnderEye();
+		elemental_pendant = new ElementalPendant();
 	}
 	
 	public static void reg()
@@ -133,6 +136,7 @@ public class HarshenItems
 		regItem(criminal_pendant, 1);
 		regItem(telering, 1);
 		regItem(blood_infused_ender_eye, 1);
+		regItem(elemental_pendant, 1);
 		
 		regMetaItem(pontus_world_gate_spawner, 1, EnumPontusGateSpawner.getNames(), "pontus_world_gate_spawner_");
 		regMetaItem(pontus_world_gate_parts, 1, EnumPontusGateSpawnerParts.getNames(), "pontus_world_gate_part_");

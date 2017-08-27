@@ -41,6 +41,7 @@ item.one_ring.name=One Ring
 item.criminal_pendant.name=Criminal Pendant
 item.telering.name=Telering
 item.blood_infused_ender_eye.name=Blood Infused Ender Eye
+item.elemental_pendant.name=Elemental Pendant
 
 
 #entity eggs
@@ -166,6 +167,8 @@ onering2=one ring to be destroyed
 telering1=Teleportation ring. You can teleport
 telering2=by pressing shift to 4 blocks away. Be Lucky!
 cpendant=You are more powerful.
+ependant1=Resist, more resist to afflict more.
+ependant2=(Health and armor increases)
 
 #misc
 itemGroup.harshenTab=Harshen Castle
