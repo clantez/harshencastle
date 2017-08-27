@@ -43,6 +43,8 @@ item.telering.name=Telering
 item.blood_infused_ender_eye.name=Blood Infused Ender Eye
 item.elemental_pendant.name=Elemental Pendant
 
+#ritual
+ritual.fail.position=Ritual built wrong (%s, %s, %s)
 
 #entity eggs
 entity.soulless_knight.name=[HC] Soulless Knight

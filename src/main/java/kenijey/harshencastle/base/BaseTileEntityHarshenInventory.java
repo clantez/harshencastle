@@ -50,6 +50,7 @@ public abstract class BaseTileEntityHarshenInventory extends BaseHarshenTileEnti
 	
 	public boolean setItem(int slot, ItemStack item)
 	{
+		item.setCount(1);
 		this.handler.setStackInSlot(slot, item);
 		dirty();
 		onItemAdded(slot);

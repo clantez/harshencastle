@@ -45,7 +45,6 @@ public enum EnumGlassContainer implements IStringSerializable, IIDSet
 	
 	@Override
 	public void setId(int meta) {
-		System.out.println(meta);
 		this.meta = meta;
 	}
 	

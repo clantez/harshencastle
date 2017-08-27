@@ -9,6 +9,7 @@ import kenijey.harshencastle.entity.EntityFactories;
 import kenijey.harshencastle.entity.EntitySoulPart;
 import kenijey.harshencastle.entity.EntitySoullessKnight;
 import kenijey.harshencastle.enums.items.EnumGlassContainer;
+import kenijey.harshencastle.enums.items.EnumRitualStick;
 import kenijey.harshencastle.enums.particle.EnumHarshenParticle;
 import kenijey.harshencastle.gui.GuiBookScreen;
 import kenijey.harshencastle.handlers.client.HandlerGameOverlay;
@@ -93,7 +94,6 @@ public class ClientProxy extends CommonProxy
 	public void book()
 	{
 		Minecraft.getMinecraft().displayGuiScreen(new GuiBookScreen());
-		System.out.println(new ItemColors().getColorFromItemstack(Minecraft.getMinecraft().player.getHeldItemOffhand(), 1));
 	}
     
 	@Override
@@ -116,6 +116,7 @@ public class ClientProxy extends CommonProxy
         	FMLCommonHandler.instance().bus().register(o);
     	}
     	
+    	
     	ItemColors itemcolors = Minecraft.getMinecraft().getItemColors();
     	itemcolors.registerItemColorHandler(new IItemColor() {
 			
@@ -124,6 +125,13 @@ public class ClientProxy extends CommonProxy
 				return tintIndex == 1 ? -1 : EnumGlassContainer.getContainerFromMeta(stack.getMetadata()).color;
 			}
 		}, HarshenItems.glass_container);
+    	itemcolors.registerItemColorHandler(new IItemColor() {
+			
+			@Override
+			public int getColorFromItemstack(ItemStack stack, int tintIndex) {
+				return EnumRitualStick.getColorFromMeta(stack.getMetadata());
+			}
+		}, HarshenItems.ritual_stick);
     }
     
     @Override

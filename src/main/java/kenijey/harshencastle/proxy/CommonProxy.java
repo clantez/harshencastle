@@ -55,13 +55,13 @@ public class CommonProxy
 {
     public void preInit(FMLPreInitializationEvent event) 
     {
-    	setUpEnumValues();
-    	
-    	HarshenPotions.preInit();
+    	HarshenPotions.preInit();//has to be first or else crash
 		HarshenPotions.register();
 		
     	HarshenFluids.register();
 		
+    	setUpEnumValues();
+	
 		HarshenBlocks.preInit();
 		HarshenItems.preInit();
 		

@@ -13,7 +13,7 @@ public enum EnumPontusGateSpawnerParts implements IStringSerializable, IIDSet
 
 	@Override
 	public String getName() {
-		return String.valueOf(this.meta);
+		return String.valueOf(this.meta + 1);
 	}
 	
 	public int getMeta()

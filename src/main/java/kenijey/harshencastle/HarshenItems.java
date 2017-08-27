@@ -9,6 +9,7 @@ import kenijey.harshencastle.enums.items.EnumPontusGateSpawner;
 import kenijey.harshencastle.enums.items.EnumPontusGateSpawnerParts;
 import kenijey.harshencastle.enums.items.EnumProp;
 import kenijey.harshencastle.enums.items.EnumRitualCrystal;
+import kenijey.harshencastle.enums.items.EnumRitualStick;
 import kenijey.harshencastle.items.BloodCollector;
 import kenijey.harshencastle.items.BloodEssence;
 import kenijey.harshencastle.items.BloodInfusedEnderEye;
@@ -26,7 +27,6 @@ import kenijey.harshencastle.items.HarshenProps;
 import kenijey.harshencastle.items.HarshenSoulFragment;
 import kenijey.harshencastle.items.HarshenSoulIngot;
 import kenijey.harshencastle.items.Itium;
-import kenijey.harshencastle.items.RitualStick;
 import kenijey.harshencastle.items.LightEmittedEssence;
 import kenijey.harshencastle.items.LightEmittedSeed;
 import kenijey.harshencastle.items.OneRing;
@@ -34,6 +34,7 @@ import kenijey.harshencastle.items.PontusRing;
 import kenijey.harshencastle.items.PontusWorldGatePart;
 import kenijey.harshencastle.items.PontusWorldGateSpawner;
 import kenijey.harshencastle.items.RitualCrystal;
+import kenijey.harshencastle.items.RitualStick;
 import kenijey.harshencastle.items.SoulHarsherPickaxe;
 import kenijey.harshencastle.items.SoulHarsherSword;
 import kenijey.harshencastle.items.SoulInfusedIngot;
@@ -65,7 +66,7 @@ public class HarshenItems
 	public static Item light_emitted_essence;
 	public static BaseItemMetaData blood_collector;
 	public static BaseItemMetaData ritual_crystal;
-	public static Item ladle;
+	public static BaseItemMetaData ritual_stick;
 	public static BaseItemMetaData props;
 	public static BaseItemMetaData glass_container;
 	public static Item soul_infused_ingot;
@@ -98,7 +99,7 @@ public class HarshenItems
 		light_emitted_essence = new LightEmittedEssence();
 		blood_collector = new BloodCollector();
 		ritual_crystal = new RitualCrystal();
-		ladle = new RitualStick();
+		ritual_stick = new RitualStick();
 		props = new HarshenProps();
 		glass_container = new GlassContainer();
 		soul_infused_ingot = new SoulInfusedIngot();
@@ -127,7 +128,6 @@ public class HarshenItems
 		regItem(blood_essence, 8);
 		regItem(light_emitted_essence,8);
 		regItem(light_emitted_seed,16);
-		regItem(ladle,1);
 		regItem(soul_infused_ingot, 2);
 		regItem(feather_earring, 1);
 		regItem(fearring, 1);
@@ -137,23 +137,30 @@ public class HarshenItems
 		regItem(blood_infused_ender_eye, 1);
 		regItem(elemental_pendant, 1);
 		
+		regMetaItem(ritual_stick, 1, emptyList(EnumRitualStick.values().length), "ritual_stick");
 		regMetaItem(pontus_world_gate_spawner, 1, EnumPontusGateSpawner.getNames(), "pontus_world_gate_spawner_");
 		regMetaItem(pontus_world_gate_parts, 1, EnumPontusGateSpawnerParts.getNames(), "pontus_world_gate_part_");
 		regMetaItem(props, 1, EnumProp.getNames(), "prop_");
 		regMetaItem(blood_collector, 1, EnumBloodCollector.getNames(), "blood_collector_");
 		regMetaItem(ritual_crystal, EnumRitualCrystal.getNames(), "ritual_crystal_");
-		String[] glassContainerNames = new String[EnumGlassContainer.values().length];
-		HarshenUtils.fillList(glassContainerNames, "");
-		glassContainerNames[0] = "_empty";
-		regMetaItem(glass_container, 1, glassContainerNames, "glass_container");
+		regMetaItem(glass_container, 1, emptyList(EnumGlassContainer.values().length), "glass_container", new exceptionName(0, "_empty"));
 	}
 	
 	public static ArrayList<Item> items = new ArrayList<Item>();
+	
 	public static void regRenders()
 	{
 		for(Item item : items)
 			regRender(item);
 		regRenderMeta();
+	}
+	
+	private static String[] emptyList(int size)
+	{
+		String[] s = new String[size];
+		for(int i = 0; i < size; i++)
+			s[i] = "";
+		return s;
 	}
 	
 	public static void regItem(Item item, int stackSize)
@@ -163,18 +170,21 @@ public class HarshenItems
 		ForgeRegistries.ITEMS.register(item);
 	}
 	
-	public static void regMetaItem(BaseItemMetaData item, int stackSize, String[] names, String prefix)
+	public static void regMetaItem(BaseItemMetaData item, int stackSize, String[] names, String prefix, exceptionName...exceptionNames)
 	{
+
 		item.setMaxStackSize(stackSize);
-		regMetaItem(item, names, prefix);
+		regMetaItem(item, names, prefix, exceptionNames);
 	}
 	
 	private static ArrayList<Item> allMetaItems = new ArrayList<Item>();
 	private static ArrayList<String[]> allMetaNames = new ArrayList<String[]>();
 	private static ArrayList<String> allMetaPrefix = new ArrayList<String>();
 	
-	public static void regMetaItem(BaseItemMetaData item, String[] names, String prefix)
+	public static void regMetaItem(BaseItemMetaData item, String[] names, String prefix, exceptionName...exceptionNames)
 	{
+		for(exceptionName exc : exceptionNames)
+			names[exc.position] = exc.name;
 		ForgeRegistries.ITEMS.register(item);
 		allMetaItems.add(item);
 		allMetaNames.add(names);
@@ -201,5 +211,14 @@ public class HarshenItems
 		new ItemStack(item, 1, meta).getItem().setCreativeTab(HarshenCastle.harshenTab);
 		ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(new ResourceLocation(HarshenCastle.MODID, fileName), "inventory"));
 	}
-	
+}
+
+class exceptionName
+{
+	public final int position;
+	public final String name;
+	public exceptionName(int position, String name) {
+		this.position = position;
+		this.name = name;
+	}
 }

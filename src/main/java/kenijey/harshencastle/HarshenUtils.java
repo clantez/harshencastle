@@ -95,8 +95,10 @@ public class HarshenUtils
 			
 	}
 
-	public static void fillList(String[] list, String string) {
+	public static String[] fillList(String string, Object[] objectList) {
+		String[] list = new String[objectList.length];
 		for(int i = 0; i < list.length; i++)
 			list[i] = string;
+		return list;
 	}
 }

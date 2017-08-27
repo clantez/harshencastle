@@ -41,7 +41,7 @@ public class JEICauldronCategory extends BaseJeiCategory
 		recipeLayout.getItemStacks().init(0, true, 66, 0);
 		recipeLayout.getItemStacks().set(0, ingredients.getInputs(ItemStack.class).get(0));
 		recipeLayout.getItemStacks().init(1, false, 66, 29);
-		recipeLayout.getItemStacks().set(1, Arrays.asList(new ItemStack(HarshenItems.ladle)));
+		recipeLayout.getItemStacks().set(1, Arrays.asList(new ItemStack(HarshenItems.ritual_stick)));
 		recipeLayout.getItemStacks().init(2, false, 130, 46);
 		recipeLayout.getItemStacks().set(2, ingredients.getOutputs(ItemStack.class).get(0));
 	}
