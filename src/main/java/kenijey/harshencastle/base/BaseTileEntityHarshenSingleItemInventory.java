@@ -1,60 +1,29 @@
 package kenijey.harshencastle.base;
 
-import kenijey.harshencastle.itemstackhandlers.HarshenItemStackHandler;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumFacing;
-import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.items.CapabilityItemHandler;
 
-public abstract class BaseTileEntityHarshenSingleItemInventory extends BaseHarshenTileEntity implements net.minecraft.util.ITickable, ICapabilityProvider
+public abstract class BaseTileEntityHarshenSingleItemInventory extends BaseTileEntityHarshenInventory implements net.minecraft.util.ITickable, ICapabilityProvider
 {
-	protected final HarshenItemStackHandler handler;
-	protected boolean hasItem = false;
-	protected int timer;
-	private int dirtyTimer;
 	
 	public BaseTileEntityHarshenSingleItemInventory(){
-		this.handler = new HarshenItemStackHandler(1);
+		super(1);
 	}
 	
-	
-	@Override
-	public void update()
-	{
-		timer ++;
-		tick();
-		if(dirtyTimer++ % 10 == 0)
-			dirty();
-		
-	}
-	
-	public int getTimer()
-	{
-		return timer;
-	}
-	
-	protected void tick()
-	{
-	}
-	
-	public boolean canAddItem()
+	public boolean isSlotEmpty()
 	{	 
-		return this.handler.getStackInSlot(0).getItem() == Item.getItemFromBlock(Blocks.AIR);
+		return super.isSlotEmpty(0);
 	}
 	
 	
 	public boolean setItem(ItemStack item)
 	{
-		item.setCount(1);
-		this.handler.setStackInSlot(0, item);
-		dirty();
+		return super.setItem(0, item);
+	}
+	
+	protected void onItemAdded(int slot)
+	{
 		onItemAdded();
-		return true;
 	}
 	
 	protected void onItemAdded()
@@ -62,56 +31,14 @@ public abstract class BaseTileEntityHarshenSingleItemInventory extends BaseHarsh
 		
 	}
 		
-	public void delItem()
+	public void setItemAir()
 	{
-		this.handler.setStackInSlot(0, new ItemStack(Blocks.AIR));
-		dirty();
-	}
-	
-	public boolean hasItem()
-	{
-		return getItem().getItem() != Item.getItemFromBlock(Blocks.AIR);
+		super.setItemAir(0);
 	}
 	
 	public ItemStack getItem()
 	{
-		return handler.getStackInSlot(0);
+		return super.getItem(0);
 	}
-	
-	protected void dirty()
-	{
-		markDirty();
-		IBlockState state = world.getBlockState(pos);
-		world.notifyBlockUpdate(pos, state, state, 3);
-	}
-	
-	@Override
-	public <T> T getCapability(Capability<T> capability, EnumFacing facing)
-	{
-		if (capability  == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
-			return (T) this.handler;
-		return super.getCapability(capability, facing);
-	}
-	
-	@Override
-	public boolean hasCapability(Capability<?> capability, EnumFacing facing)
-	{
-		if (capability  == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
-			return true;
-		return super.hasCapability(capability, facing);
-	}
-	
-	@Override
-	public void readFromNBT(NBTTagCompound compound) {
-		this.handler.deserializeNBT(compound.getCompoundTag("ItemStackHandler"));
-		super.readFromNBT(compound);
-	}
-	
-	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-		nbt.setTag("ItemStackHandler", this.handler.serializeNBT());
-		return super.writeToNBT(nbt);
-	}
-
 }
 

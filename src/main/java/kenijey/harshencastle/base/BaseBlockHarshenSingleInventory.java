@@ -57,7 +57,7 @@ public abstract class BaseBlockHarshenSingleInventory extends Block implements I
 					playerIn.setHeldItem(hand, new ItemStack(item.getItem(), i, item.getMetadata(), item.serializeNBT()));
 				
 			}
-			else if (((BaseTileEntityHarshenSingleItemInventory) tileEntity).hasItem())
+			else if (!((BaseTileEntityHarshenSingleItemInventory) tileEntity).canAddItem())
 			{
 				ItemStack stack = ((BaseTileEntityHarshenSingleItemInventory)tileEntity).getItem();
 				((BaseTileEntityHarshenSingleItemInventory)tileEntity).delItem();
