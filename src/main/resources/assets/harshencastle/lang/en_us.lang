@@ -35,15 +35,13 @@ item.empowered_soul_harsher_sword.name=Empowered Soul Harsher Sword
 item.harshen_book.name=Harshen Book
 item.soul_infused_ingot.name=Soul Infused Ingot
 item.glass_container.empty.name=Empty Glass Container
-item.glass_container.void.name=Glass Container: Void
-item.glass_container.regen.name=Glass Container: Blood
 item.feather_earring.name=Feather Earring
 item.fearring.name=Fearring
 item.one_ring.name=One Ring
 item.criminal_pendant.name=Criminal Pendant
 item.telering.name=Telering
 item.blood_infused_ender_eye.name=Blood Infused Ender Eye
-item.glass_container.cure.name=Glass Container: Cure
+
 
 #entity eggs
 entity.soulless_knight.name=[HC] Soulless Knight
@@ -127,7 +125,7 @@ sword1=Reminds the wraith
 sword2=of Kazzendre
 sword3=Drains the soul
 sword4=of the target you hit
-itium1=Very expensive matter
+itium1=Very expensive matter, an element
 bearring1=Regenerates 1 heart
 bearring2=every 3 seconds
 pickaxe1=A pickaxe used to
