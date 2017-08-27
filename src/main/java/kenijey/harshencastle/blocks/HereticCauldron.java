@@ -69,12 +69,6 @@ public class HereticCauldron extends BaseBlockHarshenSingleInventory
 	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
 		return getTile(worldIn, pos) != null ? this.getDefaultState().withProperty(LIQUID, getTile(worldIn, pos).getFluid()).withProperty(LEVEL, getTile(worldIn, pos).getLevel()) : this.getDefaultState();
 	}
-
-	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
-    {
-        return new AxisAlignedBB(0, 0, 0, 1, 1.001, 1);
-    }
 	 
 	@SideOnly(Side.CLIENT)
     public BlockRenderLayer getBlockLayer()
@@ -101,6 +95,7 @@ public class HereticCauldron extends BaseBlockHarshenSingleInventory
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
+		System.out.println(facing);
 		boolean flag = getTile(worldIn, pos).onActivated(playerIn, hand);
 		if(flag)
 		{

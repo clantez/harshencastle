@@ -115,11 +115,10 @@ public class BloodCollector extends BaseItemMetaData
 				break;
 			}
 		}
-		
-		else if(!flag && player.isSneaking() && remove(player, hand, 1) && worldIn.getBlockState(pos.offset(facing).down()).isSideSolid(worldIn, pos, EnumFacing.UP))
-		{
+		else if(!flag && player.isSneaking() && worldIn.getBlockState(pos.offset(facing).down()).isSideSolid(worldIn, pos, EnumFacing.UP) && remove(player, hand, 1))
+		{	
 			worldIn.setBlockState(pos.offset(facing), HarshenBlocks.blood_block.getDefaultState(), 3);
-			worldIn.getBlockState(pos.offset(facing)).getBlock().onBlockAdded(worldIn, pos, worldIn.getBlockState(pos.offset(facing))); 
+			worldIn.getBlockState(pos.offset(facing)).getBlock().onBlockAdded(worldIn, pos.offset(facing), worldIn.getBlockState(pos.offset(facing))); 
 			worldIn.playSound(pos.getX(), pos.getY(), pos.getZ(), HarshenSounds.bloodCollectorUse, SoundCategory.BLOCKS, 0.5f, new Random().nextFloat(), false);
 		}
 		return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
