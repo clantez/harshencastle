@@ -34,7 +34,7 @@ public class ContainerPlayerInventory extends net.minecraft.inventory.Container
 	@Override
 	public boolean canInteractWith(EntityPlayer playerIn)
 	{
-		return !playerIn.isSpectator();
+		return true;
 	}
 
 	@Override

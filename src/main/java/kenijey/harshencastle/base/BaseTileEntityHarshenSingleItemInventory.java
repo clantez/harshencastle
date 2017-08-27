@@ -40,5 +40,9 @@ public abstract class BaseTileEntityHarshenSingleItemInventory extends BaseTileE
 	{
 		return super.getItem(0);
 	}
+
+	public boolean canAddItem() {
+		return super.isSlotEmpty(0);
+	}
 }
 
