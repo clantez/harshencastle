@@ -49,7 +49,7 @@ public class GlassContainer extends BaseItemMetaData
 	
 	private boolean hasDrinkEffect(int meta)
 	{
-		return EnumGlassContainer.getContainerFromMeta(meta).getEffects()[0] != null;
+		return EnumGlassContainer.getContainerFromMeta(meta).getEffects() != null;
 	}
 	
 	@Override
@@ -60,7 +60,7 @@ public class GlassContainer extends BaseItemMetaData
 	@Override
 	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving) {
 		EnumGlassContainer enu = EnumGlassContainer.getContainerFromMeta(stack.getMetadata());
-		if(enu.getEffects()[0] != null)
+		if(enu.getEffects() != null)
 			for(PotionEffect effect : enu.getEffects())
 				entityLiving.addPotionEffect(effect);
 		return new ItemStack(this);

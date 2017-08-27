@@ -62,7 +62,7 @@ public class RitualRecipes {
 	{
 		boolean flag = false;
 		for(ItemStack stack1 : this.inputs)
-			if(stack.getItem() == stack1.getItem())
+			if(stack.isItemEqual(stack1))
 				flag = true;
 		return flag;
 	}

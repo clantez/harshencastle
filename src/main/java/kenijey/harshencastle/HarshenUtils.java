@@ -1,6 +1,7 @@
 package kenijey.harshencastle;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import kenijey.harshencastle.base.BasePontusResourceBiome;
 import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
@@ -11,6 +12,8 @@ import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 
@@ -93,5 +96,10 @@ public class HarshenUtils
 
         return blockpos;
 			
+	}
+
+	public static void fillList(String[] list, String string) {
+		for(int i = 0; i < list.length; i++)
+			list[i] = string;
 	}
 }

@@ -21,11 +21,11 @@ public class CauldronRecipes
 		allRecipes.add(this);
 	}
 	
-	public static CauldronRecipes getRecipe(ItemStack input) 
+	public static CauldronRecipes getRecipe(ItemStack input, EnumHetericCauldronFluidType fluid) 
 	{
 		ArrayList<CauldronRecipes> working = new ArrayList<CauldronRecipes>();
 		for(CauldronRecipes recipe : allRecipes)
-			if(recipe.getInput().getItem() == input.getItem())
+			if(recipe.getInput().isItemEqual(input) && recipe.getCatalyst() == fluid)
 				return recipe;
 		return null;
 	}

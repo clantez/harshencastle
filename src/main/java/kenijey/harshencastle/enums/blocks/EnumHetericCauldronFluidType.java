@@ -14,16 +14,32 @@ public enum EnumHetericCauldronFluidType implements IStringSerializable
 	BLOOD("blood"),
 	LAVA("lava", new ResourceLocation("minecraft", "textures/blocks/lava_still.png")),
 	MILK("milk");
-;
 	
 	private final String name;
 	private final ResourceLocation resourceLoc;
+	private int id;
 	private Fluid fromBucket;
 	
 	private EnumHetericCauldronFluidType(String name, ResourceLocation resourceLocation, Fluid fluid) {
 		this.name = name;
 		this.resourceLoc = resourceLocation;
 		this.fromBucket = fluid;
+	}
+	
+	public static EnumHetericCauldronFluidType getFromId(int id)
+	{
+		for(EnumHetericCauldronFluidType type : EnumHetericCauldronFluidType.values())
+			if(type.getId() == id)
+				return type;
+		return NONE;
+	}
+	
+	public int getId() {
+		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	private EnumHetericCauldronFluidType(String name)

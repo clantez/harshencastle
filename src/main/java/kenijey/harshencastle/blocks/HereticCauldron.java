@@ -104,11 +104,9 @@ public class HereticCauldron extends BaseBlockHarshenSingleInventory
 		boolean flag = getTile(worldIn, pos).onActivated(playerIn, hand);
 		if(flag)
 		{
-			EnumHetericCauldronFluidType liquid = getTile(worldIn, pos).getFluid();
-			int level = getTile(worldIn, pos).getLevel();
+			TileEntityHereticCauldron cauldron = getTile(worldIn, pos);
 			worldIn.setBlockState(pos, getActualState(state, worldIn, pos), 3);
-			getTile(worldIn, pos).setFluid(liquid);
-			getTile(worldIn, pos).setLevel(level);
+			cauldron.reactivate(0);
 			return true;
 		}
 		return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitZ, hitZ, hitZ);

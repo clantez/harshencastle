@@ -11,6 +11,8 @@ import kenijey.harshencastle.biomes.HarshenBiomes;
 import kenijey.harshencastle.dimensions.HarshenDimensions;
 import kenijey.harshencastle.dimensions.pontus.PontusWorldProvider;
 import kenijey.harshencastle.entity.HarshenEntities;
+import kenijey.harshencastle.enums.blocks.EnumHetericCauldronFluidType;
+import kenijey.harshencastle.enums.items.EnumGlassContainer;
 import kenijey.harshencastle.enums.particle.EnumHarshenParticle;
 import kenijey.harshencastle.fluids.HarshenFluids;
 import kenijey.harshencastle.handlers.HandlerBloodOnHurt;
@@ -71,6 +73,13 @@ public class CommonProxy
 		
 		HarshenLootTables.preInit();
 		
+		int i = 0;
+		for(EnumHetericCauldronFluidType type : EnumHetericCauldronFluidType.values())
+			type.setId(i++);
+		
+		int i1 = 0;
+		for(EnumGlassContainer type : EnumGlassContainer.values())
+			type.setMeta(i1++);
     }
 
     public void init(FMLInitializationEvent event) 
@@ -130,7 +139,7 @@ public class CommonProxy
 	public void setWorldRenderer(PontusWorldProvider prov) {		
 	}
 	
-	public void spawnParticle(EnumHarshenParticle type, Vec3d position, Vec3d directionSpeed, Object... info){}
+    public void spawnParticle(EnumHarshenParticle type, Vec3d position, Vec3d directionSpeed, float scale, boolean disableMoving, Object...info){};
 	
 	public ModelBiped getArmorModel(int id)
 	{

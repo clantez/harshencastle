@@ -8,6 +8,7 @@ import kenijey.harshencastle.dimensions.pontus.PontusWorldProvider;
 import kenijey.harshencastle.entity.EntityFactories;
 import kenijey.harshencastle.entity.EntitySoulPart;
 import kenijey.harshencastle.entity.EntitySoullessKnight;
+import kenijey.harshencastle.enums.items.EnumGlassContainer;
 import kenijey.harshencastle.enums.particle.EnumHarshenParticle;
 import kenijey.harshencastle.gui.GuiBookScreen;
 import kenijey.harshencastle.handlers.client.HandlerGameOverlay;
@@ -21,6 +22,7 @@ import kenijey.harshencastle.itemrenderer.RendererHereticCauldron;
 import kenijey.harshencastle.itemrenderer.RendererPedestalSlab;
 import kenijey.harshencastle.models.ModelArmour;
 import kenijey.harshencastle.particle.ParticleBlood;
+import kenijey.harshencastle.particle.ParticleCauldron;
 import kenijey.harshencastle.skyrenders.WeatherPontus;
 import kenijey.harshencastle.tileentity.TileEntityBloodFactory;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDimensionalPedestal;
@@ -35,7 +37,10 @@ import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
+import net.minecraft.client.renderer.color.IItemColor;
+import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.client.model.ModelLoader;
@@ -89,6 +94,7 @@ public class ClientProxy extends CommonProxy
 	public void book()
 	{
 		Minecraft.getMinecraft().displayGuiScreen(new GuiBookScreen());
+		System.out.println(new ItemColors().getColorFromItemstack(Minecraft.getMinecraft().player.getHeldItemOffhand(), 1));
 	}
     
 	@Override
@@ -110,6 +116,15 @@ public class ClientProxy extends CommonProxy
     		MinecraftForge.EVENT_BUS.register(o);
         	FMLCommonHandler.instance().bus().register(o);
     	}
+    	
+    	ItemColors itemcolors = Minecraft.getMinecraft().getItemColors();
+    	itemcolors.registerItemColorHandler(new IItemColor() {
+			
+			@Override
+			public int getColorFromItemstack(ItemStack stack, int tintIndex) {
+				return tintIndex == 1 ? -1 : EnumGlassContainer.getContainerFromMeta(stack.getMetadata()).color;
+			}
+		}, HarshenItems.glass_container);
     }
     
     @Override
@@ -140,14 +155,17 @@ public class ClientProxy extends CommonProxy
     }
     
     @Override
-    public void spawnParticle(EnumHarshenParticle type, Vec3d position, Vec3d directionSpeed, Object... info) {
+    public void spawnParticle(EnumHarshenParticle type, Vec3d position, Vec3d directionSpeed, float scale, boolean disableMoving, Object...info) {
     	Minecraft minecraft = Minecraft.getMinecraft();
         Particle entityFx = null;
         if(minecraft.world !=  null)
 	        switch (type)
 	        {
 		        case BLOOD:
-		            entityFx = new ParticleBlood(minecraft.world, position.x, position.y, position.z, directionSpeed.x, directionSpeed.y, directionSpeed.z, (float)info[0], (boolean) info[1]);
+		            entityFx = new ParticleBlood(minecraft.world, position.x, position.y, position.z, directionSpeed.x, directionSpeed.y, directionSpeed.z, scale, disableMoving);
+		            break;
+		        case CAULDRON:
+		        	entityFx = new ParticleCauldron(minecraft.world, (ResourceLocation) info[0], position.x, position.y, position.z, directionSpeed.x, directionSpeed.y, directionSpeed.z, scale / 5f, disableMoving);
 		            break;
 		        default:
 		            break;

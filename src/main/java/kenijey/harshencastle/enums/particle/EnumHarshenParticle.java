@@ -2,7 +2,8 @@ package kenijey.harshencastle.enums.particle;
 
 public enum EnumHarshenParticle 
 {
-	BLOOD(0);
+	BLOOD(0),
+	CAULDRON(1);
 	
 	
 	private int id;

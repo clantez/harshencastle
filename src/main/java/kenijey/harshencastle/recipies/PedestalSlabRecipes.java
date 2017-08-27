@@ -23,7 +23,7 @@ public class PedestalSlabRecipes
 	{
 		ArrayList<PedestalSlabRecipes> working = new ArrayList<PedestalSlabRecipes>();
 		for(PedestalSlabRecipes recipe : allRecipes)
-			if(recipe.getInput().getItem() == input.getItem())
+			if(recipe.getInput().isItemEqual(input))
 				return recipe;
 		return null;
 	}

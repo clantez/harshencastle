@@ -139,11 +139,13 @@ public class HarshenItems
 		regMetaItem(props, 1, EnumProp.getNames(), "prop_");
 		regMetaItem(blood_collector, 1, EnumBloodCollector.getNames(), "blood_collector_");
 		regMetaItem(ritual_crystal, EnumRitualCrystal.getNames(), "ritual_crystal_");
-		regMetaItem(glass_container, 1, EnumGlassContainer.getNames(), "glass_container_");
+		String[] glassContainerNames = new String[EnumGlassContainer.values().length];
+		HarshenUtils.fillList(glassContainerNames, "");
+		glassContainerNames[0] = "_empty";
+		regMetaItem(glass_container, 1, glassContainerNames, "glass_container");
 	}
 	
 	public static ArrayList<Item> items = new ArrayList<Item>();
-	
 	public static void regRenders()
 	{
 		for(Item item : items)
