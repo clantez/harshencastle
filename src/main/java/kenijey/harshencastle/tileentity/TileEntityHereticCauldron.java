@@ -43,8 +43,6 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 	
 	@Override
 	public void tick() {
-		if(level == 1 && fluid != EnumHetericCauldronFluidType.NONE)
-			fluid = EnumHetericCauldronFluidType.NONE;
 		if(isActive)
 		{
 			if(activeTimer++ > 175)
@@ -60,6 +58,8 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 				setItem(switchedItem);
 			double[] yPosOfDrains = {0.7D, 0.8D, 0.9D};
 			level = MathHelper.clamp(level - 1, 1, 3);
+			if(level == 1)
+				fluid = EnumHetericCauldronFluidType.NONE;
 			for(int i = 0; i < 35; i++)
 				HarshenCastle.proxy.spawnParticle(EnumHarshenParticle.CAULDRON,
 						new Vec3d(pos).addVector((new Random().nextDouble() / 2) + 0.25D, yPosOfDrains[layersDrained], (new Random().nextDouble() / 2) + 0.25D), new Vec3d(0, 0.01d, 0), 1f, false,
