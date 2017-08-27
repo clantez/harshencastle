@@ -7,5 +7,9 @@ public interface IHarshenProvider
 {
 	public EnumInventorySlots getSlot();
 	
-	public void onTick(EntityPlayer player, int tick);
+	public default void onTick(EntityPlayer player, int tick){};
+	
+	public default void onRemove(EntityPlayer player){};
+	
+	public default void onAdd(EntityPlayer player){};
 }
