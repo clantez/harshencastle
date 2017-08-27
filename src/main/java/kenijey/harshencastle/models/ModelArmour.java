@@ -6,13 +6,20 @@ import java.util.HashMap;
 import kenijey.harshencastle.base.BaseHarshenBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.util.math.Vec3d;
 
 public class ModelArmour extends BaseHarshenBiped
 {
+	public EntityEquipmentSlot slotActive = null;
+	
 	private ArrayList<ModelRenderer> helmet = new ArrayList<>();
 	private ArrayList<ModelRenderer> chestplate = new ArrayList<>();
-	 
+	private ArrayList<ModelRenderer> leggingsLeft = new ArrayList<>();
+	private ArrayList<ModelRenderer> leggingsRight = new ArrayList<>();
+	private ArrayList<ModelRenderer> feetLeft = new ArrayList<>();
+	private ArrayList<ModelRenderer> feetRight = new ArrayList<>();
+	
 	private HashMap<ModelRenderer, Vec3d> rotations = new HashMap<>();
 
 	public ModelArmour(float scale)
@@ -70,40 +77,91 @@ public class ModelArmour extends BaseHarshenBiped
 		addRenderer(chestplate,1,2,1,3,11,2,32,38);
 		addRenderer(chestplate,1,5,1,-2,3,2,58,32);
 		addRenderer(chestplate,1,2,1,-4,11,2,58,38);
-		 
-		for(ModelRenderer renderer : helmet)
-			bipedHead.addChild(renderer);
-		 
-		for(ModelRenderer renderer : chestplate)
-			 bipedBody.addChild(renderer);
-	}
-	 
-	private ModelRenderer addRenderer(ArrayList chestplate, int dimensionX, int dimensionY, int dimensionZ,
-		float offsetX, float offsetY, float offsetZ, int textureX, int textureY) 
-	{
-		ModelRenderer r = newRender(dimensionX, dimensionY, dimensionZ, 0, 0, 0, offsetX, offsetY, offsetZ, textureX, textureY, false, this);
-		chestplate.add(r);
-		return r;
-	}
-
-	public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
-	{
-		setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entityIn);
-		for(ModelRenderer renderer : helmet)
-			renderAndRotate(renderer, bipedHead, scale);
-		for(ModelRenderer renderer : chestplate)
-			renderAndRotate(renderer, bipedBody, scale);
+		
+		addRenderer(leggingsLeft,1,6,4,2,0,-2,0,44);
+		addRenderer(leggingsLeft,5,1,1,-2,1,-3,52,46);
+		addRenderer(leggingsLeft,5,4,1,-2,3,-3,20,44);
+		addRenderer(leggingsLeft,2,6,1,-2,0,2,32,44);
+		addRenderer(leggingsLeft,1,5,1,1,0,2,60,50);
+		addRenderer(leggingsLeft,1,1,1,0,2,2,52,50);
+		addRenderer(leggingsLeft,1,6,1,2,1,2,48,50);
+		addRenderer(leggingsLeft,1,1,1,-2,0,-3,52,54);
+		addRenderer(leggingsLeft,1,5,1,3,2,0,40,51);
+		addRenderer(leggingsLeft,4,1,1,-2,0,3,44,44);
+		
+		addRenderer(leggingsRight,1,6,4,-3,0,-2,10,44);
+		addRenderer(leggingsRight,5,1,1,-3,1,-3,52,48);
+		addRenderer(leggingsRight,5,4,1,-3,3,-3,20,49);
+		addRenderer(leggingsRight,1,3,1,-1,0,-3,44,46);
+		addRenderer(leggingsRight,2,6,1,0,0,2,38,44);
+		addRenderer(leggingsRight,1,5,1,-2,0,2,56,50);
+		addRenderer(leggingsRight,1,1,1,-1,2,2,52,52);
+		addRenderer(leggingsRight,1,6,1,-3,1,2,44,50);
+		addRenderer(leggingsRight,1,1,1,1,0,-3,32,51);
+		addRenderer(leggingsRight,1,5,1,-4,2,0,36,51);
+		addRenderer(leggingsRight,4,1,1,-2,0,3,54,44);
+		
+		addRenderer(feetLeft,1,4,1,0,6.3f,-3,0,61);
+		addRenderer(feetLeft,1,5,1,-2,5.3f,-3,12,57);
+		addRenderer(feetLeft,5,1,1,-2,8,-3,20,57);
+		addRenderer(feetLeft,4,2,1,-2,10,-3,20,59);
+		addRenderer(feetLeft,1,5,4,2,7,-2,54,57);
+		addRenderer(feetLeft,5,4,1,-2,8,2,20,62);
+		addRenderer(feetLeft,5,1,1,-2,6,2,0,59);
+		addRenderer(feetLeft,1,1,1,2,6,1,40,60);
+		
+		addRenderer(feetRight,1,4,1,-1,6.3f,-3,8,61);
+		addRenderer(feetRight,1,5,1,1,5.3f,-3,16,57);
+		addRenderer(feetRight,5,1,1,-2,8,-3,32,57);
+		addRenderer(feetRight,4,2,1,-2,10,-3,30,59);
+		addRenderer(feetRight,1,5,4,-3,7,-2,44,57);
+		addRenderer(feetRight,5,4,1,-3,8,2,32,62);
+		addRenderer(feetRight,5,1,1,-3,6,2,0,57);
+		addRenderer(feetRight,1,1,1,-3,6,1,4,61);
 
 	}
 	
-	private void renderAndRotate(ModelRenderer renderer, ModelRenderer parent, float scale)
+	@Override
+	public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
 	{
-		if(!parent.showModel)
-			return;
-		copyModelAngles(parent, renderer);
-		if(rotations.keySet().contains(renderer))
-			addAngle(renderer);
-		renderer.render(scale);
+		setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entityIn);
+		switch (slotActive) {
+		case CHEST:
+			renderAndRotate(chestplate, bipedBody, scale);
+			break;
+		case HEAD:
+			renderAndRotate(helmet, bipedHead, scale);
+			break;
+		case LEGS:
+			renderAndRotate(leggingsLeft, bipedLeftLeg, scale);
+			renderAndRotate(leggingsRight, bipedRightLeg, scale);
+			break;
+		case FEET:
+			renderAndRotate(feetLeft, bipedLeftLeg, scale);
+			renderAndRotate(feetRight, bipedRightLeg, scale);
+			break;
+		default:
+			break;
+		}
+	}
+	
+	private ModelRenderer addRenderer(ArrayList list, int dimensionX, int dimensionY, int dimensionZ,
+		float offsetX, float offsetY, float offsetZ, int textureX, int textureY) 
+	{
+		ModelRenderer r = newRender(dimensionX, dimensionY, dimensionZ, 0, 0, 0, offsetX, offsetY, offsetZ, textureX, textureY, false, this);
+		list.add(r);
+		return r;
+	}
+	
+	private void renderAndRotate(ArrayList<ModelRenderer> list, ModelRenderer parent, float scale)
+	{
+		for(ModelRenderer renderer : list)
+		{
+			copyModelAngles(parent, renderer);
+			if(rotations.keySet().contains(renderer))
+				addAngle(renderer);
+			renderer.render(scale);
+		}
 	}
 	
 	private void addAngle(ModelRenderer renderer)

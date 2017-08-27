@@ -1,7 +1,9 @@
 package kenijey.harshencastle.armor;
 
 import kenijey.harshencastle.HarshenCastle;
+import kenijey.harshencastle.models.ModelArmour;
 import net.minecraft.client.model.ModelBiped;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
@@ -30,7 +32,7 @@ public class HarshenJaguarArmor extends ItemArmor
 			if (itemStack.getItem() instanceof ItemArmor) {
 
 				EntityEquipmentSlot type = ((ItemArmor) itemStack.getItem()).armorType;
-				ModelBiped armorModel = null;
+				ModelArmour armorModel = null;
 				switch (type) {
 				case HEAD:
 				case LEGS:
@@ -43,14 +45,8 @@ public class HarshenJaguarArmor extends ItemArmor
 				default:
 					break;
 				}
-
-				armorModel.bipedHead.showModel = armorSlot == EntityEquipmentSlot.HEAD;
-				armorModel.bipedHeadwear.showModel = armorSlot == EntityEquipmentSlot.HEAD;
-				armorModel.bipedBody.showModel = armorSlot == EntityEquipmentSlot.CHEST;
-				armorModel.bipedRightArm.showModel = armorSlot == EntityEquipmentSlot.CHEST;
-				armorModel.bipedLeftArm.showModel = armorSlot == EntityEquipmentSlot.CHEST;
-				armorModel.bipedRightLeg.showModel = (armorSlot == EntityEquipmentSlot.LEGS);
-				armorModel.bipedLeftLeg.showModel = (armorSlot == EntityEquipmentSlot.LEGS);
+				
+				armorModel.slotActive = armorSlot;
 				armorModel.isSneak = _default.isSneak;
 				armorModel.isRiding = _default.isRiding;
 				armorModel.isChild = _default.isChild;
@@ -60,5 +56,10 @@ public class HarshenJaguarArmor extends ItemArmor
 			}
 		}
 		return null;
+	}
+	
+	@Override
+	public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type) {
+		return HarshenCastle.MODID + ":textures/models/armor/jaguar.png";
 	}
 }

@@ -23,6 +23,7 @@ import kenijey.harshencastle.handlers.HandlerHarshenInventoryEffects;
 import kenijey.harshencastle.handlers.HandlerPontusAllowed;
 import kenijey.harshencastle.handlers.HandlerPotionEffects;
 import kenijey.harshencastle.handlers.HandlerSoulHarsherSword;
+import kenijey.harshencastle.models.ModelArmour;
 import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.potions.HarshenPotions;
 import kenijey.harshencastle.recipies.HarshenRecipes;
@@ -141,7 +142,7 @@ public class CommonProxy
 	
     public void spawnParticle(EnumHarshenParticle type, Vec3d position, Vec3d directionSpeed, float scale, boolean disableMoving, Object...info){};
 	
-	public ModelBiped getArmorModel(int id)
+	public ModelArmour getArmorModel(int id)
 	{
 		return null;
 	};

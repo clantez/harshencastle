@@ -174,7 +174,7 @@ public class ClientProxy extends CommonProxy
     }
     
     @Override
-    public ModelBiped getArmorModel(int id) {
+    public ModelArmour getArmorModel(int id) {
     	switch (id) {
     	 case 0:
     	 return new ModelArmour(1.0f);
