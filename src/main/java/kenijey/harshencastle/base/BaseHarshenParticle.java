@@ -1,5 +1,6 @@
 package kenijey.harshencastle.base;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
@@ -9,16 +10,16 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.client.FMLClientHandler;
 
 public abstract class BaseHarshenParticle extends Particle
 {
 	private boolean disableMoving;
+	private ResourceLocation location;
 	
 	protected abstract int getXIndex();
 	protected abstract int getYIndex();
 	
-    public BaseHarshenParticle(World world, double xCoordIn, double yCoordIn, double zCoordIn, double motionXIn, double motionYIn, double motionZIn, float par14, boolean disableMoving)
+    public BaseHarshenParticle(World world, double xCoordIn, double yCoordIn, double zCoordIn, double motionXIn, double motionYIn, double motionZIn, float par14, boolean disableMoving, ResourceLocation location)
     {
         super(world, xCoordIn, yCoordIn, zCoordIn, 0.0D, 0.0D, 0.0D);
         
@@ -33,37 +34,33 @@ public abstract class BaseHarshenParticle extends Particle
         this.particleScale *= 0.75F;
         this.particleScale *= par14;
         this.particleMaxAge = (int)((8.0D / (Math.random() * 0.8D + 0.2D)) * 8);
-        this.particleMaxAge = (int)((float)this.particleMaxAge * par14);
-        this.particleAge = (particleMaxAge / 2) + (int)((particleMaxAge / 2) * world.rand.nextInt(7));
+        this.particleMaxAge = (int)(this.particleMaxAge * par14);
+        this.particleAge = (particleMaxAge / 2) + (particleMaxAge / 2) * world.rand.nextInt(7);
         this.particleAlpha = 1.0F;
         this.particleRed = 1.0F;
         this.particleGreen = 1.0F;
         this.particleBlue = 1.0F;
         this.canCollide = false;
         this.disableMoving = disableMoving;
+        this.location = location;
     }
 	@Override
     public int getFXLayer()
     {
         return 2;
     }
-	
-	protected abstract ResourceLocation getLocation();
-    
+		
     @Override
-    public void renderParticle(BufferBuilder buffer, Entity entity, float partialTicks, float rotX, float rotXZ, float rotZ, float rotYZ, float rotXY)
-    {
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(getLocation());
-        
-        float scaleMultiplier = ((float)this.particleAge + partialTicks) / (float)this.particleMaxAge * 32.0F;
+    public void renderParticle(BufferBuilder buffer, Entity entity, float partialTicks, float rotX, float rotZ, float rotYZ, float rotXY, float rotXZ)
+    {		
+    	Minecraft.getMinecraft().renderEngine.bindTexture(location);
+        float scaleMultiplier = (this.particleAge + partialTicks) / this.particleMaxAge * 32.0F;
         scaleMultiplier = MathHelper.clamp(scaleMultiplier, 0.0F, 1.0F);
         this.particleScale = this.particleScale * scaleMultiplier;
-        
         GlStateManager.depthMask(false);
         GlStateManager.enableBlend();
         GlStateManager.blendFunc(770, 1);
-
-        super.renderParticle(buffer, entity, partialTicks, rotX, rotXZ, rotZ, rotYZ, rotXY);
+        super.renderParticle(buffer, entity, partialTicks, rotX, rotZ, rotYZ, rotXY, rotXZ);
 
         GlStateManager.disableBlend();
         GlStateManager.depthMask(true);
@@ -127,7 +124,5 @@ public abstract class BaseHarshenParticle extends Particle
             motionX *= 0.699999988079071D;
             motionZ *= 0.699999988079071D;
         }
-    }
-    
-    
+    }   
 }

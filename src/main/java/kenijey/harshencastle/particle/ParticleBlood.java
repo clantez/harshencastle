@@ -2,7 +2,6 @@ package kenijey.harshencastle.particle;
 
 import kenijey.harshencastle.base.BaseHarshenParticle;
 import kenijey.harshencastle.proxy.ClientProxy;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 public class ParticleBlood extends BaseHarshenParticle
@@ -10,7 +9,7 @@ public class ParticleBlood extends BaseHarshenParticle
 
 	public ParticleBlood(World world, double xCoordIn, double yCoordIn, double zCoordIn, double motionXIn,
 			double motionYIn, double motionZIn, float par14, boolean disableMoving) {
-		super(world, xCoordIn, yCoordIn, zCoordIn, motionXIn, motionYIn, motionZIn, par14, disableMoving);
+		super(world, xCoordIn, yCoordIn, zCoordIn, motionXIn, motionYIn, motionZIn, par14, disableMoving, ClientProxy.particleTexturesLocation);
 	}
 
 	@Override
@@ -22,12 +21,4 @@ public class ParticleBlood extends BaseHarshenParticle
 	protected int getYIndex() {
 		return 0;
 	}
-
-	@Override
-	protected ResourceLocation getLocation() {
-		return ClientProxy.particleTexturesLocation;
-	}
-	
-	
-
 }

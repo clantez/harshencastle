@@ -3,6 +3,7 @@ package kenijey.harshencastle.enums.blocks;
 import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.fluids.HarshenFluids;
 import kenijey.harshencastle.interfaces.IIDSet;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
@@ -20,11 +21,14 @@ public enum EnumHetericCauldronFluidType implements IStringSerializable, IIDSet
 	private final ResourceLocation resourceLoc;
 	private int id;
 	private Fluid fromBucket;
+	private IBlockState state;
 	
 	private EnumHetericCauldronFluidType(String name, ResourceLocation resourceLocation, Fluid fluid) {
 		this.name = name;
 		this.resourceLoc = resourceLocation;
 		this.fromBucket = fluid;
+		if(fluid != null)
+			this.state = fluid.getBlock().getDefaultState();
 	}
 	
 	public static EnumHetericCauldronFluidType getFromId(int id)
@@ -75,5 +79,10 @@ public enum EnumHetericCauldronFluidType implements IStringSerializable, IIDSet
 	
 	public ResourceLocation getResourceLoc() {
 		return resourceLoc;
+	}
+	
+	public Object getStateOrLoc()
+	{
+		return state == null? resourceLoc : state;
 	}
 }

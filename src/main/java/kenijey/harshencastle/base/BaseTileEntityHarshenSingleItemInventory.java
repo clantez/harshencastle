@@ -1,6 +1,9 @@
 package kenijey.harshencastle.base;
 
+import java.util.Random;
+
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 public abstract class BaseTileEntityHarshenSingleItemInventory extends BaseTileEntityHarshenInventory implements net.minecraft.util.ITickable, ICapabilityProvider
@@ -21,6 +24,7 @@ public abstract class BaseTileEntityHarshenSingleItemInventory extends BaseTileE
 		return super.setItem(0, item);
 	}
 	
+	@Override
 	protected void onItemAdded(int slot)
 	{
 		onItemAdded();
@@ -43,6 +47,11 @@ public abstract class BaseTileEntityHarshenSingleItemInventory extends BaseTileE
 
 	public boolean canAddItem() {
 		return super.isSlotEmpty(0);
+	}
+	
+	protected double randPos()
+	{
+		return MathHelper.clamp(new Random().nextDouble(), 0.1, 0.9);
 	}
 }
 

@@ -120,6 +120,7 @@ public class HereticCauldron extends BaseBlockHarshenSingleInventory
 	public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
 		if(worldIn.getBlockState(pos.up()).getBlock() instanceof HereticCauldronTop)
 			worldIn.setBlockToAir(pos.up());
+		((TileEntityHereticCauldron)worldIn.getTileEntity(pos)).killRitual();
 	}
 	
 	@Override

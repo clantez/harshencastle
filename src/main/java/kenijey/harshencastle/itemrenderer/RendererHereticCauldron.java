@@ -1,5 +1,7 @@
 package kenijey.harshencastle.itemrenderer;
 
+import java.util.Random;
+
 import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.enums.particle.EnumHarshenParticle;
 import kenijey.harshencastle.tileentity.TileEntityHereticCauldron;
@@ -10,7 +12,6 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import scala.util.Random;
 
 public class RendererHereticCauldron extends TileEntitySpecialRenderer<TileEntityHereticCauldron>
 {
@@ -59,6 +60,7 @@ public class RendererHereticCauldron extends TileEntitySpecialRenderer<TileEntit
 			
 		}
 		GlStateManager.popMatrix();
+		
 	}
 	
 }

@@ -9,7 +9,6 @@ import kenijey.harshencastle.enums.particle.EnumHarshenParticle;
 import kenijey.harshencastle.recipies.HarshenRecipes;
 import kenijey.harshencastle.recipies.PedestalSlabRecipes;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 
 public class TileEntityPedestalSlab extends BaseTileEntityHarshenSingleItemInventoryActive
@@ -81,10 +80,5 @@ public class TileEntityPedestalSlab extends BaseTileEntityHarshenSingleItemInven
 						HarshenCastle.proxy.spawnParticle(EnumHarshenParticle.BLOOD, new Vec3d(pos.add(x, 0, z)).addVector(randPos(), 0, randPos()), new Vec3d(0, 0.01, 0), 1f, false);
 				}
 					
-	}
-	
-	private double randPos()
-	{
-		return MathHelper.clamp(new Random().nextDouble(), 0.1, 0.9);
 	}
 }

@@ -77,7 +77,7 @@ public class ClientProxy extends CommonProxy
 		
 		RenderingRegistry.registerEntityRenderingHandler(EntitySoullessKnight.class, new EntityFactories.FactorySoullessKnight());
 		RenderingRegistry.registerEntityRenderingHandler(EntitySoulPart.class, new EntityFactories.FactorySoulPart());
-    }
+	}
 	
 	 @Override
 	public int getrenderDistance() {
@@ -172,8 +172,9 @@ public class ClientProxy extends CommonProxy
 		            entityFx = new ParticleBlood(minecraft.world, position.x, position.y, position.z, directionSpeed.x, directionSpeed.y, directionSpeed.z, scale, disableMoving);
 		            break;
 		        case CAULDRON:
-		        	entityFx = new ParticleCauldron(minecraft.world, (ResourceLocation) info[0], position.x, position.y, position.z, directionSpeed.x, directionSpeed.y, directionSpeed.z, scale / 5f, disableMoving);
-		            break;
+		        	if(info[0] instanceof ResourceLocation)
+		        		entityFx = new ParticleCauldron(minecraft.world, (ResourceLocation) info[0], position.x, position.y, position.z, directionSpeed.x, directionSpeed.y, directionSpeed.z, scale / 5f, disableMoving);
+		        	break;
 		        default:
 		            break;
 	        }

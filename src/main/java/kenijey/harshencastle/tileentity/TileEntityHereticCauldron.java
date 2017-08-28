@@ -63,6 +63,31 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 				layersDrained = 0;
 			}	
 		}
+		if(overstandingRecipe != null)
+			if(!checkForLargeRitual(false))
+				killRitual();
+			else if(overstandingTimer-- <= 0)
+			{
+				setActive(true);
+				setSwitchedItem(overstandingRecipe.getOutput());
+				for(TileEntityHarshenDimensionalPedestal pedestal : pedestals)
+				{
+					pedestal.deactiveateNonController();
+					pedestal.setItemAir();
+				}
+				for(BlockPos pos : bloodPos)
+					world.setBlockToAir(pos);
+				overstandingRecipe = null;
+			}	
+			else
+				for(BlockPos pos : bloodPos)
+					for(int i = 0; i < 15; i ++)
+						{
+							Vec3d vec = new Vec3d(pos).addVector(randPos(), -0.1, randPos());
+							HarshenCastle.proxy.spawnParticle(EnumHarshenParticle.BLOOD, vec, 
+									new Vec3d((this.pos.getX() + 0.5 - vec.x) / 20D, (this.pos.getY() + 2 - vec.y) / 30D, (this.pos.getZ() + 0.5 - vec.z) / 20D), 1f, false);
+						}
+			
 		if(activeTimer >= drainPos[layersDrained])
 		{
 			if(layersDrained == 2)
@@ -74,25 +99,10 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 			for(int i = 0; i < 35; i++)
 				HarshenCastle.proxy.spawnParticle(EnumHarshenParticle.CAULDRON,
 						new Vec3d(pos).addVector((new Random().nextDouble() / 2) + 0.25D, yPosOfDrains[layersDrained], (new Random().nextDouble() / 2) + 0.25D), new Vec3d(0, 0.01d, 0), 1f, false,
-						workingFluid.getResourceLoc());
+						workingFluid.getStateOrLoc());
 
 			reactivate(1);
 		}
-		
-		if(overstandingRecipe != null)
-			if(overstandingTimer-- <= 0)
-			{
-				System.out.println("s");
-				setActive(true);
-				setSwitchedItem(overstandingRecipe.getOutput());
-				for(TileEntityHarshenDimensionalPedestal pedestal : pedestals)
-				{
-					pedestal.deactiveateNonController();
-					pedestal.setItemAir();
-				}
-				overstandingRecipe = null;
-			}
-			
 	}
 	
 	public boolean onActivated(EntityPlayer playerIn, EnumHand hand)
@@ -201,8 +211,12 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 	
 	
 	private ArrayList<TileEntityHarshenDimensionalPedestal> pedestals = new ArrayList<>();
+	private ArrayList<BlockPos> bloodPos = new ArrayList<>();
+
 	private boolean checkForLargeRitual(boolean setRecipe, EntityPlayer... players)
 	{
+		bloodPos.clear();
+		pedestals.clear();
 		ArrayList<Integer> maxList = new ArrayList<>(Arrays.asList(-4, 5));
 		maxList.add(Math.abs(maxList.get(0)));
 		maxList.add(Math.abs(maxList.get(1)));
@@ -219,7 +233,6 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 					erroredPositions.add(pos.add(x, -1, z));
 				switchFlag = !switchFlag;
 			}
-		ArrayList<BlockPos> bloodPos = new ArrayList<>();
 		for(int x = -1; x < 2; x++)
 			for(int z = -1; z < 2; z++)
 				if(!(x == 0 && z == 0))
@@ -227,7 +240,6 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 						erroredPositions.add(pos.add(x, 0, z));
 					else
 						bloodPos.add(pos.add(x, 0, z));
-		ArrayList<TileEntityHarshenDimensionalPedestal> pedestals = new ArrayList<>();
 		for(EnumFacing facing : EnumFacing.HORIZONTALS)
 		{
 			if(world.getBlockState(pos.offset(facing, 2)).getBlock() != HarshenBlocks.blood_block)
@@ -255,17 +267,24 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 		{	
 			for(TileEntityHarshenDimensionalPedestal pedestal : pedestals)
 				pedestal.setActiveNonController();
-			this.pedestals = pedestals;
-			for(BlockPos pos : bloodPos)
-				world.setBlockToAir(pos);
 			this.overstandingRecipe = recipe;
-			overstandingTimer = 20;
-			
+			overstandingTimer = 2;
+			workingFluid = fluid;
+			isActiveInBackground = true;
 		}
 		else if(setRecipe && !erroredPositions.isEmpty() && players[0] != null && world.isRemote)
 			players[0].sendMessage(new TextComponentTranslation("ritual.fail.position", erroredPositions.get(0).getX(), erroredPositions.get(0).getY(), erroredPositions.get(0).getZ()));
 		return erroredPositions.isEmpty() && recipe != null;
 
+	}
+	
+	public void killRitual()
+	{
+		for(TileEntityHarshenDimensionalPedestal pedestal : pedestals)
+			pedestal.deactiveateNonController();
+		overstandingRecipe = null;
+		workingFluid = EnumHetericCauldronFluidType.NONE;
+		isActiveInBackground = false;
 	}
 	
 	private boolean give(EntityPlayer playerIn, EnumHand hand, ItemStack stack)
@@ -361,6 +380,7 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 
 	private void deactivate() {
 		this.isActive = false;
+		this.isActiveInBackground = false;
 		this.activeTimer = 0;
 		workingFluid = EnumHetericCauldronFluidType.NONE;
 	}
