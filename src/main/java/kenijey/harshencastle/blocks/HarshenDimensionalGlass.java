@@ -19,8 +19,8 @@ public class HarshenDimensionalGlass extends BlockGlass
 		setUnlocalizedName("harshen_dimensional_glass");
 		setRegistryName("harshen_dimensional_glass");
 		setHarvestLevel("pickaxe", 3);
-        setHardness(2500.0f);
-        setResistance(2500.0f);
+        setHardness(3000.0f);
+        setResistance(3000.0f);
         blockSoundType = blockSoundType.GLASS;
 	}
 	

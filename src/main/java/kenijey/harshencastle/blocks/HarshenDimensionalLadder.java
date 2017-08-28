@@ -9,8 +9,8 @@ public class HarshenDimensionalLadder extends BlockLadder
         setUnlocalizedName("harshen_dimensional_ladder");
         setRegistryName("harshen_dimensional_ladder");
         setHarvestLevel("pickaxe", 3);
-        setHardness(2500.0f);
-        setResistance(2500.0f);
+        setHardness(3000.0f);
+        setResistance(3000.0f);
         blockSoundType = blockSoundType.LADDER;
 	}
 }

@@ -28,8 +28,8 @@ public class HarshenDimensionalDoor extends BlockDoor
 		setUnlocalizedName("harshen_dimensional_door");
         setRegistryName("harshen_dimensional_door");
         setHarvestLevel("pickaxe", 3);
-		setHardness(2500.0F);
-		setResistance(2500.0F);
+		setHardness(3000.0F);
+		setResistance(3000.0F);
 	}
 	
 	@Override

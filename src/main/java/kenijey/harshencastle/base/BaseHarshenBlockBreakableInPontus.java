@@ -43,8 +43,8 @@ public class BaseHarshenBlockBreakableInPontus extends BaseHarshenBlockCastle
 		}
 		else
 		{
-			setHardness(2400f);
-			setResistance(2400f);
+			setHardness(3000f);
+			setResistance(3000f);
 		}
 	}
 	

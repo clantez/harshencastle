@@ -17,8 +17,8 @@ public class HarshenDimensionalFlatPlate extends BlockPressurePlate
 		setUnlocalizedName("harshen_dimensional_flat_plate");
 		setRegistryName("harshen_dimensional_flat_plate");
 		setHarvestLevel("pickaxe", 3);
-        setHardness(2500.0f);
-        setResistance(2500.0f);
+        setHardness(3000.0f);
+        setResistance(3000.0f);
 	}
 	
 	@Override

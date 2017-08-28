@@ -18,8 +18,8 @@ public class HarshenDimensionalStairs extends BlockStairs
 		setUnlocalizedName("harshen_dimensional_stairs");
 		setRegistryName("harshen_dimensional_stairs");
 		setHarvestLevel("pickaxe", 3);
-        setHardness(2500.0f);
-        setResistance(2500.0f);
+        setHardness(3000.0f);
+        setResistance(3000.0f);
 		useNeighborBrightness = true;
 	}
 

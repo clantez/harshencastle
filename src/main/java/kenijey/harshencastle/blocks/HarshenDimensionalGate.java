@@ -41,7 +41,7 @@ public class HarshenDimensionalGate extends Block implements ITileEntityProvider
 		setRegistryName("harshen_dimensional_gate");
 		setUnlocalizedName("harshen_dimensional_gate");
 		setDefaultState(this.blockState.getBaseState().withProperty(ACTIVE, false).withProperty(FOREVER, false));
-		setHardness(2f);
+		setHardness(10f);
 		setResistance(50f);
 	}
 	
