@@ -40,6 +40,7 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 {
 	boolean alterSameGlassContainer = false;
 	private int activeTimer = 0;
+	private int overstandingTimer = 0;
 	int layersDrained = 0;
 	public boolean isActive = false;
 	public boolean isActiveInBackground = false;
@@ -49,6 +50,7 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 	private EnumHetericCauldronFluidType fluid = EnumHetericCauldronFluidType.NONE;
 	private int level = 1;
 	private EnumHetericCauldronFluidType workingFluid = EnumHetericCauldronFluidType.NONE;
+	private LargeRitualRecipe overstandingRecipe;
 	
 	@Override
 	public void tick() {
@@ -76,6 +78,20 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 
 			reactivate(1);
 		}
+		
+		if(overstandingRecipe != null)
+			if(overstandingTimer-- <= 0)
+			{
+				System.out.println("s");
+				setActive(true);
+				setSwitchedItem(overstandingRecipe.getOutput());
+				for(TileEntityHarshenDimensionalPedestal pedestal : pedestals)
+				{
+					pedestal.deactiveateNonController();
+					pedestal.setItemAir();
+				}
+				overstandingRecipe = null;
+			}
 			
 	}
 	
@@ -183,6 +199,8 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
         return false;
 	}
 	
+	
+	private ArrayList<TileEntityHarshenDimensionalPedestal> pedestals = new ArrayList<>();
 	private boolean checkForLargeRitual(boolean setRecipe, EntityPlayer... players)
 	{
 		ArrayList<Integer> maxList = new ArrayList<>(Arrays.asList(-4, 5));
@@ -235,15 +253,14 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 		LargeRitualRecipe recipe = LargeRitualRecipe.getRecipe(getItem(), fluid, stacks);
 		if(recipe != null && setRecipe)
 		{	
-			//TODO move and add animation and such
 			for(TileEntityHarshenDimensionalPedestal pedestal : pedestals)
-				pedestal.setItemAir();
-			System.out.println(bloodPos);
+				pedestal.setActiveNonController();
+			this.pedestals = pedestals;
 			for(BlockPos pos : bloodPos)
 				world.setBlockToAir(pos);
-			fluid = EnumHetericCauldronFluidType.NONE;
-			level = 1;
-			setItem(recipe.getOutput());
+			this.overstandingRecipe = recipe;
+			overstandingTimer = 20;
+			
 		}
 		else if(setRecipe && !erroredPositions.isEmpty() && players[0] != null && world.isRemote)
 			players[0].sendMessage(new TextComponentTranslation("ritual.fail.position", erroredPositions.get(0).getX(), erroredPositions.get(0).getY(), erroredPositions.get(0).getZ()));

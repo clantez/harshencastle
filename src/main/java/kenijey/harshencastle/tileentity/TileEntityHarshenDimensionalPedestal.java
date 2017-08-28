@@ -14,8 +14,9 @@ import net.minecraft.util.math.BlockPos;
 
 public class TileEntityHarshenDimensionalPedestal extends BaseTileEntityHarshenSingleItemInventoryActive
 {
-	//public static ArrayList<BlockPos> positionsOfGo = new ArrayList<BlockPos>(); 
 	private RitualRecipes workingRecipe;
+	private boolean isActiveNonController;
+	private int activeNonControllerTimer = 0;
 	
 	@Override
 	public void tick() {
@@ -27,8 +28,15 @@ public class TileEntityHarshenDimensionalPedestal extends BaseTileEntityHarshenS
 			hasItem = flag;
 			dirty();
 		}
-		if(isActive() && workingRecipe != null && !checkForCompleation(true))
+		if(isActive && workingRecipe != null && !checkForCompleation(true))
 			deactivateAll();
+		if(isActiveNonController)
+			activeNonControllerTimer++;
+	}
+	
+	@Override
+	public int getActiveTimer() {
+		return isActive ? super.getActiveTimer() : activeNonControllerTimer;
 	}
 	
 	private void deactivateAll() 
@@ -36,6 +44,22 @@ public class TileEntityHarshenDimensionalPedestal extends BaseTileEntityHarshenS
 		isActive = false;
 		for(EnumFacing facing : EnumFacing.HORIZONTALS)
 			((TileEntityHarshenDimensionalPedestal) world.getTileEntity(workingRecipe.getPositionOfRitual().offset(facing))).deactivate();	
+	}
+	
+	public void deactiveateNonController()
+	{
+		activeNonControllerTimer = 0;
+		isActiveNonController = false;
+	}
+	
+	public void setActiveNonController()
+	{
+		isActiveNonController = true;
+	}
+	
+	@Override
+	public boolean isActive() {
+		return super.isActive() || isActiveNonController;
 	}
 
 	@Override
