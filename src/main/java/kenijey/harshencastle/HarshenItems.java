@@ -33,6 +33,7 @@ import kenijey.harshencastle.items.OneRing;
 import kenijey.harshencastle.items.PontusRing;
 import kenijey.harshencastle.items.PontusWorldGatePart;
 import kenijey.harshencastle.items.PontusWorldGateSpawner;
+import kenijey.harshencastle.items.PowderOfHeretism;
 import kenijey.harshencastle.items.RitualCrystal;
 import kenijey.harshencastle.items.RitualStick;
 import kenijey.harshencastle.items.SoulHarsherPickaxe;
@@ -77,6 +78,7 @@ public class HarshenItems
 	public static Item telering;
 	public static Item blood_infused_ender_eye;
 	public static Item elemental_pendant;
+	public static Item powder_of_heretism;
 	
 	
 	public static void preInit()
@@ -110,6 +112,7 @@ public class HarshenItems
 		telering = new Telering();
 		blood_infused_ender_eye = new BloodInfusedEnderEye();
 		elemental_pendant = new ElementalPendant();
+		powder_of_heretism = new PowderOfHeretism();
 	}
 	
 	public static void reg()
@@ -136,6 +139,7 @@ public class HarshenItems
 		regItem(telering, 1);
 		regItem(blood_infused_ender_eye, 1);
 		regItem(elemental_pendant, 1);
+		regItem(powder_of_heretism, 8);
 		
 		regMetaItem(ritual_stick, 1, emptyList(EnumRitualStick.values().length), "ritual_stick");
 		regMetaItem(pontus_world_gate_spawner, 1, EnumPontusGateSpawner.getNames(), "pontus_world_gate_spawner_");
