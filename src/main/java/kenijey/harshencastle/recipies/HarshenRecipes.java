@@ -224,6 +224,7 @@ public class HarshenRecipes {
 				'e', new ItemStack(HarshenItems.blood_infused_ender_eye),
 				'g', new ItemStack(Items.GOLDEN_CARROT));
 		
+		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "glass_container"), new ResourceLocation("harshen_items"),
 				new ItemStack(HarshenItems.glass_container),
 				" g ",
@@ -231,5 +232,16 @@ public class HarshenRecipes {
 				" g ",
 				
 				'g', new ItemStack(Blocks.GLASS_PANE));
+		
+		
+		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "zombi_pendant"), new ResourceLocation("harshen_items"),
+				new ItemStack(HarshenItems.zombi_pendant),
+				"g g",
+				" z ",
+				" e ",
+				
+				'z', new ItemStack(HarshenItems.zombie_eye),
+				'g', new ItemStack(Items.GOLD_INGOT),
+				'e', new ItemStack(HarshenItems.light_emitted_essence));
 	}
 }
