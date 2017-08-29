@@ -14,6 +14,8 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 public class GlassContainer extends BaseItemMetaData
@@ -33,6 +35,14 @@ public class GlassContainer extends BaseItemMetaData
 			player.setHeldItem(hand, new ItemStack(this, 1, 1));
 		return EnumActionResult.SUCCESS;
 
+	}
+	
+	@Override
+	public String getUnlocalizedName(ItemStack stack) {
+		if(EnumGlassContainer.getContainerFromMeta(stack.getMetadata()).isSubContainer())
+			stack.setStackDisplayName(TextFormatting.RESET + new TextComponentTranslation(super.getUnlocalizedName() + ".container", 
+					new TextComponentTranslation("fluid." + EnumGlassContainer.getContainerFromMeta(stack.getMetadata()).getType().getName()).getFormattedText()).getFormattedText());
+		return super.getUnlocalizedName(stack);
 	}
 	
 	@Override
