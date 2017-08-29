@@ -49,6 +49,7 @@ item.ritual_stick.normalcauldron.name=Ritual Stick
 item.ritual_stick.advancedcauldron.name=Heretic Stick
 item.powder_of_heretism.name=Powder of Heretism
 item.zombie_eye.name=Zombie Eye
+item.zombi_pendant.name=Zombi Pendant
 
 #ritual
 ritual.fail.position=Ritual built wrong (%s, %s, %s)
@@ -179,6 +180,10 @@ telering2=by pressing shift to 4 blocks away. Be Lucky!
 cpendant=You are more powerful.
 ependant1=Resist, more resist to afflict more.
 ependant2=(Health and armor increases)
+zombi1="I will send you all to your
+zombi2=graves you motherfuckers!!!"
+zombi3=Damage taken from all zombies
+zombi4=will be decreased to 1
 
 #misc
 itemGroup.harshenTab=Harshen Castle

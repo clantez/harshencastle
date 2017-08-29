@@ -40,6 +40,7 @@ import kenijey.harshencastle.items.SoulHarsherPickaxe;
 import kenijey.harshencastle.items.SoulHarsherSword;
 import kenijey.harshencastle.items.SoulInfusedIngot;
 import kenijey.harshencastle.items.Telering;
+import kenijey.harshencastle.items.ZombiPendant;
 import kenijey.harshencastle.items.ZombieEye;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -81,6 +82,7 @@ public class HarshenItems
 	public static Item elemental_pendant;
 	public static Item powder_of_heretism;
 	public static Item zombie_eye;
+	public static Item zombi_pendant;
 	
 	
 	public static void preInit()
@@ -116,6 +118,7 @@ public class HarshenItems
 		elemental_pendant = new ElementalPendant();
 		powder_of_heretism = new PowderOfHeretism();
 		zombie_eye = new ZombieEye();
+		zombi_pendant = new ZombiPendant();
 	}
 	
 	public static void reg()
@@ -144,6 +147,7 @@ public class HarshenItems
 		regItem(elemental_pendant, 1);
 		regItem(powder_of_heretism, 8);
 		regItem(zombie_eye, 32);
+		regItem(zombi_pendant, 1);
 		
 		regMetaItem(ritual_stick, 1, emptyList(EnumRitualStick.values().length), "ritual_stick");
 		regMetaItem(pontus_world_gate_spawner, 1, EnumPontusGateSpawner.getNames(), "pontus_world_gate_spawner_");
