@@ -48,6 +48,7 @@ item.elemental_pendant.name=Elemental Pendant
 item.ritual_stick.normalcauldron.name=Ritual Stick
 item.ritual_stick.advancedcauldron.name=Heretic Stick
 item.powder_of_heretism.name=Powder Of Heretism
+item.zombie_eye.name=Zombie Eye
 
 #ritual
 ritual.fail.position=Ritual built wrong (%s, %s, %s)
