@@ -31,6 +31,7 @@ import kenijey.harshencastle.blocks.HarshenSpawner;
 import kenijey.harshencastle.blocks.HereticCauldron;
 import kenijey.harshencastle.blocks.HereticCauldronTop;
 import kenijey.harshencastle.blocks.ItiumOre;
+import kenijey.harshencastle.blocks.KuanticOre;
 import kenijey.harshencastle.blocks.PedestalSlab;
 import kenijey.harshencastle.blocks.PlantOfGleam;
 import kenijey.harshencastle.blocks.PontusChaoticLeaves;
@@ -90,6 +91,7 @@ public class HarshenBlocks {
 	public static Block blood_factory;
 	public static Block pontus_emerald_ore;
 	public static Block archive;
+	public static Block kuantic_ore;
 	
 	public static BlockCrops crop_of_gleam;
 
@@ -138,16 +140,17 @@ public class HarshenBlocks {
 		blood_factory = new BloodFactory();
 		pontus_emerald_ore = new PontusEmeraldOre();
 		archive = new Archive();
+		kuantic_ore = new KuanticOre();
 	}
 
 	public static void reg() {
 		regBlock(harshen_dimensional_stone, 64);
-		regBlock(harshen_hidden_plate,64);
+		regBlock(harshen_hidden_plate, 64);
 		regBlock(harshen_dimensional_pressure_plate, 64);
 		regBlock(harshen_dimensional_flat_plate, 64);
-		regBlock(harshen_dimensional_stairs,64);
-		regBlock(harshen_dimensional_glass,64);
-		regBlock(harshen_dimensional_ladder,64);
+		regBlock(harshen_dimensional_stairs, 64);
+		regBlock(harshen_dimensional_glass, 64);
+		regBlock(harshen_dimensional_ladder, 64);
 		regBlock(harshen_dimensional_wood_crate, 64);
 		regBlock(harshen_display_block, 64);
 		regBlock(harshen_dimensional_dirt, 64);
@@ -162,9 +165,9 @@ public class HarshenBlocks {
 		regBlock(heretic_cauldron, 64);
 		regBlock(harshen_soul_ore, 64);
 		regBlock(itium_ore, 64);
-		regBlock(harshen_destroyed_plant,64);
+		regBlock(harshen_destroyed_plant, 64);
 		regBlock(harshen_soul_flower, 64);
-		regBlock(soul_reminder,1);
+		regBlock(soul_reminder, 1);
 		regBlock(harshen_dimensional_pedestal, 8);
 		regBlock(plant_of_gleam, 64);
 		regBlock(blood_block, 1);
@@ -174,6 +177,7 @@ public class HarshenBlocks {
 		regBlock(pedestal_slab, 64);
 		regBlock(pontus_emerald_ore, 64);
 		regBlock(archive, 64);
+		regBlock(kuantic_ore, 1);
 		
 		regSingleBlock(heretic_cauldron_top);
 		regSingleBlock(crop_of_gleam);
