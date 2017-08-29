@@ -26,7 +26,7 @@ public class MessageSendPlayerInv extends BaseMessagePacket<MessageSendPlayerInv
 	@Override
 	public void fromBytes(ByteBuf buf) {
 		NBTTagCompound nbt = ByteBufUtils.readTag(buf);
-		handler = new HarshenItemStackHandler(nbt.getInteger("Size"));
+		handler = HarshenUtils.getHandler(nbt);
 		handler.deserializeNBT(nbt);
 	}
 

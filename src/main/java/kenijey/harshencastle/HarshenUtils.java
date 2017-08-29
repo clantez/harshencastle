@@ -15,6 +15,7 @@ import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -76,13 +77,19 @@ public class HarshenUtils
 		HarshenItemStackHandler handler = new HarshenItemStackHandler(EnumInventorySlots.values().length);
 		if(player.getEntityData().getCompoundTag("harshenInventory").getInteger("Size") != handler.getSlots())
 		{
-			HarshenItemStackHandler handler2 = new HarshenItemStackHandler(player.getEntityData().getCompoundTag("harshenInventory").getInteger("Size"));
-			handler2.deserializeNBT(player.getEntityData().getCompoundTag("harshenInventory"));
+			HarshenItemStackHandler handler2 = getHandler(player.getEntityData());
 			handler2.setSize(handler.getSlots());
 			handler = handler2;
 		}
 		else
 			handler.deserializeNBT(player.getEntityData().getCompoundTag("harshenInventory"));
+		return handler;
+	}
+	
+	public static HarshenItemStackHandler getHandler(NBTTagCompound nbt)
+	{
+		HarshenItemStackHandler handler = new HarshenItemStackHandler(nbt.getCompoundTag("harshenInventory").getInteger("Size"));
+		handler.deserializeNBT(nbt.getCompoundTag("harshenInventory"));
 		return handler;
 	}
 	
