@@ -3,7 +3,9 @@ package kenijey.harshencastle.enums.inventory;
 import java.awt.Dimension;
 import java.util.ArrayList;
 
-public enum EnumInventorySlots
+import kenijey.harshencastle.interfaces.IIDSet;
+
+public enum EnumInventorySlots implements IIDSet
 {
 	LEFT_EAR(56, 14, 1),
 	RIGHT_EAR(104, 14, 0),
@@ -19,7 +21,6 @@ public enum EnumInventorySlots
 	{
 		this.dimension = new Dimension(x, y);
 		alowedIds = new ArrayList<>();
-		alowedIds.add(id);
 		for(int i : relatedTypes)
 			alowedIds.add(i);
 	}
@@ -39,7 +40,10 @@ public enum EnumInventorySlots
 		return this.alowedIds.contains(slotType.getId());
 	}
 
+	@Override
 	public void setId(int id) {
 		this.id = id;
+		alowedIds.add(id);
+
 	}
 }

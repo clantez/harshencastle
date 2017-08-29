@@ -13,6 +13,7 @@ import kenijey.harshencastle.dimensions.pontus.PontusWorldProvider;
 import kenijey.harshencastle.entity.HarshenEntities;
 import kenijey.harshencastle.enums.SetIds;
 import kenijey.harshencastle.enums.blocks.EnumHetericCauldronFluidType;
+import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
 import kenijey.harshencastle.enums.items.EnumBloodCollector;
 import kenijey.harshencastle.enums.items.EnumGlassContainer;
 import kenijey.harshencastle.enums.items.EnumPontusGateSpawner;
@@ -92,6 +93,7 @@ public class CommonProxy
 		SetIds.setup(EnumPontusGateSpawnerParts.values());
 		SetIds.setup(EnumProp.values());
 		SetIds.setup(EnumRitualStick.values());
+		SetIds.setup(EnumInventorySlots.values());
     }
 
     public void init(FMLInitializationEvent event) 
