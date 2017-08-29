@@ -1,6 +1,10 @@
 package kenijey.harshencastle;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+import com.google.common.collect.Lists;
 
 import kenijey.harshencastle.base.BasePontusResourceBiome;
 import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
@@ -10,9 +14,14 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
+import net.minecraft.world.storage.loot.LootContext;
 
 public class HarshenUtils
 {
@@ -93,6 +102,20 @@ public class HarshenUtils
 
         return blockpos;
 			
+	}
+	
+	public static List<ItemStack> getItemsFromLootTable(World world, ResourceLocation locationOfTable)
+	{
+		LootContext context = new LootContext(1f, (WorldServer) world, world.getLootTableManager(), null, null, DamageSource.MAGIC);
+		return world.getLootTableManager().getLootTableFromLocation(locationOfTable).generateLootForPools(new Random(), context);
+	}
+	
+	public static List<ItemStack> getItemsFromLootPool(World world, ResourceLocation locationOfTable, String poolName)
+	{
+		LootContext context = new LootContext(1f, (WorldServer) world, world.getLootTableManager(), null, null, DamageSource.MAGIC);
+		List<ItemStack> list = Lists.<ItemStack>newArrayList();
+		world.getLootTableManager().getLootTableFromLocation(locationOfTable).getPool(poolName).generateLoot(list, new Random(), context);
+		return list;
 	}
 
 	public static String[] fillList(String string, Object[] objectList) {

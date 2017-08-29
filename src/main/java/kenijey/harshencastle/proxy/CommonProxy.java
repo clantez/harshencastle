@@ -30,6 +30,7 @@ import kenijey.harshencastle.handlers.HandlerHarshenInventoryEffects;
 import kenijey.harshencastle.handlers.HandlerPontusAllowed;
 import kenijey.harshencastle.handlers.HandlerPotionEffects;
 import kenijey.harshencastle.handlers.HandlerSoulHarsherSword;
+import kenijey.harshencastle.handlers.HandlerZombieEyeDrop;
 import kenijey.harshencastle.models.ModelArmour;
 import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.potions.HarshenPotions;
@@ -79,9 +80,7 @@ public class CommonProxy
 		HarshenSounds.preInit();
 		
 		HarshenNetwork.preInit();
-		
-		HarshenLootTables.preInit();
-		
+				
     }
     
     private void setUpEnumValues()
@@ -115,7 +114,7 @@ public class CommonProxy
     	HarshenRecipes.register();
     	
     	Object[] handlers = {new HandlerSoulHarsherSword(), new HandlerHarshenInventory(), new HandlerBloodOnHurt(), new HandlerPotionEffects(), new HandlerHarshenArmourEffects(),
-    			new HandlerGlassContainer(), new HandlerPontusAllowed(), new HandlerHarshenInventoryEffects()};
+    			new HandlerGlassContainer(), new HandlerPontusAllowed(), new HandlerHarshenInventoryEffects(), new HandlerZombieEyeDrop()};
     	for(Object o : handlers)
     	{
     		MinecraftForge.EVENT_BUS.register(o);

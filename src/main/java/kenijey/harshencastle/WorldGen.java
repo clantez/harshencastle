@@ -55,12 +55,9 @@ public class WorldGen implements IWorldGenerator
 				world.setBlockState(position, Blocks.CHEST.getDefaultState().withProperty(BlockChest.FACING, EnumFacing.HORIZONTALS[random.nextInt(4)]), 3);
 				if(world instanceof WorldServer && world.getTileEntity(position) != null)
 				{
-					List<ItemStack> list = Lists.<ItemStack>newArrayList();
-					LootContext context = new LootContext(1f, (WorldServer) world, world.getLootTableManager(), null, HarshenUtils.getClosestPlayer(world, position), DamageSource.MAGIC);
-					world.getLootTableManager().getLootTableFromLocation(HarshenLootTables.shrine).getPool("extras").generateLoot(list, new Random(), context);
 					TileEntityChest chest = (TileEntityChest)world.getTileEntity(position);
-					chest.setInventorySlotContents(13, world.getLootTableManager().getLootTableFromLocation(HarshenLootTables.shrine).generateLootForPools(new Random(), context).get(0));
-					for(ItemStack stack : list)
+					chest.setInventorySlotContents(13, HarshenUtils.getItemsFromLootTable(world, HarshenLootTables.shrine).get(0));
+					for(ItemStack stack : HarshenUtils.getItemsFromLootPool(world, HarshenLootTables.shrine, "extras"))
 						for(int count = 0; count < stack.getCount(); count++)
 						{
 							int slot = new Random().nextInt(27);

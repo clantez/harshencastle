@@ -5,12 +5,12 @@ import net.minecraft.world.storage.loot.LootTableList;
 
 public class HarshenLootTables 
 {
-	public static ResourceLocation shrine;
-	public static ResourceLocation harshen_castle;
+	public final static ResourceLocation shrine = reg("chests/shrine");
+	public final static ResourceLocation harshen_castle = reg("chests/castle");
+	public final static ResourceLocation zombieDrops = reg("entities/zombie_eye");
 	
-	public static void preInit()
+	public static ResourceLocation reg(String name)
 	{
-		shrine = LootTableList.register(new ResourceLocation(HarshenCastle.MODID, "chests/shrine"));
-		harshen_castle = LootTableList.register(new ResourceLocation(HarshenCastle.MODID, "chests/castle"));
+		return LootTableList.register(new ResourceLocation(HarshenCastle.MODID, name));
 	}
 }
