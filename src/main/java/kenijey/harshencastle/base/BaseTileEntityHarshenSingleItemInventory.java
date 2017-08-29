@@ -51,7 +51,7 @@ public abstract class BaseTileEntityHarshenSingleItemInventory extends BaseTileE
 	
 	protected double randPos()
 	{
-		return MathHelper.clamp(new Random().nextDouble(), 0.1, 0.9);
+		return MathHelper.clamp(new Random().nextDouble(), 0.15, 0.85);
 	}
 }
 

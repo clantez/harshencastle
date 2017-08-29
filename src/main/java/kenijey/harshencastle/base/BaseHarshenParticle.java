@@ -58,37 +58,12 @@ public abstract class BaseHarshenParticle extends Particle
     @Override
     public void renderParticle(BufferBuilder buffer, Entity entity, float partialTicks, float rotX, float rotZ, float rotYZ, float rotXY, float rotXZ)
     {		
-//    	Minecraft.getMinecraft().renderEngine.bindTexture(location);
-//        float scaleMultiplier = (this.particleAge + partialTicks) / this.particleMaxAge * 32.0F;
-//        scaleMultiplier = MathHelper.clamp(scaleMultiplier, 0.0F, 1.0F);
-//        this.particleScale = this.particleScale * scaleMultiplier;
-//        GlStateManager.depthMask(false);
-//        GlStateManager.enableBlend();
-//        GlStateManager.blendFunc(770, 1);
-//        GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-//        buffer.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR);
-//        super.renderParticle(buffer, entity, partialTicks, rotX, rotZ, rotYZ, rotXY, rotXZ);
-//        Tessellator.getInstance().draw();
-//        GlStateManager.disableBlend();
-//        GlStateManager.enableLighting();
-//        GlStateManager.disableBlend();
-//        GlStateManager.depthMask(true);
-    	float f = ((float)this.particleAge + partialTicks) / (float)this.particleMaxAge;
-        f = f * f;
-        float f1 = 2.0F - f * 2.0F;
-
-        if (f1 > 1.0F)
-        {
-            f1 = 1.0F;
-        }
-
-        f1 = f1 * 0.2F;
         GlStateManager.disableLighting();
         float f2 = 0.125F;
         float f3 = (float)(this.posX - interpPosX);
         float f4 = (float)(this.posY - interpPosY);
         float f5 = (float)(this.posZ - interpPosZ);
-        float f6 = this.world.getLightBrightness(new BlockPos(this.posX, this.posY, this.posZ));
+        float f6 = getBrightnessForRender(partialTicks);
         float size = 0.1F * this.particleScale;
         Minecraft.getMinecraft().getTextureManager().bindTexture(location);
         float k = (float)this.particleTextureIndexX / 16.0F;
@@ -96,11 +71,14 @@ public abstract class BaseHarshenParticle extends Particle
         float k2 = (float)this.particleTextureIndexY / 16.0F;
         float k3 = k2 + 0.0624375F;
         float k4 = 0.1F * this.particleScale;
+        int i = this.getBrightnessForRender(partialTicks);
+        int ij = i >> 16 & 65535;
+        int ik = i & 65535;
         buffer.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR);
-        buffer.pos((double)(f3 - rotX * size- rotXY * size), (double)f4 - rotZ * size, (double)(f5 - rotYZ * size - rotXZ * size)).tex((double)k1, (double)k3).color(f6, f6, f6, f1).endVertex();
-        buffer.pos((double)(f3 - rotX * size + rotXY * size), (double)f4 + rotZ * size, (double)(f5 - rotYZ * size + rotXZ * size)).tex((double)k1, (double)k2).color(f6, f6, f6, f1).endVertex();
-        buffer.pos((double)(f3 + rotX * size + rotXY * size), (double)f4 + rotZ * size, (double)(f5 + rotYZ * size + rotXZ * size)).tex((double)k, (double)k2).color(f6, f6, f6, f1).endVertex();
-        buffer.pos((double)(f3 + rotX * size - rotXY * size), (double)f4 - rotZ * size, (double)(f5 + rotYZ * size - rotXZ * size)).tex((double)k, (double)k3).color(f6, f6, f6, f1).endVertex();
+        buffer.pos((double)(f3 - rotX * size- rotXY * size), (double)f4 - rotZ * size, (double)(f5 - rotYZ * size - rotXZ * size)).tex((double)k1, (double)k3).color(f6, f6, f6, 1).endVertex();
+        buffer.pos((double)(f3 - rotX * size + rotXY * size), (double)f4 + rotZ * size, (double)(f5 - rotYZ * size + rotXZ * size)).tex((double)k1, (double)k2).color(f6, f6, f6, 1).endVertex();
+        buffer.pos((double)(f3 + rotX * size + rotXY * size), (double)f4 + rotZ * size, (double)(f5 + rotYZ * size + rotXZ * size)).tex((double)k, (double)k2).color(f6, f6, f6, 1).endVertex();
+        buffer.pos((double)(f3 + rotX * size - rotXY * size), (double)f4 - rotZ * size, (double)(f5 + rotYZ * size - rotXZ * size)).tex((double)k, (double)k3).color(f6, f6, f6, 1).endVertex();
         Tessellator.getInstance().draw();
         GlStateManager.enableLighting();
 
@@ -110,19 +88,18 @@ public abstract class BaseHarshenParticle extends Particle
     public int getBrightnessForRender(float p_189214_1_)
     {
     	BlockPos blockpos = new BlockPos(this.posX, this.posY, this.posZ);
-        return this.world.isBlockLoaded(blockpos) ? getLightCombonation(blockpos, 0) : 0;
+        return this.world.isBlockLoaded(blockpos) ? getLightCombonation(blockpos.add(0, 1, 0), 0) : 0;
     }
     
     private int getLightCombonation(BlockPos pos, int lightValue)
     {
     	int i = world.getLightFromNeighborsFor(EnumSkyBlock.SKY, pos);
-        int j = world.getLightFromNeighborsFor(EnumSkyBlock.BLOCK, pos.add(0, 1, 0));
+        int j = world.getLightFromNeighborsFor(EnumSkyBlock.BLOCK, pos);
 
         if (j < lightValue)
         {
             j = lightValue;
         }
-
         return i << 20 | j << 4;
     }
     
