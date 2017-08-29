@@ -89,7 +89,7 @@ public abstract class BaseHarshenParticle extends Particle
         float f4 = (float)(this.posY - interpPosY);
         float f5 = (float)(this.posZ - interpPosZ);
         float f6 = this.world.getLightBrightness(new BlockPos(this.posX, this.posY, this.posZ));
-        float size = 0.03F * this.particleScale;
+        float size = 0.1F * this.particleScale;
         Minecraft.getMinecraft().getTextureManager().bindTexture(location);
         float k = (float)this.particleTextureIndexX / 16.0F;
         float k1 = k + 0.0624375F;

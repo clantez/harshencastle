@@ -74,7 +74,15 @@ public class HarshenUtils
 	public static HarshenItemStackHandler getHandler(EntityPlayer player)
 	{
 		HarshenItemStackHandler handler = new HarshenItemStackHandler(EnumInventorySlots.values().length);
-		handler.deserializeNBT(player.getEntityData().getCompoundTag("harshenInventory"));
+		if(player.getEntityData().getCompoundTag("harshenInventory").getInteger("Size") != handler.getSlots())
+		{
+			HarshenItemStackHandler handler2 = new HarshenItemStackHandler(player.getEntityData().getCompoundTag("harshenInventory").getInteger("Size"));
+			handler2.deserializeNBT(player.getEntityData().getCompoundTag("harshenInventory"));
+			handler2.setSize(handler.getSlots());
+			handler = handler2;
+		}
+		else
+			handler.deserializeNBT(player.getEntityData().getCompoundTag("harshenInventory"));
 		return handler;
 	}
 	

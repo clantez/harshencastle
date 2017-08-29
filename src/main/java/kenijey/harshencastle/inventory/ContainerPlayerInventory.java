@@ -3,7 +3,11 @@ package kenijey.harshencastle.inventory;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
 import kenijey.harshencastle.itemstackhandlers.HarshenItemStackHandler;
+import kenijey.harshencastle.network.HarshenNetwork;
+import kenijey.harshencastle.network.packets.MessageSendPlayerInv;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -67,7 +71,15 @@ public class ContainerPlayerInventory extends net.minecraft.inventory.Container
 	}
 	
 	@Override
-	public void onContainerClosed(EntityPlayer playerIn) {
-		playerIn.getEntityData().setTag("harshenInventory", this.handler.serializeNBT());
+	public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, EntityPlayer player) {
+		ItemStack stack = super.slotClick(slotId, dragType, clickTypeIn, player);
+		updated();
+		return stack;
+	}
+	
+	public void updated()
+	{
+		Minecraft.getMinecraft().player.getEntityData().setTag("harshenInventory", this.handler.serializeNBT());
+		HarshenNetwork.sendToServer(new MessageSendPlayerInv(Minecraft.getMinecraft().player));
 	}
 }

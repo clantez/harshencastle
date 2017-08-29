@@ -93,9 +93,9 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 			if(layersDrained == 2)
 				setItem(switchedItem);
 			double[] yPosOfDrains = {0.7D, 0.8D, 0.9D};
-			level = MathHelper.clamp(level - 1, 1, 3);
 			if(level == 1)
 				fluid = EnumHetericCauldronFluidType.NONE;
+			level = MathHelper.clamp(level - 1, 1, 3);
 			for(int i = 0; i < 35; i++)
 				HarshenCastle.proxy.spawnParticle(EnumHarshenParticle.CAULDRON,
 						new Vec3d(pos).addVector((new Random().nextDouble() / 2) + 0.25D, yPosOfDrains[layersDrained], (new Random().nextDouble() / 2) + 0.25D), new Vec3d(0, 0.01d, 0), 1f, false,
@@ -268,7 +268,7 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 			for(TileEntityHarshenDimensionalPedestal pedestal : pedestals)
 				pedestal.setActiveNonController();
 			this.overstandingRecipe = recipe;
-			overstandingTimer = 2;
+			overstandingTimer = 300;
 			workingFluid = fluid;
 			isActiveInBackground = true;
 		}
