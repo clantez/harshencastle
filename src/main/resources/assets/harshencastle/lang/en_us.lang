@@ -29,7 +29,6 @@ item.blood_collector.4.name=Blood Collector
 item.blood_collector.5.name=Blood Collector
 item.ritual_crystal.passive.name=Ritual Crystal (passive)
 item.ritual_crystal.active.name=Ritual Crystal (active)
-item.ladle.name=Ladle
 item.prop.knight_sword.name=Soulless Knight Sword Prop
 item.empowered_soul_harsher_sword.name=Empowered Soul Harsher Sword
 item.harshen_book.name=Harshen Book
@@ -42,6 +41,8 @@ item.criminal_pendant.name=Criminal Pendant
 item.telering.name=Telering
 item.blood_infused_ender_eye.name=Blood Infused Ender Eye
 item.elemental_pendant.name=Elemental Pendant
+item.ritual_stick.normalcauldron.name=Ritual Stick
+item.ritual_stick.advancedcauldron.name=Heretic Stick
 
 #ritual
 ritual.fail.position=Ritual built wrong (%s, %s, %s)
@@ -92,6 +93,7 @@ tile.blood_vessel.name=Blood Vessel
 tile.pontus_emerald_ore.name=Pontus Emerald Ore
 tile.archive.name=Archive
 tile.blood_factory.name=Blood Factory
+tile.kuantic_ore.name=Kuantic Ore
 
 
 #fluids
