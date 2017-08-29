@@ -12,10 +12,9 @@ public class KuanticOre extends Block
         setUnlocalizedName("kuantic_ore");
         setRegistryName("kuantic_ore");
         setHarvestLevel("pickaxe", 2);
-		setHardness(31f);
-		setResistance(100f);
+		setHardness(11f);
+		setResistance(2f);
 		setCreativeTab(HarshenCastle.harshenTab);
     }
-
 	
 }
