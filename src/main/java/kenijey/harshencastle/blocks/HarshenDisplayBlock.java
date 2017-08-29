@@ -44,47 +44,18 @@ public class HarshenDisplayBlock extends BaseBlockHarshenSingleInventory
 	}
 	
 	@Override
-	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer,
-			ItemStack stack) {
-		ItemStackHandler handlerStack = new ItemStackHandler(1);
-		handlerStack.deserializeNBT(stack.serializeNBT().getCompoundTag("tag").getCompoundTag("ItemStackHandler"));
-		((TileEntityHarshenDisplayBlock)worldIn.getTileEntity(pos)).setItem(handlerStack.getStackInSlot(0));
-	}
-	
-	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
 			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		return playerIn.capabilities.isCreativeMode ? super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ) : false;
 	}
 	
 	@Override
-	public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-		BaseTileEntityHarshenSingleItemInventory te = (BaseTileEntityHarshenSingleItemInventory) worldIn.getTileEntity(pos);
-		IItemHandler handler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-		worldIn.removeTileEntity(pos);
-		ItemStackHandler handlerStack = new ItemStackHandler(1);
-		handlerStack.setStackInSlot(0, handler.getStackInSlot(0));
-		ItemStack stack = new ItemStack(this);
-		if(handlerStack.getStackInSlot(0).getItem() != Item.getItemFromBlock(Blocks.AIR))
-		{
-			NBTTagCompound nbttagcompound = new NBTTagCompound();
-	        nbttagcompound.setTag("ItemStackHandler", handlerStack.serializeNBT());
-	        stack.setTagCompound(nbttagcompound);
-	        stack.setStackDisplayName("§r" + getLocalizedName() + " (" + I18n.translateToLocal(handlerStack.getStackInSlot(0).getItem().getUnlocalizedName() + ".name") + ")");
-		}
-		if(!creativeBreakMap.get(pos))
-			worldIn.spawnEntity(new EntityItem(worldIn, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, stack));
-		creativeBreakMap.remove(pos);
-	}
-	
-	@Override
-	public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
-		creativeBreakMap.put(pos, player.capabilities.isCreativeMode);
-		super.onBlockHarvested(worldIn, pos, state, player);
-	}
-	
-	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
 		return null;
+	}
+	
+	@Override
+	protected boolean isBreakNBT() {
+		return true;
 	}
 }
