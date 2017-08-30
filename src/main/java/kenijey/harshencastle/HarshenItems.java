@@ -13,6 +13,7 @@ import kenijey.harshencastle.enums.items.EnumRitualStick;
 import kenijey.harshencastle.items.BloodCollector;
 import kenijey.harshencastle.items.BloodEssence;
 import kenijey.harshencastle.items.BloodInfusedEnderEye;
+import kenijey.harshencastle.items.BloodyApple;
 import kenijey.harshencastle.items.BloodyEarring;
 import kenijey.harshencastle.items.CriminalPendant;
 import kenijey.harshencastle.items.ElementalPendant;
@@ -83,6 +84,7 @@ public class HarshenItems
 	public static Item powder_of_heretism;
 	public static Item zombie_eye;
 	public static Item zombi_pendant;
+	public static Item bloody_apple;
 	
 	
 	public static void preInit()
@@ -119,6 +121,7 @@ public class HarshenItems
 		powder_of_heretism = new PowderOfHeretism();
 		zombie_eye = new ZombieEye();
 		zombi_pendant = new ZombiPendant();
+		bloody_apple = new BloodyApple();
 	}
 	
 	public static void reg()
@@ -148,6 +151,7 @@ public class HarshenItems
 		regItem(powder_of_heretism, 8);
 		regItem(zombie_eye, 64);
 		regItem(zombi_pendant, 1);
+		regItem(bloody_apple, 13);
 		
 		regMetaItem(ritual_stick, 1, emptyList(EnumRitualStick.values().length), "ritual_stick");
 		regMetaItem(pontus_world_gate_spawner, 1, EnumPontusGateSpawner.getNames(), "pontus_world_gate_spawner_");

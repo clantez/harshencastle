@@ -6,8 +6,6 @@ import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ZombieEye extends ItemFood
 {
@@ -28,11 +26,4 @@ public class ZombieEye extends ItemFood
                 player.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 50, 0));
         }
     }
-	
-	@SideOnly(Side.CLIENT)
-    public boolean hasEffect(ItemStack stack)
-    {
-        return true;
-    }
-
 }
