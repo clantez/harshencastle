@@ -23,11 +23,11 @@ public class JEIRitualCategory extends BaseJeiCategory
 		JEIRitualWrapper wrapper = (JEIRitualWrapper) recipeWrapper;
 		for(int i = 0; i < 4; i++)
 			addSlot(recipeLayout, ingredients.getInputs(ItemStack.class), i);
-		recipeLayout.getItemStacks().init(4, false, 125, 47);
+		recipeLayout.getItemStacks().init(4, false, 122, 45);
 		recipeLayout.getItemStacks().set(4, ingredients.getOutputs(ItemStack.class).get(0));
 	}
 	
-	Dimension[] positionsOfSlots = {new Dimension(21, 9), new Dimension(56, 10), new Dimension(9, 27), new Dimension(69, 25)};
+	Dimension[] positionsOfSlots = {new Dimension(26, 1), new Dimension(65, 3), new Dimension(19, 24), new Dimension(71, 23)};
 	
 	private void addSlot(IRecipeLayout recipeLayout, List<List<ItemStack>> list, int id)
 	{
