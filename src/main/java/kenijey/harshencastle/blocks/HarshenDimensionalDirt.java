@@ -20,7 +20,7 @@ public class HarshenDimensionalDirt extends BaseHarshenBlockBreakableInPontus
 {
 	public HarshenDimensionalDirt() 
 	{
-		super(Material.GRASS, "shovel");
+		super(Material.GRASS, "pickaxe");
         setUnlocalizedName("harshen_dimensional_dirt");
         setRegistryName("harshen_dimensional_dirt");
         blockSoundType = blockSoundType.GROUND;
