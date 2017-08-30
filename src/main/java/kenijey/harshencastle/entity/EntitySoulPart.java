@@ -28,7 +28,7 @@ public class EntitySoulPart extends EntityMob
 		super(worldIn);
 		this.isImmuneToFire = true;
         this.moveHelper = new MoveHelperSoulPart(this);
-        this.experienceValue = 3;
+        this.experienceValue = 30;
         
 	}
 	
@@ -54,8 +54,8 @@ public class EntitySoulPart extends EntityMob
 	{
 	        super.applyEntityAttributes();
 	        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(14.0D);
-	        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4.0D);
-	        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(1000D);
+	        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(2.0D);
+	        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(700D);
 	}  
 	
 	public void onUpdate()
