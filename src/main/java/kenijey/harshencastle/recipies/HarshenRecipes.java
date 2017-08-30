@@ -47,6 +47,7 @@ public class HarshenRecipes {
 		PedestalSlabRecipes.addRecipe(new ItemStack(Blocks.COBBLESTONE), new ItemStack(Blocks.NETHERRACK));
 		PedestalSlabRecipes.addRecipe(new ItemStack(Items.ENDER_EYE), new ItemStack(HarshenItems.blood_infused_ender_eye));
 		PedestalSlabRecipes.addRecipe(new ItemStack(Items.GOLDEN_APPLE), new ItemStack(HarshenItems.bloody_apple));
+		PedestalSlabRecipes.addRecipe(new ItemStack(HarshenItems.pontus_cube), new ItemStack(HarshenItems.bloody_pontus_cube));
 		
 		
 		ItemStack[] stackList = new ItemStack[8];
@@ -60,7 +61,7 @@ public class HarshenRecipes {
 		CauldronRecipes.addRecipe(new ItemStack(HarshenItems.harshen_soul_ingot, 1, 0), new ItemStack(HarshenItems.soul_infused_ingot, 1, 0), EnumHetericCauldronFluidType.HARSHING_WATER);
 		CauldronRecipes.addRecipe(new ItemStack(Blocks.SAND, 1, 0), new ItemStack(Blocks.SOUL_SAND, 1, 0), EnumHetericCauldronFluidType.HARSHEN_DIMENSIONAL_FLUID);
 		CauldronRecipes.addRecipe(new ItemStack(Blocks.COBBLESTONE, 1, 0), new ItemStack(Blocks.NETHERRACK, 1, 0), EnumHetericCauldronFluidType.BLOOD);
-		CauldronRecipes.addRecipe(new ItemStack(Blocks.COBBLESTONE), new ItemStack(Blocks.OBSIDIAN), EnumHetericCauldronFluidType.LAVA);
+		CauldronRecipes.addRecipe(new ItemStack(Blocks.COBBLESTONE), new ItemStack(Blocks.OBSIDIAN, 2), EnumHetericCauldronFluidType.LAVA);
 		CauldronRecipes.addRecipe(new ItemStack(HarshenItems.glass_container), new ItemStack(HarshenItems.glass_container, 1, 3), EnumHetericCauldronFluidType.MILK);
 	}	
 	
