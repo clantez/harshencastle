@@ -51,6 +51,7 @@ item.powder_of_heretism.name=Powder of Heretism
 item.zombie_eye.name=Zombie Eye
 item.zombi_pendant.name=Zombi Pendant
 item.bloody_apple.name=Bloody Apple
+item.pontus_cube.name=Pontus Cube
 
 #ritual
 ritual.fail.position=Ritual built wrong (%s, %s, %s)
