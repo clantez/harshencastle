@@ -19,7 +19,7 @@ public class JEIPedestalSlabCategory extends BaseJeiCategory
 		if(!(recipeWrapper instanceof JEIPedestalSlabWrapper))
 			return;
 		JEIPedestalSlabWrapper wrapper = (JEIPedestalSlabWrapper) recipeWrapper;
-		recipeLayout.getItemStacks().init(0, true, 54, 25);
+		recipeLayout.getItemStacks().init(0, true, 53, 27);
 		recipeLayout.getItemStacks().set(0, ingredients.getInputs(ItemStack.class).get(0));
 		recipeLayout.getItemStacks().init(1, false, 132, 36);
 		recipeLayout.getItemStacks().set(1, ingredients.getOutputs(ItemStack.class).get(0));
