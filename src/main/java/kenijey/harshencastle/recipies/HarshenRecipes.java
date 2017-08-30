@@ -185,8 +185,8 @@ public class HarshenRecipes {
 		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "ritual_stick"), new ResourceLocation("harshen_items"),
 				new ItemStack(HarshenItems.ritual_stick, 1, 0),
-				"  s",
-				"  s",
+				" s ",
+				" s ",
 				
 				's', "stickWood");
 		
