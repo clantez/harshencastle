@@ -146,7 +146,7 @@ public class HarshenItems
 		regItem(blood_infused_ender_eye, 1);
 		regItem(elemental_pendant, 1);
 		regItem(powder_of_heretism, 8);
-		regItem(zombie_eye, 32);
+		regItem(zombie_eye, 64);
 		regItem(zombi_pendant, 1);
 		
 		regMetaItem(ritual_stick, 1, emptyList(EnumRitualStick.values().length), "ritual_stick");
