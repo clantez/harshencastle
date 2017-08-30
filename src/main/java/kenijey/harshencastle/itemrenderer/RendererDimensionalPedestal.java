@@ -10,6 +10,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.init.Items;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -35,6 +36,8 @@ public class RendererDimensionalPedestal extends TileEntitySpecialRenderer<TileE
 			GlStateManager.translate(0, Math.sin(rotateAngle) / 20f, 0);
 			GlStateManager.rotate(rotateAngle % 360 * (te.isActive() ? te.getActiveTimer() / 10f: 1f), 0, 1, 0);
 			Minecraft.getMinecraft().getRenderManager().doRenderEntity(ITEM, 0f, 0f, 0f, 0f, 0f, false);
+			if(te.getItem().getItem() != Items.AIR)
+				HarshenCastle.proxy.spawnParticle(EnumHarshenParticle.ITEM, new Vec3d(te.getPos()).addVector(0.5, 0.95 + Math.sin(rotateAngle) / 20f, 0.5), Vec3d.ZERO, 4f, false, te.getItem());
 		}
 		GlStateManager.popMatrix();
 	}

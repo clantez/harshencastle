@@ -49,6 +49,11 @@ public abstract class BaseHarshenParticle extends Particle
         this.location = location;
     }
     
+	public BaseHarshenParticle(World world, double xCoordIn, double yCoordIn, double zCoordIn, double motionXIn,
+			double motionYIn, double motionZIn, float par14, boolean disableMoving2) 
+	{
+			this(world, xCoordIn, yCoordIn, zCoordIn, motionXIn, motionYIn, motionZIn, par14, disableMoving2, null);
+	}
 	@Override
     public int getFXLayer()
     {
@@ -58,6 +63,19 @@ public abstract class BaseHarshenParticle extends Particle
     @Override
     public void renderParticle(BufferBuilder buffer, Entity entity, float partialTicks, float rotX, float rotZ, float rotYZ, float rotXY, float rotXZ)
     {		
+    	if(getFXLayer() != 3)
+    	{
+            float scaleMultiplier = (this.particleAge + partialTicks) / this.particleMaxAge * 32.0F;
+            scaleMultiplier = MathHelper.clamp(scaleMultiplier, 0.0F, 1.0F);
+            this.particleScale = this.particleScale * scaleMultiplier;
+            GlStateManager.depthMask(false);
+            GlStateManager.enableBlend();
+            GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+            super.renderParticle(buffer, entity, partialTicks, rotX, rotZ, rotYZ, rotXY, rotXZ);
+            GlStateManager.disableBlend();
+            GlStateManager.depthMask(true);
+            return;
+    	}
         GlStateManager.disableLighting();
         float f2 = 0.125F;
         float f3 = (float)(this.posX - interpPosX);

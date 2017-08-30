@@ -24,6 +24,7 @@ import kenijey.harshencastle.itemrenderer.RendererPedestalSlab;
 import kenijey.harshencastle.models.ModelArmour;
 import kenijey.harshencastle.particle.ParticleBlood;
 import kenijey.harshencastle.particle.ParticleCauldron;
+import kenijey.harshencastle.particle.ParticleItem;
 import kenijey.harshencastle.skyrenders.WeatherPontus;
 import kenijey.harshencastle.tileentity.TileEntityBloodFactory;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDimensionalPedestal;
@@ -175,6 +176,9 @@ public class ClientProxy extends CommonProxy
 		        	if(info[0] instanceof ResourceLocation)
 		        		entityFx = new ParticleCauldron(minecraft.world, (ResourceLocation) info[0], position.x, position.y, position.z, directionSpeed.x, directionSpeed.y, directionSpeed.z, scale / 5f, disableMoving);
 		        	break;
+		        case ITEM:
+		        	if(info[0] instanceof ItemStack)
+		        		entityFx = new ParticleItem(minecraft.world, position.x, position.y, position.z, directionSpeed.x, directionSpeed.y, directionSpeed.z, scale / 5f, disableMoving, (ItemStack) info[0]);
 		        default:
 		            break;
 	        }
