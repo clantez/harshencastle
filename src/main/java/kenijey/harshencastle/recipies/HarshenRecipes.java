@@ -183,14 +183,20 @@ public class HarshenRecipes {
 				'i', new ItemStack(HarshenItems.harshen_soul_ingot));
 		
 		
-		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "ladle"), new ResourceLocation("harshen_items"),
-				new ItemStack(HarshenItems.ritual_stick),
+		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "ritual_stick"), new ResourceLocation("harshen_items"),
+				new ItemStack(HarshenItems.ritual_stick, 1, 0),
 				"  s",
 				"  s",
-				" p ",
 				
-				's', "stickWood",
-				'p', "plankWood");
+				's', "stickWood");
+		
+		
+		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "heretic_stick"), new ResourceLocation("harshen_items"),
+				new ItemStack(HarshenItems.ritual_stick, 1, 1),
+				"psp",
+				
+				'p', new ItemStack(HarshenItems.powder_of_heretism),
+				's', new ItemStack(HarshenItems.ritual_stick, 1, 0));
 		
 		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "blood_collector"), new ResourceLocation("harshen_items"),
