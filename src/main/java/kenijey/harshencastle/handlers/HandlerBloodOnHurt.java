@@ -18,7 +18,8 @@ public class HandlerBloodOnHurt
 	@SubscribeEvent
 	public void onLivingHurt(LivingHurtEvent event)
 	{
-		if(event.getSource() instanceof EntityDamageSource && new Random().nextInt(3) == 0 && Arrays.asList(AllowedEntities).contains(event.getEntity().getClass()))
+		if(event.getSource() instanceof EntityDamageSource && new Random().nextInt(3) == 0 && Arrays.asList(AllowedEntities).contains(event.getEntity().getClass())
+				&& event.getEntity().world.isAirBlock(event.getEntity().getPosition()))
 			event.getEntity().getEntityWorld().setBlockState(event.getEntity().getPosition(), HarshenBlocks.blood_block.getDefaultState(), 3);
 	}
 }
