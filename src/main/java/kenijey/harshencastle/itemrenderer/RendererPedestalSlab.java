@@ -25,7 +25,7 @@ public class RendererPedestalSlab extends TileEntitySpecialRenderer<TileEntityPe
 			GlStateManager.translate(x, y, z);
 			GlStateManager.translate(0.5f, 0.3f,0.5f);
 			GlStateManager.translate(0, Math.sin(te.getTimer() / 10f) / 15f, 0);
-			GlStateManager.rotate(te.getTimer() % 360 * 10f, 0, 1, 0);
+			GlStateManager.rotate(te.getTimer() % 360 * 4f, 0, 1, 0);
 			Minecraft.getMinecraft().getRenderManager().doRenderEntity(ITEM, 0f, 0f, 0f, 0f, 0f, false);
 			
 		}
