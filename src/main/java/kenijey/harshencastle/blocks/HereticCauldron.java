@@ -67,6 +67,8 @@ public class HereticCauldron extends BaseBlockHarshenSingleInventory
 	
 	@Override
 	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
+		if(getTile(worldIn, pos) == null)
+			return this.getDefaultState();
 		getTile(worldIn, pos).setLevel(MathHelper.clamp(getTile(worldIn, pos).getLevel(), 1, 3));
 		return getTile(worldIn, pos) != null ? this.getDefaultState().withProperty(LIQUID, getTile(worldIn, pos).getFluid()).withProperty(LEVEL, getTile(worldIn, pos).getLevel()) : this.getDefaultState();
 	}

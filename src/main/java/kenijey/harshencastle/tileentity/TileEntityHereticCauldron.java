@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Random;
 
+import it.unimi.dsi.fastutil.Hash;
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.HarshenItems;
@@ -17,6 +18,7 @@ import kenijey.harshencastle.items.BloodCollector;
 import kenijey.harshencastle.items.GlassContainer;
 import kenijey.harshencastle.recipies.CauldronRecipes;
 import kenijey.harshencastle.recipies.LargeRitualRecipe;
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -31,6 +33,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
@@ -51,6 +54,7 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 	private int level = 1;
 	private EnumHetericCauldronFluidType workingFluid = EnumHetericCauldronFluidType.NONE;
 	private LargeRitualRecipe overstandingRecipe;
+	private HashMap<BlockPos, ItemStack> pedestalMap = new HashMap<>(HarshenUtils.HASH_LIMIT); 
 	
 	@Override
 	public void tick() {
@@ -64,34 +68,67 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 			}	
 		}
 		if(overstandingRecipe != null)
+		{
 			if(!checkForLargeRitual(false))
 				killRitual();
-			else if(overstandingTimer-- <= 0)
+			else if(overstandingTimer-- <= 100)
 			{
-				setActive(true);
-				setSwitchedItem(overstandingRecipe.getOutput());
+				ArrayList<TileEntityHarshenDimensionalPedestal> pedstalsRemove = new ArrayList<>();
 				for(TileEntityHarshenDimensionalPedestal pedestal : pedestals)
 				{
+					if(new Random().nextInt(overstandingTimer / 2) != 0)
+					{
+						pedstalsRemove.add(pedestal);
+						continue;
+					}
 					pedestal.deactiveateNonController();
+					for(int i = 0; i < 25; i++)
+					{
+						Vec3d vec = new Vec3d(pedestal.getPos()).addVector(0.5d, 0.9d, 0.5d);
+						HarshenCastle.proxy.spawnParticle(EnumHarshenParticle.ITEM, vec, 
+								new Vec3d((this.pos.getX() + 0.5 - vec.x) / 20D, (this.pos.getY() + 2 - vec.y) / 30D, (this.pos.getZ() + 0.5 - vec.z) / 20D), 
+								(float)randPos() + 1f, false, pedestalMap.get(pedestal.getPos()));
+					}
 					pedestal.setItemAir();
 				}
+				pedestals.clear();
+				for(TileEntityHarshenDimensionalPedestal pedestal : pedstalsRemove)
+					pedestals.add(pedestal);
+				ArrayList<BlockPos> localBloodPos = new ArrayList<>();
 				for(BlockPos pos : bloodPos)
-					world.setBlockToAir(pos);
-				overstandingRecipe = null;
-			}	
-			else
-				for(BlockPos pos : bloodPos)
-					for(int i = 0; i < 15; i ++)
-						{
-							Vec3d vec = new Vec3d(pos).addVector(randPos(), -0.1, randPos());
-							HarshenCastle.proxy.spawnParticle(EnumHarshenParticle.BLOOD, vec, 
-									new Vec3d((this.pos.getX() + 0.5 - vec.x) / 20D, (this.pos.getY() + 2 - vec.y) / 30D, (this.pos.getZ() + 0.5 - vec.z) / 20D), 1f, false);
-						}
+					if(new Random().nextInt(overstandingTimer / 2) == 0)
+						world.setBlockToAir(pos);
+					else localBloodPos.add(pos);
+				bloodPos.clear();
+				for(BlockPos pos : localBloodPos)
+					bloodPos.add(pos);
+				boolean flag = !localBloodPos.isEmpty();
+				for(TileEntityHarshenDimensionalPedestal pedestal : pedestals)
+					if(!pedestal.getItem().isEmpty())
+						flag = true;
+				if(!flag)
+				{
+					setActive(true);
+					setSwitchedItem(overstandingRecipe.getOutput());
+					overstandingRecipe = null;
+					pedestalMap.clear();
+				}
+			}
+			for(BlockPos pos : bloodPos)
+				for(int i = 0; i < 15; i ++)
+					{
+						Vec3d vec = new Vec3d(pos).addVector(randPos(), -0.1, randPos());
+						HarshenCastle.proxy.spawnParticle(EnumHarshenParticle.BLOOD, vec, 
+								new Vec3d((this.pos.getX() + 0.5 - vec.x) / 20D, (this.pos.getY() + 2 - vec.y) / 30D, (this.pos.getZ() + 0.5 - vec.z) / 20D), 1f, false);
+					}
+		}
 			
 		if(activeTimer >= drainPos[layersDrained])
 		{
 			if(layersDrained == 2)
 				setItem(switchedItem);
+			if(world.isRemote)
+				return;
 			double[] yPosOfDrains = {0.7D, 0.8D, 0.9D};
 			if(level == 1)
 				fluid = EnumHetericCauldronFluidType.NONE;
@@ -212,42 +249,48 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 	
 	private ArrayList<TileEntityHarshenDimensionalPedestal> pedestals = new ArrayList<>();
 	private ArrayList<BlockPos> bloodPos = new ArrayList<>();
-
+	private ArrayList<BlockPos> erroredPositions = new ArrayList<>();
+	private ArrayList<Block> blockErrorList = new ArrayList<>();
+	
 	private boolean checkForLargeRitual(boolean setRecipe, EntityPlayer... players)
 	{
-		bloodPos.clear();
+		if(setRecipe)
+			bloodPos.clear();
 		pedestals.clear();
+		blockErrorList.clear();
+		erroredPositions.clear();
 		ArrayList<Integer> maxList = new ArrayList<>(Arrays.asList(-4, 5));
 		maxList.add(Math.abs(maxList.get(0)));
 		maxList.add(Math.abs(maxList.get(1)));
 		boolean switchFlag = true;
-		ArrayList<BlockPos> erroredPositions = new ArrayList<>();
 		for(int x = maxList.get(0); x < maxList.get(1); x++)
 			for(int z = maxList.get(0); z < maxList.get(1); z++)
 			{
 				if(!(maxList.contains(x) && maxList.contains(z)) && switchFlag)
 					if(world.getBlockState(pos.add(x, -1, z)).getBlock() != Blocks.STONE)
-						erroredPositions.add(pos.add(x, -1, z));
+						setError(pos.add(x, -1, z), Blocks.STONE);
 					else;
 				else if(world.getBlockState(pos.add(x, -1, z)).getBlock() == Blocks.STONE)
-					erroredPositions.add(pos.add(x, -1, z));
+					setError(pos.add(x, -1, z), Blocks.BARRIER);
 				switchFlag = !switchFlag;
 			}
 		for(int x = -1; x < 2; x++)
 			for(int z = -1; z < 2; z++)
 				if(!(x == 0 && z == 0))
-					if(world.getBlockState(pos.add(x, 0, z)).getBlock() != HarshenBlocks.blood_block)
-						erroredPositions.add(pos.add(x, 0, z));
-					else
-						bloodPos.add(pos.add(x, 0, z));
+					if(setRecipe)
+						if(world.getBlockState(pos.add(x, 0, z)).getBlock() != HarshenBlocks.blood_block)
+							setError(pos.add(x, 0, z), HarshenBlocks.blood_block, setRecipe);
+						else
+							bloodPos.add(pos.add(x, 0, z));
 		for(EnumFacing facing : EnumFacing.HORIZONTALS)
 		{
-			if(world.getBlockState(pos.offset(facing, 2)).getBlock() != HarshenBlocks.blood_block)
-				erroredPositions.add(pos.offset(facing, 2));
-			else
-				bloodPos.add(pos.offset(facing, 2));
+			if(setRecipe)
+				if(world.getBlockState(pos.offset(facing, 2)).getBlock() != HarshenBlocks.blood_block)
+					setError(pos.offset(facing, 2), HarshenBlocks.blood_block, setRecipe);
+				else
+					bloodPos.add(pos.offset(facing, 2));
 			if(world.getBlockState(pos.offset(facing, 3)).getBlock() != HarshenBlocks.harshen_dimensional_pedestal)
-				erroredPositions.add(pos.offset(facing, 3));
+				setError(pos.offset(facing, 3), HarshenBlocks.harshen_dimensional_pedestal);
 			else
 				pedestals.add((TileEntityHarshenDimensionalPedestal)world.getTileEntity(pos.offset(facing, 3)));
 		}
@@ -255,7 +298,7 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 		for(int x : pedestalDistanceList)
 			for(int z : pedestalDistanceList)
 				if(world.getBlockState(pos.add(x, 0, z)).getBlock() != HarshenBlocks.harshen_dimensional_pedestal)
-					erroredPositions.add(pos.add(x, 0, z));
+					setError(pos.add(x, 0, z), HarshenBlocks.harshen_dimensional_pedestal);
 				else
 					pedestals.add((TileEntityHarshenDimensionalPedestal)world.getTileEntity(pos.add(x, 0, z)));
 		
@@ -266,16 +309,28 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 		if(recipe != null && setRecipe)
 		{	
 			for(TileEntityHarshenDimensionalPedestal pedestal : pedestals)
+			{
+				pedestalMap.put(pedestal.getPos(), pedestal.getItem());
 				pedestal.setActiveNonController();
+			}
 			this.overstandingRecipe = recipe;
 			overstandingTimer = 300;
 			workingFluid = fluid;
 			isActiveInBackground = true;
 		}
-		else if(setRecipe && !erroredPositions.isEmpty() && players[0] != null && world.isRemote)
-			players[0].sendMessage(new TextComponentTranslation("ritual.fail.position", erroredPositions.get(0).getX(), erroredPositions.get(0).getY(), erroredPositions.get(0).getZ()));
-		return erroredPositions.isEmpty() && recipe != null;
+		if(setRecipe && !erroredPositions.isEmpty() && players[0] != null && world.isRemote)
+			players[0].sendMessage(new TextComponentTranslation("ritual.fail.position", erroredPositions.get(0).getX(), erroredPositions.get(0).getY(), erroredPositions.get(0).getZ(),
+					blockErrorList.get(0) == Blocks.BARRIER ? I18n.translateToLocal("ritual.not") + " " + blockErrorList.get(1).getLocalizedName() : blockErrorList.get(0).getLocalizedName(),
+					blockErrorList.get(1).getLocalizedName()));
+		return erroredPositions.isEmpty() && this.overstandingRecipe != null;
 
+	}
+	
+	private void setError(BlockPos pos, Block expected, boolean... setRecipe)
+	{
+		erroredPositions.add(pos);
+		blockErrorList.add(expected);
+		blockErrorList.add(world.getBlockState(pos).getBlock());
 	}
 	
 	public void killRitual()

@@ -2,6 +2,8 @@ package kenijey.harshencastle.itemrenderer;
 
 import java.util.Random;
 
+import org.lwjgl.opengl.GL11;
+
 import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.enums.blocks.EnumHetericCauldronFluidType;
 import kenijey.harshencastle.enums.particle.EnumHarshenParticle;
@@ -37,7 +39,8 @@ public class RendererDimensionalPedestal extends TileEntitySpecialRenderer<TileE
 			GlStateManager.rotate(rotateAngle % 360 * (te.isActive() ? te.getActiveTimer() / 10f: 1f), 0, 1, 0);
 			Minecraft.getMinecraft().getRenderManager().doRenderEntity(ITEM, 0f, 0f, 0f, 0f, 0f, false);
 			if(te.getItem().getItem() != Items.AIR)
-				HarshenCastle.proxy.spawnParticle(EnumHarshenParticle.ITEM, new Vec3d(te.getPos()).addVector(0.5, 0.95 + Math.sin(rotateAngle) / 20f, 0.5), Vec3d.ZERO, 4f, false, te.getItem());
+				for(int i = 0; i < 15; i++)
+					HarshenCastle.proxy.spawnParticle(EnumHarshenParticle.ITEM, new Vec3d(te.getPos()).addVector(0.5, 0.9 + Math.sin(rotateAngle) / 20f, 0.5), Vec3d.ZERO, 0.85f, false, te.getItem());
 		}
 		GlStateManager.popMatrix();
 	}

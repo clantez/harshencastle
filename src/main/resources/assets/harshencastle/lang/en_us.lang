@@ -55,7 +55,8 @@ item.pontus_cube.name=Pontus Cube
 item.bloody_pontus_cube.name=Bloody Pontus Cube
 
 #ritual
-ritual.fail.position=Ritual built wrong (%s, %s, %s)
+ritual.fail.position=Ritual built wrong at %s, %s, %s. Expected %s, got %s
+ritual.not=not
 
 #entity eggs
 entity.soulless_knight.name=[HC] Soulless Knight

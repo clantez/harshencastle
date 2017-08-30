@@ -68,10 +68,35 @@ public abstract class BaseHarshenParticle extends Particle
             float scaleMultiplier = (this.particleAge + partialTicks) / this.particleMaxAge * 32.0F;
             scaleMultiplier = MathHelper.clamp(scaleMultiplier, 0.0F, 1.0F);
             this.particleScale = this.particleScale * scaleMultiplier;
+            this.particleTextureIndexX = getXIndex();
+            this.particleTextureIndexY = getYIndex();
             GlStateManager.depthMask(false);
             GlStateManager.enableBlend();
             GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-            super.renderParticle(buffer, entity, partialTicks, rotX, rotZ, rotYZ, rotXY, rotXZ);
+            float f = ((float)this.particleTextureIndexX + this.particleTextureJitterX / 4.0F) / 16.0F;
+            float f1 = f + 0.015609375F;
+            float f2 = ((float)this.particleTextureIndexY + this.particleTextureJitterY / 4.0F) / 16.0F;
+            float f3 = f2 + 0.015609375F;
+            float f4 = 0.1F * this.particleScale;
+
+            if (this.particleTexture != null)
+            {
+                f = this.particleTexture.getInterpolatedU((double)(this.particleTextureJitterX / 4.0F * 16.0F));
+                f1 = this.particleTexture.getInterpolatedU((double)((this.particleTextureJitterX + 1.0F) / 4.0F * 16.0F));
+                f2 = this.particleTexture.getInterpolatedV((double)(this.particleTextureJitterY / 4.0F * 16.0F));
+                f3 = this.particleTexture.getInterpolatedV((double)((this.particleTextureJitterY + 1.0F) / 4.0F * 16.0F));
+            }
+
+            float f5 = (float)(this.prevPosX + (this.posX - this.prevPosX) * (double)partialTicks - interpPosX);
+            float f6 = (float)(this.prevPosY + (this.posY - this.prevPosY) * (double)partialTicks - interpPosY);
+            float f7 = (float)(this.prevPosZ + (this.posZ - this.prevPosZ) * (double)partialTicks - interpPosZ);
+            int i = this.getBrightnessForRender(partialTicks);
+            int j = i >> 16 & 65535;
+            int k = i & 65535;
+            buffer.pos((double)(f5 - rotX * f4 - rotXY * f4), (double)(f6 - rotZ * f4), (double)(f7 - rotYZ * f4 - rotXZ * f4)).tex((double)f, (double)f3).color(this.particleRed, this.particleGreen, this.particleBlue, 1.0F).lightmap(j, k).endVertex();
+            buffer.pos((double)(f5 - rotX * f4 + rotXY * f4), (double)(f6 + rotZ * f4), (double)(f7 - rotYZ * f4 + rotXZ * f4)).tex((double)f, (double)f2).color(this.particleRed, this.particleGreen, this.particleBlue, 1.0F).lightmap(j, k).endVertex();
+            buffer.pos((double)(f5 + rotX * f4 + rotXY * f4), (double)(f6 + rotZ * f4), (double)(f7 + rotYZ * f4 + rotXZ * f4)).tex((double)f1, (double)f2).color(this.particleRed, this.particleGreen, this.particleBlue, 1.0F).lightmap(j, k).endVertex();
+            buffer.pos((double)(f5 + rotX * f4 - rotXY * f4), (double)(f6 - rotZ * f4), (double)(f7 + rotYZ * f4 - rotXZ * f4)).tex((double)f1, (double)f3).color(this.particleRed, this.particleGreen, this.particleBlue, 1.0F).lightmap(j, k).endVertex();
             GlStateManager.disableBlend();
             GlStateManager.depthMask(true);
             return;
