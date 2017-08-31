@@ -31,10 +31,10 @@ public class JEIHarshenCastle implements IModPlugin
 		registry.addRecipes(HarshenRecipes.allRitualRecipes, JEICategoryUIDs.ritual);
 		registry.addRecipes(HarshenRecipes.allCauldronRecipes, JEICategoryUIDs.cauldron);
 		registry.addRecipes(HarshenRecipes.allPedestalRecipes, JEICategoryUIDs.pedestalslab);
-		registry.addRecipes(HarshenRecipes.allHereticCauldronRecipes, JEICategoryUIDs.herticritual);
+		registry.addRecipes(HarshenRecipes.allHereticCauldronRecipes, JEICategoryUIDs.hereticritual);
 		registry.addRecipeCatalyst(new ItemStack(HarshenBlocks.harshen_dimensional_pedestal), JEICategoryUIDs.ritual);
 		registry.addRecipeCatalyst(new ItemStack(HarshenItems.ritual_stick), JEICategoryUIDs.cauldron);
-		registry.addRecipeCatalyst(new ItemStack(HarshenItems.ritual_stick, 1, 1), JEICategoryUIDs.herticritual);
+		registry.addRecipeCatalyst(new ItemStack(HarshenItems.ritual_stick, 1, 1), JEICategoryUIDs.hereticritual);
 		registry.addRecipeCatalyst(new ItemStack(HarshenBlocks.pedestal_slab), JEICategoryUIDs.pedestalslab);
 		
 		info(HarshenItems.harshen_soul_fragment);
