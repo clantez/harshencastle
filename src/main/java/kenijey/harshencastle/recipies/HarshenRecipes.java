@@ -6,7 +6,7 @@ import java.util.Arrays;
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.armor.HarshenArmors;
-import kenijey.harshencastle.enums.blocks.EnumHetericCauldronFluidType;
+import kenijey.harshencastle.enums.blocks.EnumHereticCauldronFluidType;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -53,16 +53,16 @@ public class HarshenRecipes {
 		ItemStack[] stackList = new ItemStack[8];
 		for(int i = 0; i < 8; i ++)
 			stackList[i] = new ItemStack(Blocks.GOLD_BLOCK);
-		HereticRitualRecipes.addRecipe(new ItemStack(Items.APPLE), new ItemStack(Items.GOLDEN_APPLE, 1, 1), EnumHetericCauldronFluidType.HARSHING_WATER,
+		HereticRitualRecipes.addRecipe(new ItemStack(Items.APPLE), new ItemStack(Items.GOLDEN_APPLE, 1, 1), EnumHereticCauldronFluidType.HARSHING_WATER,
 				stackList);
 		
 		
-		CauldronRecipes.addRecipe(new ItemStack(HarshenItems.ritual_crystal, 1, 0), new ItemStack(HarshenItems.ritual_crystal, 1, 1), EnumHetericCauldronFluidType.BLOOD);
-		CauldronRecipes.addRecipe(new ItemStack(HarshenItems.harshen_soul_ingot, 1, 0), new ItemStack(HarshenItems.soul_infused_ingot, 1, 0), EnumHetericCauldronFluidType.HARSHING_WATER);
-		CauldronRecipes.addRecipe(new ItemStack(Blocks.SAND, 1, 0), new ItemStack(Blocks.SOUL_SAND, 1, 0), EnumHetericCauldronFluidType.HARSHEN_DIMENSIONAL_FLUID);
-		CauldronRecipes.addRecipe(new ItemStack(Blocks.COBBLESTONE, 1, 0), new ItemStack(Blocks.NETHERRACK, 1, 0), EnumHetericCauldronFluidType.BLOOD);
-		CauldronRecipes.addRecipe(new ItemStack(Blocks.COBBLESTONE), new ItemStack(Blocks.OBSIDIAN, 2), EnumHetericCauldronFluidType.LAVA);
-		CauldronRecipes.addRecipe(new ItemStack(HarshenItems.glass_container), new ItemStack(HarshenItems.glass_container, 1, 3), EnumHetericCauldronFluidType.MILK);
+		CauldronRecipes.addRecipe(new ItemStack(HarshenItems.ritual_crystal, 1, 0), new ItemStack(HarshenItems.ritual_crystal, 1, 1), EnumHereticCauldronFluidType.BLOOD);
+		CauldronRecipes.addRecipe(new ItemStack(HarshenItems.harshen_soul_ingot, 1, 0), new ItemStack(HarshenItems.soul_infused_ingot, 1, 0), EnumHereticCauldronFluidType.HARSHING_WATER);
+		CauldronRecipes.addRecipe(new ItemStack(Blocks.SAND, 1, 0), new ItemStack(Blocks.SOUL_SAND, 1, 0), EnumHereticCauldronFluidType.HARSHEN_DIMENSIONAL_FLUID);
+		CauldronRecipes.addRecipe(new ItemStack(Blocks.COBBLESTONE, 1, 0), new ItemStack(Blocks.NETHERRACK, 1, 0), EnumHereticCauldronFluidType.BLOOD);
+		CauldronRecipes.addRecipe(new ItemStack(Blocks.COBBLESTONE), new ItemStack(Blocks.OBSIDIAN, 2), EnumHereticCauldronFluidType.LAVA);
+		CauldronRecipes.addRecipe(new ItemStack(HarshenItems.glass_container), new ItemStack(HarshenItems.glass_container, 1, 3), EnumHereticCauldronFluidType.MILK);
 	}	
 	
 	public static void craftingRegistry()

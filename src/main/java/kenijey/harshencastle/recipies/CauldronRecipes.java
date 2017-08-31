@@ -2,7 +2,7 @@ package kenijey.harshencastle.recipies;
 
 import java.util.ArrayList;
 
-import kenijey.harshencastle.enums.blocks.EnumHetericCauldronFluidType;
+import kenijey.harshencastle.enums.blocks.EnumHereticCauldronFluidType;
 import net.minecraft.item.ItemStack;
 
 public class CauldronRecipes 
@@ -11,9 +11,9 @@ public class CauldronRecipes
 	
 	private final ItemStack input;
 	private final ItemStack output;
-	private final EnumHetericCauldronFluidType catalyst;
+	private final EnumHereticCauldronFluidType catalyst;
 	
-	private CauldronRecipes(ItemStack input, ItemStack output, EnumHetericCauldronFluidType catalyst)
+	private CauldronRecipes(ItemStack input, ItemStack output, EnumHereticCauldronFluidType catalyst)
 	{
 		this.input = input;
 		this.output = output;
@@ -21,7 +21,7 @@ public class CauldronRecipes
 		allRecipes.add(this);
 	}
 	
-	public static CauldronRecipes getRecipe(ItemStack input, EnumHetericCauldronFluidType fluid) 
+	public static CauldronRecipes getRecipe(ItemStack input, EnumHereticCauldronFluidType fluid) 
 	{
 		ArrayList<CauldronRecipes> working = new ArrayList<CauldronRecipes>();
 		for(CauldronRecipes recipe : allRecipes)
@@ -40,12 +40,12 @@ public class CauldronRecipes
 		return output;
 	}
 	
-	public EnumHetericCauldronFluidType getCatalyst() 
+	public EnumHereticCauldronFluidType getCatalyst() 
 	{
 		return catalyst;
 	}
 	
-	public static void addRecipe(ItemStack input, ItemStack output, EnumHetericCauldronFluidType catalyst)
+	public static void addRecipe(ItemStack input, ItemStack output, EnumHereticCauldronFluidType catalyst)
 	{
 		HarshenRecipes.allCauldronRecipes.add(new CauldronRecipes(input, output, catalyst));
 	}

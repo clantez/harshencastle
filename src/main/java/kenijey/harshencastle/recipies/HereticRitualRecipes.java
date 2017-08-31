@@ -2,7 +2,7 @@ package kenijey.harshencastle.recipies;
 
 import java.util.ArrayList;
 
-import kenijey.harshencastle.enums.blocks.EnumHetericCauldronFluidType;
+import kenijey.harshencastle.enums.blocks.EnumHereticCauldronFluidType;
 import net.minecraft.item.ItemStack;
 
 public class HereticRitualRecipes 
@@ -12,9 +12,9 @@ public class HereticRitualRecipes
 	private final ItemStack cauldronItem;
 	private final ItemStack output;
 	private final ItemStack[] pedestalItems;
-	private final EnumHetericCauldronFluidType catalyst;
+	private final EnumHereticCauldronFluidType catalyst;
 	
-	private HereticRitualRecipes(ItemStack cauldronItem, ItemStack output, EnumHetericCauldronFluidType catalyst, ItemStack... pedstalItems)
+	private HereticRitualRecipes(ItemStack cauldronItem, ItemStack output, EnumHereticCauldronFluidType catalyst, ItemStack... pedstalItems)
 	{
 		if(pedstalItems.length != 8)
 			throw new IllegalArgumentException("input size for ritual recipe was not 8");
@@ -29,7 +29,7 @@ public class HereticRitualRecipes
 		return pedestalItems;
 	}
 	
-	public static HereticRitualRecipes getRecipe(ItemStack cauldronInput, EnumHetericCauldronFluidType fluid, ArrayList<ItemStack> pedestalItems) 
+	public static HereticRitualRecipes getRecipe(ItemStack cauldronInput, EnumHereticCauldronFluidType fluid, ArrayList<ItemStack> pedestalItems) 
 	{
 		ArrayList<HereticRitualRecipes> working = new ArrayList<HereticRitualRecipes>();
 		for(HereticRitualRecipes recipe : allRecipes)
@@ -62,12 +62,12 @@ public class HereticRitualRecipes
 		return output;
 	}
 	
-	public EnumHetericCauldronFluidType getCatalyst() 
+	public EnumHereticCauldronFluidType getCatalyst() 
 	{
 		return catalyst;
 	}
 	
-	public static void addRecipe(ItemStack cauldronItem, ItemStack output, EnumHetericCauldronFluidType catalyst, ItemStack... pedstalItems)
+	public static void addRecipe(ItemStack cauldronItem, ItemStack output, EnumHereticCauldronFluidType catalyst, ItemStack... pedstalItems)
 	{
 		HarshenRecipes.allHereticCauldronRecipes.add(new HereticRitualRecipes(cauldronItem, output, catalyst, pedstalItems));
 	}

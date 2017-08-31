@@ -11,7 +11,7 @@ import kenijey.harshencastle.dimensions.HarshenDimensions;
 import kenijey.harshencastle.dimensions.pontus.PontusWorldProvider;
 import kenijey.harshencastle.entity.HarshenEntities;
 import kenijey.harshencastle.enums.SetIds;
-import kenijey.harshencastle.enums.blocks.EnumHetericCauldronFluidType;
+import kenijey.harshencastle.enums.blocks.EnumHereticCauldronFluidType;
 import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
 import kenijey.harshencastle.enums.items.EnumBloodCollector;
 import kenijey.harshencastle.enums.items.EnumGlassContainer;
@@ -87,7 +87,7 @@ public class CommonProxy
     private void setUpEnumValues()
     {
 		SetIds.setup(EnumGlassContainer.values());
-		SetIds.setup(EnumHetericCauldronFluidType.values());
+		SetIds.setup(EnumHereticCauldronFluidType.values());
 		SetIds.setup(EnumBloodCollector.values());
 		SetIds.setup(EnumPontusGateSpawner.values());
 		SetIds.setup(EnumPontusGateSpawnerParts.values());
