@@ -201,6 +201,7 @@ button.normal=Inventory
 jei.ritual.name=Lightning Ritual
 jei.cauldron.name=Heretic Cauldron Experiment
 jei.pedestalslab.name=Blood Ritual
+jei.hereticritual.name=Heretic Ritual
 
 #JEI Description
 jei.harshen_soul_fragment.description=You can mine Harshen Soul Ore, but you need to use Soul Harsher Pickaxe to do that. Neither way, you will die in pain.
