@@ -14,7 +14,7 @@ public enum EnumHereticCauldronFluidType implements IStringSerializable, IIDSet
 	HARSHING_WATER("harshing_water", HarshenFluids.harshing_water),
 	HARSHEN_DIMENSIONAL_FLUID("harshen_dimensional_fluid", HarshenFluids.harshen_dimensional_fluid),
 	BLOOD("blood"),
-	LAVA("lava", new ResourceLocation("minecraft", "textures/blocks/lava_still.png")),
+	LAVA("lava", new ResourceLocation("textures/blocks/lava_still.png")),
 	MILK("milk");
 	
 	private final String name;

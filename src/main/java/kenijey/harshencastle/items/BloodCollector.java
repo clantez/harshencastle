@@ -40,7 +40,6 @@ public class BloodCollector extends BaseItemMetaData
 			nbt.setInteger("Blood", nbt.getInteger("Blood") + amount);
 			flag = true;
 		}
-		System.out.println(amount);
 		stack.setItemDamage(metaChange(nbt));
         stack.setTagCompound(nbt);
         player.setHeldItem(hand, stack);

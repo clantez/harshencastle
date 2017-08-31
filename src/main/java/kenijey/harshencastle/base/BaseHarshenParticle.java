@@ -54,6 +54,11 @@ public abstract class BaseHarshenParticle extends Particle
 	{
 			this(world, xCoordIn, yCoordIn, zCoordIn, motionXIn, motionYIn, motionZIn, par14, disableMoving2, null);
 	}
+	
+	public void setLocation(ResourceLocation location) {
+		this.location = location;
+	}
+	
 	@Override
     public int getFXLayer()
     {

@@ -19,11 +19,14 @@ import net.minecraft.item.ItemBed;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.UniversalBucket;
 
 public class ParticleItem extends BaseHarshenParticle {
 
+	private int fxLayer = 1;
+	
 	public ParticleItem(World world, double xCoordIn, double yCoordIn, double zCoordIn, double motionXIn,
 			double motionYIn, double motionZIn, float par14, boolean disableMoving, ItemStack stack) {
 		super(world, xCoordIn, yCoordIn, zCoordIn, motionXIn, motionYIn, motionZIn, par14, disableMoving);
@@ -36,17 +39,11 @@ public class ParticleItem extends BaseHarshenParticle {
 			else
 				this.setParticleTexture(Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getParticleIcon(Items.BUCKET));
 		if(stack.getItem() instanceof ItemBed)
-			switch (new Random().nextInt(4)) {
-			case 0:
-				this.setParticleTexture(Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getTexture(Blocks.WOOL.getDefaultState()));
-				break;
-			case 1:
-				this.setParticleTexture(Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getTexture(Blocks.PLANKS.getDefaultState()));
-				break;
-			default:
-				this.setParticleTexture(Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getTexture(Blocks.WOOL.getDefaultState().withProperty(BlockColored.COLOR, EnumDyeColor.byMetadata(stack.getMetadata()))));
-				break;
-			}
+		{
+			fxLayer = 3;
+			setLocation(new ResourceLocation("textures/entity/bed/" + EnumDyeColor.byMetadata(stack.getMetadata()).getName() + ".png"));
+			return;
+		}
 		List<BakedQuad> quadList = Minecraft.getMinecraft().getRenderItem().getItemModelWithOverrides(stack, world, Minecraft.getMinecraft().player).getQuads((IBlockState)null, (EnumFacing)null, 0L);
 		int i = 0;
 		boolean flag = !stack.isEmpty();
@@ -79,7 +76,7 @@ public class ParticleItem extends BaseHarshenParticle {
 	@Override
 	public int getFXLayer() 
 	{
-		return 1;
+		return fxLayer;
 	}
 
 	@Override

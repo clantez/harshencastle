@@ -47,7 +47,6 @@ public class ModelHarshenSoul extends BaseHarshenBiped
 		render(bodyParts, 3, 1, 2, -3, 5.7f, -1, 0, 44);
 		render(bodyParts, 2, 1, 1, -1, 9.6f, -1, 5, 47);
 		this.bipedHeadwear.isHidden = true;
-		System.out.println("jef");
 		this.bipedRightArm = newRender(4, 12, 4, -5, 2, 0, -3, -2, -2, 0, 0, false, this);
 		this.bipedRightLeg = newRender(4, 12, 4, -2, 12, 0, -2, 0, -2, 0, 16, false, this);
 		this.bipedLeftLeg = newRender(4, 12, 4, 2, 12, 0, -2, 0, -2, 0, 16, true, this);
