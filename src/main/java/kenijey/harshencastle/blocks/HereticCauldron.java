@@ -116,7 +116,7 @@ public class HereticCauldron extends BaseBlockHarshenSingleInventory
 	
 	@Override
 	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, new IProperty[] {LIQUID, LEVEL});
+		return new BlockStateContainer(this, new IProperty[] {LEVEL, LIQUID});
 	}
 	
 	@Override

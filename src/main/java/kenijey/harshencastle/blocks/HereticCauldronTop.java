@@ -6,6 +6,7 @@ import java.util.Random;
 import javax.annotation.Nullable;
 
 import kenijey.harshencastle.HarshenBlocks;
+import kenijey.harshencastle.tileentity.TileEntityHereticCauldron;
 import kenijey.harshencastle.tileentity.TileEntityHereticCauldronTop;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
@@ -70,7 +71,9 @@ public class HereticCauldronTop extends Block implements ITileEntityProvider
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
 			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		return ((HereticCauldron)worldIn.getBlockState(pos.down()).getBlock()).onBlockActivated(worldIn, pos.down(), worldIn.getBlockState(pos.down()), playerIn, hand, facing, hitX, hitY, hitZ);
+		if(worldIn.getTileEntity(pos.down()) instanceof TileEntityHereticCauldron)
+			return ((HereticCauldron)worldIn.getBlockState(pos.down()).getBlock()).onBlockActivated(worldIn, pos.down(), worldIn.getBlockState(pos.down()), playerIn, hand, facing, hitX, hitY, hitZ);
+		return false;
 	}
 	
 	@Override
