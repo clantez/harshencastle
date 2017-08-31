@@ -1,11 +1,6 @@
 package kenijey.harshencastle.itemrenderer;
 
-import java.util.Random;
-
-import org.lwjgl.opengl.GL11;
-
 import kenijey.harshencastle.HarshenCastle;
-import kenijey.harshencastle.enums.blocks.EnumHetericCauldronFluidType;
 import kenijey.harshencastle.enums.particle.EnumHarshenParticle;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDimensionalPedestal;
 import net.minecraft.client.Minecraft;

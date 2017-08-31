@@ -1,6 +1,6 @@
 package kenijey.harshencastle.enums.items;
 
-import kenijey.harshencastle.enums.blocks.EnumHetericCauldronFluidType;
+import kenijey.harshencastle.enums.blocks.EnumHereticCauldronFluidType;
 import kenijey.harshencastle.interfaces.IIDSet;
 import kenijey.harshencastle.potions.HarshenPotions;
 import net.minecraft.init.MobEffects;
@@ -14,20 +14,20 @@ public enum EnumGlassContainer implements IStringSerializable, IIDSet
 	REGEN("regen", 0xF40D09, new PotionEffect(MobEffects.REGENERATION, 100, 200)),
 	CURE("cure", 0xEFEDA2, new PotionEffect(HarshenPotions.potionPure, 1)),
 	
-	HARSHING_WATER(EnumHetericCauldronFluidType.HARSHING_WATER, 0x613A63),
-	HARSHEN_DIMENSIONAL_FLUID(EnumHetericCauldronFluidType.HARSHEN_DIMENSIONAL_FLUID, 0x324B64),
-	BLOOD(EnumHetericCauldronFluidType.BLOOD, 0x870705),
-	LAVA(EnumHetericCauldronFluidType.LAVA, 0xD96415),
-	MILK(EnumHetericCauldronFluidType.MILK, -1);
+	HARSHING_WATER(EnumHereticCauldronFluidType.HARSHING_WATER, 0x613A63),
+	HARSHEN_DIMENSIONAL_FLUID(EnumHereticCauldronFluidType.HARSHEN_DIMENSIONAL_FLUID, 0x324B64),
+	BLOOD(EnumHereticCauldronFluidType.BLOOD, 0x870705),
+	LAVA(EnumHereticCauldronFluidType.LAVA, 0xD96415),
+	MILK(EnumHereticCauldronFluidType.MILK, -1);
 		
 	private int meta;
 	private String name;
 	private PotionEffect[] effects;
-	private EnumHetericCauldronFluidType type;
+	private EnumHereticCauldronFluidType type;
 	private boolean isSubContainer = false;
 	public int color;
 	
-	private EnumGlassContainer(EnumHetericCauldronFluidType type, int color)
+	private EnumGlassContainer(EnumHereticCauldronFluidType type, int color)
 	{
 		this.color = color;
 		this.type = type;
@@ -52,7 +52,7 @@ public enum EnumGlassContainer implements IStringSerializable, IIDSet
 		return isSubContainer;
 	}
 	
-	 public EnumHetericCauldronFluidType getType() {
+	 public EnumHereticCauldronFluidType getType() {
 		return type;
 	}
 
@@ -69,7 +69,7 @@ public enum EnumGlassContainer implements IStringSerializable, IIDSet
 		return EnumGlassContainer.EMPTY;
 	}
 	
-	public static EnumGlassContainer getContainerFromType(EnumHetericCauldronFluidType type)
+	public static EnumGlassContainer getContainerFromType(EnumHereticCauldronFluidType type)
 	{
 		for(EnumGlassContainer cycleEnu : EnumGlassContainer.values())
 			if(cycleEnu.getType() == type)

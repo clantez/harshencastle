@@ -9,7 +9,7 @@ import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.base.BaseBlockHarshenSingleInventory;
 import kenijey.harshencastle.base.BaseTileEntityHarshenSingleItemInventory;
-import kenijey.harshencastle.enums.blocks.EnumHetericCauldronFluidType;
+import kenijey.harshencastle.enums.blocks.EnumHereticCauldronFluidType;
 import kenijey.harshencastle.tileentity.TileEntityHereticCauldron;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -18,11 +18,8 @@ import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.BlockRenderLayer;
@@ -32,21 +29,17 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
 
 public class HereticCauldron extends BaseBlockHarshenSingleInventory
 {
 	private static HashMap<BlockPos, Boolean> creativeBreakMap = new HashMap<>(HarshenUtils.HASH_LIMIT);
 
 	
-	public static final PropertyEnum<EnumHetericCauldronFluidType> LIQUID =  PropertyEnum.<EnumHetericCauldronFluidType>create("liquid_type", EnumHetericCauldronFluidType.class);
+	public static final PropertyEnum<EnumHereticCauldronFluidType> LIQUID =  PropertyEnum.<EnumHereticCauldronFluidType>create("liquid_type", EnumHereticCauldronFluidType.class);
 	public static final PropertyInteger LEVEL = PropertyInteger.create("level", 1, 3);
 	
 	protected static final AxisAlignedBB AABB_LEGS = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.3125D, 1.0D);
@@ -84,9 +77,9 @@ public class HereticCauldron extends BaseBlockHarshenSingleInventory
 		super(Material.IRON);
 		setRegistryName("heretic_cauldron");
 		setUnlocalizedName("heretic_cauldron");
-		this.setDefaultState(this.blockState.getBaseState().withProperty(LIQUID, EnumHetericCauldronFluidType.NONE).withProperty(LEVEL, 1));
-		TileEntityHereticCauldron.fluidMap.put(EnumHetericCauldronFluidType.LAVA, Items.LAVA_BUCKET);
-		TileEntityHereticCauldron.fluidMap.put(EnumHetericCauldronFluidType.MILK, Items.MILK_BUCKET);
+		this.setDefaultState(this.blockState.getBaseState().withProperty(LIQUID, EnumHereticCauldronFluidType.NONE).withProperty(LEVEL, 1));
+		TileEntityHereticCauldron.fluidMap.put(EnumHereticCauldronFluidType.LAVA, Items.LAVA_BUCKET);
+		TileEntityHereticCauldron.fluidMap.put(EnumHereticCauldronFluidType.MILK, Items.MILK_BUCKET);
 		setHardness(5.0F);
 		setResistance(5.0F);
 	}
@@ -118,7 +111,7 @@ public class HereticCauldron extends BaseBlockHarshenSingleInventory
 	
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		return this.getDefaultState();//this.getDefaultState().withProperty(LEVEL, (meta % 3) + 1).withProperty(LIQUID, EnumHetericCauldronFluidType.getMatch(Math.floorDiv(meta, 3)));
+		return this.getDefaultState();//this.getDefaultState().withProperty(LEVEL, (meta % 3) + 1).withProperty(LIQUID, EnumHereticCauldronFluidType.getMatch(Math.floorDiv(meta, 3)));
 	}
 	
 	@Override
@@ -198,14 +191,14 @@ public class HereticCauldron extends BaseBlockHarshenSingleInventory
 	
 	@Override
 	protected String extraName(NBTTagCompound nbt, boolean isItem) {
-		return EnumHetericCauldronFluidType.getFromId(nbt.getInteger("FluidValue")) == EnumHetericCauldronFluidType.NONE? "" : 
-			(isItem? " & " : "") + new TextComponentTranslation("fluid." + EnumHetericCauldronFluidType.getFromId(nbt.getInteger("FluidValue")).getName()).getFormattedText();
+		return EnumHereticCauldronFluidType.getFromId(nbt.getInteger("FluidValue")) == EnumHereticCauldronFluidType.NONE? "" : 
+			(isItem? " & " : "") + new TextComponentTranslation("fluid." + EnumHereticCauldronFluidType.getFromId(nbt.getInteger("FluidValue")).getName()).getFormattedText();
 	}
 	
 	@Override
 	protected void readNBT(BaseTileEntityHarshenSingleItemInventory tileEntity, ItemStack stack)
 	{
-		((TileEntityHereticCauldron)tileEntity).setFluid(EnumHetericCauldronFluidType.getFromId(stack.serializeNBT().getCompoundTag("tag").getInteger("FluidValue")));
+		((TileEntityHereticCauldron)tileEntity).setFluid(EnumHereticCauldronFluidType.getFromId(stack.serializeNBT().getCompoundTag("tag").getInteger("FluidValue")));
 		((TileEntityHereticCauldron)tileEntity).setLevel(stack.serializeNBT().getCompoundTag("tag").getInteger("FluidLevel"));
 
 	}

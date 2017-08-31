@@ -7,7 +7,7 @@ import java.util.List;
 import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.base.BaseJeiCategory;
-import kenijey.harshencastle.enums.blocks.EnumHetericCauldronFluidType;
+import kenijey.harshencastle.enums.blocks.EnumHereticCauldronFluidType;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IRecipeLayout;
@@ -25,7 +25,7 @@ public class JEICauldronCategory extends BaseJeiCategory
 		super(UID, reg);
 	}
 
-	private static HashMap<EnumHetericCauldronFluidType, IDrawable> fluidTypes = new HashMap<>(EnumHetericCauldronFluidType.values().length);
+	private static HashMap<EnumHereticCauldronFluidType, IDrawable> fluidTypes = new HashMap<>(EnumHereticCauldronFluidType.values().length);
 	
 	private IDrawable currentFluid;
 	private IDrawable frontOfCauldron;
@@ -48,7 +48,7 @@ public class JEICauldronCategory extends BaseJeiCategory
 	
 	@Override
 	protected void createDrawable(IGuiHelper helper) {
-		for(EnumHetericCauldronFluidType fluid : EnumHetericCauldronFluidType.values())
+		for(EnumHereticCauldronFluidType fluid : EnumHereticCauldronFluidType.values())
 			fluidTypes.put(fluid, helper.createDrawable(fluid.getResourceLoc(), 0, 0, 38, 14, 38, 14));
 		frontOfCauldron = helper.createDrawable(new ResourceLocation(HarshenCastle.MODID, "textures/gui/jei/cauldron-front.png"), 0, 0, 150, 110, 150, 110);
 	}

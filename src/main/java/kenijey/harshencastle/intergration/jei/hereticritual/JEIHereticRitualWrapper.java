@@ -7,7 +7,7 @@ import javax.annotation.Nonnull;
 import com.google.common.collect.ImmutableList;
 
 import kenijey.harshencastle.base.BaseJeiWrapper;
-import kenijey.harshencastle.enums.blocks.EnumHetericCauldronFluidType;
+import kenijey.harshencastle.enums.blocks.EnumHereticCauldronFluidType;
 import kenijey.harshencastle.recipies.HereticRitualRecipes;
 import mezz.jei.api.ingredients.IIngredients;
 import net.minecraft.item.ItemStack;
@@ -17,7 +17,7 @@ public class JEIHereticRitualWrapper extends BaseJeiWrapper
 	private final List<List<ItemStack>> input;
 	private final ItemStack output;
 	private final ItemStack cauldronInput;
-	private final EnumHetericCauldronFluidType catalyst;
+	private final EnumHereticCauldronFluidType catalyst;
 	private final List<List<ItemStack>> allInputs;
 
 	@SuppressWarnings("unchecked")
@@ -40,7 +40,7 @@ public class JEIHereticRitualWrapper extends BaseJeiWrapper
 		ingredients.setOutput(ItemStack.class, output);
 	}
 	
-	public EnumHetericCauldronFluidType getCatalyst() 
+	public EnumHereticCauldronFluidType getCatalyst() 
 	{
 		return catalyst;
 	}
