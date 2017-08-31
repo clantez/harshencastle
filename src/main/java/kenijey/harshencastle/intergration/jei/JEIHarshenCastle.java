@@ -64,6 +64,6 @@ public class JEIHarshenCastle implements IModPlugin
 		registry.addRecipeCategories(new JEIRitualCategory(JEICategoryUIDs.ritual, registry));
 		registry.addRecipeCategories(new JEICauldronCategory(JEICategoryUIDs.cauldron, registry));
 		registry.addRecipeCategories(new JEIPedestalSlabCategory(JEICategoryUIDs.pedestalslab, registry));
-		registry.addRecipeCategories(new JEIHereticRitualCategory(JEICategoryUIDs.herticritual, registry));
+		registry.addRecipeCategories(new JEIHereticRitualCategory(JEICategoryUIDs.hereticritual, registry));
 	}
 }
