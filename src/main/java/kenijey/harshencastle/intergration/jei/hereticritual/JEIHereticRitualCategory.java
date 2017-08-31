@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import kenijey.harshencastle.HarshenCastle;
-import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.base.BaseJeiCategory;
 import kenijey.harshencastle.enums.blocks.EnumHetericCauldronFluidType;
 import mezz.jei.api.IGuiHelper;
@@ -69,7 +68,7 @@ public class JEIHereticRitualCategory extends BaseJeiCategory
 	protected void createDrawable(IGuiHelper helper) {
 		for(EnumHetericCauldronFluidType fluid : EnumHetericCauldronFluidType.values())
 			fluidTypes.put(fluid, helper.createDrawable(fluid.getResourceLoc(), 0, 0, 17, 4));
-		ritualFront = helper.createDrawable(new ResourceLocation(HarshenCastle.MODID, "textures/gui/jei/herticritual-front.png"), 0, 0, 150, 110, 150, 110);
+		ritualFront = helper.createDrawable(new ResourceLocation(HarshenCastle.MODID, "textures/gui/jei/hereticritual-front.png"), 0, 0, 150, 110, 150, 110);
 
 	}
 	
