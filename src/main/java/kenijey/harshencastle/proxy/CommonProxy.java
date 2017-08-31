@@ -3,7 +3,6 @@ package kenijey.harshencastle.proxy;
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.HarshenItems;
-import kenijey.harshencastle.HarshenLootTables;
 import kenijey.harshencastle.HarshenSounds;
 import kenijey.harshencastle.WorldGen;
 import kenijey.harshencastle.armor.HarshenArmors;
@@ -43,6 +42,7 @@ import kenijey.harshencastle.tileentity.TileEntityHarshenDimensionalPedestal;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDisplayBlock;
 import kenijey.harshencastle.tileentity.TileEntityHarshenSpawner;
 import kenijey.harshencastle.tileentity.TileEntityHereticCauldron;
+import kenijey.harshencastle.tileentity.TileEntityHereticCauldronTop;
 import kenijey.harshencastle.tileentity.TileEntityPedestalSlab;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -102,6 +102,7 @@ public class CommonProxy
     	
     	GameRegistry.registerTileEntity(TileEntityHarshenDimensionalPedestal.class, HarshenCastle.MODID + "HarshenDimensionalPedestalTileEntity");
     	GameRegistry.registerTileEntity(TileEntityHereticCauldron.class, HarshenCastle.MODID + "TileEntityHereticCauldron");
+    	GameRegistry.registerTileEntity(TileEntityHereticCauldronTop.class, HarshenCastle.MODID + "TileEntityHereticCauldronTop");
     	GameRegistry.registerTileEntity(TileEntityHarshenDisplayBlock.class, HarshenCastle.MODID + "TileEntityHarshenDisplayBlock");
     	GameRegistry.registerTileEntity(TileEntityHarshenSpawner.class, HarshenCastle.MODID + "TileEntityHarshenSpawner");
     	GameRegistry.registerTileEntity(TileEntityHarshenDimensionalGate.class, HarshenCastle.MODID + "TileEntityHarshenDimensionalGate");

@@ -17,7 +17,7 @@ import kenijey.harshencastle.enums.particle.EnumHarshenParticle;
 import kenijey.harshencastle.items.BloodCollector;
 import kenijey.harshencastle.items.GlassContainer;
 import kenijey.harshencastle.recipies.CauldronRecipes;
-import kenijey.harshencastle.recipies.LargeRitualRecipe;
+import kenijey.harshencastle.recipies.HereticRitualRecipes;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -53,7 +53,7 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 	private EnumHetericCauldronFluidType fluid = EnumHetericCauldronFluidType.NONE;
 	private int level = 1;
 	private EnumHetericCauldronFluidType workingFluid = EnumHetericCauldronFluidType.NONE;
-	private LargeRitualRecipe overstandingRecipe;
+	private HereticRitualRecipes overstandingRecipe;
 	private HashMap<BlockPos, ItemStack> pedestalMap = new HashMap<>(HarshenUtils.HASH_LIMIT); 
 	
 	@Override
@@ -305,7 +305,7 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 		ArrayList<ItemStack> stacks = new ArrayList<>();
 		for(TileEntityHarshenDimensionalPedestal pedestal : pedestals)
 			stacks.add(pedestal.getItem());
-		LargeRitualRecipe recipe = LargeRitualRecipe.getRecipe(getItem(), fluid, stacks);
+		HereticRitualRecipes recipe = HereticRitualRecipes.getRecipe(getItem(), fluid, stacks);
 		if(recipe != null && setRecipe)
 		{	
 			for(TileEntityHarshenDimensionalPedestal pedestal : pedestals)

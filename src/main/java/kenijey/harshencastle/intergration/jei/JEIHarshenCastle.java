@@ -4,6 +4,8 @@ import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.intergration.jei.cauldron.JEICauldronCategory;
 import kenijey.harshencastle.intergration.jei.cauldron.JEICauldronHandler;
+import kenijey.harshencastle.intergration.jei.hereticritual.JEIHereticRitualCategory;
+import kenijey.harshencastle.intergration.jei.hereticritual.JEIHereticRitualHandler;
 import kenijey.harshencastle.intergration.jei.pedestalslab.JEIPedestalSlabCategory;
 import kenijey.harshencastle.intergration.jei.pedestalslab.JEIPedestalSlabHandler;
 import kenijey.harshencastle.intergration.jei.ritual.JEIRitualCategory;
@@ -24,14 +26,15 @@ public class JEIHarshenCastle implements IModPlugin
 	@Override
 	public void register(IModRegistry registry) { 
 		this.registry = registry;
-		registry.addRecipeHandlers(new JEIRitualHandler(), new JEICauldronHandler(), new JEIPedestalSlabHandler());
+		registry.addRecipeHandlers(new JEIRitualHandler(), new JEICauldronHandler(), new JEIPedestalSlabHandler(), new JEIHereticRitualHandler());
 		
 		registry.addRecipes(HarshenRecipes.allRitualRecipes, JEICategoryUIDs.ritual);
 		registry.addRecipes(HarshenRecipes.allCauldronRecipes, JEICategoryUIDs.cauldron);
 		registry.addRecipes(HarshenRecipes.allPedestalRecipes, JEICategoryUIDs.pedestalslab);
-		
+		registry.addRecipes(HarshenRecipes.allHereticCauldronRecipes, JEICategoryUIDs.herticritual);
 		registry.addRecipeCatalyst(new ItemStack(HarshenBlocks.harshen_dimensional_pedestal), JEICategoryUIDs.ritual);
-		registry.addRecipeCatalyst(new ItemStack(HarshenBlocks.heretic_cauldron), JEICategoryUIDs.cauldron);
+		registry.addRecipeCatalyst(new ItemStack(HarshenItems.ritual_stick), JEICategoryUIDs.cauldron);
+		registry.addRecipeCatalyst(new ItemStack(HarshenItems.ritual_stick, 1, 1), JEICategoryUIDs.herticritual);
 		registry.addRecipeCatalyst(new ItemStack(HarshenBlocks.pedestal_slab), JEICategoryUIDs.pedestalslab);
 		
 		info(HarshenItems.harshen_soul_fragment);
@@ -61,6 +64,6 @@ public class JEIHarshenCastle implements IModPlugin
 		registry.addRecipeCategories(new JEIRitualCategory(JEICategoryUIDs.ritual, registry));
 		registry.addRecipeCategories(new JEICauldronCategory(JEICategoryUIDs.cauldron, registry));
 		registry.addRecipeCategories(new JEIPedestalSlabCategory(JEICategoryUIDs.pedestalslab, registry));
-
+		registry.addRecipeCategories(new JEIHereticRitualCategory(JEICategoryUIDs.herticritual, registry));
 	}
 }

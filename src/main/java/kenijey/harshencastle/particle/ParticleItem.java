@@ -1,17 +1,26 @@
 package kenijey.harshencastle.particle;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import kenijey.harshencastle.base.BaseHarshenParticle;
+import net.minecraft.block.BlockColored;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.texture.TextureUtil;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.EnumDyeColor;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBed;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.UniversalBucket;
 
 public class ParticleItem extends BaseHarshenParticle {
 
@@ -19,11 +28,30 @@ public class ParticleItem extends BaseHarshenParticle {
 			double motionYIn, double motionZIn, float par14, boolean disableMoving, ItemStack stack) {
 		super(world, xCoordIn, yCoordIn, zCoordIn, motionXIn, motionYIn, motionZIn, par14, disableMoving);
 		this.setParticleTexture(Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getParticleIcon(stack.getItem(), stack.getMetadata()));
+		if(stack.getItem() instanceof ItemBlock)
+	        this.setParticleTexture(Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getTexture(((ItemBlock)stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata())));
+		if(stack.getItem() instanceof UniversalBucket)
+			if(new Random().nextBoolean())
+				this.setParticleTexture(Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getTexture(((UniversalBucket)stack.getItem()).getFluid(stack).getFluid().getBlock().getDefaultState()));
+			else
+				this.setParticleTexture(Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getParticleIcon(Items.BUCKET));
+		if(stack.getItem() instanceof ItemBed)
+			switch (new Random().nextInt(4)) {
+			case 0:
+				this.setParticleTexture(Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getTexture(Blocks.WOOL.getDefaultState()));
+				break;
+			case 1:
+				this.setParticleTexture(Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getTexture(Blocks.PLANKS.getDefaultState()));
+				break;
+			default:
+				this.setParticleTexture(Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getTexture(Blocks.WOOL.getDefaultState().withProperty(BlockColored.COLOR, EnumDyeColor.byMetadata(stack.getMetadata()))));
+				break;
+			}
 		List<BakedQuad> quadList = Minecraft.getMinecraft().getRenderItem().getItemModelWithOverrides(stack, world, Minecraft.getMinecraft().player).getQuads((IBlockState)null, (EnumFacing)null, 0L);
 		int i = 0;
 		boolean flag = !stack.isEmpty();
 		boolean flag2 = false;
-		int color = 0;
+		ArrayList<Integer> colors = new ArrayList<Integer>();
 		for (int j = quadList.size(); i < j; ++i)
         {
             BakedQuad bakedquad = quadList.get(i);
@@ -36,11 +64,12 @@ public class ParticleItem extends BaseHarshenParticle {
                     k = TextureUtil.anaglyphColor(k);
 
                 k = k | -16777216;
-                color = k;
+                colors.add(k);
             }
         }
 		if(flag2)
 		{
+			int color = colors.get(new Random().nextInt(colors.size()));
 			this.particleRed = ((color >> 16) & 0xFF) * 255;
 			this.particleGreen = ((color >> 8) & 0xFF) * 255;
 			this.particleBlue = ((color >> 0) & 0xFF) * 255;

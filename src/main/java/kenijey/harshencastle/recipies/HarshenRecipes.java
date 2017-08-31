@@ -17,7 +17,7 @@ public class HarshenRecipes {
 	
 	public static ArrayList<RitualRecipes> allRitualRecipes = new ArrayList<>();
 	public static ArrayList<CauldronRecipes> allCauldronRecipes = new ArrayList<>();
-	public static ArrayList<LargeRitualRecipe> allLargeRitualRecipes = new ArrayList<>();
+	public static ArrayList<HereticRitualRecipes> allHereticCauldronRecipes = new ArrayList<>();
 	public static ArrayList<PedestalSlabRecipes> allPedestalRecipes = new ArrayList<>();
 	
 	public static void register()
@@ -53,7 +53,7 @@ public class HarshenRecipes {
 		ItemStack[] stackList = new ItemStack[8];
 		for(int i = 0; i < 8; i ++)
 			stackList[i] = new ItemStack(Blocks.GOLD_BLOCK);
-		LargeRitualRecipe.addRecipe(new ItemStack(Items.APPLE), new ItemStack(Items.GOLDEN_APPLE, 1, 1), EnumHetericCauldronFluidType.HARSHING_WATER,
+		HereticRitualRecipes.addRecipe(new ItemStack(Items.APPLE), new ItemStack(Items.GOLDEN_APPLE, 1, 1), EnumHetericCauldronFluidType.HARSHING_WATER,
 				stackList);
 		
 		
