@@ -1,6 +1,6 @@
 package kenijey.harshencastle.base;
 
-import kenijey.harshencastle.itemstackhandlers.HarshenItemStackHandler;
+import kenijey.harshencastle.objecthandlers.HarshenItemStackHandler;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;

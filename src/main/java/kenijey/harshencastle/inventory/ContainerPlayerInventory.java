@@ -2,9 +2,9 @@ package kenijey.harshencastle.inventory;
 
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
-import kenijey.harshencastle.itemstackhandlers.HarshenItemStackHandler;
 import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.network.packets.MessageSendPlayerInv;
+import kenijey.harshencastle.objecthandlers.HarshenItemStackHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ClickType;

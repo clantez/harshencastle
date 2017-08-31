@@ -9,7 +9,7 @@ import com.google.common.collect.Lists;
 import kenijey.harshencastle.base.BasePontusResourceBiome;
 import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
 import kenijey.harshencastle.handlers.HandlerPontusAllowed;
-import kenijey.harshencastle.itemstackhandlers.HarshenItemStackHandler;
+import kenijey.harshencastle.objecthandlers.HarshenItemStackHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.state.IBlockState;

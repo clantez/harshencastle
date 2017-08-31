@@ -72,6 +72,10 @@ public enum EnumHetericCauldronFluidType implements IStringSerializable, IIDSet
 		return NONE;
 	}
 	
+	public Fluid getFromBucket() {
+		return fromBucket;
+	}
+	
 	@Override
 	public String getName() {
 		return this.name;

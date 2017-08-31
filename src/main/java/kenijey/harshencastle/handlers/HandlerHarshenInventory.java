@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.interfaces.IHarshenProvider;
-import kenijey.harshencastle.itemstackhandlers.HarshenItemStackHandler;
+import kenijey.harshencastle.objecthandlers.HarshenItemStackHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;

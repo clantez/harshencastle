@@ -10,16 +10,12 @@ public class TileEntityHereticCauldronTop extends TileEntity
 	@Override
 	public <T> T getCapability(Capability<T> capability, EnumFacing facing)
 	{
-		if (capability  == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
-			return (T) world.getTileEntity(pos.down()).getCapability(capability, facing);
-		return super.getCapability(capability, facing);
+		return (T) world.getTileEntity(pos.down()).getCapability(capability, facing);
 	}
 	
 	@Override
 	public boolean hasCapability(Capability<?> capability, EnumFacing facing)
 	{
-		if (capability  == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
-			return true;
-		return super.hasCapability(capability, facing);
+		return world.getTileEntity(pos.down()).hasCapability(capability, facing);
 	}
 }

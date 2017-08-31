@@ -6,7 +6,7 @@ import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.base.BaseMessagePacket;
 import kenijey.harshencastle.inventory.GuiHandler;
-import kenijey.harshencastle.itemstackhandlers.HarshenItemStackHandler;
+import kenijey.harshencastle.objecthandlers.HarshenItemStackHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.network.ByteBufUtils;

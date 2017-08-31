@@ -1,4 +1,4 @@
-package kenijey.harshencastle.itemstackhandlers;
+package kenijey.harshencastle.objecthandlers;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
