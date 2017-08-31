@@ -8,7 +8,7 @@ import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 
-public enum EnumHetericCauldronFluidType implements IStringSerializable, IIDSet
+public enum EnumHereticCauldronFluidType implements IStringSerializable, IIDSet
 {
 	NONE("none"),
 	HARSHING_WATER("harshing_water", HarshenFluids.harshing_water),
@@ -23,7 +23,7 @@ public enum EnumHetericCauldronFluidType implements IStringSerializable, IIDSet
 	private Fluid fromBucket;
 	private IBlockState state;
 	
-	private EnumHetericCauldronFluidType(String name, ResourceLocation resourceLocation, Fluid fluid) {
+	private EnumHereticCauldronFluidType(String name, ResourceLocation resourceLocation, Fluid fluid) {
 		this.name = name;
 		this.resourceLoc = resourceLocation;
 		this.fromBucket = fluid;
@@ -31,9 +31,9 @@ public enum EnumHetericCauldronFluidType implements IStringSerializable, IIDSet
 			this.state = fluid.getBlock().getDefaultState();
 	}
 	
-	public static EnumHetericCauldronFluidType getFromId(int id)
+	public static EnumHereticCauldronFluidType getFromId(int id)
 	{
-		for(EnumHetericCauldronFluidType type : EnumHetericCauldronFluidType.values())
+		for(EnumHereticCauldronFluidType type : EnumHereticCauldronFluidType.values())
 			if(type.getId() == id)
 				return type;
 		return NONE;
@@ -49,24 +49,24 @@ public enum EnumHetericCauldronFluidType implements IStringSerializable, IIDSet
 		this.id = id;
 	}
 	
-	private EnumHetericCauldronFluidType(String name)
+	private EnumHereticCauldronFluidType(String name)
 	{
 		this(name, new ResourceLocation(HarshenCastle.MODID, "textures/blocks/" + name + "_still.png"), null);
 	}
 	
-	private EnumHetericCauldronFluidType(String name, Fluid fluid)
+	private EnumHereticCauldronFluidType(String name, Fluid fluid)
 	{
 		this(name, new ResourceLocation(HarshenCastle.MODID, "textures/blocks/" + name + "_still.png"), fluid);
 	}
 	
-	private EnumHetericCauldronFluidType(String name, ResourceLocation location)
+	private EnumHereticCauldronFluidType(String name, ResourceLocation location)
 	{
 		this(name, location, null);
 	}
 	
-	public static EnumHetericCauldronFluidType getFromFluid(Fluid fluid)
+	public static EnumHereticCauldronFluidType getFromFluid(Fluid fluid)
 	{
-		for(EnumHetericCauldronFluidType type : EnumHetericCauldronFluidType.values())
+		for(EnumHereticCauldronFluidType type : EnumHereticCauldronFluidType.values())
 			if(type.fromBucket == fluid)
 				return type;
 		return NONE;
