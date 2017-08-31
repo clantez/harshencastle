@@ -295,10 +295,10 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 			for(int z = maxList.get(0); z < maxList.get(1); z++)
 			{
 				if(!(maxList.contains(x) && maxList.contains(z)) && switchFlag)
-					if(world.getBlockState(pos.add(x, -1, z)).getBlock() != Blocks.STONE)
-						setError(pos.add(x, -1, z), Blocks.STONE);
+					if(world.getBlockState(pos.add(x, -1, z)).getBlock() != Blocks.OBSIDIAN)
+						setError(pos.add(x, -1, z), Blocks.OBSIDIAN);
 					else;
-				else if(world.getBlockState(pos.add(x, -1, z)).getBlock() == Blocks.STONE)
+				else if(world.getBlockState(pos.add(x, -1, z)).getBlock() == Blocks.OBSIDIAN)
 					setError(pos.add(x, -1, z), Blocks.BARRIER);
 				switchFlag = !switchFlag;
 			}
