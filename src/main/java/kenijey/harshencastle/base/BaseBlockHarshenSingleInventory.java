@@ -3,7 +3,6 @@ package kenijey.harshencastle.base;
 import java.util.HashMap;
 
 import kenijey.harshencastle.HarshenUtils;
-import kenijey.harshencastle.tileentity.TileEntityHarshenDisplayBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
