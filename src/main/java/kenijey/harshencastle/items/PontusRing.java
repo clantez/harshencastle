@@ -38,7 +38,7 @@ public class PontusRing extends Item implements IHarshenProvider
 	@Override
 	public void onTick(EntityPlayer player, int tick) {
 		player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 100, 0, false, false));
-		player.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 80, 0, false, false));
+		player.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 80, 0, false, false));
 	}
 
 }
