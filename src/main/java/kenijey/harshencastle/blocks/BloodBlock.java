@@ -1,5 +1,6 @@
 package kenijey.harshencastle.blocks;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
@@ -28,6 +29,8 @@ import net.minecraft.world.World;
 public class BloodBlock extends Block
 {
 	private static HashMap<BlockPos, Integer> tickMap = new HashMap<>(HarshenUtils.HASH_LIMIT);
+	private static ArrayList<BlockPos> inUse = new ArrayList<>();
+	
 	public BloodBlock() 
 	{
 		 super(Material.CARPET);
@@ -37,10 +40,18 @@ public class BloodBlock extends Block
 	     setTickRandomly(true);
 	}
 	
+	public void setRitualState(BlockPos pos, boolean setTo)
+	{
+		if(setTo)
+			inUse.add(pos);
+		else
+			inUse.remove(pos);
+	}
+	
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
 			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		if(playerIn.getHeldItem(hand).getItem() instanceof BloodCollector && ((BloodCollector)playerIn.getHeldItem(hand).getItem()).fill(playerIn, hand, 1))
+		if(!inUse.contains(pos) && playerIn.getHeldItem(hand).getItem() instanceof BloodCollector && ((BloodCollector)playerIn.getHeldItem(hand).getItem()).fill(playerIn, hand, 1))
 		{
 			worldIn.playSound(pos.getX(), pos.getY(), pos.getZ(), HarshenSounds.bloodCollectorUse, SoundCategory.BLOCKS, 0.5f, new Random().nextFloat(), false);
 			worldIn.setBlockToAir(pos);
@@ -60,6 +71,12 @@ public class BloodBlock extends Block
 		tickMap.put(pos, tickMap.get(pos) + 1);
 		if(tickMap.get(pos) > 17)
 			worldIn.setBlockToAir(pos);
+	}
+	
+	@Override
+	public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
+		tickMap.remove(pos);
+		inUse.remove(pos);
 	}
 	
 	@Override
