@@ -132,9 +132,9 @@ commands.pontuslevel.success=%s's access level was set to %s
 #gui
 gui.category.mobs=Mobs
 gui.category.potions=Potions
-gui.category.structure=Structure
-gui.category.dimension=Dimension
-gui.category.ritual=Ritual
+gui.category.structure=Structures
+gui.category.dimension=Dimensions
+gui.category.ritual=Rituals
 
 #tooltips
 sword1=Reminds the wraith
