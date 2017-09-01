@@ -10,10 +10,8 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
@@ -40,7 +38,7 @@ public class CriminalPendant extends Item implements IHarshenProvider
 	
 	@Override
 	public void onTick(EntityPlayer player, int tick) {
-		player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 500, 0, false, false));
+		
 	}
 	
 	@Override
