@@ -27,7 +27,7 @@ public class FeatherEarring extends Item implements IHarshenProvider
 		tooltip.add(" ");
 		tooltip.add("\u00A72" + new TextComponentTranslation("featherearring1").getFormattedText());
 		tooltip.add(" ");
-		tooltip.add("\u00A73" + new TextComponentTranslation("featherearring2").getFormattedText());
+		tooltip.add("\u00A7o" + new TextComponentTranslation("featherearring2").getFormattedText());
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 	}
 	

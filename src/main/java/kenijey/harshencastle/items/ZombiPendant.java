@@ -25,8 +25,8 @@ public class ZombiPendant extends Item implements IHarshenProvider
 		tooltip.add("\u00A72" + new TextComponentTranslation("zombi1").getFormattedText());
 		tooltip.add("\u00A72" + new TextComponentTranslation("zombi2").getFormattedText());
 		tooltip.add(" ");
-		tooltip.add("\u00A73" + new TextComponentTranslation("zombi3").getFormattedText());
-		tooltip.add("\u00A73" + new TextComponentTranslation("zombi4").getFormattedText());
+		tooltip.add("\u00A7o" + new TextComponentTranslation("zombi3").getFormattedText());
+		tooltip.add("\u00A7o" + new TextComponentTranslation("zombi4").getFormattedText());
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 	}
 	

@@ -24,8 +24,8 @@ public class BloodyEarring extends Item implements IBloodSupply, IHarshenProvide
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 		tooltip.add("\u00A75" + new TextComponentTranslation("accessoryitem").getFormattedText() + " \u00A77" + new TextComponentTranslation("earring").getFormattedText());
 		tooltip.add(" ");
-		tooltip.add("\u00A73" + new TextComponentTranslation("bearring1").getFormattedText());
-		tooltip.add("\u00A73" + new TextComponentTranslation("bearring2").getFormattedText());
+		tooltip.add("\u00A7o" + new TextComponentTranslation("bearring1").getFormattedText());
+		tooltip.add("\u00A7o" + new TextComponentTranslation("bearring2").getFormattedText());
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 	}
 	

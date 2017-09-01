@@ -37,7 +37,7 @@ public class OneRing extends Item implements IHarshenProvider
 
 	@Override
 	public void onTick(EntityPlayer player, int tick) {
-		player.addPotionEffect(new PotionEffect(MobEffects.INVISIBILITY, 3, 0, false, false));
+		player.addPotionEffect(new PotionEffect(MobEffects.INVISIBILITY, 7, 0, false, false));
 	}
 
 }
