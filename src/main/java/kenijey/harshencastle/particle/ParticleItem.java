@@ -5,16 +5,13 @@ import java.util.List;
 import java.util.Random;
 
 import kenijey.harshencastle.base.BaseHarshenParticle;
-import net.minecraft.block.BlockColored;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.texture.TextureUtil;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumDyeColor;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemBed;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;

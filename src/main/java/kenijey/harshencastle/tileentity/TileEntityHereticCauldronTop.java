@@ -3,7 +3,6 @@ package kenijey.harshencastle.tileentity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.items.CapabilityItemHandler;
 
 public class TileEntityHereticCauldronTop extends TileEntity
 {

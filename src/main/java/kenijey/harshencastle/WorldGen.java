@@ -1,9 +1,6 @@
 package kenijey.harshencastle;
 
-import java.util.List;
 import java.util.Random;
-
-import com.google.common.collect.Lists;
 
 import kenijey.harshencastle.dimensions.DimensionPontus;
 import kenijey.harshencastle.worldgenerators.castle.ChestGenerator;
@@ -17,7 +14,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityChest;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -28,7 +24,6 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraft.world.gen.structure.template.PlacementSettings;
-import net.minecraft.world.storage.loot.LootContext;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 public class WorldGen implements IWorldGenerator
