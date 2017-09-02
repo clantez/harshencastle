@@ -16,7 +16,7 @@ public class HandlerKeyBinding
 	
 	public HandlerKeyBinding()
 	{
-		telering = regKey("telering", Keyboard.KEY_G);
+		telering = regKey("telering", Keyboard.KEY_LSHIFT);
 
 	}
 	
