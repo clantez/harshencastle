@@ -25,6 +25,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
+import scala.actors.Logger;
 
 public class HandlerHarshenInventoryEffects 
 {
@@ -58,13 +59,14 @@ public class HandlerHarshenInventoryEffects
 			BlockPos blockpos = HarshenUtils.getTopBlock(world, new BlockPos(vec));
 			if(blockpos.getY() != -1 && !world.isRemote)
 			{
-				((EntityPlayerMP)event.player).connection.setPlayerLocation(vec.x, blockpos.getY(), vec.z, event.player.rotationYaw, event.player.rotationPitch);
-				HarshenNetwork.sendToPlayer(((EntityPlayerMP)event.player), new MessagePacketPlayerTeleportEffects(blockpos));
+				((EntityPlayerMP)event.player).velocityChanged = true;
+				HarshenNetwork.sendToPlayer(((EntityPlayerMP)event.player), new MessagePacketPlayerTeleportEffects(new Vec3d(vec.x, blockpos.getY(), vec.z)));
+				((EntityPlayerMP)event.player).setPositionAndUpdate(vec.x, blockpos.getY(), vec.z);
 				world.playSound((EntityPlayer)null, event.player.posX, event.player.posY, event.player.posZ, SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT, SoundCategory.PLAYERS, 1.0F, 1.0F);
                 event.player.playSound(SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT, 1.0F, 1.0F);
+
 			}
 		}
-		
 		if(cooldownMap.containsKey(event.player))
 		{
 			cooldownMap.put(event.player, cooldownMap.get(event.player) + 1);
