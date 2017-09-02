@@ -70,7 +70,7 @@ public class HandlerHarshenInventoryEffects
 		if(cooldownMap.containsKey(event.player))
 		{
 			cooldownMap.put(event.player, cooldownMap.get(event.player) + 1);
-			if(cooldownMap.get(event.player) >= 15)
+			if(cooldownMap.get(event.player) >= 20)
 				cooldownMap.remove(event.player);	
 		}
 			

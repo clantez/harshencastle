@@ -1,7 +1,9 @@
 package kenijey.harshencastle.network.packets;
 
 import io.netty.buffer.ByteBuf;
+import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.base.BaseMessagePacket;
+import kenijey.harshencastle.enums.particle.EnumHarshenParticle;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
@@ -45,12 +47,12 @@ public class MessagePacketPlayerTeleportEffects extends BaseMessagePacket<Messag
         {
             double d0 = world.rand.nextDouble();
             float f = (world.rand.nextFloat() - 0.5F) * 0.2F;
-            float f1 = (world.rand.nextFloat() - 0.5F) * 0.2F;
+            float f1 = (world.rand.nextFloat() - 0.5F) * 1.2F;
             float f2 = (world.rand.nextFloat() - 0.5F) * 0.2F;
             double d1 = blockpos.x + (double)(player.getPosition().getX() - blockpos.x) * d0 + (world.rand.nextDouble() - 0.5D) + 0.5D;
             double d2 = blockpos.y + (double)(player.getPosition().getY() - blockpos.y) * d0 + world.rand.nextDouble() - 0.5D;
             double d3 = blockpos.z + (double)(player.getPosition().getZ() - blockpos.z) * d0 + (world.rand.nextDouble() - 0.5D) + 0.5D;
-            world.spawnParticle(EnumParticleTypes.PORTAL, d1, d2, d3, (double)f, (double)f1, (double)f2);
+            HarshenCastle.proxy.spawnParticle(EnumHarshenParticle.PORTAL, new Vec3d(d1, d2, d3), new Vec3d(f, f1, f2), 1f, false);
         }
 	}
 
