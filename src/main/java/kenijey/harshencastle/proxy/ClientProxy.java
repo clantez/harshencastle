@@ -14,6 +14,7 @@ import kenijey.harshencastle.enums.particle.EnumHarshenParticle;
 import kenijey.harshencastle.gui.GuiBookScreen;
 import kenijey.harshencastle.handlers.client.HandlerGameOverlay;
 import kenijey.harshencastle.handlers.client.HandlerGuiEvent;
+import kenijey.harshencastle.handlers.client.HandlerKeyBinding;
 import kenijey.harshencastle.inventory.GuiHandler;
 import kenijey.harshencastle.itemrenderer.RendererBloodFactory;
 import kenijey.harshencastle.itemrenderer.RendererDimensionalPedestal;
@@ -110,7 +111,7 @@ public class ClientProxy extends CommonProxy
 		NetworkRegistry.INSTANCE.registerGuiHandler(HarshenCastle.instance, new GuiHandler());
 
     	
-    	Object[] handlers = {new HandlerGameOverlay(), new HandlerGuiEvent()};
+    	Object[] handlers = {new HandlerKeyBinding(), new  HandlerGameOverlay(), new HandlerGuiEvent()};
     	for(Object o : handlers)
     	{
     		MinecraftForge.EVENT_BUS.register(o);
