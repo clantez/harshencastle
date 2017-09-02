@@ -16,9 +16,7 @@ import kenijey.harshencastle.enums.items.EnumGlassContainer;
 import kenijey.harshencastle.enums.particle.EnumHarshenParticle;
 import kenijey.harshencastle.items.BloodCollector;
 import kenijey.harshencastle.items.GlassContainer;
-import kenijey.harshencastle.objecthandlers.HarshenFluidTank;
 import kenijey.harshencastle.recipies.CauldronRecipes;
-import kenijey.harshencastle.recipies.HarshenRecipes;
 import kenijey.harshencastle.recipies.HereticRitualRecipes;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -41,7 +39,6 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.UniversalBucket;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
 
 public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemInventory
@@ -60,12 +57,6 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 	private EnumHereticCauldronFluidType workingFluid = EnumHereticCauldronFluidType.NONE;
 	private HereticRitualRecipes overstandingRecipe;
 	private HashMap<BlockPos, ItemStack> pedestalMap = new HashMap<>(HarshenUtils.HASH_LIMIT); 
-	private HarshenFluidTank fluidHandler = new HarshenFluidTank(1000); //TODO REMOVE
-	
-	
-	public TileEntityHereticCauldron() {
-		fluidHandler.setTileEntity(this);
-	}
 	
 	@Override
 	public void tick() {

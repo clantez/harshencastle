@@ -19,6 +19,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
@@ -114,9 +115,17 @@ public class HarshenUtils
                 break;
             }
         }
-
-        return blockpos;
-			
+        return blockpos;		
+	}
+	
+	public static BlockPos getTopBlock(World world, double x, double z)
+	{
+		return getTopBlock(world, new BlockPos(x, 0, z));
+	}
+	
+	public static BlockPos getTopBlock(World world, Vec3d vec)
+	{
+		return getTopBlock(world, new BlockPos(vec));
 	}
 	
 	public static List<ItemStack> getItemsFromLootTable(World world, ResourceLocation locationOfTable)
