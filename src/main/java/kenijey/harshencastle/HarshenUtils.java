@@ -118,14 +118,33 @@ public class HarshenUtils
         return blockpos;		
 	}
 	
-	public static BlockPos getTopBlock(World world, double x, double z)
-	{
-		return getTopBlock(world, new BlockPos(x, 0, z));
-	}
-	
 	public static BlockPos getTopBlock(World world, Vec3d vec)
 	{
 		return getTopBlock(world, new BlockPos(vec));
+	}
+	
+	public static BlockPos getBottomBlockAir(World world, BlockPos pos)
+	{
+		Chunk chunk = world.getChunkFromBlockCoords(pos);
+        BlockPos blockpos;
+        BlockPos blockpos1;
+
+        for (blockpos = new BlockPos(pos.getX(), 0, pos.getZ()); blockpos.getY() < world.getActualHeight()- 1; blockpos = blockpos1)
+        {
+            blockpos1 = blockpos.up();
+            IBlockState state = chunk.getBlockState(blockpos1);
+            if ((state.getBlock() instanceof BlockLiquid || world.isAirBlock(blockpos1)) &&
+            		chunk.getBlockState(blockpos1.up()) instanceof BlockLiquid || world.isAirBlock(blockpos1.up()))
+            {
+                break;
+            }
+        }
+        return blockpos.up(2);		
+	}
+	
+	public static BlockPos getBottomBlockAir(World world, Vec3d vec)
+	{
+		return getBottomBlockAir(world, new BlockPos(vec));
 	}
 	
 	public static List<ItemStack> getItemsFromLootTable(World world, ResourceLocation locationOfTable)

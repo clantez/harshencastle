@@ -31,6 +31,7 @@ import kenijey.harshencastle.items.HarshenSoulIngot;
 import kenijey.harshencastle.items.Itium;
 import kenijey.harshencastle.items.LightEmittedEssence;
 import kenijey.harshencastle.items.LightEmittedSeed;
+import kenijey.harshencastle.items.MineRing;
 import kenijey.harshencastle.items.OneRing;
 import kenijey.harshencastle.items.PontusCube;
 import kenijey.harshencastle.items.PontusRing;
@@ -88,6 +89,7 @@ public class HarshenItems
 	public static Item zombi_pendant;
 	public static Item bloody_apple;
 	public static Item pontus_cube;
+	public static Item minering;
 	public static Item bloody_pontus_cube;
 	
 	
@@ -128,6 +130,7 @@ public class HarshenItems
 		bloody_apple = new BloodyApple();
 		pontus_cube = new PontusCube();
 		bloody_pontus_cube = new BloodyPontusCube();
+		minering = new MineRing();
 	}
 	
 	public static void reg()
@@ -152,6 +155,7 @@ public class HarshenItems
 		regItem(one_ring, 1);
 		regItem(criminal_pendant, 1);
 		regItem(telering, 1);
+		regItem(minering, 1);
 		regItem(blood_infused_ender_eye, 1);
 		regItem(elemental_pendant, 1);
 		regItem(powder_of_heretism, 8);

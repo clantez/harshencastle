@@ -33,7 +33,7 @@ public class HandlerHarshenInventoryEffects
 	HashMap<EntityPlayer, Integer> cooldownMap = new HashMap<>(HarshenUtils.HASH_LIMIT);
 	
 	public static boolean keyTeleringDown;
-
+	public static boolean keyMineringDown;
 	
 	@SubscribeEvent
 	public void onLivingHurt(LivingHurtEvent event)
@@ -50,13 +50,13 @@ public class HandlerHarshenInventoryEffects
 	@SubscribeEvent
 	public void playerTick(PlayerTickEvent event)
 	{
-		if(keyTeleringDown && !cooldownMap.containsKey(event.player) && containsItem(event.player, HarshenItems.telering))
+		if(((keyTeleringDown && containsItem(event.player, HarshenItems.telering)) || (keyMineringDown && containsItem(event.player, HarshenItems.minering))) && !cooldownMap.containsKey(event.player))
 		{
 			cooldownMap.put(event.player, 0);
 			World world = event.player.world;
 			Vec3d vec = new Vec3d(event.player.posX + (event.player.getLookVec().x * 4f),
 					event.player.posY + (event.player.getLookVec().y * 4f), event.player.posZ + (event.player.getLookVec().z* 4f));
-			BlockPos blockpos = HarshenUtils.getTopBlock(world, new BlockPos(vec));
+			BlockPos blockpos = keyTeleringDown? HarshenUtils.getTopBlock(world, vec) : HarshenUtils.getBottomBlockAir(world, vec);
 			if(blockpos.getY() != -1 && !world.isRemote)
 			{
 				((EntityPlayerMP)event.player).velocityChanged = true;
@@ -70,7 +70,7 @@ public class HandlerHarshenInventoryEffects
 		if(cooldownMap.containsKey(event.player))
 		{
 			cooldownMap.put(event.player, cooldownMap.get(event.player) + 1);
-			if(cooldownMap.get(event.player) >= 20)
+			if(cooldownMap.get(event.player) >= 30)
 				cooldownMap.remove(event.player);	
 		}
 			
