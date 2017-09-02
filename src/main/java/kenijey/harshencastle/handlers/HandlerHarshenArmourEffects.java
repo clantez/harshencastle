@@ -25,7 +25,7 @@ public class HandlerHarshenArmourEffects
 				i++;
 		if(i == 4)
 		{
-			event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 220, 0, false, false));
+			event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 225, 0, false, false));
 			event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.SPEED, 30, 0, false, false));
 		}
 				
