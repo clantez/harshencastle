@@ -18,6 +18,7 @@ import kenijey.harshencastle.items.BloodCollector;
 import kenijey.harshencastle.items.GlassContainer;
 import kenijey.harshencastle.objecthandlers.HarshenFluidTank;
 import kenijey.harshencastle.recipies.CauldronRecipes;
+import kenijey.harshencastle.recipies.HarshenRecipes;
 import kenijey.harshencastle.recipies.HereticRitualRecipes;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -59,7 +60,7 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 	private EnumHereticCauldronFluidType workingFluid = EnumHereticCauldronFluidType.NONE;
 	private HereticRitualRecipes overstandingRecipe;
 	private HashMap<BlockPos, ItemStack> pedestalMap = new HashMap<>(HarshenUtils.HASH_LIMIT); 
-	private HarshenFluidTank fluidHandler = new HarshenFluidTank(1000);
+	private HarshenFluidTank fluidHandler = new HarshenFluidTank(1000); //TODO REMOVE
 	
 	
 	public TileEntityHereticCauldron() {
@@ -68,22 +69,6 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 	
 	@Override
 	public void tick() {
-		if(fluid.getFromBucket() != null)
-		{
-			fluidHandler.setFluid(new FluidStack(fluid.getFromBucket(), Math.round(333f * level)));
-		}
-		if(isActive || isActiveInBackground)
-		{
-			fluidHandler.setCanDrain(false);
-			fluidHandler.setCanFill(false);
-		}
-		else
-		{
-			fluidHandler.setCanDrain(true);
-			fluidHandler.setCanFill(true);
-		}
-		if(level == 1 || fluid == EnumHereticCauldronFluidType.NONE)
-			fluidHandler.setFluid(null);
 		if(isActive)
 		{
 			if(activeTimer++ > 175)
@@ -132,7 +117,6 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 				{
 					pedestals.clear();
 					setActive(true);
-					setSwitchedItem(overstandingRecipe.getOutput());
 					overstandingRecipe = null;
 					pedestalMap.clear();
 				}
@@ -347,6 +331,7 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 			this.bloodPos = bloodPos;
 			overstandingTimer = 300;
 			workingFluid = fluid;
+			setSwitchedItem(recipe.getOutput());
 			isActiveInBackground = true;
 		}
 		if(setRecipe && !erroredPositions.isEmpty() && players[0] != null && world.isRemote)
@@ -498,16 +483,13 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 	{
 		if (capability  == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
 			return (T) this.handler;
-		else if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY)
-			return (T) this.fluidHandler;
 		return super.getCapability(capability, facing);
 	}
 	
 	@Override
 	public boolean hasCapability(Capability<?> capability, EnumFacing facing)
 	{
-		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || 
-			capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY)
+		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
 			return true;
 		return super.hasCapability(capability, facing);
 	}

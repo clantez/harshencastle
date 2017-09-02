@@ -51,8 +51,9 @@ public class HarshenRecipes {
 		
 		
 		ItemStack[] stackList = new ItemStack[8];
-		for(int i = 0; i < 8; i ++)
+		for(int i = 0; i < 7; i ++)
 			stackList[i] = new ItemStack(Blocks.GOLD_BLOCK);
+		stackList[7] = new ItemStack(Blocks.SANDSTONE);
 		HereticRitualRecipes.addRecipe(new ItemStack(Items.APPLE), new ItemStack(Items.GOLDEN_APPLE, 1, 1), EnumHereticCauldronFluidType.HARSHING_WATER,
 				stackList);
 		

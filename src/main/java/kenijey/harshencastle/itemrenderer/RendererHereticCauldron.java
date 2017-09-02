@@ -9,6 +9,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -31,6 +33,7 @@ public class RendererHereticCauldron extends TileEntitySpecialRenderer<TileEntit
 		{
 			GlStateManager.translate(x, y, z);
 			GlStateManager.translate(0.5f, 1.45f,0.5f);
+			boolean flag = true;
 			if(te.isActive)
 			{
 				if(te.getActiveTimer() < 50)
@@ -41,6 +44,20 @@ public class RendererHereticCauldron extends TileEntitySpecialRenderer<TileEntit
 					GlStateManager.translate(0, -1.225f, 0);
 					if(te.getActiveTimer() >= 130)
 						GlStateManager.translate(0, ((te.getActiveTimer()-130) / 40f), 0);
+					else if(te.getActiveTimer() >= 50)
+					{
+						ItemStack stack = null;
+						if(new Random().nextInt(MathHelper.floor(MathHelper.clamp(130 - te.getActiveTimer(), 1, 130))) <= 2 && !te.getItem().isEmpty())
+							stack = te.getItem();
+						else if(!te.getSwitchedItem().isEmpty())
+							stack = te.getSwitchedItem();
+						flag = false;
+						for(int i = 0; i < 45; i ++)
+						{
+							HarshenCastle.proxy.spawnParticle(EnumHarshenParticle.ITEM, 
+									new Vec3d(te.getPos()).addVector(0.5d, 0.6d + (te.getActiveTimer() >= 130? (te.getActiveTimer()-130) / 40f : 0), 0.5d), Vec3d.ZERO, 1f, false, stack);
+						}
+					}
 					else if (te.getActiveTimer() <= 105)
 						for(int i = 0; i < 15; i ++)
 						{
@@ -56,7 +73,8 @@ public class RendererHereticCauldron extends TileEntitySpecialRenderer<TileEntit
 
 			GlStateManager.scale(0.7f, 0.7f, 0.7f);
 			GlStateManager.rotate(te.getTimer() % 360 * 10, 0, 1, 0);
-			Minecraft.getMinecraft().getRenderManager().doRenderEntity(ITEM, 0f, 0f, 0f, 0f, 0f, false);
+			if(flag)
+				Minecraft.getMinecraft().getRenderManager().doRenderEntity(ITEM, 0f, 0f, 0f, 0f, 0f, false);
 			
 		}
 		GlStateManager.popMatrix();

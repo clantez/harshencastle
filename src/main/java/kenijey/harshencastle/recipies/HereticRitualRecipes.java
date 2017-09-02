@@ -31,22 +31,20 @@ public class HereticRitualRecipes
 	
 	public static HereticRitualRecipes getRecipe(ItemStack cauldronInput, EnumHereticCauldronFluidType fluid, ArrayList<ItemStack> pedestalItems) 
 	{
-		ArrayList<HereticRitualRecipes> working = new ArrayList<HereticRitualRecipes>();
 		for(HereticRitualRecipes recipe : allRecipes)
 			if(recipe.getCauldronInput().isItemEqual(cauldronInput) && recipe.getCatalyst() == fluid)
 			{
-				boolean flag = false;
-				ArrayList<ItemStack> doneItems = new ArrayList<>();
+				ArrayList<ItemStack> doneItems = new ArrayList<>(pedestalItems);
 				stackTestingLoop:
 				for(ItemStack stack : recipe.getPedestalItems())
 					for(ItemStack stack1 : pedestalItems)
-						if(stack1.isItemEqual(stack))
+						if(stack1.isItemEqual(stack) && doneItems.contains(stack1))
 						{
-							doneItems.add(stack);
+							doneItems.remove(stack1);
 							continue stackTestingLoop;
 						}
-				if(!flag && doneItems.size() == pedestalItems.size())
-				return recipe;
+				if(doneItems.isEmpty())
+					return recipe;
 			}
 				
 		return null;
