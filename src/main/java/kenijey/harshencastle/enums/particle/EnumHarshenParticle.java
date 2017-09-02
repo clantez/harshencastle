@@ -4,5 +4,6 @@ public enum EnumHarshenParticle
 {
 	BLOOD(),
 	CAULDRON(),
-	ITEM();
+	ITEM(),
+	PORTAL();
 }

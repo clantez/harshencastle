@@ -36,13 +36,16 @@ import kenijey.harshencastle.tileentity.TileEntityPedestalSlab;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.IParticleFactory;
 import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticlePortal;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.client.model.ModelLoader;
@@ -180,6 +183,11 @@ public class ClientProxy extends CommonProxy
 		        case ITEM:
 		        	if(info[0] instanceof ItemStack)
 		        		entityFx = new ParticleItem(minecraft.world, position.x, position.y, position.z, directionSpeed.x, directionSpeed.y, directionSpeed.z, scale / 5f, disableMoving, (ItemStack) info[0]);
+		        	break;
+		        case PORTAL:
+		        	entityFx = new ParticlePortal.Factory().createParticle(EnumParticleTypes.PORTAL.getParticleID(), minecraft.world, 
+	        				position.x, position.y, position.z, directionSpeed.x, directionSpeed.y, directionSpeed.z);
+		        	entityFx.setMaxAge((int)(Math.random() * 20.0D) + 100);
 		        default:
 		            break;
 	        }
