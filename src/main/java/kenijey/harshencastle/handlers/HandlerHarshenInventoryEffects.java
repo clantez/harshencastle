@@ -30,7 +30,8 @@ public class HandlerHarshenInventoryEffects
 {
 	
 	HashMap<EntityPlayer, Integer> cooldownMap = new HashMap<>(HarshenUtils.HASH_LIMIT);
-	HashMap<EntityPlayer, Integer> chargeMap = new HashMap<>(HarshenUtils.HASH_LIMIT);
+	
+	public static boolean keyTeleringDown;
 
 	
 	@SubscribeEvent
@@ -48,34 +49,26 @@ public class HandlerHarshenInventoryEffects
 	@SubscribeEvent
 	public void playerTick(PlayerTickEvent event)
 	{
-		if(event.player.isSneaking() && event.player.getHeldItemOffhand().getItem() == Items.STICK && !cooldownMap.containsKey(event.player) && containsItem(event.player, HarshenItems.telering))
+		if(keyTeleringDown && !cooldownMap.containsKey(event.player) && containsItem(event.player, HarshenItems.telering))
 		{
-			if(chargeMap.containsKey(event.player))
-				chargeMap.put(event.player, chargeMap.get(event.player) + 1);
-			else
-				chargeMap.put(event.player, 0);
-			if(chargeMap.get(event.player) >= 5)
+			cooldownMap.put(event.player, 0);
+			World world = event.player.world;
+			Vec3d vec = new Vec3d(event.player.posX + (event.player.getLookVec().x * 4f),
+					event.player.posY + (event.player.getLookVec().y * 4f), event.player.posZ + (event.player.getLookVec().z* 4f));
+			BlockPos blockpos = HarshenUtils.getTopBlock(world, new BlockPos(vec));
+			if(blockpos.getY() != -1 && !world.isRemote)
 			{
-				chargeMap.remove(event.player);
-				cooldownMap.put(event.player, 0);
-				World world = event.player.world;
-				Vec3d vec = new Vec3d(event.player.posX + (event.player.getLookVec().x * 4f),
-						event.player.posY + (event.player.getLookVec().y * 4f), event.player.posZ + (event.player.getLookVec().z* 4f));
-				BlockPos blockpos = HarshenUtils.getTopBlock(world, new BlockPos(vec));
-				if(blockpos.getY() != -1 && !world.isRemote && event.player.attemptTeleport(vec.x, blockpos.getY(), vec.z))
-				{
-					HarshenNetwork.sendToPlayer(((EntityPlayerMP)event.player), new MessagePacketPlayerTeleportEffects(blockpos));
-					world.playSound((EntityPlayer)null, event.player.posX, event.player.posY, event.player.posZ, SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT, SoundCategory.PLAYERS, 1.0F, 1.0F);
-                    event.player.playSound(SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT, 1.0F, 1.0F);
-				}
-				
+				((EntityPlayerMP)event.player).connection.setPlayerLocation(vec.x, blockpos.getY(), vec.z, event.player.rotationYaw, event.player.rotationPitch);
+				HarshenNetwork.sendToPlayer(((EntityPlayerMP)event.player), new MessagePacketPlayerTeleportEffects(blockpos));
+				world.playSound((EntityPlayer)null, event.player.posX, event.player.posY, event.player.posZ, SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT, SoundCategory.PLAYERS, 1.0F, 1.0F);
+                event.player.playSound(SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT, 1.0F, 1.0F);
 			}
 		}
 		
 		if(cooldownMap.containsKey(event.player))
 		{
 			cooldownMap.put(event.player, cooldownMap.get(event.player) + 1);
-			if(cooldownMap.get(event.player) >= 10)
+			if(cooldownMap.get(event.player) >= 15)
 				cooldownMap.remove(event.player);	
 		}
 			
