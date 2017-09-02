@@ -54,6 +54,9 @@ item.bloody_apple.name=Bloody Apple
 item.pontus_cube.name=Pontus Cube
 item.bloody_pontus_cube.name=Bloody Pontus Cube
 
+#keybindings
+key.telering.description=Telering Teleport Key
+
 #ritual
 ritual.fail.position=Ritual built wrong at %s, %s, %s. Expected %s, got %s
 ritual.not=not
