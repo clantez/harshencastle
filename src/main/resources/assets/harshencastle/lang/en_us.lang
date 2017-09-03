@@ -54,6 +54,7 @@ item.bloody_apple.name=Bloody Apple
 item.pontus_cube.name=Pontus Cube
 item.bloody_pontus_cube.name=Bloody Pontus Cube
 item.minering.name=Minering
+item.punchy_ring.name=Punchy Ring
 
 #keybindings
 key.telering.description=Telering Teleport Key
@@ -194,6 +195,8 @@ elemental_pendant1=Resist, more resist to afflict more.
 elemental_pendant2=Health and armor increases
 zombi_pendant1=Damage taken from all zombies
 zombi_pendant2=will be decreased to 1
+punchy_ring1="You want a punch?"
+punchy_ring2=You deal more damage with your hand.
 
 #misc
 itemGroup.harshenTab=Harshen Castle

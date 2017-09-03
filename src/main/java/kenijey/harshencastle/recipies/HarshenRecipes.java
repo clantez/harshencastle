@@ -257,5 +257,14 @@ public class HarshenRecipes {
 				'z', new ItemStack(HarshenItems.zombie_eye),
 				'g', new ItemStack(Items.GOLD_INGOT),
 				'e', new ItemStack(HarshenItems.light_emitted_essence));
+		
+		
+		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "punchy_ring"), new ResourceLocation("harshen_items"),
+				new ItemStack(HarshenItems.punchy_ring),
+				"nnn",
+				" b ",
+				
+				'n', new ItemStack(Items.IRON_NUGGET),
+				'b', new ItemStack(Blocks.IRON_BARS));
 	}
 }
