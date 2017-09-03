@@ -32,6 +32,6 @@ public class CriminalPendant extends BaseItemInventory
 	
 	@Override
 	public void onRemove(EntityPlayer player) {
-		player.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).removeModifier(UUID.fromString("d20525ee-98b2-402f-b298-61bc19a9e0c5"));
+		player.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).removeModifier(UUID.fromString("72eb8438-8f2b-11e7-bb31-be2e44b06b34"));
 	}
 }
