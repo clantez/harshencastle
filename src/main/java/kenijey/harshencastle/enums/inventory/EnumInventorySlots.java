@@ -7,29 +7,33 @@ import kenijey.harshencastle.interfaces.IIDSet;
 
 public enum EnumInventorySlots implements IIDSet
 {
-	LEFT_EAR(56, 14, 1),
-	RIGHT_EAR(104, 14, 0),
-	NECK(80, 23),
-	RING1(68, 50, 4),
-	RING2(92, 50, 3);
+	LEFT_EAR("earring", 56, 14, 1),
+	RIGHT_EAR("earring", 104, 14, 0),
+	NECK("pendant", 80, 23),
+	RING1("ring", 68, 50, 4),
+	RING2("ring", 92, 50, 3);
 	
 	private int id;
 	private final ArrayList<Integer> alowedIds;
 	private final Dimension dimension;
+	private final String name;
 	
-	private EnumInventorySlots(int x, int y, int... relatedTypes)
+	private EnumInventorySlots(String name, int x, int y, int... relatedTypes)
 	{
 		this.dimension = new Dimension(x, y);
 		alowedIds = new ArrayList<>();
 		for(int i : relatedTypes)
 			alowedIds.add(i);
+		this.name = name;
+	}
+	
+	public String getName() {
+		return name;
 	}
 	
 	public int getId() {
 		return id;
 	}
-	
-	
 	
 	public Dimension getDimension() {
 		return dimension;
