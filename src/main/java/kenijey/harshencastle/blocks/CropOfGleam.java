@@ -1,5 +1,7 @@
 package kenijey.harshencastle.blocks;
 
+import java.util.Random;
+
 import kenijey.harshencastle.HarshenItems;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.block.state.IBlockState;
@@ -7,6 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 
 public class CropOfGleam extends BlockCrops
 {
@@ -43,8 +46,18 @@ public class CropOfGleam extends BlockCrops
         return CROPS_AABB[((Integer)state.getValue(this.getAgeProperty())).intValue()];
     }
 	
+	@Override
+	public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
+		return super.canPlaceBlockAt(worldIn, pos) && worldIn.getBlockState(pos.down()).getBlock() instanceof HarshenDimensionalDirt;
+	}
+	
 	public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos)
 	{
 	        return true;
+	}
+	
+	@Override
+	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state) {
+		return false;
 	}
 }
