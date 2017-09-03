@@ -11,6 +11,7 @@ import kenijey.harshencastle.objecthandlers.HarshenItemStackHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
@@ -34,6 +35,11 @@ public class HandlerHarshenInventoryEffects
 		else if(event.getSource() instanceof EntityDamageSource && ((EntityDamageSource)event.getSource()).getTrueSource() instanceof EntityPlayer
 				&& containsItem(((EntityDamageSource)event.getSource()).getTrueSource(),  HarshenItems.fearring))
 			event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 150));
+		
+		if(event.getSource() instanceof EntityDamageSource && ((EntityDamageSource)event.getSource()).getTrueSource() instanceof EntityPlayer
+				&& containsItem(((EntityDamageSource)event.getSource()).getTrueSource(),  HarshenItems.punchy_ring) && 
+				((EntityPlayer)((EntityDamageSource)event.getSource()).getTrueSource()).getHeldItemMainhand().getItem() == Items.AIR)
+			event.setAmount(event.getAmount() + 1);
 
 	}
 	
