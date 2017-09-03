@@ -1,7 +1,6 @@
 package kenijey.harshencastle.handlers;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.HarshenUtils;
@@ -9,6 +8,8 @@ import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.network.packets.MessagePacketPlayerTeleportEffects;
 import kenijey.harshencastle.objecthandlers.HarshenItemStackHandler;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.monster.EntityPigZombie;
+import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
@@ -32,14 +33,19 @@ public class HandlerHarshenInventoryEffects
 		if(containsItem(event.getEntityLiving(), HarshenItems.fearring))
 			event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 30));
 
-		else if(event.getSource() instanceof EntityDamageSource && ((EntityDamageSource)event.getSource()).getTrueSource() instanceof EntityPlayer
-				&& containsItem(((EntityDamageSource)event.getSource()).getTrueSource(),  HarshenItems.fearring))
-			event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 150));
-		
-		if(event.getSource() instanceof EntityDamageSource && ((EntityDamageSource)event.getSource()).getTrueSource() instanceof EntityPlayer
-				&& containsItem(((EntityDamageSource)event.getSource()).getTrueSource(),  HarshenItems.punchy_ring) && 
-				((EntityPlayer)((EntityDamageSource)event.getSource()).getTrueSource()).getHeldItemMainhand().getItem() == Items.AIR)
-			event.setAmount(event.getAmount() + 1);
+		if(event.getSource() instanceof EntityDamageSource && ((EntityDamageSource)event.getSource()).getTrueSource() instanceof EntityPlayer)
+		{
+			EntityPlayer player = ((EntityPlayer)((EntityDamageSource)event.getSource()).getTrueSource());
+			if(containsItem(player,  HarshenItems.fearring))
+				player.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 150));
+			if(containsItem(player, HarshenItems.punchy_ring) && player.getHeldItemMainhand().getItem() == Items.AIR)
+				event.setAmount(event.getAmount() + 1);
+		}
+		if(containsItem(event.getEntityLiving(), HarshenItems.zombi_pendant) &&
+				(event.getSource() instanceof EntityDamageSource && ((EntityDamageSource)event.getSource()).getTrueSource() instanceof EntityZombie &&
+						!(((EntityDamageSource)event.getSource()).getTrueSource() instanceof EntityPigZombie)))
+			event.setAmount(event.getAmount() - 1);
+				
 
 	}
 	
