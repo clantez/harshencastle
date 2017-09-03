@@ -8,14 +8,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 
-public class MessageSendPlayerInv extends BaseMessagePacket<MessageSendPlayerInv>{
+public class MessageSendPlayerInvToClient extends BaseMessagePacket<MessageSendPlayerInvToClient>{
 
-	public MessageSendPlayerInv() {
+	public MessageSendPlayerInvToClient() {
 	}
 	
 	
 	private HarshenItemStackHandler handler;
-	public MessageSendPlayerInv(EntityPlayer player)
+	public MessageSendPlayerInvToClient(EntityPlayer player)
 	{
 		handler = HarshenUtils.getHandler(player);
 	}
@@ -33,13 +33,12 @@ public class MessageSendPlayerInv extends BaseMessagePacket<MessageSendPlayerInv
 	}
 
 	@Override
-	public void handleServerSide(MessageSendPlayerInv message, EntityPlayer player) {
-		player.getEntityData().setTag("harshenInventory", message.handler.serializeNBT());
+	public void handleServerSide(MessageSendPlayerInvToClient message, EntityPlayer player) {
 	}
 
 	@Override
-	public void handleClientSide(MessageSendPlayerInv message, EntityPlayer player) {
-		
+	public void handleClientSide(MessageSendPlayerInvToClient message, EntityPlayer player) {
+		player.getEntityData().setTag("harshenInventory", message.handler.serializeNBT());
 	}
 
 }

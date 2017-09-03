@@ -3,7 +3,7 @@ package kenijey.harshencastle.inventory;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
 import kenijey.harshencastle.network.HarshenNetwork;
-import kenijey.harshencastle.network.packets.MessageSendPlayerInv;
+import kenijey.harshencastle.network.packets.MessageSendPlayerInvToServer;
 import kenijey.harshencastle.objecthandlers.HarshenItemStackHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,15 +24,12 @@ public class ContainerPlayerInventory extends net.minecraft.inventory.Container
 			this.addSlotToContainer(new SlotHarshenInventory(handler, slot, slot.getId(), slot.getDimension().width, slot.getDimension().height));
 		int xPos = 8;
 		int yPos = 84;			
-		for (int y = 0; y < 3; ++y) {
-			for (int x = 0; x < 9; ++x) {
+		for (int y = 0; y < 3; ++y)
+			for (int x = 0; x < 9; ++x)
 				this.addSlotToContainer(new Slot(playerInv, x + y * 9 + 9, xPos + x * 18, yPos + y * 18));
-			}
-		}
-				
-		for (int x = 0; x < 9; ++x) {
+	
+		for (int x = 0; x < 9; ++x) 
 			this.addSlotToContainer(new Slot(playerInv, x, xPos + x * 18, yPos + 58));
-		}
 	}
 
 	@Override
@@ -80,6 +77,6 @@ public class ContainerPlayerInventory extends net.minecraft.inventory.Container
 	public void updated()
 	{
 		Minecraft.getMinecraft().player.getEntityData().setTag("harshenInventory", this.handler.serializeNBT());
-		HarshenNetwork.sendToServer(new MessageSendPlayerInv(Minecraft.getMinecraft().player));
+		HarshenNetwork.sendToServer(new MessageSendPlayerInvToServer(Minecraft.getMinecraft().player));
 	}
 }

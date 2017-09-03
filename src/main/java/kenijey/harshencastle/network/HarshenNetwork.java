@@ -1,12 +1,14 @@
 package kenijey.harshencastle.network;
 
 import kenijey.harshencastle.HarshenCastle;
+import kenijey.harshencastle.network.packets.MessagePacketItemInventoryDamaged;
 import kenijey.harshencastle.network.packets.MessagePacketOpenInv;
 import kenijey.harshencastle.network.packets.MessagePacketPlayerHasAccess;
 import kenijey.harshencastle.network.packets.MessagePacketPlayerTeleportEffects;
 import kenijey.harshencastle.network.packets.MessagePacketRingUpdate;
 import kenijey.harshencastle.network.packets.MessagePacketTileEntityBloodPlacerUpdated;
-import kenijey.harshencastle.network.packets.MessageSendPlayerInv;
+import kenijey.harshencastle.network.packets.MessageSendPlayerInvToClient;
+import kenijey.harshencastle.network.packets.MessageSendPlayerInvToServer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -23,9 +25,11 @@ public class HarshenNetwork
 		registerMessage(MessagePacketPlayerHasAccess.class, Side.CLIENT);
 		registerMessage(MessagePacketTileEntityBloodPlacerUpdated.class, Side.CLIENT);
 		registerMessage(MessagePacketOpenInv.class, Side.SERVER);
-		registerMessage(MessageSendPlayerInv.class, Side.SERVER);
+		registerMessage(MessageSendPlayerInvToServer.class, Side.SERVER);
+		registerMessage(MessageSendPlayerInvToClient.class, Side.CLIENT);
 		registerMessage(MessagePacketPlayerTeleportEffects.class, Side.CLIENT);
 		registerMessage(MessagePacketRingUpdate.class, Side.SERVER);
+		registerMessage(MessagePacketItemInventoryDamaged.class, Side.CLIENT);
 	}
 	
 	

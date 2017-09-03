@@ -6,22 +6,22 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
 
-public class Telering extends BaseItemInventory
+public class WaterEarring extends BaseItemInventory
 {
-	public Telering()
-	{
-		setUnlocalizedName("telering");
-		setRegistryName("telering");
-		setMaxDamage(400);
+
+	public WaterEarring() {
+		setRegistryName("water_earring");
+		setUnlocalizedName("water_earring");
 	}
 	
 	@Override
 	public EnumInventorySlots getSlot() {
-		return EnumInventorySlots.RING1;
+		return EnumInventorySlots.LEFT_EAR;
 	}
-
+	
 	@Override
 	public void onTick(EntityPlayer player, int tick) {
-		player.addPotionEffect(new PotionEffect(MobEffects.LUCK, 105, 0, false, false));
+		player.addPotionEffect(new PotionEffect(MobEffects.WATER_BREATHING, 105));
 	}
+
 }

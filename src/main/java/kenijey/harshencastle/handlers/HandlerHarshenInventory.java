@@ -5,10 +5,14 @@ import java.util.HashMap;
 
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.interfaces.IHarshenProvider;
+import kenijey.harshencastle.network.HarshenNetwork;
+import kenijey.harshencastle.network.packets.MessageSendPlayerInvToClient;
 import kenijey.harshencastle.objecthandlers.HarshenItemStackHandler;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 
 public class HandlerHarshenInventory 
@@ -38,5 +42,12 @@ public class HandlerHarshenInventory
 				((IHarshenProvider)handler.getStackInSlot(slot).getItem()).onTick(event.player, tickMap.get(event.player));
 			prevInv.add(handler.getStackInSlot(slot));
 		}	
+	}
+	
+	@SubscribeEvent
+	public void onPlayerJoin(PlayerLoggedInEvent event)
+	{
+		if(!event.player.world.isRemote)
+			HarshenNetwork.sendToPlayer((EntityPlayerMP) event.player, new MessageSendPlayerInvToClient(event.player));
 	}
 }

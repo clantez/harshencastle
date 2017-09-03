@@ -2,6 +2,8 @@ package kenijey.harshencastle.entity;
 
 import com.google.common.base.Predicate;
 
+import kenijey.harshencastle.HarshenItems;
+import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.damagesource.DamageSourceSoulPart;
 import kenijey.harshencastle.entity.AI.AIEntityFlyingTowardsPlayer;
 import kenijey.harshencastle.entity.movehelper.MoveHelperSoulPart;
@@ -64,7 +66,7 @@ public class EntitySoulPart extends EntityMob
         super.onUpdate();
         this.noClip = false;
         this.setNoGravity(true);
-        if(this.getAttackTarget() != null && this.getPosition().distanceSq(this.getAttackTarget().getPosition()) < 10)
+        if(this.getAttackTarget() != null && this.getPosition().distanceSq(this.getAttackTarget().getPosition()) < 25)
         	this.getAttackTarget().attackEntityFrom(DamageSourceSoulPart.getSource(this),  4f);
     }
 	

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 import kenijey.harshencastle.HarshenCastle;
+import kenijey.harshencastle.HarshenItems;
+import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.damagesource.DamageSourceHarshed;
 import kenijey.harshencastle.entity.EntitySoulPart;
 import kenijey.harshencastle.potions.HarshenPotions;
@@ -13,6 +15,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
@@ -44,7 +47,7 @@ public class HandlerPotionEffects {
 			{
 				arrayLivingNoSoul.add(event.getEntityLiving());
 				IAttributeInstance attribute = event.getEntityLiving().getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH);
-				AttributeModifier modifier = new AttributeModifier(UUID.fromString("81c41407-0bb1-435d-91ca-449b8c8a0eec"), "healthTo1", -(event.getEntityLiving().getMaxHealth() - 1D), 0).setSaved(true);
+				AttributeModifier modifier = new AttributeModifier(UUID.fromString("81c41407-0bb1-435d-91ca-449b8c8a0eec"), "healthTo1", -(event.getEntityLiving().getMaxHealth() - 2D), 0).setSaved(true);
 				if(!attribute.hasModifier(modifier))	
 					attribute.applyModifier(modifier);
 			}

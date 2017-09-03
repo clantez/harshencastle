@@ -19,6 +19,7 @@ import kenijey.harshencastle.items.BloodyPontusCube;
 import kenijey.harshencastle.items.CriminalPendant;
 import kenijey.harshencastle.items.ElementalPendant;
 import kenijey.harshencastle.items.EmpoweredSoulHarsherSword;
+import kenijey.harshencastle.items.EnderPendant;
 import kenijey.harshencastle.items.Fearring;
 import kenijey.harshencastle.items.FeatherEarring;
 import kenijey.harshencastle.items.GlassContainer;
@@ -31,6 +32,7 @@ import kenijey.harshencastle.items.HarshenSoulIngot;
 import kenijey.harshencastle.items.Itium;
 import kenijey.harshencastle.items.LightEmittedEssence;
 import kenijey.harshencastle.items.LightEmittedSeed;
+import kenijey.harshencastle.items.LootingEarring;
 import kenijey.harshencastle.items.MineRing;
 import kenijey.harshencastle.items.OneRing;
 import kenijey.harshencastle.items.PontusCube;
@@ -44,7 +46,9 @@ import kenijey.harshencastle.items.RitualStick;
 import kenijey.harshencastle.items.SoulHarsherPickaxe;
 import kenijey.harshencastle.items.SoulHarsherSword;
 import kenijey.harshencastle.items.SoulInfusedIngot;
+import kenijey.harshencastle.items.SoulShield;
 import kenijey.harshencastle.items.Telering;
+import kenijey.harshencastle.items.WaterEarring;
 import kenijey.harshencastle.items.ZombiPendant;
 import kenijey.harshencastle.items.ZombieEye;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -93,7 +97,10 @@ public class HarshenItems
 	public static Item minering;
 	public static Item bloody_pontus_cube;
 	public static Item punchy_ring;
-	
+	public static Item looting_earring;
+	public static Item ender_pendant;
+	public static Item soul_shield;
+	public static Item water_earring;
 	
 	public static void preInit()
 	{
@@ -134,48 +141,57 @@ public class HarshenItems
 		bloody_pontus_cube = new BloodyPontusCube();
 		minering = new MineRing();
 		punchy_ring = new PunchyRing();
+		looting_earring = new LootingEarring();
+		ender_pendant = new EnderPendant();
+		soul_shield = new SoulShield();
+		water_earring = new WaterEarring();
 	}
 	
 	public static void reg()
 	{
-		regItem(harshen_book, 1);
+		regItem(harshen_book);
 		regItem(harshen_soul_fragment, 8);
-		regItem(soul_harsher_sword, 1);
-		regItem(empowered_soul_harsher_sword, 1);
-		regItem(soul_harsher_pickaxe, 1);
+		regItem(soul_harsher_sword);
+		regItem(empowered_soul_harsher_sword);
+		regItem(soul_harsher_pickaxe);
 		regItem(item_harshen_dimensional_door,8);
 		regItem(itium,8);
 		regItem(harshen_crystal, 8);
 		regItem(harshen_soul_ingot, 8);
-		regItem(pontus_ring, 1);
-		regItem(bloody_earring, 1);
 		regItem(blood_essence, 8);
 		regItem(light_emitted_essence,8);
 		regItem(light_emitted_seed,16);
 		regItem(soul_infused_ingot, 2);
-		regItem(feather_earring, 1);
-		regItem(fearring, 1);
-		regItem(one_ring, 1);
-		regItem(criminal_pendant, 1);
-		regItem(telering, 1);
-		regItem(minering, 1);
-		regItem(blood_infused_ender_eye, 1);
-		regItem(elemental_pendant, 1);
+		regItem(blood_infused_ender_eye);
+		regItem(elemental_pendant);
 		regItem(powder_of_heretism, 8);
 		regItem(zombie_eye, 64);
-		regItem(zombi_pendant, 1);
 		regItem(bloody_apple, 13);
 		regItem(pontus_cube, 7);
 		regItem(bloody_pontus_cube, 6);
-		regItem(punchy_ring, 1);
 		
-		regMetaItem(ritual_stick, 1, emptyList(EnumRitualStick.values().length), "ritual_stick");
-		regMetaItem(pontus_world_gate_spawner, 1, EnumPontusGateSpawner.getNames(), "pontus_world_gate_spawner_");
-		regMetaItem(pontus_world_gate_parts, 1, EnumPontusGateSpawnerParts.getNames(), "pontus_world_gate_part_");
-		regMetaItem(props, 1, EnumProp.getNames(), "prop_");
-		regMetaItem(blood_collector, 1, EnumBloodCollector.getNames(), "blood_collector_");
-		regMetaItem(ritual_crystal, EnumRitualCrystal.getNames(), "ritual_crystal_");
-		regMetaItem(glass_container, 1, emptyList(EnumGlassContainer.values().length), "glass_container", new exceptionName(0, "_empty"));
+		regItem(zombi_pendant);
+		regItem(punchy_ring);
+		regItem(looting_earring);
+		regItem(ender_pendant);
+		regItem(feather_earring);
+		regItem(fearring);
+		regItem(one_ring);
+		regItem(criminal_pendant);
+		regItem(telering);
+		regItem(minering);
+		regItem(pontus_ring);
+		regItem(bloody_earring);
+		regItem(soul_shield);
+		regItem(water_earring);
+		
+		regMetaItem(ritual_stick, emptyList(EnumRitualStick.values().length), "ritual_stick");
+		regMetaItem(pontus_world_gate_spawner, EnumPontusGateSpawner.getNames(), "pontus_world_gate_spawner_");
+		regMetaItem(pontus_world_gate_parts, EnumPontusGateSpawnerParts.getNames(), "pontus_world_gate_part_");
+		regMetaItem(props, EnumProp.getNames(), "prop_");
+		regMetaItem(blood_collector, EnumBloodCollector.getNames(), "blood_collector_");
+		regMetaItem(ritual_crystal, 64, EnumRitualCrystal.getNames(), "ritual_crystal_");
+		regMetaItem(glass_container, emptyList(EnumGlassContainer.values().length), "glass_container", new exceptionName(0, "_empty"));
 	}
 	
 	public static ArrayList<Item> items = new ArrayList<Item>();
@@ -195,6 +211,11 @@ public class HarshenItems
 		return s;
 	}
 	
+	public static void regItem(Item item)
+	{
+		regItem(item, 1);
+	}
+	
 	public static void regItem(Item item, int stackSize)
 	{
 		items.add(item);
@@ -204,9 +225,13 @@ public class HarshenItems
 	
 	public static void regMetaItem(BaseItemMetaData item, int stackSize, String[] names, String prefix, exceptionName...exceptionNames)
 	{
-
 		item.setMaxStackSize(stackSize);
-		regMetaItem(item, names, prefix, exceptionNames);
+		for(exceptionName exc : exceptionNames)
+			names[exc.position] = exc.name;
+		ForgeRegistries.ITEMS.register(item);
+		allMetaItems.add(item);
+		allMetaNames.add(names);
+		allMetaPrefix.add(prefix);
 	}
 	
 	private static ArrayList<Item> allMetaItems = new ArrayList<Item>();
@@ -215,12 +240,7 @@ public class HarshenItems
 	
 	public static void regMetaItem(BaseItemMetaData item, String[] names, String prefix, exceptionName...exceptionNames)
 	{
-		for(exceptionName exc : exceptionNames)
-			names[exc.position] = exc.name;
-		ForgeRegistries.ITEMS.register(item);
-		allMetaItems.add(item);
-		allMetaNames.add(names);
-		allMetaPrefix.add(prefix);
+		regMetaItem(item, 1, names, prefix, exceptionNames);
 	}
 	
 	

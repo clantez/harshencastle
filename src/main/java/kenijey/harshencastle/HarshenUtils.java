@@ -9,11 +9,16 @@ import com.google.common.collect.Lists;
 import kenijey.harshencastle.base.BasePontusResourceBiome;
 import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
 import kenijey.harshencastle.handlers.HandlerPontusAllowed;
+import kenijey.harshencastle.network.HarshenNetwork;
+import kenijey.harshencastle.network.packets.MessagePacketItemInventoryDamaged;
 import kenijey.harshencastle.objecthandlers.HarshenItemStackHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
@@ -92,6 +97,31 @@ public class HarshenUtils
 		HarshenItemStackHandler handler = new HarshenItemStackHandler(nbt.getCompoundTag("harshenInventory").getInteger("Size"));
 		handler.deserializeNBT(nbt.getCompoundTag("harshenInventory"));
 		return handler;
+	}
+	
+	public static boolean containsItem(Entity entity, Item item)
+	{
+		return entity instanceof EntityPlayer && getHandler((EntityPlayer) entity).containsItem(item);
+	}
+	
+	public static void damageFirstOccuringItem(EntityPlayer player, Item item, int amount)
+	{
+		if(player.world.isRemote)
+			return;
+		HarshenItemStackHandler handler = HarshenUtils.getHandler(player);
+        for(int i =0; i < handler.getSlots(); i++)
+        	if(handler.getStackInSlot(i).getItem() == item)
+        	{
+        		handler.getStackInSlot(i).damageItem(amount, player);
+                HarshenNetwork.sendToPlayer((EntityPlayerMP) player, new MessagePacketItemInventoryDamaged(i, amount));
+        		break;
+        	}
+        player.getEntityData().setTag("harshenInventory", handler.serializeNBT());
+	}
+	
+	public static void damageFirstOccuringItem(EntityPlayer player, Item item)
+	{
+		damageFirstOccuringItem(player, item, 1);
 	}
 	
 	public static EntityPlayer getClosestPlayer(World world, BlockPos position)
