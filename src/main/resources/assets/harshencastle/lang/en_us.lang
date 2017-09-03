@@ -192,8 +192,8 @@ criminal_pendant1=Who dies harder, resists better and destroys more
 criminal_pendant2=
 elemental_pendant1=Resist, more resist to afflict more.
 elemental_pendant2=Health and armor increases
-zombi1_pendant=Damage taken from all zombies
-zombi2_pendant=will be decreased to 1
+zombi_pendant1=Damage taken from all zombies
+zombi_pendant2=will be decreased to 1
 
 #misc
 itemGroup.harshenTab=Harshen Castle
