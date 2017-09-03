@@ -53,9 +53,11 @@ item.zombi_pendant.name=Zombi Pendant
 item.bloody_apple.name=Bloody Apple
 item.pontus_cube.name=Pontus Cube
 item.bloody_pontus_cube.name=Bloody Pontus Cube
+item.minering.name=Minering
 
 #keybindings
 key.telering.description=Telering Teleport Key
+key.minering.description=Minering Teleport Key
 
 #ritual
 ritual.fail.position=Ritual built wrong at %s, %s, %s. Expected %s, got %s
