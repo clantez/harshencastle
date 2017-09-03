@@ -42,12 +42,16 @@ public class HarshenRecipes {
 		RitualRecipes.addRecipe(Arrays.asList(new ItemStack(HarshenItems.itium, 1, 0), new ItemStack(Items.MAGMA_CREAM),
 				new ItemStack(Items.PRISMARINE_SHARD), new ItemStack(Items.GOLDEN_APPLE)), new ItemStack(HarshenItems.elemental_pendant, 1, 0), true);
 		
+		RitualRecipes.addRecipe(Arrays.asList(new ItemStack(HarshenItems.itium, 1, 0), new ItemStack(Items.SPIDER_EYE),
+				new ItemStack(Items.DYE, 1, 4), new ItemStack(Blocks.STONE)), new ItemStack(HarshenItems.minering), true);
+		
 		
 		
 		PedestalSlabRecipes.addRecipe(new ItemStack(Blocks.COBBLESTONE), new ItemStack(Blocks.NETHERRACK));
 		PedestalSlabRecipes.addRecipe(new ItemStack(Items.ENDER_EYE), new ItemStack(HarshenItems.blood_infused_ender_eye));
 		PedestalSlabRecipes.addRecipe(new ItemStack(Items.GOLDEN_APPLE), new ItemStack(HarshenItems.bloody_apple));
 		PedestalSlabRecipes.addRecipe(new ItemStack(HarshenItems.pontus_cube), new ItemStack(HarshenItems.bloody_pontus_cube));
+		
 		
 		
 		ItemStack[] stackList = new ItemStack[8];
@@ -58,13 +62,14 @@ public class HarshenRecipes {
 				stackList);
 		
 		
+		
 		CauldronRecipes.addRecipe(new ItemStack(HarshenItems.ritual_crystal, 1, 0), new ItemStack(HarshenItems.ritual_crystal, 1, 1), EnumHereticCauldronFluidType.BLOOD);
 		CauldronRecipes.addRecipe(new ItemStack(HarshenItems.harshen_soul_ingot, 1, 0), new ItemStack(HarshenItems.soul_infused_ingot, 1, 0), EnumHereticCauldronFluidType.HARSHING_WATER);
 		CauldronRecipes.addRecipe(new ItemStack(Blocks.SAND, 1, 0), new ItemStack(Blocks.SOUL_SAND, 1, 0), EnumHereticCauldronFluidType.HARSHEN_DIMENSIONAL_FLUID);
 		CauldronRecipes.addRecipe(new ItemStack(Blocks.COBBLESTONE, 1, 0), new ItemStack(Blocks.NETHERRACK, 1, 0), EnumHereticCauldronFluidType.BLOOD);
 		CauldronRecipes.addRecipe(new ItemStack(Blocks.COBBLESTONE), new ItemStack(Blocks.OBSIDIAN, 2), EnumHereticCauldronFluidType.LAVA);
 		CauldronRecipes.addRecipe(new ItemStack(HarshenItems.glass_container), new ItemStack(HarshenItems.glass_container, 1, 3), EnumHereticCauldronFluidType.MILK);
-	}	
+	}
 	
 	public static void craftingRegistry()
 	{		
