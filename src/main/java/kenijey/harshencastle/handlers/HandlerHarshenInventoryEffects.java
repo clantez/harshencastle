@@ -1,40 +1,30 @@
 package kenijey.harshencastle.handlers;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.network.packets.MessagePacketPlayerTeleportEffects;
-import net.minecraft.block.material.Material;
+import kenijey.harshencastle.objecthandlers.HarshenItemStackHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EntityDamageSource;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
-import scala.actors.Logger;
 
 public class HandlerHarshenInventoryEffects 
-{
-	
-	HashMap<EntityPlayer, Integer> cooldownMap = new HashMap<>(HarshenUtils.HASH_LIMIT);
-	
-	public static boolean keyTeleringDown;
-	public static boolean keyMineringDown;
-	
+{	
 	@SubscribeEvent
 	public void onLivingHurt(LivingHurtEvent event)
 	{
@@ -47,36 +37,40 @@ public class HandlerHarshenInventoryEffects
 
 	}
 	
-	@SubscribeEvent
-	public void playerTick(PlayerTickEvent event)
+	public static void ringEvent(EntityPlayer player, int ringType)
 	{
-		if(((keyTeleringDown && containsItem(event.player, HarshenItems.telering)) || (keyMineringDown && containsItem(event.player, HarshenItems.minering))) && !cooldownMap.containsKey(event.player))
+		ArrayList<Item> ringTypeItem = new ArrayList<Item>();
+		ringTypeItem.add(HarshenItems.telering);
+		ringTypeItem.add(HarshenItems.minering);
+		if(containsItem(player, ringTypeItem.get(ringType)))
 		{
-			cooldownMap.put(event.player, 0);
-			World world = event.player.world;
-			Vec3d vec = new Vec3d(event.player.posX + (event.player.getLookVec().x * 4f),
-					event.player.posY + (event.player.getLookVec().y * 4f), event.player.posZ + (event.player.getLookVec().z* 4f));
-			BlockPos blockpos = keyTeleringDown? HarshenUtils.getTopBlock(world, vec) : HarshenUtils.getBottomBlockAir(world, vec);
-			if(blockpos.getY() != -1 && !world.isRemote)
+			World world = player.world;
+			Vec3d vec = new Vec3d(player.posX + (player.getLookVec().x * 4f),
+					player.posY + (player.getLookVec().y * 4f), player.posZ + (player.getLookVec().z* 4f));
+			BlockPos blockpos = ringType == 0? HarshenUtils.getTopBlock(world, vec) : HarshenUtils.getBottomBlockAir(world, vec);
+			Vec3d vecPos = new Vec3d(blockpos).addVector(0.5, 0, 0.5);
+			if(blockpos.getY() != -1 && player.getFoodStats().getFoodLevel() > 0)
 			{
-				((EntityPlayerMP)event.player).velocityChanged = true;
-				HarshenNetwork.sendToPlayer(((EntityPlayerMP)event.player), new MessagePacketPlayerTeleportEffects(new Vec3d(vec.x, blockpos.getY(), vec.z)));
-				((EntityPlayerMP)event.player).setPositionAndUpdate(vec.x, blockpos.getY(), vec.z);
-				world.playSound((EntityPlayer)null, event.player.posX, event.player.posY, event.player.posZ, SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT, SoundCategory.PLAYERS, 1.0F, 1.0F);
-                event.player.playSound(SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT, 1.0F, 1.0F);
-
+				((EntityPlayerMP)player).velocityChanged = true;
+				((EntityPlayerMP)player).fallDistance = 0;
+				HarshenNetwork.sendToPlayer(((EntityPlayerMP)player), new MessagePacketPlayerTeleportEffects(vecPos));
+				((EntityPlayerMP)player).setPositionAndUpdate(vecPos.x, vecPos.y, vecPos.z);
+				world.playSound((EntityPlayer)null, player.posX, player.posY, player.posZ, SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT, SoundCategory.PLAYERS, 1.0F, 1.0F);
+                player.playSound(SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT, 1.0F, 1.0F);
+                player.addExhaustion(0.5F);
+                HarshenItemStackHandler handler = HarshenUtils.getHandler(player);
+                for(int i =0; i < handler.getSlots(); i++)
+                	if(handler.getStackInSlot(i).getItem() == ringTypeItem.get(ringType))
+                	{
+                		handler.getStackInSlot(i).damageItem(1, player);
+                		break;
+                	}
+                player.getEntityData().setTag("harshenInventory", handler.serializeNBT());
 			}
-		}
-		if(cooldownMap.containsKey(event.player))
-		{
-			cooldownMap.put(event.player, cooldownMap.get(event.player) + 1);
-			if(cooldownMap.get(event.player) >= 30)
-				cooldownMap.remove(event.player);	
-		}
-			
+		}		
 	}
 	
-	private boolean containsItem(Entity entity, Item item)
+	private static boolean containsItem(Entity entity, Item item)
 	{
 		return entity instanceof EntityPlayer && HarshenUtils.getHandler((EntityPlayer) entity).containsItem(item);
 	}

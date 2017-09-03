@@ -19,7 +19,6 @@ public class HandlerKeyBinding
 	{
 		telering = regKey("telering", Keyboard.KEY_G);
 		minering = regKey("minering", Keyboard.KEY_V);
-
 	}
 	
 	private KeyBinding regKey(String name, int keycode)
@@ -32,29 +31,16 @@ public class HandlerKeyBinding
 	@SubscribeEvent
 	public void onKeyInput(KeyInputEvent event)
 	{
-		if(telering.isKeyDown() != teleringPressed)
-			update(telering.isKeyDown(), 0);
-		if(minering.isKeyDown() != mineringPressed)
-			update(minering.isKeyDown(), 1);
+
+		if(telering.isPressed())
+			sendRingEvent(0);
+		if(minering.isPressed())
+			sendRingEvent(1);
 	}
 	
-	boolean teleringPressed;
-	boolean mineringPressed;
-
-	
-	private void update(boolean updateTo, int ringType)
+	private void sendRingEvent(int ringType)
 	{
-		HarshenNetwork.sendToServer(new MessagePacketRingUpdate(updateTo, ringType));
-		switch (ringType) {
-		case 0:
-			teleringPressed = updateTo;
-			break;
-		case 1:
-			mineringPressed = updateTo;
-			break;
-		default:
-			break;
-		}
+		HarshenNetwork.sendToServer(new MessagePacketRingUpdate(ringType));
 	}
 	
 }

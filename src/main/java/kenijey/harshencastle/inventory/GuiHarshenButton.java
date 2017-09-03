@@ -5,6 +5,7 @@ import org.lwjgl.opengl.GL11;
 import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.network.packets.MessagePacketOpenInv;
+import kenijey.harshencastle.tileentity.HarshenClientUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
@@ -47,7 +48,7 @@ public class GuiHarshenButton extends GuiButton {
 			int x = this.x + this.parentGui.getGuiLeft();
 			FontRenderer fontrenderer = mc.fontRenderer;
 			int k = this.getHoverState(this.hovered);
-			mc.getTextureManager().bindTexture(new ResourceLocation(HarshenCastle.MODID, "textures/gui/accessory_button" + (k==1? "" : "_over") + ".png"));
+			mc.getTextureManager().bindTexture(GuiPlayerInventoryExtended.background);
 			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 			this.hovered = mouseX >= x && mouseY >= this.y && mouseX < x + this.width && mouseY < this.y + this.height;
 			GlStateManager.enableBlend();
@@ -55,7 +56,7 @@ public class GuiHarshenButton extends GuiButton {
 			GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 			GlStateManager.pushMatrix();
 			GlStateManager.translate(0, 0, 200);
-			this.drawModalRectWithCustomSizedTexture(x, this.y, 0, 0, 24, 24, 24, 24);
+			HarshenClientUtils.drawTexture(x, this.y, 16.9f, (k  - 1) * 7f, 7f, 7f,  24, 24, 24, 24);
 			if (k!=1)
 				this.drawCenteredString(fontrenderer, I18n.translateToLocalFormatted(this.displayString), x + 5, this.y + this.height, 0xffffff);
 			GlStateManager.popMatrix();

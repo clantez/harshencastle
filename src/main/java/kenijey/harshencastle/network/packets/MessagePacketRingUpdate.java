@@ -11,40 +11,26 @@ public class MessagePacketRingUpdate extends BaseMessagePacket<MessagePacketRing
 	public MessagePacketRingUpdate() {
 	}
 	
-	private boolean updateFlag;
 	private int ringType;
 	
-	public MessagePacketRingUpdate(boolean updateTo, int ringType)
+	public MessagePacketRingUpdate(int ringType)
 	{
-		updateFlag = updateTo;
 		this.ringType = ringType;
 	}
 	
 	@Override
 	public void fromBytes(ByteBuf buf) {		
-		updateFlag = buf.readBoolean();
 		ringType = buf.readInt();
 	}
 
 	@Override
 	public void toBytes(ByteBuf buf) {		
-		buf.writeBoolean(updateFlag);
 		buf.writeInt(ringType);
 	}
 
 	@Override
 	public void handleServerSide(MessagePacketRingUpdate message, EntityPlayer player) {
-		switch (message.ringType) {
-		case 0:
-			HandlerHarshenInventoryEffects.keyTeleringDown = message.updateFlag;
-			break;
-		case 1:
-			HandlerHarshenInventoryEffects.keyMineringDown = message.updateFlag;
-
-			break;
-		default:
-			break;
-		}
+		HandlerHarshenInventoryEffects.ringEvent(player, message.ringType);
 	}
 
 	@Override
