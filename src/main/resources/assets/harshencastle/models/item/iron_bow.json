@@ -1,7 +1,7 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "harshencastle:items/iron_bow_standby"
+        "layer0": "harshencastle:items/iron_bow"
     },
     "display": {
         "thirdperson_righthand": {
@@ -39,12 +39,19 @@
             },
             "model": "harshencastle:item/iron_bow_pulling_1"
         },
+		{
+            "predicate": {
+                "pulling": 1,
+                "pull": 0.77
+            },
+            "model": "harshencastle:item/iron_bow_pulling_2"
+        },
         {
             "predicate": {
                 "pulling": 1,
                 "pull": 0.9
             },
-            "model": "harshencastle:item/iron_bow_pulling_2"
+            "model": "harshencastle:item/iron_bow_pulling_3"
         }
     ]
 }
