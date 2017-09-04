@@ -59,6 +59,7 @@ item.looting_earring.name=Looting Earring
 item.ender_pendant.name=Ender Necklace
 item.soul_shield.name=Soul Shield
 item.water_earring.name=Aqua Earring
+item.iron_bow.name=Iron Bow
 
 #keybindings
 key.telering.description=Telering Teleport Key
