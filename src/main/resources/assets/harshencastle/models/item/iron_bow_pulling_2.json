@@ -1,6 +1,6 @@
 {
-    "parent": "item/iron_bow",
+    "parent": "item/bow",
     "textures": {
-        "layer0": "items/harshencastle:iron_bow_pulling_2"
+        "layer0": "harshencastle:items/iron_bow_pulling_2"
     }
 }

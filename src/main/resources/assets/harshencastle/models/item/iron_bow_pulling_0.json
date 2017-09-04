@@ -1,5 +1,5 @@
 {
-    "parent": "item/iron_bow",
+    "parent": "item/generated",
     "textures": {
         "layer0": "harshencastle:items/iron_bow_pulling_0"
     }
