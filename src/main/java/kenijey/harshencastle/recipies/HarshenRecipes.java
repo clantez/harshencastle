@@ -266,5 +266,15 @@ public class HarshenRecipes {
 				
 				'n', new ItemStack(Items.IRON_NUGGET),
 				'b', new ItemStack(Blocks.IRON_BARS));
+		
+		
+		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "iron_bow"), new ResourceLocation("harshen_items"),
+				new ItemStack(HarshenItems.iron_bow),
+				" is",
+				"i s",
+				" is",
+				
+				'i', new ItemStack(Items.IRON_INGOT),
+				's', new ItemStack(Items.STRING));
 	}
 }
