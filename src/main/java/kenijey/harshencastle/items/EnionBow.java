@@ -22,13 +22,13 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class IronBow extends ItemBow
+public class EnionBow extends ItemBow
 {
-	public IronBow()
+	public EnionBow()
 	{
-		setUnlocalizedName("iron_bow");
-		setRegistryName("iron_bow");
-		this.setMaxDamage(1388);
+		setUnlocalizedName("enion_bow");
+		setRegistryName("enion_bow");
+		this.setMaxDamage(1417);
 		
 		this.addPropertyOverride(new ResourceLocation("pull"), new IItemPropertyGetter()
         {
@@ -41,7 +41,7 @@ public class IronBow extends ItemBow
                 }
                 else
                 {
-                    return entityIn.getActiveItemStack().getItem() != HarshenItems.iron_bow ? 0.0F : (float)(stack.getMaxItemUseDuration() - entityIn.getItemInUseCount()) / 15.0F;
+                    return entityIn.getActiveItemStack().getItem() != HarshenItems.enion_bow ? 0.0F : (float)(stack.getMaxItemUseDuration() - entityIn.getItemInUseCount()) / 15.0F;
                 }
             }
         });
@@ -109,7 +109,7 @@ public class IronBow extends ItemBow
                         EntityArrow entityarrow = itemarrow.createArrow(worldIn, itemstack, entityplayer);
                         entityarrow.setAim(entityplayer, entityplayer.rotationPitch, entityplayer.rotationYaw, 0.0F, f * 3.0F, 1.0F);
 
-                        entityarrow.setDamage(entityarrow.getDamage() + 1.5D);
+                        entityarrow.setDamage(entityarrow.getDamage() + 2.1D);
                         
                         if (f == 1.0F)
                         {

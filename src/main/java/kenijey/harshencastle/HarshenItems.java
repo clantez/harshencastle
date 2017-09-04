@@ -20,6 +20,7 @@ import kenijey.harshencastle.items.CriminalPendant;
 import kenijey.harshencastle.items.ElementalPendant;
 import kenijey.harshencastle.items.EmpoweredSoulHarsherSword;
 import kenijey.harshencastle.items.EnderPendant;
+import kenijey.harshencastle.items.EnionBow;
 import kenijey.harshencastle.items.Fearring;
 import kenijey.harshencastle.items.FeatherEarring;
 import kenijey.harshencastle.items.GlassContainer;
@@ -105,6 +106,7 @@ public class HarshenItems
 	public static Item water_earring;
 	public static Item xray_pendant;
 	public static Item iron_bow;
+	public static Item enion_bow;
 	
 	public static void preInit()
 	{
@@ -151,6 +153,7 @@ public class HarshenItems
 		water_earring = new WaterEarring();
 		xray_pendant = new XrayPendant();
 		iron_bow = new IronBow();
+		enion_bow = new EnionBow();
 	}
 	
 	public static void reg()
@@ -176,6 +179,7 @@ public class HarshenItems
 		regItem(pontus_cube, 7);
 		regItem(bloody_pontus_cube, 6);
 		regItem(iron_bow);
+		regItem(enion_bow);
 		
 		regItem(zombi_pendant);
 		regItem(punchy_ring);
