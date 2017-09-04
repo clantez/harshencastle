@@ -7,6 +7,7 @@ import kenijey.harshencastle.network.packets.MessagePacketPlayerHasAccess;
 import kenijey.harshencastle.network.packets.MessagePacketPlayerTeleportEffects;
 import kenijey.harshencastle.network.packets.MessagePacketRingUpdate;
 import kenijey.harshencastle.network.packets.MessagePacketTileEntityBloodPlacerUpdated;
+import kenijey.harshencastle.network.packets.MessagePacketUpdateXrayBlock;
 import kenijey.harshencastle.network.packets.MessageSendPlayerInvToClient;
 import kenijey.harshencastle.network.packets.MessageSendPlayerInvToServer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -30,6 +31,7 @@ public class HarshenNetwork
 		registerMessage(MessagePacketPlayerTeleportEffects.class, Side.CLIENT);
 		registerMessage(MessagePacketRingUpdate.class, Side.SERVER);
 		registerMessage(MessagePacketItemInventoryDamaged.class, Side.CLIENT);
+		registerMessage(MessagePacketUpdateXrayBlock.class, Side.SERVER);
 	}
 	
 	

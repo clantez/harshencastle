@@ -8,11 +8,14 @@ import kenijey.harshencastle.dimensions.pontus.PontusWorldProvider;
 import kenijey.harshencastle.entity.EntityFactories;
 import kenijey.harshencastle.entity.EntitySoulPart;
 import kenijey.harshencastle.entity.EntitySoullessKnight;
+import kenijey.harshencastle.enums.gui.EnumGuiTypes;
 import kenijey.harshencastle.enums.items.EnumGlassContainer;
 import kenijey.harshencastle.enums.items.EnumRitualStick;
 import kenijey.harshencastle.enums.particle.EnumHarshenParticle;
 import kenijey.harshencastle.gui.GuiBookScreen;
+import kenijey.harshencastle.gui.GuiXrayPendantScreen;
 import kenijey.harshencastle.handlers.client.HandlerClientHarshenInventoryEffects;
+import kenijey.harshencastle.handlers.client.HandlerFlatPlateRenderer;
 import kenijey.harshencastle.handlers.client.HandlerGameOverlay;
 import kenijey.harshencastle.handlers.client.HandlerGuiEvent;
 import kenijey.harshencastle.handlers.client.HandlerKeyBinding;
@@ -38,7 +41,7 @@ import kenijey.harshencastle.tileentity.TileEntityPedestalSlab;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.IParticleFactory;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticlePortal;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -98,9 +101,20 @@ public class ClientProxy extends CommonProxy
     }
 	
 	@Override
-	public void book()
-	{
-		Minecraft.getMinecraft().displayGuiScreen(new GuiBookScreen());
+	public void openGui(EnumGuiTypes gui, Object... info) {
+		GuiScreen screen = null;
+		switch (gui) {
+		case BOOK:
+			screen = new GuiBookScreen();
+			break;
+		case XRAY_PENDANT:
+			if(info[0] instanceof ItemStack)
+				screen = new GuiXrayPendantScreen(((ItemStack)info[0]));
+			break;
+		default:
+			break;
+		}
+		Minecraft.getMinecraft().displayGuiScreen(screen);
 	}
     
 	@Override
@@ -116,7 +130,8 @@ public class ClientProxy extends CommonProxy
 		NetworkRegistry.INSTANCE.registerGuiHandler(HarshenCastle.instance, new GuiHandler());
 
     	
-    	Object[] handlers = {new HandlerKeyBinding(), new  HandlerGameOverlay(), new HandlerGuiEvent(), new HandlerRendererGuiInventory(), new HandlerClientHarshenInventoryEffects()};
+    	Object[] handlers = {new HandlerKeyBinding(), new  HandlerGameOverlay(), new HandlerGuiEvent(), new HandlerRendererGuiInventory(), 
+    			new HandlerClientHarshenInventoryEffects(), new HandlerFlatPlateRenderer()};
     	for(Object o : handlers)
     	{
     		MinecraftForge.EVENT_BUS.register(o);
