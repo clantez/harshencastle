@@ -29,6 +29,7 @@ import kenijey.harshencastle.items.HarshenDimensionalDoor;
 import kenijey.harshencastle.items.HarshenProps;
 import kenijey.harshencastle.items.HarshenSoulFragment;
 import kenijey.harshencastle.items.HarshenSoulIngot;
+import kenijey.harshencastle.items.IronBow;
 import kenijey.harshencastle.items.Itium;
 import kenijey.harshencastle.items.LightEmittedEssence;
 import kenijey.harshencastle.items.LightEmittedSeed;
@@ -103,6 +104,7 @@ public class HarshenItems
 	public static Item soul_shield;
 	public static Item water_earring;
 	public static Item xray_pendant;
+	public static Item iron_bow;
 	
 	public static void preInit()
 	{
@@ -148,6 +150,7 @@ public class HarshenItems
 		soul_shield = new SoulShield();
 		water_earring = new WaterEarring();
 		xray_pendant = new XrayPendant();
+		iron_bow = new IronBow();
 	}
 	
 	public static void reg()
@@ -172,6 +175,7 @@ public class HarshenItems
 		regItem(bloody_apple, 13);
 		regItem(pontus_cube, 7);
 		regItem(bloody_pontus_cube, 6);
+		regItem(iron_bow);
 		
 		regItem(zombi_pendant);
 		regItem(punchy_ring);
