@@ -12,6 +12,7 @@ import kenijey.harshencastle.dimensions.pontus.PontusWorldProvider;
 import kenijey.harshencastle.entity.HarshenEntities;
 import kenijey.harshencastle.enums.SetIds;
 import kenijey.harshencastle.enums.blocks.EnumHereticCauldronFluidType;
+import kenijey.harshencastle.enums.gui.EnumGuiTypes;
 import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
 import kenijey.harshencastle.enums.items.EnumBloodCollector;
 import kenijey.harshencastle.enums.items.EnumGlassContainer;
@@ -37,6 +38,7 @@ import kenijey.harshencastle.potions.HarshenPotions;
 import kenijey.harshencastle.recipies.HarshenRecipes;
 import kenijey.harshencastle.tileentity.TileEntityBloodFactory;
 import kenijey.harshencastle.tileentity.TileEntityBloodVessel;
+import kenijey.harshencastle.tileentity.TileEntityFlatPlate;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDimensionalGate;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDimensionalPedestal;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDisplayBlock;
@@ -109,6 +111,7 @@ public class CommonProxy
     	GameRegistry.registerTileEntity(TileEntityPedestalSlab.class, HarshenCastle.MODID + "TileEntityPedestalSlab");
     	GameRegistry.registerTileEntity(TileEntityBloodVessel.class, HarshenCastle.MODID + "TileEntityBloodVessel");
     	GameRegistry.registerTileEntity(TileEntityBloodFactory.class, HarshenCastle.MODID + "TileEntityBloodFactory");
+    	GameRegistry.registerTileEntity(TileEntityFlatPlate.class, HarshenCastle.MODID + "TileEntityFlatPlate");
 
     	
     	GameRegistry.registerWorldGenerator(new WorldGen(), 0);
@@ -147,9 +150,7 @@ public class CommonProxy
 		return null;
 	}
 
-	public void book() {
-		
-	}
+	public void openGui(EnumGuiTypes gui, Object... info){}
 
 	public void setWorldRenderer(PontusWorldProvider prov) {		
 	}

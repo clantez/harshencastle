@@ -103,7 +103,6 @@ public class BloodBlock extends Block
 			worldIn.setBlockToAir(pos);
 		else
 			tickMap.put(pos, 0);
-		
 	}
 	
 	@Override

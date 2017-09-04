@@ -3,8 +3,6 @@ package kenijey.harshencastle;
 import java.util.Arrays;
 
 import kenijey.harshencastle.commands.CommandAccessPontusOuter;
-import kenijey.harshencastle.commands.CommandDelFlatPlate;
-import kenijey.harshencastle.commands.CommandFlatPlate;
 import kenijey.harshencastle.creativetabs.HarshenTab;
 import kenijey.harshencastle.dimensions.DimensionPontus;
 import kenijey.harshencastle.proxy.CommonProxy;
@@ -66,7 +64,7 @@ public class HarshenCastle {
     @EventHandler
 	public void serverLoad(FMLServerStartingEvent event)
 	{
-		for(ICommand command : Arrays.asList(new CommandFlatPlate(), new CommandDelFlatPlate(), new CommandAccessPontusOuter()))
+		for(ICommand command : Arrays.asList(new CommandAccessPontusOuter()))
 			event.registerServerCommand(command);
 	}	
     

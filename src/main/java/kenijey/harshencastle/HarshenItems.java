@@ -50,6 +50,7 @@ import kenijey.harshencastle.items.SoulInfusedIngot;
 import kenijey.harshencastle.items.SoulShield;
 import kenijey.harshencastle.items.Telering;
 import kenijey.harshencastle.items.WaterEarring;
+import kenijey.harshencastle.items.XrayPendant;
 import kenijey.harshencastle.items.ZombiPendant;
 import kenijey.harshencastle.items.ZombieEye;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -102,6 +103,7 @@ public class HarshenItems
 	public static Item ender_pendant;
 	public static Item soul_shield;
 	public static Item water_earring;
+	public static Item xray_pendant;
 	public static Item iron_bow;
 	
 	public static void preInit()
@@ -147,6 +149,7 @@ public class HarshenItems
 		ender_pendant = new EnderPendant();
 		soul_shield = new SoulShield();
 		water_earring = new WaterEarring();
+		xray_pendant = new XrayPendant();
 		iron_bow = new IronBow();
 	}
 	
@@ -188,6 +191,7 @@ public class HarshenItems
 		regItem(bloody_earring);
 		regItem(soul_shield);
 		regItem(water_earring);
+		regItem(xray_pendant);
 		
 		regMetaItem(ritual_stick, emptyList(EnumRitualStick.values().length), "ritual_stick");
 		regMetaItem(pontus_world_gate_spawner, EnumPontusGateSpawner.getNames(), "pontus_world_gate_spawner_");

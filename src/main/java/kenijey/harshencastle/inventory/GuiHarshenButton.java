@@ -3,9 +3,9 @@ package kenijey.harshencastle.inventory;
 import org.lwjgl.opengl.GL11;
 
 import kenijey.harshencastle.HarshenCastle;
+import kenijey.harshencastle.HarshenClientUtils;
 import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.network.packets.MessagePacketOpenInv;
-import kenijey.harshencastle.tileentity.HarshenClientUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;

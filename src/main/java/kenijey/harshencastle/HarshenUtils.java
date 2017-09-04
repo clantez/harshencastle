@@ -119,6 +119,17 @@ public class HarshenUtils
         player.getEntityData().setTag("harshenInventory", handler.serializeNBT());
 	}
 	
+	public static ItemStack getFirstOccuringItem(EntityPlayer player, Item item)
+	{
+		HarshenItemStackHandler handler = HarshenUtils.getHandler(player);
+        for(int i =0; i < handler.getSlots(); i++)
+        	if(handler.getStackInSlot(i).getItem() == item)
+        	{
+        		return handler.getStackInSlot(i);
+        	}
+        return null;
+	}
+	
 	public static void damageFirstOccuringItem(EntityPlayer player, Item item)
 	{
 		damageFirstOccuringItem(player, item, 1);
@@ -189,6 +200,13 @@ public class HarshenUtils
 		List<ItemStack> list = Lists.<ItemStack>newArrayList();
 		world.getLootTableManager().getLootTableFromLocation(locationOfTable).getPool(poolName).generateLoot(list, new Random(), context);
 		return list;
+	}
+	
+	public static NBTTagCompound getNBT(ItemStack stack)
+	{
+		if(!stack.hasTagCompound())
+			stack.setTagCompound(new NBTTagCompound());
+		return stack.getTagCompound();
 	}
 
 	public static String[] fillList(String string, Object[] objectList) {

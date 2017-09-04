@@ -1,9 +1,9 @@
 package kenijey.harshencastle.inventory;
 
 import kenijey.harshencastle.HarshenCastle;
+import kenijey.harshencastle.HarshenClientUtils;
 import kenijey.harshencastle.enums.gui.EnumGuiPage;
 import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
-import kenijey.harshencastle.tileentity.HarshenClientUtils;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.InventoryEffectRenderer;
 import net.minecraft.entity.player.EntityPlayer;
