@@ -32,7 +32,7 @@ public class EnionBow extends ItemBow
 	{
 		setUnlocalizedName("enion_bow");
 		setRegistryName("enion_bow");
-		this.setMaxDamage(1417);
+		this.setMaxDamage(1837);
 		
 		this.addPropertyOverride(new ResourceLocation("pull"), new IItemPropertyGetter()
         {
