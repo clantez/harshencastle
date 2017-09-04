@@ -270,11 +270,11 @@ public class HarshenRecipes {
 		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "iron_bow"), new ResourceLocation("harshen_items"),
 				new ItemStack(HarshenItems.iron_bow),
-				" is",
-				"i s",
-				" is",
+				" il",
+				"i l",
+				" il",
 				
 				'i', new ItemStack(Items.IRON_INGOT),
-				's', new ItemStack(Items.STRING));
+				'l', new ItemStack(Items.LEAD));
 	}
 }

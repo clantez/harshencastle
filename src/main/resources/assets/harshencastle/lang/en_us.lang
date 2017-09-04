@@ -60,6 +60,7 @@ item.ender_pendant.name=Ender Necklace
 item.soul_shield.name=Soul Shield
 item.water_earring.name=Aqua Earring
 item.iron_bow.name=Iron Bow
+item.enion_bow.name=Enion Bow
 
 #keybindings
 key.telering.description=Telering Teleport Key
@@ -208,6 +209,8 @@ ender_pendant1=Now you can see all the
 ender_pendant2=hostiles through walls/blocks
 looting_earring1=Loot more!
 looting_earring2=
+enionbow1=Reminds the electricity
+enionbow2=of lightnings coming from skies
 
 #misc
 itemGroup.harshenTab=Harshen Castle
