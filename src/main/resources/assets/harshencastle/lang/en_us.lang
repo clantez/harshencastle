@@ -55,6 +55,10 @@ item.pontus_cube.name=Pontus Cube
 item.bloody_pontus_cube.name=Bloody Pontus Cube
 item.minering.name=Minering
 item.punchy_ring.name=Punchy Ring
+item.looting_earring.name=Looting Earring
+item.ender_pendant.name=Ender Necklace
+item.soul_shield.name=Soul Shield
+item.water_earring.name=Aqua Earring
 
 #keybindings
 key.telering.description=Telering Teleport Key
@@ -197,6 +201,12 @@ zombi_pendant1=Damage taken from all zombies
 zombi_pendant2=will be decreased to 1
 punchy_ring1="You want a punch?"
 punchy_ring2=You deal more damage with your hand.
+water_earring1="O2 in water? Yes!"
+water_earring2=Waterbreathing
+ender_pendant1=Now you can see all the
+ender_pendant2=hostiles through walls/blocks
+looting_earring1=Loot more!
+looting_earring2=
 
 #misc
 itemGroup.harshenTab=Harshen Castle
