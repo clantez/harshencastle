@@ -220,6 +220,7 @@ xray_pendant4=it to set a block. It supports oreDict!
 fiery_ring1=Cooks animals when killed
 soulripperbow1=Drains the soul of the
 soulripperbow2=target you hit with it
+soulripperbow3=It has its own arrow.
 
 #misc
 itemGroup.harshenTab=Harshen Castle
