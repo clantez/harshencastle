@@ -86,6 +86,7 @@ public class HarshenRecipes {
 		CauldronRecipes.addRecipe(new ItemStack(Blocks.COBBLESTONE, 1, 0), new ItemStack(Blocks.NETHERRACK, 1, 0), EnumHereticCauldronFluidType.BLOOD);
 		CauldronRecipes.addRecipe(new ItemStack(Blocks.COBBLESTONE), new ItemStack(Blocks.OBSIDIAN, 2), EnumHereticCauldronFluidType.LAVA);
 		CauldronRecipes.addRecipe(new ItemStack(HarshenItems.glass_container), new ItemStack(HarshenItems.glass_container, 1, 3), EnumHereticCauldronFluidType.MILK);
+		CauldronRecipes.addRecipe(new ItemStack(HarshenItems.glass_container), new ItemStack(HarshenItems.glass_container, 1, 2), EnumHereticCauldronFluidType.BLOOD);
 	}
 	
 	public static void craftingRegistry()
