@@ -67,13 +67,12 @@ public class HarshenRecipes {
 		
 		
 		ItemStack[] stackList = new ItemStack[8];
-		for(int i = 0; i < 7; i ++)
+		for(int i = 0; i < 8; i ++)
 			stackList[i] = new ItemStack(Blocks.GOLD_BLOCK);
-		stackList[7] = new ItemStack(Blocks.SANDSTONE);
 		HereticRitualRecipes.addRecipe(new ItemStack(Items.APPLE), new ItemStack(Items.GOLDEN_APPLE, 1, 1), EnumHereticCauldronFluidType.HARSHING_WATER,
 				stackList);
 		
-		HereticRitualRecipes.addRecipe(new ItemStack(HarshenItems.itium), new ItemStack(HarshenItems.xray_pendant), EnumHereticCauldronFluidType.HARSHING_WATER, 
+		HereticRitualRecipes.addRecipe(new ItemStack(HarshenItems.itium), new ItemStack(HarshenItems.xray_pendant), EnumHereticCauldronFluidType.HARSHEN_DIMENSIONAL_FLUID, 
 				new ItemStack(HarshenItems.ritual_crystal, 1, 1), new ItemStack(HarshenItems.powder_of_heretism), new ItemStack(HarshenItems.soul_infused_ingot),
 				new ItemStack(Items.EMERALD), new ItemStack(Items.QUARTZ), new ItemStack(Items.ENDER_EYE),
 				new ItemStack(Blocks.END_ROD), new ItemStack(Blocks.LAPIS_ORE));
