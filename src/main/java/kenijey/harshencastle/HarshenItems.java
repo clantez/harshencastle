@@ -49,6 +49,7 @@ import kenijey.harshencastle.items.RitualStick;
 import kenijey.harshencastle.items.SoulHarsherPickaxe;
 import kenijey.harshencastle.items.SoulHarsherSword;
 import kenijey.harshencastle.items.SoulInfusedIngot;
+import kenijey.harshencastle.items.SoulRipperBow;
 import kenijey.harshencastle.items.SoulShield;
 import kenijey.harshencastle.items.Telering;
 import kenijey.harshencastle.items.WaterEarring;
@@ -109,6 +110,7 @@ public class HarshenItems
 	public static Item iron_bow;
 	public static Item enion_bow;
 	public static Item fiery_ring;
+	public static Item soul_ripper_bow;
 	
 	public static void preInit()
 	{
@@ -157,6 +159,7 @@ public class HarshenItems
 		iron_bow = new IronBow();
 		enion_bow = new EnionBow();
 		fiery_ring = new FieryRing();
+		soul_ripper_bow = new SoulRipperBow();
 	}
 	
 	public static void reg()
@@ -175,7 +178,6 @@ public class HarshenItems
 		regItem(light_emitted_seed,16);
 		regItem(soul_infused_ingot, 2);
 		regItem(blood_infused_ender_eye);
-		regItem(elemental_pendant);
 		regItem(powder_of_heretism, 8);
 		regItem(zombie_eye, 64);
 		regItem(bloody_apple, 13);
@@ -183,7 +185,9 @@ public class HarshenItems
 		regItem(bloody_pontus_cube, 6);
 		regItem(iron_bow);
 		regItem(enion_bow);
-		
+		regItem(soul_ripper_bow);
+
+		regItem(elemental_pendant);
 		regItem(zombi_pendant);
 		regItem(punchy_ring);
 		regItem(looting_earring);
