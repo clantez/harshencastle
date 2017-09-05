@@ -53,6 +53,7 @@ import kenijey.harshencastle.items.SoulInfusedIngot;
 import kenijey.harshencastle.items.SoulRipperBow;
 import kenijey.harshencastle.items.SoulShield;
 import kenijey.harshencastle.items.Telering;
+import kenijey.harshencastle.items.ValorBadge;
 import kenijey.harshencastle.items.WaterEarring;
 import kenijey.harshencastle.items.XrayPendant;
 import kenijey.harshencastle.items.ZombiPendant;
@@ -113,6 +114,7 @@ public class HarshenItems
 	public static Item soul_ripper_bow;
 	public static Item fiery_ring;
 	public static Item broken_arrow;
+	public static Item valor_badge;
 	
 	public static void preInit()
 	{
@@ -163,6 +165,7 @@ public class HarshenItems
 		fiery_ring = new FieryRing();
 		broken_arrow = new BrokenArrow();
 		soul_ripper_bow = new SoulRipperBow();
+		valor_badge = new ValorBadge();
 	}
 	
 	public static void reg()
@@ -191,6 +194,7 @@ public class HarshenItems
 		regItem(enion_bow);
 		regItem(soul_ripper_bow);
 		regItem(broken_arrow, 64);
+		regItem(valor_badge, 31);
 		
 		regItem(zombi_pendant);
 		regItem(punchy_ring);

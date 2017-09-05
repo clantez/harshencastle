@@ -65,6 +65,7 @@ item.xray_pendant.name=Xray Necklace
 item.fiery_ring.name=Fiery Ring
 item.soul_ripper_bow.name=Soul Ripper Bow
 item.broken_arrow.name=Broken Arrow
+item.valor_badge.name=Valor Badge
 
 #keybindings
 key.telering.description=Telering Teleport Key
