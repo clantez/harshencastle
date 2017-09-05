@@ -37,7 +37,7 @@ public class HarshenRecipes {
 				new ItemStack(HarshenItems.ritual_crystal, 1 ,1), new ItemStack(Items.QUARTZ)), new ItemStack(Items.NETHER_STAR, 1, 0), true);
 		
 		RitualRecipes.addRecipe(Arrays.asList(new ItemStack(HarshenItems.harshen_soul_ingot, 1, 0), new ItemStack(HarshenItems.harshen_soul_fragment, 1, 0),
-				new ItemStack(HarshenItems.ritual_crystal, 1 ,1), new ItemStack(Items.DIAMOND_SWORD)), new ItemStack(HarshenItems.soul_harsher_sword, 1, 0), true);
+				new ItemStack(HarshenItems.ritual_crystal, 1 ,1), new ItemStack(Items.IRON_SWORD)), new ItemStack(HarshenItems.soul_harsher_sword, 1, 0), true);
 		
 		RitualRecipes.addRecipe(Arrays.asList(new ItemStack(HarshenItems.itium, 1, 0), new ItemStack(Items.MAGMA_CREAM),
 				new ItemStack(HarshenItems.ritual_crystal, 1, 1), new ItemStack(Items.GOLDEN_APPLE)), new ItemStack(HarshenItems.elemental_pendant, 1, 0), true);
@@ -48,7 +48,7 @@ public class HarshenRecipes {
 		RitualRecipes.addRecipe(Arrays.asList(new ItemStack(HarshenItems.iron_bow), new ItemStack(HarshenItems.ritual_crystal, 1, 1),
 				new ItemStack(Blocks.REDSTONE_BLOCK), new ItemStack(Blocks.PRISMARINE, 1, 2)), new ItemStack(HarshenItems.enion_bow), true);
 		
-		RitualRecipes.addRecipe(Arrays.asList(new ItemStack(HarshenItems.itium), new ItemStack(HarshenItems.ritual_crystal, 1, 1),
+		RitualRecipes.addRecipe(Arrays.asList(new ItemStack(HarshenBlocks.block_of_heads), new ItemStack(HarshenItems.ritual_crystal, 1, 1),
 				new ItemStack(Items.DYE, 1, 4), new ItemStack(Items.EMERALD)), new ItemStack(HarshenItems.looting_earring), true);
 		
 		RitualRecipes.addRecipe(Arrays.asList(new ItemStack(HarshenItems.ritual_crystal, 1, 1), new ItemStack(Items.ENDER_EYE),
