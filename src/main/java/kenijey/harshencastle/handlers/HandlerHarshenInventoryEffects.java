@@ -2,6 +2,7 @@ package kenijey.harshencastle.handlers;
 
 import java.util.ArrayList;
 
+import kenijey.harshencastle.HarshenClientUtils;
 import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.network.HarshenNetwork;
@@ -19,12 +20,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EntityDamageSource;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class HandlerHarshenInventoryEffects 
@@ -42,7 +45,7 @@ public class HandlerHarshenInventoryEffects
 			if(HarshenUtils.containsItem(player,  HarshenItems.fearring))
 				event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 150));
 			if(HarshenUtils.containsItem(player, HarshenItems.punchy_ring) && player.getHeldItemMainhand().getItem() == Items.AIR)
-				event.setAmount(event.getAmount() + 2);
+				{event.setAmount(event.getAmount() + HarshenUtils.getItemCount(player, HarshenItems.punchy_ring) * 2);System.out.println(event.getAmount());}
 		}
 		if(HarshenUtils.containsItem(event.getEntityLiving(), HarshenItems.zombi_pendant) &&
 				(event.getSource() instanceof EntityDamageSource && ((EntityDamageSource)event.getSource()).getTrueSource() instanceof EntityZombie &&
@@ -55,6 +58,13 @@ public class HandlerHarshenInventoryEffects
 					HarshenUtils.damageFirstOccuringItem((EntityPlayer) event.getEntityLiving(), HarshenItems.soul_shield, (int) event.getAmount() * 2);
 					event.setAmount(0);
 				}
+	}
+	
+	@SubscribeEvent
+	public void onBlockBroken(HarvestDropsEvent event)
+	{
+		if(HarshenUtils.containsItem(event.getHarvester(), HarshenItems.fiery_ring))
+			HarshenUtils.cookAndReplaceStackList(event.getDrops());
 	}
 		
 	@SubscribeEvent
@@ -69,20 +79,7 @@ public class HandlerHarshenInventoryEffects
 					drops.add(new EntityItem(e.world, e.posX, e.posY, e.posZ, e.getItem()));
 			event.getDrops().addAll(drops);
 			if(HarshenUtils.containsItem(player, HarshenItems.fiery_ring))
-			{
-				ArrayList<EntityItem> newList = new ArrayList<>();
-				for(EntityItem e : event.getDrops())
-					if(!FurnaceRecipes.instance().getSmeltingResult(e.getItem()).isEmpty())
-					{
-						ItemStack stack = FurnaceRecipes.instance().getSmeltingResult(e.getItem());
-						stack.setCount(e.getItem().getCount());
-						newList.add(new EntityItem(e.world, e.posX, e.posY, e.posZ, stack));
-					}
-					else newList.add(e);
-				event.getDrops().clear();
-				for(EntityItem item : newList)
-					event.getDrops().add(item);
-			}
+				HarshenUtils.cookAndReplaceList(event.getDrops());
 		}
 	}
 	

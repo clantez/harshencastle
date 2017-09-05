@@ -17,12 +17,14 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
@@ -47,6 +49,45 @@ public class HarshenUtils
 				((BasePontusResourceBiome) world.getBiome(pos)).getLevel() <= 0 ||
 				((BasePontusResourceBiome)world.getBiome(pos)).getLevel() <= HandlerPontusAllowed.getAllowed(player);
 		
+	}
+	
+	public static ArrayList<EntityItem> cookList(List<EntityItem> list)
+	{
+		ArrayList<EntityItem> newList = new ArrayList<>();
+		for(EntityItem e : list)
+			newList.add(new EntityItem(e.world, e.posX, e.posY, e.posZ, getStackCooked(e.getItem())));
+		return newList;
+	}
+	
+	public static ArrayList<ItemStack> cookStackList(List<ItemStack> list)
+	{
+		ArrayList<ItemStack> newList = new ArrayList<>();
+		for(ItemStack stack : list)
+			newList.add(getStackCooked(stack));
+		return newList;
+	}
+	
+	public static ItemStack getStackCooked(ItemStack rawStack)
+	{
+		ItemStack stack = FurnaceRecipes.instance().getSmeltingResult(rawStack);
+		stack.setCount(rawStack.getCount());
+		return stack.isEmpty() ? rawStack : stack;
+	}
+	
+	public static void cookAndReplaceList(List<EntityItem> list)
+	{
+		ArrayList<EntityItem> newlist = cookList(list);
+		list.clear();
+		for(EntityItem item : newlist)
+			list.add(item);
+	}
+	
+	public static void cookAndReplaceStackList(List<ItemStack> drops) 
+	{
+		ArrayList<ItemStack> newlist = cookStackList(drops);
+		drops.clear();
+		for(ItemStack item : newlist)
+			drops.add(item);
 	}
 	
 	public static BlockPos chunkToPos(BlockPos pos)
@@ -107,6 +148,18 @@ public class HarshenUtils
 	{
 		return entity instanceof EntityPlayer && getHandler((EntityPlayer) entity).containsItem(item);
 	}
+	
+	public static int getItemCount(Entity entity, Item item)
+	{
+		if(!(entity instanceof EntityPlayer))
+			return 0;
+		HarshenItemStackHandler handler = getHandler((EntityPlayer) entity);
+		int count = 0;
+		for(int i = 0; i < handler.getSlots(); i++)
+			if(handler.getStackInSlot(i).getItem() == item)
+				count++;
+		return count;
+	}	
 	
 	public static void damageFirstOccuringItem(EntityPlayer player, Item item, int amount)
 	{

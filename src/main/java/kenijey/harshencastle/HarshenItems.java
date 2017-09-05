@@ -16,6 +16,7 @@ import kenijey.harshencastle.items.BloodInfusedEnderEye;
 import kenijey.harshencastle.items.BloodyApple;
 import kenijey.harshencastle.items.BloodyEarring;
 import kenijey.harshencastle.items.BloodyPontusCube;
+import kenijey.harshencastle.items.BrokenArrow;
 import kenijey.harshencastle.items.CriminalPendant;
 import kenijey.harshencastle.items.ElementalPendant;
 import kenijey.harshencastle.items.EmpoweredSoulHarsherSword;
@@ -109,8 +110,9 @@ public class HarshenItems
 	public static Item xray_pendant;
 	public static Item iron_bow;
 	public static Item enion_bow;
-	public static Item fiery_ring;
 	public static Item soul_ripper_bow;
+	public static Item fiery_ring;
+	public static Item broken_arrow;
 	
 	public static void preInit()
 	{
@@ -159,6 +161,7 @@ public class HarshenItems
 		iron_bow = new IronBow();
 		enion_bow = new EnionBow();
 		fiery_ring = new FieryRing();
+		broken_arrow = new BrokenArrow();
 		soul_ripper_bow = new SoulRipperBow();
 	}
 	
@@ -178,6 +181,7 @@ public class HarshenItems
 		regItem(light_emitted_seed,16);
 		regItem(soul_infused_ingot, 2);
 		regItem(blood_infused_ender_eye);
+		regItem(elemental_pendant);
 		regItem(powder_of_heretism, 8);
 		regItem(zombie_eye, 64);
 		regItem(bloody_apple, 13);
@@ -186,8 +190,8 @@ public class HarshenItems
 		regItem(iron_bow);
 		regItem(enion_bow);
 		regItem(soul_ripper_bow);
-
-		regItem(elemental_pendant);
+		regItem(broken_arrow, 64);
+		
 		regItem(zombi_pendant);
 		regItem(punchy_ring);
 		regItem(looting_earring);

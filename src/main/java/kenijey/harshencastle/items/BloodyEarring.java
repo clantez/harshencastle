@@ -2,25 +2,14 @@ package kenijey.harshencastle.items;
 
 import kenijey.harshencastle.base.BaseItemInventory;
 import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
-import kenijey.harshencastle.interfaces.IBloodSupply;
 import net.minecraft.entity.player.EntityPlayer;
 
-public class BloodyEarring extends BaseItemInventory implements IBloodSupply
+public class BloodyEarring extends BaseItemInventory
 {
 	public BloodyEarring()
 	{
 		setUnlocalizedName("bloody_earring");
 		setRegistryName("bloody_earring");
-	}
-	
-	@Override
-	public int getAmountPerSecond() {
-		return 1;
-	}
-
-	@Override
-	public int ticksUntillUsed() {
-		return 100;
 	}
 
 	@Override
