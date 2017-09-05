@@ -293,5 +293,16 @@ public class HarshenRecipes {
 				
 				'i', new ItemStack(Items.IRON_INGOT),
 				'l', new ItemStack(Items.LEAD));
+		
+		
+		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "blood_placer"), new ResourceLocation("harshen_items"),
+				new ItemStack(HarshenBlocks.blood_placer),
+				"qrq",
+				"qdq",
+				"qqq",
+				
+				'q', new ItemStack(Items.QUARTZ),
+				'd', new ItemStack(Blocks.DISPENSER),
+				'r', new ItemStack(Items.COMPARATOR));
 	}
 }
