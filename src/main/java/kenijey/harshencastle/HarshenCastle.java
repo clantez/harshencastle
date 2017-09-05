@@ -25,7 +25,7 @@ public class HarshenCastle {
 
     public static final String MODID = "harshencastle";
     public static final String MODNAME = "Harshen Castle";
-    public static final String VERSION = "0.8.1";
+    public static final String VERSION = "0.9.0";
 
     @SidedProxy(clientSide = "kenijey.harshencastle.proxy.ClientProxy", serverSide = "kenijey.harshencastle.proxy.ServerProxy")
     public static CommonProxy proxy;

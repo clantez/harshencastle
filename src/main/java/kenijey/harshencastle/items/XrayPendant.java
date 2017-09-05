@@ -29,5 +29,10 @@ public class XrayPendant extends BaseItemInventory
 	public EnumInventorySlots getSlot() {
 		return EnumInventorySlots.NECK;
 	}
+	
+	@Override
+	protected int toolTipLines() {
+		return 4;
+	}
 
 }

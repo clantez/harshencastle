@@ -15,5 +15,10 @@ public class LootingEarring extends BaseItemInventory
 	public EnumInventorySlots getSlot() {
 		return EnumInventorySlots.LEFT_EAR;
 	}
+	
+	@Override
+	protected int toolTipLines() {
+		return 1;
+	}
 
 }

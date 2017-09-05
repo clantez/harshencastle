@@ -3,19 +3,22 @@ package kenijey.harshencastle.armor;
 import java.util.ArrayList;
 
 import kenijey.harshencastle.HarshenCastle;
+import kenijey.harshencastle.HarshenItems;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 public class HarshenArmors 
 {
-	public static ArmorMaterial harshen_material = EnumHelper.addArmorMaterial("harshen", "harshencastle:Harshen", 100, new int[] {3,8,6,3}, 9, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 2.0F);
+	public static ArmorMaterial harshen_material = EnumHelper.addArmorMaterial("harshen", "harshencastle:Harshen", 100, new int[] {3,8,6,3}, 9, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 2.0F)
+			.setRepairItem(new ItemStack(HarshenItems.harshen_soul_ingot));
 
 	public static ItemArmor harshen_jaguar_armor_helmet;
 	public static ItemArmor harshen_jaguar_armor_chestplate;

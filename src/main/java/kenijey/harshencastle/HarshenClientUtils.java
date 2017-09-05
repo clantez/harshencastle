@@ -106,7 +106,7 @@ public class HarshenClientUtils
         GlStateManager.depthFunc(519);
         GlStateManager.disableTexture2D();
         GlStateManager.disableBlend();
-        GlStateManager.glLineWidth(3.0F);
+        GlStateManager.glLineWidth(0.5F);
         return prepLineRender(partialTicks);
 
 	}

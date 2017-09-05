@@ -23,6 +23,7 @@ import kenijey.harshencastle.items.EnderPendant;
 import kenijey.harshencastle.items.EnionBow;
 import kenijey.harshencastle.items.Fearring;
 import kenijey.harshencastle.items.FeatherEarring;
+import kenijey.harshencastle.items.FieryRing;
 import kenijey.harshencastle.items.GlassContainer;
 import kenijey.harshencastle.items.GuidanceOfHarshenCastle;
 import kenijey.harshencastle.items.HarshenCrystal;
@@ -107,6 +108,7 @@ public class HarshenItems
 	public static Item xray_pendant;
 	public static Item iron_bow;
 	public static Item enion_bow;
+	public static Item fiery_ring;
 	
 	public static void preInit()
 	{
@@ -154,6 +156,7 @@ public class HarshenItems
 		xray_pendant = new XrayPendant();
 		iron_bow = new IronBow();
 		enion_bow = new EnionBow();
+		fiery_ring = new FieryRing();
 	}
 	
 	public static void reg()
@@ -196,6 +199,7 @@ public class HarshenItems
 		regItem(soul_shield);
 		regItem(water_earring);
 		regItem(xray_pendant);
+		regItem(fiery_ring);
 		
 		regMetaItem(ritual_stick, emptyList(EnumRitualStick.values().length), "ritual_stick");
 		regMetaItem(pontus_world_gate_spawner, EnumPontusGateSpawner.getNames(), "pontus_world_gate_spawner_");

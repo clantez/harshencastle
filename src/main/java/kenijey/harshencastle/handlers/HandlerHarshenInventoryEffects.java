@@ -15,6 +15,8 @@ import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.SoundCategory;
@@ -27,6 +29,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class HandlerHarshenInventoryEffects 
 {	
+	
 	@SubscribeEvent
 	public void onLivingHurt(LivingHurtEvent event)
 	{
@@ -53,7 +56,7 @@ public class HandlerHarshenInventoryEffects
 					event.setAmount(0);
 				}
 	}
-	
+		
 	@SubscribeEvent
 	public void onLivingDeath(LivingDropsEvent event)
 	{
@@ -65,6 +68,21 @@ public class HandlerHarshenInventoryEffects
 				for(EntityItem e : event.getDrops())
 					drops.add(new EntityItem(e.world, e.posX, e.posY, e.posZ, e.getItem()));
 			event.getDrops().addAll(drops);
+			if(HarshenUtils.containsItem(player, HarshenItems.fiery_ring))
+			{
+				ArrayList<EntityItem> newList = new ArrayList<>();
+				for(EntityItem e : event.getDrops())
+					if(!FurnaceRecipes.instance().getSmeltingResult(e.getItem()).isEmpty())
+					{
+						ItemStack stack = FurnaceRecipes.instance().getSmeltingResult(e.getItem());
+						stack.setCount(e.getItem().getCount());
+						newList.add(new EntityItem(e.world, e.posX, e.posY, e.posZ, stack));
+					}
+					else newList.add(e);
+				event.getDrops().clear();
+				for(EntityItem item : newList)
+					event.getDrops().add(item);
+			}
 		}
 	}
 	
