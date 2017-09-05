@@ -1,27 +1,16 @@
 package kenijey.harshencastle.gui;
 
-import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.ArrayList;
 
-import org.lwjgl.input.Mouse;
-
-import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.HarshenUtils;
-import kenijey.harshencastle.enums.gui.EnumGuiPage;
 import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.network.packets.MessagePacketUpdateXrayBlock;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
-import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ResourceLocation;
 
 public class GuiXrayPendantScreen extends GuiScreen
 {

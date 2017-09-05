@@ -2,8 +2,6 @@ package kenijey.harshencastle.entity;
 
 import com.google.common.base.Predicate;
 
-import kenijey.harshencastle.HarshenItems;
-import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.damagesource.DamageSourceSoulPart;
 import kenijey.harshencastle.entity.AI.AIEntityFlyingTowardsPlayer;
 import kenijey.harshencastle.entity.movehelper.MoveHelperSoulPart;

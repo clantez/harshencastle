@@ -2,7 +2,6 @@ package kenijey.harshencastle.entityrender;
 
 import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.entity.EntitySoullessKnight;
-import kenijey.harshencastle.models.ModelHarshenSoul;
 import kenijey.harshencastle.models.ModelSoullessKnight;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;

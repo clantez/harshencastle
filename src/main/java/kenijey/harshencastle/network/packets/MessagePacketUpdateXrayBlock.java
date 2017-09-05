@@ -3,10 +3,7 @@ package kenijey.harshencastle.network.packets;
 import io.netty.buffer.ByteBuf;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.base.BaseMessagePacket;
-import kenijey.harshencastle.handlers.HandlerHarshenInventoryEffects;
-import kenijey.harshencastle.handlers.HandlerPontusAllowed;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 

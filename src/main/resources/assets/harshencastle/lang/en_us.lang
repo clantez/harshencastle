@@ -63,6 +63,7 @@ item.iron_bow.name=Iron Bow
 item.enion_bow.name=Enion Bow
 item.xray_pendant.name=Xray Necklace
 item.fiery_ring.name=Fiery Ring
+item.soul_ripper_bow.name=Soul Ripper Bow
 
 #keybindings
 key.telering.description=Telering Teleport Key
@@ -217,6 +218,8 @@ xray_pendant2=through blocks in a short distance.
 xray_pendant3=Right click the pendant before wearing
 xray_pendant4=it to set a block. It supports oreDict!
 fiery_ring1=Cooks animals when killed
+soulripperbow1=Drains the soul of the
+soulripperbow2=target you hit with it
 
 #misc
 itemGroup.harshenTab=Harshen Castle
