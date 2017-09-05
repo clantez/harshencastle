@@ -52,6 +52,12 @@ public class IronBow extends ItemBow
         return 100000;
     }
 	
+	@Override
+	public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
+		return repair.getItem() == Items.IRON_INGOT;
+	}
+	
+	
 	private ItemStack findAmmo(EntityPlayer player)
     {
         if (this.isArrow(player.getHeldItem(EnumHand.OFF_HAND)))

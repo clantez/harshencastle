@@ -49,16 +49,10 @@ public class HandlerClientHarshenInventoryEffects
 		{
 			EntityPlayer player = Minecraft.getMinecraft().player;
 			BlockPos pos = player.getPosition();
-			if(tickCounter ++ % 20 == 0)
+			if(tickCounter ++ % 10 == 0)
 			{
 				finalBlockPositions.clear();
-				ArrayList<Block> blocks = new ArrayList<Block>();
-				String blockName = HarshenUtils.getFirstOccuringItem(Minecraft.getMinecraft().player,  HarshenItems.xray_pendant).getTagCompound().getString("BlockToSearch");
-				if(!Arrays.asList(Blocks.AIR, null).contains(Block.getBlockFromName(blockName)))
-						blocks.add(Block.getBlockFromName(blockName));
-				for(ItemStack oreStack : OreDictionary.getOres(blockName))
-					if(oreStack.getItem() instanceof ItemBlock)
-						blocks.add(((ItemBlock)oreStack.getItem()).getBlock());
+				ArrayList<Block> blocks = HarshenUtils.getBlocksFromString(HarshenUtils.getFirstOccuringItem(Minecraft.getMinecraft().player,  HarshenItems.xray_pendant).getTagCompound().getString("BlockToSearch"));
 				ArrayList<BlockPos> allBlockPos = new ArrayList<>();
 				HashMap<Double, BlockPos> distanceMap = new HashMap<>(HarshenUtils.HASH_LIMIT);
 				for(int x = pos.getX() - 35; x < pos.getX() + 35; x++)
@@ -86,9 +80,8 @@ public class HandlerClientHarshenInventoryEffects
 					}
 			}
 			for(BlockPos finalPos : finalBlockPositions)
-				for(EnumFacing face : EnumFacing.values())
-					if(!finalBlockPositions.contains(pos.offset(face)))
-						HarshenClientUtils.renderBoxAt(finalPos, event.getPartialTicks());
+				HarshenClientUtils.renderFullBoxAt(finalPos, event.getPartialTicks());
+
 		}
 	}
 }

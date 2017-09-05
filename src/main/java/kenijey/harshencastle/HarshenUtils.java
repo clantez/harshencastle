@@ -1,6 +1,7 @@
 package kenijey.harshencastle;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -18,7 +19,9 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
@@ -29,6 +32,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.storage.loot.LootContext;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class HarshenUtils
 {
@@ -207,6 +211,17 @@ public class HarshenUtils
 		if(!stack.hasTagCompound())
 			stack.setTagCompound(new NBTTagCompound());
 		return stack.getTagCompound();
+	}
+	
+	public static ArrayList<Block> getBlocksFromString(String blockName)
+	{
+		ArrayList<Block> blocks = new ArrayList<>();
+		if(!Arrays.asList(Blocks.AIR, null).contains(Block.getBlockFromName(blockName)))
+			blocks.add(Block.getBlockFromName(blockName));
+		for(ItemStack oreStack : OreDictionary.getOres(blockName))
+			if(oreStack.getItem() instanceof ItemBlock)
+				blocks.add(((ItemBlock)oreStack.getItem()).getBlock());
+		return blocks;
 	}
 
 	public static String[] fillList(String string, Object[] objectList) {
