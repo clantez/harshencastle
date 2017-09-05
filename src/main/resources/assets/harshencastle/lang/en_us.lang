@@ -118,6 +118,7 @@ tile.pontus_emerald_ore.name=Pontus Emerald Ore
 tile.archive.name=Archive
 tile.blood_factory.name=Blood Factory
 tile.kuantic_ore.name=Unstable Kuantic Element Ore
+tile.block_of_heads.name=Block Of Heads
 
 
 #fluids

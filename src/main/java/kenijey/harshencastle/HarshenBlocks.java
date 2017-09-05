@@ -3,6 +3,7 @@ package kenijey.harshencastle;
 import java.util.ArrayList;
 
 import kenijey.harshencastle.blocks.Archive;
+import kenijey.harshencastle.blocks.BlockOfHeads;
 import kenijey.harshencastle.blocks.BloodBlock;
 import kenijey.harshencastle.blocks.BloodFactory;
 import kenijey.harshencastle.blocks.BloodPlacer;
@@ -92,6 +93,7 @@ public class HarshenBlocks {
 	public static Block pontus_emerald_ore;
 	public static Block archive;
 	public static Block kuantic_ore;
+	public static Block block_of_heads;
 	
 	public static BlockCrops crop_of_gleam;
 
@@ -141,6 +143,7 @@ public class HarshenBlocks {
 		pontus_emerald_ore = new PontusEmeraldOre();
 		archive = new Archive();
 		kuantic_ore = new KuanticOre();
+		block_of_heads = new BlockOfHeads();
 	}
 
 	public static void reg() {
@@ -178,6 +181,7 @@ public class HarshenBlocks {
 		regBlock(pontus_emerald_ore, 64);
 		regBlock(archive, 64);
 		regBlock(kuantic_ore, 1);
+		regBlock(block_of_heads, 64);
 		
 		regSingleBlock(heretic_cauldron_top);
 		regSingleBlock(crop_of_gleam);

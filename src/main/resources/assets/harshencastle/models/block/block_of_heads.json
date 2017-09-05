@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "up": "harshencastle:blocks/block_of_heads_top",
+		"down": "harshencastle:blocks/block_of_heads_down",
+        "north": "harshencastle:blocks/block_of_heads_front",
+        "east": "harshencastle:blocks/block_of_heads_right",
+		"south": "harshencastle:blocks/block_of_heads_back",
+		"west": "harshencastle:blocks/block_of_heads_left",
+		"particle": "harshencastle:blocks/block_of_heads_top"
+    }
+}
