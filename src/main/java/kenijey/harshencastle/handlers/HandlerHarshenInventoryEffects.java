@@ -5,13 +5,8 @@ import java.util.ArrayList;
 import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.network.HarshenNetwork;
-import kenijey.harshencastle.network.packets.MessagePacketItemInventoryDamaged;
 import kenijey.harshencastle.network.packets.MessagePacketPlayerTeleportEffects;
-import kenijey.harshencastle.objecthandlers.HarshenItemStackHandler;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
@@ -26,7 +21,6 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -50,7 +44,7 @@ public class HandlerHarshenInventoryEffects
 		if(HarshenUtils.containsItem(event.getEntityLiving(), HarshenItems.zombi_pendant) &&
 				(event.getSource() instanceof EntityDamageSource && ((EntityDamageSource)event.getSource()).getTrueSource() instanceof EntityZombie &&
 						!(((EntityDamageSource)event.getSource()).getTrueSource() instanceof EntityPigZombie)))
-			event.setAmount(event.getAmount() - 1);
+			event.setAmount(1);
 		if(HarshenUtils.containsItem(event.getEntityLiving(), HarshenItems.soul_shield))
 			for(int i = 0; i < HarshenUtils.getHandler((EntityPlayer) event.getEntityLiving()).getSlots(); i++)
 				if(HarshenUtils.getHandler((EntityPlayer) event.getEntityLiving()).getStackInSlot(i).getItem() == HarshenItems.soul_shield)
