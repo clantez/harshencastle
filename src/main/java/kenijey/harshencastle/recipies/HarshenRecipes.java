@@ -304,5 +304,15 @@ public class HarshenRecipes {
 				'q', new ItemStack(Items.QUARTZ),
 				'd', new ItemStack(Blocks.DISPENSER),
 				'r', new ItemStack(Items.COMPARATOR));
+		
+		
+		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "blood_vessel"), new ResourceLocation("harshen_items"),
+				new ItemStack(HarshenBlocks.blood_vessel),
+				" t ",
+				"ggg",
+				" t ",
+				
+				't', new ItemStack(Blocks.STAINED_HARDENED_CLAY, 1, 0),
+				'g', new ItemStack(Blocks.STAINED_GLASS, 1, 14));
 	}
 }
