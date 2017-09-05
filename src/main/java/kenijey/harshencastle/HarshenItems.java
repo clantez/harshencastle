@@ -33,6 +33,7 @@ import kenijey.harshencastle.items.HarshenProps;
 import kenijey.harshencastle.items.HarshenSoulFragment;
 import kenijey.harshencastle.items.HarshenSoulIngot;
 import kenijey.harshencastle.items.IronBow;
+import kenijey.harshencastle.items.IronScythe;
 import kenijey.harshencastle.items.Itium;
 import kenijey.harshencastle.items.LightEmittedEssence;
 import kenijey.harshencastle.items.LightEmittedSeed;
@@ -115,6 +116,7 @@ public class HarshenItems
 	public static Item fiery_ring;
 	public static Item broken_arrow;
 	public static Item valor_badge;
+	public static Item iron_scythe;
 	
 	public static void preInit()
 	{
@@ -166,6 +168,7 @@ public class HarshenItems
 		broken_arrow = new BrokenArrow();
 		soul_ripper_bow = new SoulRipperBow();
 		valor_badge = new ValorBadge();
+		iron_scythe = new IronScythe();
 	}
 	
 	public static void reg()
@@ -195,6 +198,7 @@ public class HarshenItems
 		regItem(soul_ripper_bow);
 		regItem(broken_arrow, 64);
 		regItem(valor_badge, 31);
+		regItem(iron_scythe);
 		
 		regItem(zombi_pendant);
 		regItem(punchy_ring);

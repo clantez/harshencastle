@@ -317,5 +317,15 @@ public class HarshenRecipes {
 				
 				't', new ItemStack(Blocks.STAINED_HARDENED_CLAY, 1, 0),
 				'g', new ItemStack(Blocks.STAINED_GLASS, 1, 14));
+		
+		
+		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "iron_scythe"), new ResourceLocation("harshen_items"),
+				new ItemStack(HarshenItems.iron_scythe),
+				"iii",
+				" s ",
+				"s  ",
+				
+				'i', new ItemStack(Items.IRON_INGOT),
+				's', "stickWood");
 	}
 }
