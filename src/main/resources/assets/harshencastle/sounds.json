@@ -1,5 +1,7 @@
 {
 	"sword.firework":{"category": "master","sounds": [ { "name": "harshencastle:sword_firework", "stream": false }]},
 	"blood.collector":{"category": "master","sounds": [ { "name": "harshencastle:blood_collector", "stream": false }]},
-	"arrow.hit":{"category": "master","sounds": [ { "name": "harshencastle:arrow_hit", "stream": false }]}
+	"arrow.hit":{"category": "master","sounds": [ { "name": "harshencastle:arrow_hit", "stream": false }]},
+	"ripper.shoot":{"category": "master","sounds": [ { "name": "harshencastle:ripper_shoot", "stream": false }]}
+
 }

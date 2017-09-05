@@ -11,12 +11,14 @@ public class HarshenSounds {
 	public static SoundEvent swordFireWork;
 	public static SoundEvent bloodCollectorUse;
 	public static SoundEvent customArrowHit;
+	public static SoundEvent ripperShoot;
 	
 	public static void preInit()
 	{
 		swordFireWork = reg("sword.firework");
 		bloodCollectorUse = reg("blood.collector");
 		customArrowHit = reg("arrow.hit");
+		ripperShoot = reg("ripper.shoot");
 	}
 	
 	private static ArrayList<SoundEvent> reg(String... name)

@@ -64,7 +64,7 @@ public abstract class BaseHarshenBow extends ItemBow
 	
 	protected SoundEvent bowSound()
 	{
-		return  SoundEvents.ENTITY_ARROW_SHOOT;
+		return SoundEvents.ENTITY_ARROW_SHOOT;
 	}
 	
 	protected boolean isRipper()
