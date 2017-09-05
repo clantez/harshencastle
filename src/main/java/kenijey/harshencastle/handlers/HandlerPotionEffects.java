@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 import kenijey.harshencastle.HarshenCastle;
-import kenijey.harshencastle.HarshenItems;
-import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.damagesource.DamageSourceHarshed;
 import kenijey.harshencastle.entity.EntitySoulPart;
 import kenijey.harshencastle.potions.HarshenPotions;
@@ -15,7 +13,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;

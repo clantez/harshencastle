@@ -1,12 +1,9 @@
 package kenijey.harshencastle.handlers.client;
 
-import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.interfaces.IHudDisplay;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;

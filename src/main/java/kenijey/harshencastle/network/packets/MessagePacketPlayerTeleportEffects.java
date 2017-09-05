@@ -5,8 +5,6 @@ import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.base.BaseMessagePacket;
 import kenijey.harshencastle.enums.particle.EnumHarshenParticle;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 

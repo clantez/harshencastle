@@ -3,7 +3,6 @@ package kenijey.harshencastle.network.packets;
 import io.netty.buffer.ByteBuf;
 import kenijey.harshencastle.base.BaseMessagePacket;
 import kenijey.harshencastle.handlers.HandlerHarshenInventoryEffects;
-import kenijey.harshencastle.handlers.HandlerPontusAllowed;
 import net.minecraft.entity.player.EntityPlayer;
 
 public class MessagePacketRingUpdate extends BaseMessagePacket<MessagePacketRingUpdate>{

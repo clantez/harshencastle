@@ -2,7 +2,6 @@ package kenijey.harshencastle.interfaces;
 
 import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 
 public interface IHarshenProvider 
 {

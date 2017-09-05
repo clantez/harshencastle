@@ -1,14 +1,10 @@
 package kenijey.harshencastle.network.packets;
 
 import io.netty.buffer.ByteBuf;
-import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.base.BaseMessagePacket;
-import kenijey.harshencastle.inventory.GuiHandler;
 import kenijey.harshencastle.objecthandlers.HarshenItemStackHandler;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.network.ByteBufUtils;
 
 public class MessagePacketItemInventoryDamaged extends BaseMessagePacket<MessagePacketItemInventoryDamaged>{
 

@@ -1,15 +1,10 @@
 package kenijey.harshencastle.blocks;
 
-import java.util.ArrayList;
-import java.util.Random;
-
 import kenijey.harshencastle.tileentity.TileEntityFlatPlate;
 import net.minecraft.block.BlockPressurePlate;
 import net.minecraft.block.ITileEntityProvider;
-import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.AxisAlignedBB;
