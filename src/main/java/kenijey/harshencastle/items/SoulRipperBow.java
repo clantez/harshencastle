@@ -17,6 +17,11 @@ public class SoulRipperBow extends BaseHarshenBow
 	}
 	
 	@Override
+	protected boolean isRipper() {
+		return true;
+	}
+	
+	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 		tooltip.add("\u00A74" + new TextComponentTranslation("soulripperbow1").getFormattedText());
 		tooltip.add("\u00A74" + new TextComponentTranslation("soulripperbow2").getFormattedText());

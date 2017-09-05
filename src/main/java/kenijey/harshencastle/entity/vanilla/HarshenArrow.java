@@ -17,8 +17,11 @@ import net.minecraft.util.math.RayTraceResult;
 public class HarshenArrow extends EntityTippedArrow
 {
 
-	public HarshenArrow(EntityArrow arrow) {
+	private boolean isRipper;
+	
+	public HarshenArrow(EntityArrow arrow, boolean isRipper) {
 		super(arrow.world, (EntityLivingBase) arrow.shootingEntity);
+		this.isRipper = isRipper;
 		setPotionEffect(new ItemStack(Items.ARROW));
 	}
 
@@ -26,8 +29,11 @@ public class HarshenArrow extends EntityTippedArrow
 	
 	@Override
 	protected ItemStack getArrowStack() {
+		if(isRipper)
+			return ItemStack.EMPTY;
 		return new ItemStack(new Random().nextFloat() < chanceThatArrowBreaks ? HarshenItems.broken_arrow : Items.ARROW);
 	}
+	
 	
 	@Override
 	public void playSound(SoundEvent soundIn, float volume, float pitch) {
@@ -44,6 +50,11 @@ public class HarshenArrow extends EntityTippedArrow
 		if(raytraceResultIn.entityHit != null || world.getTileEntity(raytraceResultIn.getBlockPos()) != null)
 			playCustomSound = true;
 		super.onHit(raytraceResultIn);
+	}
+	
+	@Override
+	public void onUpdate() {
+		super.onUpdate();
 	}
 	
 }

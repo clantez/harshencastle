@@ -19,6 +19,8 @@ import net.minecraft.item.ItemArrow;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
@@ -65,6 +67,11 @@ public abstract class BaseHarshenBow extends ItemBow
 		return  SoundEvents.ENTITY_ARROW_SHOOT;
 	}
 	
+	protected boolean isRipper()
+	{
+		return false;
+	}
+	
 	protected ItemStack findAmmo(EntityPlayer player)
     {
         if (this.isArrow(player.getHeldItem(EnumHand.OFF_HAND)))
@@ -91,6 +98,25 @@ public abstract class BaseHarshenBow extends ItemBow
         }
     }
 	
+	@Override
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+		ItemStack itemstack = playerIn.getHeldItem(handIn);
+        boolean flag = !this.findAmmo(playerIn).isEmpty();
+
+        ActionResult<ItemStack> ret = net.minecraftforge.event.ForgeEventFactory.onArrowNock(itemstack, worldIn, playerIn, handIn, flag);
+        if (ret != null && !isRipper()) return ret;
+
+        if (!playerIn.capabilities.isCreativeMode && !flag && !isRipper())
+        {
+            return flag ? new ActionResult(EnumActionResult.PASS, itemstack) : new ActionResult(EnumActionResult.FAIL, itemstack);
+        }
+        else
+        {
+            playerIn.setActiveHand(handIn);
+            return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemstack);
+        }
+	}
+	
 	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft)
     {
         if (entityLiving instanceof EntityPlayer)
@@ -98,7 +124,8 @@ public abstract class BaseHarshenBow extends ItemBow
             EntityPlayer entityplayer = (EntityPlayer)entityLiving;
             boolean flag = entityplayer.capabilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, stack) > 0;
             ItemStack itemstack = this.findAmmo(entityplayer);
-
+            if(isRipper())
+            	itemstack = new ItemStack(Items.ARROW);
             int i = this.getMaxItemUseDuration(stack) - timeLeft;
             i = net.minecraftforge.event.ForgeEventFactory.onArrowLoose(stack, worldIn, entityplayer, i, !itemstack.isEmpty() || flag);
             if (i < 0) return;
@@ -119,7 +146,7 @@ public abstract class BaseHarshenBow extends ItemBow
                     if (!worldIn.isRemote)
                     {
                         ItemArrow itemarrow = (ItemArrow)(itemstack.getItem() instanceof ItemArrow ? itemstack.getItem() : Items.ARROW);
-                        EntityArrow entityarrow = new HarshenArrow(itemarrow.createArrow(worldIn, itemstack, entityplayer));
+                        EntityArrow entityarrow = new HarshenArrow(itemarrow.createArrow(worldIn, itemstack, entityplayer), isRipper());
                         entityarrow.setAim(entityplayer, entityplayer.rotationPitch, entityplayer.rotationYaw, 0.0F, f * 3.0F, 1.0F);
                         
                         if (f == 1.0F)
@@ -154,8 +181,6 @@ public abstract class BaseHarshenBow extends ItemBow
                         }
                         
                         entityarrow.setDamage(entityarrow.getDamage() + additionDamage());
-
-                        
                         worldIn.spawnEntity(entityarrow);
                     }
 
