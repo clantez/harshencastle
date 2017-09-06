@@ -34,27 +34,6 @@ public abstract class BaseHarshenSword extends ItemSword
 	protected abstract String getName();
 	
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
-		if(playerIn.isElytraFlying())
-		{
-			if(!worldIn.isRemote)
-			{
-				playerIn.getHeldItem(handIn).damageItem(new Random().nextInt(10) + 20, playerIn);
-				EntityFireworkRocket rocket = new EntityFireworkRocket(worldIn, new ItemStack(Items.FIREWORKS), playerIn);
-				rocket.setSilent(true);
-				worldIn.spawnEntity(rocket);
-			}
-
-			worldIn.playSound(playerIn.getPosition().getX(), playerIn.getPosition().getY(), playerIn.getPosition().getZ(),
-					HarshenSounds.swordFireWork, SoundCategory.AMBIENT, 2f, 1f, false);
-	        return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
-
-		}
-			
-		return super.onItemRightClick(worldIn, playerIn, handIn);
-	}
-	
-	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 		tooltip.add(new TextComponentTranslation(" ").getFormattedText());
 		String type = this.getSwordType();

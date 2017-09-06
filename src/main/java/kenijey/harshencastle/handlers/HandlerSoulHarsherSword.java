@@ -6,6 +6,7 @@ import kenijey.harshencastle.armor.HarshenArmors;
 import kenijey.harshencastle.base.BaseHarshenSword;
 import kenijey.harshencastle.items.HarshenProps;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.MobEffects;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EntityDamageSource;
@@ -26,7 +27,7 @@ public class HandlerSoulHarsherSword
 					&& Lists.newArrayList(event.getEntityLiving().getArmorInventoryList().iterator()).get(2).getItem() == HarshenArmors.harshen_jaguar_armor_chestplate
 					&& Lists.newArrayList(event.getEntityLiving().getArmorInventoryList().iterator()).get(1).getItem() == HarshenArmors.harshen_jaguar_armor_leggings
 					&& Lists.newArrayList(event.getEntityLiving().getArmorInventoryList().iterator()).get(0).getItem() == HarshenArmors.harshen_jaguar_armor_boots)))
-				event.getEntityLiving().addPotionEffect(new PotionEffect(Potion.getPotionById(20), 150, 1));
+				event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.WITHER, 150, 1));
 		}
 		catch (ClassCastException clazz){}
 	}
