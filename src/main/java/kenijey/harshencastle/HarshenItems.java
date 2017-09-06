@@ -180,7 +180,7 @@ public class HarshenItems
 		regItem(soul_harsher_pickaxe);
 		regItem(item_harshen_dimensional_door,8);
 		regItem(itium,8);
-		regItem(harshen_crystal, 8);
+		regItem(harshen_crystal, 18);
 		regItem(harshen_soul_ingot, 8);
 		regItem(blood_essence, 8);
 		regItem(light_emitted_essence,8);
@@ -222,7 +222,7 @@ public class HarshenItems
 		regMetaItem(pontus_world_gate_parts, EnumPontusGateSpawnerParts.getNames(), "pontus_world_gate_part_");
 		regMetaItem(props, EnumProp.getNames(), "prop_");
 		regMetaItem(blood_collector, EnumBloodCollector.getNames(), "blood_collector_");
-		regMetaItem(ritual_crystal, 64, EnumRitualCrystal.getNames(), "ritual_crystal_");
+		regMetaItem(ritual_crystal, 12, EnumRitualCrystal.getNames(), "ritual_crystal_");
 		regMetaItem(glass_container, emptyList(EnumGlassContainer.values().length), "glass_container", new exceptionName(0, "_empty"));
 	}
 	
