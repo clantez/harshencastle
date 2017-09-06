@@ -4,11 +4,15 @@ import java.util.Arrays;
 import java.util.Random;
 
 import kenijey.harshencastle.HarshenBlocks;
+import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.config.GeneralConfig;
+import kenijey.harshencastle.items.BloodCollector;
 import net.minecraft.entity.monster.EntityWitch;
 import net.minecraft.entity.passive.EntityVillager;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.EntityDamageSource;
+import net.minecraft.util.EnumHand;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -19,8 +23,11 @@ public class HandlerBloodOnHurt
 	@SubscribeEvent
 	public void onLivingHurt(LivingHurtEvent event)
 	{
-		if(event.getSource() instanceof EntityDamageSource && new Random().nextDouble() < GeneralConfig.chanceBloodSpawns && Arrays.asList(AllowedEntities).contains(event.getEntity().getClass())
-				&& event.getEntity().world.isAirBlock(event.getEntity().getPosition()) && GeneralConfig.bloodDrops)
-			event.getEntity().getEntityWorld().setBlockState(event.getEntity().getPosition(), HarshenBlocks.blood_block.getDefaultState(), 3);
+		if(new Random().nextDouble() < GeneralConfig.bloodChance && event.getSource() instanceof EntityDamageSource)
+			if(Arrays.asList(AllowedEntities).contains(event.getEntity().getClass()) && event.getEntity().world.isAirBlock(event.getEntity().getPosition()) && GeneralConfig.bloodDrops)
+				event.getEntity().getEntityWorld().setBlockState(event.getEntity().getPosition(), HarshenBlocks.blood_block.getDefaultState(), 3);
+			else if(event.getSource().getTrueSource() instanceof EntityPlayer && GeneralConfig.bloodOffHand &&
+					((EntityPlayer)event.getSource().getTrueSource()).getHeldItemOffhand().getItem() == HarshenItems.blood_collector)
+				((BloodCollector)((EntityPlayer)event.getSource().getTrueSource()).getHeldItemOffhand().getItem()).fill(((EntityPlayer)event.getSource().getTrueSource()), EnumHand.OFF_HAND, 1);
 	}
 }

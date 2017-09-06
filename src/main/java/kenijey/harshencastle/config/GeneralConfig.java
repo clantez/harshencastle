@@ -5,7 +5,8 @@ import kenijey.harshencastle.base.BaseConfig;
 public class GeneralConfig extends BaseConfig {
 
 	public static boolean bloodDrops;
-	public static double chanceBloodSpawns;
+	public static boolean bloodOffHand;
+	public static double bloodChance;
 	
 	@Override
 	public String getName() {
@@ -15,13 +16,15 @@ public class GeneralConfig extends BaseConfig {
 	@Override
 	public void read() {
 		bloodDrops = getBoolean("blood_drops", true);
-		chanceBloodSpawns = getDouble("blood_chance", 0.3D);
+		bloodChance = getDouble("blood_chance", 0.3D);
+		bloodOffHand = getBoolean("blood_offhand", true);
 	}
 
 	@Override
 	public void save() {
 		setBoolean("blood_drops", bloodDrops);
-		setDouble("blood_chance", chanceBloodSpawns);
+		setDouble("blood_chance", bloodChance);
+		setBoolean("blood_offhand", bloodOffHand);
 	}
 
 }
