@@ -15,7 +15,7 @@ public class SoulRipperBow extends BaseHarshenBow
 	public SoulRipperBow()
 	{
 		setRegistryName("soul_ripper_bow");
-		//setUnlocalizedName("soul_ripper_bow");
+		setUnlocalizedName("soul_ripper_bow");
 	}
 	
 	@Override
