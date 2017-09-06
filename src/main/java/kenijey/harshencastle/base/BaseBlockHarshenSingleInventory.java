@@ -71,7 +71,7 @@ public abstract class BaseBlockHarshenSingleInventory extends Block implements I
 				addNBT(nbttagcompound, worldIn, pos);
 		        stack.setTagCompound(nbttagcompound);
 				stackName += extraName(nbttagcompound, handlerStack.getStackInSlot(0).getItem() != Items.AIR);
-				stackName = stackName == ""? stackName : "§r" + getLocalizedName() + " (" + stackName + ")";
+				stackName = stackName.equals("")? "§r" + getLocalizedName() : "§r" + getLocalizedName() + " (" + stackName + ")";
 				stack.setStackDisplayName(stackName);
 				if(!creativeBreakMap.containsKey(pos) || !creativeBreakMap.get(pos))
 					worldIn.spawnEntity(new EntityItem(worldIn, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, stack));
