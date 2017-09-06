@@ -127,9 +127,6 @@ public class ClientProxy extends CommonProxy
     {
     	super.init(event);
     	
-		NetworkRegistry.INSTANCE.registerGuiHandler(HarshenCastle.instance, new GuiHandler());
-
-    	
     	Object[] handlers = {new HandlerKeyBinding(), new  HandlerGameOverlay(), new HandlerGuiEvent(), new HandlerRendererGuiInventory(), 
     			new HandlerClientHarshenInventoryEffects(), new HandlerFlatPlateRenderer()};
     	for(Object o : handlers)

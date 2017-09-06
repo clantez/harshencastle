@@ -5,7 +5,6 @@ import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
 import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.network.packets.MessageSendPlayerInvToServer;
 import kenijey.harshencastle.objecthandlers.HarshenItemStackHandler;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.IInventory;
@@ -16,10 +15,12 @@ public class ContainerPlayerInventory extends net.minecraft.inventory.Container
 {
 	
 	private final HarshenItemStackHandler handler;
+	private final EntityPlayer player;
 	public ContainerPlayerInventory(EntityPlayer player)
 	{
-		IInventory playerInv = player.inventory;
+		this.player = player;
 		this.handler = HarshenUtils.getHandler(player);
+		IInventory playerInv = player.inventory;
 		for(EnumInventorySlots slot : EnumInventorySlots.values())
 			this.addSlotToContainer(new SlotHarshenInventory(handler, slot, slot.getId(), slot.getDimension().width, slot.getDimension().height));
 		int xPos = 8;
@@ -70,13 +71,7 @@ public class ContainerPlayerInventory extends net.minecraft.inventory.Container
 	@Override
 	public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, EntityPlayer player) {
 		ItemStack stack = super.slotClick(slotId, dragType, clickTypeIn, player);
-		updated();
+		player.getEntityData().setTag("harshenInventory", this.handler.serializeNBT());
 		return stack;
-	}
-	
-	public void updated()
-	{
-		Minecraft.getMinecraft().player.getEntityData().setTag("harshenInventory", this.handler.serializeNBT());
-		HarshenNetwork.sendToServer(new MessageSendPlayerInvToServer(Minecraft.getMinecraft().player));
 	}
 }

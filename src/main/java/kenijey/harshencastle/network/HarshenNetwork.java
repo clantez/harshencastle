@@ -27,7 +27,6 @@ public class HarshenNetwork
 		registerMessage(MessagePacketPlayerHasAccess.class, Side.CLIENT);
 		registerMessage(MessagePacketTileEntityBloodPlacerUpdated.class, Side.CLIENT);
 		registerMessage(MessagePacketOpenInv.class, Side.SERVER);
-		registerMessage(MessageSendPlayerInvToServer.class, Side.SERVER);
 		registerMessage(MessageSendPlayerInvToClient.class, Side.CLIENT);
 		registerMessage(MessagePacketPlayerTeleportEffects.class, Side.CLIENT);
 		registerMessage(MessagePacketRingUpdate.class, Side.SERVER);
