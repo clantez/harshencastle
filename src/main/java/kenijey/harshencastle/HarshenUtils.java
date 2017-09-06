@@ -43,7 +43,6 @@ public class HarshenUtils
 	
     public static final int DECIMAL_COLOR_WHITE = 16777215;
     public static final int DECIMAL_COLOR_GRAY_TEXT = 4210752;
-    public static final int HASH_LIMIT = 1000000;
 	
 	public static boolean isLevelAcceptable(World world, BlockPos pos, EntityPlayer player)
 	{

@@ -13,7 +13,7 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
 
 public class HandlerPlayerInventoryOverDeath 
 {
-	private static HashMap<UUID, HarshenItemStackHandler> stackMap = new HashMap<>(HarshenUtils.HASH_LIMIT);
+	private static HashMap<UUID, HarshenItemStackHandler> stackMap = new HashMap<>();
 	
 	@SubscribeEvent
 	public void onPlayerDeath(LivingDeathEvent event)

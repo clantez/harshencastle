@@ -6,7 +6,6 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import kenijey.harshencastle.HarshenBlocks;
-import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.base.BaseBlockHarshenSingleInventory;
 import kenijey.harshencastle.base.BaseTileEntityHarshenSingleItemInventory;
 import kenijey.harshencastle.enums.blocks.EnumHereticCauldronFluidType;
@@ -36,7 +35,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class HereticCauldron extends BaseBlockHarshenSingleInventory
 {
-	private static HashMap<BlockPos, Boolean> creativeBreakMap = new HashMap<>(HarshenUtils.HASH_LIMIT);
+	private static HashMap<BlockPos, Boolean> creativeBreakMap = new HashMap<>();
 
 	
 	public static final PropertyEnum<EnumHereticCauldronFluidType> LIQUID =  PropertyEnum.<EnumHereticCauldronFluidType>create("liquid_type", EnumHereticCauldronFluidType.class);

@@ -17,7 +17,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 
 public class HandlerHarshenInventory 
 {	
-	HashMap<EntityPlayer, Integer> tickMap = new HashMap<>(HarshenUtils.HASH_LIMIT);
+	HashMap<EntityPlayer, Integer> tickMap = new HashMap<>();
 	private static ArrayList<ItemStack> prevInv = new ArrayList<>();
 	
 	@SubscribeEvent

@@ -2,7 +2,6 @@ package kenijey.harshencastle.base;
 
 import java.util.HashMap;
 
-import kenijey.harshencastle.HarshenUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -28,7 +27,7 @@ import net.minecraftforge.items.ItemStackHandler;
 
 public abstract class BaseBlockHarshenSingleInventory extends Block implements ITileEntityProvider
 {
-	private static HashMap<BlockPos, Boolean> creativeBreakMap = new HashMap<>(HarshenUtils.HASH_LIMIT);
+	private static HashMap<BlockPos, Boolean> creativeBreakMap = new HashMap<>();
 	
 	public BaseBlockHarshenSingleInventory(Material materialIn) 
 	{

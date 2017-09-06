@@ -42,7 +42,7 @@ public class HandlerClientHarshenInventoryEffects
 				finalBlockPositions.clear();
 				ArrayList<Block> blocks = HarshenUtils.getBlocksFromString(HarshenUtils.getFirstOccuringItem(Minecraft.getMinecraft().player,  HarshenItems.xray_pendant).getTagCompound().getString("BlockToSearch"));
 				ArrayList<BlockPos> allBlockPos = new ArrayList<>();
-				HashMap<Double, BlockPos> distanceMap = new HashMap<>(HarshenUtils.HASH_LIMIT);
+				HashMap<Double, BlockPos> distanceMap = new HashMap<>();
 				for(int x = pos.getX() - 35; x < pos.getX() + 35; x++)
 					for(int z = pos.getZ() - 35; z < pos.getZ() + 35; z++)
 						for(int y = pos.getY() - 10; y < pos.getY() + 10; y++)

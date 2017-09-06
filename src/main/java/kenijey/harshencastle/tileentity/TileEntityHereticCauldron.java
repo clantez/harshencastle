@@ -8,7 +8,6 @@ import java.util.Random;
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.HarshenItems;
-import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.base.BaseTileEntityHarshenSingleItemInventory;
 import kenijey.harshencastle.blocks.BloodBlock;
 import kenijey.harshencastle.enums.blocks.EnumHereticCauldronFluidType;
@@ -51,12 +50,12 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 	public boolean isActiveInBackground = false;
 	private ItemStack switchedItem;
 	private int[] drainPos = {50, 75, 100, Integer.MAX_VALUE};
-	public static final HashMap<EnumHereticCauldronFluidType, Item> fluidMap = new HashMap<>(HarshenUtils.HASH_LIMIT);
+	public static final HashMap<EnumHereticCauldronFluidType, Item> fluidMap = new HashMap<>();
 	private EnumHereticCauldronFluidType fluid = EnumHereticCauldronFluidType.NONE;
 	private int level = 1;
 	private EnumHereticCauldronFluidType workingFluid = EnumHereticCauldronFluidType.NONE;
 	private HereticRitualRecipes overstandingRecipe;
-	private HashMap<BlockPos, ItemStack> pedestalMap = new HashMap<>(HarshenUtils.HASH_LIMIT); 
+	private HashMap<BlockPos, ItemStack> pedestalMap = new HashMap<>(); 
 	
 	@Override
 	public void tick() {

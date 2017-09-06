@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.tileentity.TileEntityBloodVessel;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
@@ -31,8 +30,8 @@ public class BloodVessel extends Block implements ITileEntityProvider
 {
 	
 	public static PropertyBool NODE = PropertyBool.create("node_active");
-	private static HashMap<BlockPos, Boolean> creativeBreakMap = new HashMap<>(HarshenUtils.HASH_LIMIT);
-	public static HashMap<BlockPos, Integer> updateMap = new HashMap<>(HarshenUtils.HASH_LIMIT);
+	private static HashMap<BlockPos, Boolean> creativeBreakMap = new HashMap<>();
+	public static HashMap<BlockPos, Integer> updateMap = new HashMap<>();
 	
 	public BloodVessel() {
 		super(Material.IRON);
@@ -107,7 +106,7 @@ public class BloodVessel extends Block implements ITileEntityProvider
 	        stack.setTagCompound(nbttagcompound);
 	        stack.setStackDisplayName("§r" + getLocalizedName() + " [" + amount + "/" + max + "]");
 		}
-		if(!creativeBreakMap.get(pos))
+		if(!creativeBreakMap.containsKey(pos) || !creativeBreakMap.get(pos))
 			worldIn.spawnEntity(new EntityItem(worldIn, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, stack));
 		creativeBreakMap.remove(pos);
 	}

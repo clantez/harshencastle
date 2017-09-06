@@ -1,8 +1,5 @@
 package kenijey.harshencastle.blocks;
 
-import java.util.HashMap;
-
-import kenijey.harshencastle.HarshenUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -18,7 +15,6 @@ import net.minecraft.world.World;
 public class BlockOfHeads extends Block
 {	
 	public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
-	private static HashMap<BlockPos, Boolean> blocksOnMap = new HashMap<>(HarshenUtils.HASH_LIMIT);
 	
 	public BlockOfHeads()
 	{

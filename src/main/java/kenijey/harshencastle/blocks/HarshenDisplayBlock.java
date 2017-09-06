@@ -3,7 +3,6 @@ package kenijey.harshencastle.blocks;
 import java.util.HashMap;
 import java.util.Random;
 
-import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.base.BaseBlockHarshenSingleInventory;
 import kenijey.harshencastle.base.BaseTileEntityHarshenSingleItemInventory;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDisplayBlock;
@@ -18,7 +17,7 @@ import net.minecraft.world.World;
 
 public class HarshenDisplayBlock extends BaseBlockHarshenSingleInventory
 {
-	private static HashMap<BlockPos, Boolean> creativeBreakMap = new HashMap<>(HarshenUtils.HASH_LIMIT);
+	private static HashMap<BlockPos, Boolean> creativeBreakMap = new HashMap<>();
 
 
 	public HarshenDisplayBlock() {

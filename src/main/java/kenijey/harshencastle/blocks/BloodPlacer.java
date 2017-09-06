@@ -3,7 +3,6 @@ package kenijey.harshencastle.blocks;
 import java.util.HashMap;
 
 import kenijey.harshencastle.HarshenBlocks;
-import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.network.packets.MessagePacketTileEntityBloodPlacerUpdated;
 import kenijey.harshencastle.tileentity.TileEntityBloodVessel;
@@ -24,7 +23,7 @@ public class BloodPlacer extends BlockHorizontal
 {
 	
     public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
-    private static HashMap<BlockPos, Boolean> blocksOnMap = new HashMap<>(HarshenUtils.HASH_LIMIT);
+    private static HashMap<BlockPos, Boolean> blocksOnMap = new HashMap<>(	);
 	
 	public BloodPlacer() {
 		super(Material.ROCK);
