@@ -327,5 +327,15 @@ public class HarshenRecipes {
 				
 				'i', new ItemStack(Items.IRON_INGOT),
 				's', "stickWood");
+		
+		
+		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "blood_factory"), new ResourceLocation("harshen_items"),
+				new ItemStack(HarshenBlocks.blood_factory),
+				"t t",
+				" t ",
+				" i ",
+				
+				'i', new ItemStack(HarshenItems.soul_infused_ingot),
+				't', new ItemStack(Blocks.STAINED_HARDENED_CLAY, 1, 2));
 	}
 }
