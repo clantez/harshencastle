@@ -11,7 +11,7 @@ import net.minecraftforge.common.util.EnumHelper;
 public class RaptorScythe extends ItemSword
 {
 	protected float attackSpeed;
-	private static ToolMaterial toolMaterial = EnumHelper.addToolMaterial("iron_scythe", 2, 1010, 13.5f, 3f, 30);
+	private static ToolMaterial toolMaterial = EnumHelper.addToolMaterial("iron_scythe", 3, 1010, 13.5f, 8f, 30);
 
 	public RaptorScythe() 
 	{

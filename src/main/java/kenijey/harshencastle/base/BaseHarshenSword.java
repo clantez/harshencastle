@@ -20,7 +20,7 @@ import net.minecraftforge.common.util.EnumHelper;
 
 public abstract class BaseHarshenSword extends ItemSword
 {
-	private static ToolMaterial toolMaterial = EnumHelper.addToolMaterial("soul_sword", 3, 5000, 13.5f, 13f, 30);
+	private static ToolMaterial toolMaterial = EnumHelper.addToolMaterial("soul_sword", 3, 5000, 13.5f, 11f, 30);
 	public BaseHarshenSword()
 	{
 		super(toolMaterial);

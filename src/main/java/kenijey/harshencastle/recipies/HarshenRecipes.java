@@ -66,6 +66,9 @@ public class HarshenRecipes {
 		RitualRecipes.addRecipe(Arrays.asList(new ItemStack(Items.BLAZE_ROD), new ItemStack(HarshenItems.ritual_crystal, 1, 1),
 				new ItemStack(Items.BLAZE_ROD), new ItemStack(Items.BLAZE_ROD)), new ItemStack(Items.BLAZE_POWDER, 11), true);
 		
+		RitualRecipes.addRecipe(Arrays.asList(new ItemStack(HarshenItems.iron_scythe), new ItemStack(HarshenItems.ritual_crystal, 1, 1),
+				new ItemStack(HarshenItems.soul_infused_ingot), new ItemStack(HarshenItems.valor_badge)), new ItemStack(HarshenItems.raptor_scythe), true);
+		
 		
 		
 		PedestalSlabRecipes.addRecipe(new ItemStack(Blocks.COBBLESTONE), new ItemStack(Blocks.NETHERRACK));
