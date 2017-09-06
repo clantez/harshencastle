@@ -105,7 +105,7 @@ public class BloodVessel extends Block implements ITileEntityProvider
 			NBTTagCompound nbttagcompound = new NBTTagCompound();
 	        nbttagcompound.setInteger("BloodLevel", amount);
 	        stack.setTagCompound(nbttagcompound);
-	        stack.setStackDisplayName("§r" + getLocalizedName() + " (" + amount + "/" + max + ")");
+	        stack.setStackDisplayName("§r" + getLocalizedName() + " [" + amount + "/" + max + "]");
 		}
 		if(!creativeBreakMap.get(pos))
 			worldIn.spawnEntity(new EntityItem(worldIn, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, stack));
