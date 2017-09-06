@@ -47,6 +47,7 @@ import kenijey.harshencastle.items.PontusWorldGatePart;
 import kenijey.harshencastle.items.PontusWorldGateSpawner;
 import kenijey.harshencastle.items.PowderOfHeretism;
 import kenijey.harshencastle.items.PunchyRing;
+import kenijey.harshencastle.items.RaptorScythe;
 import kenijey.harshencastle.items.RitualCrystal;
 import kenijey.harshencastle.items.RitualStick;
 import kenijey.harshencastle.items.SoulHarsherPickaxe;
@@ -118,6 +119,7 @@ public class HarshenItems
 	public static Item broken_arrow;
 	public static Item valor_badge;
 	public static Item iron_scythe;
+	public static Item raptor_scythe;
 	
 	public static void preInit()
 	{
@@ -170,6 +172,7 @@ public class HarshenItems
 		soul_ripper_bow = new SoulRipperBow();
 		valor_badge = new ValorBadge();
 		iron_scythe = new IronScythe();
+		raptor_scythe = new RaptorScythe();
 	}
 	
 	public static void reg()
@@ -200,6 +203,7 @@ public class HarshenItems
 		regItem(broken_arrow, 64);
 		regItem(valor_badge, 31);
 		regItem(iron_scythe);
+		regItem(raptor_scythe);
 		
 		regItem(zombi_pendant);
 		regItem(punchy_ring);
