@@ -35,6 +35,7 @@ public class GuiXrayPendantScreen extends GuiScreen
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 		this.drawDefaultBackground();
 		this.drawCenteredString(this.fontRenderer, I18n.format("gui.xray.block"), this.width / 2, this.height / 2 - 20, 16777215);
+		this.drawCenteredString(this.fontRenderer, I18n.format("gui.xray.example"), this.width / 2, this.height / 2 + 40, 16777215);
 		this.textInput.drawTextBox();
 		this.textInput.setFocused(true);
 		super.drawScreen(mouseX, mouseY, partialTicks);

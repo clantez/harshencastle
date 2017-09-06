@@ -193,6 +193,18 @@ public class HarshenUtils
 		damageFirstOccuringItem(player, item, 1);
 	}
 	
+	public static void damageOccuringItemNoPacket(EntityPlayer player, Item item, int amount)
+	{
+		HarshenItemStackHandler handler = HarshenUtils.getHandler(player);
+        for(int i =0; i < handler.getSlots(); i++)
+        	if(handler.getStackInSlot(i).getItem() == item)
+        	{
+        		handler.getStackInSlot(i).damageItem(amount, player);
+        		break;
+        	}
+        player.getEntityData().setTag("harshenInventory", handler.serializeNBT());
+	}
+	
 	public static EntityPlayer getClosestPlayer(World world, BlockPos position)
 	{
 		return world.getClosestPlayer(position.getX(), position.getY(), position.getZ(), Integer.MAX_VALUE, false);

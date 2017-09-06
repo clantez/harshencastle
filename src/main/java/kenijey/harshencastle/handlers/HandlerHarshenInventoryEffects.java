@@ -1,11 +1,15 @@
 package kenijey.harshencastle.handlers;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
 
 import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.network.packets.MessagePacketPlayerTeleportEffects;
+import kenijey.harshencastle.network.packets.MessagePacketSummonFirework;
+import net.minecraft.entity.item.EntityFireworkRocket;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.monster.EntityZombie;
@@ -15,7 +19,9 @@ import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
@@ -23,8 +29,10 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 
 public class HandlerHarshenInventoryEffects 
 {	
@@ -54,6 +62,9 @@ public class HandlerHarshenInventoryEffects
 					HarshenUtils.damageFirstOccuringItem((EntityPlayer) event.getEntityLiving(), HarshenItems.soul_shield, (int) event.getAmount() * 2);
 					event.setAmount(0);
 				}
+		if(HarshenUtils.containsItem(event.getEntityLiving(), HarshenItems.elytra_pendant) && Arrays.asList(DamageSource.FLY_INTO_WALL, DamageSource.FALL).contains(event.getSource()))
+			event.setCanceled(true);
+			
 	}
 	
 	@SubscribeEvent
@@ -61,6 +72,31 @@ public class HandlerHarshenInventoryEffects
 	{
 		if(HarshenUtils.containsItem(event.getHarvester(), HarshenItems.fiery_ring))
 			HarshenUtils.cookAndReplaceStackList(event.getDrops());
+	}
+	
+	ArrayList<Long> clicksClicked = new ArrayList<>();
+	
+	@SubscribeEvent
+	public void playerClick(PlayerInteractEvent.RightClickBlock event)
+	{
+		if(!clicksClicked.contains(System.currentTimeMillis()))
+			AttemptFirework(event.getEntityPlayer());
+		clicksClicked.add(System.currentTimeMillis());	
+	}
+	
+	@SubscribeEvent
+	public void playerClicked(PlayerInteractEvent.RightClickEmpty event)
+	{
+		if(!clicksClicked.contains(System.currentTimeMillis()))
+			AttemptFirework(event.getEntityPlayer());
+		clicksClicked.add(System.currentTimeMillis());	
+	}
+	
+	
+	private void AttemptFirework(EntityPlayer player)
+	{
+		if(HarshenUtils.containsItem(player, HarshenItems.elytra_pendant) && player.getHeldItemMainhand().isEmpty() && player.isElytraFlying())
+			HarshenNetwork.sendToServer(new MessagePacketSummonFirework());
 	}
 		
 	@SubscribeEvent

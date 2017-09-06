@@ -5,6 +5,7 @@ import java.util.Random;
 import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.HarshenUtils;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.audio.MusicTicker.MusicType;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;

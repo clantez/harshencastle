@@ -7,15 +7,16 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
-import net.minecraft.world.WorldProvider;
+import net.minecraft.world.WorldProviderHell;
+import net.minecraft.world.border.WorldBorder;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class PontusWorldProvider extends WorldProvider 
+public class PontusWorldProvider extends WorldProviderHell
 {
 	@Override
-	protected void init() {
+	public void init() {
 		this.hasSkyLight = false;
 		this.biomeProvider = new PontusBiomeProvider();
 		HarshenCastle.proxy.setWorldRenderer(this);
@@ -29,15 +30,14 @@ public class PontusWorldProvider extends WorldProvider
 	}
 	
 	@Override
+	public float calculateCelestialAngle(long worldTime, float partialTicks) {
+		return 0;
+	}
+	
+	@Override
 	public IChunkGenerator createChunkGenerator()
 	{
 		return new PontusChunkProvider(this.world, this.getSeed());
-	}
-
-	@Override
-	public float calculateCelestialAngle(long worldTime, float partialTicks)
-	{
-		return 0.0F;
 	}
 
 	@Override
@@ -52,6 +52,7 @@ public class PontusWorldProvider extends WorldProvider
 		return world.getTopSolidOrLiquidBlock(new BlockPos(0, 0, 0));
 	}
 
+	
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Vec3d getFogColor(float p_76562_1_, float p_76562_2_)
@@ -87,24 +88,6 @@ public class PontusWorldProvider extends WorldProvider
 		return false;
 	}
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public float getCloudHeight()
-	{
-		return 8.0F;
-	}
-
-	@Override
-	public boolean canCoordinateBeSpawn(int x, int z)
-	{
-		return false;
-	}
-
-	@Override
-	public int getAverageGroundLevel()
-	{
-		return 0;
-	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
@@ -118,25 +101,8 @@ public class PontusWorldProvider extends WorldProvider
 		return DimensionPontus.PONTUS_DIMENSION;
 	}
 	
-	@Override
-	public void onWorldSave() {
-		
-	}
-
-	@Override
-	public void onWorldUpdateEntities() {
-		
-	}
-
-	@Override
-	public int getHeight()
-	{
-		return 256;
-	}
-
-	@Override
-	public int getActualHeight()
-	{
-		return 256;
-	}
+	public WorldBorder createWorldBorder()
+    {
+        return new WorldBorder();
+    }
 }
