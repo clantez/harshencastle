@@ -1,6 +1,7 @@
 package kenijey.harshencastle;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import kenijey.harshencastle.blocks.Archive;
 import kenijey.harshencastle.blocks.BlockOfHeads;
@@ -41,6 +42,7 @@ import kenijey.harshencastle.blocks.PontusDeadLeaves;
 import kenijey.harshencastle.blocks.PontusDeadWood;
 import kenijey.harshencastle.blocks.PontusEmeraldOre;
 import kenijey.harshencastle.blocks.SoulReminder;
+import kenijey.harshencastle.config.BlocksEnabled;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.block.BlockFlower;
@@ -57,6 +59,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class HarshenBlocks {
 	private static ArrayList<Block> blocksWithItems = new ArrayList<Block>();
+	private static HashMap<Block, Integer> blockStackSize = new HashMap<>();
 	private static ArrayList<Block> blocksWithCustomStateMap = new ArrayList<Block>();
 	private static ArrayList<IProperty<?>[]> propertiesToIgnoreCustomStateMap = new ArrayList<IProperty<?>[]>();
 	
@@ -198,11 +201,8 @@ public class HarshenBlocks {
 
 	public static void regBlock(Block block, int stackSize) {
 		blocksWithItems.add(block);
-		ForgeRegistries.BLOCKS.register(block);
-		ItemBlock item = new ItemBlock(block);
-		item.setRegistryName(block.getRegistryName());
-		item.setMaxStackSize(stackSize);
-		ForgeRegistries.ITEMS.register(item);
+		blockStackSize.put(block, stackSize);	
+		BlocksEnabled.allBlocks.add(block);
 	}
 	
 	public static void regBlock(Block block, int stackSize, IProperty<?>... toIgnore)
@@ -220,18 +220,35 @@ public class HarshenBlocks {
 	
 	public static void regSingleBlock(Block block)
 	{
-		ForgeRegistries.BLOCKS.register(block);
+		BlocksEnabled.allBlocks.add(block);
 	}
 	
 	public static void regSingleBlock(Block block,  IProperty<?>... toIgnore)
 	{
 		blocksWithCustomStateMap.add(block);
 		propertiesToIgnoreCustomStateMap.add(toIgnore);
-		ForgeRegistries.BLOCKS.register(block);
+		BlocksEnabled.allBlocks.add(block);
 	}
 
 	public static void regRender(Block block) {
 		block.setCreativeTab(HarshenCastle.harshenTab);
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, new ModelResourceLocation(block.getRegistryName(), "inventory"));
+	}
+
+	public static void register() {
+		for(Block block : BlocksEnabled.allBlocks)
+			if(BlocksEnabled.isBlockEnabled(block))
+			{
+				ForgeRegistries.BLOCKS.register(block);
+				if(blocksWithItems.contains(block))
+				{
+					ItemBlock item = new ItemBlock(block);
+					item.setRegistryName(block.getRegistryName());
+					item.setMaxStackSize(blockStackSize.get(block));
+					ForgeRegistries.ITEMS.register(item);
+				}
+					
+			}
+				
 	}
 }

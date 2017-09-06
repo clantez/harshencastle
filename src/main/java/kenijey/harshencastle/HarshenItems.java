@@ -3,6 +3,7 @@ package kenijey.harshencastle;
 import java.util.ArrayList;
 
 import kenijey.harshencastle.base.BaseItemMetaData;
+import kenijey.harshencastle.config.ItemsEnabled;
 import kenijey.harshencastle.enums.items.EnumBloodCollector;
 import kenijey.harshencastle.enums.items.EnumGlassContainer;
 import kenijey.harshencastle.enums.items.EnumPontusGateSpawner;
@@ -252,7 +253,7 @@ public class HarshenItems
 	{
 		items.add(item);
 		item.setMaxStackSize(stackSize);
-		ForgeRegistries.ITEMS.register(item);
+		ItemsEnabled.allItems.add(item);
 	}
 	
 	public static void regMetaItem(BaseItemMetaData item, int stackSize, String[] names, String prefix, exceptionName...exceptionNames)
@@ -260,7 +261,7 @@ public class HarshenItems
 		item.setMaxStackSize(stackSize);
 		for(exceptionName exc : exceptionNames)
 			names[exc.position] = exc.name;
-		ForgeRegistries.ITEMS.register(item);
+		ItemsEnabled.allItems.add(item);
 		allMetaItems.add(item);
 		allMetaNames.add(names);
 		allMetaPrefix.add(prefix);
@@ -294,6 +295,13 @@ public class HarshenItems
 	{
 		new ItemStack(item, 1, meta).getItem().setCreativeTab(HarshenCastle.harshenTab);
 		ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(new ResourceLocation(HarshenCastle.MODID, fileName), "inventory"));
+	}
+
+	public static void register() 
+	{
+		for(Item item : ItemsEnabled.allItems)
+			if(ItemsEnabled.isItemEnabled(item))
+				ForgeRegistries.ITEMS.register(item);
 	}
 }
 

@@ -83,6 +83,9 @@ entity.soul_part.name=[HC] Soul Part
 #damage sources
 death.attack.entitySoulPart=%1$s's soul was taken away.
 
+#config
+config.isEnabled=Should %s be enabled
+
 #blocks
 tile.harshen_soul_ore.name=Harshen Soul Ore
 tile.soul_reminder.name=Soul Reminder

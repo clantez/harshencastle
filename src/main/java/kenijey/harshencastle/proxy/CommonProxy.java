@@ -7,6 +7,7 @@ import kenijey.harshencastle.HarshenSounds;
 import kenijey.harshencastle.WorldGen;
 import kenijey.harshencastle.armor.HarshenArmors;
 import kenijey.harshencastle.biomes.HarshenBiomes;
+import kenijey.harshencastle.config.HarshenConfigs;
 import kenijey.harshencastle.dimensions.HarshenDimensions;
 import kenijey.harshencastle.dimensions.pontus.PontusWorldProvider;
 import kenijey.harshencastle.entity.HarshenEntities;
@@ -60,7 +61,7 @@ public class CommonProxy
 {
     public void preInit(FMLPreInitializationEvent event) 
     {
-    	HarshenPotions.preInit();//has to be first or else crash
+    	HarshenPotions.preInit();//dont mess with order
 		HarshenPotions.register();
 		
     	HarshenFluids.register();
@@ -69,9 +70,14 @@ public class CommonProxy
 	
 		HarshenBlocks.preInit();
 		HarshenItems.preInit();
-		
+				
 		HarshenBlocks.reg();
 		HarshenItems.reg();
+		
+		HarshenConfigs.preInit();
+		
+		HarshenBlocks.register();
+		HarshenItems.register();
 		
 		HarshenArmors.preInit();
 		HarshenArmors.register();

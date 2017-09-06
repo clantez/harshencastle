@@ -1,5 +1,7 @@
 package kenijey.harshencastle.handlers;
 
+import kenijey.harshencastle.HarshenItems;
+import kenijey.harshencastle.config.ItemsEnabled;
 import kenijey.harshencastle.items.GlassContainer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;

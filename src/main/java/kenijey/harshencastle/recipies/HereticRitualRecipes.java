@@ -2,6 +2,7 @@ package kenijey.harshencastle.recipies;
 
 import java.util.ArrayList;
 
+import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.enums.blocks.EnumHereticCauldronFluidType;
 import net.minecraft.item.ItemStack;
 
@@ -13,11 +14,19 @@ public class HereticRitualRecipes
 	private final ItemStack output;
 	private final ItemStack[] pedestalItems;
 	private final EnumHereticCauldronFluidType catalyst;
+	private boolean isFalse;
 	
 	private HereticRitualRecipes(ItemStack cauldronItem, ItemStack output, EnumHereticCauldronFluidType catalyst, ItemStack... pedstalItems)
 	{
 		if(pedstalItems.length != 8)
 			throw new IllegalArgumentException("input size for ritual recipe was not 8");
+		
+		for(int i = 0; i < 8; i++)
+			if(HarshenUtils.isItemFalse(pedstalItems[i]))
+				isFalse = true;
+		if(HarshenUtils.isItemFalse(cauldronItem) || HarshenUtils.isItemFalse(output))
+			isFalse = true;
+		
 		this.cauldronItem = cauldronItem;
 		this.output = output;
 		this.catalyst = catalyst;
@@ -67,7 +76,9 @@ public class HereticRitualRecipes
 	
 	public static void addRecipe(ItemStack cauldronItem, ItemStack output, EnumHereticCauldronFluidType catalyst, ItemStack... pedstalItems)
 	{
-		HarshenRecipes.allHereticCauldronRecipes.add(new HereticRitualRecipes(cauldronItem, output, catalyst, pedstalItems));
+		HereticRitualRecipes recipe = new HereticRitualRecipes(cauldronItem, output, catalyst, pedstalItems);
+		if(!recipe.isFalse)
+			HarshenRecipes.allHereticCauldronRecipes.add(recipe);
 	}
 	
 }

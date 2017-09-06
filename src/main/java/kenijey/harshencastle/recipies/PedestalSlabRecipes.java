@@ -2,6 +2,7 @@ package kenijey.harshencastle.recipies;
 
 import java.util.ArrayList;
 
+import kenijey.harshencastle.HarshenUtils;
 import net.minecraft.item.ItemStack;
 
 public class PedestalSlabRecipes 
@@ -10,9 +11,12 @@ public class PedestalSlabRecipes
 	
 	private final ItemStack input;
 	private final ItemStack output;
+	private boolean isFalse;
 	
 	private PedestalSlabRecipes(ItemStack input, ItemStack output)
 	{
+		if(HarshenUtils.isItemFalse(input) || HarshenUtils.isItemFalse(output))
+			isFalse = true;
 		this.input = input;
 		this.output = output;
 		allRecipes.add(this);
@@ -39,7 +43,9 @@ public class PedestalSlabRecipes
 	
 	public static void addRecipe(ItemStack input, ItemStack output)
 	{
-		HarshenRecipes.allPedestalRecipes.add(new PedestalSlabRecipes(input, output));
+		PedestalSlabRecipes recipe = new PedestalSlabRecipes(input, output);
+		if(!recipe.isFalse)
+			HarshenRecipes.allPedestalRecipes.add(recipe);
 	}
 	
 }

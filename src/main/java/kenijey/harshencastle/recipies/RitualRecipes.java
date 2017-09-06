@@ -3,6 +3,7 @@ package kenijey.harshencastle.recipies;
 import java.util.ArrayList;
 import java.util.List;
 
+import kenijey.harshencastle.HarshenUtils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 
@@ -13,11 +14,18 @@ public class RitualRecipes {
 	private final ItemStack output;
 	private final boolean useLightning;
 	private BlockPos positionOfRitual;
+	private boolean isFalse;
 	
 	private RitualRecipes(List<ItemStack> inputs, ItemStack output, boolean useLightning) 
 	{
 		if(inputs.size() != 4)
 			throw new IllegalArgumentException("input size for ritual recipe was not 4");
+		for(int i = 0; i < 4; i++)
+			if(HarshenUtils.isItemFalse(inputs.get(i)))
+				isFalse = true;
+		if(HarshenUtils.isItemFalse(output))
+			isFalse = true;
+		
 		this.inputs = inputs;
 		this.output = output;
 		this.useLightning = useLightning;
@@ -74,6 +82,8 @@ public class RitualRecipes {
 	
 	public static void addRecipe(List<ItemStack> inputs, ItemStack output, boolean useLightning)
 	{
-		HarshenRecipes.allRitualRecipes.add(new RitualRecipes(inputs, output, useLightning));
+		RitualRecipes recipe = new RitualRecipes(inputs, output, useLightning);
+		if(!recipe.isFalse)
+			HarshenRecipes.allRitualRecipes.add(recipe);
 	}
 }

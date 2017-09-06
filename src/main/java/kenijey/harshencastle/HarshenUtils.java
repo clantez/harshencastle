@@ -8,6 +8,8 @@ import java.util.Random;
 import com.google.common.collect.Lists;
 
 import kenijey.harshencastle.base.BasePontusResourceBiome;
+import kenijey.harshencastle.config.BlocksEnabled;
+import kenijey.harshencastle.config.ItemsEnabled;
 import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
 import kenijey.harshencastle.handlers.HandlerPontusAllowed;
 import kenijey.harshencastle.network.HarshenNetwork;
@@ -248,7 +250,7 @@ public class HarshenUtils
 	public static List<ItemStack> getItemsFromLootTable(World world, ResourceLocation locationOfTable)
 	{
 		LootContext context = new LootContext(1f, (WorldServer) world, world.getLootTableManager(), null, null, DamageSource.MAGIC);
-		return world.getLootTableManager().getLootTableFromLocation(locationOfTable).generateLootForPools(new Random(), context);
+		return exposeList(world.getLootTableManager().getLootTableFromLocation(locationOfTable).generateLootForPools(new Random(), context));
 	}
 	
 	public static List<ItemStack> getItemsFromLootPool(World world, ResourceLocation locationOfTable, String poolName)
@@ -256,7 +258,30 @@ public class HarshenUtils
 		LootContext context = new LootContext(1f, (WorldServer) world, world.getLootTableManager(), null, null, DamageSource.MAGIC);
 		List<ItemStack> list = Lists.<ItemStack>newArrayList();
 		world.getLootTableManager().getLootTableFromLocation(locationOfTable).getPool(poolName).generateLoot(list, new Random(), context);
+		return exposeList(list);
+	}
+	
+	private static List<ItemStack> exposeList(List<ItemStack> list)
+	{
+		if(list.isEmpty())
+			list.add(ItemStack.EMPTY);
 		return list;
+	}
+	
+	public static boolean isItemAvalible(ItemStack stack)
+	{
+		boolean flag = true;
+		Item item = stack.getItem();
+		if(item instanceof ItemBlock)
+			flag = BlocksEnabled.isBlockEnabled(((ItemBlock)item).getBlock());
+		else
+			flag = ItemsEnabled.isItemEnabled(item);
+		return flag;
+	}
+	
+	public static boolean isItemFalse(ItemStack stack)
+	{
+		return !isItemAvalible(stack);
 	}
 	
 	public static NBTTagCompound getNBT(ItemStack stack)
