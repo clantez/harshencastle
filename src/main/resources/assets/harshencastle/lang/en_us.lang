@@ -154,6 +154,7 @@ gui.category.potions=Potions
 gui.category.structure=Structures
 gui.category.dimension=Dimensions
 gui.category.ritual=Rituals
+gui.xray.block=Xray Necklace: Block Set. (example:oreIron)
 
 #tooltips
 sword1=Reminds the wraith
