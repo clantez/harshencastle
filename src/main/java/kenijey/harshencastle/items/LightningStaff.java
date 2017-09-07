@@ -3,12 +3,12 @@ package kenijey.harshencastle.items;
 import java.util.List;
 
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
-public class LightningStaff extends Item
+public class LightningStaff extends ItemBow
 {
 	public LightningStaff()
 	{
