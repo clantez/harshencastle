@@ -235,6 +235,8 @@ soulripperbow2=target you hit with it
 soulripperbow3=It has its own arrow.
 soul_shield1=It will absorb all damages when worn.
 soul_shield2=However, it has a durability which is 500. (damage/hp)
+elytra_pendant1=Boosts you like a rocket while you flying with Elytra.
+elytra_pendant2=Hold Right Click with your empty hand to boost.
 
 #misc
 itemGroup.harshenTab=Harshen Castle
