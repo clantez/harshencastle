@@ -27,6 +27,7 @@ import kenijey.harshencastle.blocks.HarshenDimensionalWoodCrate;
 import kenijey.harshencastle.blocks.HarshenDisplayBlock;
 import kenijey.harshencastle.blocks.HarshenHiddenPlate;
 import kenijey.harshencastle.blocks.HarshenHiddenPlateActive;
+import kenijey.harshencastle.blocks.HarshenMagicTable;
 import kenijey.harshencastle.blocks.HarshenSoulFlower;
 import kenijey.harshencastle.blocks.HarshenSoulOre;
 import kenijey.harshencastle.blocks.HarshenSpawner;
@@ -97,6 +98,7 @@ public class HarshenBlocks {
 	public static Block archive;
 	public static Block kuantic_ore;
 	public static Block block_of_heads;
+	public static Block harshen_magic_table;
 	
 	public static BlockCrops crop_of_gleam;
 
@@ -147,6 +149,7 @@ public class HarshenBlocks {
 		archive = new Archive();
 		kuantic_ore = new KuanticOre();
 		block_of_heads = new BlockOfHeads();
+		harshen_magic_table = new HarshenMagicTable();
 	}
 
 	public static void reg() {
@@ -185,6 +188,7 @@ public class HarshenBlocks {
 		regBlock(archive, 64);
 		regBlock(kuantic_ore, 1);
 		regBlock(block_of_heads, 64);
+		regBlock(harshen_magic_table, 4);
 		
 		regSingleBlock(heretic_cauldron_top);
 		regSingleBlock(crop_of_gleam);

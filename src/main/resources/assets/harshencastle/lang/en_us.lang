@@ -131,6 +131,7 @@ tile.archive.name=Archive
 tile.blood_factory.name=Blood Factory
 tile.kuantic_ore.name=Unstable Kuantic Element Ore
 tile.block_of_heads.name=Block Of Heads
+tile.harshen_magic_table.name=Harshen Magic Table
 
 
 #fluids
@@ -240,6 +241,7 @@ elytra_pendant1=Boosts you like a rocket while you flying with Elytra.
 elytra_pendant2=Hold Right Click with your empty hand to boost.
 lightning_staff1=Recalls thunders from skies
 lightning_staff2=with a small amount of gold
+magic_table1=Meet with Harshen Magic
 
 #misc
 itemGroup.harshenTab=Harshen Castle
