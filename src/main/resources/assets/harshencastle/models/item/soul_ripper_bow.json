@@ -42,7 +42,7 @@
 		{
             "predicate": {
                 "pulling": 1,
-                "pull": 0.8
+                "pull": 0.9
             },
             "model": "harshencastle:item/soul_ripper_bow_pulling_2"
         }
