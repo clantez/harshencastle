@@ -39,6 +39,7 @@ import kenijey.harshencastle.items.IronScythe;
 import kenijey.harshencastle.items.Itium;
 import kenijey.harshencastle.items.LightEmittedEssence;
 import kenijey.harshencastle.items.LightEmittedSeed;
+import kenijey.harshencastle.items.LightningStaff;
 import kenijey.harshencastle.items.LootingEarring;
 import kenijey.harshencastle.items.MineRing;
 import kenijey.harshencastle.items.MysticFeather;
@@ -124,6 +125,7 @@ public class HarshenItems
 	public static Item raptor_scythe;
 	public static Item elytra_pendant;
 	public static Item mystic_feather;
+	public static Item lightning_staff;
 	
 	public static void preInit()
 	{
@@ -179,6 +181,7 @@ public class HarshenItems
 		raptor_scythe = new RaptorScythe();
 		elytra_pendant = new ElytraPendant();
 		mystic_feather = new MysticFeather();
+		lightning_staff = new LightningStaff();
 	}
 	
 	public static void reg()
@@ -211,6 +214,7 @@ public class HarshenItems
 		regItem(iron_scythe);
 		regItem(raptor_scythe);
 		regItem(mystic_feather, 12);
+		regItem(lightning_staff);
 		
 		regItem(zombi_pendant);
 		regItem(punchy_ring);

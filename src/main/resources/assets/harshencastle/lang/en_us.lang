@@ -70,6 +70,7 @@ item.iron_scythe.name=Iron Scythe
 item.raptor_scythe.name=Raptor Scythe
 item.elytra_pendant.name=Elytra Pendant
 item.mystic_feather.name=Mystic Feather
+item.lightning_staff.name=Lightning Staff
 
 #keybindings
 key.telering.description=Telering Teleport Key
@@ -237,6 +238,8 @@ soul_shield1=It will absorb all damages when worn.
 soul_shield2=However, it has a durability which is 500. (damage/hp)
 elytra_pendant1=Boosts you like a rocket while you flying with Elytra.
 elytra_pendant2=Hold Right Click with your empty hand to boost.
+lightning_staff1=Recalls thunders from skies
+lightning_staff2=with a small amount of gold
 
 #misc
 itemGroup.harshenTab=Harshen Castle
