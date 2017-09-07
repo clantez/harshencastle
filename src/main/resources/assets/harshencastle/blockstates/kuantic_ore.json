@@ -1,5 +1,9 @@
 {
     "variants": {
-        "normal": { "model": "harshencastle:kuantic_ore" }
-    }
+        "normal": [
+                    { "model": "harshencastle:kuantic_ore_1" },
+                    { "model": "harshencastle:kuantic_ore_2" }
+                        
+                  ]     
+                }
 }
