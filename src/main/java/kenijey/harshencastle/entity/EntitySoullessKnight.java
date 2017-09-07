@@ -71,7 +71,7 @@ public class EntitySoullessKnight extends EntityMob
     protected void dropLoot(boolean wasRecentlyHit, int lootingModifier, DamageSource source) {
     	for(int i = 0; i < lootingModifier + 1; i ++)
     		if(new Random().nextBoolean())
-    			this.dropItem(HarshenItems.blood_essence, 1);
+    			this.dropItem(HarshenItems.ritual_crystal, 1);
     }
     
     @Override
