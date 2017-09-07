@@ -231,6 +231,8 @@ fiery_ring2=and blocks when mined.
 soulripperbow1=Drains the soul of the
 soulripperbow2=target you hit with it
 soulripperbow3=It has its own arrow.
+soul_shield1=It will absorb all damages when worn.
+soul_shield2=However, it has a durability which is 500. (damage/hp)
 
 #misc
 itemGroup.harshenTab=Harshen Castle
