@@ -2,6 +2,7 @@ package kenijey.harshencastle.items;
 
 import java.util.List;
 
+import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.HarshenSounds;
 import kenijey.harshencastle.base.BaseHarshenBow;
 import net.minecraft.client.util.ITooltipFlag;
@@ -46,4 +47,8 @@ public class SoulRipperBow extends BaseHarshenBow
 		return 1.7;
 	}
 	
+	@Override
+	public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
+		return repair.getItem() == HarshenItems.soul_infused_ingot;
+	}
 }
