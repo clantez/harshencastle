@@ -18,7 +18,7 @@ import net.minecraftforge.common.util.EnumHelper;
 public class RaptorScythe extends ItemSword
 {
 	protected float attackSpeed;
-	private static ToolMaterial toolMaterial = EnumHelper.addToolMaterial("iron_scythe", 3, 1010, 13.5f, 8f, 30);
+	private static ToolMaterial toolMaterial = EnumHelper.addToolMaterial("iron_scythe", 3, 1010, 13.5f, 11f, 30);
 
 	public RaptorScythe() 
 	{
@@ -46,7 +46,7 @@ public class RaptorScythe extends ItemSword
 		final Multimap<String, AttributeModifier> modifiers = super.getAttributeModifiers(slot, stack);
 
 		if (slot == EntityEquipmentSlot.MAINHAND) {
-			replaceModifier(modifiers, SharedMonsterAttributes.ATTACK_SPEED, ATTACK_SPEED_MODIFIER, 1.15);
+			replaceModifier(modifiers, SharedMonsterAttributes.ATTACK_SPEED, ATTACK_SPEED_MODIFIER, 1.4);
 		}
 
 		return modifiers;
