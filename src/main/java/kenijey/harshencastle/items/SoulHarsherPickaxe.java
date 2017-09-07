@@ -2,6 +2,7 @@ package kenijey.harshencastle.items;
 
 import java.util.List;
 
+import kenijey.harshencastle.HarshenItems;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
@@ -27,4 +28,8 @@ public class SoulHarsherPickaxe extends ItemPickaxe
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 	}
 
+	@Override
+	public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
+		return repair.getItem() == HarshenItems.soul_infused_ingot;
+	}
 }
