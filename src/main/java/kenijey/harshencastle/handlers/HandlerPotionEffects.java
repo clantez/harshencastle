@@ -61,7 +61,7 @@ public class HandlerPotionEffects {
 			event.getEntityLiving().getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).removeModifier(UUID.fromString("81c41407-0bb1-435d-91ca-449b8c8a0eec"));
 			event.getEntityLiving().setHealth(event.getEntityLiving().getHealth());
 		}
-		if(event.getEntityLiving().isPotionActive(HarshenPotions.potionHarshed))
+		if(event.getEntityLiving().isPotionActive(HarshenPotions.potionHarshed) && !event.getEntityLiving().world.isRemote)
 		{
 			if(!arrayLivingWithEffect.contains(event.getEntityLiving()))
 			{
@@ -69,10 +69,11 @@ public class HandlerPotionEffects {
 				for(PotionEffect effect : event.getEntityLiving().getActivePotionEffects())
 					if(effect.getPotion().equals(HarshenPotions.potionHarshed))
 						arrayEffectManager.add(new HandlerHarshenEffect(event.getEntityLiving(), effect.getAmplifier()));
+
 			}
 			arrayEffectManager.get(arrayLivingWithEffect.indexOf(event.getEntityLiving())).add();
 		}
-		else if(arrayLivingWithEffect.contains(event.getEntityLiving()))
+		else if(arrayLivingWithEffect.contains(event.getEntityLiving()) && !event.getEntityLiving().world.isRemote)
 		{
 			arrayEffectManager.remove(arrayLivingWithEffect.indexOf(event.getEntityLiving()));
 			arrayLivingWithEffect.remove(event.getEntityLiving());

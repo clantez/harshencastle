@@ -171,7 +171,7 @@ public class HarshenUtils
         	if(handler.getStackInSlot(i).getItem() == item)
         	{
         		handler.getStackInSlot(i).damageItem(amount, player);
-                HarshenNetwork.sendToPlayer((EntityPlayerMP) player, new MessagePacketItemInventoryDamaged(i, amount));
+                HarshenNetwork.sendToPlayer(player, new MessagePacketItemInventoryDamaged(i, amount));
         		break;
         	}
         player.getEntityData().setTag("harshenInventory", handler.serializeNBT());

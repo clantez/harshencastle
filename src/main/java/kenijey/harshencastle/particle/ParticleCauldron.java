@@ -1,7 +1,5 @@
 package kenijey.harshencastle.particle;
 
-import java.util.Random;
-
 import kenijey.harshencastle.base.BaseHarshenParticle;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;

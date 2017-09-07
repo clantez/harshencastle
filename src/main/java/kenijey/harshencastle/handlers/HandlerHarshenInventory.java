@@ -6,13 +6,19 @@ import java.util.HashMap;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.interfaces.IHarshenProvider;
 import kenijey.harshencastle.network.HarshenNetwork;
+import kenijey.harshencastle.network.packets.MessagePacketRequestInv;
 import kenijey.harshencastle.network.packets.MessageSendPlayerInvToClient;
 import kenijey.harshencastle.objecthandlers.HarshenItemStackHandler;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Enchantments;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.event.entity.player.PlayerPickupXpEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 
 public class HandlerHarshenInventory 
@@ -24,7 +30,11 @@ public class HandlerHarshenInventory
 	public void playerTick(PlayerTickEvent event)
 	{
 		if(event.player.world.isRemote)
+		{
+			if(!event.player.getEntityData().hasKey("harshenInventory"))
+				HarshenNetwork.sendToServer(new MessagePacketRequestInv());
 			return;
+		}
 		if(!tickMap.containsKey(event.player))
 			tickMap.put(event.player, 0);
 		tickMap.put(event.player, tickMap.get(event.player) + 1);
@@ -45,9 +55,18 @@ public class HandlerHarshenInventory
 	}
 	
 	@SubscribeEvent
-	public void onPlayerJoin(PlayerLoggedInEvent event)
+	public void onPlayerInteractXP(PlayerPickupXpEvent event)
 	{
-		if(!event.player.world.isRemote)
-			HarshenNetwork.sendToPlayer((EntityPlayerMP) event.player, new MessageSendPlayerInvToClient(event.player));
+         if (!EnchantmentHelper.getEnchantedItem(Enchantments.MENDING, event.getEntityPlayer()).isEmpty())
+        	 return;
+         HarshenItemStackHandler handler = HarshenUtils.getHandler(event.getEntityPlayer());
+         for(int o = 0; o < handler.getSlots(); o++)
+         	if(handler.getStackInSlot(o).isItemDamaged() && EnchantmentHelper.getEnchantmentLevel(Enchantments.MENDING, handler.getStackInSlot(o)) > 0)
+         	{
+         		int i = Math.min(event.getOrb().xpValue * 2, (handler.getStackInSlot(o).getItemDamage()));
+                event.getOrb().xpValue -= i / 2;
+                HarshenUtils.damageFirstOccuringItem(event.getEntityPlayer(), handler.getStackInSlot(o).getItem(), - i);
+         		break;
+         	}
 	}
 }

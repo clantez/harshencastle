@@ -2,7 +2,6 @@ package kenijey.harshencastle.base;
 
 import javax.vecmath.Vector3f;
 
-import kenijey.harshencastle.tileentity.TileEntityHarshenDimensionalPedestal;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;

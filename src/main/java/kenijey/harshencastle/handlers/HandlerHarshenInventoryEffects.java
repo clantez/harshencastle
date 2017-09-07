@@ -2,14 +2,12 @@ package kenijey.harshencastle.handlers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Random;
 
 import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.network.packets.MessagePacketPlayerTeleportEffects;
 import kenijey.harshencastle.network.packets.MessagePacketSummonFirework;
-import net.minecraft.entity.item.EntityFireworkRocket;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.monster.EntityZombie;
@@ -18,8 +16,8 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
@@ -32,7 +30,6 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 
 public class HandlerHarshenInventoryEffects 
 {	
@@ -62,8 +59,10 @@ public class HandlerHarshenInventoryEffects
 					HarshenUtils.damageFirstOccuringItem((EntityPlayer) event.getEntityLiving(), HarshenItems.soul_shield, (int) event.getAmount() * 2);
 					event.setAmount(0);
 				}
-		if(HarshenUtils.containsItem(event.getEntityLiving(), HarshenItems.elytra_pendant) && Arrays.asList(DamageSource.FLY_INTO_WALL, DamageSource.FALL).contains(event.getSource()))
+		if(HarshenUtils.containsItem(event.getEntityLiving(), HarshenItems.elytra_pendant)&& Arrays.asList(DamageSource.FLY_INTO_WALL, DamageSource.FALL).contains(event.getSource())
+				&& event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.CHEST).getItem() == Items.ELYTRA)
 			event.setCanceled(true);
+
 			
 	}
 	
@@ -96,7 +95,14 @@ public class HandlerHarshenInventoryEffects
 	private void AttemptFirework(EntityPlayer player)
 	{
 		if(HarshenUtils.containsItem(player, HarshenItems.elytra_pendant) && player.getHeldItemMainhand().isEmpty() && player.isElytraFlying())
+		{
 			HarshenNetwork.sendToServer(new MessagePacketSummonFirework());
+
+			Vec3d vec3d = player.getLookVec();
+			player.motionX += vec3d.x * 0.1D + (vec3d.x * 2.5D - player.motionX) * 0.5D;
+	        player.motionY += vec3d.y * 0.1D + (vec3d.y * 2.5D - player.motionY) * 0.5D;
+	        player.motionZ += vec3d.z * 0.1D + (vec3d.z * 2.5D - player.motionZ) * 0.5D;
+		}
 	}
 		
 	@SubscribeEvent
@@ -131,7 +137,7 @@ public class HandlerHarshenInventoryEffects
 			{
 				((EntityPlayerMP)player).velocityChanged = true;
 				((EntityPlayerMP)player).fallDistance = 0;
-				HarshenNetwork.sendToPlayer(((EntityPlayerMP)player), new MessagePacketPlayerTeleportEffects(vecPos));
+				HarshenNetwork.sendToPlayer(player, new MessagePacketPlayerTeleportEffects(vecPos));
 				((EntityPlayerMP)player).setPositionAndUpdate(vecPos.x, vecPos.y, vecPos.z);
 				world.playSound((EntityPlayer)null, player.posX, player.posY, player.posZ, SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT, SoundCategory.PLAYERS, 1.0F, 1.0F);
                 player.playSound(SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT, 1.0F, 1.0F);

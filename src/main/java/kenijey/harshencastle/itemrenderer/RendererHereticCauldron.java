@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Random;
 
 import kenijey.harshencastle.HarshenCastle;
-import kenijey.harshencastle.enums.blocks.EnumHereticCauldronFluidType;
 import kenijey.harshencastle.enums.particle.EnumHarshenParticle;
 import kenijey.harshencastle.particle.ParticleCauldronTop;
 import kenijey.harshencastle.tileentity.TileEntityHereticCauldron;

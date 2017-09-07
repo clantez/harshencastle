@@ -5,12 +5,13 @@ import kenijey.harshencastle.network.packets.MessagePacketItemInventoryDamaged;
 import kenijey.harshencastle.network.packets.MessagePacketOpenInv;
 import kenijey.harshencastle.network.packets.MessagePacketPlayerHasAccess;
 import kenijey.harshencastle.network.packets.MessagePacketPlayerTeleportEffects;
+import kenijey.harshencastle.network.packets.MessagePacketRequestInv;
 import kenijey.harshencastle.network.packets.MessagePacketRingUpdate;
 import kenijey.harshencastle.network.packets.MessagePacketSummonFirework;
 import kenijey.harshencastle.network.packets.MessagePacketTileEntityBloodPlacerUpdated;
 import kenijey.harshencastle.network.packets.MessagePacketUpdateXrayBlock;
 import kenijey.harshencastle.network.packets.MessageSendPlayerInvToClient;
-import kenijey.harshencastle.network.packets.MessageSendPlayerInvToServer;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -33,6 +34,7 @@ public class HarshenNetwork
 		registerMessage(MessagePacketItemInventoryDamaged.class, Side.CLIENT);
 		registerMessage(MessagePacketUpdateXrayBlock.class, Side.SERVER);
 		registerMessage(MessagePacketSummonFirework.class, Side.SERVER);
+		registerMessage(MessagePacketRequestInv.class, Side.SERVER);
 	}
 	
 	
@@ -47,9 +49,9 @@ public class HarshenNetwork
 		INSTANCE.sendToServer(message);
 	}
 	
-	public static void sendToPlayer(EntityPlayerMP player, IMessage message)
+	public static void sendToPlayer(EntityPlayer player, IMessage message)
 	{
-		INSTANCE.sendTo(message, player);
+		INSTANCE.sendTo(message, (EntityPlayerMP) player);
 	}
 	
 	public static void sendToAll(IMessage message)

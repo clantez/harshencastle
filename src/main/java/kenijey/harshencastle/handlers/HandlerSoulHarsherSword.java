@@ -7,7 +7,6 @@ import kenijey.harshencastle.base.BaseHarshenSword;
 import kenijey.harshencastle.items.HarshenProps;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.MobEffects;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;

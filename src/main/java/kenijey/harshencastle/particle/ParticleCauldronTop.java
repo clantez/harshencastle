@@ -1,17 +1,10 @@
 package kenijey.harshencastle.particle;
 
-import java.util.ArrayList;
-
 import kenijey.harshencastle.base.BaseHarshenParticle;
-import kenijey.harshencastle.tileentity.TileEntityHereticCauldron;
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fluids.UniversalBucket;
 
 public class ParticleCauldronTop extends BaseHarshenParticle
 {
