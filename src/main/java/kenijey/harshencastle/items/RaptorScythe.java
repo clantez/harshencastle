@@ -2,9 +2,11 @@ package kenijey.harshencastle.items;
 
 import com.google.common.collect.Multimap;
 
+import kenijey.harshencastle.HarshenItems;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraftforge.common.util.EnumHelper;
 
@@ -33,4 +35,9 @@ public class RaptorScythe extends ItemSword
 
         return multimap;
     }
+	
+	@Override
+	public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
+		return repair.getItem() == HarshenItems.soul_infused_ingot;
+	}
 }
