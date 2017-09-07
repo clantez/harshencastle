@@ -104,9 +104,6 @@ public class HarshenClientUtils
 	public static BufferBuilder prepNoDepthLineRender(float partialTicks)
 	{
         GlStateManager.depthFunc(519);
-        GlStateManager.disableTexture2D();
-        GlStateManager.disableBlend();
-        GlStateManager.glLineWidth(0.5F);
         return prepLineRender(partialTicks);
 
 	}
@@ -114,9 +111,6 @@ public class HarshenClientUtils
 	public static void postNoDepthLineRender()
 	{
 		postLineRender();
-		GlStateManager.glLineWidth(1.0F);
-        GlStateManager.enableBlend();
-        GlStateManager.enableTexture2D();
         GlStateManager.depthFunc(515);
 	}
 	
@@ -130,11 +124,17 @@ public class HarshenClientUtils
         double d2 = entityplayer.lastTickPosZ + (entityplayer.posZ - entityplayer.lastTickPosZ) * (double)partialTicks;
         bufferbuilder.begin(3, DefaultVertexFormats.POSITION_COLOR);
         Tessellator.getInstance().getBuffer().setTranslation(-d0, -d1, -d2);
+        GlStateManager.disableTexture2D();
+        GlStateManager.disableBlend();
+        GlStateManager.glLineWidth(0.5F);
         return bufferbuilder;
 	}
 	
 	public static void postLineRender()
 	{
+		GlStateManager.glLineWidth(1.0F);
+        GlStateManager.enableBlend();
+        GlStateManager.enableTexture2D();
 		Tessellator.getInstance().draw();
         Tessellator.getInstance().getBuffer().setTranslation(0, 0, 0);
 	}

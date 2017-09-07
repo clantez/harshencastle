@@ -1,9 +1,11 @@
 package kenijey.harshencastle.enums.items;
 
+import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.enums.blocks.EnumHereticCauldronFluidType;
 import kenijey.harshencastle.interfaces.IIDSet;
 import kenijey.harshencastle.potions.HarshenPotions;
 import net.minecraft.init.MobEffects;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.IStringSerializable;
 
@@ -54,6 +56,11 @@ public enum EnumGlassContainer implements IStringSerializable, IIDSet
 	
 	 public EnumHereticCauldronFluidType getType() {
 		return type;
+	}
+	 
+	public ItemStack getStack()
+	{
+		return new ItemStack(HarshenItems.glass_container, 1, this.meta);
 	}
 
 	@Override

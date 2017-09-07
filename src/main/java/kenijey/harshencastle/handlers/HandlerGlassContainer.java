@@ -1,11 +1,15 @@
 package kenijey.harshencastle.handlers;
 
+import kenijey.harshencastle.HarshenItems;
+import kenijey.harshencastle.enums.items.EnumGlassContainer;
 import kenijey.harshencastle.items.GlassContainer;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class HandlerGlassContainer 
@@ -20,8 +24,14 @@ public class HandlerGlassContainer
 			ItemStack stack = ((EntityLivingBase)((EntityDamageSource) event.getSource()).getTrueSource()).getHeldItemMainhand();
 			stack.setItemDamage(2);
 			((EntityLivingBase)((EntityDamageSource) event.getSource()).getTrueSource()).setHeldItem(EnumHand.MAIN_HAND, stack);
-		}
-			
-			
+		}		
+	}
+	
+	@SubscribeEvent
+	public void onEntityRightClick(PlayerInteractEvent.EntityInteract event)
+	{
+		if(event.getEntityPlayer().getHeldItemMainhand().isItemEqual(new ItemStack(HarshenItems.glass_container)) && event.getTarget().getClass() == EntityCow.class)
+			event.getEntityPlayer().setHeldItem(EnumHand.MAIN_HAND, EnumGlassContainer.MILK.getStack());
+
 	}
 }

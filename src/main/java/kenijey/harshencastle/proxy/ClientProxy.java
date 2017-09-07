@@ -20,7 +20,6 @@ import kenijey.harshencastle.handlers.client.HandlerGameOverlay;
 import kenijey.harshencastle.handlers.client.HandlerGuiEvent;
 import kenijey.harshencastle.handlers.client.HandlerKeyBinding;
 import kenijey.harshencastle.handlers.client.HandlerRendererGuiInventory;
-import kenijey.harshencastle.inventory.GuiHandler;
 import kenijey.harshencastle.itemrenderer.RendererBloodFactory;
 import kenijey.harshencastle.itemrenderer.RendererDimensionalPedestal;
 import kenijey.harshencastle.itemrenderer.RendererHarshenDisplayBlock;
@@ -30,6 +29,7 @@ import kenijey.harshencastle.itemrenderer.RendererPedestalSlab;
 import kenijey.harshencastle.models.ModelArmour;
 import kenijey.harshencastle.particle.ParticleBlood;
 import kenijey.harshencastle.particle.ParticleCauldron;
+import kenijey.harshencastle.particle.ParticleCauldronTop;
 import kenijey.harshencastle.particle.ParticleItem;
 import kenijey.harshencastle.skyrenders.WeatherPontus;
 import kenijey.harshencastle.tileentity.TileEntityBloodFactory;
@@ -61,7 +61,6 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 public class ClientProxy extends CommonProxy 
 {
@@ -181,7 +180,7 @@ public class ClientProxy extends CommonProxy
     }
     
     @Override
-    public void spawnParticle(EnumHarshenParticle type, Vec3d position, Vec3d directionSpeed, float scale, boolean disableMoving, Object...info) {
+    public Particle spawnParticle(EnumHarshenParticle type, Vec3d position, Vec3d directionSpeed, float scale, boolean disableMoving, Object...info) {
     	Minecraft minecraft = Minecraft.getMinecraft();
         Particle entityFx = null;
         if(minecraft.world !=  null)
@@ -191,21 +190,29 @@ public class ClientProxy extends CommonProxy
 		            entityFx = new ParticleBlood(minecraft.world, position.x, position.y, position.z, directionSpeed.x, directionSpeed.y, directionSpeed.z, scale, disableMoving);
 		            break;
 		        case CAULDRON:
-		        	if(info[0] instanceof ResourceLocation)
-		        		entityFx = new ParticleCauldron(minecraft.world, (ResourceLocation) info[0], position.x, position.y, position.z, directionSpeed.x, directionSpeed.y, directionSpeed.z, scale / 5f, disableMoving);
+			        if(info.length > 0 && info[0] instanceof ResourceLocation)
+			        	entityFx = new ParticleCauldron(minecraft.world, (ResourceLocation) info[0], position.x, position.y, position.z, directionSpeed.x, directionSpeed.y, directionSpeed.z, scale / 5f, disableMoving);
 		        	break;
 		        case ITEM:
-		        	if(info[0] instanceof ItemStack)
+		        	if(info.length > 0 && info[0] instanceof ItemStack)
 		        		entityFx = new ParticleItem(minecraft.world, position.x, position.y, position.z, directionSpeed.x, directionSpeed.y, directionSpeed.z, scale / 5f, disableMoving, (ItemStack) info[0]);
 		        	break;
 		        case PORTAL:
 		        	entityFx = new ParticlePortal.Factory().createParticle(EnumParticleTypes.PORTAL.getParticleID(), minecraft.world, 
 	        				position.x, position.y, position.z, directionSpeed.x, directionSpeed.y, directionSpeed.z);
 		        	entityFx.setMaxAge((int)(Math.random() * 20.0D) + 100);
+		        case CAULDRON_LIQUID:
+		        	if(info.length > 0)
+		        		if(info[0] instanceof ResourceLocation)
+		        			entityFx = new ParticleCauldronTop(minecraft.world, position.x, position.y, position.z, scale, (ResourceLocation) info[0]);
+		        		else if(info[0] instanceof IBlockState)
+		        			entityFx = new ParticleCauldronTop(minecraft.world, position.x, position.y, position.z, scale, ((IBlockState) info[0]));
+		        	break;
 		        default:
 		            break;
 	        }
         if (entityFx != null) {minecraft.effectRenderer.addEffect(entityFx);}
+        return entityFx;
     }
     
     @Override

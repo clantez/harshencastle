@@ -52,13 +52,18 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 	private int[] drainPos = {50, 75, 100, Integer.MAX_VALUE};
 	public static final HashMap<EnumHereticCauldronFluidType, Item> fluidMap = new HashMap<>();
 	private EnumHereticCauldronFluidType fluid = EnumHereticCauldronFluidType.NONE;
-	private int level = 1;
+	private int level = 0;
 	private EnumHereticCauldronFluidType workingFluid = EnumHereticCauldronFluidType.NONE;
 	private HereticRitualRecipes overstandingRecipe;
 	private HashMap<BlockPos, ItemStack> pedestalMap = new HashMap<>(); 
 	
 	@Override
 	public void tick() {
+		if(level <= 0)
+		{
+			level = 0;
+			fluid = EnumHereticCauldronFluidType.NONE;
+		}
 		if(isActive)
 		{
 			if(activeTimer++ > 175)
@@ -127,9 +132,7 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 			if(world.isRemote)
 				return;
 			double[] yPosOfDrains = {0.7D, 0.8D, 0.9D};
-			if(level == 1)
-				fluid = EnumHereticCauldronFluidType.NONE;
-			level = MathHelper.clamp(level - 1, 1, 3);
+			level--;
 			for(int i = 0; i < 35; i++)
 				HarshenCastle.proxy.spawnParticle(EnumHarshenParticle.CAULDRON,
 						new Vec3d(pos).addVector((new Random().nextDouble() / 2) + 0.25D, yPosOfDrains[layersDrained], (new Random().nextDouble() / 2) + 0.25D), new Vec3d(0, 0.01d, 0), 1f, false,
@@ -154,7 +157,7 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
         		if (playerIn.capabilities.isCreativeMode || (!playerIn.capabilities.isCreativeMode && ((BloodCollector)item).remove(playerIn, hand, 3)))
                 {
         			this.world.playSound((EntityPlayer)null, pos, SoundEvents.ITEM_BOTTLE_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
-        			level += fluid == EnumHereticCauldronFluidType.BLOOD ? 1 : 0;
+        			level ++;
         			fluid = EnumHereticCauldronFluidType.BLOOD;
         		}
         	return true;
@@ -164,8 +167,7 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
         	if(EnumGlassContainer.getContainerFromMeta(itemstack.getMetadata()).isSubContainer() && level != 3 &&
         			(fluid == EnumHereticCauldronFluidType.NONE || fluid == EnumGlassContainer.getContainerFromMeta(itemstack.getMetadata()).getType()))
         	{
-        		if(fluid != EnumHereticCauldronFluidType.NONE && level != 3)
-        			level ++;
+        		level ++;
         		fluid = EnumGlassContainer.getContainerFromMeta(itemstack.getMetadata()).getType();
         		itemstack.shrink(1);
         		give(playerIn, hand, new ItemStack(HarshenItems.glass_container));
@@ -181,10 +183,7 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
         		}
         		itemstack.shrink(1);
         		give(playerIn, hand, new ItemStack(HarshenItems.glass_container, 1, EnumGlassContainer.getContainerFromType(fluid).getMeta()));
-        		if(level != 1)
-        			level--;
-        		else
-        			fluid = EnumHereticCauldronFluidType.NONE;
+        		level--;
         		return true;
         	}
         }
@@ -203,7 +202,7 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
         	itemstack.shrink(1);
         	give(playerIn, hand, new ItemStack(Items.BUCKET));
         	level = 3;
-        	fluid = EnumHereticCauldronFluidType.getFromFluid(((UniversalBucket)item).getFluid(itemstack).getFluid());
+        	fluid = EnumHereticCauldronFluidType.getFromState(((UniversalBucket)item).getFluid(itemstack).getFluid().getBlock().getDefaultState());
 	        this.world.playSound((EntityPlayer)null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
 	        return true;
         }
@@ -349,6 +348,18 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 		deletedBloodPos.clear();
 		bloodPos.clear();
 		pedestals.clear();
+	}
+	
+	private boolean particle = false;
+	
+	public boolean setParticle()
+	{
+		if(!particle)
+		{
+			particle = true;
+			return false;
+		}
+		return true;
 	}
 	
 	private boolean give(EntityPlayer playerIn, EnumHand hand, ItemStack stack)

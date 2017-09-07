@@ -1,35 +1,22 @@
 package kenijey.harshencastle.itemrenderer;
 
-import kenijey.harshencastle.tileentity.TileEntityPedestalSlab;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import javax.vecmath.Vector3f;
 
-public class RendererPedestalSlab extends TileEntitySpecialRenderer<TileEntityPedestalSlab>
+import kenijey.harshencastle.base.BaseItemRenderer;
+import kenijey.harshencastle.tileentity.TileEntityPedestalSlab;
+
+public class RendererPedestalSlab extends BaseItemRenderer<TileEntityPedestalSlab>
 {
-	
-	public static EntityItem ITEM;
-	
-	@SideOnly(Side.CLIENT)
+
 	@Override
-	public void render(TileEntityPedestalSlab te, double x, double y, double z, float partialTicks,
-			int destroyStage, float alpha) {
-		super.render(te, x, y, z, partialTicks, destroyStage, alpha);
-		ITEM = new EntityItem(Minecraft.getMinecraft().world, 0, 0, 0, te.getItem());
-		ITEM.hoverStart = 0.0f;
-		GlStateManager.pushMatrix();
-		{
-			GlStateManager.translate(x, y, z);
-			GlStateManager.translate(0.5f, 0.3f,0.5f);
-			GlStateManager.translate(0, Math.sin(te.getTimer() / 10f) / 15f, 0);
-			GlStateManager.rotate(te.getTimer() % 360 * 4f, 0, 1, 0);
-			Minecraft.getMinecraft().getRenderManager().doRenderEntity(ITEM, 0f, 0f, 0f, 0f, 0f, false);
-			
-		}
-		GlStateManager.popMatrix();
+	protected float getMovementSpeed(TileEntityPedestalSlab te) {
+	return 4f;
 	}
+
+	@Override
+	protected Vector3f movePos() {
+		return new Vector3f(0.5f, 0.3f,0.5f);
+	}
+	
 	
 }

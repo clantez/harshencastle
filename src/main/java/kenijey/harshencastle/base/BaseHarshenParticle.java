@@ -53,6 +53,13 @@ public abstract class BaseHarshenParticle extends Particle
 			this(world, xCoordIn, yCoordIn, zCoordIn, motionXIn, motionYIn, motionZIn, par14, disableMoving2, null);
 	}
 	
+	private boolean isCauldronTop;
+	
+	public void setCauldronTop()
+	{
+		isCauldronTop = true;
+	}
+	
 	public void setLocation(ResourceLocation location) {
 		this.location = location;
 	}
@@ -62,15 +69,33 @@ public abstract class BaseHarshenParticle extends Particle
     {
         return 3;
     }
+	
+	protected boolean shouldRender()
+	{
+		return true;
+	}
 		
     @Override
     public void renderParticle(BufferBuilder buffer, Entity entity, float partialTicks, float rotX, float rotZ, float rotYZ, float rotXY, float rotXZ)
     {		
+    	if(!shouldRender())
+    		return;
+    	if(isCauldronTop)
+    	{
+    		rotX = 0f;
+            rotXY = 1f;
+            rotZ = 1.2246469E-16f;
+            rotYZ = 1f;
+            rotXZ =  1.2246469E-16f;
+    	}
     	if(getFXLayer() != 3)
     	{
-            float scaleMultiplier = (this.particleAge + partialTicks) / this.particleMaxAge * 32.0F;
-            scaleMultiplier = MathHelper.clamp(scaleMultiplier, 0.0F, 1.0F);
-            this.particleScale = this.particleScale * scaleMultiplier;
+    		if(!isCauldronTop)
+    		{
+    			float scaleMultiplier = (this.particleAge + partialTicks) / this.particleMaxAge * 32.0F;
+                scaleMultiplier = MathHelper.clamp(scaleMultiplier, 0.0F, 1.0F);
+                this.particleScale = this.particleScale * scaleMultiplier;
+    		}
             this.particleTextureIndexX = getXIndex();
             this.particleTextureIndexY = getYIndex();
             GlStateManager.depthMask(false);
@@ -80,16 +105,25 @@ public abstract class BaseHarshenParticle extends Particle
             float f1 = f + 0.015609375F;
             float f2 = ((float)this.particleTextureIndexY + this.particleTextureJitterY / 4.0F) / 16.0F;
             float f3 = f2 + 0.015609375F;
-            float f4 = 0.1F * this.particleScale;
-
+            float f4 = 0.1F * (isCauldronTop ? 3.15f : this.particleScale);
             if (this.particleTexture != null)
             {
-                f = this.particleTexture.getInterpolatedU((double)(this.particleTextureJitterX / 4.0F * 16.0F));
+            	f = this.particleTexture.getInterpolatedU((double)(this.particleTextureJitterX / 4.0F * 16.0F));
                 f1 = this.particleTexture.getInterpolatedU((double)((this.particleTextureJitterX + 1.0F) / 4.0F * 16.0F));
                 f2 = this.particleTexture.getInterpolatedV((double)(this.particleTextureJitterY / 4.0F * 16.0F));
                 f3 = this.particleTexture.getInterpolatedV((double)((this.particleTextureJitterY + 1.0F) / 4.0F * 16.0F));
+                
+            	if(isCauldronTop)
+            	{
+            		particleTextureJitterX = 0;
+                	particleTextureJitterY = 0;
+                	f = this.particleTexture.getInterpolatedU((double)(this.particleTextureJitterX));
+                    f1 = this.particleTexture.getInterpolatedU((double)((this.particleTextureJitterX + 16.0F)));
+                    f2 = this.particleTexture.getInterpolatedV((double)(this.particleTextureJitterY));
+                    f3 = this.particleTexture.getInterpolatedV((double)((this.particleTextureJitterY + 16.0F)));
+            	}
             }
-
+            
             float f5 = (float)(this.prevPosX + (this.posX - this.prevPosX) * (double)partialTicks - interpPosX);
             float f6 = (float)(this.prevPosY + (this.posY - this.prevPosY) * (double)partialTicks - interpPosY);
             float f7 = (float)(this.prevPosZ + (this.posZ - this.prevPosZ) * (double)partialTicks - interpPosZ);
@@ -110,13 +144,12 @@ public abstract class BaseHarshenParticle extends Particle
         float f4 = (float)(this.posY - interpPosY);
         float f5 = (float)(this.posZ - interpPosZ);
         float f6 = getBrightnessForRender(partialTicks);
-        float size = 0.1F * this.particleScale;
+        float size = 0.1F * (isCauldronTop ? 3.15f : this.particleScale);
         Minecraft.getMinecraft().getTextureManager().bindTexture(location);
         float k = (float)this.particleTextureIndexX / 16.0F;
-        float k1 = k + 0.0624375F;
+        float k1 = isFullTexture() ? 2 : k + 0.0624375F;
         float k2 = (float)this.particleTextureIndexY / 16.0F;
-        float k3 = k2 + 0.0624375F;
-        float k4 = 0.1F * this.particleScale;
+        float k3 = isFullTexture() ? 0 : k2 + 0.0624375F;
         int i = this.getBrightnessForRender(partialTicks);
         int ij = i >> 16 & 65535;
         int ik = i & 65535;
@@ -127,8 +160,12 @@ public abstract class BaseHarshenParticle extends Particle
         buffer.pos((double)(f3 + rotX * size - rotXY * size), (double)f4 - rotZ * size, (double)(f5 + rotYZ * size - rotXZ * size)).tex((double)k, (double)k3).color(f6, f6, f6, 1).endVertex();
         Tessellator.getInstance().draw();
         GlStateManager.enableLighting();
-
     }
+    
+    protected boolean isFullTexture() 
+    {
+    	return false;
+	}
     
     @Override
     public int getBrightnessForRender(float p_189214_1_)

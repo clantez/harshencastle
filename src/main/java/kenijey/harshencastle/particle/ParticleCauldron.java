@@ -15,11 +15,11 @@ public class ParticleCauldron extends BaseHarshenParticle
 
 	@Override
 	protected int getXIndex() {
-		return new Random().nextInt(8);
+		return 0;
 	}
 	
 	@Override
 	protected int getYIndex() {
-		return new Random().nextInt(8);
+		return 0;
 	}
 }

@@ -36,10 +36,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class HereticCauldron extends BaseBlockHarshenSingleInventory
 {
 	private static HashMap<BlockPos, Boolean> creativeBreakMap = new HashMap<>();
-
-	
-	public static final PropertyEnum<EnumHereticCauldronFluidType> LIQUID =  PropertyEnum.<EnumHereticCauldronFluidType>create("liquid_type", EnumHereticCauldronFluidType.class);
-	public static final PropertyInteger LEVEL = PropertyInteger.create("level", 1, 3);
 	
 	protected static final AxisAlignedBB AABB_LEGS = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.3125D, 1.0D);
 	protected static final AxisAlignedBB AABB_WALL_NORTH = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 0.125D);
@@ -56,14 +52,6 @@ public class HereticCauldron extends BaseBlockHarshenSingleInventory
         addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_WALL_EAST);
         addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_WALL_SOUTH);
     }
-	
-	@Override
-	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
-		if(getTile(worldIn, pos) == null)
-			return this.getDefaultState();
-		getTile(worldIn, pos).setLevel(MathHelper.clamp(getTile(worldIn, pos).getLevel(), 1, 3));
-		return getTile(worldIn, pos) != null ? this.getDefaultState().withProperty(LIQUID, getTile(worldIn, pos).getFluid()).withProperty(LEVEL, getTile(worldIn, pos).getLevel()) : this.getDefaultState();
-	}
 	 
 	@Override
 	@SideOnly(Side.CLIENT)
@@ -76,7 +64,6 @@ public class HereticCauldron extends BaseBlockHarshenSingleInventory
 		super(Material.IRON);
 		setRegistryName("heretic_cauldron");
 		setUnlocalizedName("heretic_cauldron");
-		this.setDefaultState(this.blockState.getBaseState().withProperty(LIQUID, EnumHereticCauldronFluidType.NONE).withProperty(LEVEL, 1));
 		TileEntityHereticCauldron.fluidMap.put(EnumHereticCauldronFluidType.LAVA, Items.LAVA_BUCKET);
 		TileEntityHereticCauldron.fluidMap.put(EnumHereticCauldronFluidType.MILK, Items.MILK_BUCKET);
 		setHardness(5.0F);
@@ -92,31 +79,8 @@ public class HereticCauldron extends BaseBlockHarshenSingleInventory
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
 		boolean flag = getTile(worldIn, pos).onActivated(playerIn, hand);
-		if(flag)
-		{
-			TileEntityHereticCauldron cauldron = getTile(worldIn, pos);
-			worldIn.setBlockState(pos, getActualState(state, worldIn, pos), 3);
-			cauldron.reactivate(0);
-			return true;
-		}
-		return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitZ, hitZ, hitZ);
+		return flag ? flag : super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitZ, hitZ, hitZ);
     }
-	
-	@Override
-	public int getMetaFromState(IBlockState state) {
-		return 0;//state.getValue(LIQUID).getMetaId() + state.getValue(LEVEL);
-	}
-	
-	
-	@Override
-	public IBlockState getStateFromMeta(int meta) {
-		return this.getDefaultState();//this.getDefaultState().withProperty(LEVEL, (meta % 3) + 1).withProperty(LIQUID, EnumHereticCauldronFluidType.getMatch(Math.floorDiv(meta, 3)));
-	}
-	
-	@Override
-	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, new IProperty[] {LEVEL, LIQUID});
-	}
 	
 	@Override
 	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
@@ -126,26 +90,6 @@ public class HereticCauldron extends BaseBlockHarshenSingleInventory
 			worldIn.destroyBlock(pos, true);
 	}
 	
-	@Override
-	public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-//		BaseTileEntityHarshenSingleItemInventory te = (BaseTileEntityHarshenSingleItemInventory) worldIn.getTileEntity(pos);
-//		IItemHandler handler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-//		worldIn.removeTileEntity(pos);
-//		ItemStackHandler handlerStack = new ItemStackHandler(1);
-//		handlerStack.setStackInSlot(0, handler.getStackInSlot(0));
-//		ItemStack stack = new ItemStack(this);
-//		if(handlerStack.getStackInSlot(0).getItem() != Item.getItemFromBlock(Blocks.AIR))
-//		{
-//			NBTTagCompound nbttagcompound = new NBTTagCompound();
-//	        nbttagcompound.setTag("ItemStackHandler", handlerStack.serializeNBT());
-//	        stack.setTagCompound(nbttagcompound);
-//	        stack.setStackDisplayName("§r" + getLocalizedName() + " (" + I18n.translateToLocal(handlerStack.getStackInSlot(0).getItem().getUnlocalizedName() + ".name") + ")");
-//		}
-//		if(!creativeBreakMap.get(pos))
-//			worldIn.spawnEntity(new EntityItem(worldIn, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, stack));
-//		creativeBreakMap.remove(pos);
-		super.breakBlock(worldIn, pos, state);
-	}
 	
 	@Override
 	public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
@@ -164,7 +108,7 @@ public class HereticCauldron extends BaseBlockHarshenSingleInventory
 	@Override
     public int getComparatorInputOverride(IBlockState blockState, World worldIn, BlockPos pos)
     {
-        return blockState.getValue(LEVEL).intValue();
+        return getTile(worldIn, pos).getLevel();
     }
 	
 	private TileEntityHereticCauldron getTile(World worldIn, BlockPos pos)

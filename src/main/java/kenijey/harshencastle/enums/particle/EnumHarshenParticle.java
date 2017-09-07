@@ -5,5 +5,6 @@ public enum EnumHarshenParticle
 	BLOOD,
 	CAULDRON,
 	ITEM,
-	PORTAL;
+	PORTAL,
+	CAULDRON_LIQUID;
 }

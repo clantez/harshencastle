@@ -48,8 +48,10 @@ public class GlassContainer extends BaseItemMetaData
 	@Override
 	 public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
     {
+		if(!hasDrinkEffect(playerIn, handIn))
+			return new ActionResult<ItemStack>(EnumActionResult.FAIL, playerIn.getHeldItem(handIn));
 		playerIn.setActiveHand(handIn);
-        return new ActionResult<ItemStack>(hasDrinkEffect(playerIn, handIn) ? EnumActionResult.SUCCESS : EnumActionResult.FAIL, playerIn.getHeldItem(handIn));
+        return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
     }
 	
 	private boolean hasDrinkEffect(EntityPlayer playerIn, EnumHand handIn)
