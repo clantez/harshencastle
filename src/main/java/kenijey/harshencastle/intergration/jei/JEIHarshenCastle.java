@@ -45,6 +45,7 @@ public class JEIHarshenCastle implements IModPlugin
 		info(HarshenItems.pontus_world_gate_parts);
 		info(HarshenItems.blood_essence);
 		info(HarshenItems.blood_collector);
+		info(HarshenItems.valor_badge);
 		
 		info(HarshenBlocks.blood_vessel);
 		info(HarshenBlocks.harshen_soul_flower);
