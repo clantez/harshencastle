@@ -69,6 +69,7 @@ item.valor_badge.name=Valor Badge
 item.iron_scythe.name=Iron Scythe
 item.raptor_scythe.name=Raptor Scythe
 item.elytra_pendant.name=Elytra Pendant
+item.mystic_feather.name=Mystic Feather
 
 #keybindings
 key.telering.description=Telering Teleport Key

@@ -74,6 +74,9 @@ public class HarshenRecipes {
 		RitualRecipes.addRecipe(Arrays.asList(new ItemStack(HarshenItems.harshen_soul_fragment), new ItemStack(HarshenItems.ritual_crystal, 1, 1),
 				new ItemStack(Items.SLIME_BALL), new ItemStack(Blocks.IRON_BLOCK)), new ItemStack(HarshenItems.soul_shield), true);
 		
+		RitualRecipes.addRecipe(Arrays.asList(new ItemStack(Blocks.AIR), new ItemStack(HarshenItems.ritual_crystal, 1, 1),
+				new ItemStack(Items.FEATHER), new ItemStack(Items.CHORUS_FRUIT_POPPED)), new ItemStack(HarshenItems.mystic_feather, 2), true);
+		
 		
 		
 		PedestalSlabRecipes.addRecipe(new ItemStack(Blocks.COBBLESTONE), new ItemStack(Blocks.NETHERRACK));
@@ -351,5 +354,15 @@ public class HarshenRecipes {
 				
 				'i', new ItemStack(HarshenItems.soul_infused_ingot),
 				't', new ItemStack(Blocks.STAINED_HARDENED_CLAY, 1, 2));
+		
+		
+		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "elytra"), new ResourceLocation("harshen_items"),
+				new ItemStack(Items.ELYTRA),
+				"flf",
+				"f f",
+				"f f",
+				
+				'f', new ItemStack(HarshenItems.mystic_feather),
+				'l', new ItemStack(Items.LEAD));
 	}
 }
