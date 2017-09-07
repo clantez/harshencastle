@@ -43,6 +43,7 @@ public class SoulRipperBow extends BaseHarshenBow
 
 	@Override
 	public double additionDamage() {
-		return 1.5;
+		return 1.7;
 	}
+	
 }

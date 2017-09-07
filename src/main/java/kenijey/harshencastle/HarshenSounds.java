@@ -15,7 +15,7 @@ public class HarshenSounds {
 	public static void preInit()
 	{
 		bloodCollectorUse = reg("blood.collector");
-		customArrowHit = reg("arrow.hit");
+		customArrowHit = reg("lightning.hit");
 		ripperShoot = reg("ripper.shoot");
 	}
 	
