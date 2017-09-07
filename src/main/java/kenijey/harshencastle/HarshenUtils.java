@@ -185,7 +185,7 @@ public class HarshenUtils
         	{
         		return handler.getStackInSlot(i);
         	}
-        return null;
+        return ItemStack.EMPTY;
 	}
 	
 	public static void damageFirstOccuringItem(EntityPlayer player, Item item)

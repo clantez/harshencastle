@@ -116,6 +116,9 @@ public class HarshenClientUtils
 	
 	public static BufferBuilder prepLineRender(float partialTicks)
 	{
+		GlStateManager.disableTexture2D();
+        GlStateManager.disableBlend();
+        GlStateManager.glLineWidth(0.5F);
 		EntityPlayer entityplayer = Minecraft.getMinecraft().player;
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder bufferbuilder = tessellator.getBuffer();
@@ -124,18 +127,15 @@ public class HarshenClientUtils
         double d2 = entityplayer.lastTickPosZ + (entityplayer.posZ - entityplayer.lastTickPosZ) * (double)partialTicks;
         bufferbuilder.begin(3, DefaultVertexFormats.POSITION_COLOR);
         Tessellator.getInstance().getBuffer().setTranslation(-d0, -d1, -d2);
-        GlStateManager.disableTexture2D();
-        GlStateManager.disableBlend();
-        GlStateManager.glLineWidth(0.5F);
         return bufferbuilder;
 	}
 	
 	public static void postLineRender()
 	{
-		GlStateManager.glLineWidth(1.0F);
-        GlStateManager.enableBlend();
-        GlStateManager.enableTexture2D();
 		Tessellator.getInstance().draw();
         Tessellator.getInstance().getBuffer().setTranslation(0, 0, 0);
+        GlStateManager.glLineWidth(1.0F);
+        GlStateManager.enableBlend();
+        GlStateManager.enableTexture2D();
 	}
 }

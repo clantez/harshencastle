@@ -230,6 +230,7 @@ xray_pendant1=You can see any block you want
 xray_pendant2=through blocks in a short distance.
 xray_pendant3=Right click the pendant before wearing
 xray_pendant4=it to set a block. It supports oreDict!
+xray.blocknotfound=Block '%s' not found
 fiery_ring1=Cooks animals when killed
 fiery_ring2=and blocks when mined.
 soulripperbow1=Drains the soul of the
