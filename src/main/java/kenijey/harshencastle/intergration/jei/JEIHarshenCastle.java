@@ -2,6 +2,7 @@ package kenijey.harshencastle.intergration.jei;
 
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenItems;
+import kenijey.harshencastle.HarshenRecipes;
 import kenijey.harshencastle.intergration.jei.cauldron.JEICauldronCategory;
 import kenijey.harshencastle.intergration.jei.cauldron.JEICauldronHandler;
 import kenijey.harshencastle.intergration.jei.hereticritual.JEIHereticRitualCategory;
@@ -10,7 +11,6 @@ import kenijey.harshencastle.intergration.jei.pedestalslab.JEIPedestalSlabCatego
 import kenijey.harshencastle.intergration.jei.pedestalslab.JEIPedestalSlabHandler;
 import kenijey.harshencastle.intergration.jei.ritual.JEIRitualCategory;
 import kenijey.harshencastle.intergration.jei.ritual.JEIRitualHandler;
-import kenijey.harshencastle.recipies.HarshenRecipes;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.JEIPlugin;

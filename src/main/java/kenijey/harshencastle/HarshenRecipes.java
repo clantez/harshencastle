@@ -1,12 +1,14 @@
-package kenijey.harshencastle.recipies;
+package kenijey.harshencastle;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import kenijey.harshencastle.HarshenBlocks;
-import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.armor.HarshenArmors;
 import kenijey.harshencastle.enums.blocks.EnumHereticCauldronFluidType;
+import kenijey.harshencastle.recipies.CauldronRecipes;
+import kenijey.harshencastle.recipies.HereticRitualRecipes;
+import kenijey.harshencastle.recipies.PedestalSlabRecipes;
+import kenijey.harshencastle.recipies.RitualRecipes;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;

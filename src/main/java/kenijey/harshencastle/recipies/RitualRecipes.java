@@ -3,6 +3,7 @@ package kenijey.harshencastle.recipies;
 import java.util.ArrayList;
 import java.util.List;
 
+import kenijey.harshencastle.HarshenRecipes;
 import kenijey.harshencastle.HarshenUtils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;

@@ -2,6 +2,7 @@ package kenijey.harshencastle.recipies;
 
 import java.util.ArrayList;
 
+import kenijey.harshencastle.HarshenRecipes;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.enums.blocks.EnumHereticCauldronFluidType;
 import net.minecraft.item.ItemStack;
