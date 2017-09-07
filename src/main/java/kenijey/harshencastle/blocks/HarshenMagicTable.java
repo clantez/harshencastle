@@ -2,19 +2,17 @@ package kenijey.harshencastle.blocks;
 
 import java.util.List;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
+import net.minecraft.block.BlockWorkbench;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
-public class HarshenMagicTable extends Block
+public class HarshenMagicTable extends BlockWorkbench
 {
 	public HarshenMagicTable()
 	{
-		super(Material.WOOD);
 		setRegistryName("harshen_magic_table");
 		setUnlocalizedName("harshen_magic_table");
 		setHardness(5.0F);
