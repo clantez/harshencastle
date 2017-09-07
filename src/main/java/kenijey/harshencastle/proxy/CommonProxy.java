@@ -32,6 +32,7 @@ import kenijey.harshencastle.handlers.HandlerHarshenInventoryEffects;
 import kenijey.harshencastle.handlers.HandlerPlayerInventoryOverDeath;
 import kenijey.harshencastle.handlers.HandlerPontusAllowed;
 import kenijey.harshencastle.handlers.HandlerPotionEffects;
+import kenijey.harshencastle.handlers.HandlerRaptorScythe;
 import kenijey.harshencastle.handlers.HandlerSoulHarsherSword;
 import kenijey.harshencastle.handlers.HandlerZombieEyeDrop;
 import kenijey.harshencastle.inventory.GuiHandler;
@@ -129,8 +130,18 @@ public class CommonProxy
     	
     	HarshenRecipes.register();
     	
-    	Object[] handlers = {new HandlerSoulHarsherSword(), new HandlerHarshenInventory(), new HandlerBloodOnHurt(), new HandlerPotionEffects(), new HandlerHarshenArmourEffects(),
-    			new HandlerGlassContainer(), new HandlerPontusAllowed(), new HandlerHarshenInventoryEffects(), new HandlerZombieEyeDrop(), new HandlerPlayerInventoryOverDeath()};
+    	Object[] handlers = {
+    			new HandlerRaptorScythe(),
+    			new HandlerSoulHarsherSword(), 
+    			new HandlerHarshenInventory(), 
+    			new HandlerBloodOnHurt(), 
+    			new HandlerPotionEffects(), 
+    			new HandlerHarshenArmourEffects(),
+    			new HandlerGlassContainer(), 
+    			new HandlerPontusAllowed(), 
+    			new HandlerHarshenInventoryEffects(), 
+    			new HandlerZombieEyeDrop(), 
+    			new HandlerPlayerInventoryOverDeath()};
     	for(Object o : handlers)
     	{
     		MinecraftForge.EVENT_BUS.register(o);
