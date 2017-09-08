@@ -383,5 +383,15 @@ public class HarshenRecipes {
 				
 				'd', "dirt",
 				'c', Items.CLAY_BALL);
+		
+		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "harshen_magic_table"), new ResourceLocation("harshen_items"),
+				new ItemStack(HarshenBlocks.harshen_magic_table),
+				"wew",
+				" c ",
+				"w w",
+				
+				'e', new ItemStack(HarshenItems.light_emitted_essence),
+				'w', new ItemStack(HarshenBlocks.pontus_chaotic_wood),
+				'c', new ItemStack(HarshenBlocks.harshen_dimensional_wood_crate));
 	}
 }
