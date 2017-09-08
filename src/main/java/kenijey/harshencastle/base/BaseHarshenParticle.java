@@ -115,12 +115,10 @@ public abstract class BaseHarshenParticle extends Particle
                 
             	if(isCauldronTop)
             	{
-            		particleTextureJitterX = 0;
-                	particleTextureJitterY = 0;
-                	f = this.particleTexture.getInterpolatedU((double)(this.particleTextureJitterX));
-                    f1 = this.particleTexture.getInterpolatedU((double)((this.particleTextureJitterX + 16.0F)));
-                    f2 = this.particleTexture.getInterpolatedV((double)(this.particleTextureJitterY));
-                    f3 = this.particleTexture.getInterpolatedV((double)((this.particleTextureJitterY + 16.0F)));
+            		f = this.particleTexture.getMinU();
+                    f1 = this.particleTexture.getMaxU();
+                    f2 = this.particleTexture.getMinV();
+                    f3 = this.particleTexture.getMaxV();
             	}
             }
             
@@ -130,10 +128,10 @@ public abstract class BaseHarshenParticle extends Particle
             int i = this.getBrightnessForRender(partialTicks);
             int j = i >> 16 & 65535;
             int k = i & 65535;
-            buffer.pos((double)(f5 - rotX * f4 - rotXY * f4), (double)(f6 - rotZ * f4), (double)(f7 - rotYZ * f4 - rotXZ * f4)).tex((double)f, (double)f3).color(this.particleRed, this.particleGreen, this.particleBlue, 1.0F).lightmap(j, k).endVertex();
-            buffer.pos((double)(f5 - rotX * f4 + rotXY * f4), (double)(f6 + rotZ * f4), (double)(f7 - rotYZ * f4 + rotXZ * f4)).tex((double)f, (double)f2).color(this.particleRed, this.particleGreen, this.particleBlue, 1.0F).lightmap(j, k).endVertex();
-            buffer.pos((double)(f5 + rotX * f4 + rotXY * f4), (double)(f6 + rotZ * f4), (double)(f7 + rotYZ * f4 + rotXZ * f4)).tex((double)f1, (double)f2).color(this.particleRed, this.particleGreen, this.particleBlue, 1.0F).lightmap(j, k).endVertex();
-            buffer.pos((double)(f5 + rotX * f4 - rotXY * f4), (double)(f6 - rotZ * f4), (double)(f7 + rotYZ * f4 - rotXZ * f4)).tex((double)f1, (double)f3).color(this.particleRed, this.particleGreen, this.particleBlue, 1.0F).lightmap(j, k).endVertex();
+            buffer.pos((double)(f5 - rotX * f4 - rotXY * f4), (double)(f6 - rotZ * f4), (double)(f7 - rotYZ * f4 - rotXZ * f4)).tex((double)f, (double)f3).color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha).lightmap(j, k).endVertex();
+            buffer.pos((double)(f5 - rotX * f4 + rotXY * f4), (double)(f6 + rotZ * f4), (double)(f7 - rotYZ * f4 + rotXZ * f4)).tex((double)f, (double)f2).color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha).lightmap(j, k).endVertex();
+            buffer.pos((double)(f5 + rotX * f4 + rotXY * f4), (double)(f6 + rotZ * f4), (double)(f7 + rotYZ * f4 + rotXZ * f4)).tex((double)f1, (double)f2).color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha).lightmap(j, k).endVertex();
+            buffer.pos((double)(f5 + rotX * f4 - rotXY * f4), (double)(f6 - rotZ * f4), (double)(f7 + rotYZ * f4 - rotXZ * f4)).tex((double)f1, (double)f3).color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha).lightmap(j, k).endVertex();
             GlStateManager.disableBlend();
             GlStateManager.depthMask(true);
             return;
@@ -154,10 +152,10 @@ public abstract class BaseHarshenParticle extends Particle
         int ij = i >> 16 & 65535;
         int ik = i & 65535;
         buffer.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR);
-        buffer.pos((double)(f3 - rotX * size- rotXY * size), (double)f4 - rotZ * size, (double)(f5 - rotYZ * size - rotXZ * size)).tex((double)k1, (double)k3).color(f6, f6, f6, 1).endVertex();
-        buffer.pos((double)(f3 - rotX * size + rotXY * size), (double)f4 + rotZ * size, (double)(f5 - rotYZ * size + rotXZ * size)).tex((double)k1, (double)k2).color(f6, f6, f6, 1).endVertex();
-        buffer.pos((double)(f3 + rotX * size + rotXY * size), (double)f4 + rotZ * size, (double)(f5 + rotYZ * size + rotXZ * size)).tex((double)k, (double)k2).color(f6, f6, f6, 1).endVertex();
-        buffer.pos((double)(f3 + rotX * size - rotXY * size), (double)f4 - rotZ * size, (double)(f5 + rotYZ * size - rotXZ * size)).tex((double)k, (double)k3).color(f6, f6, f6, 1).endVertex();
+        buffer.pos((double)(f3 - rotX * size- rotXY * size), (double)f4 - rotZ * size, (double)(f5 - rotYZ * size - rotXZ * size)).tex((double)k1, (double)k3).color(f6, f6, f6, this.particleAlpha).endVertex();
+        buffer.pos((double)(f3 - rotX * size + rotXY * size), (double)f4 + rotZ * size, (double)(f5 - rotYZ * size + rotXZ * size)).tex((double)k1, (double)k2).color(f6, f6, f6, this.particleAlpha).endVertex();
+        buffer.pos((double)(f3 + rotX * size + rotXY * size), (double)f4 + rotZ * size, (double)(f5 + rotYZ * size + rotXZ * size)).tex((double)k, (double)k2).color(f6, f6, f6, this.particleAlpha).endVertex();
+        buffer.pos((double)(f3 + rotX * size - rotXY * size), (double)f4 - rotZ * size, (double)(f5 + rotYZ * size - rotXZ * size)).tex((double)k, (double)k3).color(f6, f6, f6, this.particleAlpha).endVertex();
         Tessellator.getInstance().draw();
         GlStateManager.enableLighting();
     }

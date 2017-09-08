@@ -16,7 +16,10 @@ import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.IRecipeWrapper;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -33,15 +36,19 @@ public class JEIHereticRitualCategory extends BaseJeiCategory
 	private IDrawable currentFluid;
 	private IDrawable ritualFront;
 	private String name;
+	private CauldronLiquid catalyst;
 
 	@Override
 	public void setRecipe(IRecipeLayout recipeLayout, IRecipeWrapper recipeWrapper, IIngredients ingredients) {
 		if(!(recipeWrapper instanceof JEIHereticRitualWrapper))
 			return;
 		JEIHereticRitualWrapper wrapper = (JEIHereticRitualWrapper) recipeWrapper;
-		currentFluid = fluidTypes.get(wrapper.getCatalyst());
-		name = GlassContainer.getGlassContaining(wrapper.getCatalyst());
-
+		catalyst = wrapper.getCatalyst();
+		if(!catalyst.hasState())
+			currentFluid = fluidTypes.get(catalyst);
+		else
+			currentFluid = null;
+		name = GlassContainer.getGlassContaining(catalyst);
 		int index = 1;
 		Point center = new Point(75, 46);
 		Point point = new Point(center.x, center.y - 52);
@@ -69,18 +76,29 @@ public class JEIHereticRitualCategory extends BaseJeiCategory
 		double newY = Math.sin(rad) * (in.x - about.x) + Math.cos(rad) * (in.y - about.y) + about.y;
 		return new Point((int) newX, (int) newY);
 	}
+	
 	@Override
 	protected void createDrawable(IGuiHelper helper) {
-//		for(EnumHereticCauldronFluidType fluid : EnumHereticCauldronFluidType.values())
-//			fluidTypes.put(fluid, helper.createDrawable(fluid.getResourceLoc(), 0, 0, 17, 4));
+		for(CauldronLiquid fluid : CauldronLiquid.allLiquids)
+			if(!fluid.hasState())
+				fluidTypes.put(fluid, helper.createDrawable((ResourceLocation) fluid.getStateOrLoc(), 0, 0, 17, 4));
+		
 		ritualFront = helper.createDrawable(new ResourceLocation(HarshenCastle.MODID, "textures/gui/jei/hereticritual-front.png"), 0, 0, 150, 110, 150, 110);
 
 	}
 	
 	@Override
 	protected void drawMore(Minecraft minecraft) {
-//		currentFluid.draw(minecraft, 6, 46);
-		ritualFront.draw(minecraft);
+		if(currentFluid != null)
+			currentFluid.draw(minecraft, 56, 49);
+		else
+		{
+			Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+			TextureAtlasSprite textureSprite = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getTexture((IBlockState) catalyst.getStateOrLoc());
+			Minecraft.getMinecraft().currentScreen.drawTexturedModalRect(6, 46, textureSprite, 17, 17);
+
+		}
+        ritualFront.draw(minecraft);
 	}
 	
 	@Override

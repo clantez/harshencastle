@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import kenijey.harshencastle.HarshenCastle;
+import kenijey.harshencastle.HarshenClientUtils;
 import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.base.BaseJeiCategory;
 import kenijey.harshencastle.enums.blocks.CauldronLiquid;
@@ -15,7 +16,11 @@ import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.IRecipeWrapper;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -31,14 +36,19 @@ public class JEICauldronCategory extends BaseJeiCategory
 	private IDrawable currentFluid;
 	private IDrawable frontOfCauldron;
 	private String name;
+	private CauldronLiquid catalyst;
 
 	@Override
 	public void setRecipe(IRecipeLayout recipeLayout, IRecipeWrapper recipeWrapper, IIngredients ingredients) {
 		if(!(recipeWrapper instanceof JEICauldronWrapper))
 			return;
 		JEICauldronWrapper wrapper = (JEICauldronWrapper) recipeWrapper;
-		currentFluid = fluidTypes.get(wrapper.getCatalyst());
-		name = GlassContainer.getGlassContaining(wrapper.getCatalyst());
+		catalyst = wrapper.getCatalyst();
+		if(!catalyst.hasState())
+			currentFluid = fluidTypes.get(catalyst);
+		else
+			currentFluid = null;
+		name = GlassContainer.getGlassContaining(catalyst);
 		recipeLayout.getItemStacks().init(0, true, 66, 0);
 		recipeLayout.getItemStacks().set(0, ingredients.getInputs(ItemStack.class).get(0));
 		recipeLayout.getItemStacks().init(1, false, 66, 29);
@@ -49,15 +59,26 @@ public class JEICauldronCategory extends BaseJeiCategory
 	
 	@Override
 	protected void createDrawable(IGuiHelper helper) {
-//		for(EnumHereticCauldronFluidType fluid : EnumHereticCauldronFluidType.values())
-//			fluidTypes.put(fluid, helper.createDrawable(fluid.getResourceLoc(), 0, 0, 38, 14, 38, 14));
+		for(CauldronLiquid fluid : CauldronLiquid.allLiquids)
+			if(!fluid.hasState())
+				fluidTypes.put(fluid, helper.createDrawable((ResourceLocation) fluid.getStateOrLoc(), 0, 0, 38, 14, 38, 14));
+		
 		frontOfCauldron = helper.createDrawable(new ResourceLocation(HarshenCastle.MODID, "textures/gui/jei/cauldron-front.png"), 0, 0, 150, 110, 150, 110);
 	}
 	
 	@Override
 	protected void drawMore(Minecraft minecraft) {
-//		currentFluid.draw(minecraft, 56, 49);
+		if(currentFluid != null)
+			currentFluid.draw(minecraft, 56, 49);
+		else
+		{
+			Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+			TextureAtlasSprite textureSprite = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getTexture((IBlockState) catalyst.getStateOrLoc());
+			Minecraft.getMinecraft().currentScreen.drawTexturedModalRect(56, 49, textureSprite, 38, 14);
+		}
+
 		frontOfCauldron.draw(minecraft);
+
 	}
 	
 	@Override

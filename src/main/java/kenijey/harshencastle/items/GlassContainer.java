@@ -56,7 +56,7 @@ public class GlassContainer extends BaseItemMetaData
 	{
 		if(liquid == null)
 			return null;
-		return liquid.hasState() ? 
+		return liquid.hasState() && !((IBlockState)liquid.getStateOrLoc()).getBlock().getLocalizedName().equals("tile.null.name") ? 
 				((IBlockState)liquid.getStateOrLoc()).getBlock().getLocalizedName() : 
 					new TextComponentTranslation("fluid." + liquid.getName()).getUnformattedText(); 
 

@@ -30,7 +30,8 @@ public enum EnumGlassContainer implements IStringSerializable, IIDSet
 	LAVA(new CauldronLiquid("lava", Blocks.LAVA.getDefaultState()), 0xD96415),
 	MILK("milk", -1),
 	WATER(new CauldronLiquid("water", Blocks.WATER.getDefaultState()), 0x598fe5),
-	EARTH(new CauldronLiquid("earth", Blocks.DIRT.getDefaultState()), 0xc6854d);
+	EARTH(new CauldronLiquid("earth", Blocks.DIRT.getDefaultState()), 0xc6854d),
+	SAND(new CauldronLiquid("sand", Blocks.SAND.getDefaultState()), 0xf4cf60);
 		
 	private int meta;
 	private String name;

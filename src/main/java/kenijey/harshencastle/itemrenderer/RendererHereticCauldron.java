@@ -26,6 +26,8 @@ public class RendererHereticCauldron extends TileEntitySpecialRenderer<TileEntit
 	private boolean switched = false, switchedItem = false;
 	public boolean finished = false;
 	private HashMap<BlockPos, Particle> particleMap = new HashMap<>();
+	private HashMap<BlockPos, Double> levelMove = new HashMap<>();
+	private HashMap<BlockPos, Integer> serialMove = new HashMap<>();
 	
 	@SideOnly(Side.CLIENT)
 	@Override
@@ -38,9 +40,18 @@ public class RendererHereticCauldron extends TileEntitySpecialRenderer<TileEntit
 		{
 			if((ParticleCauldronTop)particleMap.get(te.getPos()) != null)
 				((ParticleCauldronTop)particleMap.get(te.getPos())).kill();
+			if(!levelMove.containsKey(te.getPos()))
+				levelMove.put(te.getPos(), (double) te.getLevel());
+			if(!serialMove.containsKey(te.getPos()))
+				serialMove.put(te.getPos(), 0);
+			serialMove.put(te.getPos(), serialMove.get(te.getPos()) + 1);
+			if(levelMove.get(te.getPos()).floatValue() != te.getLevel())
+			{
+				float moveBy = 0.08f;
+				levelMove.put(te.getPos(), levelMove.get(te.getPos()) + (Math.min(levelMove.get(te.getPos()), te.getLevel()) == te.getLevel()? - moveBy : moveBy));
+			}
 			if(te.getLevel() > 0)
-				particleMap.put(te.getPos(), HarshenCastle.proxy.spawnParticle(EnumHarshenParticle.CAULDRON_LIQUID,  new Vec3d(te.getPos()).addVector(0.5D, 0.05D + te.getLevel() / 4d, 0.5D), Vec3d.ZERO, 3.0001f, true, te.getFluid().getStateOrLoc()));
-			
+				particleMap.put(te.getPos(), HarshenCastle.proxy.spawnParticle(EnumHarshenParticle.CAULDRON_LIQUID, new Vec3d(te.getPos()).addVector(0.5D, MathHelper.clamp(Math.sin(serialMove.get(te.getPos()) / 200d) / 50d + 0.05D + levelMove.get(te.getPos()) / 4d, 0.2D, 1D), 0.5D), Vec3d.ZERO, 3.0001f, true, te.getFluid().getStateOrLoc()));
 			GlStateManager.translate(x, y, z);
 			GlStateManager.translate(0.5f, 1.45f,0.5f);
 			boolean flag = true;
