@@ -1,13 +1,21 @@
 package kenijey.harshencastle.enums.items;
 
+import java.util.ArrayList;
+
+import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.HarshenItems;
-import kenijey.harshencastle.enums.blocks.EnumHereticCauldronFluidType;
+import kenijey.harshencastle.enums.blocks.CauldronLiquid;
+import kenijey.harshencastle.fluids.HarshenFluids;
 import kenijey.harshencastle.interfaces.IIDSet;
 import kenijey.harshencastle.potions.HarshenPotions;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fluids.Fluid;
 
 public enum EnumGlassContainer implements IStringSerializable, IIDSet
 {
@@ -16,20 +24,22 @@ public enum EnumGlassContainer implements IStringSerializable, IIDSet
 	REGEN("regen", 0xF40D09, new PotionEffect(MobEffects.REGENERATION, 100, 200)),
 	CURE("cure", 0xEFEDA2, new PotionEffect(HarshenPotions.potionPure, 1)),
 	
-	HARSHING_WATER(EnumHereticCauldronFluidType.HARSHING_WATER, 0x613A63),
-	HARSHEN_DIMENSIONAL_FLUID(EnumHereticCauldronFluidType.HARSHEN_DIMENSIONAL_FLUID, 0x324B64),
-	BLOOD(EnumHereticCauldronFluidType.BLOOD, 0x870705),
-	LAVA(EnumHereticCauldronFluidType.LAVA, 0xD96415),
-	MILK(EnumHereticCauldronFluidType.MILK, -1);
+	HARSHING_WATER(new CauldronLiquid("harshing_water", HarshenFluids.harshing_water), 0x613A63),
+	HARSHEN_DIMENSIONAL_FLUID(new CauldronLiquid("harshen_dimensional_fluid", HarshenFluids.harshen_dimensional_fluid), 0x324B64),
+	BLOOD("blood", 0x870705),
+	LAVA(new CauldronLiquid("lava", Blocks.LAVA.getDefaultState()), 0xD96415),
+	MILK("milk", -1),
+	WATER(new CauldronLiquid("water", Blocks.WATER.getDefaultState()), 0x598fe5),
+	EARTH(new CauldronLiquid("earth", Blocks.DIRT.getDefaultState()), 0xc6854d);
 		
 	private int meta;
 	private String name;
 	private PotionEffect[] effects;
-	private EnumHereticCauldronFluidType type;
+	private CauldronLiquid type;
 	private boolean isSubContainer = false;
 	public int color;
 	
-	private EnumGlassContainer(EnumHereticCauldronFluidType type, int color)
+	private EnumGlassContainer(CauldronLiquid type, int color)
 	{
 		this.color = color;
 		this.type = type;
@@ -45,6 +55,11 @@ public enum EnumGlassContainer implements IStringSerializable, IIDSet
 		this.effects = effects;
 	}
 	
+	private EnumGlassContainer(String name, int color) 
+	{
+		this(new CauldronLiquid(name, new ResourceLocation(HarshenCastle.MODID, "textures/blocks/" + name + "_still.png")), color);
+	}
+	
 	@Override
 	public void setId(int meta) {
 		this.meta = meta;
@@ -54,7 +69,7 @@ public enum EnumGlassContainer implements IStringSerializable, IIDSet
 		return isSubContainer;
 	}
 	
-	 public EnumHereticCauldronFluidType getType() {
+	 public CauldronLiquid getType() {
 		return type;
 	}
 	 
@@ -76,7 +91,17 @@ public enum EnumGlassContainer implements IStringSerializable, IIDSet
 		return EnumGlassContainer.EMPTY;
 	}
 	
-	public static EnumGlassContainer getContainerFromType(EnumHereticCauldronFluidType type)
+	public static CauldronLiquid getTypeFromMeta(int meta)
+	{
+		return getContainerFromMeta(meta).getType();
+	}
+	
+	public static int getMetaFromType(CauldronLiquid type)
+	{
+		return getContainerFromType(type).meta;
+	}
+	
+	public static EnumGlassContainer getContainerFromType(CauldronLiquid type)
 	{
 		for(EnumGlassContainer cycleEnu : EnumGlassContainer.values())
 			if(cycleEnu.getType() == type)

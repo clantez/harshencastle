@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import kenijey.harshencastle.armor.HarshenArmors;
-import kenijey.harshencastle.enums.blocks.EnumHereticCauldronFluidType;
+import kenijey.harshencastle.enums.items.EnumGlassContainer;
 import kenijey.harshencastle.recipies.CauldronRecipes;
 import kenijey.harshencastle.recipies.HereticRitualRecipes;
 import kenijey.harshencastle.recipies.PedestalSlabRecipes;
@@ -89,23 +89,23 @@ public class HarshenRecipes {
 		ItemStack[] stackList = new ItemStack[8];
 		for(int i = 0; i < 8; i ++)
 			stackList[i] = new ItemStack(Blocks.GOLD_BLOCK);
-		HereticRitualRecipes.addRecipe(new ItemStack(Items.APPLE), new ItemStack(Items.GOLDEN_APPLE, 1, 1), EnumHereticCauldronFluidType.HARSHING_WATER,
+		HereticRitualRecipes.addRecipe(new ItemStack(Items.APPLE), new ItemStack(Items.GOLDEN_APPLE, 1, 1), EnumGlassContainer.HARSHING_WATER.getType(),
 				stackList);
 		
-		HereticRitualRecipes.addRecipe(new ItemStack(HarshenItems.itium), new ItemStack(HarshenItems.xray_pendant), EnumHereticCauldronFluidType.HARSHEN_DIMENSIONAL_FLUID, 
+		HereticRitualRecipes.addRecipe(new ItemStack(HarshenItems.itium), new ItemStack(HarshenItems.xray_pendant), EnumGlassContainer.HARSHEN_DIMENSIONAL_FLUID.getType(), 
 				new ItemStack(HarshenItems.ritual_crystal, 1, 1), new ItemStack(HarshenItems.powder_of_heretism), new ItemStack(HarshenItems.soul_infused_ingot),
 				new ItemStack(Items.EMERALD), new ItemStack(Items.QUARTZ), new ItemStack(Items.ENDER_EYE),
 				new ItemStack(Blocks.END_ROD), new ItemStack(Blocks.LAPIS_ORE));
 		
 		
 		
-		CauldronRecipes.addRecipe(new ItemStack(HarshenItems.ritual_crystal, 1, 0), new ItemStack(HarshenItems.ritual_crystal, 1, 1), EnumHereticCauldronFluidType.BLOOD);
-		CauldronRecipes.addRecipe(new ItemStack(HarshenItems.harshen_soul_ingot, 1, 0), new ItemStack(HarshenItems.soul_infused_ingot, 1, 0), EnumHereticCauldronFluidType.HARSHING_WATER);
-		CauldronRecipes.addRecipe(new ItemStack(Blocks.SAND, 1, 0), new ItemStack(Blocks.SOUL_SAND, 1, 0), EnumHereticCauldronFluidType.HARSHEN_DIMENSIONAL_FLUID);
-		CauldronRecipes.addRecipe(new ItemStack(Blocks.COBBLESTONE, 1, 0), new ItemStack(Blocks.NETHERRACK, 1, 0), EnumHereticCauldronFluidType.BLOOD);
-		CauldronRecipes.addRecipe(new ItemStack(Blocks.COBBLESTONE), new ItemStack(Blocks.OBSIDIAN, 2), EnumHereticCauldronFluidType.LAVA);
-		CauldronRecipes.addRecipe(new ItemStack(HarshenItems.glass_container), new ItemStack(HarshenItems.glass_container, 1, 3), EnumHereticCauldronFluidType.MILK);
-		CauldronRecipes.addRecipe(new ItemStack(HarshenItems.glass_container), new ItemStack(HarshenItems.glass_container, 1, 2), EnumHereticCauldronFluidType.BLOOD);
+		CauldronRecipes.addRecipe(new ItemStack(HarshenItems.ritual_crystal, 1, 0), new ItemStack(HarshenItems.ritual_crystal, 1, 1), EnumGlassContainer.BLOOD.getType());
+		CauldronRecipes.addRecipe(new ItemStack(HarshenItems.harshen_soul_ingot, 1, 0), new ItemStack(HarshenItems.soul_infused_ingot, 1, 0), EnumGlassContainer.HARSHING_WATER.getType());
+		CauldronRecipes.addRecipe(new ItemStack(Blocks.SAND, 1, 0), new ItemStack(Blocks.SOUL_SAND, 1, 0), EnumGlassContainer.HARSHEN_DIMENSIONAL_FLUID.getType());
+		CauldronRecipes.addRecipe(new ItemStack(Blocks.COBBLESTONE, 1, 0), new ItemStack(Blocks.NETHERRACK, 1, 0), EnumGlassContainer.BLOOD.getType());
+		CauldronRecipes.addRecipe(new ItemStack(Blocks.COBBLESTONE), new ItemStack(Blocks.OBSIDIAN, 2), EnumGlassContainer.LAVA.getType());
+		CauldronRecipes.addRecipe(new ItemStack(HarshenItems.glass_container), new ItemStack(HarshenItems.glass_container, 1, 3), EnumGlassContainer.MILK.getType());
+		CauldronRecipes.addRecipe(new ItemStack(HarshenItems.glass_container), new ItemStack(HarshenItems.glass_container, 1, 2), EnumGlassContainer.BLOOD.getType());
 	}
 	
 	public static void craftingRegistry()
