@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import kenijey.harshencastle.HarshenRecipes;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.enums.blocks.CauldronLiquid;
+import kenijey.harshencastle.enums.items.EnumGlassContainer;
 import net.minecraft.item.ItemStack;
 
 public class CauldronRecipes 
@@ -50,9 +51,9 @@ public class CauldronRecipes
 		return catalyst;
 	}
 	
-	public static void addRecipe(ItemStack input, ItemStack output, CauldronLiquid catalyst)
+	public static void addRecipe(ItemStack input, ItemStack output, EnumGlassContainer type)
 	{
-		CauldronRecipes recipe = new CauldronRecipes(input, output, catalyst);
+		CauldronRecipes recipe = new CauldronRecipes(input, output, type.getType());
 		if(!recipe.isFalse)
 			HarshenRecipes.allCauldronRecipes.add(recipe);
 	}

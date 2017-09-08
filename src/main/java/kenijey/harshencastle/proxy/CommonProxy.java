@@ -17,6 +17,7 @@ import kenijey.harshencastle.enums.gui.EnumGuiTypes;
 import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
 import kenijey.harshencastle.enums.items.EnumBloodCollector;
 import kenijey.harshencastle.enums.items.EnumGlassContainer;
+import kenijey.harshencastle.enums.items.EnumItemLiquid;
 import kenijey.harshencastle.enums.items.EnumPontusGateSpawner;
 import kenijey.harshencastle.enums.items.EnumPontusGateSpawnerParts;
 import kenijey.harshencastle.enums.items.EnumProp;
@@ -105,6 +106,7 @@ public class CommonProxy
 		SetIds.setup(EnumProp.values());
 		SetIds.setup(EnumRitualStick.values());
 		SetIds.setup(EnumInventorySlots.values());	
+		SetIds.setup(EnumItemLiquid.values());
     }
 
     public void init(FMLInitializationEvent event) 

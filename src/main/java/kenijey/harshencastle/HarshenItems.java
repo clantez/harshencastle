@@ -6,6 +6,7 @@ import kenijey.harshencastle.base.BaseItemMetaData;
 import kenijey.harshencastle.config.ItemsEnabled;
 import kenijey.harshencastle.enums.items.EnumBloodCollector;
 import kenijey.harshencastle.enums.items.EnumGlassContainer;
+import kenijey.harshencastle.enums.items.EnumItemLiquid;
 import kenijey.harshencastle.enums.items.EnumPontusGateSpawner;
 import kenijey.harshencastle.enums.items.EnumPontusGateSpawnerParts;
 import kenijey.harshencastle.enums.items.EnumProp;
@@ -36,6 +37,7 @@ import kenijey.harshencastle.items.HarshenSoulFragment;
 import kenijey.harshencastle.items.HarshenSoulIngot;
 import kenijey.harshencastle.items.IronBow;
 import kenijey.harshencastle.items.IronScythe;
+import kenijey.harshencastle.items.ItemLiquid;
 import kenijey.harshencastle.items.Itium;
 import kenijey.harshencastle.items.LightEmittedEssence;
 import kenijey.harshencastle.items.LightEmittedSeed;
@@ -53,6 +55,7 @@ import kenijey.harshencastle.items.PunchyRing;
 import kenijey.harshencastle.items.RaptorScythe;
 import kenijey.harshencastle.items.RitualCrystal;
 import kenijey.harshencastle.items.RitualStick;
+import kenijey.harshencastle.items.SolidifyingPaste;
 import kenijey.harshencastle.items.SoulHarsherPickaxe;
 import kenijey.harshencastle.items.SoulHarsherSword;
 import kenijey.harshencastle.items.SoulInfusedIngot;
@@ -94,6 +97,7 @@ public class HarshenItems
 	public static BaseItemMetaData ritual_stick;
 	public static BaseItemMetaData props;
 	public static BaseItemMetaData glass_container;
+	public static BaseItemMetaData item_liquid;
 	public static Item soul_infused_ingot;
 	public static Item feather_earring;
 	public static Item fearring;
@@ -126,6 +130,7 @@ public class HarshenItems
 	public static Item elytra_pendant;
 	public static Item mystic_feather;
 	public static Item lightning_staff;
+	public static Item solidifying_paste; 
 	
 	public static void preInit()
 	{
@@ -182,6 +187,8 @@ public class HarshenItems
 		elytra_pendant = new ElytraPendant();
 		mystic_feather = new MysticFeather();
 		lightning_staff = new LightningStaff();
+		solidifying_paste = new SolidifyingPaste();
+		item_liquid = new ItemLiquid();
 	}
 	
 	public static void reg()
@@ -215,6 +222,7 @@ public class HarshenItems
 		regItem(raptor_scythe);
 		regItem(mystic_feather, 12);
 		regItem(lightning_staff);
+		regItem(solidifying_paste, 64);
 		
 		regItem(zombi_pendant);
 		regItem(punchy_ring);
@@ -234,6 +242,7 @@ public class HarshenItems
 		regItem(fiery_ring);
 		regItem(elytra_pendant);
 		
+		regMetaItem(item_liquid, 64, emptyList(EnumItemLiquid.values().length), "item_liquid");
 		regMetaItem(ritual_stick, emptyList(EnumRitualStick.values().length), "ritual_stick");
 		regMetaItem(pontus_world_gate_spawner, EnumPontusGateSpawner.getNames(), "pontus_world_gate_spawner_");
 		regMetaItem(pontus_world_gate_parts, EnumPontusGateSpawnerParts.getNames(), "pontus_world_gate_part_");

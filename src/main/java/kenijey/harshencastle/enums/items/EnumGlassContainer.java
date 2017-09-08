@@ -1,14 +1,12 @@
 package kenijey.harshencastle.enums.items;
 
-import java.util.ArrayList;
-
 import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.enums.blocks.CauldronLiquid;
 import kenijey.harshencastle.fluids.HarshenFluids;
 import kenijey.harshencastle.interfaces.IIDSet;
 import kenijey.harshencastle.potions.HarshenPotions;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
@@ -24,20 +22,23 @@ public enum EnumGlassContainer implements IStringSerializable, IIDSet
 	REGEN("regen", 0xF40D09, new PotionEffect(MobEffects.REGENERATION, 100, 200)),
 	CURE("cure", 0xEFEDA2, new PotionEffect(HarshenPotions.potionPure, 1)),
 	
-	HARSHING_WATER(new CauldronLiquid("harshing_water", HarshenFluids.harshing_water), 0x613A63),
-	HARSHEN_DIMENSIONAL_FLUID(new CauldronLiquid("harshen_dimensional_fluid", HarshenFluids.harshen_dimensional_fluid), 0x324B64),
+	HARSHING_WATER("harshing_water", HarshenFluids.harshing_water, 0x613A63),
+	HARSHEN_DIMENSIONAL_FLUID("harshen_dimensional_fluid", HarshenFluids.harshen_dimensional_fluid, 0x324B64),
 	BLOOD("blood", 0x870705),
-	LAVA(new CauldronLiquid("lava", Blocks.LAVA.getDefaultState()), 0xD96415),
+	LAVA("lava", Blocks.LAVA, 0xD96415),
 	MILK("milk", -1),
-	WATER(new CauldronLiquid("water", Blocks.WATER.getDefaultState()), 0x598fe5),
-	EARTH(new CauldronLiquid("earth", Blocks.DIRT.getDefaultState()), 0xc6854d),
-	SAND(new CauldronLiquid("sand", Blocks.SAND.getDefaultState()), 0xf4cf60);
+	WATER("water", Blocks.WATER, 0x598fe5),
+	EARTH("earth", Blocks.DIRT, 0xc6854d),
+	SAND("sand", Blocks.SAND, 0xf4cf60),
+	COAL("coal", Blocks.COAL_BLOCK, 0x605a5a),
+	DIAMOND("diamond", Blocks.DIAMOND_BLOCK, 0x67dbc7);
 		
 	private int meta;
 	private String name;
 	private PotionEffect[] effects;
 	private CauldronLiquid type;
 	private boolean isSubContainer = false;
+	private boolean removePaste = false;
 	public int color;
 	
 	private EnumGlassContainer(CauldronLiquid type, int color)
@@ -61,6 +62,28 @@ public enum EnumGlassContainer implements IStringSerializable, IIDSet
 		this(new CauldronLiquid(name, new ResourceLocation(HarshenCastle.MODID, "textures/blocks/" + name + "_still.png")), color);
 	}
 	
+	private EnumGlassContainer(String name, int color, boolean action) 
+	{
+		this(new CauldronLiquid(name, new ResourceLocation(HarshenCastle.MODID, "textures/blocks/" + name + "_still.png")), color);
+		removePaste = action;
+	}
+	
+	private EnumGlassContainer(String name, Block block, int color, boolean action) 
+	{
+		this(new CauldronLiquid(name, block.getDefaultState()), color);
+		removePaste = action;
+	}
+	
+	private EnumGlassContainer(String name, Block block, int color) 
+	{
+		this(new CauldronLiquid(name, block.getDefaultState()), color);
+	}
+	
+	private EnumGlassContainer(String name, Fluid fluid, int color) 
+	{
+		this(new CauldronLiquid(name, fluid.getBlock().getDefaultState()), color);
+	}
+	
 	@Override
 	public void setId(int meta) {
 		this.meta = meta;
@@ -70,7 +93,7 @@ public enum EnumGlassContainer implements IStringSerializable, IIDSet
 		return isSubContainer;
 	}
 	
-	 public CauldronLiquid getType() {
+	public CauldronLiquid getType() {
 		return type;
 	}
 	 
@@ -82,6 +105,10 @@ public enum EnumGlassContainer implements IStringSerializable, IIDSet
 	@Override
 	public String getName() {
 		return name;
+	}
+	
+	public boolean isPaste() {
+		return !removePaste;
 	}
 	
 	public static EnumGlassContainer getContainerFromMeta(int meta)

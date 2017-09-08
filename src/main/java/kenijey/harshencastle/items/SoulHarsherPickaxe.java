@@ -4,6 +4,7 @@ import java.util.List;
 
 import kenijey.harshencastle.HarshenItems;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -19,7 +20,6 @@ public class SoulHarsherPickaxe extends ItemPickaxe
 		setRegistryName("soul_harsher_pickaxe");
 		setNoRepair();
 	}
-	
 	
 	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {

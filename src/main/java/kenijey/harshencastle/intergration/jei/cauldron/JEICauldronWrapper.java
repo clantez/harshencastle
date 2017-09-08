@@ -10,6 +10,11 @@ import kenijey.harshencastle.base.BaseJeiWrapper;
 import kenijey.harshencastle.enums.blocks.CauldronLiquid;
 import kenijey.harshencastle.recipies.CauldronRecipes;
 import mezz.jei.api.ingredients.IIngredients;
+import mezz.jei.input.InputHandler;
+import mezz.jei.plugins.jei.JEIInternalPlugin;
+import mezz.jei.runtime.JeiHelpers;
+import mezz.jei.runtime.JeiRuntime;
+import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 
 public class JEICauldronWrapper extends BaseJeiWrapper
@@ -39,6 +44,10 @@ public class JEICauldronWrapper extends BaseJeiWrapper
 	{
 		return catalyst;
 	}
-
-
+	
+	@Override
+	public boolean handleClick(Minecraft minecraft, int mouseX, int mouseY, int mouseButton) {
+		// TODO Auto-generated method stub
+		return super.handleClick(minecraft, mouseX, mouseY, mouseButton);
+	}
 }

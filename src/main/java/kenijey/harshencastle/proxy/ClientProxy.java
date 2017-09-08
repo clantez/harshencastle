@@ -10,6 +10,7 @@ import kenijey.harshencastle.entity.EntitySoulPart;
 import kenijey.harshencastle.entity.EntitySoullessKnight;
 import kenijey.harshencastle.enums.gui.EnumGuiTypes;
 import kenijey.harshencastle.enums.items.EnumGlassContainer;
+import kenijey.harshencastle.enums.items.EnumItemLiquid;
 import kenijey.harshencastle.enums.items.EnumRitualStick;
 import kenijey.harshencastle.enums.particle.EnumHarshenParticle;
 import kenijey.harshencastle.gui.GuiBookScreen;
@@ -143,6 +144,7 @@ public class ClientProxy extends CommonProxy
 				return tintIndex == 1 ? -1 : EnumGlassContainer.getContainerFromMeta(stack.getMetadata()).color;
 			}
 		}, HarshenItems.glass_container);
+    	
     	itemcolors.registerItemColorHandler(new IItemColor() {
 			
 			@Override
@@ -150,6 +152,14 @@ public class ClientProxy extends CommonProxy
 				return EnumRitualStick.getColorFromMeta(stack.getMetadata());
 			}
 		}, HarshenItems.ritual_stick);
+    	
+    	itemcolors.registerItemColorHandler(new IItemColor(){
+
+			@Override
+			public int getColorFromItemstack(ItemStack stack, int tintIndex) {
+				return EnumItemLiquid.getFromMeta(stack.getMetadata()) == null ? -1 : EnumGlassContainer.getContainerFromType(EnumItemLiquid.getFromMeta(stack.getMetadata()).getFluid()).color;
+			}
+    	}, HarshenItems.item_liquid);
     }
     
     @Override

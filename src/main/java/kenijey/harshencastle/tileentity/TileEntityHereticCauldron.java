@@ -15,6 +15,7 @@ import kenijey.harshencastle.enums.items.EnumGlassContainer;
 import kenijey.harshencastle.enums.particle.EnumHarshenParticle;
 import kenijey.harshencastle.items.BloodCollector;
 import kenijey.harshencastle.items.GlassContainer;
+import kenijey.harshencastle.items.ItemLiquid;
 import kenijey.harshencastle.recipies.CauldronRecipes;
 import kenijey.harshencastle.recipies.HereticRitualRecipes;
 import net.minecraft.block.Block;
@@ -217,6 +218,13 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
                 fluid = CauldronLiquid.NONE;	
             }
             return true;
+        }
+        else if(item instanceof ItemLiquid && fluid == CauldronLiquid.NONE)
+        {
+        	level = 3;
+        	fluid = ((ItemLiquid)item).getLiquid(itemstack);
+        	itemstack.shrink(1);
+        	return true;
         }
         else if(item == HarshenItems.ritual_stick)
         {

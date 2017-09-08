@@ -21,6 +21,7 @@ public class HandlerRendererGuiInventory
 	{
 		Minecraft minecraft = Minecraft.getMinecraft();
         EntityPlayer player = minecraft.player;
+
 		if(event.getType() != RenderGameOverlayEvent.ElementType.ALL || minecraft.currentScreen != null)
 			return;
 		ArrayList<Block> blocks = new ArrayList<>();
@@ -36,14 +37,17 @@ public class HandlerRendererGuiInventory
 			blocks.addAll(HarshenUtils.getBlocksFromString(HarshenUtils.getFirstOccuringItem(player,  HarshenItems.xray_pendant).getTagCompound().getString("BlockToSearch")));
 		ItemStack testStack = HarshenUtils.getFirstOccuringItem(player,  HarshenItems.xray_pendant);
 		xrayStack = testStack.isEmpty() ? xrayStack : testStack;
+		boolean flag = false;
 		if(xrayStack.isEmpty())
-			return;
-		String brokenBlock = "";
-		if(xrayStack.hasTagCompound())
-			brokenBlock = xrayStack.getTagCompound().getString("BlockToSearch");
-		if(blocks.isEmpty())
-			player.sendStatusMessage(new TextComponentTranslation("xray.blocknotfound", brokenBlock), true); 
-
+			flag = true;
+		if(!flag)
+		{
+			String brokenBlock = "";
+			if(xrayStack.hasTagCompound())
+				brokenBlock = xrayStack.getTagCompound().getString("BlockToSearch");
+			if(blocks.isEmpty())
+				player.sendStatusMessage(new TextComponentTranslation("xray.blocknotfound", brokenBlock), true); 
+		}
 		
 		for(int i = 0; i < HarshenUtils.getHandler(player).getSlots(); i++)
         {
@@ -66,7 +70,6 @@ public class HandlerRendererGuiInventory
                 
                 if (f > 0.0F)
                     GlStateManager.popMatrix();
-                
                 minecraft.getRenderItem().renderItemOverlays(minecraft.fontRenderer, stack, x, y);
             }
         }

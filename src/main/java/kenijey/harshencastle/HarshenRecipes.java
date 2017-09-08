@@ -5,12 +5,15 @@ import java.util.Arrays;
 
 import kenijey.harshencastle.armor.HarshenArmors;
 import kenijey.harshencastle.enums.items.EnumGlassContainer;
+import kenijey.harshencastle.enums.items.EnumItemLiquid;
 import kenijey.harshencastle.recipies.CauldronRecipes;
 import kenijey.harshencastle.recipies.HereticRitualRecipes;
 import kenijey.harshencastle.recipies.PedestalSlabRecipes;
 import kenijey.harshencastle.recipies.RitualRecipes;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -99,13 +102,20 @@ public class HarshenRecipes {
 		
 		
 		
-		CauldronRecipes.addRecipe(new ItemStack(HarshenItems.ritual_crystal, 1, 0), new ItemStack(HarshenItems.ritual_crystal, 1, 1), EnumGlassContainer.BLOOD.getType());
-		CauldronRecipes.addRecipe(new ItemStack(HarshenItems.harshen_soul_ingot, 1, 0), new ItemStack(HarshenItems.soul_infused_ingot, 1, 0), EnumGlassContainer.HARSHING_WATER.getType());
-		CauldronRecipes.addRecipe(new ItemStack(Blocks.SAND, 1, 0), new ItemStack(Blocks.SOUL_SAND, 1, 0), EnumGlassContainer.HARSHEN_DIMENSIONAL_FLUID.getType());
-		CauldronRecipes.addRecipe(new ItemStack(Blocks.COBBLESTONE, 1, 0), new ItemStack(Blocks.NETHERRACK, 1, 0), EnumGlassContainer.BLOOD.getType());
-		CauldronRecipes.addRecipe(new ItemStack(Blocks.COBBLESTONE), new ItemStack(Blocks.OBSIDIAN, 2), EnumGlassContainer.LAVA.getType());
-		CauldronRecipes.addRecipe(new ItemStack(HarshenItems.glass_container), new ItemStack(HarshenItems.glass_container, 1, 3), EnumGlassContainer.MILK.getType());
-		CauldronRecipes.addRecipe(new ItemStack(HarshenItems.glass_container), new ItemStack(HarshenItems.glass_container, 1, 2), EnumGlassContainer.BLOOD.getType());
+		CauldronRecipes.addRecipe(new ItemStack(HarshenItems.ritual_crystal, 1, 0), new ItemStack(HarshenItems.ritual_crystal, 1, 1), EnumGlassContainer.BLOOD);
+		CauldronRecipes.addRecipe(new ItemStack(HarshenItems.harshen_soul_ingot, 1, 0), new ItemStack(HarshenItems.soul_infused_ingot, 1, 0), EnumGlassContainer.HARSHING_WATER);
+		CauldronRecipes.addRecipe(new ItemStack(Blocks.SAND, 1, 0), new ItemStack(Blocks.SOUL_SAND, 1, 0), EnumGlassContainer.HARSHEN_DIMENSIONAL_FLUID);
+		CauldronRecipes.addRecipe(new ItemStack(Blocks.COBBLESTONE, 1, 0), new ItemStack(Blocks.NETHERRACK, 1, 0), EnumGlassContainer.BLOOD);
+		CauldronRecipes.addRecipe(new ItemStack(Blocks.COBBLESTONE), new ItemStack(Blocks.OBSIDIAN, 2), EnumGlassContainer.LAVA);
+		CauldronRecipes.addRecipe(new ItemStack(HarshenItems.glass_container), new ItemStack(HarshenItems.glass_container, 1, 3), EnumGlassContainer.MILK);
+		CauldronRecipes.addRecipe(new ItemStack(HarshenItems.glass_container), new ItemStack(HarshenItems.glass_container, 1, 2), EnumGlassContainer.BLOOD);
+		CauldronRecipes.addRecipe(new ItemStack(Blocks.COAL_BLOCK), EnumItemLiquid.Coalite.getStack(), EnumGlassContainer.LAVA);
+		CauldronRecipes.addRecipe(new ItemStack(Items.COAL), EnumItemLiquid.Diamondite.getStack(), EnumGlassContainer.COAL);
+		
+		for(EnumGlassContainer glass : EnumGlassContainer.values())
+			if(glass.isSubContainer() && glass.getType().hasState() && Item.getItemFromBlock(((IBlockState)glass.getType().getStateOrLoc()).getBlock()) != Items.AIR
+					&& glass.isPaste())
+					CauldronRecipes.addRecipe(new ItemStack(HarshenItems.solidifying_paste), new ItemStack(Item.getItemFromBlock(((IBlockState)glass.getType().getStateOrLoc()).getBlock())), glass);
 	}
 	
 	public static void craftingRegistry()
@@ -364,5 +374,14 @@ public class HarshenRecipes {
 				
 				'f', new ItemStack(HarshenItems.mystic_feather),
 				'l', new ItemStack(Items.LEAD));
+		
+		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "solidifying_paste"), new ResourceLocation("harshen_items"),
+				new ItemStack(HarshenItems.solidifying_paste, 16),
+				" d ",
+				"dcd",
+				" d ",
+				
+				'd', "dirt",
+				'c', Items.CLAY_BALL);
 	}
 }
