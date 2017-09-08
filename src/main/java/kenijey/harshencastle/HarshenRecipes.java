@@ -83,6 +83,7 @@ public class HarshenRecipes {
 		PedestalSlabRecipes.addRecipe(new ItemStack(Items.ENDER_EYE), new ItemStack(HarshenItems.blood_infused_ender_eye));
 		PedestalSlabRecipes.addRecipe(new ItemStack(Items.GOLDEN_APPLE), new ItemStack(HarshenItems.bloody_apple));
 		PedestalSlabRecipes.addRecipe(new ItemStack(HarshenItems.pontus_cube), new ItemStack(HarshenItems.bloody_pontus_cube));
+		PedestalSlabRecipes.addRecipe(new ItemStack(HarshenBlocks.harshen_dimensional_stone), new ItemStack(HarshenBlocks.harshen_display_block));
 		
 		
 		
@@ -106,6 +107,7 @@ public class HarshenRecipes {
 		CauldronRecipes.addRecipe(new ItemStack(Blocks.COBBLESTONE), new ItemStack(Blocks.OBSIDIAN, 2), EnumGlassContainer.LAVA.getType());
 		CauldronRecipes.addRecipe(new ItemStack(HarshenItems.glass_container), new ItemStack(HarshenItems.glass_container, 1, 3), EnumGlassContainer.MILK.getType());
 		CauldronRecipes.addRecipe(new ItemStack(HarshenItems.glass_container), new ItemStack(HarshenItems.glass_container, 1, 2), EnumGlassContainer.BLOOD.getType());
+		CauldronRecipes.addRecipe(new ItemStack(HarshenBlocks.pontus_chaotic_wood), new ItemStack(HarshenBlocks.harshen_dimensional_wood_crate), EnumGlassContainer.HARSHING_WATER.getType());
 	}
 	
 	public static void craftingRegistry()
@@ -364,5 +366,16 @@ public class HarshenRecipes {
 				
 				'f', new ItemStack(HarshenItems.mystic_feather),
 				'l', new ItemStack(Items.LEAD));
+		
+		
+		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "harshen_magic_table"), new ResourceLocation("harshen_items"),
+				new ItemStack(HarshenBlocks.harshen_magic_table),
+				"wew",
+				" c ",
+				"w w",
+				
+				'e', new ItemStack(HarshenItems.light_emitted_essence),
+				'w', new ItemStack(HarshenBlocks.pontus_chaotic_wood),
+				'c', new ItemStack(HarshenBlocks.harshen_dimensional_wood_crate));
 	}
 }
