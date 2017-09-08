@@ -7,7 +7,8 @@ import java.util.List;
 import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.base.BaseJeiCategory;
-import kenijey.harshencastle.enums.blocks.EnumHereticCauldronFluidType;
+import kenijey.harshencastle.enums.blocks.CauldronLiquid;
+import kenijey.harshencastle.items.GlassContainer;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IRecipeLayout;
@@ -25,7 +26,7 @@ public class JEICauldronCategory extends BaseJeiCategory
 		super(UID, reg);
 	}
 
-	private static HashMap<EnumHereticCauldronFluidType, IDrawable> fluidTypes = new HashMap<>(EnumHereticCauldronFluidType.values().length);
+	private static HashMap<CauldronLiquid, IDrawable> fluidTypes = new HashMap<>();
 	
 	private IDrawable currentFluid;
 	private IDrawable frontOfCauldron;
@@ -37,7 +38,7 @@ public class JEICauldronCategory extends BaseJeiCategory
 			return;
 		JEICauldronWrapper wrapper = (JEICauldronWrapper) recipeWrapper;
 		currentFluid = fluidTypes.get(wrapper.getCatalyst());
-		name = "fluid." + wrapper.getCatalyst().getName();
+		name = GlassContainer.getGlassContaining(wrapper.getCatalyst());
 		recipeLayout.getItemStacks().init(0, true, 66, 0);
 		recipeLayout.getItemStacks().set(0, ingredients.getInputs(ItemStack.class).get(0));
 		recipeLayout.getItemStacks().init(1, false, 66, 29);
@@ -48,14 +49,14 @@ public class JEICauldronCategory extends BaseJeiCategory
 	
 	@Override
 	protected void createDrawable(IGuiHelper helper) {
-		for(EnumHereticCauldronFluidType fluid : EnumHereticCauldronFluidType.values())
-			fluidTypes.put(fluid, helper.createDrawable(fluid.getResourceLoc(), 0, 0, 38, 14, 38, 14));
+//		for(EnumHereticCauldronFluidType fluid : EnumHereticCauldronFluidType.values())
+//			fluidTypes.put(fluid, helper.createDrawable(fluid.getResourceLoc(), 0, 0, 38, 14, 38, 14));
 		frontOfCauldron = helper.createDrawable(new ResourceLocation(HarshenCastle.MODID, "textures/gui/jei/cauldron-front.png"), 0, 0, 150, 110, 150, 110);
 	}
 	
 	@Override
 	protected void drawMore(Minecraft minecraft) {
-		currentFluid.draw(minecraft, 56, 49);
+//		currentFluid.draw(minecraft, 56, 49);
 		frontOfCauldron.draw(minecraft);
 	}
 	

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import kenijey.harshencastle.HarshenRecipes;
 import kenijey.harshencastle.HarshenUtils;
-import kenijey.harshencastle.enums.blocks.EnumHereticCauldronFluidType;
+import kenijey.harshencastle.enums.blocks.CauldronLiquid;
 import net.minecraft.item.ItemStack;
 
 public class HereticRitualRecipes 
@@ -14,10 +14,10 @@ public class HereticRitualRecipes
 	private final ItemStack cauldronItem;
 	private final ItemStack output;
 	private final ItemStack[] pedestalItems;
-	private final EnumHereticCauldronFluidType catalyst;
+	private final CauldronLiquid catalyst;
 	private boolean isFalse;
 	
-	private HereticRitualRecipes(ItemStack cauldronItem, ItemStack output, EnumHereticCauldronFluidType catalyst, ItemStack... pedstalItems)
+	private HereticRitualRecipes(ItemStack cauldronItem, ItemStack output, CauldronLiquid catalyst, ItemStack... pedstalItems)
 	{
 		if(pedstalItems.length != 8)
 			throw new IllegalArgumentException("input size for ritual recipe was not 8");
@@ -39,7 +39,7 @@ public class HereticRitualRecipes
 		return pedestalItems;
 	}
 	
-	public static HereticRitualRecipes getRecipe(ItemStack cauldronInput, EnumHereticCauldronFluidType fluid, ArrayList<ItemStack> pedestalItems) 
+	public static HereticRitualRecipes getRecipe(ItemStack cauldronInput, CauldronLiquid fluid, ArrayList<ItemStack> pedestalItems) 
 	{
 		for(HereticRitualRecipes recipe : allRecipes)
 			if(recipe.getCauldronInput().isItemEqual(cauldronInput) && recipe.getCatalyst() == fluid)
@@ -70,12 +70,12 @@ public class HereticRitualRecipes
 		return output;
 	}
 	
-	public EnumHereticCauldronFluidType getCatalyst() 
+	public CauldronLiquid getCatalyst() 
 	{
 		return catalyst;
 	}
 	
-	public static void addRecipe(ItemStack cauldronItem, ItemStack output, EnumHereticCauldronFluidType catalyst, ItemStack... pedstalItems)
+	public static void addRecipe(ItemStack cauldronItem, ItemStack output, CauldronLiquid catalyst, ItemStack... pedstalItems)
 	{
 		HereticRitualRecipes recipe = new HereticRitualRecipes(cauldronItem, output, catalyst, pedstalItems);
 		if(!recipe.isFalse)

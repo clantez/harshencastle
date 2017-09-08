@@ -3,10 +3,16 @@ package kenijey.harshencastle.items;
 import java.util.List;
 
 import kenijey.harshencastle.base.BaseItemMetaData;
+import kenijey.harshencastle.enums.blocks.CauldronLiquid;
 import kenijey.harshencastle.enums.items.EnumGlassContainer;
+import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.EnumAction;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ActionResult;
@@ -39,10 +45,21 @@ public class GlassContainer extends BaseItemMetaData
 	
 	@Override
 	public String getUnlocalizedName(ItemStack stack) {
-		if(EnumGlassContainer.getContainerFromMeta(stack.getMetadata()).isSubContainer())
-			stack.setStackDisplayName(TextFormatting.RESET + new TextComponentTranslation(super.getUnlocalizedName() + ".container", 
-					new TextComponentTranslation("fluid." + EnumGlassContainer.getContainerFromMeta(stack.getMetadata()).getType().getName()).getFormattedText()).getFormattedText());
+		String args = getGlassContaining(EnumGlassContainer.getContainerFromMeta(stack.getMetadata()).getType());
+		if(args != null)
+			stack.setStackDisplayName(TextFormatting.RESET + new TextComponentTranslation(stack.getItem().getUnlocalizedName() + 
+					".container", args).getFormattedText());
 		return super.getUnlocalizedName(stack);
+	}
+	
+	public static String getGlassContaining(CauldronLiquid liquid)
+	{
+		if(liquid == null)
+			return null;
+		return liquid.hasState() ? 
+				((IBlockState)liquid.getStateOrLoc()).getBlock().getLocalizedName() : 
+					new TextComponentTranslation("fluid." + liquid.getName()).getUnformattedText(); 
+
 	}
 	
 	@Override

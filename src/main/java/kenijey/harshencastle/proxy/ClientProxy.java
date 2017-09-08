@@ -190,9 +190,12 @@ public class ClientProxy extends CommonProxy
 		            entityFx = new ParticleBlood(minecraft.world, position.x, position.y, position.z, directionSpeed.x, directionSpeed.y, directionSpeed.z, scale, disableMoving);
 		            break;
 		        case CAULDRON:
-			        if(info.length > 0 && info[0] instanceof ResourceLocation)
-			        	entityFx = new ParticleCauldron(minecraft.world, (ResourceLocation) info[0], position.x, position.y, position.z, directionSpeed.x, directionSpeed.y, directionSpeed.z, scale / 5f, disableMoving);
-		        	break;
+			        if(info.length > 0 )
+			        	if(info[0] instanceof ResourceLocation)
+			        		entityFx = new ParticleCauldron(minecraft.world, (ResourceLocation) info[0], position.x, position.y, position.z, directionSpeed.x, directionSpeed.y, directionSpeed.z, scale / 5f, disableMoving);
+			        	if(info[0] instanceof IBlockState)
+			        		entityFx = new ParticleCauldron(minecraft.world, position.x, position.y, position.z, directionSpeed.x, directionSpeed.y, directionSpeed.z, scale / 5f, disableMoving, ((IBlockState)info[0]));
+			        break;
 		        case ITEM:
 		        	if(info.length > 0 && info[0] instanceof ItemStack)
 		        		entityFx = new ParticleItem(minecraft.world, position.x, position.y, position.z, directionSpeed.x, directionSpeed.y, directionSpeed.z, scale / 5f, disableMoving, (ItemStack) info[0]);

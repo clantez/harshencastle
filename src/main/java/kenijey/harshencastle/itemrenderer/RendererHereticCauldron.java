@@ -73,7 +73,7 @@ public class RendererHereticCauldron extends TileEntitySpecialRenderer<TileEntit
 						{
 							Vec3d vec = new Vec3d((new Random().nextDouble() - 0.5D) / 1.5D, new Random().nextDouble() / 4D, (new Random().nextDouble() - 0.5D) / 1.5D);
 							HarshenCastle.proxy.spawnParticle(EnumHarshenParticle.CAULDRON, new Vec3d(te.getPos()).addVector(0.5d, 0.225d, 0.5d).add(vec), 
-									new Vec3d(-vec.x / 20D, -vec.y / 20D, -vec.z / 20D), 1f, false, te.getWorkingFluid().getResourceLoc());
+									new Vec3d(-vec.x / 20D, -vec.y / 20D, -vec.z / 20D), 1f, false, te.getWorkingFluid().getStateOrLoc());
 						}
 							
 				}	

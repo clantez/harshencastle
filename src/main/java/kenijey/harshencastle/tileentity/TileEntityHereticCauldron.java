@@ -10,7 +10,7 @@ import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.base.BaseTileEntityHarshenSingleItemInventory;
 import kenijey.harshencastle.blocks.BloodBlock;
-import kenijey.harshencastle.enums.blocks.EnumHereticCauldronFluidType;
+import kenijey.harshencastle.enums.blocks.CauldronLiquid;
 import kenijey.harshencastle.enums.items.EnumGlassContainer;
 import kenijey.harshencastle.enums.particle.EnumHarshenParticle;
 import kenijey.harshencastle.items.BloodCollector;
@@ -49,10 +49,10 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 	public boolean isActiveInBackground = false;
 	private ItemStack switchedItem;
 	private int[] drainPos = {50, 75, 100, Integer.MAX_VALUE};
-	public static final HashMap<EnumHereticCauldronFluidType, Item> fluidMap = new HashMap<>();
-	private EnumHereticCauldronFluidType fluid = EnumHereticCauldronFluidType.NONE;
+	public static final HashMap<CauldronLiquid, Item> fluidMap = new HashMap<>();
+	private CauldronLiquid fluid = CauldronLiquid.NONE;
 	private int level = 0;
-	private EnumHereticCauldronFluidType workingFluid = EnumHereticCauldronFluidType.NONE;
+	private CauldronLiquid workingFluid = CauldronLiquid.NONE;
 	private HereticRitualRecipes overstandingRecipe;
 	private HashMap<BlockPos, ItemStack> pedestalMap = new HashMap<>(); 
 	
@@ -61,7 +61,7 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 		if(level <= 0)
 		{
 			level = 0;
-			fluid = EnumHereticCauldronFluidType.NONE;
+			fluid = CauldronLiquid.NONE;
 		}
 		if(isActive)
 		{
@@ -150,21 +150,21 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
         if (itemstack.isEmpty())
         	return false;
         boolean flag;
-        if(item instanceof BloodCollector && (fluid ==  EnumHereticCauldronFluidType.BLOOD || fluid == EnumHereticCauldronFluidType.NONE))
+        if(item instanceof BloodCollector && (fluid ==  EnumGlassContainer.BLOOD.getType() || fluid == CauldronLiquid.NONE))
         {
         	if(level != 3)
         		if (playerIn.capabilities.isCreativeMode || (!playerIn.capabilities.isCreativeMode && ((BloodCollector)item).remove(playerIn, hand, 3)))
                 {
         			this.world.playSound((EntityPlayer)null, pos, SoundEvents.ITEM_BOTTLE_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
         			level ++;
-        			fluid = EnumHereticCauldronFluidType.BLOOD;
+        			fluid = EnumGlassContainer.BLOOD.getType();
         		}
         	return true;
         }
         if(item instanceof GlassContainer)
         {
         	if(EnumGlassContainer.getContainerFromMeta(itemstack.getMetadata()).isSubContainer() && level != 3 &&
-        			(fluid == EnumHereticCauldronFluidType.NONE || fluid == EnumGlassContainer.getContainerFromMeta(itemstack.getMetadata()).getType()))
+        			(fluid == CauldronLiquid.NONE || fluid == EnumGlassContainer.getContainerFromMeta(itemstack.getMetadata()).getType()))
         	{
         		level ++;
         		fluid = EnumGlassContainer.getContainerFromMeta(itemstack.getMetadata()).getType();
@@ -172,7 +172,7 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
         		give(playerIn, hand, new ItemStack(HarshenItems.glass_container));
         		return true;
         	}
-        	else if(itemstack.getMetadata() == 0 && fluid != EnumHereticCauldronFluidType.NONE)
+        	else if(itemstack.getMetadata() == 0 && fluid != CauldronLiquid.NONE)
         	{	
         		if(CauldronRecipes.getRecipe(itemstack, fluid) != null && level == 3)
         		{
@@ -186,9 +186,9 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
         		return true;
         	}
         }
-        if(fluidMap.containsValue(item) && fluid == EnumHereticCauldronFluidType.NONE)
+        if(fluidMap.containsValue(item) && fluid == CauldronLiquid.NONE)
         {
-        	EnumHereticCauldronFluidType[] type = new EnumHereticCauldronFluidType[fluidMap.keySet().size()];
+        	CauldronLiquid[] type = new CauldronLiquid[fluidMap.keySet().size()];
         	playerIn.setHeldItem(hand, ItemStack.EMPTY);
         	give(playerIn, hand, new ItemStack(Items.BUCKET));
         	level = 3;
@@ -196,16 +196,16 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 	        this.world.playSound((EntityPlayer)null, pos, SoundEvents.ITEM_BUCKET_FILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
 	        return true;
         }
-        else if(item instanceof UniversalBucket && fluid == EnumHereticCauldronFluidType.NONE)
+        else if(item instanceof UniversalBucket && fluid == CauldronLiquid.NONE)
         {
         	itemstack.shrink(1);
         	give(playerIn, hand, new ItemStack(Items.BUCKET));
         	level = 3;
-        	fluid = EnumHereticCauldronFluidType.getFromState(((UniversalBucket)item).getFluid(itemstack).getFluid().getBlock().getDefaultState());
+        	fluid = CauldronLiquid.getFromState(((UniversalBucket)item).getFluid(itemstack).getFluid().getBlock().getDefaultState());
 	        this.world.playSound((EntityPlayer)null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
 	        return true;
         }
-        else if (item == Items.BUCKET && fluid != EnumHereticCauldronFluidType.BLOOD)
+        else if (item == Items.BUCKET && fluid != EnumGlassContainer.BLOOD.getType())
         {
             if (level == 3)
             {
@@ -213,8 +213,8 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
                 this.world.playSound((EntityPlayer)null, pos, SoundEvents.ITEM_BUCKET_FILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
                 ItemStack stack = fluidMap.containsKey(fluid) ?  new ItemStack(fluidMap.get(fluid)) : FluidUtil.getFilledBucket(new FluidStack(FluidRegistry.getFluid(fluid.getName()), 1000));
             	give(playerIn, hand, stack);
-            	level = 1;
-                fluid = EnumHereticCauldronFluidType.NONE;	
+            	level = 0;
+                fluid = CauldronLiquid.NONE;	
             }
             return true;
         }
@@ -342,7 +342,7 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 		for(TileEntityHarshenDimensionalPedestal pedestal : pedestals)
 			pedestal.deactiveateNonController();
 		overstandingRecipe = null;
-		workingFluid = EnumHereticCauldronFluidType.NONE;
+		workingFluid = CauldronLiquid.NONE;
 		isActiveInBackground = false;
 		deletedBloodPos.clear();
 		bloodPos.clear();
@@ -370,15 +370,15 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 		return true;
 	}
 	
-	public EnumHereticCauldronFluidType getFluid() {
+	public CauldronLiquid getFluid() {
 		return fluid;
 	}
 	
-	public EnumHereticCauldronFluidType getWorkingFluid() {
+	public CauldronLiquid getWorkingFluid() {
 		return workingFluid;
 	}
 	
-	public TileEntityHereticCauldron setFluid(EnumHereticCauldronFluidType fluid) {
+	public TileEntityHereticCauldron setFluid(CauldronLiquid fluid) {
 		this.fluid = fluid;
 		return this;
 	}
@@ -456,12 +456,12 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 		this.isActive = false;
 		this.isActiveInBackground = false;
 		this.activeTimer = 0;
-		workingFluid = EnumHereticCauldronFluidType.NONE;
+		workingFluid = CauldronLiquid.NONE;
 	}
 	
 	@Override
 	public void readFromNBT(NBTTagCompound compound) {
-		fluid = EnumHereticCauldronFluidType.getFromId(compound.getInteger("cauldronType"));
+		fluid = CauldronLiquid.getFromId(compound.getInteger("cauldronType"));
 		level = compound.getInteger("cauldronLevel");
 		super.readFromNBT(compound);
 	}

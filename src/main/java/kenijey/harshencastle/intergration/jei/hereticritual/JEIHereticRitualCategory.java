@@ -8,7 +8,8 @@ import java.util.List;
 
 import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.base.BaseJeiCategory;
-import kenijey.harshencastle.enums.blocks.EnumHereticCauldronFluidType;
+import kenijey.harshencastle.enums.blocks.CauldronLiquid;
+import kenijey.harshencastle.items.GlassContainer;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IRecipeLayout;
@@ -27,7 +28,7 @@ public class JEIHereticRitualCategory extends BaseJeiCategory
 		super(UID, reg);
 	}
 	
-	private static HashMap<EnumHereticCauldronFluidType, IDrawable> fluidTypes = new HashMap<>(EnumHereticCauldronFluidType.values().length);
+	private static HashMap<CauldronLiquid, IDrawable> fluidTypes = new HashMap<>();
 	
 	private IDrawable currentFluid;
 	private IDrawable ritualFront;
@@ -39,7 +40,7 @@ public class JEIHereticRitualCategory extends BaseJeiCategory
 			return;
 		JEIHereticRitualWrapper wrapper = (JEIHereticRitualWrapper) recipeWrapper;
 		currentFluid = fluidTypes.get(wrapper.getCatalyst());
-		name = "fluid." + wrapper.getCatalyst().getName();
+		name = GlassContainer.getGlassContaining(wrapper.getCatalyst());
 
 		int index = 1;
 		Point center = new Point(75, 46);
@@ -70,15 +71,15 @@ public class JEIHereticRitualCategory extends BaseJeiCategory
 	}
 	@Override
 	protected void createDrawable(IGuiHelper helper) {
-		for(EnumHereticCauldronFluidType fluid : EnumHereticCauldronFluidType.values())
-			fluidTypes.put(fluid, helper.createDrawable(fluid.getResourceLoc(), 0, 0, 17, 4));
+//		for(EnumHereticCauldronFluidType fluid : EnumHereticCauldronFluidType.values())
+//			fluidTypes.put(fluid, helper.createDrawable(fluid.getResourceLoc(), 0, 0, 17, 4));
 		ritualFront = helper.createDrawable(new ResourceLocation(HarshenCastle.MODID, "textures/gui/jei/hereticritual-front.png"), 0, 0, 150, 110, 150, 110);
 
 	}
 	
 	@Override
 	protected void drawMore(Minecraft minecraft) {
-		currentFluid.draw(minecraft, 6, 46);
+//		currentFluid.draw(minecraft, 6, 46);
 		ritualFront.draw(minecraft);
 	}
 	

@@ -13,7 +13,6 @@ import kenijey.harshencastle.dimensions.HarshenDimensions;
 import kenijey.harshencastle.dimensions.pontus.PontusWorldProvider;
 import kenijey.harshencastle.entity.HarshenEntities;
 import kenijey.harshencastle.enums.SetIds;
-import kenijey.harshencastle.enums.blocks.EnumHereticCauldronFluidType;
 import kenijey.harshencastle.enums.gui.EnumGuiTypes;
 import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
 import kenijey.harshencastle.enums.items.EnumBloodCollector;
@@ -71,7 +70,7 @@ public class CommonProxy
     	HarshenFluids.register();
 		
     	setUpEnumValues();
-	
+    	
 		HarshenBlocks.preInit();
 		HarshenItems.preInit();
 				
@@ -93,19 +92,19 @@ public class CommonProxy
 		HarshenSounds.preInit();
 		
 		HarshenNetwork.preInit();
-				
+		
+						
     }
     
     private void setUpEnumValues()
     {
 		SetIds.setup(EnumGlassContainer.values());
-		SetIds.setup(EnumHereticCauldronFluidType.values());
 		SetIds.setup(EnumBloodCollector.values());
 		SetIds.setup(EnumPontusGateSpawner.values());
 		SetIds.setup(EnumPontusGateSpawnerParts.values());
 		SetIds.setup(EnumProp.values());
 		SetIds.setup(EnumRitualStick.values());
-		SetIds.setup(EnumInventorySlots.values());
+		SetIds.setup(EnumInventorySlots.values());	
     }
 
     public void init(FMLInitializationEvent event) 
