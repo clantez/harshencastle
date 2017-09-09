@@ -7,7 +7,7 @@ import javax.annotation.Nonnull;
 import com.google.common.collect.ImmutableList;
 
 import kenijey.harshencastle.base.BaseJeiWrapper;
-import kenijey.harshencastle.enums.blocks.CauldronLiquid;
+import kenijey.harshencastle.enums.CauldronLiquid;
 import kenijey.harshencastle.recipies.HereticRitualRecipes;
 import mezz.jei.api.ingredients.IIngredients;
 import net.minecraft.item.ItemStack;

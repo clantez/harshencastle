@@ -8,7 +8,7 @@ import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.HarshenClientUtils;
 import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.base.BaseJeiCategory;
-import kenijey.harshencastle.enums.blocks.CauldronLiquid;
+import kenijey.harshencastle.enums.CauldronLiquid;
 import kenijey.harshencastle.items.GlassContainer;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;

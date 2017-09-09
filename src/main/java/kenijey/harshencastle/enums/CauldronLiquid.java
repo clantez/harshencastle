@@ -1,4 +1,4 @@
-package kenijey.harshencastle.enums.blocks;
+package kenijey.harshencastle.enums;
 
 import java.util.ArrayList;
 

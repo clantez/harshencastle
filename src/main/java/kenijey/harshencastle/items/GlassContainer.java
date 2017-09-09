@@ -3,7 +3,7 @@ package kenijey.harshencastle.items;
 import java.util.List;
 
 import kenijey.harshencastle.base.BaseItemMetaData;
-import kenijey.harshencastle.enums.blocks.CauldronLiquid;
+import kenijey.harshencastle.enums.CauldronLiquid;
 import kenijey.harshencastle.enums.items.EnumGlassContainer;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

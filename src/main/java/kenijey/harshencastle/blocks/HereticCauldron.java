@@ -8,7 +8,7 @@ import javax.annotation.Nullable;
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.base.BaseBlockHarshenSingleInventory;
 import kenijey.harshencastle.base.BaseTileEntityHarshenSingleItemInventory;
-import kenijey.harshencastle.enums.blocks.CauldronLiquid;
+import kenijey.harshencastle.enums.CauldronLiquid;
 import kenijey.harshencastle.enums.items.EnumGlassContainer;
 import kenijey.harshencastle.tileentity.TileEntityHereticCauldron;
 import net.minecraft.block.material.Material;

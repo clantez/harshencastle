@@ -1,7 +1,7 @@
 package kenijey.harshencastle.enums.items;
 
 import kenijey.harshencastle.HarshenItems;
-import kenijey.harshencastle.enums.blocks.CauldronLiquid;
+import kenijey.harshencastle.enums.CauldronLiquid;
 import kenijey.harshencastle.interfaces.IIDSet;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
