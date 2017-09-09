@@ -3,6 +3,7 @@ package kenijey.harshencastle.handlers.client;
 import org.lwjgl.input.Keyboard;
 
 import kenijey.harshencastle.HarshenCastle;
+import kenijey.harshencastle.HarshenClientUtils;
 import kenijey.harshencastle.inventory.GuiHandler;
 import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.network.packets.MessagePacketOpenInv;
@@ -45,11 +46,7 @@ public class HandlerKeyBinding
 		if(minering.isPressed())
 			sendRingEvent(1);
 		if(openInventory.isPressed())
-		{
-			EntityPlayer player = 	Minecraft.getMinecraft().player;
-			player.openGui(HarshenCastle.instance, GuiHandler.CUSTOMINVENTORY, player.world, (int)player.posX, (int)player.posY, (int)player.posZ);
-			HarshenNetwork.sendToServer(new MessagePacketOpenInv());
-		}
+			HarshenClientUtils.openInventory();
 	}
 	
 	private void sendRingEvent(int ringType)

@@ -2,6 +2,9 @@ package kenijey.harshencastle;
 
 import javax.vecmath.Vector4f;
 
+import kenijey.harshencastle.inventory.GuiHandler;
+import kenijey.harshencastle.network.HarshenNetwork;
+import kenijey.harshencastle.network.packets.MessagePacketOpenInv;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -140,5 +143,12 @@ public class HarshenClientUtils
         GlStateManager.glLineWidth(1.0F);
         GlStateManager.enableBlend();
         GlStateManager.enableTexture2D();
+	}
+	
+	public static void openInventory()
+	{
+		EntityPlayer player = Minecraft.getMinecraft().player;
+		player.openGui(HarshenCastle.instance, GuiHandler.CUSTOMINVENTORY, player.world, (int)player.posX, (int)player.posY, (int)player.posZ);
+		HarshenNetwork.sendToServer(new MessagePacketOpenInv());
 	}
 }
