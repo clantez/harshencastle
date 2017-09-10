@@ -26,4 +26,9 @@ public class IronBow extends BaseHarshenBow
 	public double additionDamage() {
 		return 1.5D;
 	}
+	
+	@Override
+	protected boolean useDefaultArrow() {
+		return true;
+	}
 }

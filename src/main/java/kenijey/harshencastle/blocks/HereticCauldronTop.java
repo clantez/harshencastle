@@ -63,9 +63,11 @@ public class HereticCauldronTop extends Block implements ITileEntityProvider
 	
 	@Override
 	public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
-		super.onBlockHarvested(worldIn, pos, state, player);
 		if(worldIn.getBlockState(pos.down()).getBlock() instanceof HereticCauldron)
+		{
+			worldIn.getBlockState(pos.down()).getBlock().onBlockHarvested(worldIn, pos.down(), worldIn.getBlockState(pos.down()), player);
 			worldIn.destroyBlock(pos.down(), !player.isCreative());
+		}
 	}
 
 	@Override

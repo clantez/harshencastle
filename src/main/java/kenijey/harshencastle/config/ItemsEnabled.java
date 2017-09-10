@@ -27,6 +27,11 @@ public class ItemsEnabled extends BaseConfig
 	public void read() {
 		for(Item item: allItems)
 		{
+			if(item.getRegistryName() == null)
+			{
+				new NullPointerException("Tried to config a Item with no registry name. Item: " + item.getClass());
+				continue;
+			}
 			String itemPath = item.getRegistryName().getResourcePath();
 			Property property = config.get(CATEGORY_ITEM, itemPath, true);
 			property.setComment(new TextComponentTranslation("config.isEnabled", new TextComponentTranslation(item.getUnlocalizedName() + ".name").getUnformattedText()).getUnformattedText());

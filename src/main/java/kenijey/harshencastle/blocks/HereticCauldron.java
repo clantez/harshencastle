@@ -2,6 +2,7 @@ package kenijey.harshencastle.blocks;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 import javax.annotation.Nullable;
 
@@ -10,12 +11,14 @@ import kenijey.harshencastle.base.BaseBlockHarshenSingleInventory;
 import kenijey.harshencastle.base.BaseTileEntityHarshenSingleItemInventory;
 import kenijey.harshencastle.enums.CauldronLiquid;
 import kenijey.harshencastle.enums.items.EnumGlassContainer;
+import kenijey.harshencastle.items.GlassContainer;
 import kenijey.harshencastle.tileentity.TileEntityHereticCauldron;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.BlockRenderLayer;
@@ -30,9 +33,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class HereticCauldron extends BaseBlockHarshenSingleInventory
-{
-	private static HashMap<BlockPos, Boolean> creativeBreakMap = new HashMap<>();
-	
+{	
 	protected static final AxisAlignedBB AABB_LEGS = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.3125D, 1.0D);
 	protected static final AxisAlignedBB AABB_WALL_NORTH = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 0.125D);
 	protected static final AxisAlignedBB AABB_WALL_SOUTH = new AxisAlignedBB(0.0D, 0.0D, 0.875D, 1.0D, 1.0D, 1.0D);
@@ -88,6 +89,10 @@ public class HereticCauldron extends BaseBlockHarshenSingleInventory
 			worldIn.destroyBlock(pos, true);
 	}
 	
+	@Override
+	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+		return null;
+	}
 	
 	@Override
 	public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
@@ -133,7 +138,7 @@ public class HereticCauldron extends BaseBlockHarshenSingleInventory
 	@Override
 	protected String extraName(NBTTagCompound nbt, boolean isItem) {
 		return CauldronLiquid.getFromId(nbt.getInteger("FluidValue")) == CauldronLiquid.NONE? "" : 
-			(isItem? " & " : "") + new TextComponentTranslation("fluid." + CauldronLiquid.getFromId(nbt.getInteger("FluidValue")).getName()).getFormattedText();
+			(isItem? " & " : "") +  GlassContainer.getGlassContaining(CauldronLiquid.getFromId(nbt.getInteger("FluidValue")));
 	}
 	
 	@Override

@@ -19,6 +19,7 @@ import kenijey.harshencastle.items.BloodyApple;
 import kenijey.harshencastle.items.BloodyEarring;
 import kenijey.harshencastle.items.BloodyPontusCube;
 import kenijey.harshencastle.items.BrokenArrow;
+import kenijey.harshencastle.items.CombatPendant;
 import kenijey.harshencastle.items.CriminalPendant;
 import kenijey.harshencastle.items.ElementalPendant;
 import kenijey.harshencastle.items.ElytraPendant;
@@ -131,6 +132,7 @@ public class HarshenItems
 	public static Item mystic_feather;
 	public static Item lightning_staff;
 	public static Item solidifying_paste; 
+	public static Item combat_pendant;
 	
 	public static void preInit()
 	{
@@ -189,6 +191,7 @@ public class HarshenItems
 		lightning_staff = new LightningStaff();
 		solidifying_paste = new SolidifyingPaste();
 		item_liquid = new ItemLiquid();
+		combat_pendant = new CombatPendant();
 	}
 	
 	public static void reg()
@@ -241,6 +244,7 @@ public class HarshenItems
 		regItem(xray_pendant);
 		regItem(fiery_ring);
 		regItem(elytra_pendant);
+		regItem(combat_pendant);
 		
 		regMetaItem(item_liquid, 64, emptyList(EnumItemLiquid.values().length), "item_liquid");
 		regMetaItem(ritual_stick, emptyList(EnumRitualStick.values().length), "ritual_stick");

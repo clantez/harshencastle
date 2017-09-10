@@ -2,7 +2,6 @@ package kenijey.harshencastle.base;
 
 import javax.annotation.Nullable;
 
-import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.entity.vanilla.HarshenArrow;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
@@ -43,12 +42,12 @@ public abstract class BaseHarshenBow extends ItemBow
                 }
                 else
                 {
-                    return entityIn.getActiveItemStack().getItem() != HarshenItems.enion_bow ? 0.0F : (float)(stack.getMaxItemUseDuration() - entityIn.getItemInUseCount()) / 15.0F;
+                    return entityIn.getActiveItemStack().getItem() instanceof BaseHarshenBow ? (float)(stack.getMaxItemUseDuration() - entityIn.getItemInUseCount()) / 15.0F : 0.0F;
                 }
             }
         });
 	}
-	
+		
 	public abstract int getMaxDamage();
 
 	public int getMaxItemUseDuration(ItemStack stack)
@@ -64,6 +63,11 @@ public abstract class BaseHarshenBow extends ItemBow
 	}
 	
 	protected boolean isRipper()
+	{
+		return false;
+	}
+	
+	protected boolean useDefaultArrow()
 	{
 		return false;
 	}
@@ -142,7 +146,8 @@ public abstract class BaseHarshenBow extends ItemBow
                     if (!worldIn.isRemote)
                     {
                         ItemArrow itemarrow = (ItemArrow)(itemstack.getItem() instanceof ItemArrow ? itemstack.getItem() : Items.ARROW);
-                        EntityArrow entityarrow = new HarshenArrow(itemarrow.createArrow(worldIn, itemstack, entityplayer), isRipper());
+                        EntityArrow arrow = itemarrow.createArrow(worldIn, itemstack, entityplayer);
+                        EntityArrow entityarrow = useDefaultArrow() ? arrow : new HarshenArrow(arrow, isRipper());
                         entityarrow.setAim(entityplayer, entityplayer.rotationPitch, entityplayer.rotationYaw, 0.0F, f * 3.0F, 1.0F);
                         
                         if (f == 1.0F)
