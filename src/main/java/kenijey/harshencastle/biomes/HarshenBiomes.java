@@ -15,6 +15,7 @@ public class HarshenBiomes
 	
 	public static BasePontusResourceBiome pontus_dimensional_biome;
 	public static BasePontusResourceBiome pontus_outer_biome;
+	public static BasePontusResourceBiome pontus_far_biome;
 		
 	public static ArrayList<BasePontusResourceBiome> allBiomes = new ArrayList<>();
 	
@@ -22,6 +23,7 @@ public class HarshenBiomes
 	{
 		pontus_dimensional_biome = initAndRegBiome(new PontusBiome());
 		pontus_outer_biome = initAndRegBiome(new PontusOuterBiome());
+		pontus_far_biome = initAndRegBiome(new PontusFarBiome());
 	}
 	
 	private static BasePontusResourceBiome initAndRegBiome(BasePontusResourceBiome biome)

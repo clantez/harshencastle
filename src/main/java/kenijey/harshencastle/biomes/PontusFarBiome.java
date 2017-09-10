@@ -5,70 +5,77 @@ import java.util.Random;
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.base.BaseLargeTreeGenerator;
+import kenijey.harshencastle.base.BasePineTreeGenerator;
 import kenijey.harshencastle.base.BasePontusResourceBiome;
+import kenijey.harshencastle.entity.EntitySoullessKnight;
 import kenijey.harshencastle.worldgenerators.pontus.PontusWorldGeneratorDestroyedPlants;
 import net.minecraft.block.Block;
 import net.minecraft.entity.monster.EntityEnderman;
-import net.minecraft.entity.monster.EntityEndermite;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.common.BiomeDictionary.Type;
 
-public class PontusOuterBiome extends BasePontusResourceBiome {
+public class PontusFarBiome extends BasePontusResourceBiome {
 		
-	public PontusOuterBiome() {
-		super("Pontus_Chaotic");
+	public PontusFarBiome() {
+		super("Pontus_Far");
 		
 		this.spawnableCaveCreatureList.clear();
 		this.spawnableCaveCreatureList.add(new SpawnListEntry(EntityEnderman.class, 10, 2, 7));
 		
 		this.spawnableCreatureList.clear();
-		this.spawnableCreatureList.add(new SpawnListEntry(EntityEndermite.class, 100, 5, 17));
+		this.spawnableCreatureList.add(new SpawnListEntry(EntitySoullessKnight.class, 12, 3, 7));
 
-		this.decorator.extraTreeChance = 0.5f;		
+		this.decorator.extraTreeChance = 0.7f;		
 		
 	}
 	
 	@Override
 	public WorldGenAbstractTree getRandomTreeFeature(Random rand) {
-		return new BaseLargeTreeGenerator(false, HarshenBlocks.pontus_chaotic_leaves.getDefaultState(), HarshenBlocks.pontus_chaotic_wood);
-	}
-	
-	@Override
-	public WorldGenerator getRandomWorldGenForGrass(Random rand) {
-		return new PontusWorldGeneratorDestroyedPlants();
-	}
+		this.decorator.treesPerChunk = 3;
+		return new BasePineTreeGenerator(HarshenBlocks.pontus_far_wood, HarshenBlocks.pontus_far_leaves.getDefaultState());
+	}	
 	
 	@Override
 	public int getLevel() {
-		return 1;
+		return 2;
 	}
 	
 	@Override
 	public int distanceStartSpawn() {
-		return 7500;
+		return 20000;
+	}
+	
+	@Override
+	public float scrollAcrossSpeed() {
+		return 0;
+	}
+	
+	@Override
+	public float scrollDownSpeed() {
+		return 2;
 	}
 
 
 	@Override
 	public Block[] getGroundBlocks() {
-		return HarshenUtils.blockList(HarshenBlocks.harshen_dimensional_rock, HarshenBlocks.harshen_chaotic_rock);
+		return HarshenUtils.blockList(HarshenBlocks.harshen_far_rock, HarshenBlocks.harshen_chaotic_rock);
 	}
 
 
 	@Override
 	public Block getMergerBlockDownLevel() {
 		return HarshenBlocks.harshen_chaotic_rock;
-	}
+	}	
 	
 	@Override
-	public Block getMergerBlockUpLevel() {
-		return HarshenBlocks.harshen_dimensional_rock;
+	protected Block getMergerBlockUpLevel() {
+		return HarshenBlocks.harshen_far_rock;
 	}
 	
 	@Override
 	public Type[] getTypes() {
-		return new Type[]{Type.DRY, Type.MOUNTAIN};
+		return new Type[]{Type.COLD, Type.MOUNTAIN};
 	}	
 
 }

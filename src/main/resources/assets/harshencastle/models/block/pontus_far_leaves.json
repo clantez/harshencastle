@@ -1,0 +1,6 @@
+{
+    "parent": "block/cube_all",
+    "textures": {
+        "all": "harshencastle:blocks/pontus_far_leaves"
+    }
+}

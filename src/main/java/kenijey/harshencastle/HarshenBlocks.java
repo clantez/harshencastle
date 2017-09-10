@@ -25,6 +25,7 @@ import kenijey.harshencastle.blocks.HarshenDimensionalStairs;
 import kenijey.harshencastle.blocks.HarshenDimensionalStone;
 import kenijey.harshencastle.blocks.HarshenDimensionalWoodCrate;
 import kenijey.harshencastle.blocks.HarshenDisplayBlock;
+import kenijey.harshencastle.blocks.HarshenFarRock;
 import kenijey.harshencastle.blocks.HarshenHiddenPlate;
 import kenijey.harshencastle.blocks.HarshenHiddenPlateActive;
 import kenijey.harshencastle.blocks.HarshenMagicTable;
@@ -42,6 +43,8 @@ import kenijey.harshencastle.blocks.PontusChaoticWood;
 import kenijey.harshencastle.blocks.PontusDeadLeaves;
 import kenijey.harshencastle.blocks.PontusDeadWood;
 import kenijey.harshencastle.blocks.PontusEmeraldOre;
+import kenijey.harshencastle.blocks.PontusFarLeaves;
+import kenijey.harshencastle.blocks.PontusFarWood;
 import kenijey.harshencastle.blocks.SoulReminder;
 import kenijey.harshencastle.config.BlocksEnabled;
 import net.minecraft.block.Block;
@@ -82,6 +85,7 @@ public class HarshenBlocks {
 	public static Block harshen_destroyed_plant;
 	public static Block harshen_dimensional_rock;
 	public static Block harshen_chaotic_rock;
+	public static Block harshen_far_rock;
 	public static Block harshen_dimensional_pedestal;
 	public static Block harshen_dimensional_gate;
 	public static Block heretic_cauldron;
@@ -99,6 +103,7 @@ public class HarshenBlocks {
 	public static Block kuantic_ore;
 	public static Block block_of_heads;
 	public static Block harshen_magic_table;
+	public static Block pontus_far_leaves;
 	
 	public static BlockCrops crop_of_gleam;
 
@@ -107,7 +112,7 @@ public class HarshenBlocks {
 	
 	public static BlockLog pontus_dead_wood;
 	public static BlockLog pontus_chaotic_wood;
-
+	public static BlockLog pontus_far_wood;
 	
 	public static void preInit() {
 		harshen_soul_ore = new HarshenSoulOre();
@@ -150,6 +155,9 @@ public class HarshenBlocks {
 		kuantic_ore = new KuanticOre();
 		block_of_heads = new BlockOfHeads();
 		harshen_magic_table = new HarshenMagicTable();
+		pontus_far_leaves = new PontusFarLeaves();
+		pontus_far_wood = new PontusFarWood();
+		harshen_far_rock = new HarshenFarRock();
 	}
 
 	public static void reg() {
@@ -165,12 +173,15 @@ public class HarshenBlocks {
 		regBlock(harshen_dimensional_dirt, 64);
 		regBlock(harshen_dimensional_rock, 64);
 		regBlock(harshen_chaotic_rock, 64);
+		regBlock(harshen_far_rock, 64);
 		regBlock(harshen_dimensional_gate, 1, HarshenDimensionalGate.FOREVER);
 		regBlock(harshen_spawner, 64);
 		regBlock(pontus_dead_wood, 64);
 		regBlock(pontus_chaotic_wood, 64);
 		regBlock(pontus_dead_leaves, 64);
 		regBlock(pontus_chaotic_leaves, 64);
+		regBlock(pontus_far_wood, 64);
+		regBlock(pontus_far_leaves, 64);
 		regBlock(heretic_cauldron, 64);
 		regBlock(harshen_soul_ore, 64);
 		regBlock(itium_ore, 64);

@@ -4,6 +4,7 @@ import java.util.Random;
 
 import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.HarshenUtils;
+import kenijey.harshencastle.base.BasePontusResourceBiome;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -72,7 +73,7 @@ public class WeatherPontus extends IRenderHandler
                 double d3 = (double)this.rainXCoords[i2] * 0.5D;
                 double d4 = (double)this.rainYCoords[i2] * 0.5D;
                 blockpos$mutableblockpos.setPos(l1, 0, k1);
-                Biome biome = world.getBiome(blockpos$mutableblockpos);
+                BasePontusResourceBiome biome = (BasePontusResourceBiome) world.getBiome(blockpos$mutableblockpos);
                 int j2 = 0;
                 int i1 = 25;
                 int k2 = j - i1;
@@ -104,14 +105,12 @@ public class WeatherPontus extends IRenderHandler
                         {
                             tessellator.draw();
                         }
-
-                        j1 = 1;
                         mc.getTextureManager().bindTexture(new ResourceLocation(HarshenCastle.MODID, "textures/biome-walls/" + biome.getBiomeName().toLowerCase() + ".png"));
+                        j1 = 1;
                         bufferbuilder.begin(7, DefaultVertexFormats.PARTICLE_POSITION_TEX_COLOR_LMAP);
                     }
-
-                    double d8 = (double)(-((float)(update & 511) + partialTicks) / 512.0F);
-                    double d9 = 0.5 + (double)f1 * 0.01D;
+                    double d8 = (double)(-((float)(update & 511) + partialTicks) / 512.0F) * biome.scrollDownSpeed();
+                    double d9 = 0.5 + (double)f1 * 0.01D * biome.scrollAcrossSpeed();
                     double d10 = 0.5 + (double)(f1 * 0.5) * 0.001D;
                     double d11 = (double)((float)l1 + 0.5F) - entity.posX;
                     double d12 = (double)((float)k1 + 0.5F) - entity.posZ;

@@ -31,7 +31,8 @@ public class HandlerFlatPlateRenderer
 	
 	private BlockPos renderAt(BlockPos pos, float partialTicks)
 	{
-		HarshenClientUtils.renderFaceAt(EnumFacing.DOWN, pos, partialTicks, new Vector4f(0, 0, 1, 1));
-        return pos;
+		return pos;
+//		HarshenClientUtils.renderFaceAt(EnumFacing.DOWN, pos, partialTicks, new Vector4f(0, 0, 1, 1));
+//        return pos;
 	}
 }

@@ -68,7 +68,7 @@ public class WorldGen implements IWorldGenerator
 			{
 				BlockPos[] positionsOfFillableChests = {new BlockPos(9, 20, 36), new BlockPos(15, 20, 40), new BlockPos(15, 20, 40), new BlockPos(19, 20, 31)};
 				BlockPos position = HarshenUtils.getTopBlock(world, new BlockPos(chunkX * 16, 1, chunkZ * 16)).add(-36, -20, 1);
-				BlockPos castleSize = getSizeFromName(world, "harshencastlevol4");
+				BlockPos castleSize = getSizeFromName(world, "harshencastlevol4").add(-1, 0, -2);
 				for(int i = 0; i < 4; i++)
 					new MazeGenerator(new BlockPos(castleSize.getX(), 3, castleSize.getZ()), HarshenBlocks.harshen_dimensional_stone.getDefaultState(), 0.35f).generate(world, random, position.add(1, 1 + (i * 4), 2));
 				loadStructure(world, "harshencastlevol4", position);

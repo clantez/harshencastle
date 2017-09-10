@@ -10,6 +10,8 @@ import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.base.BasePontusResourceBiome;
 import kenijey.harshencastle.biomes.HarshenBiomes;
 import kenijey.harshencastle.biomes.PontusBiomeProvider;
+import kenijey.harshencastle.biomes.PontusFarBiome;
+import kenijey.harshencastle.biomes.PontusOuterBiome;
 import kenijey.harshencastle.fluids.HarshenFluids;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
@@ -183,7 +185,8 @@ public class PontusChunkProvider implements IChunkGenerator
                             					blockList.addAll(HarshenUtils.toArrayBlock(thisBiome.getGroundBlocks()));
                             				for(int i3 = 0; i3 < Math.floorDiv(Math.round(80 - Math.abs(PontusBiomeProvider.getDistance(HarshenUtils.chunkToPos(x, z)) - biome.distanceStartSpawn())), 4); i3 ++)
 	                            				blockList.add(HarshenBiomes.allBiomes.get(HarshenBiomes.allBiomes.indexOf(thisBiome)
-	                            						+ (PontusBiomeProvider.getDistance(HarshenUtils.chunkToPos(x, z)) - biome.distanceStartSpawn() < 0 ? 1 : -1)).getMergerBlock());
+	                            						+ (PontusBiomeProvider.getDistance(HarshenUtils.chunkToPos(x, z)) - biome.distanceStartSpawn() < 0 ? 1 : -1))
+	                            							.getMergerBlock(PontusBiomeProvider.getDistance(HarshenUtils.chunkToPos(x, z)) - biome.distanceStartSpawn() < 0));
                             				break;
                             			}
                             		if(i2 * 8 + j2 > thisBiome.getHeightForNonHeightBlocks() && thisBiome.getNonHightBlocks() != null)

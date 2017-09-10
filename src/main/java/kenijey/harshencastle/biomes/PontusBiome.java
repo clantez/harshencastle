@@ -6,12 +6,9 @@ import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.base.BasePontusResourceBiome;
 import kenijey.harshencastle.worldgenerators.pontus.PontusWorldGeneratorDestroyedPlants;
-import kenijey.harshencastle.worldgenerators.pontus.PontusWorldGeneratorStone;
 import net.minecraft.block.Block;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.monster.EntityEndermite;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenTrees;
 import net.minecraft.world.gen.feature.WorldGenerator;
@@ -42,17 +39,6 @@ public class PontusBiome extends BasePontusResourceBiome
 	}
 	
 	@Override
-	public void decorate(World worldIn, Random rand, BlockPos pos) {
-		super.decorate(worldIn, rand, pos);
-		for (int i = 0; i < 13; ++i)
-        {
-            int j = rand.nextInt(16) + 8;
-            int k = rand.nextInt(16) + 8;
-            new PontusWorldGeneratorStone().generate(worldIn, rand, worldIn.getTopSolidOrLiquidBlock(pos.add(j, 0, k)));
-        }
-	}
-	
-	@Override
 	public Block[] getNonHightBlocks() {
 		return HarshenUtils.blockList(HarshenBlocks.harshen_dimensional_dirt);
 	}
@@ -75,7 +61,12 @@ public class PontusBiome extends BasePontusResourceBiome
 
 
 	@Override
-	public Block getMergerBlock() {
+	public Block getMergerBlockDownLevel() {
+		return HarshenBlocks.harshen_dimensional_dirt;
+	}
+	
+	@Override
+	public Block getMergerBlockUpLevel() {
 		return HarshenBlocks.harshen_dimensional_dirt;
 	}
 
