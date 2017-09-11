@@ -10,10 +10,6 @@ import kenijey.harshencastle.base.BaseJeiWrapper;
 import kenijey.harshencastle.enums.CauldronLiquid;
 import kenijey.harshencastle.recipies.CauldronRecipes;
 import mezz.jei.api.ingredients.IIngredients;
-import mezz.jei.input.InputHandler;
-import mezz.jei.plugins.jei.JEIInternalPlugin;
-import mezz.jei.runtime.JeiHelpers;
-import mezz.jei.runtime.JeiRuntime;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 
