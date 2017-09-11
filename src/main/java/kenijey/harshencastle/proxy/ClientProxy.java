@@ -21,6 +21,7 @@ import kenijey.harshencastle.handlers.client.HandlerGameOverlay;
 import kenijey.harshencastle.handlers.client.HandlerGuiEvent;
 import kenijey.harshencastle.handlers.client.HandlerKeyBinding;
 import kenijey.harshencastle.handlers.client.HandlerRendererGuiInventory;
+import kenijey.harshencastle.handlers.client.HandlerUpdateChecker;
 import kenijey.harshencastle.itemrenderer.RendererBloodFactory;
 import kenijey.harshencastle.itemrenderer.RendererDimensionalPedestal;
 import kenijey.harshencastle.itemrenderer.RendererHarshenDisplayBlock;
@@ -127,8 +128,14 @@ public class ClientProxy extends CommonProxy
     {
     	super.init(event);
     	
-    	Object[] handlers = {new HandlerKeyBinding(), new  HandlerGameOverlay(), new HandlerGuiEvent(), new HandlerRendererGuiInventory(), 
-    			new HandlerClientHarshenInventoryEffects(), new HandlerFlatPlateRenderer()};
+    	Object[] handlers = {
+    			new HandlerKeyBinding(),
+    			new  HandlerGameOverlay(),
+    			new HandlerGuiEvent(),
+    			new HandlerRendererGuiInventory(), 
+    			new HandlerClientHarshenInventoryEffects(),
+    			new HandlerFlatPlateRenderer(),
+    			new HandlerUpdateChecker()};
     	for(Object o : handlers)
     	{
     		MinecraftForge.EVENT_BUS.register(o);

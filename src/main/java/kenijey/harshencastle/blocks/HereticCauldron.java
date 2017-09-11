@@ -125,27 +125,34 @@ public class HereticCauldron extends BaseBlockHarshenSingleInventory
 	}
 	
 	@Override
-	protected boolean isBreakNBT() {
+	protected boolean isBreakNBT(ItemStack stack) {
 		return true;
 	}
 	
 	@Override
-	protected void addNBT(NBTTagCompound nbt, World worldIn, BlockPos pos) {
+	protected void addNBT(ItemStack stack, NBTTagCompound nbt, World worldIn, BlockPos pos) {
+		if(getTile(worldIn, pos).getLevel() == 0)
+		{
+			stack.setTagCompound(null);
+			return;
+		}
 		nbt.setInteger("FluidValue", getTile(worldIn, pos).getFluid().getId());
 		nbt.setInteger("FluidLevel", getTile(worldIn, pos).getLevel());
 	}
 	
 	@Override
 	protected String extraName(NBTTagCompound nbt, boolean isItem) {
-		return CauldronLiquid.getFromId(nbt.getInteger("FluidValue")) == CauldronLiquid.NONE? "" : 
+		return nbt.getInteger("FluidLevel") == 0 ? "" : 
 			(isItem? " & " : "") +  GlassContainer.getGlassContaining(CauldronLiquid.getFromId(nbt.getInteger("FluidValue")));
 	}
 	
 	@Override
 	protected void readNBT(BaseTileEntityHarshenSingleItemInventory tileEntity, ItemStack stack)
 	{
-		((TileEntityHereticCauldron)tileEntity).setFluid(CauldronLiquid.getFromId(stack.serializeNBT().getCompoundTag("tag").getInteger("FluidValue")));
-		((TileEntityHereticCauldron)tileEntity).setLevel(stack.serializeNBT().getCompoundTag("tag").getInteger("FluidLevel"));
+		if(!hasKey(stack, "FluidValue"))
+			return;
+		((TileEntityHereticCauldron)tileEntity).setFluid(CauldronLiquid.getFromId(stack.getTagCompound().getInteger("FluidValue")));
+		((TileEntityHereticCauldron)tileEntity).setLevel(stack.getTagCompound().getInteger("FluidLevel"));
 
 	}
 }

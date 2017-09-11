@@ -55,8 +55,9 @@ public abstract class BaseBlockHarshenSingleInventory extends Block implements I
 	{	
 		BaseTileEntityHarshenSingleItemInventory te = (BaseTileEntityHarshenSingleItemInventory) worldIn.getTileEntity(pos);
 		IItemHandler handler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+
 		if(!worldIn.isRemote)
-			if(isBreakNBT())
+			if(isBreakNBT(handler.getStackInSlot(0)))
 			{
 				ItemStackHandler handlerStack = new ItemStackHandler(1);
 				handlerStack.setStackInSlot(0, handler.getStackInSlot(0));
@@ -68,11 +69,14 @@ public abstract class BaseBlockHarshenSingleInventory extends Block implements I
 			        nbttagcompound.setTag("ItemStackHandler", handlerStack.serializeNBT());
 			        stackName +=  I18n.translateToLocal(handlerStack.getStackInSlot(0).getItem().getUnlocalizedName() + ".name");
 				}
-				addNBT(nbttagcompound, worldIn, pos);
-		        stack.setTagCompound(nbttagcompound);
-				stackName += extraName(nbttagcompound, handlerStack.getStackInSlot(0).getItem() != Items.AIR);
-				stackName = stackName.equals("")? "§r" + getLocalizedName() : "§r" + getLocalizedName() + " (" + stackName + ")";
-				stack.setStackDisplayName(stackName);
+				addNBT(handler.getStackInSlot(0), nbttagcompound, worldIn, pos);
+				if(!nbttagcompound.getKeySet().isEmpty() || !handlerStack.getStackInSlot(0).isEmpty())
+				{
+					stack.setTagCompound(nbttagcompound);
+					stackName += extraName(nbttagcompound, handlerStack.getStackInSlot(0).getItem() != Items.AIR);
+					stackName = stackName.equals("")? "§r" + getLocalizedName() : "§r" + getLocalizedName() + " (" + stackName + ")";
+					stack.setStackDisplayName(stackName);
+				}
 				if(!creativeBreakMap.containsKey(pos) || !creativeBreakMap.get(pos))
 					worldIn.spawnEntity(new EntityItem(worldIn, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, stack));
 				creativeBreakMap.remove(pos);
@@ -121,7 +125,7 @@ public abstract class BaseBlockHarshenSingleInventory extends Block implements I
 		return false;
 	}
 	
-	protected boolean isBreakNBT()
+	protected boolean isBreakNBT(ItemStack stack)
 	{
 		return false;
 	}
@@ -131,7 +135,7 @@ public abstract class BaseBlockHarshenSingleInventory extends Block implements I
 		return "";
 	}
 	
-	protected void addNBT(NBTTagCompound nbt, World worldIn, BlockPos pos)
+	protected void addNBT(ItemStack stack, NBTTagCompound nbt, World worldIn, BlockPos pos)
 	{
 		
 	}
@@ -139,6 +143,11 @@ public abstract class BaseBlockHarshenSingleInventory extends Block implements I
 	protected void readNBT(BaseTileEntityHarshenSingleItemInventory tileEntity, ItemStack stack)
 	{
 		
+	}
+	
+	protected boolean hasKey(ItemStack stack, String key)
+	{
+		return stack.hasTagCompound() && stack.getTagCompound().hasKey(key);
 	}
 
 }

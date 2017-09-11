@@ -2,6 +2,9 @@ package kenijey.harshencastle;
 
 import java.util.Arrays;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import kenijey.harshencastle.commands.CommandAccessPontusOuter;
 import kenijey.harshencastle.creativetabs.HarshenTab;
 import kenijey.harshencastle.dimensions.DimensionPontus;
@@ -26,11 +29,15 @@ public class HarshenCastle {
     public static final String MODID = "harshencastle";
     public static final String MODNAME = "Harshen Castle";
     public static final String VERSION = "0.9.2";
+    public static final String UPDATE_URL = "http://www.wynprice.com/moddedUpdateCheckers/harshencastle.json";
 
     @SidedProxy(clientSide = "kenijey.harshencastle.proxy.ClientProxy", serverSide = "kenijey.harshencastle.proxy.ServerProxy")
     public static CommonProxy proxy;
     
     public static final CreativeTabs harshenTab = new HarshenTab("harshenTab");
+    
+    public static final Logger logger = LogManager.getFormatterLogger(MODID); 
+
     
     @Instance(MODID)
     public static HarshenCastle instance;
@@ -71,4 +78,5 @@ public class HarshenCastle {
     public World getPontusWorld() {
 		return FMLCommonHandler.instance().getMinecraftServerInstance().getWorld(DimensionPontus.DIMENSION_ID);
 	}
+    
 }

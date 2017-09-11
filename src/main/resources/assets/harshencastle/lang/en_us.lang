@@ -143,18 +143,12 @@ fluid.milk=Milk
 
 
 #commands
-commands.getflat.usage=Used to locate the Harshen Dimensional Flat Plates in the area
-commands.getflat.failure=%s is not a number
-commands.getflat.notfound=Harshen Dimensional Flat Plate was not found in the area
-commands.getflat.toobig=%s is too big, maximum of 250
-
-commands.delflat.usage=Used to delete the Harshen Dimensional Flat Plates in the area
-commands.delflat.failure=%s is not a number
-commands.delflat.notfound=Harshen Dimensional Flat Plate was not found in the area
-commands.delflat.success=Removed %s Harshen Dimensional Flat Plate%s
-commands.delflat.toobig=%s is too big, maximum of 250
-
 commands.pontuslevel.success=%s's access level was set to %s
+
+#update Checker
+update.version=[%s] The Mod is out of date. Your version %s, target version: %s. Click here to go to page
+update.hover=Click To go to %s
+
 
 #gui
 gui.category.mobs=Mobs
