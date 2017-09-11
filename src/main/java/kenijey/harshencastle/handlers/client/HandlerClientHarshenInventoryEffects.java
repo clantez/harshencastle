@@ -26,7 +26,7 @@ public class HandlerClientHarshenInventoryEffects
 	public void RenderEventPre(RenderGameOverlayEvent.Pre event)
 	{
 		for(Entity e : Minecraft.getMinecraft().world.getLoadedEntityList())
-			e.setGlowing(e instanceof EntityMob && HarshenUtils.containsItem(Minecraft.getMinecraft().player, HarshenItems.ender_pendant));
+			e.setGlowing(e instanceof EntityLivingBase && HarshenUtils.containsItem(Minecraft.getMinecraft().player, HarshenItems.ender_pendant));
 		
 	}
 	

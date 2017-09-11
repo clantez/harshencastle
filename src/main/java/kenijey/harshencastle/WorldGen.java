@@ -44,9 +44,10 @@ public class WorldGen implements IWorldGenerator
 		{
 			if(random.nextFloat() < 0.001f)
 			{
-				BlockPos position = HarshenUtils.getTopBlock(world, new BlockPos(chunkX * 16, 1, chunkZ * 16).add(random.nextInt(16), 0, random.nextInt(16))).add(-3, -1, -3);
-				loadStructure(world, "shrine", position);
-				position = position.add(3, 1, 3);
+				BlockPos pos = HarshenUtils.getTopBlock(world, new BlockPos(chunkX * 16, 1, chunkZ * 16).add(random.nextInt(16), 0, random.nextInt(16))).add(-3, -1, -3);
+				HarshenStructure.shrine.loadIntoWorld(world, pos);
+				System.out.println(pos);
+				BlockPos position = pos.add(HarshenStructure.shrine.getGetFromOrigin());
 				world.setBlockState(position, Blocks.CHEST.getDefaultState().withProperty(BlockChest.FACING, EnumFacing.HORIZONTALS[random.nextInt(4)]), 3);
 				if(world instanceof WorldServer && world.getTileEntity(position) != null)
 				{
@@ -68,10 +69,10 @@ public class WorldGen implements IWorldGenerator
 			{
 				BlockPos[] positionsOfFillableChests = {new BlockPos(9, 20, 36), new BlockPos(15, 20, 40), new BlockPos(15, 20, 40), new BlockPos(19, 20, 31)};
 				BlockPos position = HarshenUtils.getTopBlock(world, new BlockPos(chunkX * 16, 1, chunkZ * 16)).add(-36, -20, 1);
-				BlockPos castleSize = getSizeFromName(world, "harshencastlevol4").add(-1, 0, -2);
+				BlockPos castleSize = HarshenStructure.castle.getSize().add(-1, 0, -2);
 				for(int i = 0; i < 4; i++)
 					new MazeGenerator(new BlockPos(castleSize.getX(), 3, castleSize.getZ()), HarshenBlocks.harshen_dimensional_stone.getDefaultState(), 0.35f).generate(world, random, position.add(1, 1 + (i * 4), 2));
-				loadStructure(world, "harshencastlevol4", position);
+				HarshenStructure.castle.loadIntoWorld(world, position);
 				for(int i = 0; i < 3; i++)
 					new ChestGenerator(castleSize, 0.015f, HarshenLootTables.harshen_castle, true).generate(world, random, position.add(1, 1 + (i * 4), 2));
 				for(BlockPos pos : positionsOfFillableChests)
@@ -85,7 +86,7 @@ public class WorldGen implements IWorldGenerator
 		{
 	    	oreGenerator(this.itiumOre, world, random, chunkX, chunkZ, 15, 0, 255);
 	    	oreGenerator(this.pontusEmeraldOre, world, random, chunkX, chunkZ, 25, 0, 255);
-	    	structureGenerator(world, random, chunkX, chunkZ, 5, "pontus/struc1", true, new BlockPos(26, 22, 26), new BlockPos(-8, 0, -12));
+	    	structureGenerator(world, random, chunkX, chunkZ, 5, true, HarshenStructure.pontus_struc1);
 		}
 	}
 	
@@ -101,17 +102,17 @@ public class WorldGen implements IWorldGenerator
 	}
 	
 	
-	private void structureGenerator(World world, Random rand, int chunk_X, int chunk_Z, int chancesToSpawn, String names, boolean useRuin, BlockPos size, BlockPos... addPositions)
+	private void structureGenerator(World world, Random rand, int chunk_X, int chunk_Z, int chancesToSpawn, boolean useRuin, HarshenStructure... structures)
 	{
-		if( rand.nextInt(100000) < chancesToSpawn) {
+		if(rand.nextInt(100000) < chancesToSpawn) {
 	        int x = chunk_X * 16 + rand.nextInt(16);
 	        int z = chunk_Z * 16 + rand.nextInt(16);
 	        int y = world.getTopSolidOrLiquidBlock(new BlockPos(x, 0, z)).getY();
-	        int i = rand.nextInt(names.split(",").length);
-	        loadStructure(world, names.split(",")[i], new BlockPos(x, y, z).add(addPositions[i]));
+	        int i = rand.nextInt(structures.length);
+	        structures[i].loadIntoWorld(world, new BlockPos(x, y, z));
 	        if(useRuin)
-	        	new PontusWorldRuinGenerator(size, HarshenBlocks.harshen_dimensional_wood_crate, HarshenBlocks.pontus_dead_wood, HarshenBlocks.harshen_dimensional_glass)
-	        	.generate(world, rand, new BlockPos(x, y, z).add(addPositions[i]));
+	        	new PontusWorldRuinGenerator(structures[i].getSize(), HarshenBlocks.harshen_dimensional_wood_crate, HarshenBlocks.pontus_dead_wood, HarshenBlocks.harshen_dimensional_glass)
+	        	.generate(world, rand, new BlockPos(x, y, z).add(structures[i].getGetFromOrigin()));
 
 		}
 	}

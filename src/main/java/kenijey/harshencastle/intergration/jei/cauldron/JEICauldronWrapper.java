@@ -40,10 +40,4 @@ public class JEICauldronWrapper extends BaseJeiWrapper
 	{
 		return catalyst;
 	}
-	
-	@Override
-	public boolean handleClick(Minecraft minecraft, int mouseX, int mouseY, int mouseButton) {
-		// TODO Auto-generated method stub
-		return super.handleClick(minecraft, mouseX, mouseY, mouseButton);
-	}
 }
