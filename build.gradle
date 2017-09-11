@@ -11,7 +11,7 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 //Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 
 
-version = "0.9.2"
+version = "0.9.3"
 group = "com.kenijey.harshencastle" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "harshencastle"
 
@@ -47,9 +47,9 @@ repositories {
 }
 dependencies {
     // compile against the JEI API but do not include it at runtime
-    deobfProvided "mezz.jei:jei_1.12:4.7.5.85:api"
+    deobfProvided "mezz.jei:jei_1.12.1:4.7.8.95:api"
     // at runtime, use the full JEI jar
-    runtime "mezz.jei:jei_1.12:4.7.5.85"
+    runtime "mezz.jei:jei_1.12.1:4.7.8.95"
     // you may put jars on which you depend on in ./libs
     // or you may define them like so..
     //compile "some.group:artifact:version:classifier"
