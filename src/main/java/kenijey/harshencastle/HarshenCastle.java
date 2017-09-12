@@ -23,7 +23,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
-@Mod(modid = HarshenCastle.MODID, name = HarshenCastle.MODNAME, version = HarshenCastle.VERSION, useMetadata = true/*, dependencies = "required-after:Forge@[14.21.1.2400,)"*/)
+@Mod(modid = HarshenCastle.MODID, name = HarshenCastle.MODNAME, version = HarshenCastle.VERSION, useMetadata = true, acceptedMinecraftVersions = "[1.12,1.12.1]")
 public class HarshenCastle {
 
     public static final String MODID = "harshencastle";
