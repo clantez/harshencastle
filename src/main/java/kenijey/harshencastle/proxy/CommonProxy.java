@@ -5,6 +5,7 @@ import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.HarshenRecipes;
 import kenijey.harshencastle.HarshenSounds;
+import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.WorldGen;
 import kenijey.harshencastle.armor.HarshenArmors;
 import kenijey.harshencastle.biomes.HarshenBiomes;
@@ -12,12 +13,12 @@ import kenijey.harshencastle.config.HarshenConfigs;
 import kenijey.harshencastle.dimensions.HarshenDimensions;
 import kenijey.harshencastle.dimensions.pontus.PontusWorldProvider;
 import kenijey.harshencastle.entity.HarshenEntities;
+import kenijey.harshencastle.enums.ItemLiquidTypeset;
 import kenijey.harshencastle.enums.SetIds;
 import kenijey.harshencastle.enums.gui.EnumGuiTypes;
 import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
 import kenijey.harshencastle.enums.items.EnumBloodCollector;
 import kenijey.harshencastle.enums.items.EnumGlassContainer;
-import kenijey.harshencastle.enums.items.EnumItemLiquid;
 import kenijey.harshencastle.enums.items.EnumPontusGateSpawner;
 import kenijey.harshencastle.enums.items.EnumPontusGateSpawnerParts;
 import kenijey.harshencastle.enums.items.EnumProp;
@@ -38,6 +39,7 @@ import kenijey.harshencastle.handlers.HandlerZombieEyeDrop;
 import kenijey.harshencastle.inventory.GuiHandler;
 import kenijey.harshencastle.models.ModelArmour;
 import kenijey.harshencastle.network.HarshenNetwork;
+import kenijey.harshencastle.objecthandlers.FaceRenderer;
 import kenijey.harshencastle.potions.HarshenPotions;
 import kenijey.harshencastle.tileentity.TileEntityBloodFactory;
 import kenijey.harshencastle.tileentity.TileEntityBloodVessel;
@@ -52,6 +54,7 @@ import kenijey.harshencastle.tileentity.TileEntityPedestalSlab;
 import net.minecraft.block.Block;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -106,7 +109,10 @@ public class CommonProxy
 		SetIds.setup(EnumProp.values());
 		SetIds.setup(EnumRitualStick.values());
 		SetIds.setup(EnumInventorySlots.values());	
-		SetIds.setup(EnumItemLiquid.values());
+		
+		for(EnumGlassContainer glass : EnumGlassContainer.values())
+			if(HarshenUtils.glassContainerHasBlock(glass))
+				new ItemLiquidTypeset(glass);
     }
 
     public void init(FMLInitializationEvent event) 
@@ -185,4 +191,9 @@ public class CommonProxy
 	{
 		return null;
 	};
+	
+	public void addErroredPosition(FaceRenderer renderer){}
+	
+	public void resetErroredPositions(){}
+
 }

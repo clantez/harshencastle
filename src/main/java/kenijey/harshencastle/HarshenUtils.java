@@ -11,6 +11,7 @@ import kenijey.harshencastle.base.BasePontusResourceBiome;
 import kenijey.harshencastle.config.BlocksEnabled;
 import kenijey.harshencastle.config.ItemsEnabled;
 import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
+import kenijey.harshencastle.enums.items.EnumGlassContainer;
 import kenijey.harshencastle.handlers.HandlerPontusAllowed;
 import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.network.packets.MessagePacketItemInventoryDamaged;
@@ -23,6 +24,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -60,12 +62,23 @@ public class HarshenUtils
 		return newList;
 	}
 	
+	public static String capitalize(String str)
+	{
+		return str.substring(0, 1).toUpperCase() + str.substring(1);
+	}
+	
 	public static ArrayList<ItemStack> cookStackList(List<ItemStack> list)
 	{
 		ArrayList<ItemStack> newList = new ArrayList<>();
 		for(ItemStack stack : list)
 			newList.add(getStackCooked(stack));
 		return newList;
+	}
+	
+	public static boolean glassContainerHasBlock(EnumGlassContainer glass)
+	{
+		 return glass.isSubContainer() && glass.getType().hasState() && glass.isPaste()
+				 && Item.getItemFromBlock(((IBlockState)glass.getType().getStateOrLoc()).getBlock()) != Items.AIR;
 	}
 	
 	public static ItemStack getStackCooked(ItemStack rawStack)

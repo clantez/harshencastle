@@ -8,9 +8,9 @@ import kenijey.harshencastle.dimensions.pontus.PontusWorldProvider;
 import kenijey.harshencastle.entity.EntityFactories;
 import kenijey.harshencastle.entity.EntitySoulPart;
 import kenijey.harshencastle.entity.EntitySoullessKnight;
+import kenijey.harshencastle.enums.ItemLiquidTypeset;
 import kenijey.harshencastle.enums.gui.EnumGuiTypes;
 import kenijey.harshencastle.enums.items.EnumGlassContainer;
-import kenijey.harshencastle.enums.items.EnumItemLiquid;
 import kenijey.harshencastle.enums.items.EnumRitualStick;
 import kenijey.harshencastle.enums.particle.EnumHarshenParticle;
 import kenijey.harshencastle.gui.GuiBookScreen;
@@ -20,6 +20,7 @@ import kenijey.harshencastle.handlers.client.HandlerFlatPlateRenderer;
 import kenijey.harshencastle.handlers.client.HandlerGameOverlay;
 import kenijey.harshencastle.handlers.client.HandlerGuiEvent;
 import kenijey.harshencastle.handlers.client.HandlerKeyBinding;
+import kenijey.harshencastle.handlers.client.HandlerRenderError;
 import kenijey.harshencastle.handlers.client.HandlerRendererGuiInventory;
 import kenijey.harshencastle.handlers.client.HandlerUpdateChecker;
 import kenijey.harshencastle.itemrenderer.RendererBloodFactory;
@@ -29,6 +30,7 @@ import kenijey.harshencastle.itemrenderer.RendererHarshenSpawner;
 import kenijey.harshencastle.itemrenderer.RendererHereticCauldron;
 import kenijey.harshencastle.itemrenderer.RendererPedestalSlab;
 import kenijey.harshencastle.models.ModelArmour;
+import kenijey.harshencastle.objecthandlers.FaceRenderer;
 import kenijey.harshencastle.particle.ParticleBlood;
 import kenijey.harshencastle.particle.ParticleCauldron;
 import kenijey.harshencastle.particle.ParticleCauldronTop;
@@ -54,6 +56,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
@@ -135,7 +138,8 @@ public class ClientProxy extends CommonProxy
     			new HandlerRendererGuiInventory(), 
     			new HandlerClientHarshenInventoryEffects(),
     			new HandlerFlatPlateRenderer(),
-    			new HandlerUpdateChecker()};
+    			new HandlerUpdateChecker(),
+    			new HandlerRenderError()};
     	for(Object o : handlers)
     	{
     		MinecraftForge.EVENT_BUS.register(o);
@@ -164,7 +168,7 @@ public class ClientProxy extends CommonProxy
 
 			@Override
 			public int getColorFromItemstack(ItemStack stack, int tintIndex) {
-				return EnumItemLiquid.getFromMeta(stack.getMetadata()) == null ? -1 : EnumGlassContainer.getContainerFromType(EnumItemLiquid.getFromMeta(stack.getMetadata()).getFluid()).color;
+				return ItemLiquidTypeset.getFromMeta(stack.getMetadata()) == null ? -1 : EnumGlassContainer.getContainerFromType(ItemLiquidTypeset.getFromMeta(stack.getMetadata()).getType()).color;
 			}
     	}, HarshenItems.item_liquid);
     }
@@ -244,5 +248,15 @@ public class ClientProxy extends CommonProxy
     	 return new ModelArmour(0.5f);
     	}
     	return null;
+    }
+    
+    @Override
+    public void addErroredPosition(FaceRenderer renderer) {
+    	HandlerRenderError.erroredPositions.add(renderer);
+    }
+    
+    @Override
+    public void resetErroredPositions() {
+    	HandlerRenderError.erroredPositions.clear();;
     }
 }

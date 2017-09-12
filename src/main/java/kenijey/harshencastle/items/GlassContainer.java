@@ -56,10 +56,16 @@ public class GlassContainer extends BaseItemMetaData
 	{
 		if(liquid == null)
 			return null;
-		return liquid.hasState() && !((IBlockState)liquid.getStateOrLoc()).getBlock().getLocalizedName().equals("tile.null.name") ? 
-				((IBlockState)liquid.getStateOrLoc()).getBlock().getLocalizedName() : 
-					new TextComponentTranslation("fluid." + liquid.getName()).getUnformattedText(); 
-
+		String s = liquid.hasState() && !((IBlockState)liquid.getStateOrLoc()).getBlock().getLocalizedName().equals("tile.null.name") ? 
+				((IBlockState)liquid.getStateOrLoc()).getBlock().getLocalizedName() :  new TextComponentTranslation("fluid." + liquid.getName()).getUnformattedText(); 
+		if(s.split(" ").length > 2 && s.split(" ")[0].equalsIgnoreCase("block") && s.split(" ")[1].equalsIgnoreCase("of"))
+		{
+			String s1 = "";
+			for(int i1 = 2; i1 < s.split(" ").length; i1++)
+				s1 += s.split(" ")[i1];
+			s = new TextComponentTranslation("liquid").getUnformattedText() + " " + s1;
+		}
+		return s;
 	}
 	
 	@Override

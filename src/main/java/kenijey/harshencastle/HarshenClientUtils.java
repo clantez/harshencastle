@@ -85,20 +85,27 @@ public class HarshenClientUtils
 	
 	private final static Vector4f WHITE = new Vector4f(1, 1, 1, 1);
 	
-	public static void renderFaceAt(EnumFacing face, BlockPos pos, float partialTicks, Vector4f color)
+	public static void renderFaceAt(EnumFacing face, BlockPos pos, float partialTicks, Vector4f color, float line)
 	{
+		setLine(line);
 		renderFaceAt(face, pos.getX(), pos.getY(), pos.getZ(), partialTicks, color);
 	}
 	
-	public static void renderFullBoxAt(BlockPos pos, float partialTicks, Vector4f color)
+	public static void renderFullBoxAt(BlockPos pos, float partialTicks, Vector4f color, float line)
 	{
 		for(EnumFacing face : EnumFacing.values())
-			renderFaceAt(face, pos, partialTicks, color);
+			renderFaceAt(face, pos, partialTicks, color, line);
 	}
 	
 	public static void renderFaceAt(EnumFacing face, BlockPos pos, float partialTicks)
 	{
 		renderFaceAt(face, pos.getX(), pos.getY(), pos.getZ(), partialTicks, WHITE);
+	}
+	
+	private static float line;
+	
+	public static void setLine(float line) {
+		HarshenClientUtils.line = line;
 	}
 	
 	public static void renderFullBoxAt(BlockPos pos, float partialTicks)
@@ -124,7 +131,7 @@ public class HarshenClientUtils
 	{
 		GlStateManager.disableTexture2D();
         GlStateManager.disableBlend();
-        GlStateManager.glLineWidth(0.5F);
+        GlStateManager.glLineWidth(line);
 		EntityPlayer entityplayer = Minecraft.getMinecraft().player;
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder bufferbuilder = tessellator.getBuffer();
@@ -141,6 +148,7 @@ public class HarshenClientUtils
 		Tessellator.getInstance().draw();
         Tessellator.getInstance().getBuffer().setTranslation(0, 0, 0);
         GlStateManager.glLineWidth(1.0F);
+        line = 0.5f;
         GlStateManager.enableBlend();
         GlStateManager.enableTexture2D();
 	}

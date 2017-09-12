@@ -71,6 +71,7 @@ item.raptor_scythe.name=Raptor Scythe
 item.elytra_pendant.name=Elytra Pendant
 item.mystic_feather.name=Mystic Feather
 item.lightning_staff.name=Lightning Staff
+item.item_liquid.name=%site
 
 #keybindings
 key.telering.description=Telering Teleport Key
@@ -78,6 +79,7 @@ key.minering.description=Minering Teleport Key
 
 #ritual
 ritual.fail.position=Ritual built wrong at %s, %s, %s. Expected %s, got %s
+ritual.fail.recipe=Ritual Recipe not found
 ritual.not=not
 
 #entity eggs
@@ -237,6 +239,8 @@ elytra_pendant2=Hold Right Click with your empty hand to boost.
 lightning_staff1=Recalls thunders from skies
 lightning_staff2=with a small amount of gold
 magic_table1=Meet with Harshen Magic
+itemliquid.rightclick=Right Click a Heretic Cauldron
+itemliquid.rightliquid=to put %s in.
 
 #misc
 itemGroup.harshenTab=Harshen Castle
@@ -245,6 +249,7 @@ message.success=Kazzendre: You hurt my soul...
 message.broken=Kazzendre: Don't touch any particle of me
 button.harsheninventory=Harshen Accessories
 button.normal=Inventory
+liquid=Liquid
 
 #JEI Recipies
 jei.ritual.name=Lightning Ritual

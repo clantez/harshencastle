@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 import kenijey.harshencastle.base.BaseItemMetaData;
 import kenijey.harshencastle.config.ItemsEnabled;
+import kenijey.harshencastle.enums.ItemLiquidTypeset;
 import kenijey.harshencastle.enums.items.EnumBloodCollector;
 import kenijey.harshencastle.enums.items.EnumGlassContainer;
-import kenijey.harshencastle.enums.items.EnumItemLiquid;
 import kenijey.harshencastle.enums.items.EnumPontusGateSpawner;
 import kenijey.harshencastle.enums.items.EnumPontusGateSpawnerParts;
 import kenijey.harshencastle.enums.items.EnumProp;
@@ -246,7 +246,7 @@ public class HarshenItems
 		regItem(elytra_pendant);
 		regItem(combat_pendant);
 		
-		regMetaItem(item_liquid, 64, emptyList(EnumItemLiquid.values().length), "item_liquid");
+		regMetaItem(item_liquid, 64, emptyList(ItemLiquidTypeset.length()), "item_liquid");
 		regMetaItem(ritual_stick, emptyList(EnumRitualStick.values().length), "ritual_stick");
 		regMetaItem(pontus_world_gate_spawner, EnumPontusGateSpawner.getNames(), "pontus_world_gate_spawner_");
 		regMetaItem(pontus_world_gate_parts, EnumPontusGateSpawnerParts.getNames(), "pontus_world_gate_part_");

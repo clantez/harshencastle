@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import kenijey.harshencastle.armor.HarshenArmors;
+import kenijey.harshencastle.enums.ItemLiquidTypeset;
 import kenijey.harshencastle.enums.items.EnumGlassContainer;
-import kenijey.harshencastle.enums.items.EnumItemLiquid;
 import kenijey.harshencastle.recipies.CauldronRecipes;
 import kenijey.harshencastle.recipies.HereticRitualRecipes;
 import kenijey.harshencastle.recipies.PedestalSlabRecipes;
@@ -109,13 +109,13 @@ public class HarshenRecipes {
 		CauldronRecipes.addRecipe(new ItemStack(Blocks.COBBLESTONE), new ItemStack(Blocks.OBSIDIAN, 2), EnumGlassContainer.LAVA);
 		CauldronRecipes.addRecipe(new ItemStack(HarshenItems.glass_container), new ItemStack(HarshenItems.glass_container, 1, 3), EnumGlassContainer.MILK);
 		CauldronRecipes.addRecipe(new ItemStack(HarshenItems.glass_container), new ItemStack(HarshenItems.glass_container, 1, 2), EnumGlassContainer.BLOOD);
-		CauldronRecipes.addRecipe(new ItemStack(Blocks.COAL_BLOCK), EnumItemLiquid.Coalite.getStack(), EnumGlassContainer.LAVA);
-		CauldronRecipes.addRecipe(new ItemStack(Items.COAL), EnumItemLiquid.Diamondite.getStack(), EnumGlassContainer.COAL);
 		
 		for(EnumGlassContainer glass : EnumGlassContainer.values())
-			if(glass.isSubContainer() && glass.getType().hasState() && Item.getItemFromBlock(((IBlockState)glass.getType().getStateOrLoc()).getBlock()) != Items.AIR
-					&& glass.isPaste())
-					CauldronRecipes.addRecipe(new ItemStack(HarshenItems.solidifying_paste), new ItemStack(Item.getItemFromBlock(((IBlockState)glass.getType().getStateOrLoc()).getBlock())), glass);
+			if(HarshenUtils.glassContainerHasBlock(glass))
+			{
+				CauldronRecipes.addRecipe(new ItemStack(((IBlockState) glass.getType().getStateOrLoc()).getBlock()), ItemLiquidTypeset.getStackFromType(glass.getType()), EnumGlassContainer.WATER);
+				CauldronRecipes.addRecipe(new ItemStack(HarshenItems.solidifying_paste), new ItemStack(Item.getItemFromBlock(((IBlockState)glass.getType().getStateOrLoc()).getBlock())), glass);
+			}
 	}
 	
 	public static void craftingRegistry()

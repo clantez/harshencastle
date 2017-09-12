@@ -2,10 +2,16 @@ package kenijey.harshencastle.items;
 
 import java.util.List;
 
+import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.base.BaseItemMetaData;
 import kenijey.harshencastle.enums.CauldronLiquid;
-import kenijey.harshencastle.enums.items.EnumItemLiquid;
+import kenijey.harshencastle.enums.ItemLiquidTypeset;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.World;
 
 public class ItemLiquid extends BaseItemMetaData
 {
@@ -22,12 +28,31 @@ public class ItemLiquid extends BaseItemMetaData
 	
 	public CauldronLiquid getLiquid(ItemStack stack)
 	{
-		return EnumItemLiquid.getFromMeta(stack.getMetadata()).getFluid();
+		return ItemLiquidTypeset.getFromMeta(stack.getMetadata()).getType();
 	}
 
 	@Override
 	protected String[] getNames() {
-		return EnumItemLiquid.getNames();
+		return ItemLiquidTypeset.getNames();
+	}
+	
+	@Override
+	public String getUnlocalizedName(ItemStack stack) {
+		stack.setStackDisplayName(getName(stack));
+		return super.getUnlocalizedName(stack);
+	}
+	
+	private String getName(ItemStack stack)
+	{
+		return TextFormatting.RESET + new TextComponentTranslation(getUnlocalizedName() + ".name", 
+				GlassContainer.getGlassContaining(ItemLiquidTypeset.getFromMeta(stack.getMetadata()).getType())).getUnformattedText();
+	}
+	
+	@Override
+	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+		tooltip.add(new TextComponentTranslation("itemliquid.rightclick").getFormattedText());
+		tooltip.add(new TextComponentTranslation("itemliquid.rightliquid", GlassContainer.getGlassContaining(ItemLiquidTypeset.getFromMeta(stack.getMetadata()).getType())).getUnformattedText());
+		super.addInformation(stack, worldIn, tooltip, flagIn);
 	}
 	
 }

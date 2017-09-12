@@ -16,6 +16,7 @@ import kenijey.harshencastle.enums.particle.EnumHarshenParticle;
 import kenijey.harshencastle.items.BloodCollector;
 import kenijey.harshencastle.items.GlassContainer;
 import kenijey.harshencastle.items.ItemLiquid;
+import kenijey.harshencastle.objecthandlers.FaceRenderer;
 import kenijey.harshencastle.recipies.CauldronRecipes;
 import kenijey.harshencastle.recipies.HereticRitualRecipes;
 import net.minecraft.block.Block;
@@ -266,6 +267,8 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 		ArrayList<BlockPos> bloodPos = new ArrayList<>();
 		pedestals.clear();
 		blockErrorList.clear();
+		if(setRecipe && world.isRemote && players[0] != null && players[0].getUniqueID().equals(HarshenCastle.proxy.getPlayer().getUniqueID()))
+			HarshenCastle.proxy.resetErroredPositions();
 		erroredPositions.clear();
 		ArrayList<Integer> maxList = new ArrayList<>(Arrays.asList(-4, 5));
 		maxList.add(Math.abs(maxList.get(0)));
@@ -330,11 +333,26 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 			setSwitchedItem(recipe.getOutput());
 			isActiveInBackground = true;
 		}
-		if(setRecipe && !erroredPositions.isEmpty() && players[0] != null && world.isRemote)
-			players[0].sendMessage(new TextComponentTranslation("ritual.fail.position", erroredPositions.get(0).getX(), erroredPositions.get(0).getY(), erroredPositions.get(0).getZ(),
-					blockErrorList.get(0) == Blocks.BARRIER ? I18n.translateToLocal("ritual.not") + " " + blockErrorList.get(1).getLocalizedName() : blockErrorList.get(0).getLocalizedName(),
-					blockErrorList.get(1).getLocalizedName()));
-		return erroredPositions.isEmpty() && this.overstandingRecipe != null;
+		if(setRecipe && players[0] != null && world.isRemote)
+		{
+			if(!erroredPositions.isEmpty())
+			{
+				players[0].sendStatusMessage(new TextComponentTranslation("ritual.fail.position", erroredPositions.get(0).getX(), erroredPositions.get(0).getY(), erroredPositions.get(0).getZ(),
+						blockErrorList.get(0) == Blocks.BARRIER ? I18n.translateToLocal("ritual.not") + " " + blockErrorList.get(1).getLocalizedName() : blockErrorList.get(0).getLocalizedName(),
+						blockErrorList.get(1).getLocalizedName()), false);
+				for(BlockPos pos : erroredPositions)
+					if(players[0].getUniqueID().equals(HarshenCastle.proxy.getPlayer().getUniqueID()))
+						if(blockErrorList.get(erroredPositions.indexOf(pos) * 2) == HarshenBlocks.blood_block)
+							HarshenCastle.proxy.addErroredPosition(new FaceRenderer(pos, EnumFacing.DOWN));
+						else
+							HarshenCastle.proxy.addErroredPosition(new FaceRenderer(pos, null));
+			}
+			else if(this.overstandingRecipe == null)
+				players[0].sendStatusMessage(new TextComponentTranslation("ritual.fail.recipe"), false);
+
+		}
+			
+		return this.overstandingRecipe != null;
 
 	}
 	

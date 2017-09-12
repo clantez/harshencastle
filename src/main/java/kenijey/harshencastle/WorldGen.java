@@ -46,7 +46,6 @@ public class WorldGen implements IWorldGenerator
 			{
 				BlockPos pos = HarshenUtils.getTopBlock(world, new BlockPos(chunkX * 16, 1, chunkZ * 16).add(random.nextInt(16), 0, random.nextInt(16))).add(-3, -1, -3);
 				HarshenStructure.shrine.loadIntoWorld(world, pos);
-				System.out.println(pos);
 				BlockPos position = pos.add(HarshenStructure.shrine.getGetFromOrigin());
 				world.setBlockState(position, Blocks.CHEST.getDefaultState().withProperty(BlockChest.FACING, EnumFacing.HORIZONTALS[random.nextInt(4)]), 3);
 				if(world instanceof WorldServer && world.getTileEntity(position) != null)
