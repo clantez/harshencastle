@@ -1,7 +1,5 @@
 package kenijey.harshencastle;
 
-import java.util.HashMap;
-
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
