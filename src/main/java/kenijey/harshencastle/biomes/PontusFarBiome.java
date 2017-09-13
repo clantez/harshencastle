@@ -65,12 +65,12 @@ public class PontusFarBiome extends BasePontusResourceBiome {
 
 	@Override
 	public Block getMergerBlockDownLevel() {
-		return HarshenBlocks.harshen_chaotic_rock;
+		return HarshenBlocks.harshen_far_rock;
 	}	
 	
 	@Override
 	protected Block getMergerBlockUpLevel() {
-		return HarshenBlocks.harshen_far_rock;
+		return HarshenBlocks.harshen_chaotic_rock;
 	}
 	
 	@Override

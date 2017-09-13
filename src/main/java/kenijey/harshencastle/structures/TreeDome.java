@@ -8,7 +8,7 @@ public class TreeDome extends HarshenStructure
 {
 
 	public TreeDome() {
-		super("pontus/ambient", "inside_dome", new BlockPos(-8, 0, -12), 1f, true, DimensionPontus.DIMENSION_ID);
+		super("pontus/ambient", "inside_dome", new BlockPos(-8, 0, -12), 0.001f, true, DimensionPontus.DIMENSION_ID);
 	}
 
 }

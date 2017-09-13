@@ -107,7 +107,7 @@ public class HarshenStructure
 	
 	public void generateStucture(World world, Random random, int chunkX, int chunkZ)
 	{
-		if(random.nextFloat() < 1f) {
+		if(random.nextFloat() < chance) {
 	        int x = chunkX * 16 + random.nextInt(16);
 	        int z = chunkZ * 16 + random.nextInt(16);
 	        int y = HarshenUtils.getTopBlock(world, new BlockPos(x, 0, z)).getY();
