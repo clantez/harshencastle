@@ -12,13 +12,12 @@ public class PontusWorldRuinGenerator extends WorldGenerator
 {
 	
 	private final BlockPos size;
-	private final ArrayList<Block> blocksAllowedToOverride = new ArrayList<Block>();
+	private ArrayList<Block> blocksAllowedToOverride = new ArrayList<Block>();
 	
-	public PontusWorldRuinGenerator(BlockPos size, Block... blocksAllowedToOverride) {
+	public PontusWorldRuinGenerator(BlockPos size, ArrayList<Block> blocksAllowedToOverride) {
 		super();
 		this.size = size;
-		for(Block block : blocksAllowedToOverride)
-			this.blocksAllowedToOverride.add(block);
+		this.blocksAllowedToOverride = blocksAllowedToOverride;
 	}
 
 	@Override

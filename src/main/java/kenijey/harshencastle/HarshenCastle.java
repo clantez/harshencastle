@@ -7,13 +7,10 @@ import org.apache.logging.log4j.Logger;
 
 import kenijey.harshencastle.commands.CommandAccessPontusOuter;
 import kenijey.harshencastle.creativetabs.HarshenTab;
-import kenijey.harshencastle.dimensions.DimensionPontus;
 import kenijey.harshencastle.proxy.CommonProxy;
 import net.minecraft.command.ICommand;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -74,9 +71,5 @@ public class HarshenCastle {
 		for(ICommand command : Arrays.asList(new CommandAccessPontusOuter()))
 			event.registerServerCommand(command);
 	}	
-    
-    public World getPontusWorld() {
-		return FMLCommonHandler.instance().getMinecraftServerInstance().getWorld(DimensionPontus.DIMENSION_ID);
-	}
     
 }
