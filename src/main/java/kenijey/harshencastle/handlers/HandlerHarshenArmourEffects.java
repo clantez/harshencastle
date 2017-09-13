@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import kenijey.harshencastle.armor.HarshenArmors;
+import kenijey.harshencastle.potions.HarshenPotions;
 import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.inventory.EntityEquipmentSlot.Type;
@@ -27,6 +28,7 @@ public class HandlerHarshenArmourEffects
 		{
 			event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 225, 0, false, false));
 			event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.SPEED, 30, 0, false, false));
+			event.getEntityLiving().addPotionEffect(new PotionEffect(HarshenPotions.potionSoulless, 330, 0, false, false));
 		}
 				
 	}
