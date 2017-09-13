@@ -46,4 +46,9 @@ public class EnderBow extends BaseHarshenBow
 	public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
 		return repair.getItem() == HarshenItems.blood_infused_ender_eye;
 	}
+	
+	@Override
+	protected boolean useDefaultArrow() {
+		return true;
+	}
 }
