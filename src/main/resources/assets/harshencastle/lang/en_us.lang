@@ -72,6 +72,7 @@ item.elytra_pendant.name=Elytra Pendant
 item.mystic_feather.name=Mystic Feather
 item.lightning_staff.name=Lightning Staff
 item.item_liquid.name=%site
+item.solidifying_paste.name=Solidifying Paste
 
 #keybindings
 key.telering.description=Telering Teleport Key
