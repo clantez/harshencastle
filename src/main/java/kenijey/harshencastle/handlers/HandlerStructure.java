@@ -11,6 +11,7 @@ public class HandlerStructure
 	@SubscribeEvent
 	public void onPlayerTick(PlayerTickEvent event)
 	{
+		if(event.side == Side.SERVER && !HarshenStructure.hasLoaded() && event.player.world != null)
 			HarshenStructure.load((WorldServer) event.player.world);
 	}
 }

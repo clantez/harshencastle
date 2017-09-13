@@ -5,6 +5,7 @@ import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.HarshenRecipes;
 import kenijey.harshencastle.HarshenSounds;
+import kenijey.harshencastle.HarshenStructureRegistry;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.WorldGen;
 import kenijey.harshencastle.armor.HarshenArmors;
@@ -35,6 +36,7 @@ import kenijey.harshencastle.handlers.HandlerPontusAllowed;
 import kenijey.harshencastle.handlers.HandlerPotionEffects;
 import kenijey.harshencastle.handlers.HandlerRaptorScythe;
 import kenijey.harshencastle.handlers.HandlerSoulHarsherSword;
+import kenijey.harshencastle.handlers.HandlerStructure;
 import kenijey.harshencastle.handlers.HandlerZombieEyeDrop;
 import kenijey.harshencastle.inventory.GuiHandler;
 import kenijey.harshencastle.models.ModelArmour;
@@ -54,7 +56,6 @@ import kenijey.harshencastle.tileentity.TileEntityPedestalSlab;
 import net.minecraft.block.Block;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -67,7 +68,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class CommonProxy 
 {
     public void preInit(FMLPreInitializationEvent event) 
-    {
+    {    	
     	HarshenPotions.preInit();//dont mess with order
 		HarshenPotions.register();
 		
@@ -97,7 +98,7 @@ public class CommonProxy
 		
 		HarshenNetwork.preInit();
 		
-						
+		HarshenStructureRegistry.preInit();
     }
     
     private void setUpEnumValues()
@@ -149,7 +150,8 @@ public class CommonProxy
     			new HandlerPontusAllowed(), 
     			new HandlerHarshenInventoryEffects(), 
     			new HandlerZombieEyeDrop(), 
-    			new HandlerPlayerInventoryOverDeath()};
+    			new HandlerPlayerInventoryOverDeath(),
+    			new HandlerStructure()};
     	for(Object o : handlers)
     	{
     		MinecraftForge.EVENT_BUS.register(o);
