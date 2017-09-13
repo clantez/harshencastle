@@ -20,11 +20,6 @@ public class EnderBow extends BaseHarshenBow
 	}
 	
 	@Override
-	protected boolean isRipper() {
-		return true;
-	}
-	
-	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 		tooltip.add("\u00A74" + new TextComponentTranslation("enderbow1").getFormattedText());
 		tooltip.add("\u00A74" + new TextComponentTranslation("enderbow1").getFormattedText());
@@ -34,12 +29,12 @@ public class EnderBow extends BaseHarshenBow
 	
 	@Override
 	protected SoundEvent bowSound() {
-		return SoundEvents.ENTITY_ENDERMEN_AMBIENT;
+		return SoundEvents.ENTITY_ENDERMEN_TELEPORT;
 	}
 
 	@Override
 	public int getMaxDamage() {
-		return 1988;
+		return 1938;
 	}
 
 	@Override
