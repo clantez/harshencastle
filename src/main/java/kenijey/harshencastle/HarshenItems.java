@@ -24,6 +24,7 @@ import kenijey.harshencastle.items.CriminalPendant;
 import kenijey.harshencastle.items.ElementalPendant;
 import kenijey.harshencastle.items.ElytraPendant;
 import kenijey.harshencastle.items.EmpoweredSoulHarsherSword;
+import kenijey.harshencastle.items.EnderBow;
 import kenijey.harshencastle.items.EnderPendant;
 import kenijey.harshencastle.items.EnionBow;
 import kenijey.harshencastle.items.Fearring;
@@ -133,6 +134,7 @@ public class HarshenItems
 	public static Item lightning_staff;
 	public static Item solidifying_paste; 
 	public static Item combat_pendant;
+	public static Item ender_bow;
 	
 	public static void preInit()
 	{
@@ -192,6 +194,7 @@ public class HarshenItems
 		solidifying_paste = new SolidifyingPaste();
 		item_liquid = new ItemLiquid();
 		combat_pendant = new CombatPendant();
+		ender_bow = new EnderBow();
 	}
 	
 	public static void reg()
@@ -226,6 +229,7 @@ public class HarshenItems
 		regItem(mystic_feather, 12);
 		regItem(lightning_staff);
 		regItem(solidifying_paste, 64);
+		regItem(ender_bow);
 		
 		regItem(zombi_pendant);
 		regItem(punchy_ring);
