@@ -21,9 +21,11 @@ public class EnderBow extends BaseHarshenBow
 	
 	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-		tooltip.add("\u00A74" + new TextComponentTranslation("enderbow1").getFormattedText());
-		tooltip.add("\u00A74" + new TextComponentTranslation("enderbow1").getFormattedText());
 		tooltip.add("\u00A73" + new TextComponentTranslation("enderbow1").getFormattedText());
+		tooltip.add("\u00A73" + new TextComponentTranslation("enderbow2").getFormattedText());
+		tooltip.add("\u00A73" + new TextComponentTranslation("enderbow3").getFormattedText());
+		tooltip.add("");
+		tooltip.add("\u00A73" + new TextComponentTranslation("enderbow3").getFormattedText());
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 	}
 	

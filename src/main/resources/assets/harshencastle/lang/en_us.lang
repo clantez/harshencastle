@@ -243,6 +243,10 @@ lightning_staff2=with a small amount of gold
 magic_table1=Meet with Harshen Magic
 itemliquid.rightclick=Right Click a Heretic Cauldron
 itemliquid.rightliquid=to put %s in.
+enderbow1=The arrow this bow sent
+enderbow2=will pass through blocks
+enderbow3=to thrust itself into the mob
+enderbow4=You may need to use Ender Necklace.
 
 #misc
 itemGroup.harshenTab=Harshen Castle
