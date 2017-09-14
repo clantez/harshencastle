@@ -1,6 +1,5 @@
 package kenijey.harshencastle.blocks;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -26,7 +25,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -78,7 +76,8 @@ public class HereticCauldron extends BaseBlockHarshenSingleInventory
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
 		boolean flag = getTile(worldIn, pos).onActivated(playerIn, hand);
-		return flag ? flag : super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitZ, hitZ, hitZ);
+		boolean flag2 =  flag ? flag : super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitZ, hitZ, hitZ);
+		return flag2;
     }
 	
 	@Override

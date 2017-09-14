@@ -113,7 +113,7 @@ public class HarshenStructure
 	        int y = HarshenUtils.getTopBlock(world, new BlockPos(x, 0, z)).getY();
 	        BlockPos pos = new BlockPos(x, y, z).add(addPos());
 	        if(addPositionOnGenerate())
-	        	pos.add(originAddition);
+	        	pos = pos.add(originAddition);
 	        loadIntoWorld(world, pos, random);
 	        if(useRuin)
 	        	new PontusWorldRuinGenerator(size, getAdditionBlocks())

@@ -1,5 +1,7 @@
 package kenijey.harshencastle.base;
 
+import net.minecraft.nbt.NBTTagCompound;
+
 public abstract class BaseTileEntityHarshenSingleItemInventoryActive extends BaseTileEntityHarshenSingleItemInventory 
 {
 	protected boolean isActive;
@@ -46,6 +48,18 @@ public abstract class BaseTileEntityHarshenSingleItemInventoryActive extends Bas
 	{
 		this.activeTimer = 0;
 		this.isActive = true;
+	}
+	
+	@Override
+	public void readFromNBT(NBTTagCompound compound) {
+		isActive = compound.getBoolean("isActive");
+		super.readFromNBT(compound);
+	}
+	
+	@Override
+	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
+		nbt.setBoolean("isActive", isActive);
+		return super.writeToNBT(nbt);
 	}
 	
 	protected abstract int getTicksUntillDone();

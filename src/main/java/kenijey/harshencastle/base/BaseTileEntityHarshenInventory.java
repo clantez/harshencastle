@@ -28,7 +28,7 @@ public abstract class BaseTileEntityHarshenInventory extends BaseHarshenTileEnti
 	{
 		timer ++;
 		tick();
-		if(dirtyTimer++ % 10 == 0)
+		if(dirtyTimer++ % 5 == 0)
 			dirty();
 		
 	}

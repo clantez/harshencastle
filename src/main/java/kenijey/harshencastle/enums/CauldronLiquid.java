@@ -17,7 +17,7 @@ public class CauldronLiquid
 	
 	public static ArrayList<CauldronLiquid> allLiquids = new ArrayList<>();	
 	
-	private static int IDSET = -1;
+	private static int IDSET = 1;
 	
 	private CauldronLiquid(String name)
 	{

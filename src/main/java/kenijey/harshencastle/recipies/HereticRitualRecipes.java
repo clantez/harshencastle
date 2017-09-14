@@ -60,6 +60,18 @@ public class HereticRitualRecipes
 		return null;
 	}
 	
+	public static HereticRitualRecipes getFromId(int id)
+	{
+		if(id < 0 || id > allRecipes.size())
+			return null;
+		return allRecipes.get(id);
+	}
+	
+	public int getId()
+	{
+		return allRecipes.indexOf(this);
+	}
+	
 	public ItemStack getCauldronInput() 
 	{
 		return cauldronItem;
