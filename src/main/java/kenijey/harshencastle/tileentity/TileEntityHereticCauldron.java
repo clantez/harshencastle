@@ -42,7 +42,6 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.UniversalBucket;
 import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
 
 public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemInventory
 {
@@ -120,7 +119,7 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 				}
 			}
 			for(BlockPos pos : bloodPos)
-				for(int i = 0; i < 7; i ++)
+				for(int i = 0; i < 7; i ++)//TODO
 					{
 						Vec3d vec = new Vec3d(pos).addVector(randPos(), -0.1, randPos());
 						HarshenCastle.proxy.spawnParticle(EnumHarshenParticle.BLOOD, vec, 
@@ -493,8 +492,6 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 		level = compound.getInteger("cauldronLevel");
 		isActive = compound.getBoolean("isActive");
 		switchedItem = new ItemStack(compound.getCompoundTag("switchedItemStack"));
-		overstandingRecipe = HereticRitualRecipes.getFromId(compound.getInteger("ritualID"));
-		overstandingTimer = compound.getInteger("ritualTimer");
 		super.readFromNBT(compound);
 	}
 	
@@ -504,11 +501,6 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 		nbt.setInteger("cauldronLevel", level);
 		nbt.setBoolean("isActive", isActive);
 		nbt.setTag("switchedItemStack", switchedItem.serializeNBT());
-		if(overstandingRecipe == null)
-			nbt.setInteger("ritualID", -1);
-		else
-			nbt.setInteger("ritualID", overstandingRecipe.getId());
-		nbt.setInteger("ritualTimer", overstandingTimer);
 		return super.writeToNBT(nbt);
 	}
 	
