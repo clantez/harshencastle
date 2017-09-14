@@ -9,6 +9,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 
@@ -132,5 +133,17 @@ public class TileEntityHarshenDimensionalPedestal extends BaseTileEntityHarshenS
 				InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), workingRecipe.getOutput());
 				return;
 			}
+	}
+	
+	@Override
+	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
+		nbt.setBoolean("isNonControllerActive", isActiveNonController);
+		return super.writeToNBT(nbt);
+	}
+	
+	@Override
+	public void readFromNBT(NBTTagCompound compound) {
+		isActiveNonController = compound.getBoolean("isNonControllerActive");
+		super.readFromNBT(compound);
 	}
 }
