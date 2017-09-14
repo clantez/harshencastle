@@ -25,7 +25,7 @@ public class EnderBow extends BaseHarshenBow
 		tooltip.add("\u00A73" + new TextComponentTranslation("enderbow2").getFormattedText());
 		tooltip.add("\u00A73" + new TextComponentTranslation("enderbow3").getFormattedText());
 		tooltip.add("");
-		tooltip.add("\u00A73" + new TextComponentTranslation("enderbow3").getFormattedText());
+		tooltip.add("\u00A73" + new TextComponentTranslation("enderbow4").getFormattedText());
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 	}
 	
@@ -41,7 +41,7 @@ public class EnderBow extends BaseHarshenBow
 
 	@Override
 	public double additionDamage() {
-		return 1.7;
+		return 1.5D;
 	}
 	
 	@Override
