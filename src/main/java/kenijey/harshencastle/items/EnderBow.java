@@ -40,7 +40,7 @@ public class EnderBow extends BaseHarshenBow
 
 	@Override
 	public double additionDamage() {
-		return 1.5D;
+		return 1.2D;
 	}
 	
 	@Override
