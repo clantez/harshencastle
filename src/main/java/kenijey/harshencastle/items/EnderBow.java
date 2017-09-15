@@ -2,7 +2,6 @@ package kenijey.harshencastle.items;
 
 import java.util.List;
 
-import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.base.BaseHarshenBow;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.init.SoundEvents;
@@ -42,11 +41,6 @@ public class EnderBow extends BaseHarshenBow
 	@Override
 	public double additionDamage() {
 		return 1.5D;
-	}
-	
-	@Override
-	public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
-		return repair.getItem() == HarshenItems.blood_infused_ender_eye;
 	}
 	
 	@Override
