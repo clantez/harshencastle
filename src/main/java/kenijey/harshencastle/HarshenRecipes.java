@@ -163,7 +163,6 @@ public class HarshenRecipes {
 				new ItemStack(HarshenArmors.harshen_jaguar_armor_helmet),
 				"iii",
 				"i i",
-				"   ",
 				
 				'i', new ItemStack(HarshenItems.harshen_soul_ingot));
 		
@@ -188,7 +187,6 @@ public class HarshenRecipes {
 		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "harshen_jaguar_armor_boots"), new ResourceLocation("harshen_items"),
 				new ItemStack(HarshenArmors.harshen_jaguar_armor_boots),
-				"   ",
 				"i i",
 				"i i",
 				
@@ -227,7 +225,6 @@ public class HarshenRecipes {
 		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "pedestal_slab"), new ResourceLocation("harshen_items"),
 				new ItemStack(HarshenBlocks.pedestal_slab),
-				"   ",
 				"i i",
 				"iii",
 				
@@ -399,5 +396,13 @@ public class HarshenRecipes {
 				'e', new ItemStack(HarshenItems.light_emitted_essence),
 				'w', new ItemStack(HarshenBlocks.pontus_chaotic_wood),
 				'c', new ItemStack(HarshenBlocks.harshen_dimensional_wood_crate));
+		
+		
+		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "elytra_pendant"), new ResourceLocation("harshen_items"),
+				new ItemStack(HarshenItems.elytra_pendant),
+				"fif",
+				
+				'f', new ItemStack(HarshenItems.mystic_feather),
+				'i', new ItemStack(HarshenItems.itium));
 	}
 }
