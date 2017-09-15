@@ -137,6 +137,9 @@ tile.kuantic_ore.name=Unstable Kuantic Element Ore
 tile.block_of_heads.name=Block Of Heads
 tile.harshen_magic_table.name=Harshen Magic Table
 tile.gilded_obsidian.name=Gilded Obsidian
+tile.pontus_far_rock.name=Pontus Far Rock
+tile.pontus_far_wood.name=Pontus Far Wood
+tile.pontus_far_leaves.name=Pontus Far Leaves
 
 
 #fluids
