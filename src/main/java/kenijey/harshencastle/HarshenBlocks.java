@@ -10,6 +10,7 @@ import kenijey.harshencastle.blocks.BloodFactory;
 import kenijey.harshencastle.blocks.BloodPlacer;
 import kenijey.harshencastle.blocks.BloodVessel;
 import kenijey.harshencastle.blocks.CropOfGleam;
+import kenijey.harshencastle.blocks.GildedObsidian;
 import kenijey.harshencastle.blocks.HarshenChaoticRock;
 import kenijey.harshencastle.blocks.HarshenDestroyedPlant;
 import kenijey.harshencastle.blocks.HarshenDimensionalDirt;
@@ -104,6 +105,7 @@ public class HarshenBlocks {
 	public static Block block_of_heads;
 	public static Block harshen_magic_table;
 	public static Block pontus_far_leaves;
+	public static Block gilded_obsidian;
 	
 	public static BlockCrops crop_of_gleam;
 
@@ -158,6 +160,7 @@ public class HarshenBlocks {
 		pontus_far_leaves = new PontusFarLeaves();
 		pontus_far_wood = new PontusFarWood();
 		harshen_far_rock = new HarshenFarRock();
+		gilded_obsidian = new GildedObsidian();
 	}
 
 	public static void reg() {
@@ -200,6 +203,7 @@ public class HarshenBlocks {
 		regBlock(kuantic_ore, 1);
 		regBlock(block_of_heads, 64);
 		regBlock(harshen_magic_table, 4);
+		regBlock(gilded_obsidian, 64);
 		
 		regSingleBlock(heretic_cauldron_top);
 		regSingleBlock(crop_of_gleam);

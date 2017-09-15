@@ -136,6 +136,7 @@ tile.blood_factory.name=Blood Factory
 tile.kuantic_ore.name=Unstable Kuantic Element Ore
 tile.block_of_heads.name=Block Of Heads
 tile.harshen_magic_table.name=Harshen Magic Table
+tile.gilded_obsidian.name=Gilded Obsidian
 
 
 #fluids
