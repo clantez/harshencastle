@@ -80,6 +80,12 @@ public class HarshenRecipes {
 		RitualRecipes.addRecipe(Arrays.asList(new ItemStack(Blocks.AIR), new ItemStack(HarshenItems.ritual_crystal, 1, 1),
 				new ItemStack(Items.FEATHER), new ItemStack(Items.CHORUS_FRUIT_POPPED)), new ItemStack(HarshenItems.mystic_feather, 2), true);
 		
+		RitualRecipes.addRecipe(Arrays.asList(new ItemStack(Blocks.AIR), new ItemStack(Blocks.AIR),
+				new ItemStack(Blocks.OBSIDIAN), new ItemStack(Blocks.GOLD_BLOCK)), new ItemStack(HarshenBlocks.gilded_obsidian), true);
+		
+		RitualRecipes.addRecipe(Arrays.asList(new ItemStack(HarshenBlocks.gilded_obsidian), new ItemStack(HarshenItems.ritual_crystal, 1, 1),
+				new ItemStack(HarshenItems.iron_bow), new ItemStack(HarshenItems.blood_infused_ender_eye)), new ItemStack(HarshenItems.ender_bow), true);
+		
 		
 		
 		PedestalSlabRecipes.addRecipe(new ItemStack(Blocks.COBBLESTONE), new ItemStack(Blocks.NETHERRACK));
