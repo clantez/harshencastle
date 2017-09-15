@@ -101,7 +101,7 @@ public class HarshenRecipes {
 		HereticRitualRecipes.addRecipe(new ItemStack(Items.APPLE), new ItemStack(Items.GOLDEN_APPLE, 1, 1), EnumGlassContainer.HARSHING_WATER.getType(),
 				stackList);
 		
-		HereticRitualRecipes.addRecipe(new ItemStack(HarshenItems.itium), new ItemStack(HarshenItems.xray_pendant), EnumGlassContainer.HARSHEN_DIMENSIONAL_FLUID.getType(), 
+		HereticRitualRecipes.addRecipe(new ItemStack(HarshenItems.itium), new ItemStack(HarshenItems.xray_pendant), EnumGlassContainer.EARTH.getType(), 
 				new ItemStack(HarshenItems.ritual_crystal, 1, 1), new ItemStack(HarshenItems.powder_of_heretism), new ItemStack(HarshenItems.soul_infused_ingot),
 				new ItemStack(Items.EMERALD), new ItemStack(Items.QUARTZ), new ItemStack(Items.ENDER_EYE),
 				new ItemStack(Blocks.END_ROD), new ItemStack(Blocks.LAPIS_ORE));

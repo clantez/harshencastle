@@ -17,6 +17,7 @@ import kenijey.harshencastle.items.BloodCollector;
 import kenijey.harshencastle.items.GlassContainer;
 import kenijey.harshencastle.items.ItemLiquid;
 import kenijey.harshencastle.network.HarshenNetwork;
+import kenijey.harshencastle.network.packets.MessagePacketSpawnBloodParticle;
 import kenijey.harshencastle.network.packets.MessagePacketSpawnItemParticles;
 import kenijey.harshencastle.objecthandlers.FaceRenderer;
 import kenijey.harshencastle.recipies.CauldronRecipes;
@@ -119,11 +120,11 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 				}
 			}
 			for(BlockPos pos : bloodPos)
-				for(int i = 0; i < 7; i ++)//TODO
+				for(int i = 0; i < 7; i ++)
 					{
 						Vec3d vec = new Vec3d(pos).addVector(randPos(), -0.1, randPos());
-						HarshenCastle.proxy.spawnParticle(EnumHarshenParticle.BLOOD, vec, 
-								new Vec3d((this.pos.getX() + 0.5 - vec.x) / 30D, (this.pos.getY() + 2 - vec.y) / 30D, (this.pos.getZ() + 0.5 - vec.z) / 30D), 1f, false);
+						HarshenNetwork.sendToPlayersInDimension(world.provider.getDimension(), new MessagePacketSpawnBloodParticle(vec, 
+								new Vec3d((this.pos.getX() + 0.5 - vec.x) / 30D, (this.pos.getY() + 2 - vec.y) / 30D, (this.pos.getZ() + 0.5 - vec.z) / 30D), 1f, false));
 					}
 		}
 			

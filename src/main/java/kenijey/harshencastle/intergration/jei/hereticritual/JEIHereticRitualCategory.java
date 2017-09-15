@@ -54,12 +54,15 @@ public class JEIHereticRitualCategory extends BaseJeiCategory
 		Point point = new Point(center.x, center.y - 52);
 
 		recipeLayout.getItemStacks().init(0, true, 7, 14);
-		recipeLayout.getItemStacks().set(0, ingredients.getInputs(ItemStack.class).get(ingredients.getInputs(ItemStack.class).size() - 1));
+		recipeLayout.getItemStacks().set(0, ingredients.getInputs(ItemStack.class).get(0));
 		
 		List<List<ItemStack>> stackList = ingredients.getInputs(ItemStack.class);
+		stackList.remove(0);
 		stackList.remove(stackList.size() - 1);
+		if(stackList.size() > 8)
+			stackList.remove(stackList.size() - 1);
 		Collections.shuffle(stackList);
-		for(int i = 0; i < stackList.size(); i++) {
+		for(int i = 0; i < 8; i++) {
 			recipeLayout.getItemStacks().init(index, true, point.x, point.y);
 			recipeLayout.getItemStacks().set(index, stackList.get(i));
 			index += 1;

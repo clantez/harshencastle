@@ -10,6 +10,7 @@ import com.google.common.collect.Lists;
 import kenijey.harshencastle.base.BasePontusResourceBiome;
 import kenijey.harshencastle.config.BlocksEnabled;
 import kenijey.harshencastle.config.ItemsEnabled;
+import kenijey.harshencastle.enums.CauldronLiquid;
 import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
 import kenijey.harshencastle.enums.items.EnumGlassContainer;
 import kenijey.harshencastle.handlers.HandlerPontusAllowed;
@@ -78,6 +79,11 @@ public class HarshenUtils
 	{
 		 return glass.isSubContainer() && glass.getType().hasState() && glass.isPaste()
 				 && Item.getItemFromBlock(((IBlockState)glass.getType().getStateOrLoc()).getBlock()) != Items.AIR;
+	}
+	
+	public static boolean glassContainerHasBlock(CauldronLiquid liquid)
+	{
+		 return liquid.hasState() && Item.getItemFromBlock(((IBlockState)liquid.getStateOrLoc()).getBlock()) != Items.AIR;
 	}
 	
 	public static ItemStack getStackCooked(ItemStack rawStack)

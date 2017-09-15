@@ -7,6 +7,7 @@ import kenijey.harshencastle.network.packets.MessagePacketPlayerHasAccess;
 import kenijey.harshencastle.network.packets.MessagePacketPlayerTeleportEffects;
 import kenijey.harshencastle.network.packets.MessagePacketRequestInv;
 import kenijey.harshencastle.network.packets.MessagePacketRingUpdate;
+import kenijey.harshencastle.network.packets.MessagePacketSpawnBloodParticle;
 import kenijey.harshencastle.network.packets.MessagePacketSpawnItemParticles;
 import kenijey.harshencastle.network.packets.MessagePacketSummonFirework;
 import kenijey.harshencastle.network.packets.MessagePacketTileEntityBloodPlacerUpdated;
@@ -37,6 +38,7 @@ public class HarshenNetwork
 		registerMessage(MessagePacketSummonFirework.class, Side.SERVER);
 		registerMessage(MessagePacketRequestInv.class, Side.SERVER);
 		registerMessage(MessagePacketSpawnItemParticles.class, Side.CLIENT);
+		registerMessage(MessagePacketSpawnBloodParticle.class, Side.CLIENT);
 	}
 	
 	
