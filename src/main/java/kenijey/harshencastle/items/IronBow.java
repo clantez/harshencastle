@@ -1,6 +1,7 @@
 package kenijey.harshencastle.items;
 
 import kenijey.harshencastle.base.BaseHarshenBow;
+import kenijey.harshencastle.enums.entities.EnumHarshenArrowTypes;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
@@ -8,6 +9,7 @@ public class IronBow extends BaseHarshenBow
 {
 	public IronBow()
 	{
+		super(EnumHarshenArrowTypes.NORMAL);
 		setUnlocalizedName("iron_bow");
 		setRegistryName("iron_bow");
 	}

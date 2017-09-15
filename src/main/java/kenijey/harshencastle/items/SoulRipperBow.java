@@ -5,6 +5,7 @@ import java.util.List;
 import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.HarshenSounds;
 import kenijey.harshencastle.base.BaseHarshenBow;
+import kenijey.harshencastle.enums.entities.EnumHarshenArrowTypes;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundEvent;
@@ -15,13 +16,9 @@ public class SoulRipperBow extends BaseHarshenBow
 {
 	public SoulRipperBow()
 	{
+		super(EnumHarshenArrowTypes.RIPPER);
 		setRegistryName("soul_ripper_bow");
 		setUnlocalizedName("soul_ripper_bow");
-	}
-	
-	@Override
-	protected boolean isRipper() {
-		return true;
 	}
 	
 	@Override

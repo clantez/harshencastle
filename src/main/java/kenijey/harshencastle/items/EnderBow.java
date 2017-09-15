@@ -3,6 +3,7 @@ package kenijey.harshencastle.items;
 import java.util.List;
 
 import kenijey.harshencastle.base.BaseHarshenBow;
+import kenijey.harshencastle.enums.entities.EnumHarshenArrowTypes;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
@@ -14,6 +15,7 @@ public class EnderBow extends BaseHarshenBow
 {
 	public EnderBow()
 	{
+		super(EnumHarshenArrowTypes.ENDER);
 		setRegistryName("ender_bow");
 		setUnlocalizedName("ender_bow");
 	}

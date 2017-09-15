@@ -4,33 +4,46 @@ import java.util.Random;
 
 import com.google.common.collect.Lists;
 
-import kenijey.harshencastle.HarshenCastle;
-import kenijey.harshencastle.HarshenClientUtils;
 import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.HarshenSounds;
 import kenijey.harshencastle.armor.HarshenArmors;
-import kenijey.harshencastle.enums.particle.EnumHarshenParticle;
+import kenijey.harshencastle.enums.entities.EnumHarshenArrowTypes;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.MoverType;
+import net.minecraft.entity.monster.EntityEnderman;
+import net.minecraft.entity.monster.EntitySpider;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityArrow;
-import net.minecraft.entity.projectile.EntitySpectralArrow;
 import net.minecraft.entity.projectile.EntityTippedArrow;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.play.server.SPacketChangeGameState;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 
 public class HarshenArrow extends EntityTippedArrow
 {
 
-	private boolean isRipper;
+	private final EnumHarshenArrowTypes arrowType;
 	
-	public HarshenArrow(EntityArrow arrow, boolean isRipper) {
+	public HarshenArrow(EntityArrow arrow, EnumHarshenArrowTypes arrowType) {
 		super(arrow.world, (EntityLivingBase) arrow.shootingEntity);
-		this.isRipper = isRipper;
+		this.arrowType = arrowType;
 		setPotionEffect(new ItemStack(Items.ARROW));
 	}
 
@@ -38,7 +51,7 @@ public class HarshenArrow extends EntityTippedArrow
 	
 	@Override
 	protected ItemStack getArrowStack() {
-		if(isRipper)
+		if(arrowType == EnumHarshenArrowTypes.RIPPER)
 			return ItemStack.EMPTY;
 		return new ItemStack(new Random().nextFloat() < chanceThatArrowBreaks ? HarshenItems.broken_arrow : Items.ARROW);
 	}
@@ -55,15 +68,15 @@ public class HarshenArrow extends EntityTippedArrow
 	private boolean playCustomSound;
 	
 	@Override
-	protected void onHit(RayTraceResult raytraceResultIn) {
-		if(raytraceResultIn.entityHit != null || world.getTileEntity(raytraceResultIn.getBlockPos()) != null)
+	protected void onHit(RayTraceResult ray) {
+		if(ray.entityHit != null || world.getTileEntity(ray.getBlockPos()) != null)
 			playCustomSound = true;
-		super.onHit(raytraceResultIn);
+		super.onHit(ray);
 	}
 	
 	@Override
 	protected void arrowHit(EntityLivingBase living) {
-		if(isRipper
+		if(arrowType == EnumHarshenArrowTypes.RIPPER
 				&&!(Lists.newArrayList(living.getArmorInventoryList().iterator()).get(3).getItem() == HarshenArmors.harshen_jaguar_armor_helmet
 				&& Lists.newArrayList(living.getArmorInventoryList().iterator()).get(2).getItem() == HarshenArmors.harshen_jaguar_armor_chestplate
 				&& Lists.newArrayList(living.getArmorInventoryList().iterator()).get(1).getItem() == HarshenArmors.harshen_jaguar_armor_leggings
@@ -71,10 +84,4 @@ public class HarshenArrow extends EntityTippedArrow
 			living.addPotionEffect(new PotionEffect(MobEffects.WITHER, 150, 1));
 			
 	}
-	
-	@Override
-	public void onUpdate() {
-		super.onUpdate();
-	}
-	
 }

@@ -3,6 +3,7 @@ package kenijey.harshencastle.base;
 import javax.annotation.Nullable;
 
 import kenijey.harshencastle.entity.vanilla.HarshenArrow;
+import kenijey.harshencastle.enums.entities.EnumHarshenArrowTypes;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -27,10 +28,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public abstract class BaseHarshenBow extends ItemBow
 {
-	public BaseHarshenBow()
+	
+	private final EnumHarshenArrowTypes arrowType;
+	
+	public BaseHarshenBow(EnumHarshenArrowTypes arrowType)
 	{
 		this.setMaxDamage(getMaxDamage());
-		
+		this.arrowType = arrowType;
 		this.addPropertyOverride(new ResourceLocation("pull"), new IItemPropertyGetter()
         {
             @SideOnly(Side.CLIENT)
@@ -60,11 +64,6 @@ public abstract class BaseHarshenBow extends ItemBow
 	protected SoundEvent bowSound()
 	{
 		return SoundEvents.ENTITY_ARROW_SHOOT;
-	}
-	
-	protected boolean isRipper()
-	{
-		return false;
 	}
 	
 	protected boolean useDefaultArrow()
@@ -104,9 +103,9 @@ public abstract class BaseHarshenBow extends ItemBow
         boolean flag = !this.findAmmo(playerIn).isEmpty();
 
         ActionResult<ItemStack> ret = net.minecraftforge.event.ForgeEventFactory.onArrowNock(itemstack, worldIn, playerIn, handIn, flag);
-        if (ret != null && !isRipper()) return ret;
+        if (ret != null && arrowType != EnumHarshenArrowTypes.RIPPER) return ret;
 
-        if (!playerIn.capabilities.isCreativeMode && !flag && !isRipper())
+        if (!playerIn.capabilities.isCreativeMode && !flag && arrowType != EnumHarshenArrowTypes.RIPPER)
         {
             return flag ? new ActionResult(EnumActionResult.PASS, itemstack) : new ActionResult(EnumActionResult.FAIL, itemstack);
         }
@@ -124,7 +123,7 @@ public abstract class BaseHarshenBow extends ItemBow
             EntityPlayer entityplayer = (EntityPlayer)entityLiving;
             boolean flag = entityplayer.capabilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, stack) > 0;
             ItemStack itemstack = this.findAmmo(entityplayer);
-            if(isRipper())
+            if(arrowType == EnumHarshenArrowTypes.RIPPER)
             	itemstack = new ItemStack(Items.ARROW);
             int i = this.getMaxItemUseDuration(stack) - timeLeft;
             i = net.minecraftforge.event.ForgeEventFactory.onArrowLoose(stack, worldIn, entityplayer, i, !itemstack.isEmpty() || flag);
@@ -147,7 +146,7 @@ public abstract class BaseHarshenBow extends ItemBow
                     {
                         ItemArrow itemarrow = (ItemArrow)(itemstack.getItem() instanceof ItemArrow ? itemstack.getItem() : Items.ARROW);
                         EntityArrow arrow = itemarrow.createArrow(worldIn, itemstack, entityplayer);
-                        EntityArrow entityarrow = useDefaultArrow() ? arrow : new HarshenArrow(arrow, isRipper());
+                        HarshenArrow entityarrow = new HarshenArrow(arrow, arrowType);
                         entityarrow.setAim(entityplayer, entityplayer.rotationPitch, entityplayer.rotationYaw, 0.0F, f * 3.0F, 1.0F);
                         
                         if (f == 1.0F)
