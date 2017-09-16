@@ -19,11 +19,12 @@ import net.minecraft.world.gen.structure.template.Template;
 
 public class HarshenStructure 
 {
-	private static ArrayList<HarshenStructure> allStructures;
+	public static ArrayList<HarshenStructure> allStructures = new ArrayList<>();
 	
 	protected final BlockPos originAddition;
 	protected final ResourceLocation location;
 	protected final String name;
+	public String showName;
 	protected BlockPos size;
 	protected static boolean hasLoaded;
 	protected final float chance;
@@ -36,10 +37,8 @@ public class HarshenStructure
 		this.chance = chance;
 		this.originAddition = fromOrigin;
 		this.name = parentFolder + "/" + name;
+		showName = name;
 		this.location = new ResourceLocation(HarshenCastle.MODID, name);
-		if(allStructures == null)
-			allStructures = new ArrayList<>();
-		allStructures.add(this);
 	}
 	
 	public static ArrayList<HarshenStructure> get(int dimension)

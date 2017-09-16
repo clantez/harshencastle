@@ -9,6 +9,7 @@ import com.google.common.collect.Lists;
 
 import kenijey.harshencastle.base.BasePontusResourceBiome;
 import kenijey.harshencastle.config.BlocksEnabled;
+import kenijey.harshencastle.config.HarshenConfigs;
 import kenijey.harshencastle.config.ItemsEnabled;
 import kenijey.harshencastle.enums.CauldronLiquid;
 import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
@@ -302,9 +303,9 @@ public class HarshenUtils
 		boolean flag = true;
 		Item item = stack.getItem();
 		if(item instanceof ItemBlock)
-			flag = BlocksEnabled.isBlockEnabled(((ItemBlock)item).getBlock());
+			flag = HarshenConfigs.BLOCKS.isEnabled(((ItemBlock)item).getBlock());
 		else
-			flag = ItemsEnabled.isItemEnabled(item);
+			flag = HarshenConfigs.ITEMS.isEnabled(item);
 		return flag;
 	}
 	

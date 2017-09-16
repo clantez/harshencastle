@@ -3,6 +3,7 @@ package kenijey.harshencastle;
 import java.util.ArrayList;
 
 import kenijey.harshencastle.base.BaseItemMetaData;
+import kenijey.harshencastle.config.HarshenConfigs;
 import kenijey.harshencastle.config.ItemsEnabled;
 import kenijey.harshencastle.enums.ItemLiquidTypeset;
 import kenijey.harshencastle.enums.items.EnumBloodCollector;
@@ -286,7 +287,7 @@ public class HarshenItems
 	{
 		items.add(item);
 		item.setMaxStackSize(stackSize);
-		ItemsEnabled.allItems.add(item);
+		HarshenConfigs.ITEMS.allComponants.add(item);
 	}
 	
 	public static void regMetaItem(BaseItemMetaData item, int stackSize, String[] names, String prefix, exceptionName...exceptionNames)
@@ -294,7 +295,7 @@ public class HarshenItems
 		item.setMaxStackSize(stackSize);
 		for(exceptionName exc : exceptionNames)
 			names[exc.position] = exc.name;
-		ItemsEnabled.allItems.add(item);
+		HarshenConfigs.ITEMS.allComponants.add(item);
 		allMetaItems.add(item);
 		allMetaNames.add(names);
 		allMetaPrefix.add(prefix);
@@ -332,8 +333,8 @@ public class HarshenItems
 
 	public static void register() 
 	{
-		for(Item item : ItemsEnabled.allItems)
-			if(ItemsEnabled.isItemEnabled(item))
+		for(Item item : HarshenConfigs.ITEMS.allComponants)
+			if(HarshenConfigs.ITEMS.isEnabled(item))
 				ForgeRegistries.ITEMS.register(item);
 	}
 }

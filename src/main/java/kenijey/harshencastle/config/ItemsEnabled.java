@@ -1,56 +1,32 @@
 package kenijey.harshencastle.config;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import kenijey.harshencastle.base.BaseConfig;
+import kenijey.harshencastle.base.BaseEnabledConfig;
 import net.minecraft.item.Item;
 import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraftforge.common.config.Property;
 
-public class ItemsEnabled extends BaseConfig
+public class ItemsEnabled extends BaseEnabledConfig<Item>
 {
-	
-	public static ArrayList<Item> allItems = new ArrayList<>();
-	private static HashMap<Item, Property> propertyMap = new HashMap<>();
-	private static HashMap<Item, Boolean> enabledMap = new HashMap<>();
-
-	
-	private static final String CATEGORY_ITEM = "Items enables";
-
 	@Override
-	public String getName() {
-		return "Items Enabled";
+	public String getNameType() {
+		return "Items";
+	}
+	
+	@Override
+	protected boolean testIfLegit(Item componant) {
+		boolean legit = componant.getRegistryName() != null;
+		if(!legit)
+			new NullPointerException("Tried to config a Item with no registry name. Item: " + componant.getClass());
+		return super.testIfLegit(componant);
 	}
 
 	@Override
-	public void read() {
-		for(Item item: allItems)
-		{
-			if(item.getRegistryName() == null)
-			{
-				new NullPointerException("Tried to config a Item with no registry name. Item: " + item.getClass());
-				continue;
-			}
-			String itemPath = item.getRegistryName().getResourcePath();
-			Property property = config.get(CATEGORY_ITEM, itemPath, true);
-			property.setComment(new TextComponentTranslation("config.isEnabled", new TextComponentTranslation(item.getUnlocalizedName() + ".name").getUnformattedText()).getUnformattedText());
-			propertyMap.put(item, property);
-			enabledMap.put(item, property.getBoolean());
-		}
+	protected String getComponantPathInConfig(Item componant) {
+		return componant.getRegistryName().getResourcePath();
 	}
 
 	@Override
-	public void save() {
-		for(Item item : allItems)
-			propertyMap.get(item).set(enabledMap.get(item));
-	}
-	
-	public static boolean isItemEnabled(Item item)
-	{
-		if(!enabledMap.containsKey(item))
-			return true;
-		return enabledMap.get(item);
+	protected String getComponantCommentName(Item componant) {
+		return new TextComponentTranslation(componant.getUnlocalizedName() + ".name").getUnformattedText();
 	}
 
 }

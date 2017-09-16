@@ -1,51 +1,32 @@
 package kenijey.harshencastle.config;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import kenijey.harshencastle.base.BaseConfig;
+import kenijey.harshencastle.base.BaseEnabledConfig;
 import net.minecraft.block.Block;
 import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraftforge.common.config.Property;
 
-public class BlocksEnabled extends BaseConfig
+public class BlocksEnabled extends BaseEnabledConfig<Block>
 {
-	
-	public static ArrayList<Block> allBlocks= new ArrayList<>();
-	private static HashMap<Block, Property> propertyMap = new HashMap<>();
-	private static HashMap<Block, Boolean> enabledMap = new HashMap<>();
-
-	
-	private static final String CATEGORY_ITEM = "Blocks enables";
-
 	@Override
-	public String getName() {
-		return "Blocks Enabled";
+	public String getNameType() {
+		return "Blocks";
+	}
+	
+	@Override
+	protected boolean testIfLegit(Block componant) {
+		boolean legit = componant.getRegistryName() != null;
+		if(!legit)
+			new NullPointerException("Tried to config a Item with no registry name. Item: " + componant.getClass());
+		return super.testIfLegit(componant);
 	}
 
 	@Override
-	public void read() {
-		for(Block block : allBlocks)
-		{
-			String itemPath = block.getRegistryName().getResourcePath();
-			Property property = config.get(CATEGORY_ITEM, itemPath, true);
-			property.setComment(new TextComponentTranslation("config.isEnabled", new TextComponentTranslation(block.getUnlocalizedName() + ".name").getUnformattedText()).getUnformattedText());
-			propertyMap.put(block, property);
-			enabledMap.put(block, property.getBoolean());
-		}
+	protected String getComponantPathInConfig(Block componant) {
+		return componant.getRegistryName().getResourcePath();
 	}
 
 	@Override
-	public void save() {
-		for(Block block : allBlocks)
-			propertyMap.get(block).set(enabledMap.get(block));
-	}
-	
-	public static boolean isBlockEnabled(Block block)
-	{
-		if(!enabledMap.containsKey(block))
-			return true;
-		return enabledMap.get(block);
+	protected String getComponantCommentName(Block componant) {
+		return new TextComponentTranslation(componant.getUnlocalizedName() + ".name").getUnformattedText();
 	}
 
 }

@@ -93,6 +93,7 @@ death.attack.entitySoulPart=%1$s's soul was taken away.
 
 #config
 config.isEnabled=Should %s be enabled
+config.structure.name=the structure %s
 
 #blocks
 tile.harshen_soul_ore.name=Harshen Soul Ore

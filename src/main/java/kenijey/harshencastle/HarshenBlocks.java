@@ -48,6 +48,7 @@ import kenijey.harshencastle.blocks.PontusFarLeaves;
 import kenijey.harshencastle.blocks.PontusFarWood;
 import kenijey.harshencastle.blocks.SoulReminder;
 import kenijey.harshencastle.config.BlocksEnabled;
+import kenijey.harshencastle.config.HarshenConfigs;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.block.BlockFlower;
@@ -221,7 +222,7 @@ public class HarshenBlocks {
 	public static void regBlock(Block block, int stackSize) {
 		blocksWithItems.add(block);
 		blockStackSize.put(block, stackSize);	
-		BlocksEnabled.allBlocks.add(block);
+		HarshenConfigs.BLOCKS.allComponants.add(block);
 	}
 	
 	public static void regBlock(Block block, int stackSize, IProperty<?>... toIgnore)
@@ -239,14 +240,14 @@ public class HarshenBlocks {
 	
 	public static void regSingleBlock(Block block)
 	{
-		BlocksEnabled.allBlocks.add(block);
+		HarshenConfigs.BLOCKS.allComponants.add(block);
 	}
 	
 	public static void regSingleBlock(Block block,  IProperty<?>... toIgnore)
 	{
 		blocksWithCustomStateMap.add(block);
 		propertiesToIgnoreCustomStateMap.add(toIgnore);
-		BlocksEnabled.allBlocks.add(block);
+		HarshenConfigs.BLOCKS.allComponants.add(block);
 	}
 
 	public static void regRender(Block block) {
@@ -255,8 +256,8 @@ public class HarshenBlocks {
 	}
 
 	public static void register() {
-		for(Block block : BlocksEnabled.allBlocks)
-			if(BlocksEnabled.isBlockEnabled(block))
+		for(Block block : HarshenConfigs.BLOCKS.allComponants)
+			if(HarshenConfigs.BLOCKS.isEnabled(block))
 			{
 				ForgeRegistries.BLOCKS.register(block);
 				if(blocksWithItems.contains(block))

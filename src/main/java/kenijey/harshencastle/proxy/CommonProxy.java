@@ -5,7 +5,7 @@ import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.HarshenRecipes;
 import kenijey.harshencastle.HarshenSounds;
-import kenijey.harshencastle.HarshenStructureRegistry;
+import kenijey.harshencastle.HarshenStructures;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.WorldGen;
 import kenijey.harshencastle.armor.HarshenArmors;
@@ -78,14 +78,17 @@ public class CommonProxy
     	
 		HarshenBlocks.preInit();
 		HarshenItems.preInit();
+		HarshenStructures.preInit();
 				
 		HarshenBlocks.reg();
 		HarshenItems.reg();
+		HarshenStructures.reg();
 		
 		HarshenConfigs.preInit();
 		
 		HarshenBlocks.register();
 		HarshenItems.register();
+		HarshenStructures.register();
 		
 		HarshenArmors.preInit();
 		HarshenArmors.register();
@@ -97,8 +100,6 @@ public class CommonProxy
 		HarshenSounds.preInit();
 		
 		HarshenNetwork.preInit();
-		
-		HarshenStructureRegistry.preInit();
     }
     
     private void setUpEnumValues()

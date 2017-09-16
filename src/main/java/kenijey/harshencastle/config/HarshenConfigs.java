@@ -1,16 +1,20 @@
 package kenijey.harshencastle.config;
 
+import kenijey.harshencastle.base.BaseConfig;
+
 public class HarshenConfigs 
 {
-	public static final ItemsEnabled ITEM = new ItemsEnabled();
-	public static final BlocksEnabled BLOCK = new BlocksEnabled();
+	public static final ItemsEnabled ITEMS = new ItemsEnabled();
+	public static final BlocksEnabled BLOCKS = new BlocksEnabled();
+	public static final StructuresEnabled STRUCTURES = new StructuresEnabled();
 	public static final GeneralConfig GENERAL = new GeneralConfig();
 	public static final IdConfig ID = new IdConfig();
 	
 	public static void preInit()
 	{
-		ITEM.preInit();
-		BLOCK.preInit();
+		ITEMS.preInit();
+		BLOCKS.preInit();
+		STRUCTURES.preInit();
 		GENERAL.preInit();
 		ID.preInit();
 	}

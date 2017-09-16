@@ -1,5 +1,6 @@
 package kenijey.harshencastle.handlers.client;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -69,10 +70,7 @@ public class HandlerClientHarshenInventoryEffects
 				}
 			Collections.reverse(finalBlockPositions);
 			for(BlockPos finalPos : finalBlockPositions)
-				//HarshenClientUtils.renderFullBoxAt(finalPos, event.getPartialTicks());
-				HarshenClientUtils.renderGhostBlock(Minecraft.getMinecraft().world.getBlockState(finalPos), finalPos, true, event.getPartialTicks());
-
-
+				HarshenClientUtils.renderGhostBlock(Minecraft.getMinecraft().world.getBlockState(finalPos), finalPos, new Color(0.1f, 0.5f, 1f), true, event.getPartialTicks());
 		}
 	}
 }

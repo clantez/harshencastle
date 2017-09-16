@@ -32,7 +32,7 @@ public class WorldGen implements IWorldGenerator
 		{
 			
 			if(chunkX == 44 && chunkZ == 44)
-				HarshenStructureRegistry.castle.generateStucture(world, random, chunkX, chunkZ);
+				HarshenStructures.castle.generateStucture(world, random, chunkX, chunkZ);
 			oreGenerator(this.soulore, world, random, chunkX, chunkZ, 10, 0, 20);
 	    	flowerGenerator(HarshenBlocks.harshen_soul_flower, world, random, chunkX, chunkZ, 15);
 	    	flowerGenerator(HarshenBlocks.plant_of_gleam, world, random, chunkX, chunkZ, 15);
