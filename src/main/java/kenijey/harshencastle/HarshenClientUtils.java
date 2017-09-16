@@ -1,11 +1,15 @@
 package kenijey.harshencastle;
 
+import java.awt.Color;
+
 import javax.vecmath.Vector4f;
 
 import kenijey.harshencastle.inventory.GuiHandler;
 import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.network.packets.MessagePacketOpenInv;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.BlockRendererDispatcher;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
@@ -13,6 +17,7 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 public class HarshenClientUtils 
 {
@@ -80,6 +85,32 @@ public class HarshenClientUtils
         postNoDepthLineRender();
 	}
 	
+	public static void renderGhostBlock(IBlockState state, BlockPos position, Color color, boolean noDepth, float partialTicks)
+	{
+		BufferBuilder vb;
+		if(noDepth)
+		{
+            GlStateManager.depthFunc(519);
+			vb = prepRenderBlockDepth(partialTicks);
+		}
+		else
+	        vb = prepRender(partialTicks);
+
+        vb.begin(7, DefaultVertexFormats.BLOCK);
+        World world = Minecraft.getMinecraft().world;
+        BlockRendererDispatcher dispatcher = Minecraft.getMinecraft().getBlockRendererDispatcher();
+        dispatcher.renderBlock(state, position.add(0, + 300, 0), world, vb);
+        for(int i = 0; i < vb.getVertexCount(); i++)
+        	vb.putColorMultiplier(color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, i);
+        postRender();
+        GlStateManager.depthFunc(515);
+	}
+	
+	public static void renderGhostBlock(IBlockState state, BlockPos position, boolean noDepth, float partialTicks)
+	{
+		renderGhostBlock(state, position, new Color(1f, 1f, 1f), noDepth, partialTicks);
+	}
+	
 	private final static Vector4f WHITE = new Vector4f(1, 1, 1, 1);
 	
 	public static void renderFaceAt(EnumFacing face, BlockPos pos, float partialTicks, Vector4f color, float line)
@@ -129,21 +160,47 @@ public class HarshenClientUtils
 		GlStateManager.disableTexture2D();
         GlStateManager.disableBlend();
         GlStateManager.glLineWidth(line);
+        BufferBuilder bufferbuilder = prepRender(partialTicks);
+        bufferbuilder.begin(3, DefaultVertexFormats.POSITION_COLOR);
+        return bufferbuilder;
+	}
+	
+	public static BufferBuilder prepRender(float partialTicks)
+	{
+		GlStateManager.pushMatrix();
 		EntityPlayer entityplayer = Minecraft.getMinecraft().player;
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder bufferbuilder = tessellator.getBuffer();
         double d0 = entityplayer.lastTickPosX + (entityplayer.posX - entityplayer.lastTickPosX) * (double)partialTicks;
         double d1 = entityplayer.lastTickPosY + (entityplayer.posY - entityplayer.lastTickPosY) * (double)partialTicks;
         double d2 = entityplayer.lastTickPosZ + (entityplayer.posZ - entityplayer.lastTickPosZ) * (double)partialTicks;
-        bufferbuilder.begin(3, DefaultVertexFormats.POSITION_COLOR);
         Tessellator.getInstance().getBuffer().setTranslation(-d0, -d1, -d2);
         return bufferbuilder;
 	}
 	
-	public static void postLineRender()
+	public static BufferBuilder prepRenderBlockDepth(float partialTicks)
+	{
+		GlStateManager.pushMatrix();
+		EntityPlayer entityplayer = Minecraft.getMinecraft().player;
+        Tessellator tessellator = Tessellator.getInstance();
+        BufferBuilder bufferbuilder = tessellator.getBuffer();
+        double d0 = entityplayer.lastTickPosX + (entityplayer.posX - entityplayer.lastTickPosX) * (double)partialTicks;
+        double d1 = (entityplayer.lastTickPosY + (entityplayer.posY - entityplayer.lastTickPosY) * (double)partialTicks) + 300;
+        double d2 = entityplayer.lastTickPosZ + (entityplayer.posZ - entityplayer.lastTickPosZ) * (double)partialTicks;
+        Tessellator.getInstance().getBuffer().setTranslation(-d0, -d1, -d2);
+        return bufferbuilder;
+	}
+	
+	public static void postRender()
 	{
 		Tessellator.getInstance().draw();
         Tessellator.getInstance().getBuffer().setTranslation(0, 0, 0);
+        GlStateManager.popMatrix();
+	}
+		
+	public static void postLineRender()
+	{
+		postRender();
         GlStateManager.glLineWidth(1.0F);
         line = 0.5f;
         GlStateManager.enableBlend();

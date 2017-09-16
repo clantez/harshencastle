@@ -14,6 +14,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderLivingEvent;
@@ -66,8 +67,11 @@ public class HandlerClientHarshenInventoryEffects
 					finalBlockPositions.add(distanceMap.get(d));
 					positionsFound++;
 				}
+			Collections.reverse(finalBlockPositions);
 			for(BlockPos finalPos : finalBlockPositions)
-				HarshenClientUtils.renderFullBoxAt(finalPos, event.getPartialTicks());
+				//HarshenClientUtils.renderFullBoxAt(finalPos, event.getPartialTicks());
+				HarshenClientUtils.renderGhostBlock(Minecraft.getMinecraft().world.getBlockState(finalPos), finalPos, true, event.getPartialTicks());
+
 
 		}
 	}
