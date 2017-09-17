@@ -81,8 +81,7 @@ public abstract class BaseConfig
 			return (T) returnObj;
 		}
 		catch (NullPointerException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException e) {
-			HarshenCastle.logger.error("Forge Config has no such getter for " + normal.getClass() + ". ErrorClass:" + e.getClass());
-			e.printStackTrace();
+			HarshenCastle.logger.error("Forge Config has no such getter for " + normal.getClass() + ". ErrorClass: " + e.getClass().getSimpleName());
 		}
 		return normal;
 	}
