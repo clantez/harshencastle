@@ -6,10 +6,12 @@ import java.util.Random;
 
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenCastle;
+import kenijey.harshencastle.HarshenStructures;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.worldgenerators.pontus.PontusWorldRuinGenerator;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -106,18 +108,22 @@ public class HarshenStructure
 	
 	public void generateStucture(World world, Random random, int chunkX, int chunkZ)
 	{
-		if(random.nextFloat() < chance) {
+		if(size == null && !world.isRemote)
+			load((WorldServer) world);
+		if(random.nextFloat() < 0.1f) {
 	        int x = chunkX * 16 + random.nextInt(16);
 	        int z = chunkZ * 16 + random.nextInt(16);
 	        int y = HarshenUtils.getTopBlock(world, new BlockPos(x, 0, z)).getY();
-	        BlockPos pos = new BlockPos(x, y, z).add(addPos());
-	        if(addPositionOnGenerate())
-	        	pos = pos.add(originAddition);
+	        BlockPos pos = new BlockPos(x, y, z).add(addPos()).down().add(originAddition);
 	        loadIntoWorld(world, pos, random);
 	        if(useRuin)
 	        	new PontusWorldRuinGenerator(size, getAdditionBlocks())
 	        	.generate(world, random, pos);
-
+	        for(int x1 = 0; x1 < size.getX(); x1++)
+		        for(int z1 = 0; z1 < size.getZ(); z1++)
+		        	if(world.isAirBlock(pos.add(x1, -1, z1)) && !world.isAirBlock(pos.add(x1, 0, z1)))
+		        		for(int y1 = 1; world.isAirBlock(pos.add(x1, -y1, z1)); y1++)
+		        			world.setBlockState(pos.add(x1, -y1, z1), world.getBlockState(pos.add(x1, 0, z1)));
 		}
 	}
 	
@@ -135,13 +141,13 @@ public class HarshenStructure
 		if(addBlocks() != null)
 			for(Block block : addBlocks())
 				blocks.add(block);
-		if(removeBlocks() != null)
 			outLoop:
 			for(Block block : finalBlocks)
 			{
-				for(Block blocksToRemove : removeBlocks())
-					if(block == blocksToRemove)
-						continue outLoop;
+				if(removeBlocks() != null)
+					for(Block blocksToRemove : removeBlocks())
+						if(block == blocksToRemove)
+							continue outLoop;
 				blocks.add(block);
 			}
 		return blocks;

@@ -7,6 +7,7 @@ public class GeneralConfig extends BaseConfig {
 	public static boolean bloodDrops;
 	public static boolean bloodOffHand;
 	public static double bloodChance;
+	public static boolean renderPlates;
 	
 	@Override
 	public String getName() {
@@ -15,16 +16,18 @@ public class GeneralConfig extends BaseConfig {
 
 	@Override
 	public void read() {
-		bloodDrops = getBoolean("blood_drops", true);
-		bloodChance = getDouble("blood_chance", 0.3D);
-		bloodOffHand = getBoolean("blood_offhand", true);
+		bloodDrops = get("blood_drops", true);
+		bloodChance = get("blood_chance", 0.3D);
+		bloodOffHand = get("blood_offhand", true);
+		renderPlates = get("render_flatplates", true);
 	}
 
 	@Override
 	public void save() {
-		setBoolean("blood_drops", bloodDrops);
-		setDouble("blood_chance", bloodChance);
-		setBoolean("blood_offhand", bloodOffHand);
+		set("blood_drops", bloodDrops);
+		set("blood_chance", bloodChance);
+		set("blood_offhand", bloodOffHand);
+		set("render_flatplates", renderPlates);
 	}
 
 }

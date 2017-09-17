@@ -46,5 +46,4 @@ public class Shrine extends HarshenStructure {
 	public BlockPos addPos() {
 		return new BlockPos(0, -1, 0);
 	}
-
 }

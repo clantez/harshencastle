@@ -15,7 +15,10 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class HandlerFlatPlateRenderer 
 {
 	
-	public static ArrayList<BlockPos> platePositions = new ArrayList<BlockPos>();
+	private static ArrayList<BlockPos> platePositions = new ArrayList<BlockPos>();
+	private static ArrayList<BlockPos> additionPosition = new ArrayList<BlockPos>();
+
+	public static boolean isRunning = false;
 	
 	@SubscribeEvent
 	public void lastRender(RenderWorldLastEvent event)
@@ -23,16 +26,27 @@ public class HandlerFlatPlateRenderer
 		if(!Minecraft.getMinecraft().player.capabilities.isCreativeMode && !Minecraft.getMinecraft().player.isSpectator())
 			return;
 		ArrayList<BlockPos> nonRemovedPlates = new ArrayList<>();
+		isRunning = true;
 		for(BlockPos pos : platePositions)
+		{
 			if(Minecraft.getMinecraft().world.getBlockState(pos).getBlock() instanceof HarshenDimensionalFlatPlate)
 				nonRemovedPlates.add(renderAt(pos, event.getPartialTicks()));
+		}
+		isRunning = false;
 		platePositions = nonRemovedPlates;
+		platePositions.addAll(additionPosition);
 	}
 	
 	private BlockPos renderAt(BlockPos pos, float partialTicks)
 	{
-		return pos;
-//		HarshenClientUtils.renderFaceAt(EnumFacing.DOWN, pos, partialTicks, new Vector4f(0, 0, 1, 1));
-//        return pos;
+		HarshenClientUtils.renderFaceAt(EnumFacing.DOWN, pos, partialTicks, new Vector4f(0, 0, 1, 1), 1f);
+        return pos;
+	}
+	
+	public static void addPosition(BlockPos pos)
+	{
+		if(additionPosition.contains(pos) || platePositions.contains(pos))
+			return;
+		(isRunning ? additionPosition : platePositions).add(pos);
 	}
 }

@@ -69,7 +69,10 @@ public class CommonProxy
 {
     public void preInit(FMLPreInitializationEvent event) 
     {    	
-    	HarshenPotions.preInit();//dont mess with order
+    	HarshenConfigs.IDS.preInit();//dont mess with order
+    	HarshenConfigs.GENERAL.preInit();
+    	
+    	HarshenPotions.preInit();
 		HarshenPotions.register();
 		
     	HarshenFluids.register();
@@ -84,7 +87,9 @@ public class CommonProxy
 		HarshenItems.reg();
 		HarshenStructures.reg();
 		
-		HarshenConfigs.preInit();
+		HarshenConfigs.BLOCKS.preInit();
+		HarshenConfigs.ITEMS.preInit();
+		HarshenConfigs.STRUCTURES.preInit();
 		
 		HarshenBlocks.register();
 		HarshenItems.register();

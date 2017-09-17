@@ -8,7 +8,7 @@ public class HarshenConfigs
 	public static final BlocksEnabled BLOCKS = new BlocksEnabled();
 	public static final StructuresEnabled STRUCTURES = new StructuresEnabled();
 	public static final GeneralConfig GENERAL = new GeneralConfig();
-	public static final IdConfig ID = new IdConfig();
+	public static final IdConfig IDS = new IdConfig();
 	
 	public static void preInit()
 	{
@@ -16,7 +16,7 @@ public class HarshenConfigs
 		BLOCKS.preInit();
 		STRUCTURES.preInit();
 		GENERAL.preInit();
-		ID.preInit();
+		IDS.preInit();
 	}
 		
 }

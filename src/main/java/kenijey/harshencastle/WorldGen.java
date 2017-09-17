@@ -42,7 +42,6 @@ public class WorldGen implements IWorldGenerator
 	    	oreGenerator(this.itiumOre, world, random, chunkX, chunkZ, 15, 0, 255);
 	    	oreGenerator(this.pontusEmeraldOre, world, random, chunkX, chunkZ, 25, 0, 255);
 		}
-		
 		generateStructure(world, HarshenStructure.get(dim), random, chunkX, chunkZ);
 	}
 	
