@@ -75,7 +75,7 @@ public abstract class BaseConfig
 			propertyMap.put(getName() + "*" + name, property);
 			String className = normal.getClass().getSimpleName();
 			if(normal.getClass() == Integer.class || normal.getClass() == Integer[].class)
-				className = "Int";
+				className.replace("Integer", "Int");
 			Object returnObj = property.getClass().getMethod("get" + className.replace("[]", "List"))
 					.invoke(property);
 			return (T) returnObj;
