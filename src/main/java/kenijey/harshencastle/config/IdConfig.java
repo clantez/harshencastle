@@ -1,7 +1,6 @@
 package kenijey.harshencastle.config;
 
 import kenijey.harshencastle.base.BaseConfig;
-import kenijey.harshencastle.dimensions.DimensionPontus;
 
 public class IdConfig extends BaseConfig {
 

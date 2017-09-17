@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import kenijey.harshencastle.base.BaseItemMetaData;
 import kenijey.harshencastle.config.HarshenConfigs;
-import kenijey.harshencastle.config.ItemsEnabled;
 import kenijey.harshencastle.enums.ItemLiquidTypeset;
 import kenijey.harshencastle.enums.items.EnumBloodCollector;
 import kenijey.harshencastle.enums.items.EnumGlassContainer;

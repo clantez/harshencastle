@@ -10,8 +10,6 @@ import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.base.BasePontusResourceBiome;
 import kenijey.harshencastle.biomes.HarshenBiomes;
 import kenijey.harshencastle.biomes.PontusBiomeProvider;
-import kenijey.harshencastle.biomes.PontusFarBiome;
-import kenijey.harshencastle.biomes.PontusOuterBiome;
 import kenijey.harshencastle.fluids.HarshenFluids;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
@@ -174,7 +172,7 @@ public class PontusChunkProvider implements IChunkGenerator
                             	if ((lvt_45_1_ += d16) > 0.0D)
                             	{
                             		BasePontusResourceBiome thisBiome = PontusBiomeProvider.biomeFromPosition(x, z);
-                            		ArrayList<Block> blockList = HarshenUtils.toArrayBlock(thisBiome.getGroundBlocks());
+                            		ArrayList<Block> blockList = HarshenUtils.toArray(thisBiome.getGroundBlocks());
                             		for(BasePontusResourceBiome biome : HarshenBiomes.allBiomes)
                             			if(biome.distanceStartSpawn() < 0)
                             				continue;
@@ -182,7 +180,7 @@ public class PontusChunkProvider implements IChunkGenerator
                             					PontusBiomeProvider.getDistance(HarshenUtils.chunkToPos(x, z)) < biome.distanceStartSpawn()  + 80)
                             			{
                             				for(int i3 = 0; i3 < 19; i3 ++)
-                            					blockList.addAll(HarshenUtils.toArrayBlock(thisBiome.getGroundBlocks()));
+                            					blockList.addAll(HarshenUtils.toArray(thisBiome.getGroundBlocks()));
                             				for(int i3 = 0; i3 < Math.floorDiv(Math.round(80 - Math.abs(PontusBiomeProvider.getDistance(HarshenUtils.chunkToPos(x, z)) - biome.distanceStartSpawn())), 4); i3 ++)
 	                            				blockList.add(HarshenBiomes.allBiomes.get(HarshenBiomes.allBiomes.indexOf(thisBiome)
 	                            						+ (PontusBiomeProvider.getDistance(HarshenUtils.chunkToPos(x, z)) - biome.distanceStartSpawn() < 0 ? 1 : -1))
@@ -191,9 +189,9 @@ public class PontusChunkProvider implements IChunkGenerator
                             			}
                             		if(i2 * 8 + j2 > thisBiome.getHeightForNonHeightBlocks() && thisBiome.getNonHightBlocks() != null)
                             		{
-                            			ArrayList<Block> blockList1 = HarshenUtils.toArrayBlock(thisBiome.getGroundBlocks());
+                            			ArrayList<Block> blockList1 = HarshenUtils.toArray(thisBiome.getGroundBlocks());
                             			for(Block block : blockList)
-                            				if(!HarshenUtils.toArrayBlock(thisBiome.getNonHightBlocks()).contains(block))
+                            				if(!HarshenUtils.toArray(thisBiome.getNonHightBlocks()).contains(block))
                             					blockList1.add(block);
                             			blockList = blockList1;
                             		}

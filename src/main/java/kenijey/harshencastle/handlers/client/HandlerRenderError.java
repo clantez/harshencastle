@@ -7,8 +7,6 @@ import javax.vecmath.Vector4f;
 import kenijey.harshencastle.HarshenClientUtils;
 import kenijey.harshencastle.objecthandlers.FaceRenderer;
 import net.minecraft.client.Minecraft;
-import net.minecraft.init.Blocks;
-import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 

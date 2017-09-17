@@ -47,7 +47,6 @@ import kenijey.harshencastle.blocks.PontusEmeraldOre;
 import kenijey.harshencastle.blocks.PontusFarLeaves;
 import kenijey.harshencastle.blocks.PontusFarWood;
 import kenijey.harshencastle.blocks.SoulReminder;
-import kenijey.harshencastle.config.BlocksEnabled;
 import kenijey.harshencastle.config.HarshenConfigs;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;

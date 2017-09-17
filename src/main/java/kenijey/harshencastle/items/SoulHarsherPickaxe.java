@@ -4,7 +4,6 @@ import java.util.List;
 
 import kenijey.harshencastle.HarshenItems;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentTranslation;

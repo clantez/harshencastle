@@ -3,7 +3,6 @@ package kenijey.harshencastle.handlers.client;
 import kenijey.harshencastle.inventory.GuiHarshenButton;
 import kenijey.harshencastle.inventory.GuiPlayerInventoryExtended;
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.gui.inventory.GuiContainerCreative;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.client.event.GuiScreenEvent;

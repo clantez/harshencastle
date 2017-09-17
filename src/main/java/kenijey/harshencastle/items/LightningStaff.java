@@ -1,13 +1,8 @@
 package kenijey.harshencastle.items;
 
-import java.util.List;
-
 import kenijey.harshencastle.base.BaseHarshenStaff;
-import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
 public class LightningStaff extends BaseHarshenStaff

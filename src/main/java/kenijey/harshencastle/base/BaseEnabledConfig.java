@@ -3,7 +3,6 @@ package kenijey.harshencastle.base;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import net.minecraft.item.Item;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.common.config.Property;
 

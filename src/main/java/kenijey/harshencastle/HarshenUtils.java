@@ -8,9 +8,7 @@ import java.util.Random;
 import com.google.common.collect.Lists;
 
 import kenijey.harshencastle.base.BasePontusResourceBiome;
-import kenijey.harshencastle.config.BlocksEnabled;
 import kenijey.harshencastle.config.HarshenConfigs;
-import kenijey.harshencastle.config.ItemsEnabled;
 import kenijey.harshencastle.enums.CauldronLiquid;
 import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
 import kenijey.harshencastle.enums.items.EnumGlassContainer;
@@ -130,17 +128,17 @@ public class HarshenUtils
 		return (int) Math.floor(num);
 	}
 	
-	public static ArrayList<Block> toArrayBlock(Block... blocks)
+	public static <T> ArrayList<T> toArray(T... list)
 	{
-		ArrayList<Block> arrayBlocks = new ArrayList<>();
-		for(Block block : blocks)
-			arrayBlocks.add(block);
-		return arrayBlocks;
+		ArrayList<T> array = new ArrayList<>();
+		for(T componant : list)
+			array.add(componant);
+		return array;
 	}
 	
-	public static Block[] blockList(Block...blocks)
+	public static <T> T[] listOf(T...list)
 	{
-		return blocks;
+		return list;
 	}
 	
 	public static HarshenItemStackHandler getHandler(EntityPlayer player)

@@ -40,7 +40,7 @@ public class PontusBiome extends BasePontusResourceBiome
 	
 	@Override
 	public Block[] getNonHightBlocks() {
-		return HarshenUtils.blockList(HarshenBlocks.harshen_dimensional_dirt);
+		return HarshenUtils.listOf(HarshenBlocks.harshen_dimensional_dirt);
 	}
 
 	@Override
@@ -56,7 +56,7 @@ public class PontusBiome extends BasePontusResourceBiome
 
 	@Override
 	public Block[] getGroundBlocks() {
-		return HarshenUtils.blockList(HarshenBlocks.harshen_dimensional_rock, HarshenBlocks.harshen_dimensional_dirt);
+		return HarshenUtils.listOf(HarshenBlocks.harshen_dimensional_rock, HarshenBlocks.harshen_dimensional_dirt);
 	}
 
 

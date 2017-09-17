@@ -4,15 +4,12 @@ import java.util.Random;
 
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenUtils;
-import kenijey.harshencastle.base.BaseLargeTreeGenerator;
 import kenijey.harshencastle.base.BasePineTreeGenerator;
 import kenijey.harshencastle.base.BasePontusResourceBiome;
 import kenijey.harshencastle.entity.EntitySoullessKnight;
-import kenijey.harshencastle.worldgenerators.pontus.PontusWorldGeneratorDestroyedPlants;
 import net.minecraft.block.Block;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
-import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.common.BiomeDictionary.Type;
 
 public class PontusFarBiome extends BasePontusResourceBiome {
@@ -59,7 +56,7 @@ public class PontusFarBiome extends BasePontusResourceBiome {
 
 	@Override
 	public Block[] getGroundBlocks() {
-		return HarshenUtils.blockList(HarshenBlocks.harshen_far_rock, HarshenBlocks.harshen_chaotic_rock);
+		return HarshenUtils.listOf(HarshenBlocks.harshen_far_rock, HarshenBlocks.harshen_chaotic_rock);
 	}
 
 

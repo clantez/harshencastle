@@ -52,7 +52,7 @@ public class PontusOuterBiome extends BasePontusResourceBiome {
 
 	@Override
 	public Block[] getGroundBlocks() {
-		return HarshenUtils.blockList(HarshenBlocks.harshen_dimensional_rock, HarshenBlocks.harshen_chaotic_rock);
+		return HarshenUtils.listOf(HarshenBlocks.harshen_dimensional_rock, HarshenBlocks.harshen_chaotic_rock);
 	}
 
 

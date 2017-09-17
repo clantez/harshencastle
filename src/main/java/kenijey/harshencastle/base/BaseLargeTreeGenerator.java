@@ -1,12 +1,10 @@
 package kenijey.harshencastle.base;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 import com.google.common.collect.Lists;
 
-import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenUtils;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.state.IBlockState;
@@ -14,7 +12,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
-import scala.xml.dtd.impl.Base;
 
 public class BaseLargeTreeGenerator extends WorldGenAbstractTree
 {
@@ -357,7 +354,7 @@ public class BaseLargeTreeGenerator extends WorldGenAbstractTree
     {
         BlockPos down = this.basePos.down();
         net.minecraft.block.state.IBlockState state = this.world.getBlockState(down);
-        if(!(world.getBiome(down) instanceof BasePontusResourceBiome && HarshenUtils.toArrayBlock(((BasePontusResourceBiome)world.getBiome(down)).getGroundBlocks()).contains(state.getBlock())))
+        if(!(world.getBiome(down) instanceof BasePontusResourceBiome && HarshenUtils.toArray(((BasePontusResourceBiome)world.getBiome(down)).getGroundBlocks()).contains(state.getBlock())))
         	return false;
         int i = this.checkBlockLine(this.basePos, this.basePos.up(this.heightLimit - 1));
 

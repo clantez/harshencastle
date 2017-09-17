@@ -1,17 +1,13 @@
 package kenijey.harshencastle.base;
 
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Random;
 
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenCastle;
-import kenijey.harshencastle.HarshenStructures;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.worldgenerators.pontus.PontusWorldRuinGenerator;
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -130,7 +126,7 @@ public class HarshenStructure
 	protected ArrayList<Block> getAdditionBlocks()
 	{
 		ArrayList<Block> blocks = new ArrayList<>();
-		Block[] finalBlocks = HarshenUtils.blockList(
+		Block[] finalBlocks = HarshenUtils.listOf(
 				HarshenBlocks.harshen_dimensional_wood_crate, 
 				HarshenBlocks.pontus_dead_wood, 
 				HarshenBlocks.harshen_dimensional_glass,

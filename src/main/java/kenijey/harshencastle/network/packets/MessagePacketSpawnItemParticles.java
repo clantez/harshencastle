@@ -7,7 +7,6 @@ import kenijey.harshencastle.enums.particle.EnumHarshenParticle;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 
 public class MessagePacketSpawnItemParticles extends BaseMessagePacket<MessagePacketSpawnItemParticles>{

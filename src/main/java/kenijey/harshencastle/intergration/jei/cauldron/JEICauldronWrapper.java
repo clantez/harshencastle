@@ -14,7 +14,6 @@ import kenijey.harshencastle.enums.CauldronLiquid;
 import kenijey.harshencastle.enums.ItemLiquidTypeset;
 import kenijey.harshencastle.recipies.CauldronRecipes;
 import mezz.jei.api.ingredients.IIngredients;
-import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 
 public class JEICauldronWrapper extends BaseJeiWrapper

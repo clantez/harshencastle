@@ -11,7 +11,6 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 
 public class HandlerPontusAllowed 
 {
-	
 	private static HashMap<String, Integer> playersLevelMap = new HashMap<String, Integer>();
 	
 	@SubscribeEvent
@@ -19,7 +18,7 @@ public class HandlerPontusAllowed
 	{
 		if(!playersLevelMap.containsKey(event.player.getUniqueID().toString()))
 			setAllowed(event.player, event.player.getEntityData().getInteger("PontusBiomeLevel"));
-		if(!event.player.world.isRemote && !HarshenUtils.isLevelAcceptable(event.player.world, event.player.getPosition(), event.player))
+		if(!HarshenUtils.isLevelAcceptable(event.player.world, event.player.getPosition(), event.player))
 		{
 			event.player.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 100, 5));
 			event.player.addPotionEffect(new PotionEffect(MobEffects.HUNGER, 100, 4));

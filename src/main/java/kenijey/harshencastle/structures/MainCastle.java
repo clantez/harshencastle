@@ -4,7 +4,6 @@ import java.util.Random;
 
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenLootTables;
-import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.base.HarshenStructure;
 import kenijey.harshencastle.worldgenerators.castle.ChestGenerator;
 import kenijey.harshencastle.worldgenerators.castle.MazeGenerator;

@@ -72,7 +72,7 @@ public class BasePineTreeGenerator extends WorldGenAbstractTree
             {
                 BlockPos down = position.down();
                 IBlockState state = worldIn.getBlockState(down);
-                if (worldIn.getBiome(down) instanceof BasePontusResourceBiome && HarshenUtils.toArrayBlock(((BasePontusResourceBiome)worldIn.getBiome(down)).getGroundBlocks()).contains(state.getBlock())
+                if (worldIn.getBiome(down) instanceof BasePontusResourceBiome && HarshenUtils.toArray(((BasePontusResourceBiome)worldIn.getBiome(down)).getGroundBlocks()).contains(state.getBlock())
                 		&& position.getY() < 256 - i - 1)
                 {
                     state.getBlock().onPlantGrow(state, worldIn, down, position);

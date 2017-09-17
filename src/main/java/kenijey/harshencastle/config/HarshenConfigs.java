@@ -1,7 +1,5 @@
 package kenijey.harshencastle.config;
 
-import kenijey.harshencastle.base.BaseConfig;
-
 public class HarshenConfigs 
 {
 	public static final ItemsEnabled ITEMS = new ItemsEnabled();
