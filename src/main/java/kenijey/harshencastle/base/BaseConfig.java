@@ -63,8 +63,7 @@ public abstract class BaseConfig
 			propertyMap.put(getName() + "*" + name, property);
 			String className = normal.getClass().getSimpleName();
 			if(normal.getClass() == Integer.class || normal.getClass() == Integer[].class)	className = className.replace("Integer", "Int");
-			Object returnObj = property.getClass().getMethod("get" + className.replace("[]", "List")).invoke(property);
-			return (T) returnObj;
+			return (T) property.getClass().getMethod("get" + className.replace("[]", "List")).invoke(property);
 		}
 		catch (NullPointerException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException e) {
 			HarshenCastle.logger.error("Forge Config has no such getter for " + normal.getClass() + ". ErrorClass: " + e.getClass().getSimpleName());
