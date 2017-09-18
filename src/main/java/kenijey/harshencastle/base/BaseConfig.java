@@ -61,9 +61,7 @@ public abstract class BaseConfig
 			Property property = (Property) returned;
 			property.setComment(new TextComponentTranslation("config." + name).getUnformattedText());
 			propertyMap.put(getName() + "*" + name, property);
-			String className = normal.getClass().getSimpleName();
-			if(normal.getClass() == Integer.class || normal.getClass() == Integer[].class)	className = className.replace("Integer", "Int");
-			return (T) property.getClass().getMethod("get" + className.replace("[]", "List")).invoke(property);
+			return (T) property.getClass().getMethod("get" + normal.getClass().getSimpleName().replace("Integer", "Int").replace("[]", "List")).invoke(property);
 		}
 		catch (NullPointerException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException e) {
 			HarshenCastle.logger.error("Forge Config has no such getter for " + normal.getClass() + ". ErrorClass: " + e.getClass().getSimpleName());
