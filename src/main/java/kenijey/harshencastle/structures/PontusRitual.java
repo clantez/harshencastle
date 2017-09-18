@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 public class PontusRitual extends HarshenStructure
 {
 	public PontusRitual() {
-		super("pontus/resource", "ritual", new BlockPos(-5, 0, -5), 0.002f, false, DimensionPontus.DIMENSION_ID);
+		super("pontus/resource", "ritual", new BlockPos(-5, 0, -5), 0.0005f, false, DimensionPontus.DIMENSION_ID);
 	}
 	
 	@Override
