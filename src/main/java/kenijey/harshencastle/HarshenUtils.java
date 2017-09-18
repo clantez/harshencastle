@@ -1,7 +1,9 @@
 package kenijey.harshencastle;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -41,6 +43,17 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class HarshenUtils
 {
+	
+	public HarshenUtils() {
+		switchClasses.put(Boolean.class, boolean.class);
+		switchClasses.put(Boolean[].class, boolean[].class);
+		
+		switchClasses.put(Integer.class, int.class);
+		switchClasses.put(Integer[].class, int[].class);
+		
+		switchClasses.put(Double.class, double.class);
+		switchClasses.put(Double[].class, double[].class);	
+	}
 	
     public static final int DECIMAL_COLOR_WHITE = 16777215;
     public static final int DECIMAL_COLOR_GRAY_TEXT = 4210752;
@@ -335,5 +348,36 @@ public class HarshenUtils
 		for(int i = 0; i < list.length; i++)
 			list[i] = string;
 		return list;
+	}
+	
+	public final static HashMap<Class, Class> switchClasses = new HashMap<>();
+	
+	public static Class getClass(Class claz)
+	{
+		Class clas = switchClasses.containsKey(claz) ? switchClasses.get(claz) : claz;
+		if(clas.isArray())
+			clas = clas.getComponentType();
+		return clas;
+	}
+	
+	public static boolean classSame(Class claz1, Class claz2)
+	{
+		return getClass(claz1) == getClass(claz2);
+	}
+	
+	public static Method getMethod(String methodName, Class clas, Class... args)
+	{
+		int l = args.length;
+		for(Method method : clas.getMethods())
+		{
+			if(!(method.getName().equals(methodName) && method.getParameterCount() == l))
+				continue;
+			ArrayList<Boolean> boolList = new ArrayList<>();
+			for(int i = 0; i < method.getParameterTypes().length; i++)
+				boolList.add(classSame(method.getParameterTypes()[i], args[i]) && method.getParameterTypes()[i].isArray() == args[i].isArray());
+			if(!boolList.contains(false))
+				return method;
+		}
+		return null;
 	}
 }

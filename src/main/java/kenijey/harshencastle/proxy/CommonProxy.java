@@ -2,6 +2,7 @@ package kenijey.harshencastle.proxy;
 
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenCastle;
+import kenijey.harshencastle.HarshenClientUtils;
 import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.HarshenRecipes;
 import kenijey.harshencastle.HarshenSounds;
@@ -69,8 +70,13 @@ public class CommonProxy
 {
     public void preInit(FMLPreInitializationEvent event) 
     {    	
-    	HarshenConfigs.IDS.preInit();//dont mess with order
+    	
+    	new HarshenUtils();//dont mess with order
+    	new HarshenClientUtils();
+    	
+    	HarshenConfigs.IDS.preInit();
     	HarshenConfigs.GENERAL.preInit();
+    	HarshenConfigs.ACCESSORIES.preInit();
     	
     	HarshenPotions.preInit();
 		HarshenPotions.register();
@@ -105,6 +111,8 @@ public class CommonProxy
 		HarshenSounds.preInit();
 		
 		HarshenNetwork.preInit();
+		
+		HarshenCastle.logger.info("HarshenCastle loaded correctly");
     }
     
     private void setUpEnumValues()

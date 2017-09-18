@@ -18,7 +18,7 @@ import net.minecraft.world.WorldServer;
 public class Shrine extends HarshenStructure {
 
 	public Shrine() {
-		super("overworld/resource", "shrine", new BlockPos(3, 1, 3),  0.001f, false, 0);
+		super("overworld/resource", "shrine", new BlockPos(3, 1, 3),  0.002f, false, 0);
 	}
 	
 	@Override
@@ -40,10 +40,5 @@ public class Shrine extends HarshenStructure {
 					chest.setInventorySlotContents(slot, stack1);
 				}
 		}
-	}
-	
-	@Override
-	public BlockPos addPos() {
-		return new BlockPos(0, -1, 0);
 	}
 }

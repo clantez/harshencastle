@@ -1,5 +1,6 @@
 package kenijey.harshencastle.config;
 
+import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.base.BaseConfig;
 
 public class AccessoryConfig extends BaseConfig
@@ -14,13 +15,13 @@ public class AccessoryConfig extends BaseConfig
 
 	@Override
 	public void read() {
-//		get("jeff", normal)
+		blackListedXrays = get("xray.blacklist", HarshenUtils.listOf("minecraft:stone"));
 	}
 
 	@Override
 	public void save() {
-		// TODO Auto-generated method stub
-		
+		set("xray.blacklist", blackListedXrays);
+		System.out.println(blackListedXrays);
 	}
 
 }

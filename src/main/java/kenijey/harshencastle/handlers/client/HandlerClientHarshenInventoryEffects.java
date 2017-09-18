@@ -8,6 +8,7 @@ import java.util.HashMap;
 import kenijey.harshencastle.HarshenClientUtils;
 import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.HarshenUtils;
+import kenijey.harshencastle.config.AccessoryConfig;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
@@ -38,35 +39,40 @@ public class HandlerClientHarshenInventoryEffects
 			EntityPlayer player = Minecraft.getMinecraft().player;
 			BlockPos pos = player.getPosition();
 			finalBlockPositions.clear();
-			ArrayList<Block> blocks = HarshenUtils.getBlocksFromString(HarshenUtils.getFirstOccuringItem(Minecraft.getMinecraft().player,  HarshenItems.xray_pendant).getTagCompound().getString("BlockToSearch"));
-			ArrayList<BlockPos> allBlockPos = new ArrayList<>();
-			HashMap<Double, BlockPos> distanceMap = new HashMap<>();
-			for(int x = pos.getX() - 20; x < pos.getX() + 20; x++)
-				for(int z = pos.getZ() - 20; z < pos.getZ() + 20; z++)
-					for(int y = pos.getY() - 20; y < pos.getY() + 20; y++)
-					{
-						if(blocks.contains(Minecraft.getMinecraft().world.getBlockState(new BlockPos(x, y, z)).getBlock()))
+			String blockName = HarshenUtils.getFirstOccuringItem(Minecraft.getMinecraft().player,  HarshenItems.xray_pendant).getTagCompound().getString("BlockToSearch");
+			boolean flag = HarshenUtils.toArray(AccessoryConfig.blackListedXrays).contains(blockName);
+			if(!flag)
+			{
+				ArrayList<Block> blocks = HarshenUtils.getBlocksFromString(blockName);
+				ArrayList<BlockPos> allBlockPos = new ArrayList<>();
+				HashMap<Double, BlockPos> distanceMap = new HashMap<>();
+				for(int x = pos.getX() - 20; x < pos.getX() + 20; x++)
+					for(int z = pos.getZ() - 20; z < pos.getZ() + 20; z++)
+						for(int y = pos.getY() - 20; y < pos.getY() + 20; y++)
 						{
-							BlockPos position = new BlockPos(x, y, z);
-							allBlockPos.add(position);
-							distanceMap.put(position.distanceSq(player.posX, player.posY, player.posZ), position);
+							if(blocks.contains(Minecraft.getMinecraft().world.getBlockState(new BlockPos(x, y, z)).getBlock()))
+							{
+								BlockPos position = new BlockPos(x, y, z);
+								allBlockPos.add(position);
+								distanceMap.put(position.distanceSq(player.posX, player.posY, player.posZ), position);
+							}
 						}
+							
+				ArrayList<Double> keySet = new ArrayList<>();
+				for(double d : distanceMap.keySet())
+					keySet.add(d);		
+				Collections.sort(keySet);
+				int positionsFound = 0;
+				for(double d : keySet)
+					if(positionsFound < 50)
+					{
+						finalBlockPositions.add(distanceMap.get(d));
+						positionsFound++;
 					}
-						
-			ArrayList<Double> keySet = new ArrayList<>();
-			for(double d : distanceMap.keySet())
-				keySet.add(d);		
-			Collections.sort(keySet);
-			int positionsFound = 0;
-			for(double d : keySet)
-				if(positionsFound < 50)
-				{
-					finalBlockPositions.add(distanceMap.get(d));
-					positionsFound++;
-				}
-			Collections.reverse(finalBlockPositions);
-			for(BlockPos finalPos : finalBlockPositions)
-				HarshenClientUtils.renderGhostBlock(Minecraft.getMinecraft().world.getBlockState(finalPos), finalPos, new Color(0.1f, 0.5f, 1f), true, event.getPartialTicks());
+				Collections.reverse(finalBlockPositions);
+				for(BlockPos finalPos : finalBlockPositions)
+					HarshenClientUtils.renderGhostBlock(Minecraft.getMinecraft().world.getBlockState(finalPos), finalPos, new Color(0.1f, 0.5f, 1f), true, event.getPartialTicks());
+			}
 		}
 	}
 }

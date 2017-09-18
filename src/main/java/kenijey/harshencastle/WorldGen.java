@@ -50,15 +50,8 @@ public class WorldGen implements IWorldGenerator
 	private void generateStructure(World world, ArrayList<HarshenStructure> structures, Random random, int chunkX, int chunkZ)
 	{
 		HarshenStructure struc = structures.get(random.nextInt(structures.size()));
-		int timesTaken = 0;
-		while(!struc.canLoadAt(world.provider.getDimension(), chunkX, chunkZ))
-		{
-			struc = structures.get(random.nextInt(structures.size()));
-			if(timesTaken > structures.size())
-				return;
-			timesTaken++;
-		}
-		struc.generateStucture(world, random, chunkX, chunkZ);
+		if(struc.canLoadAt(world.provider.getDimension(), chunkX, chunkZ))
+			struc.generateStucture(world, random, chunkX, chunkZ);
 	}
 	
 	private void oreGenerator(WorldGenerator generator, World world, Random rand, int chunk_X, int chunk_Z, int chancesToSpawn, int minHeight, int maxHeight) 

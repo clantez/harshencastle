@@ -106,11 +106,11 @@ public class HarshenStructure
 	{
 		if(size == null && !world.isRemote)
 			load((WorldServer) world);
-		if(random.nextFloat() < 0.1f) {
+		if(random.nextFloat() < chance) {
 	        int x = chunkX * 16 + random.nextInt(16);
 	        int z = chunkZ * 16 + random.nextInt(16);
-	        int y = HarshenUtils.getTopBlock(world, new BlockPos(x, 0, z)).getY();
-	        BlockPos pos = new BlockPos(x, y, z).add(addPos()).down().add(originAddition);
+	        int y = HarshenUtils.getTopBlock(world, new BlockPos(x, 0, z).add(originAddition)).getY();
+	        BlockPos pos = new BlockPos(x, y, z).add(addPos()).down();
 	        loadIntoWorld(world, pos, random);
 	        if(useRuin)
 	        	new PontusWorldRuinGenerator(size, getAdditionBlocks())
@@ -118,7 +118,7 @@ public class HarshenStructure
 	        for(int x1 = 0; x1 < size.getX(); x1++)
 		        for(int z1 = 0; z1 < size.getZ(); z1++)
 		        	if(world.isAirBlock(pos.add(x1, -1, z1)) && !world.isAirBlock(pos.add(x1, 0, z1)))
-		        		for(int y1 = 1; world.isAirBlock(pos.add(x1, -y1, z1)); y1++)
+		        		for(int y1 = 1; world.getBlockState(pos.add(x1, -y1, z1)).getBlock().isReplaceable(world, pos.add(x1, -y1, z1)); y1++)
 		        			world.setBlockState(pos.add(x1, -y1, z1), world.getBlockState(pos.add(x1, 0, z1)));
 		}
 	}

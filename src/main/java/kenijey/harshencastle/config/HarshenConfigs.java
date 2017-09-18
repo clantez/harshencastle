@@ -7,12 +7,11 @@ public class HarshenConfigs
 	public static final StructuresEnabled STRUCTURES = new StructuresEnabled();
 	public static final GeneralConfig GENERAL = new GeneralConfig();
 	public static final IdConfig IDS = new IdConfig();
+	public static final AccessoryConfig ACCESSORIES = new AccessoryConfig();
 	
 	public static void preInit()
 	{
-		ITEMS.preInit();
-		BLOCKS.preInit();
-		STRUCTURES.preInit();
+		ACCESSORIES.preInit();
 		GENERAL.preInit();
 		IDS.preInit();
 	}
