@@ -36,6 +36,7 @@ import kenijey.harshencastle.blocks.HarshenSpawner;
 import kenijey.harshencastle.blocks.HereticCauldron;
 import kenijey.harshencastle.blocks.HereticCauldronTop;
 import kenijey.harshencastle.blocks.ItiumOre;
+import kenijey.harshencastle.blocks.JewelDirt;
 import kenijey.harshencastle.blocks.KuanticOre;
 import kenijey.harshencastle.blocks.PedestalSlab;
 import kenijey.harshencastle.blocks.PlantOfGleam;
@@ -106,6 +107,7 @@ public class HarshenBlocks {
 	public static Block harshen_magic_table;
 	public static Block pontus_far_leaves;
 	public static Block gilded_obsidian;
+	public static Block jewel_dirt;
 	
 	public static BlockCrops crop_of_gleam;
 
@@ -161,6 +163,7 @@ public class HarshenBlocks {
 		pontus_far_wood = new PontusFarWood();
 		harshen_far_rock = new HarshenFarRock();
 		gilded_obsidian = new GildedObsidian();
+		jewel_dirt = new JewelDirt();
 	}
 
 	public static void reg() {
@@ -204,6 +207,7 @@ public class HarshenBlocks {
 		regBlock(block_of_heads, 64);
 		regBlock(harshen_magic_table, 4);
 		regBlock(gilded_obsidian, 64);
+		regBlock(jewel_dirt, 64);
 		
 		regSingleBlock(heretic_cauldron_top);
 		regSingleBlock(crop_of_gleam);
