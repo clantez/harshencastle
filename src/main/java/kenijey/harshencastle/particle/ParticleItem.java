@@ -1,6 +1,7 @@
 package kenijey.harshencastle.particle;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -22,6 +23,8 @@ import net.minecraftforge.fluids.UniversalBucket;
 
 public class ParticleItem extends BaseHarshenParticle {
 
+	public static HashMap<String, ArrayList<ParticleItem>> itemMap = new HashMap<>();
+		
 	private int fxLayer = 1;
 	
 	public ParticleItem(World world, double xCoordIn, double yCoordIn, double zCoordIn, double motionXIn,
@@ -68,6 +71,21 @@ public class ParticleItem extends BaseHarshenParticle {
 			this.particleGreen = ((color >> 8) & 0xFF) * 255;
 			this.particleBlue = ((color >> 0) & 0xFF) * 255;
 		}
+	}
+	
+	public void addToList(String tag)
+	{
+		if(tag == null || tag.isEmpty())
+			return;
+		if(!itemMap.containsKey(tag))
+			itemMap.put(tag, new ArrayList<>());
+		itemMap.get(tag).add(this);
+	}	
+	
+	public static void killAllParticlesWithTag(String tag)
+	{
+		for(ParticleItem item : itemMap.remove(tag))
+			item.kill();
 	}
 
 	@Override

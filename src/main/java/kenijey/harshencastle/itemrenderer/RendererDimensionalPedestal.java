@@ -5,6 +5,7 @@ import javax.vecmath.Vector3f;
 import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.base.BaseItemRendererActive;
 import kenijey.harshencastle.enums.particle.EnumHarshenParticle;
+import kenijey.harshencastle.particle.ParticleItem;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDimensionalPedestal;
 import net.minecraft.init.Items;
 import net.minecraft.util.math.Vec3d;
@@ -13,9 +14,7 @@ public class RendererDimensionalPedestal extends BaseItemRendererActive<TileEnti
 {
 	@Override
 	protected void moveMore(TileEntityHarshenDimensionalPedestal te) {
-		if(te.getItem().getItem() != Items.AIR)
-			for(int i = 0; i < 15; i++)
-				HarshenCastle.proxy.spawnParticle(EnumHarshenParticle.ITEM, new Vec3d(te.getPos()).addVector(0.5, 0.8, 0.5), Vec3d.ZERO, 0.85f, false, te.getItem());
+
 	}
 
 	@Override

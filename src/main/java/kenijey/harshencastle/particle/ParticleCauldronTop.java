@@ -23,11 +23,6 @@ public class ParticleCauldronTop extends BaseHarshenParticle
 		this.setParticleTexture(Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getTexture(state));
 	}
 
-	public void kill()
-	{
-		this.isExpired = true;
-	}
-
 	@Override
 	public int getFXLayer() {
 		return fxLayer;

@@ -381,6 +381,12 @@ public class HarshenUtils
 	
 	public static Vec3d speedToPos(Vec3d posFrom, Vec3d posTo, double speed)
 	{
-		return new Vec3d((posFrom.x - posTo.x) / speed, (posFrom.y - posTo.y) / speed, (posFrom.z - posTo.z) / speed);
+		return new Vec3d((posTo.x - posFrom.x) / speed, (posTo.y - posFrom.y) / speed, (posTo.z - posFrom.z) / speed);
+	}
+	
+	public static String getTagLine(World world, BlockPos position, String tagType)
+	{
+		return tagType + String.valueOf(world.provider.getDimension()) + "#"
+				+ String.valueOf(position.getX()) + "," + String.valueOf(position.getY()) + "," + String.valueOf(position.getZ());
 	}
 }

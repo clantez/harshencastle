@@ -6,6 +6,8 @@ import kenijey.harshencastle.HarshenRecipes;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.enums.CauldronLiquid;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 public class HereticRitualRecipes 
 {
@@ -16,6 +18,7 @@ public class HereticRitualRecipes
 	private final ItemStack[] pedestalItems;
 	private final CauldronLiquid catalyst;
 	private boolean isFalse;
+	private String tag;
 	
 	private HereticRitualRecipes(ItemStack cauldronItem, ItemStack output, CauldronLiquid catalyst, ItemStack... pedstalItems)
 	{
@@ -59,19 +62,7 @@ public class HereticRitualRecipes
 				
 		return null;
 	}
-	
-	public static HereticRitualRecipes getFromId(int id)
-	{
-		if(id < 0 || id > allRecipes.size())
-			return null;
-		return allRecipes.get(id);
-	}
-	
-	public int getId()
-	{
-		return allRecipes.indexOf(this);
-	}
-	
+
 	public ItemStack getCauldronInput() 
 	{
 		return cauldronItem;
@@ -92,6 +83,21 @@ public class HereticRitualRecipes
 		HereticRitualRecipes recipe = new HereticRitualRecipes(cauldronItem, output, catalyst, pedstalItems);
 		if(!recipe.isFalse)
 			HarshenRecipes.allHereticCauldronRecipes.add(recipe);
+	}
+	
+	public HereticRitualRecipes setTag(String tag)
+	{
+		this.tag = tag;
+		return this;
+	}
+	
+	public String getTag() {
+		return tag;
+	}
+	
+	public HereticRitualRecipes setUp(World world, BlockPos position)
+	{
+		return this.setTag(HarshenUtils.getTagLine(world, position, "heretic_cauldron"));
 	}
 	
 }

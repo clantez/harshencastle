@@ -1,12 +1,13 @@
 package kenijey.harshencastle.tileentity;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import kenijey.harshencastle.HarshenSounds;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.base.BaseTileEntityHarshenSingleItemInventoryActive;
 import kenijey.harshencastle.network.HarshenNetwork;
-import kenijey.harshencastle.network.packets.MessagePacketSpawnBloodParticle;
+import kenijey.harshencastle.network.packets.MessagePacketKillAllWithTag;
 import kenijey.harshencastle.network.packets.MessagePacketSpawnItemParticles;
 import kenijey.harshencastle.recipies.RitualRecipes;
 import net.minecraft.entity.effect.EntityLightningBolt;
@@ -39,9 +40,18 @@ public class TileEntityHarshenDimensionalPedestal extends BaseTileEntityHarshenS
 		if(isActive && workingRecipe != null && !flag)
 			if(checkForCompleation(true))
 			{
-				HarshenNetwork.sendToPlayersInDimension(world.provider.getDimension(),
-						new MessagePacketSpawnItemParticles(getItem(), new Vec3d(pos).addVector(0.5, 0.65, 0.5), HarshenUtils.speedToPos(
-								new Vec3d(workingRecipe.getPositionOfRitual()).addVector(0, 2, 0), new Vec3d(pos).addVector(0.5, 0.65, 0.5), 30D), 1f, false, 30));
+				BlockPos pos = workingRecipe.getPositionOfRitual();
+				for(EnumFacing facing : EnumFacing.HORIZONTALS)
+					if(!((TileEntityHarshenDimensionalPedestal)world.getTileEntity(pos.offset(facing))).getItem().isEmpty())
+						HarshenNetwork.sendToPlayersInDimension(world.provider.getDimension(), new MessagePacketSpawnItemParticles(
+										((TileEntityHarshenDimensionalPedestal)world.getTileEntity(pos.offset(facing))).getItem(),
+										new Vec3d(pos.offset(facing)).addVector(0.5, 0.85, 0.5),
+										HarshenUtils.speedToPos(new Vec3d(pos.offset(facing)).addVector(0.5, 0.85, 0.5),
+										new Vec3d(pos).addVector(0.5, 1, 0.5), 15D), 1f, false, 20, workingRecipe.getTag()));
+				
+				HarshenNetwork.sendToPlayersInDimension(world.provider.getDimension(), new MessagePacketSpawnItemParticles(workingRecipe.getOutput(),
+						new Vec3d(pos).addVector(0.5, 1, 0.5), new Vec3d((randPos() - 0.5D) / 30D, (new Random().nextBoolean() ? -1 : 1 ) / 50D, (randPos() - 0.5D) / 30D), 1.5f, false,
+						(int) ((activeTimer / 20f) * (activeTimer / 20f)), workingRecipe.getTag()));
 			}
 			else
 				deactivateAll();
@@ -58,12 +68,12 @@ public class TileEntityHarshenDimensionalPedestal extends BaseTileEntityHarshenS
 	{
 		isActive = false;
 		for(EnumFacing facing : EnumFacing.HORIZONTALS)
-			((TileEntityHarshenDimensionalPedestal) world.getTileEntity(workingRecipe.getPositionOfRitual().offset(facing))).deactivate();	
+			((TileEntityHarshenDimensionalPedestal)world.getTileEntity(workingRecipe.getPositionOfRitual().offset(facing))).deactivate();	
+		workingRecipe = null;
 	}
 	
 	@Override
 	public void deactivate() {
-		workingRecipe = null;
 		super.deactivate();
 	}
 	
@@ -71,6 +81,11 @@ public class TileEntityHarshenDimensionalPedestal extends BaseTileEntityHarshenS
 	{
 		activeNonControllerTimer = 0;
 		isActiveNonController = false;
+	}
+	
+	public String getTag()
+	{
+		return workingRecipe == null ? "" : workingRecipe.getTag();
 	}
 	
 	public void setActiveNonController()
@@ -118,7 +133,7 @@ public class TileEntityHarshenDimensionalPedestal extends BaseTileEntityHarshenS
 						if(!checkingUp)
 						{
 							world.playSound(null, position, HarshenSounds.lightningRitual, SoundCategory.BLOCKS, 3f, 1f);
-							this.workingRecipe = recipe.setUpRitual(position);
+							this.workingRecipe = recipe.setUpRitual(world, position);
 							activate(position, blocks);
 						}
 						found = true;
@@ -150,6 +165,8 @@ public class TileEntityHarshenDimensionalPedestal extends BaseTileEntityHarshenS
 		if(workingRecipe.lightning())
 			world.addWeatherEffect(new EntityLightningBolt(world, pos.getX(), pos.getY(), pos.getZ(), true));
 		InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), workingRecipe.getOutput().copy());
+		HarshenNetwork.sendToPlayersInDimension(world.provider.getDimension(), new MessagePacketKillAllWithTag(workingRecipe.getTag()));
+		workingRecipe = null;
 	}
 	
 	@Override

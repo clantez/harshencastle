@@ -7,6 +7,7 @@ import kenijey.harshencastle.HarshenRecipes;
 import kenijey.harshencastle.HarshenUtils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 public class RitualRecipes {
 
@@ -16,6 +17,7 @@ public class RitualRecipes {
 	private final boolean useLightning;
 	private BlockPos positionOfRitual;
 	private boolean isFalse;
+	private String tag;
 	
 	private RitualRecipes(List<ItemStack> inputs, ItemStack output, boolean useLightning) 
 	{
@@ -53,9 +55,19 @@ public class RitualRecipes {
 		return inputs;
 	}
 	
-	public RitualRecipes setUpRitual(BlockPos position)
+	public RitualRecipes setTag(String tag)
 	{
-		return new RitualRecipes(inputs, output, useLightning, position);
+		this.tag = tag;
+		return this;
+	}
+	
+	public String getTag() {
+		return tag;
+	}
+	
+	public RitualRecipes setUpRitual(World world, BlockPos position)
+	{
+		return new RitualRecipes(inputs, output, useLightning, position).setTag(HarshenUtils.getTagLine(world, position, "lightning_"));
 	}
 	
 	public BlockPos getPositionOfRitual() {

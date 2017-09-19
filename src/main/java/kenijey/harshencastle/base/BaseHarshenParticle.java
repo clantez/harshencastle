@@ -18,6 +18,11 @@ public abstract class BaseHarshenParticle extends Particle
 	private boolean disableMoving;
 	private ResourceLocation location;
 	
+	public void kill()
+	{
+		this.isExpired = true;
+	}
+	
 	protected abstract int getXIndex();
 	protected abstract int getYIndex();
 	

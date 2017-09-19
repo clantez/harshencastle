@@ -4,6 +4,7 @@ import io.netty.buffer.ByteBuf;
 import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.base.BaseMessagePacket;
 import kenijey.harshencastle.enums.particle.EnumHarshenParticle;
+import kenijey.harshencastle.particle.ParticleItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.Vec3d;
@@ -20,8 +21,9 @@ public class MessagePacketSpawnItemParticles extends BaseMessagePacket<MessagePa
 	private boolean disableMoving;
 	private ItemStack stack;
 	private int timesSpawn;
+	private String tag;
 	
-	public MessagePacketSpawnItemParticles(ItemStack stack, Vec3d position, Vec3d directionSpeed, float scale, boolean disableMoving, int times)
+	public MessagePacketSpawnItemParticles(ItemStack stack, Vec3d position, Vec3d directionSpeed, float scale, boolean disableMoving, int times, String tag)
 	{
 		this.position = position;
 		this.stack = stack;
@@ -31,6 +33,7 @@ public class MessagePacketSpawnItemParticles extends BaseMessagePacket<MessagePa
 		this.directionSpeed = directionSpeed;
 		this.scale = scale;
 		this.disableMoving = disableMoving;
+		this.tag = tag;
 	}
 	
 	@Override
@@ -41,6 +44,7 @@ public class MessagePacketSpawnItemParticles extends BaseMessagePacket<MessagePa
 		this.scale = buf.readFloat();
 		this.disableMoving = buf.readBoolean();
 		this.timesSpawn = buf.readInt();
+		this.tag = ByteBufUtils.readUTF8String(buf);
 
 	}
 
@@ -62,6 +66,8 @@ public class MessagePacketSpawnItemParticles extends BaseMessagePacket<MessagePa
 		
 		buf.writeInt(timesSpawn);
 		
+		ByteBufUtils.writeUTF8String(buf, tag);
+		
 	}
 
 	@Override
@@ -72,6 +78,7 @@ public class MessagePacketSpawnItemParticles extends BaseMessagePacket<MessagePa
 	@Override
 	public void handleClientSide(MessagePacketSpawnItemParticles message, EntityPlayer player) {
 		for(int i = 0; i < message.timesSpawn; i++)
-			HarshenCastle.proxy.spawnParticle(EnumHarshenParticle.ITEM, message.position, message.directionSpeed, message.scale, message.disableMoving, message.stack);
+			((ParticleItem)HarshenCastle.proxy.spawnParticle(EnumHarshenParticle.ITEM, message.position, message.directionSpeed, message.scale, message.disableMoving, message.stack))
+				.addToList(message.tag);
 	}
 }
