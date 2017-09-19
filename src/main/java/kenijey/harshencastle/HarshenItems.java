@@ -24,6 +24,7 @@ import kenijey.harshencastle.items.CriminalPendant;
 import kenijey.harshencastle.items.DiamondShard;
 import kenijey.harshencastle.items.ElementalPendant;
 import kenijey.harshencastle.items.ElytraPendant;
+import kenijey.harshencastle.items.EmeraldShard;
 import kenijey.harshencastle.items.EmpoweredSoulHarsherSword;
 import kenijey.harshencastle.items.EnderBow;
 import kenijey.harshencastle.items.EnderPendant;
@@ -137,6 +138,7 @@ public class HarshenItems
 	public static Item combat_pendant;
 	public static Item ender_bow;
 	public static Item diamond_shard;
+	public static Item emerald_shard;
 	
 	public static void preInit()
 	{
@@ -198,6 +200,7 @@ public class HarshenItems
 		combat_pendant = new CombatPendant();
 		ender_bow = new EnderBow();
 		diamond_shard = new DiamondShard();
+		emerald_shard = new EmeraldShard();
 	}
 	
 	public static void reg()
@@ -234,6 +237,7 @@ public class HarshenItems
 		regItem(solidifying_paste, 64);
 		regItem(ender_bow);
 		regItem(diamond_shard, 64);
+		regItem(emerald_shard, 64);
 		
 		regItem(zombi_pendant);
 		regItem(punchy_ring);

@@ -1,0 +1,28 @@
+{
+  "type": "forge:ore_shapeless",
+  "group": "harshen_items",
+  "ingredients": [
+    {
+      "item": "harshencastle:emerald_shard"
+    },
+	{
+      "item": "harshencastle:emerald_shard"
+    },
+    {
+      "item": "harshencastle:emerald_shard"
+    },
+	{
+      "item": "harshencastle:emerald_shard"
+    },
+    {
+      "item": "harshencastle:emerald_shard"
+    },
+	{
+      "item": "harshencastle:emerald_shard"
+    }
+  ],
+  "result": {
+    "item": "minecraft:emerald",
+	 "count": 1
+  }
+}
