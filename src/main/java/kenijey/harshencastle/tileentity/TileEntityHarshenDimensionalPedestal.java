@@ -2,7 +2,12 @@ package kenijey.harshencastle.tileentity;
 
 import java.util.ArrayList;
 
+import kenijey.harshencastle.HarshenSounds;
+import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.base.BaseTileEntityHarshenSingleItemInventoryActive;
+import kenijey.harshencastle.network.HarshenNetwork;
+import kenijey.harshencastle.network.packets.MessagePacketSpawnBloodParticle;
+import kenijey.harshencastle.network.packets.MessagePacketSpawnItemParticles;
 import kenijey.harshencastle.recipies.RitualRecipes;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.init.Blocks;
@@ -11,7 +16,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 
 public class TileEntityHarshenDimensionalPedestal extends BaseTileEntityHarshenSingleItemInventoryActive
 {
@@ -29,8 +36,15 @@ public class TileEntityHarshenDimensionalPedestal extends BaseTileEntityHarshenS
 			hasItem = flag;
 			dirty();
 		}
-		if(isActive && workingRecipe != null && !checkForCompleation(true))
-			deactivateAll();
+		if(isActive && workingRecipe != null && !flag)
+			if(checkForCompleation(true))
+			{
+				HarshenNetwork.sendToPlayersInDimension(world.provider.getDimension(),
+						new MessagePacketSpawnItemParticles(getItem(), new Vec3d(pos).addVector(0.5, 0.65, 0.5), HarshenUtils.speedToPos(
+								new Vec3d(workingRecipe.getPositionOfRitual()).addVector(0, 2, 0), new Vec3d(pos).addVector(0.5, 0.65, 0.5), 30D), 1f, false, 30));
+			}
+			else
+				deactivateAll();
 		if(isActiveNonController)
 			activeNonControllerTimer++;
 	}
@@ -45,6 +59,12 @@ public class TileEntityHarshenDimensionalPedestal extends BaseTileEntityHarshenS
 		isActive = false;
 		for(EnumFacing facing : EnumFacing.HORIZONTALS)
 			((TileEntityHarshenDimensionalPedestal) world.getTileEntity(workingRecipe.getPositionOfRitual().offset(facing))).deactivate();	
+	}
+	
+	@Override
+	public void deactivate() {
+		workingRecipe = null;
+		super.deactivate();
 	}
 	
 	public void deactiveateNonController()
@@ -82,7 +102,8 @@ public class TileEntityHarshenDimensionalPedestal extends BaseTileEntityHarshenS
 				ArrayList<Boolean> isBlockHolding = new ArrayList<Boolean>();
 				for(EnumFacing face : EnumFacing.HORIZONTALS)
 				{
-					boolean flag = world.getTileEntity(position.offset(face)) instanceof TileEntityHarshenDimensionalPedestal;
+					boolean flag = world.getTileEntity(position.offset(face)) instanceof TileEntityHarshenDimensionalPedestal
+							&& world.getBlockState(position.offset(face).down()).getBlock() == Blocks.GOLD_BLOCK;
 					isBlock.add(flag);
 					if(flag)
 						blocks.add(position.offset(face));
@@ -96,6 +117,7 @@ public class TileEntityHarshenDimensionalPedestal extends BaseTileEntityHarshenS
 					{
 						if(!checkingUp)
 						{
+							world.playSound(null, position, HarshenSounds.lightningRitual, SoundCategory.BLOCKS, 3f, 1f);
 							this.workingRecipe = recipe.setUpRitual(position);
 							activate(position, blocks);
 						}
@@ -125,14 +147,9 @@ public class TileEntityHarshenDimensionalPedestal extends BaseTileEntityHarshenS
 		if(world.isRemote || workingRecipe == null)
 			return;
 		BlockPos pos = workingRecipe.getPositionOfRitual();
-		for(EnumFacing face : EnumFacing.HORIZONTALS)
-			if(this.pos.offset(face).equals(pos))
-			{
-				if(workingRecipe.lightning())
-					world.addWeatherEffect(new EntityLightningBolt(world, pos.getX(), pos.getY(), pos.getZ(), true));
-				InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), workingRecipe.getOutput());
-				return;
-			}
+		if(workingRecipe.lightning())
+			world.addWeatherEffect(new EntityLightningBolt(world, pos.getX(), pos.getY(), pos.getZ(), true));
+		InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), workingRecipe.getOutput().copy());
 	}
 	
 	@Override

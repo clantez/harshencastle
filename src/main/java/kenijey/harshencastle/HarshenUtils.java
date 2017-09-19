@@ -250,11 +250,9 @@ public class HarshenUtils
         {
             blockpos1 = blockpos.down();
             IBlockState state = chunk.getBlockState(blockpos1);
-            if ((state.getMaterial().blocksMovement() && !state.getBlock().isLeaves(state, world, blockpos1) && !state.getBlock().isFoliage(world, blockpos1))
-            		|| state.getBlock() instanceof BlockLiquid)
-            {
-                break;
-            }
+            if ((state.getMaterial().blocksMovement() && !state.getBlock().isLeaves(state, world, blockpos1) && !state.getBlock().isFoliage(world, blockpos1) && state.getBlock() != Blocks.LOG
+            		&& state.getBlock() != Blocks.LOG2) || state.getBlock() instanceof BlockLiquid)
+            	break;
         }
         return blockpos;		
 	}
@@ -379,5 +377,10 @@ public class HarshenUtils
 				return method;
 		}
 		return null;
+	}
+	
+	public static Vec3d speedToPos(Vec3d posFrom, Vec3d posTo, double speed)
+	{
+		return new Vec3d((posFrom.x - posTo.x) / speed, (posFrom.y - posTo.y) / speed, (posFrom.z - posTo.z) / speed);
 	}
 }

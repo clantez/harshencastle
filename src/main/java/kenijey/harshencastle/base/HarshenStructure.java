@@ -5,6 +5,7 @@ import java.util.Random;
 
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenCastle;
+import kenijey.harshencastle.HarshenStructures;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.worldgenerators.pontus.PontusWorldRuinGenerator;
 import net.minecraft.block.Block;
@@ -27,16 +28,22 @@ public class HarshenStructure
 	protected static boolean hasLoaded;
 	protected final float chance;
 	protected final boolean useRuin;
+	protected final boolean displaceDownwards;
 	protected final int dimension;
 	
-	public HarshenStructure(String parentFolder, String name, BlockPos fromOrigin, float chance, boolean useRuin, int dimension) {
+	public HarshenStructure(String parentFolder, String name, BlockPos fromOrigin, float chance, boolean useRuin, int dimension, boolean displaceDownwards) {
 		this.dimension = dimension;
 		this.useRuin = useRuin;
 		this.chance = chance;
+		this.displaceDownwards = displaceDownwards;
 		this.originAddition = fromOrigin;
 		this.name = parentFolder + "/" + name;
 		showName = name;
 		this.location = new ResourceLocation(HarshenCastle.MODID, name);
+	}
+	
+	public HarshenStructure(String parentFolder, String name, BlockPos fromOrigin, float chance, boolean useRuin, int dimension) {
+		this(parentFolder, name, fromOrigin, chance, useRuin, dimension, true);
 	}
 	
 	public static ArrayList<HarshenStructure> get(int dimension)
@@ -109,8 +116,8 @@ public class HarshenStructure
 		if(random.nextFloat() < chance) {
 	        int x = chunkX * 16 + random.nextInt(16);
 	        int z = chunkZ * 16 + random.nextInt(16);
-	        int y = HarshenUtils.getTopBlock(world, new BlockPos(x, 0, z).add(originAddition)).getY();
-	        BlockPos pos = new BlockPos(x, y, z).add(addPos()).down();
+	        int y = HarshenUtils.getTopBlock(world, new BlockPos(x, 0, z).add(originAddition)).getY() + originAddition.getY();
+	        BlockPos pos = new BlockPos(x, y, z).add(addPos());
 	        loadIntoWorld(world, pos, random);
 	        if(useRuin)
 	        	new PontusWorldRuinGenerator(size, getAdditionBlocks())

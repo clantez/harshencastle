@@ -8,6 +8,7 @@ import java.util.Random;
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.HarshenItems;
+import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.base.BaseTileEntityHarshenSingleItemInventory;
 import kenijey.harshencastle.blocks.BloodBlock;
 import kenijey.harshencastle.enums.CauldronLiquid;
@@ -89,8 +90,7 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 					{
 						Vec3d vec = new Vec3d(pedestal.getPos()).addVector(0.5d, 0.9d, 0.5d);
 						HarshenNetwork.sendToPlayersInDimension(world.provider.getDimension(), new MessagePacketSpawnItemParticles(pedestalMap.get(pedestal.getPos()), vec, 
-								new Vec3d((this.pos.getX() + 0.5 - vec.x) / 20D, (this.pos.getY() + 2 - vec.y) / 20D, (this.pos.getZ() + 0.5 - vec.z) / 20D), (float)randPos() + 1f,
-								false, 20));
+								HarshenUtils.speedToPos(new Vec3d(this.pos).addVector(0.5, 2, 0.5), vec, 20), (float)randPos() + 1f, false, 20));
 						pedestal.deactiveateNonController();
 						pedestal.setItemAir();
 						continue;
@@ -124,7 +124,7 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 					{
 						Vec3d vec = new Vec3d(pos).addVector(randPos(), -0.1, randPos());
 						HarshenNetwork.sendToPlayersInDimension(world.provider.getDimension(), new MessagePacketSpawnBloodParticle(vec, 
-								new Vec3d((this.pos.getX() + 0.5 - vec.x) / 30D, (this.pos.getY() + 2 - vec.y) / 30D, (this.pos.getZ() + 0.5 - vec.z) / 30D), 1f, false));
+								HarshenUtils.speedToPos(new Vec3d(this.pos).addVector(0.5, 2, 0.5), vec, 30), 1f, false));
 					}
 		}
 			
@@ -280,10 +280,10 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 			for(int z = maxList.get(0); z < maxList.get(1); z++)
 			{
 				if(!(maxList.contains(x) && maxList.contains(z)) && switchFlag)
-					if(world.getBlockState(pos.add(x, -1, z)).getBlock() != Blocks.STONE)
-						setError(pos.add(x, -1, z), Blocks.STONE);
+					if(world.getBlockState(pos.add(x, -1, z)).getBlock() != Blocks.OBSIDIAN)
+						setError(pos.add(x, -1, z), Blocks.OBSIDIAN);
 					else;
-				else if(world.getBlockState(pos.add(x, -1, z)).getBlock() == Blocks.STONE)
+				else if(world.getBlockState(pos.add(x, -1, z)).getBlock() == Blocks.OBSIDIAN)
 					setError(pos.add(x, -1, z), Blocks.BARRIER);
 				switchFlag = !switchFlag;
 			}

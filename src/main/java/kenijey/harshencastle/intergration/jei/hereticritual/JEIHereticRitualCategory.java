@@ -1,6 +1,7 @@
 package kenijey.harshencastle.intergration.jei.hereticritual;
 
 import java.awt.Point;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -57,14 +58,14 @@ public class JEIHereticRitualCategory extends BaseJeiCategory
 		recipeLayout.getItemStacks().set(0, ingredients.getInputs(ItemStack.class).get(0));
 		
 		List<List<ItemStack>> stackList = ingredients.getInputs(ItemStack.class);
+		List<List<ItemStack>> revampedList = new ArrayList<>();
 		stackList.remove(0);
-		stackList.remove(stackList.size() - 1);
-		if(stackList.size() > 8)
-			stackList.remove(stackList.size() - 1);
-		Collections.shuffle(stackList);
+		for(int i = 0; i < 8; i++)
+			revampedList.add(stackList.get(i));
+		Collections.shuffle(revampedList);
 		for(int i = 0; i < 8; i++) {
 			recipeLayout.getItemStacks().init(index, true, point.x, point.y);
-			recipeLayout.getItemStacks().set(index, stackList.get(i));
+			recipeLayout.getItemStacks().set(index, revampedList.get(i));
 			index += 1;
 			point = rotatePointAbout(point, center, 45D);
 		}

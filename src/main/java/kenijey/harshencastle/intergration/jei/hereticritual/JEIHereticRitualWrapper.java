@@ -12,6 +12,7 @@ import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.base.BaseJeiWrapper;
 import kenijey.harshencastle.enums.CauldronLiquid;
 import kenijey.harshencastle.enums.ItemLiquidTypeset;
+import kenijey.harshencastle.enums.items.EnumGlassContainer;
 import kenijey.harshencastle.recipies.HereticRitualRecipes;
 import mezz.jei.api.ingredients.IIngredients;
 import net.minecraft.item.ItemStack;
@@ -30,6 +31,7 @@ public class JEIHereticRitualWrapper extends BaseJeiWrapper
 			builder.add(ImmutableList.of((ItemStack) o));
 		if(HarshenUtils.glassContainerHasBlock(recipe.getCatalyst()))
 			builder.add(ImmutableList.of(new ItemStack(HarshenItems.item_liquid, 1, ItemLiquidTypeset.getMetaFromType(recipe.getCatalyst()))));
+		builder.add(ImmutableList.of(EnumGlassContainer.getContainerFromType(recipe.getCatalyst()).getStack()));
 		builder.add(ImmutableList.of(new ItemStack(HarshenBlocks.heretic_cauldron)));
 		output = recipe.getOutput();
 		allInputs = builder.build();
