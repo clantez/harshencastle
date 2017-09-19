@@ -2,14 +2,12 @@ package kenijey.harshencastle.items;
 
 import java.util.List;
 
-import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.base.BaseItemMetaData;
 import kenijey.harshencastle.enums.CauldronLiquid;
 import kenijey.harshencastle.enums.items.EnumGlassContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
@@ -112,27 +110,4 @@ public class GlassContainer extends BaseItemMetaData
 	protected String[] getNames() {
 		return EnumGlassContainer.getNames();
 	}
-	
-	public boolean processInteract(EntityPlayer player, EnumHand hand)
-    {
-        ItemStack itemstack = player.getHeldItem(hand);
-
-        if (itemstack.getItem() == HarshenItems.glass_container)
-        {
-            player.playSound(SoundEvents.ENTITY_COW_MILK, 1.0F, 1.0F);
-            itemstack.shrink(1);
-
-            if (itemstack.isEmpty())
-            {
-                player.setHeldItem(hand, new ItemStack(HarshenItems.glass_container, 4));
-            }
-            else if (!player.inventory.addItemStackToInventory(new ItemStack(HarshenItems.glass_container, 4)))
-            {
-                player.dropItem(new ItemStack(HarshenItems.glass_container, 4), false);
-            }
-
-            return true;
-        }
-		return bFull3D;
-    }
 }
