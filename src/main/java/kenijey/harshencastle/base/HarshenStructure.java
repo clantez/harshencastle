@@ -113,7 +113,7 @@ public class HarshenStructure
 	{
 		if(size == null && !world.isRemote)
 			load((WorldServer) world);
-		if(random.nextFloat() < chance) {
+		if(random.nextFloat() < chance * allStructures.size()) {
 	        int x = chunkX * 16 + random.nextInt(16);
 	        int z = chunkZ * 16 + random.nextInt(16);
 	        int y = HarshenUtils.getTopBlock(world, new BlockPos(x, 0, z).add(originAddition)).getY() + originAddition.getY();
