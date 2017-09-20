@@ -83,7 +83,7 @@ item.combat_pendant.name=Combat Pendant
 key.telering.description=Telering Teleport Key
 key.minering.description=Minering Teleport Key
 key.open_inventory.description=Accessory Inventory
-key.combat_pendant.description=Combat Pendant ??? Key
+key.combat_pendant.description=Combat Pendant Teleport Key
 
 #ritual
 ritual.fail.position=Ritual built wrong at %s, %s, %s. Expected %s, got %s
@@ -259,6 +259,8 @@ enderbow1=The arrow this bow sent
 enderbow2=will pass through blocks
 enderbow3=to thrust itself into the mob
 enderbow4=You may need to use Ender Necklace.
+combat_pendant1=Press its key to teleport
+combat_pendant2=to nearest mob your around
 
 #misc
 itemGroup.harshenTab=Harshen Castle
