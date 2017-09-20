@@ -26,7 +26,7 @@ public class HandlerKeyBinding
 	
 	public HandlerKeyBinding()
 	{
-		telering = regRingKey("telering", Keyboard.KEY_G);
+		telering = regRingKey("telering", Keyboard.KEY_LMENU);
 		minering = regRingKey("minering", Keyboard.KEY_V);
 		combatPendant = regRingKey("combat_pendant", Keyboard.KEY_Y);
 		openInventory = regKey("open_inventory", Keyboard.KEY_H);

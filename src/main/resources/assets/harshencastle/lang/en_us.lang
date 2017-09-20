@@ -80,6 +80,8 @@ item.emerald_shard.name=Emerald Shard
 #keybindings
 key.telering.description=Telering Teleport Key
 key.minering.description=Minering Teleport Key
+key.open_inventory.description=Accessory Inventory
+key.combat_pendant.description=Combat Pendant ??? Key
 
 #ritual
 ritual.fail.position=Ritual built wrong at %s, %s, %s. Expected %s, got %s
