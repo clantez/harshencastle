@@ -147,7 +147,8 @@ tile.gilded_obsidian.name=Gilded Obsidian
 tile.pontus_far_rock.name=Pontus Far Rock
 tile.pontus_far_wood.name=Pontus Far Wood
 tile.pontus_far_leaves.name=Pontus Far Leaves
-tile.jewel_dirt.name=Jewely Dirt
+tile.jewel_dirt.overworld.name=Jewely Dirt
+tile.jewel_dirt.pontus.name=Jewely Dirt
 
 
 #fluids

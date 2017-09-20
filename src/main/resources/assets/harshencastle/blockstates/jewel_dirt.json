@@ -1,6 +1,6 @@
 {
     "variants": {
-        "dirt_type=0": { "model": "harshencastle:jewel_dirt_overworld" },
-        "dirt_type=1": { "model": "harshencastle:jewel_dirt_pontus" }
+        "dirt_type=0": { "model": "harshencastle:jewel_dirt.overworld" },
+        "dirt_type=1": { "model": "harshencastle:jewel_dirt.pontus" }
     }
 }
