@@ -76,7 +76,6 @@ public class CommonProxy
     	
     	HarshenConfigs.IDS.preInit();
     	HarshenConfigs.GENERAL.preInit();
-    	HarshenConfigs.ACCESSORIES.preInit();
     	
     	HarshenPotions.preInit();
 		HarshenPotions.register();
@@ -100,6 +99,8 @@ public class CommonProxy
 		HarshenBlocks.register();
 		HarshenItems.register();
 		HarshenStructures.register();
+		
+    	HarshenConfigs.ACCESSORIES.preInit();
 		
 		HarshenArmors.preInit();
 		HarshenArmors.register();

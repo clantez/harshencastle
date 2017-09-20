@@ -10,10 +10,6 @@ import net.minecraft.util.NonNullList;
 
 public abstract class BaseItemMetaData extends Item
 {
-	
-	/**
-	 * Leave null for all
-	 */
 	protected abstract List<Integer> getMetaForTab();
 	
 	public BaseItemMetaData() {

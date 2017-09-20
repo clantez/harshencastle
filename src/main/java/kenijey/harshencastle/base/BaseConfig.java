@@ -47,20 +47,20 @@ public abstract class BaseConfig
 	
 	public static HashMap<String, Property> propertyMap = new HashMap<>();
 		
-	protected <T> T get(String name, T normal)
+	protected <T> T get(String name, String category, T normal)
 	{
 		try
 		{
-			Object returned = HarshenUtils.getMethod("get", config.getClass(), String.class, String.class, normal.getClass()).invoke(config, getName(), name, normal);
+			Object returned = HarshenUtils.getMethod("get", config.getClass(), String.class, String.class, normal.getClass()).invoke(config, category, name, normal);
 			if(normal.getClass().isArray())
 				for(Method method : config.getClass().getMethods())
 					if(method.getParameterTypes().length == 3 && method.getParameterTypes()[0] == String.class && method.getParameterTypes()[1] == String.class
 					&& method.getParameterTypes()[2] == normal.getClass() && method.getParameterTypes()[2].isArray())
-						returned = method.invoke(config, getName(), name, normal);
+						returned = method.invoke(config, category, name, normal);
 			if(!(returned instanceof Property))	throw new IllegalArgumentException("Returned Type was not a property. This is practically impossible");
 			Property property = (Property) returned;
 			property.setComment(new TextComponentTranslation("config." + name).getUnformattedText());
-			propertyMap.put(getName() + "*" + name, property);
+			propertyMap.put(category + "*" + name, property);
 			return (T) property.getClass().getMethod("get" + normal.getClass().getSimpleName().replace("Integer", "Int").replace("[]", "List")).invoke(property);
 		}
 		catch (NullPointerException | SecurityException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
@@ -70,12 +70,22 @@ public abstract class BaseConfig
 		return normal;
 	}
 	
-	protected <T> void set(String name, T set)
+	protected <T> T get(String name, T normal)
+	{
+		return this.get(name, getName(), normal);
+	}
+	
+	protected <T> void set(String name, String category, T set)
 	{
 		try {
-			HarshenUtils.getMethod("set", propertyMap.get(getName() + "*" + name).getClass(), set.getClass()).invoke(propertyMap.get(getName() + "*" + name), set);
+			HarshenUtils.getMethod("set", propertyMap.get(category + "*" + name).getClass(), set.getClass()).invoke(propertyMap.get(category + "*" + name), set);
 		} catch (IllegalAccessException | InvocationTargetException | SecurityException e) {
 			HarshenCastle.logger.error("Forge Config has no such setter for " + set.getClass());
 		}
+	}
+	
+	protected <T> void set(String name, T set)
+	{
+		set(name, getName(), set);
 	}
 }

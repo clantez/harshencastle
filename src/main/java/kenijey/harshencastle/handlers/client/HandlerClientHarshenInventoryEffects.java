@@ -25,7 +25,8 @@ public class HandlerClientHarshenInventoryEffects
 	public void RenderEventPre(RenderGameOverlayEvent.Pre event)
 	{
 		for(Entity e : Minecraft.getMinecraft().world.getLoadedEntityList())
-			e.setGlowing(e instanceof EntityLivingBase && HarshenUtils.containsItem(Minecraft.getMinecraft().player, HarshenItems.ender_pendant));
+			if(Minecraft.getMinecraft().player.getDistanceToEntity(e) < AccessoryConfig.enderPendantDistance)
+				e.setGlowing(e instanceof EntityLivingBase && HarshenUtils.containsItem(Minecraft.getMinecraft().player, HarshenItems.ender_pendant));
 		
 	}
 	
@@ -54,7 +55,7 @@ public class HandlerClientHarshenInventoryEffects
 							{
 								BlockPos position = new BlockPos(x, y, z);
 								allBlockPos.add(position);
-								distanceMap.put(position.distanceSq(player.posX, player.posY, player.posZ), position);
+								distanceMap.put(position.distanceSq(player.posX, player.posY + player.getEyeHeight() - 0.2f, player.posZ), position);
 							}
 						}
 							
@@ -71,7 +72,7 @@ public class HandlerClientHarshenInventoryEffects
 					}
 				Collections.reverse(finalBlockPositions);
 				for(BlockPos finalPos : finalBlockPositions)
-					HarshenClientUtils.renderGhostBlock(Minecraft.getMinecraft().world.getBlockState(finalPos), finalPos, new Color(0.1f, 0.5f, 1f), true, event.getPartialTicks());
+					HarshenClientUtils.renderGhostBlock(Minecraft.getMinecraft().world.getBlockState(finalPos), finalPos, true, event.getPartialTicks());
 			}
 		}
 	}

@@ -1,5 +1,6 @@
 {
     "variants": {
-        "normal": { "model": "harshencastle:jewel_dirt" }
+        "dirt_type=0": { "model": "harshencastle:jewel_dirt_overworld" },
+        "dirt_type=1": { "model": "harshencastle:jewel_dirt_overworld" }
     }
 }

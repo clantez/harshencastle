@@ -2,7 +2,10 @@ package kenijey.harshencastle;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
+import kenijey.harshencastle.base.BaseBlockMeta;
+import kenijey.harshencastle.base.BaseItemMetaData;
 import kenijey.harshencastle.blocks.Archive;
 import kenijey.harshencastle.blocks.BlockOfHeads;
 import kenijey.harshencastle.blocks.BloodBlock;
@@ -49,6 +52,7 @@ import kenijey.harshencastle.blocks.PontusFarLeaves;
 import kenijey.harshencastle.blocks.PontusFarWood;
 import kenijey.harshencastle.blocks.SoulReminder;
 import kenijey.harshencastle.config.HarshenConfigs;
+import kenijey.harshencastle.interfaces.IMetaItemBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.block.BlockFlower;
@@ -255,9 +259,17 @@ public class HarshenBlocks {
 
 	public static void regRender(Block block) {
 		block.setCreativeTab(HarshenCastle.harshenTab);
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, new ModelResourceLocation(block.getRegistryName(), "inventory"));
+		int timesToLoad = 1;
+		boolean flag = blockDataMap.keySet().contains(block);
+		if(flag)
+			timesToLoad = blockDataMap.get(block);
+		for(int i = 0; i < timesToLoad; i++)
+			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), i, new ModelResourceLocation(block.getRegistryName() + 
+					(flag ? "_" + ((IMetaItemBlock)block).getNames()[i]: ""), "inventory"));
 	}
 
+	private static HashMap<Block, Integer> blockDataMap = new HashMap<>();
+	
 	public static void register() {
 		for(Block block : HarshenConfigs.BLOCKS.allComponants)
 			if(HarshenConfigs.BLOCKS.isEnabled(block))
@@ -265,7 +277,7 @@ public class HarshenBlocks {
 				ForgeRegistries.BLOCKS.register(block);
 				if(blocksWithItems.contains(block))
 				{
-					ItemBlock item = new ItemBlock(block);
+					ItemBlock item = block instanceof IMetaItemBlock ? add(block) : new ItemBlock(block);
 					item.setRegistryName(block.getRegistryName());
 					item.setMaxStackSize(blockStackSize.get(block));
 					ForgeRegistries.ITEMS.register(item);
@@ -273,5 +285,11 @@ public class HarshenBlocks {
 					
 			}
 				
+	}
+	
+	private static BaseBlockMeta add(Block block)
+	{
+		blockDataMap.put(block, ((IMetaItemBlock)block).getNames().length);
+		return new BaseBlockMeta(block);
 	}
 }

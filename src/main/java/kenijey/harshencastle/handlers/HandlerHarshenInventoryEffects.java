@@ -11,6 +11,7 @@ import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.network.packets.MessagePacketPlayerTeleportEffects;
 import kenijey.harshencastle.network.packets.MessagePacketSummonFirework;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.monster.EntityZombie;
@@ -29,6 +30,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.GameType;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -156,21 +158,22 @@ public class HandlerHarshenInventoryEffects
 			World world = player.world;
 			int range = 5;
 			Vec3d vec = player.getLookVec().normalize();
-			EntityLiving entityToAttack = null;
+			EntityLivingBase entityToAttack = null;
 			for(int i = 1; i < range; i++)
 			{
 			    AxisAlignedBB aabb = new AxisAlignedBB(player.posX + vec.x * i - 1, player.posY + vec.y * i - 1, player.posZ + vec.z * i - 1, player.posX + vec.x * i + 2, player.posY + vec.y * i + 2, player.posZ + vec.z * i + 2);
-			    List<EntityLiving> list = world.getEntitiesWithinAABB(EntityLiving.class, aabb);
+			    List<EntityLivingBase> list = world.getEntitiesWithinAABB(EntityLivingBase.class, aabb);
 			    double box = 4;
 			    if(list.isEmpty())
-			    	list = world.getEntitiesWithinAABB(EntityLiving.class, new AxisAlignedBB(player.posX - box, player.posY - box, player.posZ - box, player.posX + box, player.posY + box, player.posZ + box));
+			    	list = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(player.posX - box, player.posY - box, player.posZ - box, player.posX + box, player.posY + box, player.posZ + box));
 			    if(!list.isEmpty())
 			    {
 			    	entityToAttack = list.get(0);
 			    	break;
 			    }
 			}
-			if(entityToAttack != null)
+			if(!player.equals(entityToAttack) && (entityToAttack != null || (entityToAttack instanceof EntityPlayerMP && player.canAttackPlayer((EntityPlayerMP)entityToAttack)
+					&& HarshenUtils.toArray(GameType.SURVIVAL, GameType.ADVENTURE).contains(((EntityPlayerMP)entityToAttack).interactionManager.getGameType()))))
 			{
 				Vec3d position = entityToAttack.getPositionVector();
 				Vec3d playerPosNoY = position.addVector(movePos(), 0, movePos());

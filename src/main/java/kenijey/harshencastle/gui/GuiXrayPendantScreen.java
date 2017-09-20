@@ -1,14 +1,20 @@
 package kenijey.harshencastle.gui;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.lwjgl.input.Keyboard;
 
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.network.packets.MessagePacketUpdateXrayBlock;
+import net.minecraft.block.Block;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.command.CommandBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -26,6 +32,7 @@ public class GuiXrayPendantScreen extends GuiScreen
 	public void initGui() {
 		this.buttonExit = addButton(new GuiButton(0, this.width / 2 - 100, (int) this.height - 30, 200, 20, I18n.format("gui.done")));
 		this.textInput =  new GuiTextField(1, this.fontRenderer, this.width / 2 - 152, this.height / 2, 300, 20);
+		this.textInput.setMaxStringLength(60);
 		if(!stack.hasTagCompound())
 			stack.setTagCompound(new NBTTagCompound());
 		this.textInput.setText(stack.getTagCompound().getString("BlockToSearch"));
@@ -50,15 +57,37 @@ public class GuiXrayPendantScreen extends GuiScreen
 	@Override
 	protected void actionPerformed(GuiButton button){
 		if(button.id == 0)
-		{
-			this.mc.displayGuiScreen((GuiScreen)null);
-			HarshenUtils.getNBT(stack).setString("BlockToSearch", textInput.getText());
-			HarshenNetwork.sendToServer(new MessagePacketUpdateXrayBlock(stack.serializeNBT()));
-		}
+			closeGui();
 	}
+	
+	private void closeGui()
+	{
+		this.mc.displayGuiScreen((GuiScreen)null);
+		HarshenUtils.getNBT(stack).setString("BlockToSearch", textInput.getText());
+		HarshenNetwork.sendToServer(new MessagePacketUpdateXrayBlock(stack.serializeNBT()));
+	}
+	
+	int timeOver = 0;
+	List<String> dictonaryList = new ArrayList<>();
 	
 	@Override
 	protected void keyTyped(char typedChar, int keyCode) throws IOException {
+		if(keyCode == Keyboard.KEY_TAB)
+		{			this.textInput.setMaxStringLength(60);
+
+			if(dictonaryList.isEmpty())
+				dictonaryList = CommandBase.getListOfStringsMatchingLastWord(HarshenUtils.listOf(this.textInput.getText()), Block.REGISTRY.getKeys());
+			if(!dictonaryList.isEmpty())
+				this.textInput.setText(dictonaryList.get(timeOver++%dictonaryList.size()));
+		}
+		else
+		{
+			timeOver = 0;
+			dictonaryList.clear();
+		}
+		
+		if(keyCode == Keyboard.KEY_RETURN)
+			closeGui();
 		this.textInput.textboxKeyTyped(typedChar, keyCode);
 		super.keyTyped(typedChar, keyCode);
 	}

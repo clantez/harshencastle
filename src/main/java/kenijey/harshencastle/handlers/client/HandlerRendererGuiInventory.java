@@ -9,12 +9,19 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class HandlerRendererGuiInventory 
 {
+	
+	String previousXrayBlock = "";
+	
 	@SubscribeEvent
 	public void onGameOverlay(RenderGameOverlayEvent.Post event)
 	{
@@ -44,8 +51,11 @@ public class HandlerRendererGuiInventory
 			String brokenBlock = "";
 			if(xrayStack.hasTagCompound())
 				brokenBlock = xrayStack.getTagCompound().getString("BlockToSearch");
-			if(blocks.isEmpty())
-				player.sendStatusMessage(new TextComponentTranslation("xray.blocknotfound", brokenBlock), true); 
+			if(blocks.isEmpty() && !previousXrayBlock.equalsIgnoreCase(brokenBlock))
+			{
+				player.sendStatusMessage(new TextComponentString(TextFormatting.DARK_RED + new TextComponentTranslation("xray.blocknotfound", brokenBlock).getUnformattedText()), true); 
+				previousXrayBlock = brokenBlock;
+			}
 		}
 		
 		for(int i = 0; i < HarshenUtils.getHandler(player).getSlots(); i++)

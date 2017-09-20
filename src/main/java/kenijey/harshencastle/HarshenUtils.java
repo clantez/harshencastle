@@ -340,13 +340,6 @@ public class HarshenUtils
 				blocks.add(((ItemBlock)oreStack.getItem()).getBlock());
 		return blocks;
 	}
-
-	public static String[] fillList(String string, Object[] objectList) {
-		String[] list = new String[objectList.length];
-		for(int i = 0; i < list.length; i++)
-			list[i] = string;
-		return list;
-	}
 	
 	public final static HashMap<Class, Class> switchClasses = new HashMap<>();
 	
