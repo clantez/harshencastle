@@ -1,3 +1,4 @@
+harshencastle=Harshen Castle
 
 #items
 item.harshen_soul_fragment.name=Harshen Soul Fragment
@@ -76,6 +77,7 @@ item.solidifying_paste.name=Solidifying Paste
 item.ender_bow.name=Ender Bow
 item.diamond_shard.name=Diamond Shard
 item.emerald_shard.name=Emerald Shard
+item.combat_pendant.name=Combat Pendant
 
 #keybindings
 key.telering.description=Telering Teleport Key
