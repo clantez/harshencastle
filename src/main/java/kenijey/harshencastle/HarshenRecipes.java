@@ -89,6 +89,9 @@ public class HarshenRecipes {
 		RitualRecipes.addRecipe(Arrays.asList(new ItemStack(HarshenItems.diamond_shard), new ItemStack(HarshenItems.diamond_shard),
 				new ItemStack(HarshenItems.diamond_shard), new ItemStack(HarshenItems.diamond_shard)), new ItemStack(Items.DIAMOND), true);
 		
+		RitualRecipes.addRecipe(Arrays.asList(new ItemStack(HarshenItems.blood_infused_ender_eye), new ItemStack(HarshenItems.valor_badge),
+				new ItemStack(HarshenItems.ritual_crystal, 1, 1), new ItemStack(Items.IRON_INGOT)), new ItemStack(HarshenItems.combat_pendant), true);
+		
 		
 		
 		PedestalSlabRecipes.addRecipe(new ItemStack(Blocks.COBBLESTONE), new ItemStack(Blocks.NETHERRACK));
