@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 
 public class HarshenTab extends CreativeTabs
 {
-	public HarshenTab(String label)
+	public HarshenTab()
 	{
 		super("harshenTab");
 		this.setBackgroundImageName("harshen_tab_background.png");
