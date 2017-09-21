@@ -24,7 +24,7 @@ public class PontusWorldProvider extends WorldProviderHell
 	
 	@Override
 	protected void generateLightBrightnessTable() {
-		float[] d = {0.03f,0.03f,0.03f,0.03f,0.03f,0.03f,0.03f,0.03f,0.017543858f, 0.058823526f, 0.11111113f, 0.1794872f, 0.2727273f, 0.40740743f, 0.61904764f, 1.0f};
+		float[] d = {0,0,0,0,0,0,0,0,0.017543858f, 0.058823526f, 0.11111113f, 0.1794872f, 0.2727273f, 0.40740743f, 0.61904764f, 1.0f};
         for (int i = 0; i <= 15; ++i)
         	this.lightBrightnessTable[i] = d[i];
 	}
@@ -57,16 +57,18 @@ public class PontusWorldProvider extends WorldProviderHell
 	@SideOnly(Side.CLIENT)
 	public Vec3d getFogColor(float p_76562_1_, float p_76562_2_)
 	{
-		int i = 11518688;
-        float f = MathHelper.cos(p_76562_1_ * ((float)Math.PI * 2F)) * 2.0F + 0.5F;
-        f = MathHelper.clamp(f, 0.0F, 1.0F);
-        float f1 = 0.627451F;
-        float f2 = 0.5019608F;
-        float f3 = 0.627451F;
-        f1 = f1 * (f * 0.0F + 0.15F);
-        f2 = f2 * (f * 0.0F + 0.15F);
-        f3 = f3 * (f * 0.0F + 0.15F);
-        return new Vec3d((double)f1, (double)f2, (double)f3);
+//		generateLightBrightnessTable();
+//        float f = MathHelper.cos(p_76562_1_ * ((float)Math.PI * 2F)) * 2.0F + 0.5F;
+//        f = MathHelper.clamp(f, 0.0F, 1.0F);
+//        int color = 0;
+//        float f1 = ((color >> 16) & 0xFF) * 255;
+//        float f2 = ((color >> 8) & 0xFF) * 255;
+//        float f3 = ((color >> 0) & 0xFF) * 255;
+//        f1 = f1 * (f * 0.0F + 0.15F);
+//        f2 = f2 * (f * 0.0F + 0.15F);
+//        f3 = f3 * (f * 0.0F + 0.15F);
+//        return new Vec3d((double)f1, (double)f2, (double)f3);
+		return Vec3d.ZERO;
 	}
 
 	@Override

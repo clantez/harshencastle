@@ -262,6 +262,8 @@ enderbow3=to thrust itself into the mob
 enderbow4=You may need to use Ender Necklace.
 combat_pendant1=Press its key to teleport
 combat_pendant2=to nearest mob your around
+feeding_earring1=Saturates half bar of hunger
+feeding_earring2=Every 2 seconds
 
 #misc
 itemGroup.harshenTab=Harshen Castle

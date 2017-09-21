@@ -31,6 +31,7 @@ import kenijey.harshencastle.items.EnderPendant;
 import kenijey.harshencastle.items.EnionBow;
 import kenijey.harshencastle.items.Fearring;
 import kenijey.harshencastle.items.FeatherEarring;
+import kenijey.harshencastle.items.FeedingEarring;
 import kenijey.harshencastle.items.FieryRing;
 import kenijey.harshencastle.items.GlassContainer;
 import kenijey.harshencastle.items.GuidanceOfHarshenCastle;
@@ -139,6 +140,7 @@ public class HarshenItems
 	public static Item ender_bow;
 	public static Item diamond_shard;
 	public static Item emerald_shard;
+	public static Item feeding_earring;
 	
 	public static void preInit()
 	{
@@ -201,6 +203,7 @@ public class HarshenItems
 		ender_bow = new EnderBow();
 		diamond_shard = new DiamondShard();
 		emerald_shard = new EmeraldShard();
+		feeding_earring = new FeedingEarring();
 	}
 	
 	public static void reg()
@@ -257,6 +260,7 @@ public class HarshenItems
 		regItem(fiery_ring);
 		regItem(elytra_pendant);
 		regItem(combat_pendant);
+		regItem(feeding_earring);
 		
 		regMetaItem(item_liquid, 64, emptyList(ItemLiquidTypeset.length()), "item_liquid");
 		regMetaItem(ritual_stick, emptyList(EnumRitualStick.values().length), "ritual_stick");

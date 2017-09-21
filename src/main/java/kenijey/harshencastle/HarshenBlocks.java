@@ -265,7 +265,7 @@ public class HarshenBlocks {
 			timesToLoad = blockDataMap.get(block);
 		for(int i = 0; i < timesToLoad; i++)
 			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), i, new ModelResourceLocation(block.getRegistryName() + 
-					(flag ? "_" + ((IMetaItemBlock)block).getNames()[i]: ""), "inventory"));
+					(flag ? "." + ((IMetaItemBlock)block).getNames()[i]: ""), "inventory"));
 	}
 
 	private static HashMap<Block, Integer> blockDataMap = new HashMap<>();

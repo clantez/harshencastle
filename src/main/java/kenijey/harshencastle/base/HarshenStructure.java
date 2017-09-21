@@ -5,7 +5,6 @@ import java.util.Random;
 
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenCastle;
-import kenijey.harshencastle.HarshenStructures;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.worldgenerators.pontus.PontusWorldRuinGenerator;
 import net.minecraft.block.Block;
@@ -113,11 +112,10 @@ public class HarshenStructure
 	{
 		if(size == null && !world.isRemote)
 			load((WorldServer) world);
-		if(random.nextFloat() < chance * get(world.provider.getDimension()).size()) {
+		if(random.nextFloat() < chance) {
 	        int x = chunkX * 16 + random.nextInt(16);
 	        int z = chunkZ * 16 + random.nextInt(16);
-	        int y = HarshenUtils.getTopBlock(world, new BlockPos(x, 0, z).add(originAddition)).getY() + originAddition.getY();
-	        BlockPos pos = new BlockPos(x, y, z).add(addPos());
+	        BlockPos pos = HarshenUtils.getTopBlock(world, new BlockPos(x, 0, z)).add(originAddition).add(addPos());
 	        loadIntoWorld(world, pos, random);
 	        if(useRuin)
 	        	new PontusWorldRuinGenerator(size, getAdditionBlocks())

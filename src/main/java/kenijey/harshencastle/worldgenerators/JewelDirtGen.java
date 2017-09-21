@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import kenijey.harshencastle.HarshenBlocks;
+import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.blocks.JewelDirt;
 import kenijey.harshencastle.dimensions.DimensionPontus;
 import net.minecraft.init.Blocks;
@@ -25,8 +26,9 @@ public class JewelDirtGen extends WorldGenerator
     	}
     	else if(worldIn.provider.getDimension() == DimensionPontus.DIMENSION_ID)
     		if(worldIn.isAirBlock(position))
+    			positionToGen = new BlockPos(position.getX(), rand.nextInt(HarshenUtils.getTopBlock(worldIn, position).getY() - 10) + 5, position.getZ());
+    		else
     			positionToGen = position;
-    		else;
     	else
     		return false;
     	if(positionToGen == null)

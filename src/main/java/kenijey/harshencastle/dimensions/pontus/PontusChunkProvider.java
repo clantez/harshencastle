@@ -11,6 +11,8 @@ import kenijey.harshencastle.base.BasePontusResourceBiome;
 import kenijey.harshencastle.biomes.HarshenBiomes;
 import kenijey.harshencastle.biomes.PontusBiomeProvider;
 import kenijey.harshencastle.fluids.HarshenFluids;
+import kenijey.harshencastle.worldgenerators.pontus.PontusCaveGenerator;
+import kenijey.harshencastle.worldgenerators.pontus.PontusRavineGenerator;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.BlockLog;
@@ -31,8 +33,6 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.MapGenBase;
-import net.minecraft.world.gen.MapGenCaves;
-import net.minecraft.world.gen.MapGenRavine;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
 import net.minecraft.world.gen.feature.WorldGenLakes;
@@ -53,8 +53,8 @@ public class PontusChunkProvider implements IChunkGenerator
     private final float[] biomeWeights;
     private IBlockState oceanBlock = HarshenFluids.harshen_dimensional_fluid_block.getDefaultState();
     private double[] depthBuffer = new double[256];
-    private MapGenBase caveGenerator = new MapGenCaves();
-    private MapGenBase ravineGenerator = new MapGenRavine();
+    private MapGenBase caveGenerator = new PontusCaveGenerator();
+    private MapGenBase ravineGenerator = new PontusRavineGenerator();
     double[] mainNoiseRegion;
     double[] minLimitRegion;
     double[] maxLimitRegion;
@@ -245,7 +245,6 @@ public class PontusChunkProvider implements IChunkGenerator
         this.replaceBiomeBlocks(x, z, chunkprimer, PontusBiomeProvider.biomeFromPosition(x, z));
         
         this.caveGenerator.generate(this.world, x, z, chunkprimer);
-
         this.ravineGenerator.generate(this.world, x, z, chunkprimer);
 
         Chunk chunk = new Chunk(this.world, chunkprimer, x, z);

@@ -1,6 +1,6 @@
 {
     "parent": "block/cube_all",
     "textures": {
-        "all": "harshencastle:blocks/jewel_dirt.overworld"
+        "all": "harshencastle:blocks/jewel_dirt_overworld"
     }
 }

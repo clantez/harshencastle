@@ -99,7 +99,7 @@ public class HarshenClientUtils
         vb.begin(7, DefaultVertexFormats.BLOCK);
         World world = Minecraft.getMinecraft().world;
         BlockRendererDispatcher dispatcher = Minecraft.getMinecraft().getBlockRendererDispatcher();
-        dispatcher.renderBlock(state, position.add(0, + 300, 0), world, vb);
+        dispatcher.renderBlock(state, position.add(0, 500, 0), world, vb);
         for(int i = 0; i < vb.getVertexCount(); i++)
         	vb.putColorMultiplier(color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, i);
         postRender();
@@ -185,7 +185,7 @@ public class HarshenClientUtils
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder bufferbuilder = tessellator.getBuffer();
         double d0 = entityplayer.lastTickPosX + (entityplayer.posX - entityplayer.lastTickPosX) * (double)partialTicks;
-        double d1 = (entityplayer.lastTickPosY + (entityplayer.posY - entityplayer.lastTickPosY) * (double)partialTicks) + 300;
+        double d1 = (entityplayer.lastTickPosY + (entityplayer.posY - entityplayer.lastTickPosY) * (double)partialTicks) + 500;
         double d2 = entityplayer.lastTickPosZ + (entityplayer.posZ - entityplayer.lastTickPosZ) * (double)partialTicks;
         Tessellator.getInstance().getBuffer().setTranslation(-d0, -d1, -d2);
         return bufferbuilder;
