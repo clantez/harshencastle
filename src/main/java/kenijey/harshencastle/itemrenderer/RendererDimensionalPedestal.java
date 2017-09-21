@@ -14,7 +14,7 @@ public class RendererDimensionalPedestal extends BaseItemRendererActive<TileEnti
 {
 	@Override
 	protected void moveMore(TileEntityHarshenDimensionalPedestal te) {
-
+		
 	}
 
 	@Override

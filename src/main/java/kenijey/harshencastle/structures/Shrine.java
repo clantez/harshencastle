@@ -18,12 +18,12 @@ import net.minecraft.world.WorldServer;
 public class Shrine extends HarshenStructure {
 
 	public Shrine() {
-		super("overworld/resource", "shrine", new BlockPos(3, 1, 3),  0.002f, false, 0);
+		super("overworld/resource", "shrine", new BlockPos(3, -1, 3),  0.002f, false, 0);
 	}
 	
 	@Override
 	public void postAddition(World world, BlockPos pos, Random random) {
-		pos = pos.add(originAddition);
+		pos = pos.add(originAddition).up(2);
 		world.setBlockState(pos, Blocks.CHEST.getDefaultState().withProperty(BlockChest.FACING, EnumFacing.HORIZONTALS[random.nextInt(4)]), 3);
 		if(world instanceof WorldServer && world.getTileEntity(pos) != null)
 		{

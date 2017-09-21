@@ -1,5 +1,6 @@
 package kenijey.harshencastle.base;
 
+
 import javax.vecmath.Vector3f;
 
 import net.minecraft.client.Minecraft;
@@ -28,6 +29,7 @@ public abstract class BaseItemRenderer<T extends BaseTileEntityHarshenSingleItem
 		}
 		GlStateManager.popMatrix();
 	}
+	
 	
 	protected abstract float getMovementSpeed(T te);
 	

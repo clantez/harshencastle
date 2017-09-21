@@ -4,6 +4,8 @@ import java.awt.Color;
 
 import javax.vecmath.Vector4f;
 
+import org.lwjgl.util.vector.Vector3f;
+
 import kenijey.harshencastle.inventory.GuiHandler;
 import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.network.packets.MessagePacketOpenInv;
@@ -91,17 +93,17 @@ public class HarshenClientUtils
 		if(noDepth)
 		{
             GlStateManager.depthFunc(519);
-			vb = prepRenderBlockDepth(partialTicks);
+			vb = prepRenderBlockDepth(partialTicks, true);
 		}
 		else
-	        vb = prepRender(partialTicks);
-
+	        vb = prepRender(partialTicks, true);
         vb.begin(7, DefaultVertexFormats.BLOCK);
         World world = Minecraft.getMinecraft().world;
         BlockRendererDispatcher dispatcher = Minecraft.getMinecraft().getBlockRendererDispatcher();
-        dispatcher.renderBlock(state, position.add(0, 500, 0), world, vb);
+        dispatcher.renderBlock(state, position.add(0, noDepth ? 500 : 0, 0), world, vb);
         for(int i = 0; i < vb.getVertexCount(); i++)
         	vb.putColorMultiplier(color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, i);
+        vb.color(1, 1, 1, 0.1f);
         postRender();
         GlStateManager.depthFunc(515);
 	}
@@ -160,35 +162,38 @@ public class HarshenClientUtils
 		GlStateManager.disableTexture2D();
         GlStateManager.disableBlend();
         GlStateManager.glLineWidth(line);
-        BufferBuilder bufferbuilder = prepRender(partialTicks);
+        BufferBuilder bufferbuilder = prepRender(partialTicks, true);
         bufferbuilder.begin(3, DefaultVertexFormats.POSITION_COLOR);
         return bufferbuilder;
 	}
 	
-	public static BufferBuilder prepRender(float partialTicks)
+	public static BufferBuilder prepRender(float partialTicks, boolean movePosition)
 	{
 		GlStateManager.pushMatrix();
-		EntityPlayer entityplayer = Minecraft.getMinecraft().player;
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder bufferbuilder = tessellator.getBuffer();
-        double d0 = entityplayer.lastTickPosX + (entityplayer.posX - entityplayer.lastTickPosX) * (double)partialTicks;
-        double d1 = entityplayer.lastTickPosY + (entityplayer.posY - entityplayer.lastTickPosY) * (double)partialTicks;
-        double d2 = entityplayer.lastTickPosZ + (entityplayer.posZ - entityplayer.lastTickPosZ) * (double)partialTicks;
-        Tessellator.getInstance().getBuffer().setTranslation(-d0, -d1, -d2);
+        if(movePosition)
+        	translateCamera(0, 0, 0, partialTicks);
         return bufferbuilder;
 	}
 	
-	public static BufferBuilder prepRenderBlockDepth(float partialTicks)
+	public static BufferBuilder prepRenderBlockDepth(float partialTicks, boolean movePosition)
 	{
 		GlStateManager.pushMatrix();
-		EntityPlayer entityplayer = Minecraft.getMinecraft().player;
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder bufferbuilder = tessellator.getBuffer();
-        double d0 = entityplayer.lastTickPosX + (entityplayer.posX - entityplayer.lastTickPosX) * (double)partialTicks;
-        double d1 = (entityplayer.lastTickPosY + (entityplayer.posY - entityplayer.lastTickPosY) * (double)partialTicks) + 500;
-        double d2 = entityplayer.lastTickPosZ + (entityplayer.posZ - entityplayer.lastTickPosZ) * (double)partialTicks;
-        Tessellator.getInstance().getBuffer().setTranslation(-d0, -d1, -d2);
+        if(movePosition)
+        	translateCamera(0, 500, 0, partialTicks);
         return bufferbuilder;
+	}
+	
+	public static void translateCamera(int addX, int addY, int addZ, float partialTicks)
+	{
+		EntityPlayer entityplayer = Minecraft.getMinecraft().player;
+        double d0 = (entityplayer.lastTickPosX + (entityplayer.posX - entityplayer.lastTickPosX) * (double)partialTicks) + addX;
+        double d1 = (entityplayer.lastTickPosY + (entityplayer.posY - entityplayer.lastTickPosY) * (double)partialTicks) + addY;
+        double d2 = (entityplayer.lastTickPosZ + (entityplayer.posZ - entityplayer.lastTickPosZ) * (double)partialTicks) + addZ;
+        Tessellator.getInstance().getBuffer().setTranslation(-d0, -d1, -d2);
 	}
 	
 	public static void postRender()
@@ -212,5 +217,16 @@ public class HarshenClientUtils
 		EntityPlayer player = Minecraft.getMinecraft().player;
 		player.openGui(HarshenCastle.instance, GuiHandler.CUSTOMINVENTORY, player.world, (int)player.posX, (int)player.posY, (int)player.posZ);
 		HarshenNetwork.sendToServer(new MessagePacketOpenInv());
+	}
+	
+	public static class Rotation
+	{
+		public final float angle;
+		public final Vector3f rotate;
+		
+		public Rotation(float angle, Vector3f rotate) {
+			this.angle = angle;
+			this.rotate = rotate;
+		}
 	}
 }

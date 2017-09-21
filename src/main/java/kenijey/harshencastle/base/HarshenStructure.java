@@ -5,6 +5,7 @@ import java.util.Random;
 
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenCastle;
+import kenijey.harshencastle.HarshenStructures;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.worldgenerators.pontus.PontusWorldRuinGenerator;
 import net.minecraft.block.Block;
@@ -38,7 +39,7 @@ public class HarshenStructure
 		this.originAddition = fromOrigin;
 		this.name = parentFolder + "/" + name;
 		showName = name;
-		this.location = new ResourceLocation(HarshenCastle.MODID, name);
+		this.location = new ResourceLocation(HarshenCastle.MODID, this.name);
 	}
 	
 	public HarshenStructure(String parentFolder, String name, BlockPos fromOrigin, float chance, boolean useRuin, int dimension) {
@@ -108,11 +109,11 @@ public class HarshenStructure
 		postAddition(world, pos, random);
 	}
 	
-	public void generateStucture(World world, Random random, int chunkX, int chunkZ)
+	public boolean generateStucture(World world, Random random, int chunkX, int chunkZ)
 	{
 		if(size == null && !world.isRemote)
 			load((WorldServer) world);
-		if(random.nextFloat() < chance) {
+		if(random.nextFloat() < 0.2f) {
 	        int x = chunkX * 16 + random.nextInt(16);
 	        int z = chunkZ * 16 + random.nextInt(16);
 	        BlockPos pos = HarshenUtils.getTopBlock(world, new BlockPos(x, 0, z)).add(originAddition).add(addPos());
@@ -125,7 +126,9 @@ public class HarshenStructure
 		        	if(world.isAirBlock(pos.add(x1, -1, z1)) && !world.isAirBlock(pos.add(x1, 0, z1)))
 		        		for(int y1 = 1; world.getBlockState(pos.add(x1, -y1, z1)).getBlock().isReplaceable(world, pos.add(x1, -y1, z1)); y1++)
 		        			world.setBlockState(pos.add(x1, -y1, z1), world.getBlockState(pos.add(x1, 0, z1)));
+	        return true;
 		}
+		return false;
 	}
 	
 	protected ArrayList<Block> getAdditionBlocks()
@@ -170,5 +173,9 @@ public class HarshenStructure
 	
 	public BlockPos getOriginAddition() {
 		return originAddition;
+	}
+	
+	public ResourceLocation getLocation() {
+		return new ResourceLocation(HarshenCastle.MODID, this.name);
 	}
 }

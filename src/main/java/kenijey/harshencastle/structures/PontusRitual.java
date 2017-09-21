@@ -29,7 +29,7 @@ public class PontusRitual extends HarshenStructure
 		for(ItemStack stack : recipe.getInputs())
 			stacks.add(stack.copy());
 		stacks.remove(random.nextInt(stacks.size()));
-		BlockPos position = pos.add(-originAddition.getX(), -originAddition.getY() + 1, -originAddition.getZ());
+		BlockPos position = pos.subtract(originAddition).up();
 		ArrayList<EnumFacing> shuffledFacing = new ArrayList<>();
 		for(EnumFacing facing : EnumFacing.HORIZONTALS)
 			shuffledFacing.add(facing);

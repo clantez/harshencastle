@@ -1,6 +1,8 @@
 package kenijey.harshencastle;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Random;
 
 import kenijey.harshencastle.base.HarshenStructure;
@@ -37,8 +39,8 @@ public class WorldGen implements IWorldGenerator
 			if(chunkX == 44 && chunkZ == 44)
 				HarshenStructures.castle.generateStucture(world, random, chunkX, chunkZ);
 			runGenerator(this.soulore, world, random, chunkX, chunkZ, 10, 0.5f, 0, 20);
-	    	flowerGenerator(HarshenBlocks.harshen_soul_flower, world, random, chunkX, chunkZ, 15);
-	    	flowerGenerator(HarshenBlocks.plant_of_gleam, world, random, chunkX, chunkZ, 15);
+	    	flowerGenerator(HarshenBlocks.harshen_soul_flower, world, random, chunkX, chunkZ, 0.015f);
+	    	flowerGenerator(HarshenBlocks.plant_of_gleam, world, random, chunkX, chunkZ, 0.015f);
 		}
 		else if(dim == DimensionPontus.DIMENSION_ID)
 		{
@@ -53,9 +55,10 @@ public class WorldGen implements IWorldGenerator
 	
 	private void generateStructure(World world, ArrayList<HarshenStructure> structures, Random random, int chunkX, int chunkZ)
 	{
-		HarshenStructure struc = structures.get(random.nextInt(structures.size()));
-		if(struc.canLoadAt(world.provider.getDimension(), chunkX, chunkZ))
-			struc.generateStucture(world, random, chunkX, chunkZ);
+		Collections.shuffle(structures);
+		for(HarshenStructure struc : structures)
+			if(struc.canLoadAt(world.provider.getDimension(), chunkX, chunkZ) && struc.generateStucture(world, random, chunkX, chunkZ))
+				break;
 	}
 	
 	private void runGenerator(WorldGenerator generator, World world, Random random, int chunkX, int chunkZ, int chancesPerChunk, float chancesToSpawn, int minHeight, int maxHeight) 
