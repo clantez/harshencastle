@@ -9,6 +9,7 @@ public class FeedingEarring extends BaseItemInventory {
 	public FeedingEarring() {
 		setRegistryName("feeding_earring");
 		setUnlocalizedName("feeding_earring");
+		this.canRepair = false;
 	}
 
 	@Override
