@@ -90,8 +90,8 @@ public class HarshenStructure
 		this.size = size;
 	}
 	
-	private void setPos(BlockPos size) {
-		this.size = size;
+	private void setPos(BlockPos pos) {
+		this.originAddition = pos;
 	}
 	
 	public void loadIntoWorld(World world, BlockPos pos, Random random)

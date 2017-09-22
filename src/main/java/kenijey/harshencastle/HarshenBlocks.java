@@ -2,10 +2,8 @@ package kenijey.harshencastle;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import kenijey.harshencastle.base.BaseBlockMeta;
-import kenijey.harshencastle.base.BaseItemMetaData;
 import kenijey.harshencastle.blocks.Archive;
 import kenijey.harshencastle.blocks.BlockOfHeads;
 import kenijey.harshencastle.blocks.BloodBlock;
