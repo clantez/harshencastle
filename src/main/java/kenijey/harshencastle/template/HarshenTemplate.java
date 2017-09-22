@@ -118,13 +118,11 @@ public class HarshenTemplate
             this.blocks.clear();
             NBTTagList nbttaglist = compound.getTagList("size", 3);
             this.size = new BlockPos(nbttaglist.getIntAt(0), nbttaglist.getIntAt(1), nbttaglist.getIntAt(2));
-            if(!compound.hasKey("pos", 3))
+            NBTTagList nbttaglist4 = compound.getTagList("pos", 3);
+            if(nbttaglist4.hasNoTags())
             	this.pos = BlockPos.ORIGIN;
             else
-            {
-            	NBTTagList nbttaglist4 = compound.getTagList("pos", 3);
                 this.pos = new BlockPos(nbttaglist4.getIntAt(0), nbttaglist4.getIntAt(1), nbttaglist4.getIntAt(2));
-            }
             BasicPalette template$basicpalette = new BasicPalette();
             NBTTagList nbttaglist1 = compound.getTagList("palette", 10);
 
