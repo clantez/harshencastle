@@ -1,8 +1,0 @@
-{
-    "variants": {
-        "mode=save": { "model": "sb:save" },
-        "mode=load": { "model": "sb:load" },
-		"mode=corner": { "model": "sb:corner" },
-		"mode=data": { "model": "sb:data" }
-    }
-}
