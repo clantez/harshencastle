@@ -1,6 +1,9 @@
 package kenijey.harshencastle.template;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -31,6 +34,7 @@ import net.minecraft.nbt.NBTTagDouble;
 import net.minecraft.nbt.NBTTagInt;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTUtil;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityStructure;
 import net.minecraft.util.Mirror;
@@ -59,6 +63,8 @@ public class HarshenTemplate
     protected final List<Template.EntityInfo> entities = Lists.<Template.EntityInfo>newArrayList();
     /** size of the structure */
     protected BlockPos size = BlockPos.ORIGIN;
+    /** relative position of structure used for internal calculations */
+    protected BlockPos pos = BlockPos.ORIGIN;
     /** The author of this template. */
     protected String author = "?";
 
@@ -66,6 +72,10 @@ public class HarshenTemplate
     {
         return this.size;
     }
+    
+    public BlockPos getPos() {
+		return pos;
+	}
 
     public void setAuthor(String authorIn)
     {
@@ -99,6 +109,13 @@ public class HarshenTemplate
             this.blocks.clear();
             NBTTagList nbttaglist = compound.getTagList("size", 3);
             this.size = new BlockPos(nbttaglist.getIntAt(0), nbttaglist.getIntAt(1), nbttaglist.getIntAt(2));
+            if(!compound.hasKey("pos", 3))
+            	this.pos = BlockPos.ORIGIN;
+            else
+            {
+            	NBTTagList nbttaglist4 = compound.getTagList("pos", 3);
+                this.pos = new BlockPos(nbttaglist4.getIntAt(0), nbttaglist4.getIntAt(1), nbttaglist4.getIntAt(2));
+            }
             BasicPalette template$basicpalette = new BasicPalette();
             NBTTagList nbttaglist1 = compound.getTagList("palette", 10);
 
@@ -149,7 +166,7 @@ public class HarshenTemplate
     /**
      * takes blocks from the world and puts the data them into this template
      */
-    public void takeBlocksFromWorld(World worldIn, BlockPos startPos, BlockPos endPos, boolean takeEntities, @Nullable Block toIgnore)
+    public void takeBlocksFromWorld(World worldIn, BlockPos actualPosition, BlockPos startPos, BlockPos endPos, boolean takeEntities, @Nullable Block toIgnore)
     {
         if (endPos.getX() >= 1 && endPos.getY() >= 1 && endPos.getZ() >= 1)
         {
@@ -160,6 +177,7 @@ public class HarshenTemplate
             BlockPos blockpos1 = new BlockPos(Math.min(startPos.getX(), blockpos.getX()), Math.min(startPos.getY(), blockpos.getY()), Math.min(startPos.getZ(), blockpos.getZ()));
             BlockPos blockpos2 = new BlockPos(Math.max(startPos.getX(), blockpos.getX()), Math.max(startPos.getY(), blockpos.getY()), Math.max(startPos.getZ(), blockpos.getZ()));
             this.size = endPos;
+            this.pos = actualPosition;
 
             for (BlockPos.MutableBlockPos blockpos$mutableblockpos : BlockPos.getAllInBoxMutable(blockpos1, blockpos2))
             {
@@ -619,6 +637,7 @@ public class HarshenTemplate
         nbt.setTag("blocks", nbttaglist);
         nbt.setTag("entities", nbttaglist1);
         nbt.setTag("size", this.writeInts(this.size.getX(), this.size.getY(), this.size.getZ()));
+        nbt.setTag("pos", this.writeInts(this.pos.getX(), this.pos.getY(), this.pos.getZ()));
         nbt.setString("author", this.author);
         nbt.setInteger("DataVersion", 1241);
         net.minecraftforge.fml.common.FMLCommonHandler.instance().getDataFixer().writeVersionData(nbt);
@@ -702,6 +721,55 @@ public class HarshenTemplate
         }
 
         return nbttaglist;
+    }
+    
+    public static boolean saveToFile(@Nullable MinecraftServer server, ResourceLocation id)
+    {
+    	String s = id.getResourcePath();
+        if (server != null && templateMap.containsKey(id))
+        {
+        	String fName = server.getDataDirectory().getAbsolutePath();
+            File file1 = new File(new File(fName.substring(0, fName.length()-1), server.getFolderName()), "structures");
+
+            if (!file1.exists())
+            {
+                if (!file1.mkdirs())
+                {
+                    return false;
+                }
+            }
+            else if (!file1.isDirectory())
+            {
+                return false;
+            }
+
+            File file2 = new File(file1, s + ".nbt");
+            HarshenTemplate template = templateMap.get(id);
+            OutputStream outputstream = null;
+            boolean flag;
+
+            try
+            {
+                NBTTagCompound nbttagcompound = template.writeToNBT(new NBTTagCompound());
+                outputstream = new FileOutputStream(file2);
+                CompressedStreamTools.writeCompressed(nbttagcompound, outputstream);
+                return true;
+            }
+            catch (Throwable var13)
+            {
+                flag = false;
+            }
+            finally
+            {
+                IOUtils.closeQuietly(outputstream);
+            }
+
+            return flag;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     static class BasicPalette implements Iterable<IBlockState>

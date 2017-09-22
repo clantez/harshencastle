@@ -21,30 +21,29 @@ public class HarshenStructure
 {
 	public static ArrayList<HarshenStructure> allStructures = new ArrayList<>();
 	
-	protected final BlockPos originAddition;
+	protected BlockPos originAddition;
 	protected final ResourceLocation location;
 	protected final String name;
 	public String showName;
 	protected BlockPos size;
-	protected static boolean hasLoaded;
+	private static boolean hasLoaded;
 	protected final float chance;
 	protected final boolean useRuin;
 	protected final boolean displaceDownwards;
 	protected final int dimension;
 	
-	public HarshenStructure(String parentFolder, String name, BlockPos fromOrigin, float chance, boolean useRuin, int dimension, boolean displaceDownwards) {
+	public HarshenStructure(String parentFolder, String name, float chance, boolean useRuin, int dimension, boolean displaceDownwards) {
 		this.dimension = dimension;
 		this.useRuin = useRuin;
 		this.chance = chance;
 		this.displaceDownwards = displaceDownwards;
-		this.originAddition = fromOrigin;
 		this.name = parentFolder + "/" + name;
 		showName = name;
 		this.location = new ResourceLocation(HarshenCastle.MODID, this.name);
 	}
 	
-	public HarshenStructure(String parentFolder, String name, BlockPos fromOrigin, float chance, boolean useRuin, int dimension) {
-		this(parentFolder, name, fromOrigin, chance, useRuin, dimension, true);
+	public HarshenStructure(String parentFolder, String name, float chance, boolean useRuin, int dimension) {
+		this(parentFolder, name, chance, useRuin, dimension, true);
 	}
 	
 	public static ArrayList<HarshenStructure> get(int dimension)
@@ -58,8 +57,15 @@ public class HarshenStructure
 	
 	public static void load()
 	{
+		if(hasLoaded)
+			return;
 		for(HarshenStructure struc : allStructures)
-			struc.setSize(HarshenTemplate.getTemplate(struc.location).getSize());
+		{
+			HarshenTemplate t = HarshenTemplate.getTemplate(struc.location);
+			struc.setSize(t.getSize());
+			struc.setPos(t.getPos());
+		}
+		hasLoaded = true;
 	}
 	
 	public boolean canLoadAt(int dimension, int chunkX, int chunkZ)
@@ -80,11 +86,11 @@ public class HarshenStructure
 	public void preAddition(World world, BlockPos pos, Random random){};
 	public void postAddition(World world, BlockPos pos, Random random){};
 	
-	public static boolean hasLoaded() {
-		return hasLoaded;
+	private void setSize(BlockPos size) {
+		this.size = size;
 	}
 	
-	private void setSize(BlockPos size) {
+	private void setPos(BlockPos size) {
 		this.size = size;
 	}
 	

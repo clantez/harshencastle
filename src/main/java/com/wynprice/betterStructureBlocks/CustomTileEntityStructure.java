@@ -1,9 +1,11 @@
 package com.wynprice.betterStructureBlocks;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import kenijey.harshencastle.template.HarshenTemplate;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStructure;
 import net.minecraft.block.state.IBlockState;
@@ -69,11 +71,10 @@ public class CustomTileEntityStructure extends TileEntityStructure
             WorldServer worldserver = (WorldServer)this.world;
             MinecraftServer minecraftserver = this.world.getMinecraftServer();
             TemplateManager templatemanager = worldserver.getStructureTemplateManager();
-            Template template = templatemanager.getTemplate(minecraftserver, new ResourceLocation(this.name));
-            System.out.println(template.getSize());
-            template.takeBlocksFromWorld(this.world, blockpos, this.actualSize, true, Blocks.STRUCTURE_VOID);
-            template.setAuthor(this.author);
-            return !p_189712_1_ || templatemanager.writeTemplate(minecraftserver, new ResourceLocation(this.name));
+            HarshenTemplate template = HarshenTemplate.getTemplate(new ResourceLocation(this.name));
+            template.takeBlocksFromWorld(this.world, this.actualPosition, blockpos, this.actualSize, true, Blocks.STRUCTURE_VOID);
+            template.setAuthor("Pricea1");
+            return !p_189712_1_ || HarshenTemplate.saveToFile(minecraftserver, new ResourceLocation(this.name));
         }
         else
         {
