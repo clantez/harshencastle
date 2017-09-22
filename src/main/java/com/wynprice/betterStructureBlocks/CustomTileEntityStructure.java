@@ -1,10 +1,5 @@
 package com.wynprice.betterStructureBlocks;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import kenijey.harshencastle.template.HarshenTemplate;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStructure;
@@ -24,7 +19,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.WorldServer;
-import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.template.PlacementSettings;
 import net.minecraft.world.gen.structure.template.Template;
 import net.minecraft.world.gen.structure.template.TemplateManager;

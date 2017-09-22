@@ -2,10 +2,8 @@ package com.wynprice.betterStructureBlocks;
 
 import net.minecraft.block.BlockStructure;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityStructure;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
