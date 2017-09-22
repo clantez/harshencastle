@@ -106,7 +106,7 @@ public class HarshenStructure
 	
 	public boolean generateStucture(World world, Random random, int chunkX, int chunkZ)
 	{
-		if(random.nextFloat() < 0.2f) {
+		if(random.nextFloat() < chance) {
 	        int x = chunkX * 16 + random.nextInt(16);
 	        int z = chunkZ * 16 + random.nextInt(16);
 	        BlockPos pos = HarshenUtils.getTopBlock(world, new BlockPos(x, 0, z)).add(originAddition).add(addPos());
@@ -116,7 +116,7 @@ public class HarshenStructure
 	        	.generate(world, random, pos);
 	        for(int x1 = 0; x1 < size.getX(); x1++)
 		        for(int z1 = 0; z1 < size.getZ(); z1++)
-		        	if(world.isAirBlock(pos.add(x1, -1, z1)) && !world.isAirBlock(pos.add(x1, 0, z1)))
+		        	if(world.getBlockState(pos.add(x1, -1, z1)).getBlock().isReplaceable(world, pos.add(x1, -1, z1)) && !world.isAirBlock(pos.add(x1, 0, z1)))
 		        		for(int y1 = 1; world.getBlockState(pos.add(x1, -y1, z1)).getBlock().isReplaceable(world, pos.add(x1, -y1, z1)); y1++)
 		        			world.setBlockState(pos.add(x1, -y1, z1), world.getBlockState(pos.add(x1, 0, z1)));
 	        return true;
