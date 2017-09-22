@@ -2,7 +2,6 @@ package kenijey.harshencastle.proxy;
 
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenCastle;
-import kenijey.harshencastle.HarshenClientUtils;
 import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.HarshenRecipes;
 import kenijey.harshencastle.HarshenSounds;
@@ -10,6 +9,7 @@ import kenijey.harshencastle.HarshenStructures;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.WorldGen;
 import kenijey.harshencastle.armor.HarshenArmors;
+import kenijey.harshencastle.base.HarshenStructure;
 import kenijey.harshencastle.biomes.HarshenBiomes;
 import kenijey.harshencastle.config.HarshenConfigs;
 import kenijey.harshencastle.dimensions.HarshenDimensions;
@@ -37,7 +37,6 @@ import kenijey.harshencastle.handlers.HandlerPontusAllowed;
 import kenijey.harshencastle.handlers.HandlerPotionEffects;
 import kenijey.harshencastle.handlers.HandlerRaptorScythe;
 import kenijey.harshencastle.handlers.HandlerSoulHarsherSword;
-import kenijey.harshencastle.handlers.HandlerStructure;
 import kenijey.harshencastle.handlers.HandlerZombieEyeDrop;
 import kenijey.harshencastle.inventory.GuiHandler;
 import kenijey.harshencastle.models.ModelArmour;
@@ -72,7 +71,6 @@ public class CommonProxy
     {    	
     	
     	new HarshenUtils();//dont mess with order
-    	new HarshenClientUtils();
     	
     	HarshenConfigs.IDS.preInit();
     	HarshenConfigs.GENERAL.preInit();
@@ -101,6 +99,8 @@ public class CommonProxy
 		HarshenStructures.register();
 		
     	HarshenConfigs.ACCESSORIES.preInit();
+    	
+    	HarshenStructure.load();
 		
 		HarshenArmors.preInit();
 		HarshenArmors.register();
@@ -165,8 +165,7 @@ public class CommonProxy
     			new HandlerPontusAllowed(), 
     			new HandlerHarshenInventoryEffects(), 
     			new HandlerZombieEyeDrop(), 
-    			new HandlerPlayerInventoryOverDeath(),
-    			new HandlerStructure()};
+    			new HandlerPlayerInventoryOverDeath()};
     	for(Object o : handlers)
     	{
     		MinecraftForge.EVENT_BUS.register(o);

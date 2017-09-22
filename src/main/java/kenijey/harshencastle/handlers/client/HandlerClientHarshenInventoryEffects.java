@@ -7,10 +7,10 @@ import java.util.HashMap;
 
 import kenijey.harshencastle.HarshenClientUtils;
 import kenijey.harshencastle.HarshenItems;
-import kenijey.harshencastle.HarshenStructureRenderer;
 import kenijey.harshencastle.HarshenStructures;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.config.AccessoryConfig;
+import kenijey.harshencastle.template.HarshenTemplateRenderer;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
@@ -78,7 +78,7 @@ public class HandlerClientHarshenInventoryEffects
 					HarshenClientUtils.renderGhostBlock(Minecraft.getMinecraft().world.getBlockState(finalPos), finalPos, true, event.getPartialTicks());
 			}
 		}
-		HarshenStructureRenderer.getTemplate(HarshenStructures.castle.getLocation())
+		HarshenTemplateRenderer.getTemplate(HarshenStructures.castle.getLocation())
 			.renderIntoWorld(Minecraft.getMinecraft().world, new BlockPos(100, 100, 100), event.getPartialTicks());
 	}
 }

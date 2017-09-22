@@ -7,6 +7,7 @@ import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.HarshenStructures;
 import kenijey.harshencastle.HarshenUtils;
+import kenijey.harshencastle.template.HarshenTemplate;
 import kenijey.harshencastle.worldgenerators.pontus.PontusWorldRuinGenerator;
 import net.minecraft.block.Block;
 import net.minecraft.util.ResourceLocation;
@@ -55,22 +56,10 @@ public class HarshenStructure
 		return structures;
 	}
 	
-	public static void load(WorldServer world)
+	public static void load()
 	{
-		ArrayList<HarshenStructure> repositionedStruc = new ArrayList<>();
 		for(HarshenStructure struc : allStructures)
-		{
-			Template template = world.getStructureTemplateManager().get(world.getMinecraftServer(), new ResourceLocation(HarshenCastle.MODID, struc.name));
-			if(template == null)
-			{
-				new IllegalArgumentException(struc.name + " does not exist").printStackTrace();
-				continue;
-			}
-			struc.setSize(template.getSize());
-			repositionedStruc.add(struc);
-		}
-		allStructures = repositionedStruc;
-		hasLoaded = true;
+			struc.setSize(HarshenTemplate.getTemplate(struc.location).getSize());
 	}
 	
 	public boolean canLoadAt(int dimension, int chunkX, int chunkZ)
@@ -111,8 +100,6 @@ public class HarshenStructure
 	
 	public boolean generateStucture(World world, Random random, int chunkX, int chunkZ)
 	{
-		if(size == null && !world.isRemote)
-			load((WorldServer) world);
 		if(random.nextFloat() < 0.2f) {
 	        int x = chunkX * 16 + random.nextInt(16);
 	        int z = chunkZ * 16 + random.nextInt(16);
@@ -176,6 +163,6 @@ public class HarshenStructure
 	}
 	
 	public ResourceLocation getLocation() {
-		return new ResourceLocation(HarshenCastle.MODID, this.name);
+		return location;
 	}
 }

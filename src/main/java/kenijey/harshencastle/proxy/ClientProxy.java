@@ -2,6 +2,7 @@ package kenijey.harshencastle.proxy;
 
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenCastle;
+import kenijey.harshencastle.HarshenClientUtils;
 import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.armor.HarshenArmors;
 import kenijey.harshencastle.dimensions.pontus.PontusWorldProvider;
@@ -101,6 +102,7 @@ public class ClientProxy extends CommonProxy
     public void preInit(FMLPreInitializationEvent event) 
     {
     	super.preInit(event);
+    	new HarshenClientUtils();
     }
 	
 	@Override
