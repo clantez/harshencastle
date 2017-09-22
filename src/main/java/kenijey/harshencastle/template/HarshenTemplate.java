@@ -35,6 +35,7 @@ import net.minecraft.nbt.NBTTagInt;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTUtil;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.gui.MinecraftServerGui;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityStructure;
 import net.minecraft.util.Mirror;
@@ -54,6 +55,7 @@ import net.minecraft.world.gen.structure.template.BlockRotationProcessor;
 import net.minecraft.world.gen.structure.template.ITemplateProcessor;
 import net.minecraft.world.gen.structure.template.PlacementSettings;
 import net.minecraft.world.gen.structure.template.Template;
+import net.minecraftforge.fml.server.FMLServerHandler;
 
 public class HarshenTemplate 
 {
@@ -95,17 +97,24 @@ public class HarshenTemplate
         String s1 = location.getResourcePath();
         InputStream stream = null;
         boolean flag;
-
         try
         {
-            stream = Minecraft.getMinecraft().getResourceManager().getResource(new ResourceLocation(HarshenCastle.MODID, "structures/" + s1 + ".nbt")).getInputStream();
+        	stream = getClass().getResourceAsStream("/assets/" + HarshenCastle.MODID + "/structures/" + s1 + ".nbt");
             NBTTagCompound compound = CompressedStreamTools.readCompressed(stream);
             if (!compound.hasKey("DataVersion", 99))
             {
             	compound.setInteger("DataVersion", 500);
             }
             Template template = new Template();
-            template.read(Minecraft.getMinecraft().getDataFixer().process(FixTypes.STRUCTURE, compound));
+            DataFixer fixer;
+            try
+            {
+            	fixer = Minecraft.getMinecraft().getDataFixer();
+            }
+            catch (Throwable e) {
+				fixer = FMLServerHandler.instance().getDataFixer();
+			}
+            template.read(fixer.process(FixTypes.STRUCTURE, compound));
             this.blocks.clear();
             NBTTagList nbttaglist = compound.getTagList("size", 3);
             this.size = new BlockPos(nbttaglist.getIntAt(0), nbttaglist.getIntAt(1), nbttaglist.getIntAt(2));
