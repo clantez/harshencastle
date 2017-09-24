@@ -20,6 +20,7 @@ import com.google.common.collect.Maps;
 
 import kenijey.harshencastle.HarshenCastle;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockStructure;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
@@ -92,7 +93,6 @@ public class HarshenTemplate
     protected static HashMap<ResourceLocation, HarshenTemplate> templateMap = new HashMap<>();
     
 	protected HarshenTemplate(ResourceLocation location) {
-		
 		String s = location.getResourceDomain();
         String s1 = location.getResourcePath();
         InputStream stream = null;
@@ -148,7 +148,8 @@ public class HarshenTemplate
                 {
                     nbttagcompound1 = null;
                 }
-                if(iblockstate.getBlock() != Blocks.STRUCTURE_BLOCK && iblockstate.getBlock() != Blocks.AIR)
+
+                if(!(iblockstate.getBlock() instanceof BlockStructure))
                 	this.blocks.add(new Template.BlockInfo(blockpos, iblockstate, nbttagcompound1));
             }
         }
@@ -277,7 +278,7 @@ public class HarshenTemplate
             {
                 IBlockState iblockstate = template$blockinfo.blockState;
 
-                if (iblockstate.getBlock() == Blocks.STRUCTURE_BLOCK && template$blockinfo.tileentityData != null)
+                if (iblockstate.getBlock() instanceof BlockStructure && template$blockinfo.tileentityData != null)
                 {
                     TileEntityStructure.Mode tileentitystructure$mode = TileEntityStructure.Mode.valueOf(template$blockinfo.tileentityData.getString("mode"));
 

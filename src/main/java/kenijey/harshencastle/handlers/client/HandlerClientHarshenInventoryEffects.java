@@ -50,9 +50,9 @@ public class HandlerClientHarshenInventoryEffects
 				ArrayList<Block> blocks = HarshenUtils.getBlocksFromString(blockName);
 				ArrayList<BlockPos> allBlockPos = new ArrayList<>();
 				HashMap<Double, BlockPos> distanceMap = new HashMap<>();
-				for(int x = pos.getX() - 20; x < pos.getX() + 20; x++)
-					for(int z = pos.getZ() - 20; z < pos.getZ() + 20; z++)
-						for(int y = pos.getY() - 20; y < pos.getY() + 20; y++)
+				for(int x = pos.getX() - AccessoryConfig.xrayAreaX; x < pos.getX() + AccessoryConfig.xrayAreaX; x++)
+					for(int z = pos.getZ() - AccessoryConfig.xrayAreaZ; z < pos.getZ() + AccessoryConfig.xrayAreaZ; z++)
+						for(int y = pos.getY() - AccessoryConfig.xrayAreaY; y < pos.getY() + AccessoryConfig.xrayAreaY; y++)
 						{
 							if(blocks.contains(Minecraft.getMinecraft().world.getBlockState(new BlockPos(x, y, z)).getBlock()))
 							{

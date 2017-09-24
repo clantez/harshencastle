@@ -92,8 +92,8 @@ ritual.fail.recipe=Ritual Recipe not found
 ritual.not=not
 
 #entity eggs
-entity.soulless_knight.name=[HC] Soulless Knight
-entity.soul_part.name=[HC] Soul Part
+entity.soulless_knight.name=Soulless Knight
+entity.soul_part.name=Soul Part
 
 #damage sources
 death.attack.entitySoulPart=%1$s's soul was taken away.
@@ -101,6 +101,16 @@ death.attack.entitySoulPart=%1$s's soul was taken away.
 #config
 config.isEnabled=Should %s be enabled
 config.structure.name=the structure %s
+config.id=What should the ID for %s be
+config.blood_chance=The chance for blood to occur when a mob is hit.
+config.blood_drops=If blood occurs, should it be placed on the ground?
+config.blood_offhand=If the blood cant be placed on the ground, should the player be able to get it if they have a blood collector in their offhand
+config.render_flatplates=Should the flatplate renderer be run for all players in creative mode
+config.xray.blacklist=What blocks shouldnt work with the xray pendant
+config.xray.distance.x=The distance from the player that the xray pendant should be able to find, along the x axis(The higher this is the more lag it makes)
+config.xray.distance.y=The distance from the player that the xray pendant should be able to find, along the y axis(The higher this is the more lag it makes)
+config.xray.distance.z=The distance from the player that the xray pendant should be able to find, along the z axis(The higher this is the more lag it makes)
+config.xray.listsize=The maximum amount of blocks the xray pendant can pick up
 
 #blocks
 tile.harshen_soul_ore.name=Harshen Soul Ore

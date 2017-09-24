@@ -5,7 +5,6 @@ import java.util.Random;
 
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenCastle;
-import kenijey.harshencastle.HarshenStructures;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.template.HarshenTemplate;
 import kenijey.harshencastle.worldgenerators.pontus.PontusWorldRuinGenerator;
@@ -13,9 +12,7 @@ import net.minecraft.block.Block;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
 import net.minecraft.world.gen.structure.template.PlacementSettings;
-import net.minecraft.world.gen.structure.template.Template;
 
 public class HarshenStructure 
 {
@@ -99,8 +96,7 @@ public class HarshenStructure
 		if(world.isRemote)
 			return;
 		preAddition(world, pos, random);
-		((WorldServer)world).getStructureTemplateManager().get(world.getMinecraftServer(), new ResourceLocation(HarshenCastle.MODID, name))
-		.addBlocksToWorld(world, pos, new PlacementSettings().setIgnoreEntities(false).setIgnoreStructureBlock(true));
+		 HarshenTemplate.getTemplate(location).addBlocksToWorld(world, pos, new PlacementSettings().setIgnoreEntities(false).setIgnoreStructureBlock(true));
 		postAddition(world, pos, random);
 	}
 	

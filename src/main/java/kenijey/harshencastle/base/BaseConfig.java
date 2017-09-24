@@ -49,6 +49,11 @@ public abstract class BaseConfig
 		
 	protected <T> T get(String name, String category, T normal)
 	{
+		return get(name, category, new TextComponentTranslation("config." + name).getUnformattedText(), normal);
+	}
+	
+	protected <T> T get(String name, String category, String comment, T normal)
+	{
 		try
 		{
 			Object returned = HarshenUtils.getMethod("get", config.getClass(), String.class, String.class, normal.getClass()).invoke(config, category, name, normal);
@@ -59,7 +64,7 @@ public abstract class BaseConfig
 						returned = method.invoke(config, category, name, normal);
 			if(!(returned instanceof Property))	throw new IllegalArgumentException("Returned Type was not a property. This is practically impossible");
 			Property property = (Property) returned;
-			property.setComment(new TextComponentTranslation("config." + name).getUnformattedText());
+			property.setComment(comment);
 			propertyMap.put(category + "*" + name, property);
 			return (T) property.getClass().getMethod("get" + normal.getClass().getSimpleName().replace("Integer", "Int").replace("[]", "List")).invoke(property);
 		}

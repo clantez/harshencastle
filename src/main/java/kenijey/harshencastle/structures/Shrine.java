@@ -23,7 +23,7 @@ public class Shrine extends HarshenStructure {
 	
 	@Override
 	public void postAddition(World world, BlockPos pos, Random random) {
-		pos = pos.add(originAddition).up(2);
+		pos = pos.subtract(originAddition);
 		world.setBlockState(pos, Blocks.CHEST.getDefaultState().withProperty(BlockChest.FACING, EnumFacing.HORIZONTALS[random.nextInt(4)]), 3);
 		if(world instanceof WorldServer && world.getTileEntity(pos) != null)
 		{
