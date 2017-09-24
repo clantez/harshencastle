@@ -111,6 +111,7 @@ config.xray.distance.x=The distance from the player that the xray pendant should
 config.xray.distance.y=The distance from the player that the xray pendant should be able to find, along the y axis(The higher this is the more lag it makes)
 config.xray.distance.z=The distance from the player that the xray pendant should be able to find, along the z axis(The higher this is the more lag it makes)
 config.xray.listsize=The maximum amount of blocks the xray pendant can pick up
+config.structure_ruin_chance=If a structure has the ruin tag, what is the chance that a block is changed to air. DONT WORRY ABOUT THIS
 
 #blocks
 tile.harshen_soul_ore.name=Harshen Soul Ore

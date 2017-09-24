@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.UUID;
 
 import javax.annotation.Nullable;
@@ -19,6 +20,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import kenijey.harshencastle.HarshenCastle;
+import kenijey.harshencastle.config.GeneralConfig;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStructure;
 import net.minecraft.block.state.IBlockState;
@@ -36,7 +38,6 @@ import net.minecraft.nbt.NBTTagInt;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTUtil;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.gui.MinecraftServerGui;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityStructure;
 import net.minecraft.util.Mirror;
@@ -305,30 +306,30 @@ public class HarshenTemplate
         return transformedBlockPos(pos, placementIn.getMirror(), placementIn.getRotation());
     }
 
-    public void addBlocksToWorldChunk(World worldIn, BlockPos pos, PlacementSettings placementIn)
+    public void addBlocksToWorldChunk(World worldIn, BlockPos pos, PlacementSettings placementIn, Random rand, boolean useRuin)
     {
         placementIn.setBoundingBox(null);
         placementIn.getBoundingBox();
-        this.addBlocksToWorld(worldIn, pos, placementIn);
+        this.addBlocksToWorld(worldIn, pos, placementIn, rand, useRuin);
     }
 
     /**
      * This takes the data stored in this instance and puts them into the world.
      */
-    public void addBlocksToWorld(World worldIn, BlockPos pos, PlacementSettings placementIn)
+    public void addBlocksToWorld(World worldIn, BlockPos pos, PlacementSettings placementIn, Random rand, boolean useRuin)
     {
-        this.addBlocksToWorld(worldIn, pos, new BlockRotationProcessor(pos, placementIn), placementIn, 2);
+        this.addBlocksToWorld(worldIn, pos, new BlockRotationProcessor(pos, placementIn), placementIn, 2, rand, useRuin);
     }
 
     /**
      * This takes the data stored in this instance and puts them into the world.
      */
-    public void addBlocksToWorld(World worldIn, BlockPos pos, PlacementSettings placementIn, int flags)
+    public void addBlocksToWorld(World worldIn, BlockPos pos, PlacementSettings placementIn, int flags, Random rand, boolean useRuin)
     {
-        this.addBlocksToWorld(worldIn, pos, new BlockRotationProcessor(pos, placementIn), placementIn, flags);
+        this.addBlocksToWorld(worldIn, pos, new BlockRotationProcessor(pos, placementIn), placementIn, flags, rand, useRuin);
     }
 
-    public void addBlocksToWorld(World worldIn, BlockPos p_189960_2_, @Nullable ITemplateProcessor templateProcessor, PlacementSettings placementIn, int flags)
+    public void addBlocksToWorld(World worldIn, BlockPos p_189960_2_, @Nullable ITemplateProcessor templateProcessor, PlacementSettings placementIn, int flags, Random rand, boolean useRuin)
     {
         if ((!this.blocks.isEmpty() || !placementIn.getIgnoreEntities() && !this.entities.isEmpty()) && this.size.getX() >= 1 && this.size.getY() >= 1 && this.size.getZ() >= 1)
         {
@@ -344,7 +345,8 @@ public class HarshenTemplate
                 {
                     Block block1 = template$blockinfo1.blockState.getBlock();
 
-                    if ((block == null || block != block1) && (!placementIn.getIgnoreStructureBlock() || block1 != Blocks.STRUCTURE_BLOCK) && (structureboundingbox == null || structureboundingbox.isVecInside(blockpos)))
+                    if ((block == null || block != block1) && (!placementIn.getIgnoreStructureBlock() || block1 != Blocks.STRUCTURE_BLOCK) && (structureboundingbox == null || structureboundingbox.isVecInside(blockpos))
+                    		&& (!useRuin || (useRuin && rand.nextDouble() > GeneralConfig.structureRuinChance)))
                     {
                         IBlockState iblockstate = template$blockinfo1.blockState.withMirror(placementIn.getMirror());
                         IBlockState iblockstate1 = iblockstate.withRotation(placementIn.getRotation());

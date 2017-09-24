@@ -3,12 +3,9 @@ package kenijey.harshencastle.base;
 import java.util.ArrayList;
 import java.util.Random;
 
-import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.template.HarshenTemplate;
-import kenijey.harshencastle.worldgenerators.pontus.PontusWorldRuinGenerator;
-import net.minecraft.block.Block;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -91,73 +88,31 @@ public class HarshenStructure
 		this.originAddition = pos;
 	}
 	
-	public void loadIntoWorld(World world, BlockPos pos, Random random)
+	public void loadIntoWorld(World world, BlockPos pos, Random random, boolean useRuin)
 	{
 		if(world.isRemote)
 			return;
 		preAddition(world, pos, random);
-		 HarshenTemplate.getTemplate(location).addBlocksToWorld(world, pos, new PlacementSettings().setIgnoreEntities(false).setIgnoreStructureBlock(true));
+		HarshenTemplate.getTemplate(location).addBlocksToWorld(world, pos, new PlacementSettings().setIgnoreEntities(false).setIgnoreStructureBlock(true), random, useRuin);
 		postAddition(world, pos, random);
 	}
 	
 	public boolean generateStucture(World world, Random random, int chunkX, int chunkZ)
 	{
-		if(random.nextFloat() < chance) {
+		if(random.nextFloat() < chance)
+		{
 	        int x = chunkX * 16 + random.nextInt(16);
 	        int z = chunkZ * 16 + random.nextInt(16);
 	        BlockPos pos = HarshenUtils.getTopBlock(world, new BlockPos(x, 0, z)).add(originAddition).add(addPos());
-	        loadIntoWorld(world, pos, random);
-	        if(useRuin)
-	        	new PontusWorldRuinGenerator(size, getAdditionBlocks())
-	        	.generate(world, random, pos);
-	        for(int x1 = 0; x1 < size.getX(); x1++)
-		        for(int z1 = 0; z1 < size.getZ(); z1++)
+	        loadIntoWorld(world, pos, random, useRuin);
+	        for(int x1 = 0; x1 < size.getX(); x1++) 
+	        	for(int z1 = 0; z1 < size.getZ(); z1++)
 		        	if(world.getBlockState(pos.add(x1, -1, z1)).getBlock().isReplaceable(world, pos.add(x1, -1, z1)) && !world.isAirBlock(pos.add(x1, 0, z1)))
 		        		for(int y1 = 1; world.getBlockState(pos.add(x1, -y1, z1)).getBlock().isReplaceable(world, pos.add(x1, -y1, z1)); y1++)
 		        			world.setBlockState(pos.add(x1, -y1, z1), world.getBlockState(pos.add(x1, 0, z1)));
 	        return true;
 		}
 		return false;
-	}
-	
-	protected ArrayList<Block> getAdditionBlocks()
-	{
-		ArrayList<Block> blocks = new ArrayList<>();
-		Block[] finalBlocks = HarshenUtils.listOf(
-				HarshenBlocks.harshen_dimensional_wood_crate, 
-				HarshenBlocks.pontus_dead_wood, 
-				HarshenBlocks.harshen_dimensional_glass,
-				HarshenBlocks.harshen_dimensional_stone,
-				HarshenBlocks.pontus_chaotic_wood,
-				HarshenBlocks.pontus_far_wood,
-				HarshenBlocks.harshen_dimensional_dirt);
-		if(addBlocks() != null)
-			for(Block block : addBlocks())
-				blocks.add(block);
-			outLoop:
-			for(Block block : finalBlocks)
-			{
-				if(removeBlocks() != null)
-					for(Block blocksToRemove : removeBlocks())
-						if(block == blocksToRemove)
-							continue outLoop;
-				blocks.add(block);
-			}
-		return blocks;
-	}
-	
-	protected Block[] addBlocks()
-	{
-		return null;
-	}
-	
-	protected Block[] removeBlocks()
-	{
-		return null;
-	}
-		
-	public BlockPos getSize() {
-		return size;
 	}
 	
 	public BlockPos getOriginAddition() {
