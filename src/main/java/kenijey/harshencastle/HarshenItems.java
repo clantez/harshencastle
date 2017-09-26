@@ -41,6 +41,7 @@ import kenijey.harshencastle.items.HarshenProps;
 import kenijey.harshencastle.items.HarshenSoulFragment;
 import kenijey.harshencastle.items.HarshenSoulIngot;
 import kenijey.harshencastle.items.IronBow;
+import kenijey.harshencastle.items.IronHeart;
 import kenijey.harshencastle.items.IronScythe;
 import kenijey.harshencastle.items.ItemLiquid;
 import kenijey.harshencastle.items.Itium;
@@ -141,6 +142,7 @@ public class HarshenItems
 	public static Item diamond_shard;
 	public static Item emerald_shard;
 	public static Item feeding_earring;
+	public static Item iron_heart;
 	
 	public static void preInit()
 	{
@@ -204,6 +206,7 @@ public class HarshenItems
 		diamond_shard = new DiamondShard();
 		emerald_shard = new EmeraldShard();
 		feeding_earring = new FeedingEarring();
+		iron_heart = new IronHeart();
 	}
 	
 	public static void reg()
@@ -241,6 +244,7 @@ public class HarshenItems
 		regItem(ender_bow);
 		regItem(diamond_shard, 64);
 		regItem(emerald_shard, 64);
+		regItem(iron_heart, 64);
 		
 		regItem(zombi_pendant);
 		regItem(punchy_ring);

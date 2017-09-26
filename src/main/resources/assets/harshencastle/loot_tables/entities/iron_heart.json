@@ -1,0 +1,22 @@
+{
+    "pools": [
+		{
+			"name":"heart",
+            "rolls": 1,
+            "entries": [
+                {
+                    "type": "item",
+                    "name": "harshencastle:iron_heart",
+                    "weight": 1,
+					"conditions": [
+						{
+							"condition": "random_chance_with_looting",
+							"chance": 0.8,
+							"looting_multiplier": 0.0
+						}
+					]
+                }
+            ]
+        }
+    ]
+}

@@ -8,6 +8,7 @@ public class HarshenLootTables
 	public final static ResourceLocation shrine = reg("chests/shrine");
 	public final static ResourceLocation harshen_castle = reg("chests/castle");
 	public final static ResourceLocation zombieDrops = reg("entities/zombie_eye");
+	public final static ResourceLocation golemDrops = reg("entities/iron_heart");
 	
 	public static ResourceLocation reg(String name)
 	{

@@ -32,6 +32,7 @@ import kenijey.harshencastle.handlers.HandlerGlassContainer;
 import kenijey.harshencastle.handlers.HandlerHarshenArmourEffects;
 import kenijey.harshencastle.handlers.HandlerHarshenInventory;
 import kenijey.harshencastle.handlers.HandlerHarshenInventoryEffects;
+import kenijey.harshencastle.handlers.HandlerIronHeartDrop;
 import kenijey.harshencastle.handlers.HandlerPlayerInventoryOverDeath;
 import kenijey.harshencastle.handlers.HandlerPontusAllowed;
 import kenijey.harshencastle.handlers.HandlerPotionEffects;
@@ -164,7 +165,8 @@ public class CommonProxy
     			new HandlerGlassContainer(), 
     			new HandlerPontusAllowed(), 
     			new HandlerHarshenInventoryEffects(), 
-    			new HandlerZombieEyeDrop(), 
+    			new HandlerZombieEyeDrop(),
+    			new HandlerIronHeartDrop(),
     			new HandlerPlayerInventoryOverDeath()};
     	for(Object o : handlers)
     	{

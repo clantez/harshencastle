@@ -79,6 +79,7 @@ item.diamond_shard.name=Diamond Shard
 item.emerald_shard.name=Emerald Shard
 item.combat_pendant.name=Combat Pendant
 item.feeding_earring.name=Feeding Earring
+item.iron_heart.name=Iron Heart
 
 #keybindings
 key.telering.description=Telering Teleport Key
