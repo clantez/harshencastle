@@ -10,6 +10,8 @@ import java.util.Random;
 import com.google.common.collect.Lists;
 
 import kenijey.harshencastle.base.BasePontusResourceBiome;
+import kenijey.harshencastle.biomes.HarshenBiomes;
+import kenijey.harshencastle.biomes.PontusBiomeProvider;
 import kenijey.harshencastle.config.HarshenConfigs;
 import kenijey.harshencastle.enums.CauldronLiquid;
 import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
@@ -39,6 +41,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.storage.loot.LootContext;
+import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class HarshenUtils
@@ -259,6 +262,9 @@ public class HarshenUtils
 	
 	public static BlockPos getTopBlock(World world, Vec3d vec)
 	{
+		new Event(){
+			
+		};
 		return getTopBlock(world, new BlockPos(vec));
 	}
 	
@@ -381,5 +387,34 @@ public class HarshenUtils
 	{
 		return tagType + String.valueOf(world.provider.getDimension()) + "#"
 				+ String.valueOf(position.getX()) + "," + String.valueOf(position.getY()) + "," + String.valueOf(position.getZ());
+	}
+	
+	public static ArrayList<Block> getPontusBlocks(int chunkX, int y, int chunkZ)
+	{
+		BasePontusResourceBiome thisBiome = PontusBiomeProvider.biomeFromPosition(chunkX, chunkZ);
+		ArrayList<Block> blockList = HarshenUtils.toArray(thisBiome.getGroundBlocks());
+		for(BasePontusResourceBiome biome : HarshenBiomes.allBiomes)
+			if(biome.distanceStartSpawn() < 0)
+				continue;
+			else if(PontusBiomeProvider.getDistance(HarshenUtils.chunkToPos(chunkX, chunkZ)) > biome.distanceStartSpawn()  - 80 &&
+					PontusBiomeProvider.getDistance(HarshenUtils.chunkToPos(chunkX, chunkZ)) < biome.distanceStartSpawn()  + 80)
+			{
+				for(int i3 = 0; i3 < 19; i3 ++)
+					blockList.addAll(HarshenUtils.toArray(thisBiome.getGroundBlocks()));
+				for(int i3 = 0; i3 < Math.floorDiv(Math.round(80 - Math.abs(PontusBiomeProvider.getDistance(HarshenUtils.chunkToPos(chunkX, chunkZ)) - biome.distanceStartSpawn())), 4); i3 ++)
+    				blockList.add(HarshenBiomes.allBiomes.get(HarshenBiomes.allBiomes.indexOf(thisBiome)
+    						+ (PontusBiomeProvider.getDistance(HarshenUtils.chunkToPos(chunkX, chunkZ)) - biome.distanceStartSpawn() < 0 ? 1 : -1))
+    							.getMergerBlock(PontusBiomeProvider.getDistance(HarshenUtils.chunkToPos(chunkX, chunkZ)) - biome.distanceStartSpawn() < 0));
+				break;
+			}
+		if(y > thisBiome.getHeightForNonHeightBlocks() && thisBiome.getNonHightBlocks() != null)
+		{
+			ArrayList<Block> blockList1 = HarshenUtils.toArray(thisBiome.getGroundBlocks());
+			for(Block block : blockList)
+				if(!HarshenUtils.toArray(thisBiome.getNonHightBlocks()).contains(block))
+					blockList1.add(block);
+			blockList = blockList1;
+		}
+		return blockList;
 	}
 }

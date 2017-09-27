@@ -24,9 +24,9 @@ public class JewelDirtGen extends WorldGenerator
 			if(worldIn.getBlockState(pos).getBlock() == Blocks.DIRT)
 				positionToGen = pos;
     	}
-    	else if(worldIn.provider.getDimension() == DimensionPontus.DIMENSION_ID)
+    	else if(worldIn.provider.getDimension() == DimensionPontus.DIMENSION_ID && HarshenUtils.getTopBlock(worldIn, position).getY() - 10 > 0)
     		if(worldIn.isAirBlock(position))
-    			positionToGen = new BlockPos(position.getX(), rand.nextInt(HarshenUtils.getTopBlock(worldIn, position).getY() - 10) + 5, position.getZ());
+    			positionToGen = new BlockPos(position.getX(), rand.nextInt() + 5, position.getZ());
     		else
     			positionToGen = position;
     	else

@@ -11,6 +11,7 @@ import kenijey.harshencastle.base.BasePontusResourceBiome;
 import kenijey.harshencastle.biomes.HarshenBiomes;
 import kenijey.harshencastle.biomes.PontusBiomeProvider;
 import kenijey.harshencastle.fluids.HarshenFluids;
+import kenijey.harshencastle.intergration.noodle.NoodleEvent;
 import kenijey.harshencastle.worldgenerators.pontus.PontusCaveGenerator;
 import kenijey.harshencastle.worldgenerators.pontus.PontusRavineGenerator;
 import net.minecraft.block.Block;
@@ -36,6 +37,8 @@ import net.minecraft.world.gen.MapGenBase;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
 import net.minecraft.world.gen.feature.WorldGenLakes;
+import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.common.MinecraftForge;
 
 public class PontusChunkProvider implements IChunkGenerator
 {
@@ -170,33 +173,7 @@ public class PontusChunkProvider implements IChunkGenerator
 
                             for (int l2 = 0; l2 < 4; ++l2)
                             	if ((lvt_45_1_ += d16) > 0.0D)
-                            	{
-                            		BasePontusResourceBiome thisBiome = PontusBiomeProvider.biomeFromPosition(x, z);
-                            		ArrayList<Block> blockList = HarshenUtils.toArray(thisBiome.getGroundBlocks());
-                            		for(BasePontusResourceBiome biome : HarshenBiomes.allBiomes)
-                            			if(biome.distanceStartSpawn() < 0)
-                            				continue;
-                            			else if(PontusBiomeProvider.getDistance(HarshenUtils.chunkToPos(x, z)) > biome.distanceStartSpawn()  - 80 &&
-                            					PontusBiomeProvider.getDistance(HarshenUtils.chunkToPos(x, z)) < biome.distanceStartSpawn()  + 80)
-                            			{
-                            				for(int i3 = 0; i3 < 19; i3 ++)
-                            					blockList.addAll(HarshenUtils.toArray(thisBiome.getGroundBlocks()));
-                            				for(int i3 = 0; i3 < Math.floorDiv(Math.round(80 - Math.abs(PontusBiomeProvider.getDistance(HarshenUtils.chunkToPos(x, z)) - biome.distanceStartSpawn())), 4); i3 ++)
-	                            				blockList.add(HarshenBiomes.allBiomes.get(HarshenBiomes.allBiomes.indexOf(thisBiome)
-	                            						+ (PontusBiomeProvider.getDistance(HarshenUtils.chunkToPos(x, z)) - biome.distanceStartSpawn() < 0 ? 1 : -1))
-	                            							.getMergerBlock(PontusBiomeProvider.getDistance(HarshenUtils.chunkToPos(x, z)) - biome.distanceStartSpawn() < 0));
-                            				break;
-                            			}
-                            		if(i2 * 8 + j2 > thisBiome.getHeightForNonHeightBlocks() && thisBiome.getNonHightBlocks() != null)
-                            		{
-                            			ArrayList<Block> blockList1 = HarshenUtils.toArray(thisBiome.getGroundBlocks());
-                            			for(Block block : blockList)
-                            				if(!HarshenUtils.toArray(thisBiome.getNonHightBlocks()).contains(block))
-                            					blockList1.add(block);
-                            			blockList = blockList1;
-                            		}
-                                    primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, getRandomBlock(blockList).getDefaultState()); 
-                            	}
+                                    primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, getRandomBlock(HarshenUtils.getPontusBlocks(x, i2 * 8 + j2, z)).getDefaultState()); 
                                 else if (i2 * 8 + j2 < this.seaLevel)
                                     primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, this.oceanBlock);
                             d10 += d12;
@@ -247,7 +224,12 @@ public class PontusChunkProvider implements IChunkGenerator
         this.caveGenerator.generate(this.world, x, z, chunkprimer);
         this.ravineGenerator.generate(this.world, x, z, chunkprimer);
 
+        NoodleEvent event = new NoodleEvent(this, world, x, z, chunkprimer);
+        MinecraftForge.EVENT_BUS.post(event);
+        chunkprimer = event.getPrimer();
         Chunk chunk = new Chunk(this.world, chunkprimer, x, z);
+        
+        
         chunk.generateSkylightMap();
         return chunk;
     }
