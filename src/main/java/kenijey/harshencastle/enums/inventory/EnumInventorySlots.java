@@ -1,8 +1,10 @@
 package kenijey.harshencastle.enums.inventory;
 
 import java.awt.Dimension;
+import java.awt.Point;
 import java.util.ArrayList;
 
+import kenijey.harshencastle.enums.items.EnumGlassContainer;
 import kenijey.harshencastle.interfaces.IIDSet;
 
 public enum EnumInventorySlots implements IIDSet
@@ -15,12 +17,12 @@ public enum EnumInventorySlots implements IIDSet
 	
 	private int id;
 	private final ArrayList<Integer> alowedIds;
-	private final Dimension dimension;
+	private final Point point;
 	private final String name;
 	
 	private EnumInventorySlots(String name, int x, int y, int... relatedTypes)
 	{
-		this.dimension = new Dimension(x, y);
+		this.point = new Point(x, y);
 		alowedIds = new ArrayList<>();
 		for(int i : relatedTypes)
 			alowedIds.add(i);
@@ -35,13 +37,21 @@ public enum EnumInventorySlots implements IIDSet
 		return id;
 	}
 	
-	public Dimension getDimension() {
-		return dimension;
+	public Point getPoint() {
+		return point;
 	}
 	
 	public boolean isAllowed(EnumInventorySlots slotType)
 	{
 		return this.alowedIds.contains(slotType.getId());
+	}
+	
+	public static EnumInventorySlots getFromMeta(int meta)
+	{
+		for(EnumInventorySlots slot : EnumInventorySlots.values())
+			if(slot.id == meta)
+				return slot;
+		return null;
 	}
 
 	@Override

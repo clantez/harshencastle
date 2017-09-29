@@ -1,6 +1,10 @@
 package kenijey.harshencastle.inventory;
 
+import java.awt.Point;
+
 import kenijey.harshencastle.HarshenUtils;
+import kenijey.harshencastle.base.BaseHarshenContainer;
+import kenijey.harshencastle.base.HandlerInventory;
 import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
 import kenijey.harshencastle.objecthandlers.HarshenItemStackHandler;
 import net.minecraft.entity.player.EntityPlayer;
@@ -8,62 +12,21 @@ import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
 
-public class ContainerPlayerInventory extends net.minecraft.inventory.Container
+public class ContainerPlayerInventory extends BaseHarshenContainer
 {
 	
-	private final HarshenItemStackHandler handler;
-	private final EntityPlayer player;
+	
 	public ContainerPlayerInventory(EntityPlayer player)
 	{
-		this.player = player;
-		this.handler = HarshenUtils.getHandler(player);
-		IInventory playerInv = player.inventory;
-		for(EnumInventorySlots slot : EnumInventorySlots.values())
-			this.addSlotToContainer(new SlotHarshenInventory(handler, slot, slot.getId(), slot.getDimension().width, slot.getDimension().height));
-		int xPos = 8;
-		int yPos = 84;			
-		for (int y = 0; y < 3; ++y)
-			for (int x = 0; x < 9; ++x)
-				this.addSlotToContainer(new Slot(playerInv, x + y * 9 + 9, xPos + x * 18, yPos + y * 18));
+		super(HarshenUtils.getHandler(player), player);
+	}
 	
-		for (int x = 0; x < 9; ++x) 
-			this.addSlotToContainer(new Slot(playerInv, x, xPos + x * 18, yPos + 58));
-	}
-
 	@Override
-	public boolean canInteractWith(EntityPlayer playerIn)
-	{
-		return true;
-	}
-
-	@Override
-	public ItemStack transferStackInSlot(EntityPlayer playerIn, int fromSlot) {
-	    ItemStack previous = ItemStack.EMPTY;
-	    Slot slot = (Slot) this.inventorySlots.get(fromSlot);
-
-	    if (slot != null && slot.getHasStack()) {
-	        ItemStack current = slot.getStack();
-	        previous = current.copy();
-
-	        if (fromSlot < this.handler.getSlots()) {
-	            if (!this.mergeItemStack(current, handler.getSlots(), 39, true))
-	                return ItemStack.EMPTY;
-	        } else {
-	            if (!this.mergeItemStack(current, 0, handler.getSlots(), false))
-	                return ItemStack.EMPTY;
-	        }
-
-	        if (current.getCount() == 0)
-	            slot.putStack(ItemStack.EMPTY);
-	        else
-	            slot.onSlotChanged();
-
-	        if (current.getCount() == previous.getCount())
-	            return null;
-	        slot.onTake(playerIn, current);
-	    }
-	    return previous;
+	protected Slot getSlot(ItemStackHandler handler, int index, int xPosition, int yPosition) {
+		return new SlotHarshenInventory(handler, EnumInventorySlots.getFromMeta(index), index, xPosition, yPosition);
 	}
 	
 	@Override
@@ -71,5 +34,15 @@ public class ContainerPlayerInventory extends net.minecraft.inventory.Container
 		ItemStack stack = super.slotClick(slotId, dragType, clickTypeIn, player);
 		player.getEntityData().setTag("harshenInventory", this.handler.serializeNBT());
 		return stack;
+	}
+
+	@Override
+	protected Point getPoint(int index) {
+		return EnumInventorySlots.getFromMeta(index).getPoint();
+	}
+
+	@Override
+	protected Point getInventoryStart() {
+		return new Point(8, 84);
 	}
 }

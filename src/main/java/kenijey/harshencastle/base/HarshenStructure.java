@@ -105,12 +105,12 @@ public class HarshenStructure
 	        int z = chunkZ * 16 + random.nextInt(16);
 	        BlockPos pos = HarshenUtils.getTopBlock(world, new BlockPos(x, 0, z)).add(originAddition).add(addPos());
 	        if(pos.getY() < 0)
-	        	pos = new BlockPos(pos.getX(), 35, pos.getY());
+	        	pos = new BlockPos(pos.getX(), 5, pos.getY());
 	        loadIntoWorld(world, pos, random, useRuin);
 	        for(int x1 = 0; x1 < size.getX(); x1++) 
 	        	for(int z1 = 0; z1 < size.getZ(); z1++)
 		        	if(world.getBlockState(pos.add(x1, -1, z1)).getBlock().isReplaceable(world, pos.add(x1, -1, z1)) && !world.isAirBlock(pos.add(x1, 0, z1)))
-		        		for(int y1 = 1; world.getBlockState(pos.add(x1, -y1, z1)).getBlock().isReplaceable(world, pos.add(x1, -y1, z1)); y1++)
+		        		for(int y1 = 1; world.getBlockState(pos.add(x1, -y1, z1)).getBlock().isReplaceable(world, pos.add(x1, -y1, z1)) && pos.getY() - y1 > -1; y1++)
 		        			world.setBlockState(pos.add(x1, -y1, z1), world.getBlockState(pos.add(x1, 0, z1)));
 	        return true;
 		}

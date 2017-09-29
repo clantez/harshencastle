@@ -53,7 +53,7 @@ public class HandlerHarshenInventoryEffects
 			if(HarshenUtils.containsItem(player,  HarshenItems.fearring))
 				event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 150));
 			if(HarshenUtils.containsItem(player, HarshenItems.punchy_ring) && player.getHeldItemMainhand().getItem() == Items.AIR)
-				{event.setAmount(event.getAmount() + HarshenUtils.getItemCount(player, HarshenItems.punchy_ring) * 2);System.out.println(event.getAmount());}
+				event.setAmount(event.getAmount() + HarshenUtils.getItemCount(player, HarshenItems.punchy_ring) * 2);
 		}
 		if(HarshenUtils.containsItem(event.getEntityLiving(), HarshenItems.zombi_pendant) &&
 				(event.getSource() instanceof EntityDamageSource && ((EntityDamageSource)event.getSource()).getTrueSource() instanceof EntityZombie &&

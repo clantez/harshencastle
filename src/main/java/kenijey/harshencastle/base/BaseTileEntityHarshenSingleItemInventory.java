@@ -10,7 +10,7 @@ public abstract class BaseTileEntityHarshenSingleItemInventory extends BaseTileE
 {
 	
 	public BaseTileEntityHarshenSingleItemInventory(){
-		super(1);
+		super(1, 1);
 	}
 	
 	public boolean isSlotEmpty()

@@ -1,4 +1,5 @@
 {
+    "parent": "block/block",
     "textures": {
         "0": "harshencastle:blocks/harshen_dimensional_wood_crate",
         "1": "harshencastle:blocks/harshen_magic_table_top",

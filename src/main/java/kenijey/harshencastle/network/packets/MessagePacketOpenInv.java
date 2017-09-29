@@ -3,7 +3,7 @@ package kenijey.harshencastle.network.packets;
 import io.netty.buffer.ByteBuf;
 import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.base.BaseMessagePacket;
-import kenijey.harshencastle.inventory.GuiHandler;
+import kenijey.harshencastle.handlers.GuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
 
 public class MessagePacketOpenInv extends BaseMessagePacket<MessagePacketOpenInv>{

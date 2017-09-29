@@ -27,6 +27,8 @@ import kenijey.harshencastle.enums.items.EnumProp;
 import kenijey.harshencastle.enums.items.EnumRitualStick;
 import kenijey.harshencastle.enums.particle.EnumHarshenParticle;
 import kenijey.harshencastle.fluids.HarshenFluids;
+import kenijey.harshencastle.handlers.GuiHandler;
+import kenijey.harshencastle.handlers.HandlerBlockBurn;
 import kenijey.harshencastle.handlers.HandlerBloodOnHurt;
 import kenijey.harshencastle.handlers.HandlerGlassContainer;
 import kenijey.harshencastle.handlers.HandlerHarshenArmourEffects;
@@ -39,7 +41,6 @@ import kenijey.harshencastle.handlers.HandlerPotionEffects;
 import kenijey.harshencastle.handlers.HandlerRaptorScythe;
 import kenijey.harshencastle.handlers.HandlerSoulHarsherSword;
 import kenijey.harshencastle.handlers.HandlerZombieEyeDrop;
-import kenijey.harshencastle.inventory.GuiHandler;
 import kenijey.harshencastle.models.ModelArmour;
 import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.objecthandlers.FaceRenderer;
@@ -50,6 +51,7 @@ import kenijey.harshencastle.tileentity.TileEntityFlatPlate;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDimensionalGate;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDimensionalPedestal;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDisplayBlock;
+import kenijey.harshencastle.tileentity.TileEntityHarshenMagicTable;
 import kenijey.harshencastle.tileentity.TileEntityHarshenSpawner;
 import kenijey.harshencastle.tileentity.TileEntityHereticCauldron;
 import kenijey.harshencastle.tileentity.TileEntityHereticCauldronTop;
@@ -57,6 +59,7 @@ import kenijey.harshencastle.tileentity.TileEntityPedestalSlab;
 import net.minecraft.block.Block;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -138,23 +141,19 @@ public class CommonProxy
     	
 		NetworkRegistry.INSTANCE.registerGuiHandler(HarshenCastle.instance, new GuiHandler());
 
-    	
-    	GameRegistry.registerTileEntity(TileEntityHarshenDimensionalPedestal.class, HarshenCastle.MODID + "HarshenDimensionalPedestalTileEntity");
-    	GameRegistry.registerTileEntity(TileEntityHereticCauldron.class, HarshenCastle.MODID + "TileEntityHereticCauldron");
-    	GameRegistry.registerTileEntity(TileEntityHereticCauldronTop.class, HarshenCastle.MODID + "TileEntityHereticCauldronTop");
-    	GameRegistry.registerTileEntity(TileEntityHarshenDisplayBlock.class, HarshenCastle.MODID + "TileEntityHarshenDisplayBlock");
-    	GameRegistry.registerTileEntity(TileEntityHarshenSpawner.class, HarshenCastle.MODID + "TileEntityHarshenSpawner");
-    	GameRegistry.registerTileEntity(TileEntityHarshenDimensionalGate.class, HarshenCastle.MODID + "TileEntityHarshenDimensionalGate");
-    	GameRegistry.registerTileEntity(TileEntityPedestalSlab.class, HarshenCastle.MODID + "TileEntityPedestalSlab");
-    	GameRegistry.registerTileEntity(TileEntityBloodVessel.class, HarshenCastle.MODID + "TileEntityBloodVessel");
-    	GameRegistry.registerTileEntity(TileEntityBloodFactory.class, HarshenCastle.MODID + "TileEntityBloodFactory");
-    	GameRegistry.registerTileEntity(TileEntityFlatPlate.class, HarshenCastle.MODID + "TileEntityFlatPlate");
-
-    	
-    	GameRegistry.registerWorldGenerator(new WorldGen(), 0);
-    	
-    	HarshenRecipes.register();
-    	
+    	Class[] tileEntityClasses = {
+    			TileEntityHarshenDimensionalPedestal.class,
+    			TileEntityHereticCauldron.class,
+    			TileEntityHereticCauldronTop.class,
+    			TileEntityHarshenDisplayBlock.class,
+    			TileEntityHarshenSpawner.class,
+    			TileEntityHarshenDimensionalGate.class,
+    			TileEntityPedestalSlab.class,
+    			TileEntityBloodVessel.class,
+    			TileEntityBloodFactory.class,
+    			TileEntityFlatPlate.class,
+    			TileEntityHarshenMagicTable.class
+    	};
     	Object[] handlers = {
     			new HandlerRaptorScythe(),
     			new HandlerSoulHarsherSword(), 
@@ -167,12 +166,21 @@ public class CommonProxy
     			new HandlerHarshenInventoryEffects(), 
     			new HandlerZombieEyeDrop(),
     			new HandlerIronHeartDrop(),
-    			new HandlerPlayerInventoryOverDeath()};
+    			new HandlerPlayerInventoryOverDeath(),
+    			new HandlerBlockBurn()};
+    	
+    	for(Class clas : tileEntityClasses)
+    		GameRegistry.registerTileEntity(clas, HarshenCastle.MODID + clas.getSimpleName());	
+    	
     	for(Object o : handlers)
     	{
     		MinecraftForge.EVENT_BUS.register(o);
         	FMLCommonHandler.instance().bus().register(o);
     	}
+    	
+GameRegistry.registerWorldGenerator(new WorldGen(), 0);
+    	
+    	HarshenRecipes.register();
     	
     }
 

@@ -6,7 +6,7 @@ import javax.vecmath.Vector4f;
 
 import org.lwjgl.util.vector.Vector3f;
 
-import kenijey.harshencastle.inventory.GuiHandler;
+import kenijey.harshencastle.handlers.GuiHandler;
 import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.network.packets.MessagePacketOpenInv;
 import net.minecraft.block.state.IBlockState;

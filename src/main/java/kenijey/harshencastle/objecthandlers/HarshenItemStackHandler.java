@@ -10,9 +10,15 @@ public class HarshenItemStackHandler extends ItemStackHandler
 		super(amount);
 	}
 	
+	private int slotLimit = 64;
+	
+	public void setSlotLimit(int slotLimit) {
+		this.slotLimit = slotLimit;
+	}
+	
 	@Override
 	public int getSlotLimit(int slot) {
-		return 1;
+		return slotLimit;
 	}
 	
 	public boolean containsItem(Item item)
