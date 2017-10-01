@@ -92,11 +92,16 @@ public abstract class BaseTileEntityHarshenInventory extends BaseHarshenTileEnti
 		world.notifyBlockUpdate(pos, state, state, 3);
 	}
 	
+	public HarshenItemStackHandler getCapablityHandler(HarshenItemStackHandler handler)
+	{
+		return handler;
+	}
+	
 	@Override
 	public <T> T getCapability(Capability<T> capability, EnumFacing facing)
 	{
 		if (capability  == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
-			return (T) this.handler;
+			return (T) getCapablityHandler(this.handler);
 		return super.getCapability(capability, facing);
 	}
 	

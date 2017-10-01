@@ -1,5 +1,6 @@
 package kenijey.harshencastle;
 
+import java.awt.Point;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -416,5 +417,37 @@ public class HarshenUtils
 			blockList = blockList1;
 		}
 		return blockList;
+	}
+	
+	public static boolean areInputsEqual(ArrayList<ItemStack> inputList, ArrayList<ItemStack> worldInputList)
+	{
+		ArrayList<ItemStack> doneItems = new ArrayList<>(worldInputList);
+		stackTestingLoop:
+		for(ItemStack stack : inputList)
+			for(ItemStack stack1 : worldInputList)
+				if(stack1.isItemEqual(stack) && doneItems.contains(stack1))
+				{
+					doneItems.remove(stack1);
+					continue stackTestingLoop;
+				}
+		return doneItems.isEmpty();
+	}
+	
+	public static ArrayList<Point> getPointsAroundCenter(Point in, Point center, int amountOfPoints) {
+		ArrayList<Point> pointList = new ArrayList<>();
+		Point previousPoint = new Point(in.x, in.y);
+		for(int i = 0; i < amountOfPoints; i++)
+		{
+			pointList.add(previousPoint);
+			previousPoint = rotatePointAbout(previousPoint, center, 360f / amountOfPoints);
+		}
+		return pointList;
+	}
+	
+	public static Point rotatePointAbout(Point in, Point about, double degrees) {
+		double rad = degrees * Math.PI / 180.0;
+		double newX = Math.cos(rad) * (in.x - about.x) - Math.sin(rad) * (in.y - about.y) + about.x;
+		double newY = Math.sin(rad) * (in.x - about.x) + Math.cos(rad) * (in.y - about.y) + about.y;
+		return new Point((int) newX, (int) newY);
 	}
 }

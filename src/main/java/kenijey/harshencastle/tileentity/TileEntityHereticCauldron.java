@@ -269,7 +269,7 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 		ArrayList<BlockPos> bloodPos = new ArrayList<>();
 		pedestals.clear();
 		blockErrorList.clear();
-		if(setRecipe && players[0] != null && players[0].getUniqueID().equals(HarshenCastle.proxy.getPlayer().getUniqueID()))
+		if(world.isRemote && setRecipe && players[0] != null && players[0].getUniqueID().equals(HarshenCastle.proxy.getPlayer().getUniqueID()))
 			HarshenCastle.proxy.resetErroredPositions();
 		erroredPositions.clear();
 		ArrayList<Integer> maxList = new ArrayList<>(Arrays.asList(-4, 5));
@@ -336,7 +336,7 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 			isActiveInBackground = true;
 		}
 
-		if(setRecipe && players[0] != null && !world.isRemote)
+		if(setRecipe && players[0] != null)
 		{
 			if(!erroredPositions.isEmpty())
 			{

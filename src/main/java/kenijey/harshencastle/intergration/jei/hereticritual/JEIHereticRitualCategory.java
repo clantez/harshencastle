@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import kenijey.harshencastle.HarshenCastle;
+import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.base.BaseJeiCategory;
 import kenijey.harshencastle.enums.CauldronLiquid;
 import kenijey.harshencastle.items.GlassContainer;
@@ -67,18 +68,11 @@ public class JEIHereticRitualCategory extends BaseJeiCategory
 			recipeLayout.getItemStacks().init(index, true, point.x, point.y);
 			recipeLayout.getItemStacks().set(index, revampedList.get(i));
 			index += 1;
-			point = rotatePointAbout(point, center, 45D);
+			point = HarshenUtils.rotatePointAbout(point, center, 45D);
 		}
 
 		recipeLayout.getItemStacks().init(index, false, 4, 88);
 		recipeLayout.getItemStacks().set(index, ingredients.getOutputs(ItemStack.class).get(0));
-	}
-
-	private Point rotatePointAbout(Point in, Point about, double degrees) {
-		double rad = degrees * Math.PI / 180.0;
-		double newX = Math.cos(rad) * (in.x - about.x) - Math.sin(rad) * (in.y - about.y) + about.x;
-		double newY = Math.sin(rad) * (in.x - about.x) + Math.cos(rad) * (in.y - about.y) + about.y;
-		return new Point((int) newX, (int) newY);
 	}
 	
 	@Override

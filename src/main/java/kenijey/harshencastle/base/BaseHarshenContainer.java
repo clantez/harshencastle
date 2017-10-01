@@ -21,6 +21,15 @@ public abstract class BaseHarshenContainer extends Container
 		this.handler = handler;
 		this.playerInventory = player != null;
 		totalSize = handler.getSlots() + (playerInventory ? 36 : 0);
+		for(int i = 0; i < handler.getSlots(); i++)
+			try 
+			{
+				getPoint(i);
+			} 
+			catch (IndexOutOfBoundsException e) 
+			{
+				throw new IllegalArgumentException("There arnt enough registered points to quantify all the slots");
+			}
 		
 		for(int i = 0; i < handler.getSlots(); i++)
 			this.addSlotToContainer(getSlot(handler, i, getPoint(i).x, getPoint(i).y));
@@ -28,11 +37,10 @@ public abstract class BaseHarshenContainer extends Container
 		if(playerInventory)
 		{
 			Point p = getInventoryStart();
-			for (int y = 0; y < 3; ++y)
-				for (int x = 0; x < 9; ++x)
+			for(int y = 0; y < 3; ++y)
+				for(int x = 0; x < 9; ++x)
 					this.addSlotToContainer(new Slot(player.inventory, x + y * 9 + 9, p.x + x * 18, p.y + y * 18));
-		
-			for (int x = 0; x < 9; ++x) 
+			for(int x = 0; x < 9; ++x) 
 				this.addSlotToContainer(new Slot(player.inventory, x, p.x + x * 18, p.y + 58));
 		}
 	}

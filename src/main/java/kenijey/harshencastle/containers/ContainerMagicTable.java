@@ -38,7 +38,8 @@ public class ContainerMagicTable extends BaseHarshenContainer
 	}
 
 	@Override
-	protected Point getPoint(int index) {
+	protected Point getPoint(int index) 
+	{
 		return HarshenUtils.listOf(new Point(80, 17), new Point(45, 52), new Point(115, 52), new Point(80, 87), new Point(80, 52))[index];
 	}
 

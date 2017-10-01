@@ -105,7 +105,7 @@ public class HarshenStructure
 	        int z = chunkZ * 16 + random.nextInt(16);
 	        BlockPos pos = HarshenUtils.getTopBlock(world, new BlockPos(x, 0, z)).add(originAddition).add(addPos());
 	        if(pos.getY() < 0)
-	        	pos = new BlockPos(pos.getX(), 5, pos.getY());
+	        	pos = new BlockPos(pos.getX(), 5, pos.getZ());
 	        loadIntoWorld(world, pos, random, useRuin);
 	        for(int x1 = 0; x1 < size.getX(); x1++) 
 	        	for(int z1 = 0; z1 < size.getZ(); z1++)

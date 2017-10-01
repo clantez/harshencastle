@@ -8,7 +8,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.item.EntityItem;
 
-public abstract class BaseItemRenderer<T extends BaseTileEntityHarshenSingleItemInventory>  extends TileEntitySpecialRenderer<T>
+public abstract class BaseItemRenderer<T extends BaseTileEntityHarshenSingleItemInventory> extends TileEntitySpecialRenderer<T>
 {
 	@Override
 	public void render(T te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {

@@ -8,6 +8,7 @@ import kenijey.harshencastle.enums.ItemLiquidTypeset;
 import kenijey.harshencastle.enums.items.EnumGlassContainer;
 import kenijey.harshencastle.recipies.CauldronRecipes;
 import kenijey.harshencastle.recipies.HereticRitualRecipes;
+import kenijey.harshencastle.recipies.MagicTableRecipe;
 import kenijey.harshencastle.recipies.PedestalSlabRecipes;
 import kenijey.harshencastle.recipies.RitualRecipes;
 import net.minecraft.block.state.IBlockState;
@@ -24,72 +25,75 @@ public class HarshenRecipes {
 	public static ArrayList<CauldronRecipes> allCauldronRecipes = new ArrayList<>();
 	public static ArrayList<HereticRitualRecipes> allHereticCauldronRecipes = new ArrayList<>();
 	public static ArrayList<PedestalSlabRecipes> allPedestalRecipes = new ArrayList<>();
+	public static ArrayList<MagicTableRecipe> allMagicTableRecipes = new ArrayList<>();
 	
 	public static void register()
 	{
 		craftingRegistry();
 		
-		RitualRecipes.addRecipe(Arrays.asList(new ItemStack(HarshenItems.pontus_world_gate_parts, 1, 0), new ItemStack(HarshenItems.pontus_world_gate_parts, 1, 1),
+		MagicTableRecipe.addRecipe(array(new ItemStack(Items.COAL), new ItemStack(Blocks.LOG), new ItemStack(Items.DIAMOND), new ItemStack(Blocks.STONE)), new ItemStack(Blocks.DIAMOND_BLOCK));
+		
+		RitualRecipes.addRecipe(array(new ItemStack(HarshenItems.pontus_world_gate_parts, 1, 0), new ItemStack(HarshenItems.pontus_world_gate_parts, 1, 1),
 				new ItemStack(HarshenItems.pontus_world_gate_parts, 1 ,2), new ItemStack(HarshenItems.harshen_soul_fragment)), new ItemStack(HarshenItems.pontus_world_gate_spawner, 1, 0), true);		
 		
-		RitualRecipes.addRecipe(Arrays.asList(new ItemStack(HarshenItems.soul_harsher_sword, 1, 0), new ItemStack(HarshenItems.ritual_crystal, 1, 1),
+		RitualRecipes.addRecipe(array(new ItemStack(HarshenItems.soul_harsher_sword, 1, 0), new ItemStack(HarshenItems.ritual_crystal, 1, 1),
 				new ItemStack(HarshenItems.blood_infused_ender_eye, 1 ,0), new ItemStack(HarshenItems.blood_essence)), new ItemStack(HarshenItems.empowered_soul_harsher_sword, 1, 0), true);
 		
-		RitualRecipes.addRecipe(Arrays.asList(new ItemStack(HarshenItems.pontus_world_gate_spawner, 1, 0), new ItemStack(HarshenItems.ritual_crystal, 1, 1),
+		RitualRecipes.addRecipe(array(new ItemStack(HarshenItems.pontus_world_gate_spawner, 1, 0), new ItemStack(HarshenItems.ritual_crystal, 1, 1),
 				new ItemStack(Blocks.EMERALD_BLOCK, 1 ,0), new ItemStack(Items.NETHER_STAR)), new ItemStack(HarshenItems.pontus_world_gate_spawner, 1, 1), true);
 		
-		RitualRecipes.addRecipe(Arrays.asList(new ItemStack(HarshenItems.itium, 1, 0), new ItemStack(HarshenItems.light_emitted_essence, 1, 0),
+		RitualRecipes.addRecipe(array(new ItemStack(HarshenItems.itium, 1, 0), new ItemStack(HarshenItems.light_emitted_essence, 1, 0),
 				new ItemStack(HarshenItems.ritual_crystal, 1 ,1), new ItemStack(Items.QUARTZ)), new ItemStack(Items.NETHER_STAR, 1, 0), true);
 		
-		RitualRecipes.addRecipe(Arrays.asList(new ItemStack(HarshenItems.harshen_soul_ingot, 1, 0), new ItemStack(HarshenItems.harshen_soul_fragment, 1, 0),
+		RitualRecipes.addRecipe(array(new ItemStack(HarshenItems.harshen_soul_ingot, 1, 0), new ItemStack(HarshenItems.harshen_soul_fragment, 1, 0),
 				new ItemStack(HarshenItems.ritual_crystal, 1 ,1), new ItemStack(Items.IRON_SWORD)), new ItemStack(HarshenItems.soul_harsher_sword, 1, 0), true);
 		
-		RitualRecipes.addRecipe(Arrays.asList(new ItemStack(HarshenItems.itium, 1, 0), new ItemStack(Items.MAGMA_CREAM),
+		RitualRecipes.addRecipe(array(new ItemStack(HarshenItems.itium, 1, 0), new ItemStack(Items.MAGMA_CREAM),
 				new ItemStack(HarshenItems.ritual_crystal, 1, 1), new ItemStack(Items.GOLDEN_APPLE)), new ItemStack(HarshenItems.elemental_pendant, 1, 0), true);
 		
-		RitualRecipes.addRecipe(Arrays.asList(new ItemStack(HarshenItems.ritual_crystal, 1, 1), new ItemStack(Items.SPIDER_EYE),
+		RitualRecipes.addRecipe(array(new ItemStack(HarshenItems.ritual_crystal, 1, 1), new ItemStack(Items.SPIDER_EYE),
 				new ItemStack(Items.DYE, 1, 4), new ItemStack(Blocks.STONE)), new ItemStack(HarshenItems.minering), true);
 		
-		RitualRecipes.addRecipe(Arrays.asList(new ItemStack(HarshenItems.iron_bow), new ItemStack(HarshenItems.ritual_crystal, 1, 1),
+		RitualRecipes.addRecipe(array(new ItemStack(HarshenItems.iron_bow), new ItemStack(HarshenItems.ritual_crystal, 1, 1),
 				new ItemStack(Blocks.REDSTONE_BLOCK), new ItemStack(Blocks.PRISMARINE, 1, 2)), new ItemStack(HarshenItems.enion_bow), true);
 		
-		RitualRecipes.addRecipe(Arrays.asList(new ItemStack(HarshenBlocks.block_of_heads), new ItemStack(HarshenItems.ritual_crystal, 1, 1),
+		RitualRecipes.addRecipe(array(new ItemStack(HarshenBlocks.block_of_heads), new ItemStack(HarshenItems.ritual_crystal, 1, 1),
 				new ItemStack(Items.DYE, 1, 4), new ItemStack(Items.EMERALD)), new ItemStack(HarshenItems.looting_earring), true);
 		
-		RitualRecipes.addRecipe(Arrays.asList(new ItemStack(HarshenItems.ritual_crystal, 1, 1), new ItemStack(Items.ENDER_EYE),
+		RitualRecipes.addRecipe(array(new ItemStack(HarshenItems.ritual_crystal, 1, 1), new ItemStack(Items.ENDER_EYE),
 				new ItemStack(HarshenItems.powder_of_heretism), new ItemStack(HarshenItems.soul_infused_ingot)), new ItemStack(HarshenItems.ender_pendant), true);
 		
-		RitualRecipes.addRecipe(Arrays.asList(new ItemStack(HarshenItems.ritual_crystal, 1, 1), new ItemStack(Blocks.PACKED_ICE),
+		RitualRecipes.addRecipe(array(new ItemStack(HarshenItems.ritual_crystal, 1, 1), new ItemStack(Blocks.PACKED_ICE),
 				new ItemStack(HarshenItems.itium), new ItemStack(HarshenItems.glass_container, 1, 2)), new ItemStack(HarshenItems.water_earring), true);
 		
-		RitualRecipes.addRecipe(Arrays.asList(new ItemStack(HarshenItems.iron_bow), new ItemStack(HarshenItems.ritual_crystal, 1, 1),
+		RitualRecipes.addRecipe(array(new ItemStack(HarshenItems.iron_bow), new ItemStack(HarshenItems.ritual_crystal, 1, 1),
 				new ItemStack(HarshenItems.soul_infused_ingot), new ItemStack(Blocks.PRISMARINE, 1, 2)), new ItemStack(HarshenItems.soul_ripper_bow), true);
 		
-		RitualRecipes.addRecipe(Arrays.asList(new ItemStack(HarshenBlocks.block_of_heads), new ItemStack(HarshenItems.ritual_crystal, 1, 1),
+		RitualRecipes.addRecipe(array(new ItemStack(HarshenBlocks.block_of_heads), new ItemStack(HarshenItems.ritual_crystal, 1, 1),
 				new ItemStack(Items.FIRE_CHARGE), new ItemStack(Blocks.GOLD_BLOCK)), new ItemStack(HarshenItems.fiery_ring), true);
 		
-		RitualRecipes.addRecipe(Arrays.asList(new ItemStack(Items.BLAZE_ROD), new ItemStack(HarshenItems.ritual_crystal, 1, 1),
+		RitualRecipes.addRecipe(array(new ItemStack(Items.BLAZE_ROD), new ItemStack(HarshenItems.ritual_crystal, 1, 1),
 				new ItemStack(Items.BLAZE_ROD), new ItemStack(Items.BLAZE_ROD)), new ItemStack(Items.BLAZE_POWDER, 11), true);
 		
-		RitualRecipes.addRecipe(Arrays.asList(new ItemStack(HarshenItems.iron_scythe), new ItemStack(HarshenItems.ritual_crystal, 1, 1),
+		RitualRecipes.addRecipe(array(new ItemStack(HarshenItems.iron_scythe), new ItemStack(HarshenItems.ritual_crystal, 1, 1),
 				new ItemStack(HarshenItems.soul_infused_ingot), new ItemStack(HarshenItems.valor_badge)), new ItemStack(HarshenItems.raptor_scythe), true);
 		
-		RitualRecipes.addRecipe(Arrays.asList(new ItemStack(HarshenItems.harshen_soul_fragment), new ItemStack(HarshenItems.ritual_crystal, 1, 1),
+		RitualRecipes.addRecipe(array(new ItemStack(HarshenItems.harshen_soul_fragment), new ItemStack(HarshenItems.ritual_crystal, 1, 1),
 				new ItemStack(Items.SLIME_BALL), new ItemStack(Blocks.IRON_BLOCK)), new ItemStack(HarshenItems.soul_shield), true);
 		
-		RitualRecipes.addRecipe(Arrays.asList(new ItemStack(Blocks.AIR), new ItemStack(HarshenItems.ritual_crystal, 1, 1),
+		RitualRecipes.addRecipe(array(new ItemStack(Blocks.AIR), new ItemStack(HarshenItems.ritual_crystal, 1, 1),
 				new ItemStack(Items.FEATHER), new ItemStack(Items.CHORUS_FRUIT_POPPED)), new ItemStack(HarshenItems.mystic_feather, 2), true);
 		
-		RitualRecipes.addRecipe(Arrays.asList(new ItemStack(Blocks.AIR), new ItemStack(Blocks.AIR),
+		RitualRecipes.addRecipe(array(new ItemStack(Blocks.AIR), new ItemStack(Blocks.AIR),
 				new ItemStack(Blocks.OBSIDIAN), new ItemStack(Blocks.GOLD_BLOCK)), new ItemStack(HarshenBlocks.gilded_obsidian), true);
 		
-		RitualRecipes.addRecipe(Arrays.asList(new ItemStack(HarshenBlocks.gilded_obsidian), new ItemStack(HarshenItems.ritual_crystal, 1, 1),
+		RitualRecipes.addRecipe(array(new ItemStack(HarshenBlocks.gilded_obsidian), new ItemStack(HarshenItems.ritual_crystal, 1, 1),
 				new ItemStack(HarshenItems.iron_bow), new ItemStack(HarshenItems.blood_infused_ender_eye)), new ItemStack(HarshenItems.ender_bow), true);
 		
-		RitualRecipes.addRecipe(Arrays.asList(new ItemStack(HarshenItems.diamond_shard), new ItemStack(HarshenItems.diamond_shard),
+		RitualRecipes.addRecipe(array(new ItemStack(HarshenItems.diamond_shard), new ItemStack(HarshenItems.diamond_shard),
 				new ItemStack(HarshenItems.diamond_shard), new ItemStack(HarshenItems.diamond_shard)), new ItemStack(Items.DIAMOND), true);
 		
-		RitualRecipes.addRecipe(Arrays.asList(new ItemStack(HarshenItems.blood_infused_ender_eye), new ItemStack(HarshenItems.valor_badge),
+		RitualRecipes.addRecipe(array(new ItemStack(HarshenItems.blood_infused_ender_eye), new ItemStack(HarshenItems.valor_badge),
 				new ItemStack(HarshenItems.ritual_crystal, 1, 1), new ItemStack(Items.IRON_INGOT)), new ItemStack(HarshenItems.combat_pendant), true);
 		
 		
@@ -411,4 +415,10 @@ public class HarshenRecipes {
 				'f', new ItemStack(HarshenItems.mystic_feather),
 				'i', new ItemStack(HarshenItems.itium));
 	}
+	
+	public static <T> ArrayList<T> array(T... list)
+	{
+		return HarshenUtils.toArray(list);
+	}
+	
 }

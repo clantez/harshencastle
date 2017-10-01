@@ -7,6 +7,7 @@ import kenijey.harshencastle.HarshenRecipes;
 import kenijey.harshencastle.HarshenSounds;
 import kenijey.harshencastle.HarshenStructures;
 import kenijey.harshencastle.HarshenUtils;
+import kenijey.harshencastle.HarshenVillagers;
 import kenijey.harshencastle.WorldGen;
 import kenijey.harshencastle.armor.HarshenArmors;
 import kenijey.harshencastle.base.HarshenStructure;
@@ -40,6 +41,7 @@ import kenijey.harshencastle.handlers.HandlerPontusAllowed;
 import kenijey.harshencastle.handlers.HandlerPotionEffects;
 import kenijey.harshencastle.handlers.HandlerRaptorScythe;
 import kenijey.harshencastle.handlers.HandlerSoulHarsherSword;
+import kenijey.harshencastle.handlers.HandlerVillagerSpawn;
 import kenijey.harshencastle.handlers.HandlerZombieEyeDrop;
 import kenijey.harshencastle.models.ModelArmour;
 import kenijey.harshencastle.network.HarshenNetwork;
@@ -59,7 +61,6 @@ import kenijey.harshencastle.tileentity.TileEntityPedestalSlab;
 import net.minecraft.block.Block;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -116,6 +117,8 @@ public class CommonProxy
 		HarshenSounds.preInit();
 		
 		HarshenNetwork.preInit();
+				
+		HarshenVillagers.preInit();
 		
 		HarshenCastle.logger.info("HarshenCastle loaded correctly");
     }
@@ -167,7 +170,8 @@ public class CommonProxy
     			new HandlerZombieEyeDrop(),
     			new HandlerIronHeartDrop(),
     			new HandlerPlayerInventoryOverDeath(),
-    			new HandlerBlockBurn()};
+    			new HandlerBlockBurn(),
+    			new HandlerVillagerSpawn()};
     	
     	for(Class clas : tileEntityClasses)
     		GameRegistry.registerTileEntity(clas, HarshenCastle.MODID + clas.getSimpleName());	

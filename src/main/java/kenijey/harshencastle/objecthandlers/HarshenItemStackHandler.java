@@ -1,5 +1,7 @@
 package kenijey.harshencastle.objecthandlers;
 
+import java.util.ArrayList;
+
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.ItemStackHandler;
@@ -14,6 +16,11 @@ public class HarshenItemStackHandler extends ItemStackHandler
 	
 	public void setSlotLimit(int slotLimit) {
 		this.slotLimit = slotLimit;
+	}
+	
+	public ArrayList<ItemStack> getStacks()
+	{
+		return new ArrayList<ItemStack>(stacks);
 	}
 	
 	@Override

@@ -29,6 +29,7 @@ import kenijey.harshencastle.itemrenderer.RendererDimensionalPedestal;
 import kenijey.harshencastle.itemrenderer.RendererHarshenDisplayBlock;
 import kenijey.harshencastle.itemrenderer.RendererHarshenSpawner;
 import kenijey.harshencastle.itemrenderer.RendererHereticCauldron;
+import kenijey.harshencastle.itemrenderer.RendererMagicTable;
 import kenijey.harshencastle.itemrenderer.RendererPedestalSlab;
 import kenijey.harshencastle.models.ModelArmour;
 import kenijey.harshencastle.objecthandlers.FaceRenderer;
@@ -40,6 +41,7 @@ import kenijey.harshencastle.skyrenders.WeatherPontus;
 import kenijey.harshencastle.tileentity.TileEntityBloodFactory;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDimensionalPedestal;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDisplayBlock;
+import kenijey.harshencastle.tileentity.TileEntityHarshenMagicTable;
 import kenijey.harshencastle.tileentity.TileEntityHarshenSpawner;
 import kenijey.harshencastle.tileentity.TileEntityHereticCauldron;
 import kenijey.harshencastle.tileentity.TileEntityPedestalSlab;
@@ -87,6 +89,7 @@ public class ClientProxy extends CommonProxy
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHarshenSpawner.class, new RendererHarshenSpawner());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPedestalSlab.class, new RendererPedestalSlab());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBloodFactory.class, new RendererBloodFactory());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHarshenMagicTable.class, new RendererMagicTable());
 
 		
 		RenderingRegistry.registerEntityRenderingHandler(EntitySoullessKnight.class, new EntityFactories.FactorySoullessKnight());
@@ -258,6 +261,6 @@ public class ClientProxy extends CommonProxy
     
     @Override
     public void resetErroredPositions() {
-    	HandlerRenderError.erroredPositions.clear();;
+    	HandlerRenderError.erroredPositions.clear();
     }
 }

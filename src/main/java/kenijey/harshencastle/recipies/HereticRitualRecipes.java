@@ -15,7 +15,7 @@ public class HereticRitualRecipes
 	
 	private final ItemStack cauldronItem;
 	private final ItemStack output;
-	private final ItemStack[] pedestalItems;
+	private final ArrayList<ItemStack> pedestalItems;
 	private final CauldronLiquid catalyst;
 	private boolean isFalse;
 	private String tag;
@@ -24,42 +24,31 @@ public class HereticRitualRecipes
 	{
 		if(pedstalItems.length != 8)
 			throw new IllegalArgumentException("input size for ritual recipe was not 8");
-		
+		ArrayList<ItemStack> stackList = new ArrayList<>();
 		for(int i = 0; i < 8; i++)
 			if(HarshenUtils.isItemFalse(pedstalItems[i]))
 				isFalse = true;
+			else
+				stackList.add(pedstalItems[i]);
 		if(HarshenUtils.isItemFalse(cauldronItem) || HarshenUtils.isItemFalse(output))
 			isFalse = true;
 		
 		this.cauldronItem = cauldronItem;
 		this.output = output;
 		this.catalyst = catalyst;
-		this.pedestalItems = pedstalItems.clone();
+		this.pedestalItems = stackList;
 		allRecipes.add(this);
 	}
 	
-	public ItemStack[] getPedestalItems() {
+	public ArrayList<ItemStack> getPedestalItems() {
 		return pedestalItems;
 	}
 	
 	public static HereticRitualRecipes getRecipe(ItemStack cauldronInput, CauldronLiquid fluid, ArrayList<ItemStack> pedestalItems) 
 	{
 		for(HereticRitualRecipes recipe : allRecipes)
-			if(recipe.getCauldronInput().isItemEqual(cauldronInput) && recipe.getCatalyst() == fluid)
-			{
-				ArrayList<ItemStack> doneItems = new ArrayList<>(pedestalItems);
-				stackTestingLoop:
-				for(ItemStack stack : recipe.getPedestalItems())
-					for(ItemStack stack1 : pedestalItems)
-						if(stack1.isItemEqual(stack) && doneItems.contains(stack1))
-						{
-							doneItems.remove(stack1);
-							continue stackTestingLoop;
-						}
-				if(doneItems.isEmpty())
-					return recipe;
-			}
-				
+			if(recipe.getCauldronInput().isItemEqual(cauldronInput) && recipe.getCatalyst() == fluid && HarshenUtils.areInputsEqual(recipe.getPedestalItems(), pedestalItems))
+				return recipe;
 		return null;
 	}
 
