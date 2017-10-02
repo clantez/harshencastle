@@ -17,9 +17,11 @@ public class EntityThrown extends EntityThrowable
 	private ItemStack stack;
 	private final HitResult hitResult;
 	
+	private boolean ignoreBlocks = false;
+	
 	public EntityThrown(World worldIn) {
 		super(worldIn);
-		hitResult = new HitResult() {@Override public void onHit(RayTraceResult result, boolean isServer) {}};
+		hitResult = new HitResult() {@Override public void onHit(EntityThrown entity, RayTraceResult result, boolean isServer) {}};
 	}
 	
 	public EntityThrown(World worldIn, EntityLivingBase throwerIn, HitResult hitResult, EntityThrowLocation location) {
@@ -46,9 +48,25 @@ public class EntityThrown extends EntityThrowable
 	public ItemStack getStack() {
 		return stack == null ? ItemStack.EMPTY : stack;
 	}
+	
+	public EntityThrown setIgnoreBlocks(boolean ignoreBlocks) {
+		this.ignoreBlocks = ignoreBlocks;
+		return this;
+	}
+	
+	public boolean isIgnoreBlocks() {
+		return ignoreBlocks;
+	}
 
 	@Override
 	protected void onImpact(RayTraceResult result) { 
+		hitResult.onHit(this, result, !world.isRemote);
+		if(!ignoreBlocks)
+			this.setDead();
+	}
+	
+	@Override
+	public void setDead() {
 		for(int i = 0; i < 16; i++)
 			try
 			{
@@ -59,11 +77,17 @@ public class EntityThrown extends EntityThrowable
 			catch (NullPointerException e) {
 				continue;
 			}
-		hitResult.onHit(result, !world.isRemote);
-		this.setDead();
+		super.setDead();
+	}
+	
+	@Override
+	public void onUpdate() {
+		noClip = ignoreBlocks;
+		super.onUpdate();
+		noClip = false;
 	}
 	
 	public interface HitResult {
-		public void onHit(RayTraceResult result, boolean isServer);
+		public void onHit(EntityThrown entity, RayTraceResult result, boolean isServer);
 	}
 }

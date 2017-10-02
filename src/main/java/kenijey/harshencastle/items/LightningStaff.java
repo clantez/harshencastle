@@ -20,20 +20,20 @@ public class LightningStaff extends BaseHarshenStaff
 
 	@Override
 	public int getMaxItemUseDuration(ItemStack stack) {
-		return -1;
+		return 10;
 	}
 
 	@Override
 	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving) {
-		EntityThrown thrown = new EntityThrown(worldIn, entityLiving, new EntityThrown.HitResult() {
+		spawnThrownEntity(worldIn, entityLiving, 1.5f, 0, new EntityThrown.HitResult() {
+			
 			@Override
-			public void onHit(RayTraceResult result, boolean isServer) {
+			public void onHit(EntityThrown entity, RayTraceResult result, boolean isServer) {
 				if(isServer)
 					worldIn.addWeatherEffect(new EntityLightningBolt(worldIn, result.hitVec.x, result.hitVec.y, result.hitVec.z, false));
 			}
-		}, new EntityThrowLocation(0));
-		thrown.setHeadingFromThrower(entityLiving, entityLiving.rotationPitch, entityLiving.rotationYaw, 0.0F, 1.5F, 0f);
-		worldIn.spawnEntity(thrown);
+			
+		});
 		stack.damageItem(1, entityLiving);
 		return stack;
 	}

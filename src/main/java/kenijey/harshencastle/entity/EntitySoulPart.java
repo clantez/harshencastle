@@ -65,7 +65,7 @@ public class EntitySoulPart extends EntityMob
         this.noClip = false;
         this.setNoGravity(true);
         if(this.getAttackTarget() != null && this.getPosition().distanceSq(this.getAttackTarget().getPosition()) < 25)
-        	this.getAttackTarget().attackEntityFrom(DamageSourceSoulPart.getSource(this),  4f);
+        	this.getAttackTarget().attackEntityFrom(new DamageSourceSoulPart(this),  4f);
     }
 	
 	

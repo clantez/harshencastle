@@ -111,7 +111,7 @@ class HandlerHarshenEffect
 		if(timer++ >= 20)
 		{
 			timer = 0;
-			this.entity.attackEntityFrom(DamageSourceHarshed.getSource(), (float) Math.floor(this.level * 2.5f) + 1);
+			this.entity.attackEntityFrom(new DamageSourceHarshed(), (float) Math.floor(this.level * 2.5f) + 1);
 		}
 	}
 }

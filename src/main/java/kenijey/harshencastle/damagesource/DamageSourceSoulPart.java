@@ -13,11 +13,6 @@ public class DamageSourceSoulPart extends EntityDamageSource
 		super("entitySoulPart", damageSourceEntityIn);
 	}
 	
-	public static DamageSourceSoulPart getSource(Entity damageSourceEntityIn)
-	{
-		return new DamageSourceSoulPart(damageSourceEntityIn);
-	}
-	
 	@Override
 	public ITextComponent getDeathMessage(EntityLivingBase entityLivingBaseIn) {
 		return new TextComponentTranslation("death.attack.entitySoulPart", entityLivingBaseIn.getDisplayName());

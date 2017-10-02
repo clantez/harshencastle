@@ -10,6 +10,7 @@ import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.HarshenStructures;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.config.AccessoryConfig;
+import kenijey.harshencastle.entity.EntityThrown;
 import kenijey.harshencastle.template.HarshenTemplateRenderer;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -28,8 +29,8 @@ public class HandlerClientHarshenInventoryEffects
 	public void RenderEventPre(RenderGameOverlayEvent.Pre event)
 	{
 		for(Entity e : Minecraft.getMinecraft().world.getLoadedEntityList())
-			if(Minecraft.getMinecraft().player.getDistanceToEntity(e) < AccessoryConfig.enderPendantDistance)
-				e.setGlowing(e instanceof EntityLivingBase && HarshenUtils.containsItem(Minecraft.getMinecraft().player, HarshenItems.ender_pendant));
+			e.setGlowing(e instanceof EntityLivingBase && HarshenUtils.containsItem(Minecraft.getMinecraft().player, HarshenItems.ender_pendant) &&
+							Minecraft.getMinecraft().player.getDistanceToEntity(e) < AccessoryConfig.enderPendantDistance);
 		
 	}
 	
