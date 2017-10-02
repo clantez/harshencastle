@@ -1,5 +1,6 @@
 package kenijey.harshencastle.base;
 
+import kenijey.harshencastle.objecthandlers.EntityThrowLocation;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -26,6 +27,8 @@ public abstract class BaseHarshenParticle extends Particle
 	protected abstract int getXIndex();
 	protected abstract int getYIndex();
 	
+	private final double rX, rY;
+	
     public BaseHarshenParticle(World world, double xCoordIn, double yCoordIn, double zCoordIn, double motionXIn, double motionYIn, double motionZIn, float par14, boolean disableMoving, ResourceLocation location)
     {
         super(world, xCoordIn, yCoordIn, zCoordIn, 0.0D, 0.0D, 0.0D);
@@ -50,6 +53,8 @@ public abstract class BaseHarshenParticle extends Particle
         this.canCollide = false;
         this.disableMoving = disableMoving;
         this.location = location;
+        rX = rand.nextDouble() * 5d;
+        rY = rand.nextDouble() * 5d;
     }
     
 	public BaseHarshenParticle(World world, double xCoordIn, double yCoordIn, double zCoordIn, double motionXIn,
@@ -78,6 +83,16 @@ public abstract class BaseHarshenParticle extends Particle
 	protected boolean shouldRender()
 	{
 		return true;
+	}
+	
+	public BaseHarshenParticle setParticleGravity(float particleGravity) {
+		this.particleGravity = particleGravity;
+		this.canCollide = particleGravity > 0;
+		return this;
+	}
+	
+	public float getParticleGravity() {
+		return particleGravity;
 	}
 		
     @Override
@@ -147,20 +162,29 @@ public abstract class BaseHarshenParticle extends Particle
         float f4 = (float)(this.posY - interpPosY);
         float f5 = (float)(this.posZ - interpPosZ);
         float f6 = getBrightnessForRender(partialTicks);
+        f6 = 1;
         float size = 0.1F * (isCauldronTop ? 3.15f : this.particleScale);
         Minecraft.getMinecraft().getTextureManager().bindTexture(location);
         float k = (float)this.particleTextureIndexX / 16.0F;
         float k1 = isFullTexture() ? 2 : k + 0.0624375F;
         float k2 = (float)this.particleTextureIndexY / 16.0F;
         float k3 = isFullTexture() ? 0 : k2 + 0.0624375F;
-        int i = this.getBrightnessForRender(partialTicks);
-        int ij = i >> 16 & 65535;
-        int ik = i & 65535;
+        double[] t = {k1, k3, k1, k2, k, k2, k, k3};
+        if(location instanceof EntityThrowLocation)
+        {
+        	int o = ((EntityThrowLocation)location).getId();
+        	float fi = (float)(o % 4 * 16 + rX) / 64.0F;
+            float fi1 = (float)(o % 4 * 16 + 16 - rX) / 64.0F;
+            float fi2 = (float)(o / 4 * 16 + rY) / 64.0F;
+            float fi3 = (float)(o / 4 * 16 + 16 - rY) / 64.0F;
+            double[] t1 = {fi, fi3, fi1, fi3, fi1, fi2, fi, fi2};
+            t = t1;
+        }
         buffer.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR);
-        buffer.pos((double)(f3 - rotX * size- rotXY * size), (double)f4 - rotZ * size, (double)(f5 - rotYZ * size - rotXZ * size)).tex((double)k1, (double)k3).color(f6, f6, f6, this.particleAlpha).endVertex();
-        buffer.pos((double)(f3 - rotX * size + rotXY * size), (double)f4 + rotZ * size, (double)(f5 - rotYZ * size + rotXZ * size)).tex((double)k1, (double)k2).color(f6, f6, f6, this.particleAlpha).endVertex();
-        buffer.pos((double)(f3 + rotX * size + rotXY * size), (double)f4 + rotZ * size, (double)(f5 + rotYZ * size + rotXZ * size)).tex((double)k, (double)k2).color(f6, f6, f6, this.particleAlpha).endVertex();
-        buffer.pos((double)(f3 + rotX * size - rotXY * size), (double)f4 - rotZ * size, (double)(f5 + rotYZ * size - rotXZ * size)).tex((double)k, (double)k3).color(f6, f6, f6, this.particleAlpha).endVertex();
+        buffer.pos((double)(f3 - rotX * size- rotXY * size), (double)f4 - rotZ * size, (double)(f5 - rotYZ * size - rotXZ * size)).tex(t[0], t[1]).color(f6, f6, f6, this.particleAlpha).endVertex();
+        buffer.pos((double)(f3 - rotX * size + rotXY * size), (double)f4 + rotZ * size, (double)(f5 - rotYZ * size + rotXZ * size)).tex(t[2], t[3]).color(f6, f6, f6, this.particleAlpha).endVertex();
+        buffer.pos((double)(f3 + rotX * size + rotXY * size), (double)f4 + rotZ * size, (double)(f5 + rotYZ * size + rotXZ * size)).tex(t[4], t[5]).color(f6, f6, f6, this.particleAlpha).endVertex();
+        buffer.pos((double)(f3 + rotX * size - rotXY * size), (double)f4 - rotZ * size, (double)(f5 + rotYZ * size - rotXZ * size)).tex(t[6], t[7]).color(f6, f6, f6, this.particleAlpha).endVertex();
         Tessellator.getInstance().draw();
         GlStateManager.enableLighting();
     }
@@ -210,13 +234,13 @@ public abstract class BaseHarshenParticle extends Particle
         	if(world.isAirBlock(new BlockPos(posX, posY, posZ)))
         		this.setExpired();
     	}
+        this.motionY -= 0.04D * (double)this.particleGravity;
         this.move(motionX, motionY, motionZ);
         if (posY == prevPosY)
         {
             motionX *= 1.1D;
             motionZ *= 1.1D;
         }
-
         motionX *= 0.9599999785423279D;
         motionY *= 0.9599999785423279D;
         motionZ *= 0.9599999785423279D;

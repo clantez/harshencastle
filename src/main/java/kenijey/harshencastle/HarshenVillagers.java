@@ -24,7 +24,7 @@ public class HarshenVillagers
 	private static VillagerProfession regProfession(String name)
 	{
 		VillagerProfession prof = new VillagerProfession(HarshenCastle.MODID + ":" + name, HarshenCastle.MODID + ":textures/entity/villager/" + name + ".png",
-				HarshenCastle.MODID + ":textures/entity/zombie_villager/zombie_" + name + ".png");
+				HarshenCastle.MODID + ":textures/entity/zombie_villager/" + name + ".png");
 		ForgeRegistries.VILLAGER_PROFESSIONS.register(prof);
 		return prof;
 	}

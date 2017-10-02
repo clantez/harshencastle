@@ -9,6 +9,7 @@ import kenijey.harshencastle.dimensions.pontus.PontusWorldProvider;
 import kenijey.harshencastle.entity.EntityFactories;
 import kenijey.harshencastle.entity.EntitySoulPart;
 import kenijey.harshencastle.entity.EntitySoullessKnight;
+import kenijey.harshencastle.entity.EntityThrown;
 import kenijey.harshencastle.enums.ItemLiquidTypeset;
 import kenijey.harshencastle.enums.gui.EnumGuiTypes;
 import kenijey.harshencastle.enums.items.EnumGlassContainer;
@@ -94,6 +95,7 @@ public class ClientProxy extends CommonProxy
 		
 		RenderingRegistry.registerEntityRenderingHandler(EntitySoullessKnight.class, new EntityFactories.FactorySoullessKnight());
 		RenderingRegistry.registerEntityRenderingHandler(EntitySoulPart.class, new EntityFactories.FactorySoulPart());
+		RenderingRegistry.registerEntityRenderingHandler(EntityThrown.class, new EntityFactories.FactoryEntityThrown());
 	}
 	
 	 @Override

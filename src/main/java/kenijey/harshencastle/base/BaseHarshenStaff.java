@@ -19,10 +19,13 @@ public abstract class BaseHarshenStaff extends Item
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
 		boolean flag = canItemBeUsed(worldIn, playerIn, handIn);
-		if(flag)
+		if(flag && getMaxItemUseDuration(playerIn.getHeldItem(handIn)) > 0)
 			playerIn.setActiveHand(handIn);
+		if(getMaxItemUseDuration(playerIn.getHeldItem(handIn)) < 0)
+			onItemUseFinish(playerIn.getHeldItem(handIn), worldIn, playerIn);
 		return new ActionResult<ItemStack>(flag ? EnumActionResult.SUCCESS : EnumActionResult.PASS, playerIn.getHeldItem(handIn));
 	}
+	
 	
 	@Override
 	public EnumAction getItemUseAction(ItemStack stack) {

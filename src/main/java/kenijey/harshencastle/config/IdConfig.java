@@ -9,6 +9,7 @@ public class IdConfig extends BaseConfig {
 	public static int PontusDimension;
 	public static int EntitySoulPart;
 	public static int EntitySoullessKnight;
+	public static int EntityThrown;
 
 	
 	@Override
@@ -21,6 +22,7 @@ public class IdConfig extends BaseConfig {
 		PontusDimension = get("pontus_dimension", DimensionPontus.DIM_NAME, 5);
 		EntitySoullessKnight = get("entity_soulless_knight", 83);
 		EntitySoulPart = get("entity_soul_part", 84);
+		EntityThrown = get("entity_thrown", 85);
 	}
 
 	@Override
@@ -28,6 +30,7 @@ public class IdConfig extends BaseConfig {
 		set("pontus_dimension", PontusDimension);
 		set("entity_soulless_knight", EntitySoullessKnight);
 		set("entity_soul_part", EntitySoulPart);
+		set("entity_thrown", 85);
 	}
 	
 	@Override
