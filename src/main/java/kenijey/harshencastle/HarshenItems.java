@@ -59,6 +59,7 @@ import kenijey.harshencastle.items.PontusWorldGateSpawner;
 import kenijey.harshencastle.items.PowderOfHeretism;
 import kenijey.harshencastle.items.PunchyRing;
 import kenijey.harshencastle.items.RaptorScythe;
+import kenijey.harshencastle.items.RingOfBlood;
 import kenijey.harshencastle.items.RitualCrystal;
 import kenijey.harshencastle.items.RitualStick;
 import kenijey.harshencastle.items.SolidifyingPaste;
@@ -143,6 +144,7 @@ public class HarshenItems
 	public static Item emerald_shard;
 	public static Item feeding_earring;
 	public static Item iron_heart;
+	public static Item ring_of_blood;
 	
 	public static void preInit()
 	{
@@ -207,6 +209,7 @@ public class HarshenItems
 		emerald_shard = new EmeraldShard();
 		feeding_earring = new FeedingEarring();
 		iron_heart = new IronHeart();
+		ring_of_blood = new RingOfBlood();
 	}
 	
 	public static void reg()
@@ -265,6 +268,7 @@ public class HarshenItems
 		regItem(elytra_pendant);
 		regItem(combat_pendant);
 		regItem(feeding_earring);
+		regItem(ring_of_blood);
 		
 		regMetaItem(item_liquid, 64, emptyList(ItemLiquidTypeset.length()), "item_liquid");
 		regMetaItem(ritual_stick, emptyList(EnumRitualStick.values().length), "ritual_stick");

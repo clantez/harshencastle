@@ -80,6 +80,7 @@ item.emerald_shard.name=Emerald Shard
 item.combat_pendant.name=Combat Pendant
 item.feeding_earring.name=Feeding Earring
 item.iron_heart.name=Iron Heart
+item.ring_of_blood.name=Ring of Blood
 
 #keybindings
 key.telering.description=Telering Teleport Key
@@ -237,7 +238,7 @@ telering2=highest point in the direction you're looking
 minering1=Mining ring. Teleports you to the
 minering2=lowest point in the direction you're looking
 criminal_pendant1=Who dies harder, resists better and destroys more
-elemental_pendant1=Resist, more resist to afflict more.
+elemental_pendant1=Resist, more resist to afflict more. (+6 HP)
 elemental_pendant2=Health and armor increases
 zombi_pendant1=Damage taken from all zombies
 zombi_pendant2=will be decreased to 1
