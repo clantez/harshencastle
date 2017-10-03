@@ -25,7 +25,7 @@ public class LightningStaff extends BaseHarshenStaff
 
 	@Override
 	public int getMaxItemUseDuration(ItemStack stack) {
-		return 10;
+		return 23;
 	}
 
 	@Override
