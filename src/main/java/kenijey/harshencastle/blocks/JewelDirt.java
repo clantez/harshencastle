@@ -1,5 +1,8 @@
 package kenijey.harshencastle.blocks;
 
+import java.util.Random;
+
+import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.interfaces.IMetaItemBlock;
 import net.minecraft.block.Block;
@@ -9,6 +12,7 @@ import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 
@@ -22,7 +26,9 @@ public class JewelDirt extends Block implements IMetaItemBlock
 		super(Material.GRASS);
 		setUnlocalizedName("jewel_dirt");
         setRegistryName("jewel_dirt");
-        setHarvestLevel("shovel", 2);
+        setHarvestLevel("shovel", 1);
+        setHardness(3f);
+		setResistance(3f);
         this.setDefaultState(this.blockState.getBaseState().withProperty(DIRT_TYPE, 0));
         blockSoundType = blockSoundType.GROUND;
     }
@@ -51,6 +57,20 @@ public class JewelDirt extends Block implements IMetaItemBlock
 	@Override
 	public String[] getNames() {
 		return HarshenUtils.listOf("overworld", "pontus");
+	}
+	
+	@Override
+	public int quantityDropped(Random random) {
+		
+		return 1 + random.nextInt(5);
+	}
+	
+	@Override
+	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+		
+		int x=(int) (Math.random()*4);
+		if(x>2) return HarshenItems.diamond_shard;
+		else return HarshenItems.emerald_shard;
 	}
 
 }

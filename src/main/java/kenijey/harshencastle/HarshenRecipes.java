@@ -1,7 +1,6 @@
 package kenijey.harshencastle;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import kenijey.harshencastle.armor.HarshenArmors;
 import kenijey.harshencastle.enums.ItemLiquidTypeset;
