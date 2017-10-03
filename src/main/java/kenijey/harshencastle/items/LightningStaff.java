@@ -2,9 +2,9 @@ package kenijey.harshencastle.items;
 
 import kenijey.harshencastle.base.BaseHarshenStaff;
 import kenijey.harshencastle.entity.EntityThrown;
-import kenijey.harshencastle.objecthandlers.EntityThrowLocation;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
@@ -16,6 +16,11 @@ public class LightningStaff extends BaseHarshenStaff
 		setUnlocalizedName("lightning_staff");
 		setRegistryName("lightning_staff");
 		setMaxDamage(500);
+	}
+	
+	@Override
+	public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
+		return repair.getItem() == Items.GOLD_INGOT;
 	}
 
 	@Override
