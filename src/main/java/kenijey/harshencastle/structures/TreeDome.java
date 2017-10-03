@@ -2,7 +2,6 @@ package kenijey.harshencastle.structures;
 
 import kenijey.harshencastle.base.HarshenStructure;
 import kenijey.harshencastle.dimensions.DimensionPontus;
-import net.minecraft.util.math.BlockPos;
 
 public class TreeDome extends HarshenStructure
 {

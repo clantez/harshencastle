@@ -6,7 +6,6 @@ import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.base.BaseConfig;
 import net.minecraft.item.Item;
-import net.minecraft.util.math.Vec3d;
 
 public class AccessoryConfig extends BaseConfig
 {

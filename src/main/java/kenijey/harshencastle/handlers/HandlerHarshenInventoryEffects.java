@@ -10,7 +10,6 @@ import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.network.packets.MessagePacketPlayerTeleportEffects;
 import kenijey.harshencastle.network.packets.MessagePacketSummonFirework;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityPigZombie;

@@ -7,8 +7,6 @@ import java.util.Random;
 import javax.annotation.Nullable;
 
 import kenijey.harshencastle.HarshenUtils;
-import kenijey.harshencastle.base.BasePontusResourceBiome;
-import kenijey.harshencastle.biomes.HarshenBiomes;
 import kenijey.harshencastle.biomes.PontusBiomeProvider;
 import kenijey.harshencastle.fluids.HarshenFluids;
 import kenijey.harshencastle.intergration.noodle.NoodleEvent;
@@ -37,7 +35,6 @@ import net.minecraft.world.gen.MapGenBase;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
 import net.minecraft.world.gen.feature.WorldGenLakes;
-import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.MinecraftForge;
 
 public class PontusChunkProvider implements IChunkGenerator

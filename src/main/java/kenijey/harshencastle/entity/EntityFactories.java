@@ -5,7 +5,6 @@ import kenijey.harshencastle.entityrender.RenderSoulPart;
 import kenijey.harshencastle.entityrender.RenderSoullessKnight;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 
 public class EntityFactories 

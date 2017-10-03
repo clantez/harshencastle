@@ -2,19 +2,15 @@ package kenijey.harshencastle.containers;
 
 import java.awt.Point;
 
-import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.base.BaseHarshenContainer;
-import kenijey.harshencastle.base.HandlerInventory;
 import kenijey.harshencastle.slots.OutputSlot;
 import kenijey.harshencastle.tileentity.TileEntityHarshenMagicTable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ClickType;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.ItemStackHandler;
-import net.minecraftforge.items.SlotItemHandler;
 
 public class ContainerMagicTable extends BaseHarshenContainer
 {

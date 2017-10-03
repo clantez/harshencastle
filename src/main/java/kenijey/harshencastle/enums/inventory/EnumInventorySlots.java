@@ -1,10 +1,8 @@
 package kenijey.harshencastle.enums.inventory;
 
-import java.awt.Dimension;
 import java.awt.Point;
 import java.util.ArrayList;
 
-import kenijey.harshencastle.enums.items.EnumGlassContainer;
 import kenijey.harshencastle.interfaces.IIDSet;
 
 public enum EnumInventorySlots implements IIDSet

@@ -4,7 +4,6 @@ import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.biomes.PontusBiomeProvider;
 import kenijey.harshencastle.dimensions.DimensionPontus;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProviderHell;

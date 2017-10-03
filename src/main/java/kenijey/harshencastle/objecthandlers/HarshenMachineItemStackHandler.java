@@ -3,8 +3,6 @@ package kenijey.harshencastle.objecthandlers;
 import java.util.ArrayList;
 
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.items.ItemStackHandler;
 
 public class HarshenMachineItemStackHandler extends HarshenItemStackHandler
 {

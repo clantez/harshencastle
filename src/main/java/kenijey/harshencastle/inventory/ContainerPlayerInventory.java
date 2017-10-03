@@ -4,15 +4,11 @@ import java.awt.Point;
 
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.base.BaseHarshenContainer;
-import kenijey.harshencastle.base.HandlerInventory;
 import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
-import kenijey.harshencastle.objecthandlers.HarshenItemStackHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ClickType;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 public class ContainerPlayerInventory extends BaseHarshenContainer

@@ -3,7 +3,6 @@ package kenijey.harshencastle.handlers;
 import com.google.common.eventbus.Subscribe;
 
 import kenijey.harshencastle.HarshenBlocks;
-import kenijey.harshencastle.HarshenItems;
 import net.minecraft.item.Item;
 import net.minecraftforge.event.furnace.FurnaceFuelBurnTimeEvent;
 
