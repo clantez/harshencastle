@@ -18,7 +18,7 @@ import net.minecraft.world.WorldServer;
 public class Shrine extends HarshenStructure {
 
 	public Shrine() {
-		super("overworld/resource", "shrine",  0.002f, false, 0);
+		super("overworld/resource", "shrine",  0.001f, false, 0);
 	}
 	
 	@Override
