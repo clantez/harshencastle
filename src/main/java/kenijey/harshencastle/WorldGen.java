@@ -46,7 +46,7 @@ public class WorldGen implements IWorldGenerator
 	    	runGenerator(this.itiumOre, world, random, chunkX, chunkZ, 15, 0.7f, 0, 255);
 	    	runGenerator(this.pontusEmeraldOre, world, random, chunkX, chunkZ, 25, 0.3f, 0, 255);
 		}
-		runGenerator(jewelDirt, world, random, chunkX, chunkZ, 2, 0.3f, 0, 200);
+		runGenerator(jewelDirt, world, random, chunkX, chunkZ, 40, 100.0f, 0, 200);
 		generateStructure(world, HarshenStructure.get(dim), random, chunkX, chunkZ);
 	}
 	
