@@ -19,6 +19,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 public class BloodCollector extends BaseItemMetaData
@@ -107,7 +108,7 @@ public class BloodCollector extends BaseItemMetaData
 					vessel.add(vessel.getPossibleAdd());
 				break;
 			default:
-				int tileEntityRemoveOffHand = player.isSneaking() ? vessel.getPossibleRemove() : 1;
+				int tileEntityRemoveOffHand = player.isSneaking() ? Math.min(vessel.getPossibleRemove(), 50 - getNBT(player.getHeldItem(hand)).getInteger("Blood")) : 1;
 				if(vessel.canRemove(tileEntityRemoveOffHand) && fill(player, hand, tileEntityRemoveOffHand))
 					vessel.remove(tileEntityRemoveOffHand);
 				break;

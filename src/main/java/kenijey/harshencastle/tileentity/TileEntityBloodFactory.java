@@ -10,7 +10,7 @@ public class TileEntityBloodFactory extends BaseTileEntityHarshenSingleItemInven
 	
 	@Override
 	protected int getTicksUntillDone() {
-		return itemSupply.ticksUntillUsed();
+		return itemSupply == null ? 0 : itemSupply.ticksUntillUsed();
 	}
 
 	private int tickRate = 0;
@@ -23,7 +23,8 @@ public class TileEntityBloodFactory extends BaseTileEntityHarshenSingleItemInven
 	
 	@Override
 	protected boolean checkForCompleation(boolean checkingUp) {
-		if(getItem().getItem() instanceof IBloodSupply && !checkingUp && world.getTileEntity(pos.down()) instanceof TileEntityBloodVessel)
+		if(getItem().getItem() instanceof IBloodSupply && !checkingUp && world.getTileEntity(pos.down()) instanceof TileEntityBloodVessel
+				&& ((TileEntityBloodVessel)world.getTileEntity(pos.down())).canAdd(((IBloodSupply) getItem().getItem()).getAmountPerSecond()))
 		{
 			itemSupply = (IBloodSupply) getItem().getItem();
 			activateRecipe();
