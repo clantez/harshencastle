@@ -20,7 +20,7 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 public class WorldGen implements IWorldGenerator
 {
-    private final WorldGenMinable soulore = new WorldGenMinable(HarshenBlocks.harshen_soul_ore.getDefaultState(), 3);
+    private final WorldGenMinable soulore = new WorldGenMinable(HarshenBlocks.HARSHEN_SOUL_ORE.getDefaultState(), 3);
 
     private final WorldGenerator itiumOre = new PontusWorldGeneratorItiumOre();
     private final WorldGenerator pontusEmeraldOre = new PontusWorldGeneratorPontusEmeraldOre();
@@ -36,10 +36,10 @@ public class WorldGen implements IWorldGenerator
 		if(dim == 0)
 		{
 			if(chunkX == 44 && chunkZ == 44)
-				HarshenStructures.castle.generateStucture(world, random, chunkX, chunkZ);
+				HarshenStructures.CASTLE.generateStucture(world, random, chunkX, chunkZ);
 			runGenerator(this.soulore, world, random, chunkX, chunkZ, 10, 0.5f, 0, 20);
-	    	flowerGenerator(HarshenBlocks.harshen_soul_flower, world, random, chunkX, chunkZ, 0.015f);
-	    	flowerGenerator(HarshenBlocks.plant_of_gleam, world, random, chunkX, chunkZ, 0.015f);
+	    	flowerGenerator(HarshenBlocks.HARSHEN_SOUL_FLOWER, world, random, chunkX, chunkZ, 0.015f);
+	    	flowerGenerator(HarshenBlocks.PLANT_OF_GLEAM, world, random, chunkX, chunkZ, 0.015f);
 		}
 		else if(dim == DimensionPontus.DIMENSION_ID)
 		{

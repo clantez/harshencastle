@@ -9,7 +9,6 @@ import net.minecraftforge.common.config.Property;
 public abstract class BaseEnabledConfig<T> extends BaseConfig
 {
 	public ArrayList<T> allComponants = new ArrayList<>();
-	private HashMap<T, Property> propertyMap = new HashMap<>();
 	private HashMap<T, Boolean> enabledMap = new HashMap<>();
 	
 
@@ -41,15 +40,8 @@ public abstract class BaseEnabledConfig<T> extends BaseConfig
 			}
 			Property property = config.get(CATEGORY, getComponantPathInConfig(componant), true);
 			property.setComment(new TextComponentTranslation("config.isEnabled", getComponantCommentName(componant)).getUnformattedText());
-			propertyMap.put(componant, property);
 			enabledMap.put(componant, property.getBoolean());
 		}
-	}
-
-	@Override
-	public void save() {
-		for(T componant: allComponants)
-			propertyMap.get(componant).set(enabledMap.get(componant));
 	}
 	
 	public boolean isEnabled(T componant)

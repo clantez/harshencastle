@@ -69,8 +69,8 @@ public class JewelDirt extends Block implements IMetaItemBlock
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
 		
 		int x=(int) (Math.random()*4);
-		if(x>2) return HarshenItems.diamond_shard;
-		else return HarshenItems.emerald_shard;
+		if(x>2) return HarshenItems.DIAMOND_SHARD;
+		else return HarshenItems.EMERALD_SHARD;
 	}
 
 }

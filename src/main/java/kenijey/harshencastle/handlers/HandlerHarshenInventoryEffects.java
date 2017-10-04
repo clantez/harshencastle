@@ -60,29 +60,29 @@ public class HandlerHarshenInventoryEffects
 	@SubscribeEvent
 	public void onLivingHurt(LivingHurtEvent event)
 	{
-		if(HarshenUtils.containsItem(event.getEntityLiving(), HarshenItems.fearring))
+		if(HarshenUtils.containsItem(event.getEntityLiving(), HarshenItems.FEARRING))
 			event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 30));
 
 		if(event.getSource() instanceof EntityDamageSource && ((EntityDamageSource)event.getSource()).getTrueSource() instanceof EntityPlayer)
 		{
 			EntityPlayer player = ((EntityPlayer)((EntityDamageSource)event.getSource()).getTrueSource());
-			if(HarshenUtils.containsItem(player,  HarshenItems.fearring))
+			if(HarshenUtils.containsItem(player,  HarshenItems.FEARRING))
 				event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 150));
-			if(HarshenUtils.containsItem(player, HarshenItems.punchy_ring) && player.getHeldItemMainhand().getItem() == Items.AIR)
-				event.setAmount(event.getAmount() + HarshenUtils.getItemCount(player, HarshenItems.punchy_ring) * 2);
+			if(HarshenUtils.containsItem(player, HarshenItems.PUNCHY_RING) && player.getHeldItemMainhand().getItem() == Items.AIR)
+				event.setAmount(event.getAmount() + HarshenUtils.getItemCount(player, HarshenItems.PUNCHY_RING) * 2);
 		}
-		if(HarshenUtils.containsItem(event.getEntityLiving(), HarshenItems.zombi_pendant) &&
+		if(HarshenUtils.containsItem(event.getEntityLiving(), HarshenItems.ZOMBI_PENDANT) &&
 				(event.getSource() instanceof EntityDamageSource && ((EntityDamageSource)event.getSource()).getTrueSource() instanceof EntityZombie &&
 						!(((EntityDamageSource)event.getSource()).getTrueSource() instanceof EntityPigZombie)))
 			event.setAmount(1);
-		if(HarshenUtils.containsItem(event.getEntityLiving(), HarshenItems.soul_shield))
+		if(HarshenUtils.containsItem(event.getEntityLiving(), HarshenItems.SOUL_SHIELD))
 			for(int i = 0; i < HarshenUtils.getHandler((EntityPlayer) event.getEntityLiving()).getSlots(); i++)
-				if(HarshenUtils.getHandler((EntityPlayer) event.getEntityLiving()).getStackInSlot(i).getItem() == HarshenItems.soul_shield)
+				if(HarshenUtils.getHandler((EntityPlayer) event.getEntityLiving()).getStackInSlot(i).getItem() == HarshenItems.SOUL_SHIELD)
 				{
-					HarshenUtils.damageFirstOccuringItem((EntityPlayer) event.getEntityLiving(), HarshenItems.soul_shield, (int) event.getAmount() * 2);
+					HarshenUtils.damageFirstOccuringItem((EntityPlayer) event.getEntityLiving(), HarshenItems.SOUL_SHIELD, (int) event.getAmount() * 2);
 					event.setAmount(0);
 				}
-		if(HarshenUtils.containsItem(event.getEntityLiving(), HarshenItems.elytra_pendant)&& Arrays.asList(DamageSource.FLY_INTO_WALL, DamageSource.FALL).contains(event.getSource())
+		if(HarshenUtils.containsItem(event.getEntityLiving(), HarshenItems.ELYTRA_PENDANT)&& HarshenUtils.toArray(DamageSource.FLY_INTO_WALL, DamageSource.FALL).contains(event.getSource())
 				&& event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.CHEST).getItem() == Items.ELYTRA)
 			event.setCanceled(true);		
 	}
@@ -90,7 +90,7 @@ public class HandlerHarshenInventoryEffects
 	@SubscribeEvent
 	public void onBlockBroken(HarvestDropsEvent event)
 	{
-		if(HarshenUtils.containsItem(event.getHarvester(), HarshenItems.fiery_ring))
+		if(HarshenUtils.containsItem(event.getHarvester(), HarshenItems.FIERY_RING))
 			HarshenUtils.cookAndReplaceStackList(event.getDrops());
 	}
 	
@@ -115,7 +115,7 @@ public class HandlerHarshenInventoryEffects
 	
 	private void AttemptFirework(EntityPlayer player)
 	{
-		if(HarshenUtils.containsItem(player, HarshenItems.elytra_pendant) && player.getHeldItemMainhand().isEmpty() && player.isElytraFlying())
+		if(HarshenUtils.containsItem(player, HarshenItems.ELYTRA_PENDANT) && player.getHeldItemMainhand().isEmpty() && player.isElytraFlying())
 		{
 			HarshenNetwork.sendToServer(new MessagePacketSummonFirework());
 
@@ -133,11 +133,11 @@ public class HandlerHarshenInventoryEffects
 		{
 			ArrayList<EntityItem> drops = new ArrayList<EntityItem>();
 			EntityPlayer player = ((EntityPlayer)((EntityDamageSource)event.getSource()).getTrueSource());
-			if(HarshenUtils.containsItem(player, HarshenItems.looting_earring))
+			if(HarshenUtils.containsItem(player, HarshenItems.LOOTING_EARRING))
 				for(EntityItem e : event.getDrops())
 					drops.add(new EntityItem(e.world, e.posX, e.posY, e.posZ, e.getItem()));
 			event.getDrops().addAll(drops);
-			if(HarshenUtils.containsItem(player, HarshenItems.fiery_ring))
+			if(HarshenUtils.containsItem(player, HarshenItems.FIERY_RING))
 				HarshenUtils.cookAndReplaceList(event.getDrops());
 		}
 	}
@@ -145,7 +145,7 @@ public class HandlerHarshenInventoryEffects
 	@SubscribeEvent
 	public void onLivingDeath(LivingDeathEvent event)
 	{
-		if(!(event.getEntity() instanceof EntityPlayer) || !HarshenUtils.containsItem(event.getEntity(), HarshenItems.soul_binding_pendant))
+		if(!(event.getEntity() instanceof EntityPlayer) || !HarshenUtils.containsItem(event.getEntity(), HarshenItems.SOUL_BINDING_PENDANT))
 			return;
 		event.setCanceled(true);
 		World world = event.getEntityLiving().world;
@@ -183,10 +183,10 @@ public class HandlerHarshenInventoryEffects
 	        setFlag(player, 0, false);
 	        player.getCombatTracker().reset();
 	        inventoryMap.put(event.getEntity().getUniqueID(), ((EntityPlayer)event.getEntity()).inventory.writeToNBT(new NBTTagList()));
-	        HarshenUtils.damageOccuringItemNoPacket(player, HarshenItems.soul_binding_pendant, 1);
-	        if(HarshenUtils.getFirstOccuringItem(player, HarshenItems.soul_binding_pendant).getItemDamage() == 
-	        		HarshenUtils.getFirstOccuringItem(player, HarshenItems.soul_binding_pendant).getMaxDamage() - 1)
-	        			HarshenUtils.damageOccuringItemNoPacket(player, HarshenItems.soul_binding_pendant, 1);
+	        HarshenUtils.damageOccuringItemNoPacket(player, HarshenItems.SOUL_BINDING_PENDANT, 1);
+	        if(HarshenUtils.getFirstOccuringItem(player, HarshenItems.SOUL_BINDING_PENDANT).getItemDamage() == 
+	        		HarshenUtils.getFirstOccuringItem(player, HarshenItems.SOUL_BINDING_PENDANT).getMaxDamage())
+	        			HarshenUtils.damageOccuringItemNoPacket(player, HarshenItems.SOUL_BINDING_PENDANT, 1);
 	        	
 		}	
 		HandlerPlayerInventoryOverDeath.onPlayerDeath(event);
@@ -197,7 +197,7 @@ public class HandlerHarshenInventoryEffects
 	{
 		HandlerPlayerInventoryOverDeath.onPlayerRespawn(event);
 		
-		if(HarshenUtils.containsItem(event.player, HarshenItems.soul_binding_pendant))
+		if(HarshenUtils.containsItem(event.player, HarshenItems.SOUL_BINDING_PENDANT))
 		{
 			event.player.inventory.readFromNBT(inventoryMap.get(event.player.getUniqueID()));
 			HarshenNetwork.sendToPlayer(event.player, new MessagePacketReviveInventory(event.player));
@@ -224,8 +224,8 @@ public class HandlerHarshenInventoryEffects
 		if(ringType < 2)
 		{
 			ArrayList<Item> ringTypeItem = new ArrayList<Item>();
-			ringTypeItem.add(HarshenItems.telering);
-			ringTypeItem.add(HarshenItems.minering);
+			ringTypeItem.add(HarshenItems.TELERING);
+			ringTypeItem.add(HarshenItems.MINERING);
 			if(HarshenUtils.containsItem(player, ringTypeItem.get(ringType)))
 			{
 				World world = player.world;
@@ -246,7 +246,7 @@ public class HandlerHarshenInventoryEffects
 				}
 			}			
 		}
-		else if(ringType == 2 && HarshenUtils.containsItem(player, HarshenItems.combat_pendant))
+		else if(ringType == 2 && HarshenUtils.containsItem(player, HarshenItems.COMBAT_PENDANT))
 		{
 			EntityLivingBase entityToAttack = HarshenUtils.getFirstEntityInDirection(player.world, player.getPositionVector(), player.getLookVec().normalize(), 5, EntityLivingBase.class);
 			if(entityToAttack == null)

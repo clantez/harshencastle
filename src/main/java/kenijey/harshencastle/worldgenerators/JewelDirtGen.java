@@ -36,7 +36,7 @@ public class JewelDirtGen extends WorldGenerator
     	ArrayList<Integer> dimensionList = new ArrayList<>();
     	dimensionList.add(0);
     	dimensionList.add(DimensionPontus.DIMENSION_ID);
-    	worldIn.setBlockState(positionToGen, HarshenBlocks.jewel_dirt.getDefaultState().withProperty(JewelDirt.DIRT_TYPE, dimensionList.indexOf(worldIn.provider.getDimension())), 3);
+    	worldIn.setBlockState(positionToGen, HarshenBlocks.JEWEL_DIRT.getDefaultState().withProperty(JewelDirt.DIRT_TYPE, dimensionList.indexOf(worldIn.provider.getDimension())), 3);
     	return true;
     }
 }

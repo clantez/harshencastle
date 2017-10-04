@@ -46,14 +46,14 @@ public class HarshenDimensionalDoor extends BlockDoor
 	
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return HarshenItems.item_harshen_dimensional_door;
+		return HarshenItems.ITEM_HARSHEN_DIMENSIONAL_DOOR;
 	}
 	
 	
 	@Override
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos,
 			EntityPlayer player) {
-		return new ItemStack(HarshenItems.item_harshen_dimensional_door);
+		return new ItemStack(HarshenItems.ITEM_HARSHEN_DIMENSIONAL_DOOR);
 	}
 	
 	@Override

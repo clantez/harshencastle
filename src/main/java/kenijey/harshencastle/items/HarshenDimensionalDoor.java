@@ -14,8 +14,8 @@ import net.minecraft.world.World;
 
 public class HarshenDimensionalDoor extends Item
 {
-	ItemDoor itemDoor = new ItemDoor(HarshenBlocks.harshen_dimensional_door);
-	Block block = HarshenBlocks.harshen_dimensional_door;
+	ItemDoor itemDoor = new ItemDoor(HarshenBlocks.HARSHEN_DIMENSIONAL_DOOR);
+	Block block = HarshenBlocks.HARSHEN_DIMENSIONAL_DOOR;
 	
 	public HarshenDimensionalDoor()
 	{

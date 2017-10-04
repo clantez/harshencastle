@@ -30,7 +30,7 @@ public class TileEntityPedestalSlab extends BaseTileEntityHarshenSingleItemInven
 		for(int x = -1; x < 2; x++)
 			for(int z = -1; z < 2; z++){
 				if((world.getBlockState(pos.add(x, -1, z)).getBlock() != Blocks.SOUL_SAND || 
-				world.getBlockState(pos.add(x, 0, z)).getBlock() != HarshenBlocks.blood_block) && !(x == 0 && z == 0))
+				world.getBlockState(pos.add(x, 0, z)).getBlock() != HarshenBlocks.BLOOD_BLOCK) && !(x == 0 && z == 0))
 					flag = false;
 			}
 		return flag;

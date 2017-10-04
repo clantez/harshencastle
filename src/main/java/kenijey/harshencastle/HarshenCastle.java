@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import kenijey.harshencastle.commands.CommandAccessPontusOuter;
+import kenijey.harshencastle.commands.CommandReloadConfig;
 import kenijey.harshencastle.creativetabs.HarshenTab;
 import kenijey.harshencastle.proxy.CommonProxy;
 import net.minecraft.command.ICommand;
@@ -68,7 +69,7 @@ public class HarshenCastle {
     @EventHandler
 	public void serverLoad(FMLServerStartingEvent event)
 	{
-		for(ICommand command : Arrays.asList(new CommandAccessPontusOuter()))
+		for(ICommand command : HarshenUtils.toArray(new CommandAccessPontusOuter(), new CommandReloadConfig()))
 			event.registerServerCommand(command);
 	}	
     

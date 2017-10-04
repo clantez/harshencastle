@@ -30,7 +30,7 @@ public class MainCastle extends HarshenStructure
 	public void preAddition(World world, BlockPos pos, Random random) {
 		BlockPos castleSize = getRelativeSize(world, pos);
 		for(int i = 0; i < 4; i++)
-			new MazeGenerator(new BlockPos(castleSize.getX(), 3, castleSize.getZ()), HarshenBlocks.harshen_dimensional_stone.getDefaultState(), 0.35f).generate(world, random, pos.add(1, 1 + (i * 4), 2));
+			new MazeGenerator(new BlockPos(castleSize.getX(), 3, castleSize.getZ()), HarshenBlocks.HARSHEN_DIMENSIONAL_STONE.getDefaultState(), 0.35f).generate(world, random, pos.add(1, 1 + (i * 4), 2));
 	}
 	
 	@Override

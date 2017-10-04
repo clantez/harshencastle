@@ -31,15 +31,15 @@ public class HandlerRendererGuiInventory
 		ArrayList<Block> blocks = new ArrayList<>();
 		ItemStack xrayStack = ItemStack.EMPTY;
 		for(int i = 0; i < player.inventory.getSizeInventory(); i++)
-			if(player.inventory.getStackInSlot(i).getItem() == HarshenItems.xray_pendant)
+			if(player.inventory.getStackInSlot(i).getItem() == HarshenItems.XRAY_PENDANT)
 			{
 				xrayStack = player.inventory.getStackInSlot(i);
 				if(player.inventory.getStackInSlot(i).hasTagCompound())
 					blocks.addAll(HarshenUtils.getBlocksFromString(player.inventory.getStackInSlot(i).getTagCompound().getString("BlockToSearch")));
 			}
-		if(HarshenUtils.getFirstOccuringItem(player,  HarshenItems.xray_pendant).hasTagCompound())
-			blocks.addAll(HarshenUtils.getBlocksFromString(HarshenUtils.getFirstOccuringItem(player,  HarshenItems.xray_pendant).getTagCompound().getString("BlockToSearch")));
-		ItemStack testStack = HarshenUtils.getFirstOccuringItem(player,  HarshenItems.xray_pendant);
+		if(HarshenUtils.getFirstOccuringItem(player,  HarshenItems.XRAY_PENDANT).hasTagCompound())
+			blocks.addAll(HarshenUtils.getBlocksFromString(HarshenUtils.getFirstOccuringItem(player,  HarshenItems.XRAY_PENDANT).getTagCompound().getString("BlockToSearch")));
+		ItemStack testStack = HarshenUtils.getFirstOccuringItem(player,  HarshenItems.XRAY_PENDANT);
 		xrayStack = testStack.isEmpty() ? xrayStack : testStack;
 		boolean flag = false;
 		if(xrayStack.isEmpty())

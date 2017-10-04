@@ -34,7 +34,7 @@ public class HarshenHiddenPlateActive extends BaseHarshenBlockCastle
 	
 	@Override
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-		worldIn.setBlockState(pos, HarshenBlocks.harshen_hidden_plate.getDefaultState(), 3);
+		worldIn.setBlockState(pos, HarshenBlocks.HARSHEN_HIDDEN_PLATE.getDefaultState(), 3);
 		super.updateTick(worldIn, pos, state, rand);
 	}
 	
@@ -51,7 +51,7 @@ public class HarshenHiddenPlateActive extends BaseHarshenBlockCastle
 	 @Override
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos,
 			EntityPlayer player) {
-		return new ItemStack(HarshenBlocks.harshen_hidden_plate);
+		return new ItemStack(HarshenBlocks.HARSHEN_HIDDEN_PLATE);
 	}
 	
 	

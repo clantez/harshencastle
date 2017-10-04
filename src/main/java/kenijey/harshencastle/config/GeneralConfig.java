@@ -23,14 +23,4 @@ public class GeneralConfig extends BaseConfig {
 		renderPlates = get("render_flatplates", true);
 		structureRuinChance = get("structure_ruin_chance", 0.2D);
 	}
-
-	@Override
-	public void save() {
-		set("blood_drops", bloodDrops);
-		set("blood_chance", bloodChance);
-		set("blood_offhand", bloodOffHand);
-		set("render_flatplates", renderPlates);
-		set("structure_ruin_chance", structureRuinChance);
-	}
-
 }

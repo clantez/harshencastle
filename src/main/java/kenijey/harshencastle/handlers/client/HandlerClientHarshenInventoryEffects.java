@@ -26,7 +26,7 @@ public class HandlerClientHarshenInventoryEffects
 	public void RenderEventPre(RenderGameOverlayEvent.Pre event)
 	{
 		for(Entity e : Minecraft.getMinecraft().world.getLoadedEntityList())
-			e.setGlowing(e instanceof EntityLivingBase && HarshenUtils.containsItem(Minecraft.getMinecraft().player, HarshenItems.ender_pendant) &&
+			e.setGlowing(e instanceof EntityLivingBase && HarshenUtils.containsItem(Minecraft.getMinecraft().player, HarshenItems.ENDER_PENDANT) &&
 							Minecraft.getMinecraft().player.getDistanceToEntity(e) < AccessoryConfig.enderPendantDistance);
 		
 	}
@@ -35,12 +35,12 @@ public class HandlerClientHarshenInventoryEffects
 	public void renderWorldLast(RenderWorldLastEvent event)
 	{
 		ArrayList<BlockPos> finalBlockPositions = new ArrayList<>();
-		if(HarshenUtils.containsItem(Minecraft.getMinecraft().player, HarshenItems.xray_pendant))
+		if(HarshenUtils.containsItem(Minecraft.getMinecraft().player, HarshenItems.XRAY_PENDANT))
 		{
 			EntityPlayer player = Minecraft.getMinecraft().player;
 			BlockPos pos = player.getPosition();
 			finalBlockPositions.clear();
-			String blockName = HarshenUtils.getFirstOccuringItem(Minecraft.getMinecraft().player,  HarshenItems.xray_pendant).getTagCompound().getString("BlockToSearch");
+			String blockName = HarshenUtils.getFirstOccuringItem(Minecraft.getMinecraft().player,  HarshenItems.XRAY_PENDANT).getTagCompound().getString("BlockToSearch");
 			boolean flag = HarshenUtils.toArray(AccessoryConfig.blackListedXrays).contains(blockName);
 			if(!flag)
 			{
@@ -75,7 +75,7 @@ public class HandlerClientHarshenInventoryEffects
 					HarshenClientUtils.renderGhostBlock(Minecraft.getMinecraft().world.getBlockState(finalPos), finalPos, true, event.getPartialTicks());
 			}
 		}
-		HarshenTemplateRenderer.getTemplate(HarshenStructures.castle.getLocation())
+		HarshenTemplateRenderer.getTemplate(HarshenStructures.CASTLE.getLocation())
 			.renderIntoWorld(Minecraft.getMinecraft().world, new BlockPos(100, 100, 100), event.getPartialTicks());
 	}
 }

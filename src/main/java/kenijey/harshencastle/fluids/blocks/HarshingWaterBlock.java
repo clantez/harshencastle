@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import kenijey.harshencastle.HarshenBlocks;
+import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.base.BaseFluidBlock;
 import kenijey.harshencastle.fluids.HarshenFluids;
 import kenijey.harshencastle.potions.HarshenPotions;
@@ -19,17 +20,17 @@ public class HarshingWaterBlock extends BaseFluidBlock
 
 	@Override
 	protected ArrayList<PotionEffect> getPotions() {
-		return new ArrayList<PotionEffect>(Arrays.asList(new PotionEffect(HarshenPotions.potionHarshed, 250, 1)));
+		return new ArrayList<PotionEffect>(HarshenUtils.toArray(new PotionEffect(HarshenPotions.potionHarshed, 250, 1)));
 	}
 
 	@Override
 	protected Block getBlockWhenSourceHit() {
-		return HarshenBlocks.harshen_dimensional_rock;
+		return HarshenBlocks.HARSHEN_DIMENSIONAL_ROCK;
 	}
 
 	@Override
 	protected Block getBlockWhenOtherHit() {
-		return HarshenBlocks.harshen_dimensional_rock;
+		return HarshenBlocks.HARSHEN_DIMENSIONAL_ROCK;
 	}
 	
 }

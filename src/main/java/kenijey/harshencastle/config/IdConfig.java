@@ -24,14 +24,6 @@ public class IdConfig extends BaseConfig {
 		EntitySoulPart = get("entity_soul_part", 84);
 		EntityThrown = get("entity_thrown", 85);
 	}
-
-	@Override
-	public void save() {
-		set("pontus_dimension", PontusDimension);
-		set("entity_soulless_knight", EntitySoullessKnight);
-		set("entity_soul_part", EntitySoulPart);
-		set("entity_thrown", 85);
-	}
 	
 	@Override
 	protected <T> T get(String name, String configName, T normal) {

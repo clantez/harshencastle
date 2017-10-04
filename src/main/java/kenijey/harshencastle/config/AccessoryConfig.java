@@ -13,6 +13,7 @@ public class AccessoryConfig extends BaseConfig
 	public static String[] blackListedXrays;
 	public static int xrayAreaX, xrayAreaY, xrayAreaZ, xrayListSize;
 	public static int enderPendantDistance;
+	public static double reachPendantLength;
 
 	@Override
 	public String getName() {
@@ -22,36 +23,20 @@ public class AccessoryConfig extends BaseConfig
 	@Override
 	public void read() 
 	{
-		blackListedXrays = get("xray.blacklist", HarshenItems.xray_pendant, HarshenUtils.listOf("minecraft:stone"));
-		xrayAreaX = get("xray.distance.x", HarshenItems.xray_pendant, 20);
-		xrayAreaY = get("xray.distance.y", HarshenItems.xray_pendant, 20);
-		xrayAreaZ = get("xray.distance.z", HarshenItems.xray_pendant, 20);
-		xrayListSize = get("xray.listsize", HarshenItems.xray_pendant, 50); 
-		enderPendantDistance = get("enderpendant.distance", HarshenItems.ender_pendant, 100);
-	}
-
-	@Override
-	public void save() 
-	{
-		set("xray.blacklist", blackListedXrays);
-		set("enderpendant.distance", enderPendantDistance);
-		set("xray.distance.x", xrayAreaX);
-		set("xray.distance.y", xrayAreaY);
-		set("xray.distance.z", xrayAreaZ);
-		set("xray.listsize", xrayListSize);
+		blackListedXrays = get("xray.blacklist", HarshenItems.XRAY_PENDANT, HarshenUtils.listOf("minecraft:stone"));
+		xrayAreaX = get("xray.distance.x", HarshenItems.XRAY_PENDANT, 20);
+		xrayAreaY = get("xray.distance.y", HarshenItems.XRAY_PENDANT, 20);
+		xrayAreaZ = get("xray.distance.z", HarshenItems.XRAY_PENDANT, 20);
+		xrayListSize = get("xray.listsize", HarshenItems.XRAY_PENDANT, 50); 
+		enderPendantDistance = get("enderpendant.distance", HarshenItems.ENDER_PENDANT, 100);
+		reachPendantLength = get("reach.length", HarshenItems.REACH_PENDANT, 12.5d);
 	}
 	
 	private HashMap<String, String> keyMap = new HashMap<>();
 	
 	private <T> T get(String name, Item item, T normal) 
 	{
-		keyMap.put(name, item.getRegistryName().getResourcePath());
 		return super.get(name, item.getRegistryName().getResourcePath(), normal);
-	}
-	
-	@Override
-	protected <T> void set(String name, T set) {
-		super.set(name, keyMap.get(name), set);
 	}
 
 }

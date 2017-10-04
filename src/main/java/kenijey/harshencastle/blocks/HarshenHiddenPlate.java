@@ -19,7 +19,7 @@ public class HarshenHiddenPlate extends BaseHarshenBlockCastle
 	@Override
 	public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn) {
 		if(entityIn instanceof EntityPlayer)
-			worldIn.setBlockState(pos, HarshenBlocks.harshen_hidden_plate_active.getDefaultState(), 3);
+			worldIn.setBlockState(pos, HarshenBlocks.HARSHEN_HIDDEN_PLATE_ACTIVE.getDefaultState(), 3);
 		super.onEntityWalk(worldIn, pos, entityIn);
 	}
 }

@@ -3,6 +3,7 @@ package kenijey.harshencastle.base;
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import kenijey.harshencastle.HarshenCastle;
@@ -15,7 +16,18 @@ import net.minecraftforge.fml.common.Loader;
 public abstract class BaseConfig
 {
 	protected Configuration config = null;
+	private final static ArrayList<BaseConfig> ALL_CONFIGS = new ArrayList<>();
 			
+	public BaseConfig() {
+		ALL_CONFIGS.add(this);
+	}
+	
+	public static void reloadAll()
+	{
+		for(BaseConfig config : ALL_CONFIGS)
+			config.syncConfig();
+	}
+	
 	public Configuration getConfig()
 	{
 		return config;
@@ -27,7 +39,6 @@ public abstract class BaseConfig
 			throw new IllegalArgumentException("name of config file cant be null");
 		File configFile = new File(Loader.instance().getConfigDir(), HarshenCastle.MODID + "/" + getName() + ".cfg");
 		config = new Configuration(configFile);
-		
 		syncConfig();
 	}
 	
@@ -35,7 +46,6 @@ public abstract class BaseConfig
 	{
 		config.load();
 		read();
-		save();
 		if(config.hasChanged())
 			config.save();
 	}
@@ -43,7 +53,6 @@ public abstract class BaseConfig
 	
 	public abstract void read();
 	
-	public abstract void save();
 	
 	public static HashMap<String, Property> propertyMap = new HashMap<>();
 		
@@ -78,19 +87,5 @@ public abstract class BaseConfig
 	protected <T> T get(String name, T normal)
 	{
 		return this.get(name, getName(), normal);
-	}
-	
-	protected <T> void set(String name, String category, T set)
-	{
-		try {
-			HarshenUtils.getMethod("set", propertyMap.get(category + "*" + name).getClass(), set.getClass()).invoke(propertyMap.get(category + "*" + name), set);
-		} catch (IllegalAccessException | InvocationTargetException | SecurityException e) {
-			HarshenCastle.logger.error("Forge Config has no such setter for " + set.getClass());
-		}
-	}
-	
-	protected <T> void set(String name, T set)
-	{
-		set(name, getName(), set);
 	}
 }

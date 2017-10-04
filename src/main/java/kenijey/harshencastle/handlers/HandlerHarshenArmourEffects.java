@@ -3,6 +3,7 @@ package kenijey.harshencastle.handlers;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.armor.HarshenArmors;
 import kenijey.harshencastle.potions.HarshenPotions;
 import net.minecraft.init.MobEffects;
@@ -15,7 +16,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class HandlerHarshenArmourEffects 
 {
-	ArrayList<ItemArmor> allArmour = new ArrayList<ItemArmor>(Arrays.asList(HarshenArmors.harshen_jaguar_armor_boots, HarshenArmors.harshen_jaguar_armor_leggings,
+	ArrayList<ItemArmor> allArmour = new ArrayList<ItemArmor>(HarshenUtils.toArray(HarshenArmors.harshen_jaguar_armor_boots, HarshenArmors.harshen_jaguar_armor_leggings,
 			HarshenArmors.harshen_jaguar_armor_chestplate, HarshenArmors.harshen_jaguar_armor_helmet));
 	@SubscribeEvent
 	public void onEntityTick(LivingUpdateEvent event)

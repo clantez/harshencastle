@@ -12,7 +12,7 @@ public class HandlerBlockBurn
 	public void itemBurn(FurnaceFuelBurnTimeEvent furnaceBurn)
 	{
 		Item item = furnaceBurn.getItemStack().getItem();
-		if(item == Item.getItemFromBlock(HarshenBlocks.harshen_magic_table))
+		if(item == Item.getItemFromBlock(HarshenBlocks.HARSHEN_MAGIC_TABLE))
 			furnaceBurn.setBurnTime(500);
 	}
 }

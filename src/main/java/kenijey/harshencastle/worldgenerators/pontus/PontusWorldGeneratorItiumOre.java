@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 import kenijey.harshencastle.HarshenBlocks;
+import kenijey.harshencastle.HarshenUtils;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -14,7 +15,7 @@ public class PontusWorldGeneratorItiumOre extends WorldGenerator
 {
 	
 	private int numberOfBlocks = 2;
-	private IBlockState state = HarshenBlocks.itium_ore.getDefaultState();
+	private IBlockState state = HarshenBlocks.ITIUM_ORE.getDefaultState();
 	
 	@Override
 	public boolean generate(World worldIn, Random rand, BlockPos position) {
@@ -63,7 +64,7 @@ public class PontusWorldGeneratorItiumOre extends WorldGenerator
                                     BlockPos blockpos = new BlockPos(l1, i2, j2);
 
                                     IBlockState state = worldIn.getBlockState(blockpos);
-                                    if(Arrays.asList(HarshenBlocks.harshen_dimensional_dirt, HarshenBlocks.harshen_dimensional_rock).contains(worldIn.getBlockState(blockpos).getBlock()))
+                                    if(HarshenUtils.toArray(HarshenBlocks.HARSHEN_DIMENSIONAL_DIRT, HarshenBlocks.HARSHEN_DIMENSIONAL_ROCK).contains(worldIn.getBlockState(blockpos).getBlock()))
                                         worldIn.setBlockState(blockpos, this.state, 2);	
 
 

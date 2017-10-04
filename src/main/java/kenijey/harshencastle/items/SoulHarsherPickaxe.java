@@ -29,6 +29,6 @@ public class SoulHarsherPickaxe extends ItemPickaxe
 
 	@Override
 	public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
-		return repair.getItem() == HarshenItems.soul_infused_ingot;
+		return repair.getItem() == HarshenItems.SOUL_INFUSED_INGOT;
 	}
 }

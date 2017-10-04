@@ -32,26 +32,26 @@ public class JEIHarshenCastle implements IModPlugin
 		registry.addRecipes(HarshenRecipes.allCauldronRecipes, JEICategoryUIDs.cauldron);
 		registry.addRecipes(HarshenRecipes.allPedestalRecipes, JEICategoryUIDs.pedestalslab);
 		registry.addRecipes(HarshenRecipes.allHereticCauldronRecipes, JEICategoryUIDs.hereticritual);
-		registry.addRecipeCatalyst(new ItemStack(HarshenBlocks.harshen_dimensional_pedestal), JEICategoryUIDs.ritual);
-		registry.addRecipeCatalyst(new ItemStack(HarshenItems.ritual_stick), JEICategoryUIDs.cauldron);
-		registry.addRecipeCatalyst(new ItemStack(HarshenItems.ritual_stick, 1, 1), JEICategoryUIDs.hereticritual);
-		registry.addRecipeCatalyst(new ItemStack(HarshenBlocks.pedestal_slab), JEICategoryUIDs.pedestalslab);
+		registry.addRecipeCatalyst(new ItemStack(HarshenBlocks.HARSHEN_DIMENSIONAL_PEDESTAL), JEICategoryUIDs.ritual);
+		registry.addRecipeCatalyst(new ItemStack(HarshenItems.RITUAL_STICK), JEICategoryUIDs.cauldron);
+		registry.addRecipeCatalyst(new ItemStack(HarshenItems.RITUAL_STICK, 1, 1), JEICategoryUIDs.hereticritual);
+		registry.addRecipeCatalyst(new ItemStack(HarshenBlocks.PEDESTAL_SLAB), JEICategoryUIDs.pedestalslab);
 		
-		info(HarshenItems.harshen_soul_fragment);
-		info(HarshenItems.harshen_crystal);
-		info(HarshenItems.light_emitted_essence);
-		info(HarshenItems.light_emitted_seed);
-		info(HarshenItems.soul_harsher_pickaxe);
-		info(HarshenItems.pontus_world_gate_parts);
-		info(HarshenItems.blood_essence);
-		info(HarshenItems.blood_collector);
-		info(HarshenItems.valor_badge);
-		info(HarshenItems.iron_heart);
-		info(HarshenItems.lightning_staff);
+		info(HarshenItems.HARSHEN_SOUL_FRAGMENT);
+		info(HarshenItems.HARSHEN_CRYSTAL);
+		info(HarshenItems.LIGHT_EMITTED_SEED);
+		info(HarshenItems.LIGHT_EMITTED_SEED);
+		info(HarshenItems.SOUL_HARSHER_PICKAXE);
+		info(HarshenItems.PONTUS_WORLD_GATE_PARTS);
+		info(HarshenItems.BLOOD_ESSENCE);
+		info(HarshenItems.BLOOD_COLLECTOR);
+		info(HarshenItems.VALOR_BADGE);
+		info(HarshenItems.IRON_HEART);
+		info(HarshenItems.LIGHTNING_STAFF);
 		
-		info(HarshenBlocks.blood_vessel);
-		info(HarshenBlocks.harshen_soul_flower);
-		info(HarshenBlocks.blood_block);
+		info(HarshenBlocks.BLOOD_VESSEL);
+		info(HarshenBlocks.HARSHEN_SOUL_FLOWER);
+		info(HarshenBlocks.BLOOD_BLOCK);
 	}
 
 	private void info(Block block)

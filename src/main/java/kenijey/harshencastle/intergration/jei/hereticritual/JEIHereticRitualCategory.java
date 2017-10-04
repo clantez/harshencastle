@@ -102,7 +102,7 @@ public class JEIHereticRitualCategory extends BaseJeiCategory
 	@Override
 	public List getTooltipStrings(int mouseX, int mouseY) {
 		if(mouseX > 5 && mouseX < 24 && mouseY > 45 && mouseY < 51)
-			return Arrays.asList(new TextComponentTranslation(name).getFormattedText());
+			return HarshenUtils.toArray(new TextComponentTranslation(name).getFormattedText());
 		return super.getTooltipStrings(mouseX, mouseY);
 	}
 

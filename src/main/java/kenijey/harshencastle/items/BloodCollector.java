@@ -6,6 +6,7 @@ import java.util.Random;
 
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenSounds;
+import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.base.BaseItemMetaData;
 import kenijey.harshencastle.blocks.BloodVessel;
 import kenijey.harshencastle.enums.items.EnumBloodCollector;
@@ -116,7 +117,7 @@ public class BloodCollector extends BaseItemMetaData
 		}
 		else if(!flag && player.isSneaking() && worldIn.getBlockState(pos.offset(facing).down()).isSideSolid(worldIn, pos, EnumFacing.UP) && remove(player, hand, 1))
 		{	
-			worldIn.setBlockState(pos.offset(facing), HarshenBlocks.blood_block.getDefaultState(), 3);
+			worldIn.setBlockState(pos.offset(facing), HarshenBlocks.BLOOD_BLOCK.getDefaultState(), 3);
 			worldIn.getBlockState(pos.offset(facing)).getBlock().onBlockAdded(worldIn, pos.offset(facing), worldIn.getBlockState(pos.offset(facing))); 
 			worldIn.playSound(pos.getX(), pos.getY(), pos.getZ(), HarshenSounds.bloodCollectorUse, SoundCategory.BLOCKS, 0.5f, new Random().nextFloat(), false);
 		}
@@ -130,6 +131,6 @@ public class BloodCollector extends BaseItemMetaData
 
 	@Override
 	protected List<Integer> getMetaForTab() {
-		return Arrays.asList(0);
+		return HarshenUtils.toArray(0);
 	}
 }

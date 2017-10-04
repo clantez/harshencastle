@@ -54,7 +54,7 @@ public class EntitySoullessKnight extends EntityMob
 	
 	@Override
 	public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData livingdata) {
-		setItemStackToSlot(this.isLeftHanded() ? EntityEquipmentSlot.OFFHAND : EntityEquipmentSlot.MAINHAND, new ItemStack(HarshenItems.props, 1, 0));
+		setItemStackToSlot(this.isLeftHanded() ? EntityEquipmentSlot.OFFHAND : EntityEquipmentSlot.MAINHAND, new ItemStack(HarshenItems.PROPS, 1, 0));
 		try {
 			setItemStackToSlot(this.isLeftHanded() ? EntityEquipmentSlot.MAINHAND : EntityEquipmentSlot.OFFHAND, new ItemStack(JsonToNBT.getTagFromJson("{id:\"minecraft:shield\",Count:1b,tag:{BlockEntityTag:{Patterns:[{Pattern:\"ss\",Color:6},{Pattern:\"flo\",Color:1}],Base:8}},Damage:0s}")));
 		} catch (NBTException e) {
@@ -71,7 +71,7 @@ public class EntitySoullessKnight extends EntityMob
     protected void dropLoot(boolean wasRecentlyHit, int lootingModifier, DamageSource source) {
     	for(int i = 0; i < lootingModifier + 1; i ++)
     		if(new Random().nextBoolean())
-    			this.dropItem(HarshenItems.ritual_crystal, 1);
+    			this.dropItem(HarshenItems.RITUAL_CRYSTAL, 1);
     }
     
     @Override

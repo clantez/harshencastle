@@ -31,11 +31,11 @@ public class HarshenDimensionalDirt extends BaseHarshenBlockBreakableInPontus
  	@Override
 	public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
  		whiteListedBlocks.clear();
- 		whiteListedBlocks.add(HarshenBlocks.crop_of_gleam);
+ 		whiteListedBlocks.add(HarshenBlocks.CROP_OF_GLEAM);
 		if(worldIn.getBlockState(pos.add(0, 1, 0)).getBlock() instanceof BlockBush && 
 				!whiteListedBlocks.contains(worldIn.getBlockState(pos.add(0, 1, 0)).getBlock()))
 		{
-			worldIn.setBlockState(pos.add(0, 1, 0), HarshenBlocks.harshen_destroyed_plant.getDefaultState(), 2);
+			worldIn.setBlockState(pos.add(0, 1, 0), HarshenBlocks.HARSHEN_DESTROYED_PLANT.getDefaultState(), 2);
 			if(worldIn.getBlockState(pos.add(0, 2, 0)).getBlock() instanceof BlockBush)
 				worldIn.setBlockState(pos.add(0, 2, 0),Blocks.AIR.getDefaultState(), 2);
 		}

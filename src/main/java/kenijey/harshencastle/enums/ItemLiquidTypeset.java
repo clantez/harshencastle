@@ -42,7 +42,7 @@ public class ItemLiquidTypeset
 	
 	public static ItemStack getStackFromType(CauldronLiquid type)
 	{
-		return new ItemStack(HarshenItems.item_liquid, 1, getMetaFromType(type));
+		return new ItemStack(HarshenItems.ITEM_LIQUID, 1, getMetaFromType(type));
 	}
 	
 	public String getName() {

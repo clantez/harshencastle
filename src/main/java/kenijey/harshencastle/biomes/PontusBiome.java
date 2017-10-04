@@ -30,7 +30,7 @@ public class PontusBiome extends BasePontusResourceBiome
 	
 	@Override
 	public WorldGenAbstractTree getRandomTreeFeature(Random rand) {
-		return new WorldGenTrees(false, 3, HarshenBlocks.pontus_dead_wood.getDefaultState(), HarshenBlocks.pontus_dead_leaves.getDefaultState(), false);
+		return new WorldGenTrees(false, 3, HarshenBlocks.PONTUS_DEAD_WOOD.getDefaultState(), HarshenBlocks.PONTUS_DEAD_LEAVES.getDefaultState(), false);
 	}
 	
 	@Override
@@ -40,7 +40,7 @@ public class PontusBiome extends BasePontusResourceBiome
 	
 	@Override
 	public Block[] getNonHightBlocks() {
-		return HarshenUtils.listOf(HarshenBlocks.harshen_dimensional_dirt);
+		return HarshenUtils.listOf(HarshenBlocks.HARSHEN_DIMENSIONAL_DIRT);
 	}
 
 	@Override
@@ -56,18 +56,18 @@ public class PontusBiome extends BasePontusResourceBiome
 
 	@Override
 	public Block[] getGroundBlocks() {
-		return HarshenUtils.listOf(HarshenBlocks.harshen_dimensional_rock, HarshenBlocks.harshen_dimensional_dirt);
+		return HarshenUtils.listOf(HarshenBlocks.HARSHEN_DIMENSIONAL_ROCK, HarshenBlocks.HARSHEN_DIMENSIONAL_DIRT);
 	}
 
 
 	@Override
 	public Block getMergerBlockDownLevel() {
-		return HarshenBlocks.harshen_dimensional_dirt;
+		return HarshenBlocks.HARSHEN_DIMENSIONAL_DIRT;
 	}
 	
 	@Override
 	public Block getMergerBlockUpLevel() {
-		return HarshenBlocks.harshen_dimensional_dirt;
+		return HarshenBlocks.HARSHEN_DIMENSIONAL_DIRT;
 	}
 
 

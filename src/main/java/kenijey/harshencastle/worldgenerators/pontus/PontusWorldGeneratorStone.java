@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 import kenijey.harshencastle.HarshenBlocks;
+import kenijey.harshencastle.HarshenUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
@@ -20,7 +21,7 @@ public class PontusWorldGeneratorStone extends WorldGenerator
     private ChunkPrimer primer;
     
     public PontusWorldGeneratorStone() {
-		this(HarshenBlocks.harshen_dimensional_stone.getDefaultState());
+		this(HarshenBlocks.HARSHEN_DIMENSIONAL_STONE.getDefaultState());
 	}
     
     public PontusWorldGeneratorStone(Block block) {
@@ -85,7 +86,7 @@ public class PontusWorldGeneratorStone extends WorldGenerator
                                 if (d12 * d12 + d13 * d13 + d14 * d14 < 1.0D)
                                 {
                                     BlockPos blockpos = new BlockPos(l1, i2, j2);
-                                    if(Arrays.asList(HarshenBlocks.harshen_dimensional_dirt, HarshenBlocks.harshen_dimensional_rock).contains(worldIn.getBlockState(blockpos).getBlock()))
+                                    if(HarshenUtils.toArray(HarshenBlocks.HARSHEN_DIMENSIONAL_DIRT, HarshenBlocks.HARSHEN_DIMENSIONAL_ROCK).contains(worldIn.getBlockState(blockpos).getBlock()))
                                     	if(primer == null)
                                     		worldIn.setBlockState(blockpos, this.state, 2);
                                     	else

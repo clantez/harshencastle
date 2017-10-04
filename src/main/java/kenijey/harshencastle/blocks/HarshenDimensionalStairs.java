@@ -14,7 +14,7 @@ public class HarshenDimensionalStairs extends BlockStairs
 {
 
 	public HarshenDimensionalStairs() {
-		super(HarshenBlocks.harshen_dimensional_stone.getDefaultState());
+		super(HarshenBlocks.HARSHEN_DIMENSIONAL_STONE.getDefaultState());
 		setUnlocalizedName("harshen_dimensional_stairs");
 		setRegistryName("harshen_dimensional_stairs");
 		setHarvestLevel("pickaxe", 3);

@@ -27,11 +27,11 @@ public class HarshenDimensionalFluidBlock extends BaseFluidBlock
     public boolean checkForMixing(World worldIn, BlockPos pos, IBlockState state) {
     	 for (EnumFacing enumfacing : EnumFacing.values())
     		if(shouldBlockBeChanged(worldIn.getBlockState(pos.offset(enumfacing))) && enumfacing != EnumFacing.UP)
-  	    		worldIn.setBlockState(pos.offset(enumfacing), HarshenBlocks.harshen_dimensional_dirt.getDefaultState(), 3);
+  	    		worldIn.setBlockState(pos.offset(enumfacing), HarshenBlocks.HARSHEN_DIMENSIONAL_DIRT.getDefaultState(), 3);
     	 
     	 for (EnumFacing enumfacing : EnumFacing.HORIZONTALS)
      		if(shouldBlockBeChanged(worldIn.getBlockState(pos.offset(enumfacing).down())))
-   	    		worldIn.setBlockState(pos.offset(enumfacing).down(), HarshenBlocks.harshen_dimensional_dirt.getDefaultState(), 3);
+   	    		worldIn.setBlockState(pos.offset(enumfacing).down(), HarshenBlocks.HARSHEN_DIMENSIONAL_DIRT.getDefaultState(), 3);
     		 
     	return super.checkForMixing(worldIn, pos, state);
     }
@@ -53,12 +53,12 @@ public class HarshenDimensionalFluidBlock extends BaseFluidBlock
 
 	@Override
 	protected Block getBlockWhenSourceHit() {
-		return HarshenBlocks.harshen_dimensional_dirt;
+		return HarshenBlocks.HARSHEN_DIMENSIONAL_DIRT;
 	}
 
 	@Override
 	protected Block getBlockWhenOtherHit() {
-		return HarshenBlocks.harshen_dimensional_dirt;
+		return HarshenBlocks.HARSHEN_DIMENSIONAL_DIRT;
 	}
 
 }

@@ -99,7 +99,7 @@ public enum EnumGlassContainer implements IStringSerializable, IIDSet
 	 
 	public ItemStack getStack()
 	{
-		return new ItemStack(HarshenItems.glass_container, 1, this.meta);
+		return new ItemStack(HarshenItems.GLASS_CONTAINER, 1, this.meta);
 	}
 
 	@Override

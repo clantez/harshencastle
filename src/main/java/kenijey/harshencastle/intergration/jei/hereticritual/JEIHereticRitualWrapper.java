@@ -30,9 +30,9 @@ public class JEIHereticRitualWrapper extends BaseJeiWrapper
 		for(Object o : recipe.getPedestalItems())
 			builder.add(ImmutableList.of((ItemStack) o));
 		if(HarshenUtils.glassContainerHasBlock(recipe.getCatalyst()))
-			builder.add(ImmutableList.of(new ItemStack(HarshenItems.item_liquid, 1, ItemLiquidTypeset.getMetaFromType(recipe.getCatalyst()))));
+			builder.add(ImmutableList.of(new ItemStack(HarshenItems.ITEM_LIQUID, 1, ItemLiquidTypeset.getMetaFromType(recipe.getCatalyst()))));
 		builder.add(ImmutableList.of(EnumGlassContainer.getContainerFromType(recipe.getCatalyst()).getStack()));
-		builder.add(ImmutableList.of(new ItemStack(HarshenBlocks.heretic_cauldron)));
+		builder.add(ImmutableList.of(new ItemStack(HarshenBlocks.HERETIC_CAULDRON)));
 		output = recipe.getOutput();
 		allInputs = builder.build();
 		catalyst = recipe.getCatalyst();

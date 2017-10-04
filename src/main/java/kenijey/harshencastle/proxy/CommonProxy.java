@@ -86,14 +86,10 @@ public class CommonProxy
     	HarshenFluids.register();
 		
     	setUpEnumValues();
-    	
+				
 		HarshenBlocks.preInit();
 		HarshenItems.preInit();
 		HarshenStructures.preInit();
-				
-		HarshenBlocks.reg();
-		HarshenItems.reg();
-		HarshenStructures.reg();
 		
 		HarshenConfigs.BLOCKS.preInit();
 		HarshenConfigs.ITEMS.preInit();

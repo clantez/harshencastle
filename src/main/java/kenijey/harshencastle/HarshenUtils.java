@@ -343,7 +343,7 @@ public class HarshenUtils
 	public static ArrayList<Block> getBlocksFromString(String blockName)
 	{
 		ArrayList<Block> blocks = new ArrayList<>();
-		if(!Arrays.asList(Blocks.AIR, null).contains(Block.getBlockFromName(blockName)))
+		if(!HarshenUtils.toArray(Blocks.AIR, null).contains(Block.getBlockFromName(blockName)))
 			blocks.add(Block.getBlockFromName(blockName));
 		for(ItemStack oreStack : OreDictionary.getOres(blockName))
 			if(oreStack.getItem() instanceof ItemBlock)

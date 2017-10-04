@@ -83,7 +83,7 @@ public class HereticCauldron extends BaseBlockHarshenSingleInventory
 	@Override
 	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
 		if(!(worldIn.getBlockState(pos.up()).getBlock() instanceof HereticCauldronTop) && worldIn.getBlockState(pos.up()).getBlock().isReplaceable(worldIn, pos.up()))
-			worldIn.setBlockState(pos.up(), HarshenBlocks.heretic_cauldron_top.getDefaultState(), 3);
+			worldIn.setBlockState(pos.up(), HarshenBlocks.HERETIC_CAULDRON_TOP.getDefaultState(), 3);
 		else
 			worldIn.destroyBlock(pos, true);
 	}

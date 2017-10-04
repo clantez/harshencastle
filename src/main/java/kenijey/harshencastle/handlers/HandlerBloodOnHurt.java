@@ -5,6 +5,7 @@ import java.util.Random;
 
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenItems;
+import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.config.GeneralConfig;
 import kenijey.harshencastle.items.BloodCollector;
 import net.minecraft.entity.monster.EntityWitch;
@@ -24,10 +25,10 @@ public class HandlerBloodOnHurt
 	public void onLivingHurt(LivingHurtEvent event)
 	{
 		if(new Random().nextDouble() < GeneralConfig.bloodChance && event.getSource() instanceof EntityDamageSource)
-			if(Arrays.asList(AllowedEntities).contains(event.getEntity().getClass()) && event.getEntity().world.isAirBlock(event.getEntity().getPosition()) && GeneralConfig.bloodDrops)
-				event.getEntity().getEntityWorld().setBlockState(event.getEntity().getPosition(), HarshenBlocks.blood_block.getDefaultState(), 3);
+			if(HarshenUtils.toArray(AllowedEntities).contains(event.getEntity().getClass()) && event.getEntity().world.isAirBlock(event.getEntity().getPosition()) && GeneralConfig.bloodDrops)
+				event.getEntity().getEntityWorld().setBlockState(event.getEntity().getPosition(), HarshenBlocks.BLOOD_BLOCK.getDefaultState(), 3);
 			else if(event.getSource().getTrueSource() instanceof EntityPlayer && GeneralConfig.bloodOffHand &&
-					((EntityPlayer)event.getSource().getTrueSource()).getHeldItemOffhand().getItem() == HarshenItems.blood_collector)
+					((EntityPlayer)event.getSource().getTrueSource()).getHeldItemOffhand().getItem() == HarshenItems.BLOOD_COLLECTOR)
 				((BloodCollector)((EntityPlayer)event.getSource().getTrueSource()).getHeldItemOffhand().getItem()).fill(((EntityPlayer)event.getSource().getTrueSource()), EnumHand.OFF_HAND, 1);
 	}
 }

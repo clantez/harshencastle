@@ -29,9 +29,9 @@ public class JEICauldronWrapper extends BaseJeiWrapper
 		ImmutableList.Builder<List<ItemStack>> builder = ImmutableList.builder();
 		builder.add(ImmutableList.of(recipe.getInput()));
 		if(HarshenUtils.glassContainerHasBlock(recipe.getCatalyst()))
-			builder.add(ImmutableList.of(new ItemStack(HarshenItems.item_liquid, 1, ItemLiquidTypeset.getMetaFromType(recipe.getCatalyst()))));
+			builder.add(ImmutableList.of(new ItemStack(HarshenItems.ITEM_LIQUID, 1, ItemLiquidTypeset.getMetaFromType(recipe.getCatalyst()))));
 		builder.add(ImmutableList.of(EnumGlassContainer.getContainerFromType(recipe.getCatalyst()).getStack()));
-		builder.add(ImmutableList.of(new ItemStack(HarshenBlocks.heretic_cauldron)));
+		builder.add(ImmutableList.of(new ItemStack(HarshenBlocks.HERETIC_CAULDRON)));
 		input = builder.build();
 		output = recipe.getOutput();
 		catalyst = recipe.getCatalyst();

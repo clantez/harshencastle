@@ -30,7 +30,7 @@ public class PontusFarBiome extends BasePontusResourceBiome {
 	@Override
 	public WorldGenAbstractTree getRandomTreeFeature(Random rand) {
 		this.decorator.treesPerChunk = 3;
-		return new BasePineTreeGenerator(HarshenBlocks.pontus_far_wood, HarshenBlocks.pontus_far_leaves.getDefaultState());
+		return new BasePineTreeGenerator(HarshenBlocks.PONTUS_FAR_WOOD, HarshenBlocks.PONTUS_FAR_LEAVES.getDefaultState());
 	}	
 	
 	@Override
@@ -56,18 +56,18 @@ public class PontusFarBiome extends BasePontusResourceBiome {
 
 	@Override
 	public Block[] getGroundBlocks() {
-		return HarshenUtils.listOf(HarshenBlocks.harshen_far_rock, HarshenBlocks.harshen_chaotic_rock);
+		return HarshenUtils.listOf(HarshenBlocks.HARSHEN_FAR_ROCK, HarshenBlocks.HARSHEN_CHAOTIC_ROCK);
 	}
 
 
 	@Override
 	public Block getMergerBlockDownLevel() {
-		return HarshenBlocks.harshen_far_rock;
+		return HarshenBlocks.HARSHEN_FAR_ROCK;
 	}	
 	
 	@Override
 	protected Block getMergerBlockUpLevel() {
-		return HarshenBlocks.harshen_chaotic_rock;
+		return HarshenBlocks.HARSHEN_CHAOTIC_ROCK;
 	}
 	
 	@Override

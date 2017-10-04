@@ -58,7 +58,7 @@ public class HereticCauldronTop extends Block implements ITileEntityProvider
 	@Override
 	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
 		if(!(worldIn.getBlockState(pos.down()).getBlock() instanceof HereticCauldron) && worldIn.getBlockState(pos.down()).getBlock().isReplaceable(worldIn, pos.up()))
-			worldIn.setBlockState(pos.down(), HarshenBlocks.heretic_cauldron.getDefaultState(), 3);
+			worldIn.setBlockState(pos.down(), HarshenBlocks.HERETIC_CAULDRON.getDefaultState(), 3);
 	}
 	
 	@Override

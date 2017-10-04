@@ -36,7 +36,7 @@ public class HarshenArrow extends EntityTippedArrow
 	protected ItemStack getArrowStack() {
 		if(arrowType == EnumHarshenArrowTypes.RIPPER)
 			return ItemStack.EMPTY;
-		return new ItemStack(new Random().nextFloat() < chanceThatArrowBreaks ? HarshenItems.broken_arrow : Items.ARROW);
+		return new ItemStack(new Random().nextFloat() < chanceThatArrowBreaks ? HarshenItems.BROKEN_ARROW : Items.ARROW);
 	}
 	
 	

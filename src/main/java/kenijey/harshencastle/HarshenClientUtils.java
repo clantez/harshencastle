@@ -242,7 +242,7 @@ public class HarshenClientUtils
 		}
 	}
 	
-	public static RayTraceResult getMouseOver()
+	public static RayTraceResult getMouseOver(double distance)
     {
     	Minecraft mc = Minecraft.getMinecraft();
     	float partialTicks = mc.getRenderPartialTicks();
@@ -252,7 +252,7 @@ public class HarshenClientUtils
         {
             if (mc.world != null)
             {
-                double d0 = 100D;
+                double d0 = distance;
                 RayTraceResult mouseOver = entity.rayTrace(d0, partialTicks);
                 Vec3d vec3d = entity.getPositionEyes(partialTicks);
                 double d1 = d0;
@@ -280,7 +280,6 @@ public class HarshenClientUtils
                     Entity entity1 = list.get(j);
                     AxisAlignedBB axisalignedbb = entity1.getEntityBoundingBox().grow((double)entity1.getCollisionBorderSize());
                     RayTraceResult raytraceresult = axisalignedbb.calculateIntercept(vec3d, vec3d2);
-
                     if (axisalignedbb.contains(vec3d))
                     {
                         if (d2 >= 0.0D)

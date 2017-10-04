@@ -6,6 +6,7 @@ import java.util.List;
 
 import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.HarshenItems;
+import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.base.BaseJeiCategory;
 import kenijey.harshencastle.enums.CauldronLiquid;
 import kenijey.harshencastle.items.GlassContainer;
@@ -50,7 +51,7 @@ public class JEICauldronCategory extends BaseJeiCategory
 		recipeLayout.getItemStacks().init(0, true, 66, 0);
 		recipeLayout.getItemStacks().set(0, ingredients.getInputs(ItemStack.class).get(0));
 		recipeLayout.getItemStacks().init(1, false, 66, 29);
-		recipeLayout.getItemStacks().set(1, Arrays.asList(new ItemStack(HarshenItems.ritual_stick)));
+		recipeLayout.getItemStacks().set(1, HarshenUtils.toArray(new ItemStack(HarshenItems.RITUAL_STICK)));
 		recipeLayout.getItemStacks().init(2, false, 130, 46);
 		recipeLayout.getItemStacks().set(2, ingredients.getOutputs(ItemStack.class).get(0));
 	}
@@ -82,7 +83,7 @@ public class JEICauldronCategory extends BaseJeiCategory
 	@Override
 	public List getTooltipStrings(int mouseX, int mouseY) {
 		if(mouseX > 56 && mouseX < 94 && mouseY > 49 && mouseY < 63)
-			return Arrays.asList(new TextComponentTranslation(name).getFormattedText());
+			return HarshenUtils.toArray(new TextComponentTranslation(name).getFormattedText());
 		return super.getTooltipStrings(mouseX, mouseY);
 	}
 

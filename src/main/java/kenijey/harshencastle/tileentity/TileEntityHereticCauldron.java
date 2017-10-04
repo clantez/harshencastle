@@ -173,7 +173,7 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
         		level ++;
         		fluid = EnumGlassContainer.getContainerFromMeta(itemstack.getMetadata()).getType();
         		itemstack.shrink(1);
-        		give(playerIn, hand, new ItemStack(HarshenItems.glass_container));
+        		give(playerIn, hand, new ItemStack(HarshenItems.GLASS_CONTAINER));
         		return true;
         	}
         	else if(itemstack.getMetadata() == 0 && fluid != CauldronLiquid.NONE)
@@ -185,7 +185,7 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
         				return false;
         		}
         		itemstack.shrink(1);
-        		give(playerIn, hand, new ItemStack(HarshenItems.glass_container, 1, EnumGlassContainer.getContainerFromType(fluid).getMeta()));
+        		give(playerIn, hand, new ItemStack(HarshenItems.GLASS_CONTAINER, 1, EnumGlassContainer.getContainerFromType(fluid).getMeta()));
         		level--;
         		return true;
         	}
@@ -229,7 +229,7 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
         	itemstack.shrink(1);
         	return true;
         }
-        else if(item == HarshenItems.ritual_stick)
+        else if(item == HarshenItems.RITUAL_STICK)
         {
         	ItemStack stack = getItem();
         	switch (itemstack.getMetadata()) {
@@ -272,7 +272,7 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 		if(world.isRemote && setRecipe && players[0] != null && players[0].getUniqueID().equals(HarshenCastle.proxy.getPlayer().getUniqueID()))
 			HarshenCastle.proxy.resetErroredPositions();
 		erroredPositions.clear();
-		ArrayList<Integer> maxList = new ArrayList<>(Arrays.asList(-4, 5));
+		ArrayList<Integer> maxList = new ArrayList<>(HarshenUtils.toArray(-4, 5));
 		maxList.add(Math.abs(maxList.get(0)));
 		maxList.add(Math.abs(maxList.get(1)));
 		boolean switchFlag = true;
@@ -290,26 +290,26 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 		for(int x = -1; x < 2; x++)
 			for(int z = -1; z < 2; z++)
 				if(!(x == 0 && z == 0))
-					if(world.getBlockState(pos.add(x, 0, z)).getBlock() != HarshenBlocks.blood_block && !deletedBloodPos.contains(pos.add(x, 0, z)))
-						setError(pos.add(x, 0, z), HarshenBlocks.blood_block);
+					if(world.getBlockState(pos.add(x, 0, z)).getBlock() != HarshenBlocks.BLOOD_BLOCK && !deletedBloodPos.contains(pos.add(x, 0, z)))
+						setError(pos.add(x, 0, z), HarshenBlocks.BLOOD_BLOCK);
 					else
 						bloodPos.add(pos.add(x, 0, z));
 		for(EnumFacing facing : EnumFacing.HORIZONTALS)
 		{
-			if(world.getBlockState(pos.offset(facing, 2)).getBlock() != HarshenBlocks.blood_block && !deletedBloodPos.contains(pos.offset(facing, 2)))
-				setError(pos.offset(facing, 2), HarshenBlocks.blood_block);
+			if(world.getBlockState(pos.offset(facing, 2)).getBlock() != HarshenBlocks.BLOOD_BLOCK && !deletedBloodPos.contains(pos.offset(facing, 2)))
+				setError(pos.offset(facing, 2), HarshenBlocks.BLOOD_BLOCK);
 			else
 				bloodPos.add(pos.offset(facing, 2));
-			if(world.getBlockState(pos.offset(facing, 3)).getBlock() != HarshenBlocks.harshen_dimensional_pedestal)
-				setError(pos.offset(facing, 3), HarshenBlocks.harshen_dimensional_pedestal);
+			if(world.getBlockState(pos.offset(facing, 3)).getBlock() != HarshenBlocks.HARSHEN_DIMENSIONAL_PEDESTAL)
+				setError(pos.offset(facing, 3), HarshenBlocks.HARSHEN_DIMENSIONAL_PEDESTAL);
 			else
 				pedestals.add((TileEntityHarshenDimensionalPedestal)world.getTileEntity(pos.offset(facing, 3)));
 		}
-		ArrayList<Integer> pedestalDistanceList = new ArrayList<>(Arrays.asList(-2, 2));
+		ArrayList<Integer> pedestalDistanceList = new ArrayList<>(HarshenUtils.toArray(-2, 2));
 		for(int x : pedestalDistanceList)
 			for(int z : pedestalDistanceList)
-				if(world.getBlockState(pos.add(x, 0, z)).getBlock() != HarshenBlocks.harshen_dimensional_pedestal)
-					setError(pos.add(x, 0, z), HarshenBlocks.harshen_dimensional_pedestal);
+				if(world.getBlockState(pos.add(x, 0, z)).getBlock() != HarshenBlocks.HARSHEN_DIMENSIONAL_PEDESTAL)
+					setError(pos.add(x, 0, z), HarshenBlocks.HARSHEN_DIMENSIONAL_PEDESTAL);
 				else
 					pedestals.add((TileEntityHarshenDimensionalPedestal)world.getTileEntity(pos.add(x, 0, z)));
 		
@@ -345,7 +345,7 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 						blockErrorList.get(1).getLocalizedName()), false);
 				for(BlockPos pos : erroredPositions)
 					if(players[0].getUniqueID().equals(HarshenCastle.proxy.getPlayer().getUniqueID()))
-						if(blockErrorList.get(erroredPositions.indexOf(pos) * 2) == HarshenBlocks.blood_block)
+						if(blockErrorList.get(erroredPositions.indexOf(pos) * 2) == HarshenBlocks.BLOOD_BLOCK)
 							HarshenCastle.proxy.addErroredPosition(new FaceRenderer(pos, EnumFacing.DOWN));
 						else
 							HarshenCastle.proxy.addErroredPosition(new FaceRenderer(pos, null));

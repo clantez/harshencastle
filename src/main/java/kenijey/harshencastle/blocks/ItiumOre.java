@@ -60,7 +60,7 @@ public class ItiumOre extends Block
 	
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return HarshenItems.itium;
+		return HarshenItems.ITIUM;
 	}
 	
 	@Override

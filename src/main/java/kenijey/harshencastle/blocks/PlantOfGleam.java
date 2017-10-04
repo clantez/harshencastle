@@ -42,7 +42,7 @@ public class PlantOfGleam extends BlockFlower
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
 		int[] luck = {50,60,80,100};
 		if(rand.nextInt(101) <= luck[fortune])
-			return HarshenItems.light_emitted_seed;
+			return HarshenItems.LIGHT_EMITTED_SEED;
 		return null;
 	}
 	

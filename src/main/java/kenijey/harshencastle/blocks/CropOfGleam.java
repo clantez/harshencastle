@@ -32,12 +32,12 @@ public class CropOfGleam extends BlockCrops
 	
 	@Override
 	protected Item getSeed() {
-		return HarshenItems.light_emitted_seed;
+		return HarshenItems.LIGHT_EMITTED_SEED;
 	}
 	
 	@Override
 	protected Item getCrop() {
-		return HarshenItems.light_emitted_essence;
+		return HarshenItems.LIGHT_EMITTED_SEED;
 	}
 	
 	@Override

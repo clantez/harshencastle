@@ -156,7 +156,7 @@ public class HarshenDimensionalGate extends Block implements ITileEntityProvider
             	int y = toWorldIn.getTopSolidOrLiquidBlock(pos).getY();
             	BlockPos p = new BlockPos(pos.getX(), y, pos.getZ());
                 entityIn.setLocationAndAngles(p.getX(), p.getY(), p.getZ(), entityIn.rotationYaw, entityIn.rotationPitch);
-                if(placeBlock && !toWorldIn.getBlockState(p.add(0, -1, 0)).equals(HarshenBlocks.harshen_dimensional_gate.getDefaultState().withProperty(HarshenDimensionalGate.ACTIVE, true)))
+                if(placeBlock && !toWorldIn.getBlockState(p.add(0, -1, 0)).equals(HarshenBlocks.HARSHEN_DIMENSIONAL_GATE.getDefaultState().withProperty(HarshenDimensionalGate.ACTIVE, true)))
                 	toWorldIn.setBlockState(p.add(0, -1, 0), getStateFromMeta(3), 3);
                 toWorldIn.spawnEntity(entityIn);
                 toWorldIn.updateEntityWithOptionalForce(entityIn, false);

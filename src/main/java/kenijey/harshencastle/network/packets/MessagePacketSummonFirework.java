@@ -23,6 +23,6 @@ public class MessagePacketSummonFirework extends BaseMessagePacket<MessagePacket
         player.motionX += vec3d.x * 0.1D + (vec3d.x * 2.5D - player.motionX) * 0.5D;
         player.motionY += vec3d.y * 0.1D + (vec3d.y * 2.5D - player.motionY) * 0.5D;
         player.motionZ += vec3d.z * 0.1D + (vec3d.z * 2.5D - player.motionZ) * 0.5D;
-		HarshenUtils.damageFirstOccuringItem(player, HarshenItems.elytra_pendant);
+		HarshenUtils.damageFirstOccuringItem(player, HarshenItems.ELYTRA_PENDANT);
 	}
 }
