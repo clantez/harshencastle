@@ -49,7 +49,6 @@ public class HandlerKeyBinding
 	@SubscribeEvent
 	public void onKeyInput(KeyInputEvent event)
 	{
-
 		for(KeyBinding key : ringEvents)
 			if(key.isPressed())
 				sendRingEvent(ringEvents.indexOf(key));

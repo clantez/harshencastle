@@ -71,12 +71,7 @@ public class MessagePacketSpawnItemParticles extends BaseMessagePacket<MessagePa
 	}
 
 	@Override
-	public void handleServerSide(MessagePacketSpawnItemParticles message, EntityPlayer player) {	
-		
-	}
-
-	@Override
-	public void handleClientSide(MessagePacketSpawnItemParticles message, EntityPlayer player) {
+	public void onReceived(MessagePacketSpawnItemParticles message, EntityPlayer player) {	
 		for(int i = 0; i < message.timesSpawn; i++)
 			((ParticleItem)HarshenCastle.proxy.spawnParticle(EnumHarshenParticle.ITEM, message.position, message.directionSpeed, message.scale, message.disableMoving, message.stack))
 				.addToList(message.tag);

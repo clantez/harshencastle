@@ -19,13 +19,8 @@ public class MessagePacketOpenInv extends BaseMessagePacket<MessagePacketOpenInv
 	}
 
 	@Override
-	public void handleServerSide(MessagePacketOpenInv message, EntityPlayer player) {
+	public void onReceived(MessagePacketOpenInv message, EntityPlayer player) {
 		player.openGui(HarshenCastle.instance, GuiHandler.CUSTOMINVENTORY, player.world, (int)player.posX, (int)player.posY, (int)player.posZ);
-	}
-
-	@Override
-	public void handleClientSide(MessagePacketOpenInv message, EntityPlayer player) {
-		
 	}
 
 }

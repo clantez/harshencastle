@@ -28,12 +28,7 @@ public class MessagePacketRingUpdate extends BaseMessagePacket<MessagePacketRing
 	}
 
 	@Override
-	public void handleServerSide(MessagePacketRingUpdate message, EntityPlayer player) {
+	public void onReceived(MessagePacketRingUpdate message, EntityPlayer player) {
 		HandlerHarshenInventoryEffects.ringEvent(player, message.ringType);
 	}
-
-	@Override
-	public void handleClientSide(MessagePacketRingUpdate message, EntityPlayer player) {
-	}
-
 }

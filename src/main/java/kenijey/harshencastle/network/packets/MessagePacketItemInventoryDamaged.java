@@ -33,14 +33,11 @@ public class MessagePacketItemInventoryDamaged extends BaseMessagePacket<Message
 	}
 
 	@Override
-	public void handleServerSide(MessagePacketItemInventoryDamaged message, EntityPlayer player) {
-	}
-
-	@Override
-	public void handleClientSide(MessagePacketItemInventoryDamaged message, EntityPlayer player) {
-		 HarshenItemStackHandler handler = HarshenUtils.getHandler(player);
-  		 handler.getStackInSlot(message.slotId).damageItem(message.amount, player);
-         player.getEntityData().setTag("harshenInventory", handler.serializeNBT());
+	public void onReceived(MessagePacketItemInventoryDamaged message, EntityPlayer player) 
+	{
+		HarshenItemStackHandler handler = HarshenUtils.getHandler(player);
+ 		handler.getStackInSlot(message.slotId).damageItem(message.amount, player);
+        player.getEntityData().setTag("harshenInventory", handler.serializeNBT());
 	}
 
 }

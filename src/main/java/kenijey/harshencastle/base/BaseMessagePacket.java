@@ -1,5 +1,6 @@
 package kenijey.harshencastle.base;
 
+import io.netty.buffer.ByteBuf;
 import kenijey.harshencastle.HarshenCastle;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -11,15 +12,16 @@ public abstract class BaseMessagePacket<REQ extends IMessage> implements IMessag
 {
 	@Override
 	public REQ onMessage(REQ message, MessageContext ctx) {
-		if(ctx.side == Side.SERVER)
-			handleServerSide(message, ctx.getServerHandler().player);
-		else
-			handleClientSide(message, HarshenCastle.proxy.getPlayer());
+		onReceived(message, ctx.side == Side.SERVER ? ctx.getServerHandler().player : HarshenCastle.proxy.getPlayer());
 		return null;
 	}
 	
-	public abstract void handleServerSide(REQ message, EntityPlayer player);
-
-	public abstract void handleClientSide(REQ message, EntityPlayer player);
+	@Override
+	public abstract void fromBytes(ByteBuf buf);
+	
+	@Override
+	public abstract void toBytes(ByteBuf buf);
+	
+	public abstract void onReceived(REQ message, EntityPlayer player);
 
 }

@@ -33,12 +33,7 @@ public class MessagePacketPlayerTeleportEffects extends BaseMessagePacket<Messag
 	}
 
 	@Override
-	public void handleServerSide(MessagePacketPlayerTeleportEffects message, EntityPlayer player) {	
-		
-	}
-
-	@Override
-	public void handleClientSide(MessagePacketPlayerTeleportEffects message, EntityPlayer player) {
+	public void onReceived(MessagePacketPlayerTeleportEffects message, EntityPlayer player) {	
 		World world = player.world;
 		Vec3d blockpos = message.position;
 		for (int j = 0; j < 128; ++j)

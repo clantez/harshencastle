@@ -18,16 +18,11 @@ public class MessagePacketSummonFirework extends BaseMessagePacket<MessagePacket
 	}
 
 	@Override
-	public void handleServerSide(MessagePacketSummonFirework message, EntityPlayer player) {	
+	public void onReceived(MessagePacketSummonFirework message, EntityPlayer player) {	
 		Vec3d vec3d = player.getLookVec();
         player.motionX += vec3d.x * 0.1D + (vec3d.x * 2.5D - player.motionX) * 0.5D;
         player.motionY += vec3d.y * 0.1D + (vec3d.y * 2.5D - player.motionY) * 0.5D;
         player.motionZ += vec3d.z * 0.1D + (vec3d.z * 2.5D - player.motionZ) * 0.5D;
 		HarshenUtils.damageFirstOccuringItem(player, HarshenItems.elytra_pendant);
 	}
-
-	@Override
-	public void handleClientSide(MessagePacketSummonFirework message, EntityPlayer player) {
-	}
-
 }

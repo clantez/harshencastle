@@ -28,12 +28,7 @@ public class MessagePacketPlayerHasAccess extends BaseMessagePacket<MessagePacke
 	}
 
 	@Override
-	public void handleServerSide(MessagePacketPlayerHasAccess message, EntityPlayer player) {	
-		
-	}
-
-	@Override
-	public void handleClientSide(MessagePacketPlayerHasAccess message, EntityPlayer player) {
+	public void onReceived(MessagePacketPlayerHasAccess message, EntityPlayer player) {	
 		HandlerPontusAllowed.setAllowed(player, message.level);
 	}
 

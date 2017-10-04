@@ -31,11 +31,10 @@ public class HandlerClientHarshenInventoryEffects
 		
 	}
 	
-	ArrayList<BlockPos> finalBlockPositions = new ArrayList<>();
-	
 	@SubscribeEvent
 	public void renderWorldLast(RenderWorldLastEvent event)
 	{
+		ArrayList<BlockPos> finalBlockPositions = new ArrayList<>();
 		if(HarshenUtils.containsItem(Minecraft.getMinecraft().player, HarshenItems.xray_pendant))
 		{
 			EntityPlayer player = Minecraft.getMinecraft().player;

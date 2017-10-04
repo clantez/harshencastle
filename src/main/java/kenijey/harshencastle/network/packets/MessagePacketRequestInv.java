@@ -18,13 +18,8 @@ public class MessagePacketRequestInv extends BaseMessagePacket<MessagePacketRequ
 	}
 
 	@Override
-	public void handleServerSide(MessagePacketRequestInv message, EntityPlayer player) {
+	public void onReceived(MessagePacketRequestInv message, EntityPlayer player) {
 		HarshenNetwork.sendToPlayer(player, new MessageSendPlayerInvToClient(player));
-	}
-
-	@Override
-	public void handleClientSide(MessagePacketRequestInv message, EntityPlayer player) {
-		
 	}
 
 }

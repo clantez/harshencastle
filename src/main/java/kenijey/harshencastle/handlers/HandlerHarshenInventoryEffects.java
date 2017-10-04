@@ -2,14 +2,19 @@ package kenijey.harshencastle.handlers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.network.packets.MessagePacketPlayerTeleportEffects;
+import kenijey.harshencastle.network.packets.MessagePacketReviveInventory;
 import kenijey.harshencastle.network.packets.MessagePacketSummonFirework;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityPigZombie;
@@ -21,7 +26,17 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.network.play.server.SPacketCombatEvent;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.scoreboard.IScoreCriteria;
+import net.minecraft.scoreboard.ScoreObjective;
+import net.minecraft.scoreboard.Team;
+import net.minecraft.stats.StatList;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.SoundCategory;
@@ -31,11 +46,13 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.GameType;
 import net.minecraft.world.World;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
 
 public class HandlerHarshenInventoryEffects 
 {	
@@ -110,7 +127,7 @@ public class HandlerHarshenInventoryEffects
 	}
 		
 	@SubscribeEvent
-	public void onLivingDeath(LivingDropsEvent event)
+	public void onLivingDrops(LivingDropsEvent event)
 	{
 		if(event.getSource() instanceof EntityDamageSource && ((EntityDamageSource)event.getSource()).getTrueSource() instanceof EntityPlayer)
 		{
@@ -123,6 +140,83 @@ public class HandlerHarshenInventoryEffects
 			if(HarshenUtils.containsItem(player, HarshenItems.fiery_ring))
 				HarshenUtils.cookAndReplaceList(event.getDrops());
 		}
+	}
+	
+	@SubscribeEvent
+	public void onLivingDeath(LivingDeathEvent event)
+	{
+		if(!(event.getEntity() instanceof EntityPlayer) || !HarshenUtils.containsItem(event.getEntity(), HarshenItems.soul_binding_pendant))
+			return;
+		event.setCanceled(true);
+		World world = event.getEntityLiving().world;
+		if(!world.isRemote)
+		{
+			boolean flag = world.getGameRules().getBoolean("showDeathMessages");
+			EntityPlayerMP player = (EntityPlayerMP) event.getEntity();
+			player.connection.sendPacket(new SPacketCombatEvent(player.getCombatTracker(), SPacketCombatEvent.Event.ENTITY_DIED, flag));
+	        if (flag)
+	        {
+	            Team team = player.getTeam();
+	            if (team != null && team.getDeathMessageVisibility() != Team.EnumVisible.ALWAYS)
+	                if (team.getDeathMessageVisibility() == Team.EnumVisible.HIDE_FOR_OTHER_TEAMS)
+	                	player.mcServer.getPlayerList().sendMessageToAllTeamMembers(player, player.getCombatTracker().getDeathMessage());
+	                else if (team.getDeathMessageVisibility() == Team.EnumVisible.HIDE_FOR_OWN_TEAM)
+	                	player.mcServer.getPlayerList().sendMessageToTeamOrAllPlayers(player, player.getCombatTracker().getDeathMessage());
+	            else
+	            	player.mcServer.getPlayerList().sendMessage(player.getCombatTracker().getDeathMessage());
+	        }
+
+	        for (ScoreObjective scoreobjective : world.getScoreboard().getObjectivesFromCriteria(IScoreCriteria.DEATH_COUNT))
+	            player.getWorldScoreboard().getOrCreateScore(player.getName(), scoreobjective).incrementScore();
+
+	        EntityLivingBase entitylivingbase = player.getAttackingEntity();
+
+	        if (entitylivingbase != null)
+	        {
+	            EntityList.EntityEggInfo entitylist$entityegginfo = EntityList.ENTITY_EGGS.get(EntityList.getKey(entitylivingbase));
+	            if (entitylist$entityegginfo != null)
+	            	player.addStat(entitylist$entityegginfo.entityKilledByStat);
+	        }
+	        player.addStat(StatList.DEATHS);
+	        player.takeStat(StatList.TIME_SINCE_DEATH);
+	        player.extinguish();
+	        setFlag(player, 0, false);
+	        player.getCombatTracker().reset();
+	        inventoryMap.put(event.getEntity().getUniqueID(), ((EntityPlayer)event.getEntity()).inventory.writeToNBT(new NBTTagList()));
+	        HarshenUtils.damageOccuringItemNoPacket(player, HarshenItems.soul_binding_pendant, 1);
+	        if(HarshenUtils.getFirstOccuringItem(player, HarshenItems.soul_binding_pendant).getItemDamage() == 
+	        		HarshenUtils.getFirstOccuringItem(player, HarshenItems.soul_binding_pendant).getMaxDamage() - 1)
+	        			HarshenUtils.damageOccuringItemNoPacket(player, HarshenItems.soul_binding_pendant, 1);
+	        	
+		}	
+		HandlerPlayerInventoryOverDeath.onPlayerDeath(event);
+	}
+	
+	@SubscribeEvent
+	public void onPlayerRespawn(PlayerRespawnEvent event)
+	{
+		HandlerPlayerInventoryOverDeath.onPlayerRespawn(event);
+		
+		if(HarshenUtils.containsItem(event.player, HarshenItems.soul_binding_pendant))
+		{
+			event.player.inventory.readFromNBT(inventoryMap.get(event.player.getUniqueID()));
+			HarshenNetwork.sendToPlayer(event.player, new MessagePacketReviveInventory(event.player));
+		}
+	}
+	
+		
+	private static HashMap<UUID, NBTTagList> inventoryMap = new HashMap<>();
+	
+    private static final DataParameter<Byte> FLAGS = EntityDataManager.<Byte>createKey(Entity.class, DataSerializers.BYTE);
+	
+	private static void setFlag(Entity entity, int flag, boolean set)
+	{
+		byte b0 = ((Byte)entity.getDataManager().get(FLAGS)).byteValue();
+
+        if (set)
+        	entity.getDataManager().set(FLAGS, Byte.valueOf((byte)(b0 | 1 << flag)));
+        else
+        	entity.getDataManager().set(FLAGS, Byte.valueOf((byte)(b0 & ~(1 << flag))));
 	}
 	
 	public static void ringEvent(EntityPlayer player, int ringType)
@@ -154,29 +248,19 @@ public class HandlerHarshenInventoryEffects
 		}
 		else if(ringType == 2 && HarshenUtils.containsItem(player, HarshenItems.combat_pendant))
 		{
-			World world = player.world;
-			int range = 5;
-			Vec3d vec = player.getLookVec().normalize();
-			EntityLivingBase entityToAttack = null;
-			for(int i = 1; i < range; i++)
+			EntityLivingBase entityToAttack = HarshenUtils.getFirstEntityInDirection(player.world, player.getPositionVector(), player.getLookVec().normalize(), 5, EntityLivingBase.class);
+			if(entityToAttack == null)
 			{
-			    AxisAlignedBB aabb = new AxisAlignedBB(player.posX + vec.x * i - 1, player.posY + vec.y * i - 1, player.posZ + vec.z * i - 1, player.posX + vec.x * i + 2, player.posY + vec.y * i + 2, player.posZ + vec.z * i + 2);
-			    List<EntityLivingBase> list = world.getEntitiesWithinAABB(EntityLivingBase.class, aabb);
-			    double box = 4;
-			    if(list.isEmpty())
-			    	list = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(player.posX - box, player.posY - box, player.posZ - box, player.posX + box, player.posY + box, player.posZ + box));
-			    if(!list.isEmpty())
-			    {
-			    	entityToAttack = list.get(0);
-			    	break;
-			    }
+				List<EntityLivingBase> list = player.world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(player.posX - 4d, player.posY - 4d, player.posZ - 4d, player.posX + 4d, player.posY + 4d, player.posZ + 4d));
+				if(!list.isEmpty())
+					entityToAttack = list.get(0);
 			}
 			if(!player.equals(entityToAttack) && (entityToAttack != null || (entityToAttack instanceof EntityPlayerMP && player.canAttackPlayer((EntityPlayerMP)entityToAttack)
 					&& HarshenUtils.toArray(GameType.SURVIVAL, GameType.ADVENTURE).contains(((EntityPlayerMP)entityToAttack).interactionManager.getGameType()))))
 			{
 				Vec3d position = entityToAttack.getPositionVector();
 				Vec3d playerPosNoY = position.addVector(movePos(), 0, movePos());
-				Vec3d pos = new Vec3d(playerPosNoY.x, HarshenUtils.getTopBlock(world, new BlockPos(playerPosNoY)).getY(), playerPosNoY.z);
+				Vec3d pos = new Vec3d(playerPosNoY.x, HarshenUtils.getTopBlock(player.world, new BlockPos(playerPosNoY)).getY(), playerPosNoY.z);
 				double d0 = position.x - pos.x;
 	            double d1 = position.y - (pos.y + (double)player.getEyeHeight() - entityToAttack.height / 2f + 0.1f);
 	            double d2 = position.z - pos.z;

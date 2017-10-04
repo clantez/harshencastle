@@ -52,12 +52,7 @@ public class MessagePacketSpawnBloodParticle extends BaseMessagePacket<MessagePa
 	}
 
 	@Override
-	public void handleServerSide(MessagePacketSpawnBloodParticle message, EntityPlayer player) {	
-		
-	}
-
-	@Override
-	public void handleClientSide(MessagePacketSpawnBloodParticle message, EntityPlayer player) {
+	public void onReceived(MessagePacketSpawnBloodParticle message, EntityPlayer player) {	
 		HarshenCastle.proxy.spawnParticle(EnumHarshenParticle.BLOOD, message.position, message.directionSpeed, message.scale, message.disableMoving);
 	}
 }

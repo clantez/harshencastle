@@ -31,12 +31,12 @@ import kenijey.harshencastle.fluids.HarshenFluids;
 import kenijey.harshencastle.handlers.GuiHandler;
 import kenijey.harshencastle.handlers.HandlerBlockBurn;
 import kenijey.harshencastle.handlers.HandlerBloodOnHurt;
+import kenijey.harshencastle.handlers.HandlerExtraRange;
 import kenijey.harshencastle.handlers.HandlerGlassContainer;
 import kenijey.harshencastle.handlers.HandlerHarshenArmourEffects;
 import kenijey.harshencastle.handlers.HandlerHarshenInventory;
 import kenijey.harshencastle.handlers.HandlerHarshenInventoryEffects;
 import kenijey.harshencastle.handlers.HandlerIronHeartDrop;
-import kenijey.harshencastle.handlers.HandlerPlayerInventoryOverDeath;
 import kenijey.harshencastle.handlers.HandlerPontusAllowed;
 import kenijey.harshencastle.handlers.HandlerPotionEffects;
 import kenijey.harshencastle.handlers.HandlerRaptorScythe;
@@ -169,9 +169,9 @@ public class CommonProxy
     			new HandlerHarshenInventoryEffects(), 
     			new HandlerZombieEyeDrop(),
     			new HandlerIronHeartDrop(),
-    			new HandlerPlayerInventoryOverDeath(),
     			new HandlerBlockBurn(),
-    			new HandlerVillagerSpawn()};
+    			new HandlerVillagerSpawn(),
+    			new HandlerExtraRange()};
     	
     	for(Class clas : tileEntityClasses)
     		GameRegistry.registerTileEntity(clas, HarshenCastle.MODID + clas.getSimpleName());	
@@ -182,7 +182,7 @@ public class CommonProxy
         	FMLCommonHandler.instance().bus().register(o);
     	}
     	
-GameRegistry.registerWorldGenerator(new WorldGen(), 0);
+    	GameRegistry.registerWorldGenerator(new WorldGen(), 0);
     	
     	HarshenRecipes.register();
     	

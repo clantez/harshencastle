@@ -28,11 +28,7 @@ public class MessagePacketKillAllWithTag extends BaseMessagePacket<MessagePacket
 	}
 
 	@Override
-	public void handleServerSide(MessagePacketKillAllWithTag message, EntityPlayer player) {
-	}
-
-	@Override
-	public void handleClientSide(MessagePacketKillAllWithTag message, EntityPlayer player) {
+	public void onReceived(MessagePacketKillAllWithTag message, EntityPlayer player) {
 		 ParticleItem.killAllParticlesWithTag(message.tag);
 	}
 

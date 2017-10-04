@@ -63,6 +63,7 @@ import kenijey.harshencastle.items.RingOfBlood;
 import kenijey.harshencastle.items.RitualCrystal;
 import kenijey.harshencastle.items.RitualStick;
 import kenijey.harshencastle.items.SolidifyingPaste;
+import kenijey.harshencastle.items.SoulBindingPendant;
 import kenijey.harshencastle.items.SoulHarsherPickaxe;
 import kenijey.harshencastle.items.SoulHarsherSword;
 import kenijey.harshencastle.items.SoulInfusedIngot;
@@ -145,6 +146,7 @@ public class HarshenItems
 	public static Item feeding_earring;
 	public static Item iron_heart;
 	public static Item ring_of_blood;
+	public static Item soul_binding_pendant;
 	
 	public static void preInit()
 	{
@@ -210,6 +212,7 @@ public class HarshenItems
 		feeding_earring = new FeedingEarring();
 		iron_heart = new IronHeart();
 		ring_of_blood = new RingOfBlood();
+		soul_binding_pendant = new SoulBindingPendant();
 	}
 	
 	public static void reg()
@@ -269,6 +272,7 @@ public class HarshenItems
 		regItem(combat_pendant);
 		regItem(feeding_earring);
 		regItem(ring_of_blood);
+		regItem(soul_binding_pendant);
 		
 		regMetaItem(item_liquid, 64, emptyList(ItemLiquidTypeset.length()), "item_liquid");
 		regMetaItem(ritual_stick, emptyList(EnumRitualStick.values().length), "ritual_stick");

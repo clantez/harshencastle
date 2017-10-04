@@ -30,12 +30,7 @@ public class MessagePacketUpdateXrayBlock extends BaseMessagePacket<MessagePacke
 	}
 
 	@Override
-	public void handleServerSide(MessagePacketUpdateXrayBlock message, EntityPlayer player) {
+	public void onReceived(MessagePacketUpdateXrayBlock message, EntityPlayer player) {
 		HarshenUtils.getNBT(player.getHeldItemMainhand()).setString("BlockToSearch", message.tag.getCompoundTag("tag").getString("BlockToSearch"));
 	}
-
-	@Override
-	public void handleClientSide(MessagePacketUpdateXrayBlock message, EntityPlayer player) {
-	}
-
 }

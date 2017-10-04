@@ -25,6 +25,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -36,7 +37,9 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
@@ -449,5 +452,21 @@ public class HarshenUtils
 		double newX = Math.cos(rad) * (in.x - about.x) - Math.sin(rad) * (in.y - about.y) + about.x;
 		double newY = Math.sin(rad) * (in.x - about.x) + Math.cos(rad) * (in.y - about.y) + about.y;
 		return new Point((int) newX, (int) newY);
+	}
+	
+	public static <T extends Entity> T getFirstEntityInDirection(World world, Vec3d pos, Vec3d lookVec, int range, Class<T> entity)
+	{
+		T entityToAttack = null;
+		for(int i = 1; i < range; i++)
+		{
+		    AxisAlignedBB aabb = new AxisAlignedBB(pos.x + lookVec.x * i - 0.2d, pos.y + lookVec.y * i - 0.2d, pos.z + lookVec.z * i - 0.2d, pos.x + lookVec.x * i + 0.2d, pos.y + lookVec.y * i + 0.2d, pos.z + lookVec.z * i + 0.2d);
+		    List<T> list = world.getEntitiesWithinAABB(entity, aabb);
+		    if(!list.isEmpty())
+		    {
+		    	entityToAttack = list.get(0);
+		    	break;
+		    }
+		}
+		return entityToAttack;
 	}
 }

@@ -33,14 +33,9 @@ public class MessageSendPlayerInvToClient extends BaseMessagePacket<MessageSendP
 	}
 
 	@Override
-	public void handleServerSide(MessageSendPlayerInvToClient message, EntityPlayer player) {
-	}
-
-	@Override
-	public void handleClientSide(MessageSendPlayerInvToClient message, EntityPlayer player) {
+	public void onReceived(MessageSendPlayerInvToClient message, EntityPlayer player) {
 		if(player != null)
 			player.getEntityData().setTag("harshenInventory", message.handler.serializeNBT());
 	}
-
 }
 

@@ -15,8 +15,7 @@ public class HandlerPlayerInventoryOverDeath
 {
 	private static HashMap<UUID, HarshenItemStackHandler> stackMap = new HashMap<>();
 	
-	@SubscribeEvent
-	public void onPlayerDeath(LivingDeathEvent event)
+	public static void onPlayerDeath(LivingDeathEvent event)
 	{
 		if(event.getEntityLiving() instanceof EntityPlayer)
 		{
@@ -25,8 +24,7 @@ public class HandlerPlayerInventoryOverDeath
 		}
 	}
 	
-	@SubscribeEvent
-	public void onPlayerRespawn(PlayerRespawnEvent event)
+	public static void onPlayerRespawn(PlayerRespawnEvent event)
 	{
 		if(stackMap.containsKey(event.player.getUniqueID()))
 		{
