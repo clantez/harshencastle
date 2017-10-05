@@ -8,6 +8,7 @@ import kenijey.harshencastle.interfaces.IHarshenProvider;
 import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.network.packets.MessagePacketRequestInv;
 import kenijey.harshencastle.objecthandlers.HarshenItemStackHandler;
+import net.minecraft.client.entity.EntityOtherPlayerMP;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Enchantments;
@@ -23,10 +24,10 @@ public class HandlerHarshenInventory
 	
 	@SubscribeEvent
 	public void playerTick(PlayerTickEvent event)
-	{
+	{	
 		if(event.player.world.isRemote)
 		{
-			if(!event.player.getEntityData().hasKey("harshenInventory"))
+			if(!event.player.getEntityData().hasKey("harshenInventory") && !(event.player instanceof EntityOtherPlayerMP))
 				HarshenNetwork.sendToServer(new MessagePacketRequestInv());
 			return;
 		}

@@ -12,11 +12,14 @@ import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent.MouseInputEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class HandlerExtraRange 
 {
 	
 	@SubscribeEvent
+	@SideOnly(Side.CLIENT)
 	public void onClick(MouseInputEvent event)
 	{
 		if(Minecraft.getMinecraft().gameSettings.keyBindAttack.isPressed())

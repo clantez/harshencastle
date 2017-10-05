@@ -89,7 +89,7 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 					if(pedestal.getItem().getItem() == Items.AIR ||  new Random().nextInt(overstandingTimer / 2) == 0)
 					{
 						Vec3d vec = new Vec3d(pedestal.getPos()).addVector(0.5d, 0.9d, 0.5d);
-						HarshenNetwork.sendToPlayersInDimension(world.provider.getDimension(), new MessagePacketSpawnItemParticles(pedestalMap.get(pedestal.getPos()), vec, 
+						HarshenNetwork.sendToPlayersInWorld(world, new MessagePacketSpawnItemParticles(pedestalMap.get(pedestal.getPos()), vec, 
 								HarshenUtils.speedToPos(vec, new Vec3d(this.pos).addVector(0.5, 2, 0.5), 20), (float)randPos() + 1f, false, 20, "cauldron_ritual"));
 						pedestal.deactiveateNonController();
 						pedestal.setItemAir();
@@ -123,7 +123,7 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 				for(int i = 0; i < 7; i ++)
 					{
 						Vec3d vec = new Vec3d(pos).addVector(randPos(), -0.1, randPos());
-						HarshenNetwork.sendToPlayersInDimension(world.provider.getDimension(), new MessagePacketSpawnBloodParticle(vec, 
+						HarshenNetwork.sendToPlayersInWorld(world, new MessagePacketSpawnBloodParticle(vec, 
 								HarshenUtils.speedToPos(vec, new Vec3d(this.pos).addVector(0.5, 2, 0.5), 30), 1f, false));
 					}
 		}

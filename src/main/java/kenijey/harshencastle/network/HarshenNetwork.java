@@ -18,6 +18,7 @@ import kenijey.harshencastle.network.packets.MessagePacketUpdateXrayBlock;
 import kenijey.harshencastle.network.packets.MessageSendPlayerInvToClient;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
@@ -64,9 +65,9 @@ public class HarshenNetwork
 		INSTANCE.sendTo(message, (EntityPlayerMP) player);
 	}
 	
-	public static void sendToPlayersInDimension(int dimension, IMessage message)
+	public static void sendToPlayersInWorld(World world, IMessage message)
 	{
-		INSTANCE.sendToDimension(message, dimension);
+		INSTANCE.sendToDimension(message, world.provider.getDimension());
 	}
 	
 	public static void sendToAll(IMessage message)

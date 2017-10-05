@@ -70,7 +70,9 @@ public class TileEntityPedestalSlab extends BaseTileEntityHarshenSingleItemInven
 	}
 	@Override
 	protected void finishedTicking() {
-		setItem(workingRecipe.getOutput());
+		if(workingRecipe != null)
+			setItem(workingRecipe.getOutput());
+		markDirty();
 		for(int x = -1; x < 2; x++)
 			for(int z = -1; z < 2; z++)
 				if(!(x == 0 && z == 0))
@@ -81,4 +83,6 @@ public class TileEntityPedestalSlab extends BaseTileEntityHarshenSingleItemInven
 				}
 					
 	}
+	
+	
 }

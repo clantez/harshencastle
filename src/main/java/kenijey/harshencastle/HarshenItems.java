@@ -220,11 +220,11 @@ public class HarshenItems
 		regMetaItem(GLASS_CONTAINER, emptyList(EnumGlassContainer.values().length), "glass_container", new exceptionName(0, "_empty"));
 	}
 	
-	public static ArrayList<Item> items = new ArrayList<Item>();
+	public final static ArrayList<Item> ALL_ITEMS= new ArrayList<Item>();
 	
 	public static void regRenders()
 	{
-		for(Item item : items)
+		for(Item item : ALL_ITEMS)
 			regRender(item);
 		regRenderMeta();
 	}
@@ -237,6 +237,11 @@ public class HarshenItems
 		return s;
 	}
 	
+	private static Item getItem(Item item)
+	{
+		return item;
+	}
+	
 	public static void regItem(Item item)
 	{
 		regItem(item, 1);
@@ -244,7 +249,7 @@ public class HarshenItems
 	
 	public static void regItem(Item item, int stackSize)
 	{
-		items.add(item);
+		ALL_ITEMS.add(item);
 		item.setMaxStackSize(stackSize);
 		HarshenConfigs.ITEMS.allComponants.add(item);
 	}

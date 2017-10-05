@@ -67,6 +67,7 @@ public class EntityThrown extends EntityThrowable
 	
 	@Override
 	public void setDead() {
+		if(world.isRemote)
 		for(int i = 0; i < 16; i++)
 			try
 			{

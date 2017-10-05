@@ -115,7 +115,7 @@ public class HandlerHarshenInventoryEffects
 	
 	private void AttemptFirework(EntityPlayer player)
 	{
-		if(HarshenUtils.containsItem(player, HarshenItems.ELYTRA_PENDANT) && player.getHeldItemMainhand().isEmpty() && player.isElytraFlying())
+		if(HarshenUtils.containsItem(player, HarshenItems.ELYTRA_PENDANT) && player.getHeldItemMainhand().isEmpty() && player.isElytraFlying() && player.world.isRemote)
 		{
 			HarshenNetwork.sendToServer(new MessagePacketSummonFirework());
 

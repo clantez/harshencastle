@@ -43,13 +43,13 @@ public class TileEntityHarshenDimensionalPedestal extends BaseTileEntityHarshenS
 				BlockPos pos = workingRecipe.getPositionOfRitual();
 				for(EnumFacing facing : EnumFacing.HORIZONTALS)
 					if(!((TileEntityHarshenDimensionalPedestal)world.getTileEntity(pos.offset(facing))).getItem().isEmpty())
-						HarshenNetwork.sendToPlayersInDimension(world.provider.getDimension(), new MessagePacketSpawnItemParticles(
+						HarshenNetwork.sendToPlayersInWorld(world, new MessagePacketSpawnItemParticles(
 										((TileEntityHarshenDimensionalPedestal)world.getTileEntity(pos.offset(facing))).getItem(),
 										new Vec3d(pos.offset(facing)).addVector(0.5, 0.85, 0.5),
 										HarshenUtils.speedToPos(new Vec3d(pos.offset(facing)).addVector(0.5, 0.85, 0.5),
 										new Vec3d(pos).addVector(0.5, 1, 0.5), 15D), 1f, false, 20, workingRecipe.getTag()));
 				
-				HarshenNetwork.sendToPlayersInDimension(world.provider.getDimension(), new MessagePacketSpawnItemParticles(workingRecipe.getOutput(),
+				HarshenNetwork.sendToPlayersInWorld(world, new MessagePacketSpawnItemParticles(workingRecipe.getOutput(),
 						new Vec3d(pos).addVector(0.5, 1, 0.5), new Vec3d((randPos() - 0.5D) / 30D, (new Random().nextBoolean() ? -1 : 1 ) / 50D, (randPos() - 0.5D) / 30D), 1.5f, false,
 						(int) ((activeTimer / 20f) * (activeTimer / 20f)), workingRecipe.getTag()));
 			}
@@ -165,7 +165,7 @@ public class TileEntityHarshenDimensionalPedestal extends BaseTileEntityHarshenS
 		if(workingRecipe.lightning())
 			world.addWeatherEffect(new EntityLightningBolt(world, pos.getX(), pos.getY(), pos.getZ(), true));
 		InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), workingRecipe.getOutput().copy());
-		HarshenNetwork.sendToPlayersInDimension(world.provider.getDimension(), new MessagePacketKillAllWithTag(workingRecipe.getTag()));
+		HarshenNetwork.sendToPlayersInWorld(world, new MessagePacketKillAllWithTag(workingRecipe.getTag()));
 		workingRecipe = null;
 	}
 	
