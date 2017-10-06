@@ -1,7 +1,5 @@
 package kenijey.harshencastle;
 
-import java.util.Arrays;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -26,7 +24,7 @@ public class HarshenCastle {
 
     public static final String MODID = "harshencastle";
     public static final String MODNAME = "Harshen Castle";
-    public static final String VERSION = "0.9.4";
+    public static final String VERSION = "0.10.0";
     public static final String UPDATE_URL = "http://www.wynprice.com/moddedUpdateCheckers/harshencastle.json";
 
     @SidedProxy(clientSide = "kenijey.harshencastle.proxy.ClientProxy", serverSide = "kenijey.harshencastle.proxy.ServerProxy")
