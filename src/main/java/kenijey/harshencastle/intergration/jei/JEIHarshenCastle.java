@@ -7,6 +7,8 @@ import kenijey.harshencastle.intergration.jei.cauldron.JEICauldronCategory;
 import kenijey.harshencastle.intergration.jei.cauldron.JEICauldronHandler;
 import kenijey.harshencastle.intergration.jei.hereticritual.JEIHereticRitualCategory;
 import kenijey.harshencastle.intergration.jei.hereticritual.JEIHereticRitualHandler;
+import kenijey.harshencastle.intergration.jei.magictable.JEIMagicTableCategory;
+import kenijey.harshencastle.intergration.jei.magictable.JEIMagicTableHandler;
 import kenijey.harshencastle.intergration.jei.pedestalslab.JEIPedestalSlabCategory;
 import kenijey.harshencastle.intergration.jei.pedestalslab.JEIPedestalSlabHandler;
 import kenijey.harshencastle.intergration.jei.ritual.JEIRitualCategory;
@@ -26,16 +28,23 @@ public class JEIHarshenCastle implements IModPlugin
 	@Override
 	public void register(IModRegistry registry) { 
 		this.registry = registry;
-		registry.addRecipeHandlers(new JEIRitualHandler(), new JEICauldronHandler(), new JEIPedestalSlabHandler(), new JEIHereticRitualHandler());
+		registry.addRecipeHandlers(
+				new JEIRitualHandler(),
+				new JEICauldronHandler(),
+				new JEIPedestalSlabHandler(),
+				new JEIHereticRitualHandler(),
+				new JEIMagicTableHandler());
 		
-		registry.addRecipes(HarshenRecipes.allRitualRecipes, JEICategoryUIDs.ritual);
-		registry.addRecipes(HarshenRecipes.allCauldronRecipes, JEICategoryUIDs.cauldron);
-		registry.addRecipes(HarshenRecipes.allPedestalRecipes, JEICategoryUIDs.pedestalslab);
-		registry.addRecipes(HarshenRecipes.allHereticCauldronRecipes, JEICategoryUIDs.hereticritual);
-		registry.addRecipeCatalyst(new ItemStack(HarshenBlocks.HARSHEN_DIMENSIONAL_PEDESTAL), JEICategoryUIDs.ritual);
-		registry.addRecipeCatalyst(new ItemStack(HarshenItems.RITUAL_STICK), JEICategoryUIDs.cauldron);
-		registry.addRecipeCatalyst(new ItemStack(HarshenItems.RITUAL_STICK, 1, 1), JEICategoryUIDs.hereticritual);
-		registry.addRecipeCatalyst(new ItemStack(HarshenBlocks.PEDESTAL_SLAB), JEICategoryUIDs.pedestalslab);
+		registry.addRecipes(HarshenRecipes.allRitualRecipes, JEICategoryUIDs.RITUAL);
+		registry.addRecipes(HarshenRecipes.allCauldronRecipes, JEICategoryUIDs.CAULDRON);
+		registry.addRecipes(HarshenRecipes.allPedestalRecipes, JEICategoryUIDs.PENDESTAL_SLAB);
+		registry.addRecipes(HarshenRecipes.allHereticCauldronRecipes, JEICategoryUIDs.HERETIC_RITUAL);
+		registry.addRecipes(HarshenRecipes.allMagicTableRecipes, JEICategoryUIDs.MAGIC_TABLE);
+		registry.addRecipeCatalyst(new ItemStack(HarshenBlocks.HARSHEN_DIMENSIONAL_PEDESTAL), JEICategoryUIDs.RITUAL);
+		registry.addRecipeCatalyst(new ItemStack(HarshenItems.RITUAL_STICK), JEICategoryUIDs.CAULDRON);
+		registry.addRecipeCatalyst(new ItemStack(HarshenItems.RITUAL_STICK, 1, 1), JEICategoryUIDs.HERETIC_RITUAL);
+		registry.addRecipeCatalyst(new ItemStack(HarshenBlocks.PEDESTAL_SLAB), JEICategoryUIDs.PENDESTAL_SLAB);
+		registry.addRecipeCatalyst(new ItemStack(HarshenBlocks.HARSHEN_MAGIC_TABLE), JEICategoryUIDs.MAGIC_TABLE);
 		
 		info(HarshenItems.HARSHEN_SOUL_FRAGMENT);
 		info(HarshenItems.HARSHEN_CRYSTAL);
@@ -66,9 +75,11 @@ public class JEIHarshenCastle implements IModPlugin
 	
 	@Override
 	public void registerCategories(IRecipeCategoryRegistration registry) {
-		registry.addRecipeCategories(new JEIRitualCategory(JEICategoryUIDs.ritual, registry));
-		registry.addRecipeCategories(new JEICauldronCategory(JEICategoryUIDs.cauldron, registry));
-		registry.addRecipeCategories(new JEIPedestalSlabCategory(JEICategoryUIDs.pedestalslab, registry));
-		registry.addRecipeCategories(new JEIHereticRitualCategory(JEICategoryUIDs.hereticritual, registry));
+		registry.addRecipeCategories(new JEIRitualCategory(JEICategoryUIDs.RITUAL, registry));
+		registry.addRecipeCategories(new JEICauldronCategory(JEICategoryUIDs.CAULDRON, registry));
+		registry.addRecipeCategories(new JEIPedestalSlabCategory(JEICategoryUIDs.PENDESTAL_SLAB, registry));
+		registry.addRecipeCategories(new JEIHereticRitualCategory(JEICategoryUIDs.HERETIC_RITUAL, registry));
+		registry.addRecipeCategories(new JEIMagicTableCategory(JEICategoryUIDs.MAGIC_TABLE, registry));
+
 	}
 }

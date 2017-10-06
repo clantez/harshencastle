@@ -7,6 +7,7 @@ import kenijey.harshencastle.objecthandlers.EntityThrowLocation;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -90,5 +91,31 @@ public class EntityThrown extends EntityThrowable
 	
 	public interface HitResult {
 		public void onHit(EntityThrown entity, RayTraceResult result, boolean isServer);
+	}
+	
+	@Override
+	public void readFromNBT(NBTTagCompound compound) {
+		this.ignoreBlocks = compound.getBoolean("ignore_blocks");
+		this.location = compound.getInteger("location_id") > 0 ? new EntityThrowLocation(compound.getInteger("location_id")) : null;
+		this.stack = new ItemStack(compound.getCompoundTag("inner_stack"));
+		super.readFromNBT(compound);
+	}
+	
+	@Override
+	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+		compound.setBoolean("ignore_blocks", this.ignoreBlocks);
+		compound.setInteger("location_id", isLocation() ? location.getId() : -1);
+		compound.setTag("inner_stack", (this.stack == null ? ItemStack.EMPTY : this.stack).serializeNBT());
+		return super.writeToNBT(compound);
+	}
+	
+	@Override
+	public boolean isInRangeToRender3d(double x, double y, double z) {
+		return true;
+	}
+	
+	@Override
+	public boolean shouldRenderInPass(int pass) {
+		return true;
 	}
 }

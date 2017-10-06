@@ -17,7 +17,7 @@ public class JEIRitualHandler extends BaseJeiHandler<RitualRecipes>
 
 	@Override
 	public String getRecipeCategoryUid(RitualRecipes recipe) {
-		return JEICategoryUIDs.ritual;
+		return JEICategoryUIDs.RITUAL;
 	}
 
 	@Override

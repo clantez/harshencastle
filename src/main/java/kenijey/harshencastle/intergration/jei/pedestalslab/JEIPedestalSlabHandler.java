@@ -17,7 +17,7 @@ public class JEIPedestalSlabHandler extends BaseJeiHandler<PedestalSlabRecipes> 
 
 	@Override
 	public String getRecipeCategoryUid(PedestalSlabRecipes recipe) {
-		return JEICategoryUIDs.pedestalslab;
+		return JEICategoryUIDs.PENDESTAL_SLAB;
 	}
 
 	@Override

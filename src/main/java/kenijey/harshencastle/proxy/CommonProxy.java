@@ -153,8 +153,10 @@ public class CommonProxy
     			TileEntityFlatPlate.class,
     			TileEntityHarshenMagicTable.class
     	};
-    	Object[] handlers = {
-    			new HandlerRaptorScythe(),
+    	for(Class clas : tileEntityClasses)
+    		GameRegistry.registerTileEntity(clas, HarshenCastle.MODID + clas.getSimpleName());	
+    	
+    	HarshenUtils.registerHandlers(new HandlerRaptorScythe(),
     			new HandlerSoulHarsherSword(), 
     			new HandlerHarshenInventory(), 
     			new HandlerBloodOnHurt(), 
@@ -167,16 +169,7 @@ public class CommonProxy
     			new HandlerIronHeartDrop(),
     			new HandlerBlockBurn(),
     			new HandlerVillagerSpawn(),
-    			new HandlerExtraRange()};
-    	
-    	for(Class clas : tileEntityClasses)
-    		GameRegistry.registerTileEntity(clas, HarshenCastle.MODID + clas.getSimpleName());	
-    	
-    	for(Object o : handlers)
-    	{
-    		MinecraftForge.EVENT_BUS.register(o);
-        	FMLCommonHandler.instance().bus().register(o);
-    	}
+    			new HandlerExtraRange());
     	
     	GameRegistry.registerWorldGenerator(new WorldGen(), 0);
     	

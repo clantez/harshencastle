@@ -17,7 +17,7 @@ public class JEIHereticRitualHandler extends BaseJeiHandler<HereticRitualRecipes
 
 	@Override
 	public String getRecipeCategoryUid(HereticRitualRecipes recipe) {
-		return JEICategoryUIDs.hereticritual;
+		return JEICategoryUIDs.HERETIC_RITUAL;
 	}
 
 	@Override

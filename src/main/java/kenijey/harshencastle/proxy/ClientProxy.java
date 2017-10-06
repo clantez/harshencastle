@@ -4,6 +4,7 @@ import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.HarshenClientUtils;
 import kenijey.harshencastle.HarshenItems;
+import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.armor.HarshenArmors;
 import kenijey.harshencastle.dimensions.pontus.PontusWorldProvider;
 import kenijey.harshencastle.entity.EntityFactories;
@@ -137,20 +138,15 @@ public class ClientProxy extends CommonProxy
     {
     	super.init(event);
     	
-    	Object[] handlers = {
-    			new HandlerKeyBinding(),
-    			new  HandlerGameOverlay(),
+    	HarshenUtils.registerHandlers(new HandlerKeyBinding(),
+    			new HandlerGameOverlay(),
     			new HandlerGuiEvent(),
     			new HandlerRendererGuiInventory(), 
     			new HandlerClientHarshenInventoryEffects(),
     			new HandlerFlatPlateRenderer(),
     			new HandlerUpdateChecker(),
-    			new HandlerRenderError()};
-    	for(Object o : handlers)
-    	{
-    		MinecraftForge.EVENT_BUS.register(o);
-        	FMLCommonHandler.instance().bus().register(o);
-    	}
+    			new HandlerRenderError());
+    	
     	
     	
     	ItemColors itemcolors = Minecraft.getMinecraft().getItemColors();

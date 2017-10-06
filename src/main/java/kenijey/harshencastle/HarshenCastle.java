@@ -3,11 +3,9 @@ package kenijey.harshencastle;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import kenijey.harshencastle.commands.CommandAccessPontusOuter;
-import kenijey.harshencastle.commands.CommandReloadConfig;
+import kenijey.harshencastle.commands.CommandHarshenCastleLoader;
 import kenijey.harshencastle.creativetabs.HarshenTab;
 import kenijey.harshencastle.proxy.CommonProxy;
-import net.minecraft.command.ICommand;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -19,7 +17,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
-@Mod(modid = HarshenCastle.MODID, name = HarshenCastle.MODNAME, version = HarshenCastle.VERSION, useMetadata = true, acceptedMinecraftVersions = "[1.12,1.12.1]")
+@Mod(modid = HarshenCastle.MODID, name = HarshenCastle.MODNAME, version = HarshenCastle.VERSION, useMetadata = true, acceptedMinecraftVersions = "[1.12,1.12.1,1.12.2]")
 public class HarshenCastle {
 
     public static final String MODID = "harshencastle";
@@ -67,8 +65,7 @@ public class HarshenCastle {
     @EventHandler
 	public void serverLoad(FMLServerStartingEvent event)
 	{
-		for(ICommand command : HarshenUtils.toArray(new CommandAccessPontusOuter(), new CommandReloadConfig()))
-			event.registerServerCommand(command);
+    	event.registerServerCommand(new CommandHarshenCastleLoader());
 	}	
     
 }

@@ -17,7 +17,7 @@ public class JEICauldronHandler extends BaseJeiHandler<CauldronRecipes> {
 
 	@Override
 	public String getRecipeCategoryUid(CauldronRecipes recipe) {
-		return JEICategoryUIDs.cauldron;
+		return JEICategoryUIDs.CAULDRON;
 	}
 
 	@Override

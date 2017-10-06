@@ -42,6 +42,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.storage.loot.LootContext;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -49,14 +51,13 @@ public class HarshenUtils
 {
 	
 	public HarshenUtils() {
-		switchClasses.put(Boolean.class, boolean.class);
-		switchClasses.put(Boolean[].class, boolean[].class);
-		
-		switchClasses.put(Integer.class, int.class);
-		switchClasses.put(Integer[].class, int[].class);
-		
+		switchClasses.put(Boolean.class, boolean.class);		
+		switchClasses.put(Integer.class, int.class);		
 		switchClasses.put(Double.class, double.class);
-		switchClasses.put(Double[].class, double[].class);	
+		switchClasses.put(Float.class, float.class);
+		switchClasses.put(Character.class, char.class);
+		switchClasses.put(Byte.class, byte.class);
+
 	}
 	
     public static final int DECIMAL_COLOR_WHITE = 16777215;
@@ -348,14 +349,21 @@ public class HarshenUtils
 		return blocks;
 	}
 	
+	public static void registerHandlers(Object... handlers)
+	{
+		for(Object o : handlers)
+    	{
+    		MinecraftForge.EVENT_BUS.register(o);
+        	FMLCommonHandler.instance().bus().register(o);
+    	}
+	}
+	
 	public final static HashMap<Class, Class> switchClasses = new HashMap<>();
 	
 	public static Class getClass(Class claz)
 	{
-		Class clas = switchClasses.containsKey(claz) ? switchClasses.get(claz) : claz;
-		if(clas.isArray())
-			clas = clas.getComponentType();
-		return clas;
+		if(claz.isArray()) claz = claz.getComponentType();
+		return switchClasses.containsKey(claz) ? switchClasses.get(claz) : claz;
 	}
 	
 	public static boolean classSame(Class claz1, Class claz2)
