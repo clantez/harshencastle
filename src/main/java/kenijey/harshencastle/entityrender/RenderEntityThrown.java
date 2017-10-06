@@ -48,6 +48,18 @@ public class RenderEntityThrown extends Render<EntityThrown>
     		GlStateManager.pushMatrix();
             GlStateManager.translate((float)x, (float)y, (float)z);
             this.bindEntityTexture(entity);
+            int i = entity.getLocation().getId();
+            if(i == 1)
+            	GlStateManager.depthFunc(519);
+            float f = (float)(i % 4 * 16 + 0) / 64.0F;
+            float f1 = (float)(i % 4 * 16 + 16) / 64.0F;
+            float f2 = (float)(i / 4 * 16 + 0) / 64.0F;
+            float f3 = (float)(i / 4 * 16 + 16) / 64.0F;
+            GlStateManager.translate(0.0F, 0.1F, 0.0F);
+            GlStateManager.rotate(180.0F - this.renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
+            GlStateManager.rotate((float)(this.renderManager.options.thirdPersonView == 2 ? -1 : 1) * -this.renderManager.playerViewX, 1.0F, 0.0F, 0.0F);
+            float f7 = 0.3F;
+            GlStateManager.scale(0.3F, 0.3F, 0.3F);
             Tessellator tessellator = Tessellator.getInstance();
             BufferBuilder bufferbuilder = tessellator.getBuffer();
             bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR_NORMAL);
@@ -56,7 +68,9 @@ public class RenderEntityThrown extends Render<EntityThrown>
             bufferbuilder.pos(0.5D, 0.75D, 0.0D).tex((double)f1, (double)f2).color(255, 255, 255, 255).normal(0.0F, 1.0F, 0.0F).endVertex();
             bufferbuilder.pos(-0.5D, 0.75D, 0.0D).tex((double)f, (double)f2).color(255, 255, 255, 255).normal(0.0F, 1.0F, 0.0F).endVertex();
             tessellator.draw();
+            GlStateManager.disableRescaleNormal();
         	GlStateManager.depthFunc(515);
+            GlStateManager.popMatrix();
             super.doRender(entity, x, y, z, entityYaw, partialTicks);
     	}
     	else
