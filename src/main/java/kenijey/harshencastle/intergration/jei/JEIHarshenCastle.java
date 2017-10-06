@@ -40,7 +40,7 @@ public class JEIHarshenCastle implements IModPlugin
 		info(HarshenItems.HARSHEN_SOUL_FRAGMENT);
 		info(HarshenItems.HARSHEN_CRYSTAL);
 		info(HarshenItems.LIGHT_EMITTED_SEED);
-		info(HarshenItems.LIGHT_EMITTED_SEED);
+		info(HarshenItems.LIGHT_EMITTED_ESSENCE);
 		info(HarshenItems.SOUL_HARSHER_PICKAXE);
 		info(HarshenItems.PONTUS_WORLD_GATE_PARTS);
 		info(HarshenItems.BLOOD_ESSENCE);

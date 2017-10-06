@@ -81,6 +81,8 @@ item.combat_pendant.name=Combat Pendant
 item.feeding_earring.name=Feeding Earring
 item.iron_heart.name=Iron Heart
 item.ring_of_blood.name=Ring of Blood
+item.soul_binding_pendant.name=Soul Binding Pendant
+item.reach_pendant.name=Reach Pendant
 
 #keybindings
 key.telering.description=Telering Teleport Key
@@ -192,6 +194,10 @@ gui.xray.block=Set the Block to set. Supports OreDict
 gui.xray.example=Examples: oreIron & harshencastle:harshen_soul_ore
 
 #tooltips
+accessoryitem=Accessory Item:
+ring=Ring
+pendant=Pendant
+earring=Earring
 sword1=Reminds the wraith
 sword2=of Kazzendre
 sword3=Drains the soul
@@ -227,10 +233,6 @@ feather_earring1="Am I flying?"
 feather_earring2=Lets you jump more.
 fearring1="I'm not scared~"
 fearring2=Target you hit now blind, more than you.
-accessoryitem=Accessory Item:
-ring=Ring
-pendant=Pendant
-earring=Earring
 archive1=Need to be organized.
 one_ring1=One ring to lead all,
 one_ring2=one ring to be destroyed
@@ -277,8 +279,14 @@ enderbow3=to thrust itself into the mob
 enderbow4=You may need to use Ender Necklace.
 combat_pendant1=Press its key to teleport
 combat_pendant2=to nearest mob your around
-feeding_earring1=Saturates half bar of hunger
-feeding_earring2=every 2 seconds
+feeding_earring1=Saturates your hunger
+feeding_earring2=as much as it can do
+ring_of_blood1=Purifies and refines the blood your body has
+ring_of_blood2=(+HP)
+soul_binding_pendant1=Your items will be alive
+soul_binding_pendant2=after your death, in your inventory
+reach_pendant1=Reach more!
+reach_pendant2=(+1 block, approximately)
 
 #misc
 itemGroup.harshenTab=Harshen Castle
