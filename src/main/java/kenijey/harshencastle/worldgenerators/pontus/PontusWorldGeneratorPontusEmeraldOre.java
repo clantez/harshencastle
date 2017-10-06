@@ -1,6 +1,5 @@
 package kenijey.harshencastle.worldgenerators.pontus;
 
-import java.util.Arrays;
 import java.util.Random;
 
 import kenijey.harshencastle.HarshenBlocks;

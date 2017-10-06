@@ -19,7 +19,7 @@ public class FeedingEarring extends BaseItemInventory {
 	
 	@Override
 	public void onTick(EntityPlayer player, int tick) {
-		if(tick%140==0)
+		if(tick%180==0)
 			player.getFoodStats().addStats(1, 1.0F);
 	}
 

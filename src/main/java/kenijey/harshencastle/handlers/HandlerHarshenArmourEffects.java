@@ -1,7 +1,6 @@
 package kenijey.harshencastle.handlers;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.armor.HarshenArmors;

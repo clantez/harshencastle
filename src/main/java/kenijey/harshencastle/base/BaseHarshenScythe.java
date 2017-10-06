@@ -8,7 +8,6 @@ import javax.annotation.Nullable;
 
 import com.google.common.collect.Multimap;
 
-import kenijey.harshencastle.HarshenItems;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttribute;

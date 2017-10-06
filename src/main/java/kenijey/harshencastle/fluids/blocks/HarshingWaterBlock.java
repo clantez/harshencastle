@@ -1,7 +1,6 @@
 package kenijey.harshencastle.fluids.blocks;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenUtils;

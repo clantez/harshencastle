@@ -1,6 +1,5 @@
 package kenijey.harshencastle.intergration.jei.cauldron;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 

@@ -2,7 +2,6 @@ package kenijey.harshencastle.intergration.jei.hereticritual;
 
 import java.awt.Point;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
