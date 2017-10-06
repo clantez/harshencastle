@@ -4,6 +4,7 @@ import kenijey.harshencastle.entity.EntityThrown;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.entity.Render;
@@ -33,6 +34,8 @@ public class RenderEntityThrown extends Render<EntityThrown>
     	{
     		GlStateManager.pushMatrix();
             GlStateManager.translate((float)x, (float)y, (float)z);
+            GlStateManager.disableLighting();
+            OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240f, 240f);
             this.bindEntityTexture(entity);
             int i = entity.getLocation().getId();
             if(i == 1)
@@ -49,6 +52,11 @@ public class RenderEntityThrown extends Render<EntityThrown>
             Tessellator tessellator = Tessellator.getInstance();
             BufferBuilder bufferbuilder = tessellator.getBuffer();
             bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR_NORMAL);
+            if (this.renderOutlines)
+            {
+                GlStateManager.enableColorMaterial();
+                GlStateManager.enableOutlineMode(this.getTeamColor(entity));
+            }
             bufferbuilder.pos(-0.5D, -0.25D, 0.0D).tex((double)f, (double)f3).color(255, 255, 255, 255).normal(0.0F, 1.0F, 0.0F).endVertex();
             bufferbuilder.pos(0.5D, -0.25D, 0.0D).tex((double)f1, (double)f3).color(255, 255, 255, 255).normal(0.0F, 1.0F, 0.0F).endVertex();
             bufferbuilder.pos(0.5D, 0.75D, 0.0D).tex((double)f1, (double)f2).color(255, 255, 255, 255).normal(0.0F, 1.0F, 0.0F).endVertex();
@@ -56,6 +64,7 @@ public class RenderEntityThrown extends Render<EntityThrown>
             tessellator.draw();
             GlStateManager.disableRescaleNormal();
         	GlStateManager.depthFunc(515);
+            GlStateManager.enableLighting();
             GlStateManager.popMatrix();
             super.doRender(entity, x, y, z, entityYaw, partialTicks);
     	}
@@ -68,6 +77,7 @@ public class RenderEntityThrown extends Render<EntityThrown>
             GlStateManager.rotate((float)(this.renderManager.options.thirdPersonView == 2 ? -1 : 1) * this.renderManager.playerViewX, 1.0F, 0.0F, 0.0F);
             GlStateManager.rotate(180.0F, 0.0F, 1.0F, 0.0F);
             this.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+            
             if (this.renderOutlines)
             {
                 GlStateManager.enableColorMaterial();
