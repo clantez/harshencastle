@@ -67,7 +67,8 @@ public class HarshenNetwork
 	
 	public static void sendToPlayersInWorld(World world, IMessage message)
 	{
-		INSTANCE.sendToDimension(message, world.provider.getDimension());
+		if(!world.isRemote)
+			INSTANCE.sendToDimension(message, world.provider.getDimension());
 	}
 	
 	public static void sendToAll(IMessage message)
