@@ -1,21 +1,15 @@
 package kenijey.harshencastle.entityrender;
 
-import java.util.ArrayList;
-
-import kenijey.harshencastle.HarshenClientUtils;
 import kenijey.harshencastle.entity.EntityThrown;
-import kenijey.harshencastle.objecthandlers.EntityThrownRendererHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 
 public class RenderEntityThrown extends Render<EntityThrown>
@@ -34,15 +28,7 @@ public class RenderEntityThrown extends Render<EntityThrown>
      */
     public void doRender(EntityThrown entity, double x, double y, double z, float entityYaw, float partialTicks)
     {
-    	ArrayList<EntityThrownRendererHelper> helpList = new ArrayList<>();
-    	for(EntityThrownRendererHelper helper : pushMap)
-    		if(entity.world.getEntityByID(helper.id) != null)
-    			entity.world.getEntityByID(helper.id).readFromNBT(helper.compound);
-    		else
-    			helpList.add(helper);
-    	pushMap = helpList;
-    	
-    	
+
     	if(entity.isLocation())
     	{
     		GlStateManager.pushMatrix();
@@ -100,9 +86,7 @@ public class RenderEntityThrown extends Render<EntityThrown>
             GlStateManager.popMatrix();
     	}
     }
-    
-    public static ArrayList<EntityThrownRendererHelper> pushMap = new ArrayList<>();
-
+ 
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
