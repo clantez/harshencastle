@@ -23,8 +23,7 @@ public class SlotHarshenInventory extends SlotItemHandler
 	
 	@Override
 	public boolean isItemValid(ItemStack stack) {
-		Impl item = stack.getItem() instanceof ItemBlock ? ((ItemBlock)stack.getItem()).getBlock() : stack.getItem();
-		return HarshenUtils.hasProvider(item) && this.slotType.isAllowed(HarshenUtils.getProvider(item).getSlot());
+		return HarshenUtils.hasProvider(stack) && this.slotType.isAllowed(HarshenUtils.getProvider(stack).getSlot());
 	}
 	
 }

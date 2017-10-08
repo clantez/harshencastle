@@ -2,7 +2,9 @@ package kenijey.harshencastle.items;
 
 import kenijey.harshencastle.base.BaseItemInventory;
 import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
+import kenijey.harshencastle.handlers.inventory.HandlerFearring;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 
 public class Fearring extends BaseItemInventory
 {
@@ -18,9 +20,8 @@ public class Fearring extends BaseItemInventory
 	}
 
 	@Override
-	public void onTick(EntityPlayer player, int tick) {
-		
-		
+	public Object getProvider(ItemStack stack) {
+		return new HandlerFearring();
 	}
 
 }

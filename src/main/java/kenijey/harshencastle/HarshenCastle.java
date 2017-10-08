@@ -47,7 +47,6 @@ public class HarshenCastle {
     {
     	proxy.preInit(event);
     	proxy.regRenders(event);
-    	
     }
 
     @Mod.EventHandler

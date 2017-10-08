@@ -2,7 +2,7 @@ package kenijey.harshencastle.network;
 
 import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.network.packets.MessagePacketHitWithRange;
-import kenijey.harshencastle.network.packets.MessagePacketItemInventoryDamaged;
+import kenijey.harshencastle.network.packets.MessagePacketSetItemInSlot;
 import kenijey.harshencastle.network.packets.MessagePacketKillAllWithTag;
 import kenijey.harshencastle.network.packets.MessagePacketOpenInv;
 import kenijey.harshencastle.network.packets.MessagePacketPlayerHasAccess;
@@ -37,7 +37,7 @@ public class HarshenNetwork
 		registerMessage(MessageSendPlayerInvToClient.class, Side.CLIENT);
 		registerMessage(MessagePacketPlayerTeleportEffects.class, Side.CLIENT);
 		registerMessage(MessagePacketRingUpdate.class, Side.SERVER);
-		registerMessage(MessagePacketItemInventoryDamaged.class, Side.CLIENT);
+		registerMessage(MessagePacketSetItemInSlot.class, Side.CLIENT);
 		registerMessage(MessagePacketUpdateXrayBlock.class, Side.SERVER);
 		registerMessage(MessagePacketSummonFirework.class, Side.SERVER);
 		registerMessage(MessagePacketRequestInv.class, Side.SERVER);

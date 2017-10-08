@@ -8,8 +8,8 @@ import java.util.List;
 
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.base.BaseHarshenCommand;
-import kenijey.harshencastle.objecthandlers.HarshenCommand;
-import kenijey.harshencastle.objecthandlers.HarshenCommandTabList;
+import kenijey.harshencastle.interfaces.HarshenCommand;
+import kenijey.harshencastle.interfaces.HarshenCommandTabList;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.server.MinecraftServer;

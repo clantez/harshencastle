@@ -1,6 +1,7 @@
 package kenijey.harshencastle;
 
 import java.awt.Point;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,14 +22,16 @@ import kenijey.harshencastle.enums.items.EnumGlassContainer;
 import kenijey.harshencastle.handlers.HandlerPontusAllowed;
 import kenijey.harshencastle.interfaces.IVanillaProvider;
 import kenijey.harshencastle.network.HarshenNetwork;
-import kenijey.harshencastle.network.packets.MessagePacketItemInventoryDamaged;
+import kenijey.harshencastle.network.packets.MessagePacketSetItemInSlot;
 import kenijey.harshencastle.objecthandlers.HarshenItemStackHandler;
+import kenijey.harshencastle.objecthandlers.PlayerPunchedEvent;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -36,7 +39,12 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.play.server.SPacketEntityEffect;
+import net.minecraft.network.play.server.SPacketPlayerAbilities;
+import net.minecraft.network.play.server.SPacketRespawn;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -46,8 +54,11 @@ import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.storage.loot.LootContext;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.Event;
+import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistryEntry.Impl;
 
@@ -184,6 +195,29 @@ public class HarshenUtils
 		return handler;
 	}
 	
+	public static void setStackInSlot(EntityPlayer player, int slot, ItemStack stack) 
+	{
+		if(player.world.isRemote)
+			return;
+		HarshenItemStackHandler handler = getHandler(player);
+		handler.setStackInSlot(slot, stack);
+		player.getEntityData().setTag("harshenInventory", handler.serializeNBT());
+		HarshenNetwork.sendToPlayer(player, new MessagePacketSetItemInSlot(slot, getHandler(player).getStackInSlot(slot)));
+	}
+	
+	public static void setStackInSlot(EntityPlayer player, Item item, ItemStack stack) 
+	{
+		if(player.world.isRemote)
+			return;
+		HarshenItemStackHandler handler = getHandler(player);
+		for(int i = 0; i < handler.getSlots(); i++)
+			if(handler.getStackInSlot(i).getItem() == item)
+			{
+				setStackInSlot(player, i, stack);
+				return;
+			}
+	}
+	
 	public static boolean containsItem(Entity entity, Item item)
 	{
 		return entity instanceof EntityPlayer && getHandler((EntityPlayer) entity).containsItem(item);
@@ -210,7 +244,7 @@ public class HarshenUtils
         	if(handler.getStackInSlot(i).getItem() == item)
         	{
         		handler.getStackInSlot(i).damageItem(amount, player);
-                HarshenNetwork.sendToPlayer(player, new MessagePacketItemInventoryDamaged(i, amount));
+                HarshenNetwork.sendToPlayer(player, new MessagePacketSetItemInSlot(i, handler.getStackInSlot(i)));
         		break;
         	}
         player.getEntityData().setTag("harshenInventory", handler.serializeNBT());
@@ -221,9 +255,7 @@ public class HarshenUtils
 		HarshenItemStackHandler handler = HarshenUtils.getHandler(player);
         for(int i =0; i < handler.getSlots(); i++)
         	if(handler.getStackInSlot(i).getItem() == item)
-        	{
         		return handler.getStackInSlot(i);
-        	}
         return ItemStack.EMPTY;
 	}
 	
@@ -268,9 +300,6 @@ public class HarshenUtils
 	
 	public static BlockPos getTopBlock(World world, Vec3d vec)
 	{
-		new Event(){
-			
-		};
 		return getTopBlock(world, new BlockPos(vec));
 	}
 	
@@ -492,9 +521,141 @@ public class HarshenUtils
 		return impl instanceof IVanillaProvider ? (IVanillaProvider) impl : INVENTORY_ITEMS.get(impl); 
 	}
 	
+	@Nullable
+	public static IVanillaProvider getProvider(ItemStack stack)
+	{
+		return getProvider(getImpl(stack));
+	}
+	
 	public static boolean hasProvider(Impl impl)
 	{
 		return getProvider(impl) != null;
 	}
 	
+	public static Impl getImpl(ItemStack stack)
+	{
+		return stack.getItem() instanceof ItemBlock ? ((ItemBlock)stack.getItem()).getBlock() : stack.getItem();
+	}
+	
+	public static boolean hasProvider(ItemStack stack)
+	{
+		return hasProvider(getImpl(stack));
+	}
+	
+	public static void transferPlayerToDimension(EntityPlayerMP player, int dimensionIn, BlockPos pos)
+    {
+		transferPlayerToDimension(player, dimensionIn, pos, null);
+    }
+	
+	public static void transferPlayerToDimension(EntityPlayerMP player, int dimensionIn, BlockPos pos, IBlockState state)
+    {
+        int i = player.dimension;
+        WorldServer worldserver = player.mcServer.getWorld(player.dimension);
+        player.dimension = dimensionIn;
+        WorldServer worldserver1 = player.mcServer.getWorld(player.dimension);
+        player.connection.sendPacket(new SPacketRespawn(player.dimension, worldserver1.getDifficulty(), worldserver1.getWorldInfo().getTerrainType(), player.interactionManager.getGameType()));
+        player.mcServer.getPlayerList().updatePermissionLevel(player);
+        worldserver.removeEntityDangerously(player);
+        player.isDead = false;
+        transferPlayerToWorld(player, i, worldserver, worldserver1, pos, state);
+        player.mcServer.getPlayerList().preparePlayer(player, worldserver);
+        player.connection.setPlayerLocation(player.posX, player.posY, player.posZ, player.rotationYaw, player.rotationPitch);
+        player.interactionManager.setWorld(worldserver1);
+        player.connection.sendPacket(new SPacketPlayerAbilities(player.capabilities));
+        player.mcServer.getPlayerList().updateTimeAndWeatherForPlayer(player, worldserver1);
+        player.mcServer.getPlayerList().syncPlayerInventory(player);
+
+        for (PotionEffect potioneffect : player.getActivePotionEffects())
+        {
+            player.connection.sendPacket(new SPacketEntityEffect(player.getEntityId(), potioneffect));
+        }
+        net.minecraftforge.fml.common.FMLCommonHandler.instance().firePlayerChangedDimensionEvent(player, i, dimensionIn);
+    }
+	
+	private static void transferPlayerToWorld(Entity entityIn, int lastDimension, WorldServer oldWorldIn, WorldServer toWorldIn, BlockPos pos, IBlockState state)
+    {
+        net.minecraft.world.WorldProvider pOld = oldWorldIn.provider;
+        net.minecraft.world.WorldProvider pNew = toWorldIn.provider;
+        double moveFactor = pOld.getMovementFactor() / pNew.getMovementFactor();
+        double d0 = entityIn.posX * moveFactor;
+        double d1 = entityIn.posZ * moveFactor;
+        double d2 = 8.0D;
+        float f = entityIn.rotationYaw;
+        oldWorldIn.profiler.startSection("moving");
+
+        if (entityIn.dimension == 1)
+        {
+            BlockPos blockpos;
+
+            if (lastDimension == 1)
+            {
+                blockpos = toWorldIn.getSpawnPoint();
+            }
+            else
+            {
+                blockpos = toWorldIn.getSpawnCoordinate();
+            }
+
+            d0 = (double)blockpos.getX();
+            entityIn.posY = (double)blockpos.getY();
+            d1 = (double)blockpos.getZ();
+            entityIn.setLocationAndAngles(d0, entityIn.posY, d1, 90.0F, 0.0F);
+
+            if (entityIn.isEntityAlive())
+            {
+                oldWorldIn.updateEntityWithOptionalForce(entityIn, false);
+            }
+        }
+
+        oldWorldIn.profiler.endSection();
+
+        if (lastDimension != 1)
+        {
+            oldWorldIn.profiler.startSection("placing");
+
+            if (entityIn.isEntityAlive())
+            {
+            	int y = toWorldIn.getTopSolidOrLiquidBlock(pos).getY();
+            	BlockPos p = new BlockPos(pos.getX(), y, pos.getZ());
+                entityIn.setLocationAndAngles(p.getX(), p.getY(), p.getZ(), entityIn.rotationYaw, entityIn.rotationPitch);
+                if(state != null && toWorldIn.getBlockState(p.add(0, -1, 0)).getBlock() != state.getBlock())
+                	toWorldIn.setBlockState(p.add(0, -1, 0), state, 3);
+                toWorldIn.spawnEntity(entityIn);
+                toWorldIn.updateEntityWithOptionalForce(entityIn, false);
+            }
+
+            oldWorldIn.profiler.endSection();
+        }
+        entityIn.setWorld(toWorldIn);
+    }
+	
+	public static boolean isPlayerInvolved(Event event)
+	{
+		return (event instanceof LivingEvent && (((LivingEvent)event).getEntityLiving() instanceof EntityPlayer ||
+				(((LivingEvent)event).getEntity() != null && ((LivingEvent)event).getEntity().world.isRemote))) || event instanceof PlayerTickEvent || event instanceof PlayerPunchedEvent;
+	}
+	
+	public static EntityPlayer getPlayer(Event event)
+	{
+		if(event instanceof LivingEvent && ((LivingEvent)event).getEntity() instanceof EntityPlayer)
+			return (EntityPlayer)((LivingEvent)event).getEntity();
+		if(event instanceof LivingEvent && ((LivingEvent)event).getEntity().world.isRemote)
+			return HarshenCastle.proxy.getPlayer();
+		if(event instanceof PlayerTickEvent)
+			return ((PlayerTickEvent)event).player;
+		if(event instanceof PlayerPunchedEvent)
+			return ((PlayerPunchedEvent)event).player;
+		return null;
+	}
+	
+	
+	public static <T extends Annotation> Method getMethod(Class claz, Class<T> annotation, Class... parameters)
+	{
+		for(Method method : claz.getMethods())
+			if(method.getAnnotation(annotation) != null)
+				for(int i = 0; i < method.getParameterCount(); i++)
+					if(getClass(method.getParameterTypes()[i]).isAssignableFrom(getClass(parameters[i])) && method.getParameterTypes()[i].isArray() == parameters[i].isArray())
+						return method;
+		return null;
+	}
 }

@@ -3,6 +3,7 @@ package kenijey.harshencastle.blocks;
 import java.util.List;
 
 import kenijey.harshencastle.HarshenBlocks;
+import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.dimensions.DimensionPontus;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDimensionalGate;
 import net.minecraft.block.Block;
@@ -78,94 +79,14 @@ public class HarshenDimensionalGate extends Block implements ITileEntityProvider
 				Boolean goHome = playerIn.dimension == DimensionPontus.DIMENSION_ID;
 				if(playerIn instanceof EntityPlayerMP)
 					if(goHome) 
-						transferPlayerToDimension((EntityPlayerMP) playerIn, 0, false, pos);
+						HarshenUtils.transferPlayerToDimension((EntityPlayerMP) playerIn, 0, pos);
 					else
-						transferPlayerToDimension((EntityPlayerMP) playerIn, DimensionPontus.DIMENSION_ID, true, pos);
+						HarshenUtils.transferPlayerToDimension((EntityPlayerMP) playerIn, DimensionPontus.DIMENSION_ID, pos, getStateFromMeta(3));
 			}
 		return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
 	}
 	
-	public void transferPlayerToDimension(EntityPlayerMP player, int dimensionIn, boolean placeBlock, BlockPos pos)
-    {
-        int i = player.dimension;
-        WorldServer worldserver = player.mcServer.getWorld(player.dimension);
-        player.dimension = dimensionIn;
-        WorldServer worldserver1 = player.mcServer.getWorld(player.dimension);
-        player.connection.sendPacket(new SPacketRespawn(player.dimension, worldserver1.getDifficulty(), worldserver1.getWorldInfo().getTerrainType(), player.interactionManager.getGameType()));
-        player.mcServer.getPlayerList().updatePermissionLevel(player);
-        worldserver.removeEntityDangerously(player);
-        player.isDead = false;
-        transferPlayerToWorld(player, i, worldserver, worldserver1, placeBlock, pos);
-        player.mcServer.getPlayerList().preparePlayer(player, worldserver);
-        player.connection.setPlayerLocation(player.posX, player.posY, player.posZ, player.rotationYaw, player.rotationPitch);
-        player.interactionManager.setWorld(worldserver1);
-        player.connection.sendPacket(new SPacketPlayerAbilities(player.capabilities));
-        player.mcServer.getPlayerList().updateTimeAndWeatherForPlayer(player, worldserver1);
-        player.mcServer.getPlayerList().syncPlayerInventory(player);
-
-        for (PotionEffect potioneffect : player.getActivePotionEffects())
-        {
-            player.connection.sendPacket(new SPacketEntityEffect(player.getEntityId(), potioneffect));
-        }
-        net.minecraftforge.fml.common.FMLCommonHandler.instance().firePlayerChangedDimensionEvent(player, i, dimensionIn);
-    }
 	
-	public void transferPlayerToWorld(Entity entityIn, int lastDimension, WorldServer oldWorldIn, WorldServer toWorldIn, boolean placeBlock, BlockPos pos)
-    {
-        net.minecraft.world.WorldProvider pOld = oldWorldIn.provider;
-        net.minecraft.world.WorldProvider pNew = toWorldIn.provider;
-        double moveFactor = pOld.getMovementFactor() / pNew.getMovementFactor();
-        double d0 = entityIn.posX * moveFactor;
-        double d1 = entityIn.posZ * moveFactor;
-        double d2 = 8.0D;
-        float f = entityIn.rotationYaw;
-        oldWorldIn.profiler.startSection("moving");
-
-        if (entityIn.dimension == 1)
-        {
-            BlockPos blockpos;
-
-            if (lastDimension == 1)
-            {
-                blockpos = toWorldIn.getSpawnPoint();
-            }
-            else
-            {
-                blockpos = toWorldIn.getSpawnCoordinate();
-            }
-
-            d0 = (double)blockpos.getX();
-            entityIn.posY = (double)blockpos.getY();
-            d1 = (double)blockpos.getZ();
-            entityIn.setLocationAndAngles(d0, entityIn.posY, d1, 90.0F, 0.0F);
-
-            if (entityIn.isEntityAlive())
-            {
-                oldWorldIn.updateEntityWithOptionalForce(entityIn, false);
-            }
-        }
-
-        oldWorldIn.profiler.endSection();
-
-        if (lastDimension != 1)
-        {
-            oldWorldIn.profiler.startSection("placing");
-
-            if (entityIn.isEntityAlive())
-            {
-            	int y = toWorldIn.getTopSolidOrLiquidBlock(pos).getY();
-            	BlockPos p = new BlockPos(pos.getX(), y, pos.getZ());
-                entityIn.setLocationAndAngles(p.getX(), p.getY(), p.getZ(), entityIn.rotationYaw, entityIn.rotationPitch);
-                if(placeBlock && !toWorldIn.getBlockState(p.add(0, -1, 0)).equals(HarshenBlocks.HARSHEN_DIMENSIONAL_GATE.getDefaultState().withProperty(HarshenDimensionalGate.ACTIVE, true)))
-                	toWorldIn.setBlockState(p.add(0, -1, 0), getStateFromMeta(3), 3);
-                toWorldIn.spawnEntity(entityIn);
-                toWorldIn.updateEntityWithOptionalForce(entityIn, false);
-            }
-
-            oldWorldIn.profiler.endSection();
-        }
-        entityIn.setWorld(toWorldIn);
-    }
 	
 	@Override
 	public boolean isFullBlock(IBlockState state) {

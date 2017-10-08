@@ -12,6 +12,7 @@ import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.network.packets.MessagePacketPlayerTeleportEffects;
 import kenijey.harshencastle.network.packets.MessagePacketReviveInventory;
 import kenijey.harshencastle.network.packets.MessagePacketSummonFirework;
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
@@ -25,6 +26,7 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -60,8 +62,8 @@ public class HandlerHarshenInventoryEffects
 	@SubscribeEvent
 	public void onLivingHurt(LivingHurtEvent event)
 	{
-		if(HarshenUtils.containsItem(event.getEntityLiving(), HarshenItems.FEARRING))
-			event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 30));
+//		if(HarshenUtils.containsItem(event.getEntityLiving(), HarshenItems.FEARRING))
+//			event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 30));
 
 		if(event.getSource() instanceof EntityDamageSource && ((EntityDamageSource)event.getSource()).getTrueSource() instanceof EntityPlayer)
 		{
@@ -155,9 +157,11 @@ public class HandlerHarshenInventoryEffects
 	@SubscribeEvent
 	public void onLivingDeath(LivingDeathEvent event)
 	{
-		if(!(event.getEntity() instanceof EntityPlayer) || !HarshenUtils.containsItem(event.getEntity(), HarshenItems.SOUL_BINDING_PENDANT))
+		if(!(event.getEntity() instanceof EntityPlayer))
 			return;
-		event.setCanceled(true);
+		if(HarshenUtils.containsItem(event.getEntity(), HarshenItems.SOUL_BINDING_PENDANT))
+		{
+			event.setCanceled(true);
 		World world = event.getEntityLiving().world;
 		if(!world.isRemote)
 		{
@@ -198,7 +202,27 @@ public class HandlerHarshenInventoryEffects
 	        		HarshenUtils.getFirstOccuringItem(player, HarshenItems.SOUL_BINDING_PENDANT).getMaxDamage())
 	        			HarshenUtils.damageOccuringItemNoPacket(player, HarshenItems.SOUL_BINDING_PENDANT, 1);
 	        	
-		}	
+			}	
+		}
+		if(HarshenUtils.containsItem(event.getEntity(), Items.TOTEM_OF_UNDYING))
+		{
+			EntityPlayer player = (EntityPlayer) event.getEntity();
+			event.setCanceled(true);
+			if (player instanceof EntityPlayerMP)
+			{
+                EntityPlayerMP entityplayermp = (EntityPlayerMP)player;
+                entityplayermp.addStat(StatList.getObjectUseStats(Items.TOTEM_OF_UNDYING));
+                CriteriaTriggers.USED_TOTEM.trigger(entityplayermp, HarshenUtils.getFirstOccuringItem(player, Items.TOTEM_OF_UNDYING));
+            }
+			
+			HarshenUtils.setStackInSlot(player, Items.TOTEM_OF_UNDYING, ItemStack.EMPTY);
+			player.setHealth(1.0F);
+			player.clearActivePotions();
+			player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 900, 1));
+			player.addPotionEffect(new PotionEffect(MobEffects.ABSORPTION, 100, 1));
+			player.world.setEntityState(player, (byte)35);
+		}
+		
 		HandlerPlayerInventoryOverDeath.onPlayerDeath(event);
 	}
 	
