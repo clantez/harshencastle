@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
+import javax.annotation.Nullable;
+
 import com.google.common.collect.Lists;
 
 import kenijey.harshencastle.base.BasePontusResourceBiome;
@@ -17,6 +19,7 @@ import kenijey.harshencastle.enums.CauldronLiquid;
 import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
 import kenijey.harshencastle.enums.items.EnumGlassContainer;
 import kenijey.harshencastle.handlers.HandlerPontusAllowed;
+import kenijey.harshencastle.interfaces.IVanillaProvider;
 import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.network.packets.MessagePacketItemInventoryDamaged;
 import kenijey.harshencastle.objecthandlers.HarshenItemStackHandler;
@@ -46,6 +49,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.registries.IForgeRegistryEntry.Impl;
 
 public class HarshenUtils
 {
@@ -474,4 +478,23 @@ public class HarshenUtils
 		}
 		return entityToAttack;
 	}
+	
+	private static final HashMap<Impl, IVanillaProvider> INVENTORY_ITEMS = new HashMap<>();
+
+	public static void registerInventoryItem(Impl impl, IVanillaProvider provider)
+	{
+		INVENTORY_ITEMS.put(impl, provider);
+	}
+	
+	@Nullable
+	public static IVanillaProvider getProvider(Impl impl)
+	{
+		return impl instanceof IVanillaProvider ? (IVanillaProvider) impl : INVENTORY_ITEMS.get(impl); 
+	}
+	
+	public static boolean hasProvider(Impl impl)
+	{
+		return getProvider(impl) != null;
+	}
+	
 }

@@ -51,6 +51,8 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
+import net.minecraftforge.fml.relauncher.Side;
 
 public class HandlerHarshenInventoryEffects 
 {	
@@ -83,6 +85,16 @@ public class HandlerHarshenInventoryEffects
 		if(HarshenUtils.containsItem(event.getEntityLiving(), HarshenItems.ELYTRA_PENDANT)&& HarshenUtils.toArray(DamageSource.FLY_INTO_WALL, DamageSource.FALL).contains(event.getSource())
 				&& event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.CHEST).getItem() == Items.ELYTRA)
 			event.setCanceled(true);		
+	}
+	
+	@SubscribeEvent
+	public void onPlayerTick(PlayerTickEvent event)
+	{
+		event.player.capabilities.allowFlying = HarshenUtils.toArray(GameType.ADVENTURE, GameType.SURVIVAL).contains(event.side == Side.SERVER ?
+				((EntityPlayerMP)event.player).interactionManager.getGameType() : net.minecraft.client.Minecraft.getMinecraft().playerController.getCurrentGameType()) 
+				? HarshenUtils.containsItem(event.player, HarshenItems.RING_OF_FLIGHT) : event.player.capabilities.allowFlying;
+		if(event.player.capabilities.isFlying && !event.player.capabilities.allowFlying)
+			event.player.capabilities.isFlying = false;
 	}
 	
 	@SubscribeEvent

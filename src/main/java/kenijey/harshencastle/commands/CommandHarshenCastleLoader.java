@@ -26,7 +26,13 @@ public class CommandHarshenCastleLoader extends BaseHarshenCommand
 	@Override
 	public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
 		if(args.length > 0 && getAllAvalibleMethods().contains(args[0]))
-			loadMethod(args[0], server, sender, args);
+			try {
+				loadMethod(args[0], server, sender, args);
+			} catch (CommandException e) {
+				throw e;
+			} catch (Throwable e) {
+				message(sender, args[0] + ".errored");
+			}
 		else
 			message(sender, "notfound", argsToObjs(args));
 	}
@@ -40,13 +46,15 @@ public class CommandHarshenCastleLoader extends BaseHarshenCommand
 		return stringList;
 	}
 	
-	public void loadMethod(String methodName, MinecraftServer server, ICommandSender sender, String[] args)
+	public void loadMethod(String methodName, MinecraftServer server, ICommandSender sender, String[] args) throws Throwable
 	{
 		try {
 			getMethod(methodName, HarshenCommand.class).invoke(this, server, sender, getNewArgs(args));
 		} catch (Throwable e){
-			if(e instanceof CommandException)
-				message(sender, args[0] + ".errored");
+			if(e instanceof InvocationTargetException)
+			{
+				throw ((InvocationTargetException) e).getTargetException();
+			}
 			else
 				message(sender, "failed", argsToObjs(args));
 		}		
@@ -57,7 +65,7 @@ public class CommandHarshenCastleLoader extends BaseHarshenCommand
 		for(Method method : HarshenCastleCommands.class.getMethods())
 			if(method.getAnnotation(claz) != null && method.getName().equalsIgnoreCase(methodName))
 				return method;
-		throw new NullPointerException("Somewhat impossible");
+		return null;
 	}
 	
 	public static void sendMessage(ICommandSender sender, String translationSuffix, Object... args) {
@@ -84,13 +92,13 @@ public class CommandHarshenCastleLoader extends BaseHarshenCommand
 	public List<String> getTabCompletions(MinecraftServer server, ICommandSender sender, String[] args,
 			BlockPos targetPos) {
 		if(args.length == 0) return super.getTabCompletions(server, sender, args, targetPos);
-		else if(args.length == 1) return getAllAvalibleMethods();
+		else if(args.length == 1) return getListOfStringsMatching(args[0], getAllAvalibleMethods());
 		else
 		{
 			if(!getAllAvalibleMethods().contains(args[0]))
 				return super.getTabCompletions(server, sender, args, targetPos);
 			Method method = getMethod(args[0] + "_tabList", HarshenCommandTabList.class);
-			if(method.getReturnType() == List.class)
+			if(method != null && method.getReturnType() == List.class)
 				try {
 					return (List<String>) method.invoke(new HarshenCastleCommands(), server, sender, getNewArgs(args), targetPos);
 				} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {

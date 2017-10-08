@@ -17,7 +17,7 @@ public class LootingEarring extends BaseItemInventory
 	}
 	
 	@Override
-	protected int toolTipLines() {
+	public int toolTipLines() {
 		return 1;
 	}
 

@@ -8,6 +8,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 
 public class CriminalPendant extends BaseItemInventory
 {
@@ -36,7 +37,7 @@ public class CriminalPendant extends BaseItemInventory
 	}
 	
 	@Override
-	protected int toolTipLines() {
+	public int toolTipLines() {
 		return 1;
 	}
 

@@ -1,11 +1,15 @@
 package kenijey.harshencastle.inventory;
 
+import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
-import kenijey.harshencastle.interfaces.IHarshenProvider;
+import kenijey.harshencastle.interfaces.IVanillaProvider;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
+import net.minecraftforge.registries.IForgeRegistryEntry.Impl;
 
 public class SlotHarshenInventory extends SlotItemHandler
 {
@@ -19,8 +23,8 @@ public class SlotHarshenInventory extends SlotItemHandler
 	
 	@Override
 	public boolean isItemValid(ItemStack stack) {
-		Object item = stack.getItem() instanceof ItemBlock ? ((ItemBlock)stack.getItem()).getBlock() : stack.getItem();
-		return item instanceof IHarshenProvider && this.slotType.isAllowed(((IHarshenProvider)item).getSlot());
+		Impl item = stack.getItem() instanceof ItemBlock ? ((ItemBlock)stack.getItem()).getBlock() : stack.getItem();
+		return HarshenUtils.hasProvider(item) && this.slotType.isAllowed(HarshenUtils.getProvider(item).getSlot());
 	}
 	
 }

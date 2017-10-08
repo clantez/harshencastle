@@ -43,6 +43,7 @@ import kenijey.harshencastle.handlers.HandlerRaptorScythe;
 import kenijey.harshencastle.handlers.HandlerSoulHarsherSword;
 import kenijey.harshencastle.handlers.HandlerVillagerSpawn;
 import kenijey.harshencastle.handlers.HandlerZombieEyeDrop;
+import kenijey.harshencastle.interfaces.IVanillaProvider;
 import kenijey.harshencastle.models.ModelArmour;
 import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.objecthandlers.FaceRenderer;
@@ -61,6 +62,7 @@ import kenijey.harshencastle.tileentity.TileEntityPedestalSlab;
 import net.minecraft.block.Block;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -116,7 +118,20 @@ public class CommonProxy
 				
 		HarshenVillagers.preInit();
 		
+		setUpVanillaProviders();
+		
 		HarshenCastle.logger.info("HarshenCastle loaded correctly");
+    }
+    
+    private void setUpVanillaProviders()
+    {
+    	HarshenUtils.registerInventoryItem(Items.TOTEM_OF_UNDYING, new IVanillaProvider() {
+			
+			@Override
+			public EnumInventorySlots getSlot() {
+				return EnumInventorySlots.NECK;
+			}
+		});
     }
     
     private void setUpEnumValues()

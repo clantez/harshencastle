@@ -31,7 +31,7 @@ public class XrayPendant extends BaseItemInventory
 	}
 	
 	@Override
-	protected int toolTipLines() {
+	public int toolTipLines() {
 		return 4;
 	}
 

@@ -37,6 +37,7 @@ import kenijey.harshencastle.items.GlassContainer;
 import kenijey.harshencastle.items.GuidanceOfHarshenCastle;
 import kenijey.harshencastle.items.HarshenCrystal;
 import kenijey.harshencastle.items.HarshenDimensionalDoor;
+import kenijey.harshencastle.items.RingOfFlight;
 import kenijey.harshencastle.items.HarshenProps;
 import kenijey.harshencastle.items.HarshenSoulFragment;
 import kenijey.harshencastle.items.HarshenSoulIngot;
@@ -149,6 +150,7 @@ public class HarshenItems
 	public static final Item RING_OF_BLOOD = new RingOfBlood();
 	public static final Item SOUL_BINDING_PENDANT = new SoulBindingPendant();
 	public static final Item REACH_PENDANT = new ReachPendant();
+	public static final Item RING_OF_FLIGHT = new RingOfFlight();
 	
 	public static void preInit()
 	{
@@ -209,6 +211,7 @@ public class HarshenItems
 		regItem(RING_OF_BLOOD);
 		regItem(SOUL_BINDING_PENDANT);
 		regItem(REACH_PENDANT);
+		regItem(RING_OF_FLIGHT);
 		
 		regMetaItem(ITEM_LIQUID, 64, emptyList(ItemLiquidTypeset.length()), "item_liquid");
 		regMetaItem(RITUAL_STICK, emptyList(EnumRitualStick.values().length), "ritual_stick");

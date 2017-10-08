@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.interfaces.IHarshenProvider;
+import kenijey.harshencastle.interfaces.IVanillaProvider;
 import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.network.packets.MessagePacketRequestInv;
 import kenijey.harshencastle.objecthandlers.HarshenItemStackHandler;
@@ -13,6 +14,8 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Enchantments;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerPickupXpEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
@@ -21,7 +24,7 @@ public class HandlerHarshenInventory
 {	
 	HashMap<EntityPlayer, Integer> tickMap = new HashMap<>();
 	private static ArrayList<ItemStack> prevInv = new ArrayList<>();
-	
+		
 	@SubscribeEvent
 	public void playerTick(PlayerTickEvent event)
 	{	
@@ -64,5 +67,19 @@ public class HandlerHarshenInventory
                 HarshenUtils.damageFirstOccuringItem(event.getEntityPlayer(), handler.getStackInSlot(o).getItem(), - i);
          		break;
          	}
+	}
+	
+	@SubscribeEvent
+	public void onToolTip(ItemTooltipEvent event)
+	{
+		
+		if(HarshenUtils.hasProvider(event.getItemStack().getItem()))
+		{
+			IVanillaProvider provider = HarshenUtils.getProvider(event.getItemStack().getItem());
+			event.getToolTip().add("\u00A75" + new TextComponentTranslation("accessoryitem").getFormattedText() + " \u00A77" + new TextComponentTranslation(provider.getSlot().getName()).getFormattedText());
+			event.getToolTip().add(" ");
+			for(int i = 0; i < provider.toolTipLines(); i ++)
+				event.getToolTip().add("\u00A73" + new TextComponentTranslation(event.getItemStack().getItem().getRegistryName().getResourcePath() + String.valueOf(i + 1)).getFormattedText());
+		}
 	}
 }
