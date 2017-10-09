@@ -16,7 +16,6 @@ import kenijey.harshencastle.config.HarshenConfigs;
 import kenijey.harshencastle.dimensions.HarshenDimensions;
 import kenijey.harshencastle.dimensions.pontus.PontusWorldProvider;
 import kenijey.harshencastle.enchantment.HarshenEnchantmetns;
-import kenijey.harshencastle.enchantment.HarshenMixupEnchantment;
 import kenijey.harshencastle.entity.HarshenEntities;
 import kenijey.harshencastle.enums.ItemLiquidTypeset;
 import kenijey.harshencastle.enums.SetIds;
@@ -76,10 +75,7 @@ public class CommonProxy
 {
     public void preInit(FMLPreInitializationEvent event) 
     {    	
-    	
-    	new HarshenUtils();//dont mess with order
-    	
-    	HarshenConfigs.IDS.preInit();
+    	HarshenConfigs.IDS.preInit(); //dont mess with order
     	HarshenConfigs.GENERAL.preInit();
     	
     	HarshenPotions.preInit();

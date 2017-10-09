@@ -26,6 +26,7 @@ import kenijey.harshencastle.interfaces.IVanillaProvider;
 import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.network.packets.MessagePacketSetItemInSlot;
 import kenijey.harshencastle.objecthandlers.HarshenItemStackHandler;
+import kenijey.harshencastle.objecthandlers.HarshenMap;
 import kenijey.harshencastle.objecthandlers.PlayerPunchedEvent;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
@@ -75,18 +76,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistryEntry.Impl;
 
 public class HarshenUtils
-{
-	
-	public HarshenUtils() {
-		SWITCH_CLASSES.put(Boolean.class, boolean.class);		
-		SWITCH_CLASSES.put(Integer.class, int.class);		
-		SWITCH_CLASSES.put(Double.class, double.class);
-		SWITCH_CLASSES.put(Float.class, float.class);
-		SWITCH_CLASSES.put(Character.class, char.class);
-		SWITCH_CLASSES.put(Byte.class, byte.class);
-
-	}
-	
+{	
     public static final int DECIMAL_COLOR_WHITE = 16777215;
     public static final int DECIMAL_COLOR_GRAY_TEXT = 4210752;
 	
@@ -403,7 +393,13 @@ public class HarshenUtils
     	}
 	}
 	
-	public final static HashMap<Class, Class> SWITCH_CLASSES = new HashMap<>();
+	public final static HarshenMap<Class, Class> SWITCH_CLASSES =  new HarshenMap<Class, Class>()
+			.addToMap(Boolean.class, boolean.class)
+			.addToMap(Integer.class, int.class)
+			.addToMap(Double.class, double.class)
+			.addToMap(Float.class, float.class)
+			.addToMap(Character.class, char.class)
+			.addToMap(Byte.class, byte.class);
 	
 	public static Class getClass(Class claz)
 	{
