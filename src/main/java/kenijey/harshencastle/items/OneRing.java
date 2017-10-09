@@ -1,12 +1,13 @@
 package kenijey.harshencastle.items;
 
-import kenijey.harshencastle.base.BaseItemInventory;
 import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
+import kenijey.harshencastle.interfaces.IHarshenProvider;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
+import net.minecraft.item.Item;
 import net.minecraft.potion.PotionEffect;
 
-public class OneRing extends BaseItemInventory
+public class OneRing extends Item implements IHarshenProvider
 {
 	public OneRing()
 	{

@@ -2,18 +2,16 @@ package kenijey.harshencastle.items;
 
 import java.util.ArrayList;
 
-import kenijey.harshencastle.HarshenItems;
-import kenijey.harshencastle.HarshenUtils;
-import kenijey.harshencastle.base.BaseItemInventory;
 import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
 import kenijey.harshencastle.interfaces.HarshenEvent;
+import kenijey.harshencastle.interfaces.IHarshenProvider;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EntityDamageSource;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 
-public class LootingEarring extends BaseItemInventory
+public class LootingEarring extends Item implements IHarshenProvider
 {
 
 	public LootingEarring() {

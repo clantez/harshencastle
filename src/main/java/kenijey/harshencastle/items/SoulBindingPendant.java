@@ -5,16 +5,17 @@ import java.util.UUID;
 
 import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.HarshenUtils;
-import kenijey.harshencastle.base.BaseItemInventory;
 import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
 import kenijey.harshencastle.handlers.HandlerHarshenInventory;
 import kenijey.harshencastle.interfaces.HarshenEvent;
+import kenijey.harshencastle.interfaces.IHarshenProvider;
 import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.network.packets.MessagePacketReviveInventory;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.play.server.SPacketCombatEvent;
@@ -26,7 +27,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
 
-public class SoulBindingPendant extends BaseItemInventory
+public class SoulBindingPendant extends Item implements IHarshenProvider
 {
 
 	public SoulBindingPendant() {

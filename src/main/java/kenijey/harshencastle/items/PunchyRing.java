@@ -1,15 +1,13 @@
 package kenijey.harshencastle.items;
 
-import kenijey.harshencastle.HarshenItems;
-import kenijey.harshencastle.HarshenUtils;
-import kenijey.harshencastle.base.BaseItemInventory;
 import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
 import kenijey.harshencastle.interfaces.HarshenEvent;
+import kenijey.harshencastle.interfaces.IHarshenProvider;
 import kenijey.harshencastle.objecthandlers.PlayerPunchedEvent;
-import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public class PunchyRing extends BaseItemInventory
+public class PunchyRing extends Item implements IHarshenProvider
 {
 	public PunchyRing()
 	{

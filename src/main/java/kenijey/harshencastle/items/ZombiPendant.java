@@ -1,15 +1,16 @@
 package kenijey.harshencastle.items;
 
-import kenijey.harshencastle.base.BaseItemInventory;
 import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
 import kenijey.harshencastle.interfaces.HarshenEvent;
+import kenijey.harshencastle.interfaces.IHarshenProvider;
 import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
-public class ZombiPendant extends BaseItemInventory
+public class ZombiPendant extends Item implements IHarshenProvider
 {
 	public ZombiPendant()
 	{

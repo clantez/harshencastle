@@ -30,7 +30,7 @@ public class HarshenCastle {
     
     public static final CreativeTabs harshenTab = new HarshenTab();
     
-    public static final Logger logger = LogManager.getFormatterLogger(MODID); 
+    public static final Logger LOGGER = LogManager.getFormatterLogger(MODID); 
 
     
     @Instance(MODID)

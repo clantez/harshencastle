@@ -1,10 +1,12 @@
 package kenijey.harshencastle.items;
 
-import kenijey.harshencastle.base.BaseItemInventory;
 import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
+import kenijey.harshencastle.interfaces.IHarshenProvider;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 
-public class FeedingEarring extends BaseItemInventory {
+public class FeedingEarring extends Item implements IHarshenProvider
+{
 	
 	public FeedingEarring() {
 		setRegistryName("feeding_earring");
@@ -19,7 +21,8 @@ public class FeedingEarring extends BaseItemInventory {
 	
 	@Override
 	public void onTick(EntityPlayer player, int tick) {
-		if(tick%180==0)
+		System.out.println(player.getFoodStats().getSaturationLevel());
+		if(tick%180==0 && player.getFoodStats().getSaturationLevel() < 10f)
 			player.getFoodStats().addStats(1, 1.0F);
 	}
 

@@ -1,15 +1,16 @@
 package kenijey.harshencastle.items;
 
 import kenijey.harshencastle.HarshenUtils;
-import kenijey.harshencastle.base.BaseItemInventory;
 import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
 import kenijey.harshencastle.interfaces.HarshenEvent;
+import kenijey.harshencastle.interfaces.IHarshenProvider;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-public class FieryRing extends BaseItemInventory {
+public class FieryRing extends Item implements IHarshenProvider
+{
 
 	public FieryRing() {
 		setUnlocalizedName("fiery_ring");

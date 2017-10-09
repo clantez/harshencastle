@@ -56,6 +56,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.storage.loot.LootContext;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
@@ -70,12 +72,12 @@ public class HarshenUtils
 {
 	
 	public HarshenUtils() {
-		switchClasses.put(Boolean.class, boolean.class);		
-		switchClasses.put(Integer.class, int.class);		
-		switchClasses.put(Double.class, double.class);
-		switchClasses.put(Float.class, float.class);
-		switchClasses.put(Character.class, char.class);
-		switchClasses.put(Byte.class, byte.class);
+		SWITCH_CLASSES.put(Boolean.class, boolean.class);		
+		SWITCH_CLASSES.put(Integer.class, int.class);		
+		SWITCH_CLASSES.put(Double.class, double.class);
+		SWITCH_CLASSES.put(Float.class, float.class);
+		SWITCH_CLASSES.put(Character.class, char.class);
+		SWITCH_CLASSES.put(Byte.class, byte.class);
 
 	}
 	
@@ -395,12 +397,12 @@ public class HarshenUtils
     	}
 	}
 	
-	public final static HashMap<Class, Class> switchClasses = new HashMap<>();
+	public final static HashMap<Class, Class> SWITCH_CLASSES = new HashMap<>();
 	
 	public static Class getClass(Class claz)
 	{
 		if(claz.isArray()) claz = claz.getComponentType();
-		return switchClasses.containsKey(claz) ? switchClasses.get(claz) : claz;
+		return SWITCH_CLASSES.containsKey(claz) ? SWITCH_CLASSES.get(claz) : claz;
 	}
 	
 	public static boolean classSame(Class claz1, Class claz2)
@@ -653,8 +655,8 @@ public class HarshenUtils
 	{
 		if(event instanceof LivingEvent && ((LivingEvent)event).getEntity() instanceof EntityPlayer)
 			return (EntityPlayer)((LivingEvent)event).getEntity();
-//		if(event instanceof LivingEvent && ((LivingEvent)event).getEntity() != null && ((LivingEvent)event).getEntity().world.isRemote)
-//			return HarshenCastle.proxy.getPlayer();
+		if(event instanceof RenderGameOverlayEvent || event instanceof RenderWorldLastEvent)
+			return HarshenCastle.proxy.getPlayer();
 		if(event instanceof PlayerTickEvent)
 			return ((PlayerTickEvent)event).player;
 		if(event instanceof PlayerEvent)

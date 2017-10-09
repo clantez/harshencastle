@@ -1,10 +1,11 @@
 package kenijey.harshencastle.items;
 
-import kenijey.harshencastle.base.BaseItemInventory;
 import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
+import kenijey.harshencastle.interfaces.IHarshenProvider;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 
-public class BloodyEarring extends BaseItemInventory
+public class BloodyEarring extends Item implements IHarshenProvider
 {
 	public BloodyEarring()
 	{

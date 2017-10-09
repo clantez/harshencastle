@@ -2,14 +2,15 @@ package kenijey.harshencastle.items;
 
 import java.util.UUID;
 
-import kenijey.harshencastle.base.BaseItemInventory;
 import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
+import kenijey.harshencastle.interfaces.IHarshenProvider;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 
-public class RingOfBlood extends BaseItemInventory
+public class RingOfBlood extends Item implements IHarshenProvider
 {
 	public RingOfBlood()
 	{

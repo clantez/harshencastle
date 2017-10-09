@@ -8,7 +8,6 @@ import io.netty.buffer.ByteBuf;
 import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.base.BaseMessagePacket;
-import kenijey.harshencastle.handlers.HandlerHarshenInventoryEffects;
 import kenijey.harshencastle.network.HarshenNetwork;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;

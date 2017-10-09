@@ -18,7 +18,6 @@ import kenijey.harshencastle.enums.items.EnumRitualStick;
 import kenijey.harshencastle.enums.particle.EnumHarshenParticle;
 import kenijey.harshencastle.gui.GuiBookScreen;
 import kenijey.harshencastle.gui.GuiXrayPendantScreen;
-import kenijey.harshencastle.handlers.client.HandlerClientHarshenInventoryEffects;
 import kenijey.harshencastle.handlers.client.HandlerFlatPlateRenderer;
 import kenijey.harshencastle.handlers.client.HandlerGameOverlay;
 import kenijey.harshencastle.handlers.client.HandlerGuiEvent;
@@ -63,10 +62,8 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -142,7 +139,6 @@ public class ClientProxy extends CommonProxy
     			new HandlerGameOverlay(),
     			new HandlerGuiEvent(),
     			new HandlerRendererGuiInventory(), 
-    			new HandlerClientHarshenInventoryEffects(),
     			new HandlerFlatPlateRenderer(),
     			new HandlerUpdateChecker(),
     			new HandlerRenderError());

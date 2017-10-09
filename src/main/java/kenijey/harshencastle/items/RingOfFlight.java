@@ -1,17 +1,14 @@
 package kenijey.harshencastle.items;
 
-import javax.swing.text.html.parser.Entity;
-
-import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.HarshenUtils;
-import kenijey.harshencastle.base.BaseItemInventory;
 import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
+import kenijey.harshencastle.interfaces.IHarshenProvider;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.Item;
 import net.minecraft.world.GameType;
-import net.minecraftforge.fml.relauncher.Side;
 
-public class RingOfFlight extends BaseItemInventory
+public class RingOfFlight extends Item implements IHarshenProvider
 {
 	
 	public RingOfFlight() {

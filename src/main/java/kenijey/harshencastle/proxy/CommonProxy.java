@@ -35,7 +35,6 @@ import kenijey.harshencastle.handlers.HandlerExtraRange;
 import kenijey.harshencastle.handlers.HandlerGlassContainer;
 import kenijey.harshencastle.handlers.HandlerHarshenArmourEffects;
 import kenijey.harshencastle.handlers.HandlerHarshenInventory;
-import kenijey.harshencastle.handlers.HandlerHarshenInventoryEffects;
 import kenijey.harshencastle.handlers.HandlerIronHeartDrop;
 import kenijey.harshencastle.handlers.HandlerPontusAllowed;
 import kenijey.harshencastle.handlers.HandlerPotionEffects;
@@ -119,7 +118,7 @@ public class CommonProxy
 		
 		setUpVanillaProviders();
 						
-		HarshenCastle.logger.info("HarshenCastle loaded correctly");
+		HarshenCastle.LOGGER.info("HarshenCastle loaded correctly");
     }
     
     private void setUpVanillaProviders()
@@ -172,7 +171,6 @@ public class CommonProxy
     			new HandlerHarshenArmourEffects(),
     			new HandlerGlassContainer(), 
     			new HandlerPontusAllowed(), 
-    			new HandlerHarshenInventoryEffects(), 
     			new HandlerZombieEyeDrop(),
     			new HandlerIronHeartDrop(),
     			new HandlerBlockBurn(),

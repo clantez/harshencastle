@@ -1,15 +1,16 @@
 package kenijey.harshencastle.items;
 
-import kenijey.harshencastle.base.BaseItemInventory;
 import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
 import kenijey.harshencastle.interfaces.HarshenEvent;
+import kenijey.harshencastle.interfaces.IHarshenProvider;
 import kenijey.harshencastle.objecthandlers.PlayerPunchedEvent;
 import net.minecraft.init.MobEffects;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
-public class Fearring extends BaseItemInventory
+public class Fearring extends Item implements IHarshenProvider
 {
 	public Fearring()
 	{

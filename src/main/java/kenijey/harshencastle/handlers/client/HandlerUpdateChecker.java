@@ -43,10 +43,10 @@ public class HandlerUpdateChecker
 		        con.close();
 			}
 			catch (UnknownHostException h){
-				HarshenCastle.logger.warn("Host Cannot be found for update checker. Either the Site is offline or the checker has moved. Please report this");
+				HarshenCastle.LOGGER.warn("Host Cannot be found for update checker. Either the Site is offline or the checker has moved. Please report this");
 				return;
 			} catch (IOException e) {
-				HarshenCastle.logger.warn("The URL is in the wrong format. Please report this");
+				HarshenCastle.LOGGER.warn("The URL is in the wrong format. Please report this");
 				return;
 			}
 	        
@@ -104,7 +104,7 @@ public class HandlerUpdateChecker
 
 	        }
 	        else
-	        	HarshenCastle.logger.info("Update checker returned: " + status);
+	        	HarshenCastle.LOGGER.info("Update checker returned: " + status);
 			
 		}
 	}
