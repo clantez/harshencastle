@@ -39,6 +39,9 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.network.play.server.SPacketEntityEffect;
 import net.minecraft.network.play.server.SPacketPlayerAbilities;
 import net.minecraft.network.play.server.SPacketRespawn;
@@ -54,10 +57,11 @@ import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.storage.loot.LootContext;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.Event;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistryEntry.Impl;
@@ -631,20 +635,36 @@ public class HarshenUtils
 	
 	public static boolean isPlayerInvolved(Event event)
 	{
-		return (event instanceof LivingEvent && (((LivingEvent)event).getEntityLiving() instanceof EntityPlayer ||
-				(((LivingEvent)event).getEntity() != null && ((LivingEvent)event).getEntity().world.isRemote))) || event instanceof PlayerTickEvent || event instanceof PlayerPunchedEvent;
+		return getPlayer(event) != null;
+	}
+	
+	public static boolean isSourceFromPlayer(DamageSource source)
+	{
+		return source instanceof EntityDamageSource && ((EntityDamageSource)source).getTrueSource() instanceof EntityPlayer;
+	}
+	
+	
+	public static EntityPlayer getPlayerFromSource(DamageSource source)
+	{
+		return (EntityPlayer)((EntityDamageSource)source).getTrueSource();
 	}
 	
 	public static EntityPlayer getPlayer(Event event)
 	{
 		if(event instanceof LivingEvent && ((LivingEvent)event).getEntity() instanceof EntityPlayer)
 			return (EntityPlayer)((LivingEvent)event).getEntity();
-		if(event instanceof LivingEvent && ((LivingEvent)event).getEntity().world.isRemote)
-			return HarshenCastle.proxy.getPlayer();
+//		if(event instanceof LivingEvent && ((LivingEvent)event).getEntity() != null && ((LivingEvent)event).getEntity().world.isRemote)
+//			return HarshenCastle.proxy.getPlayer();
 		if(event instanceof PlayerTickEvent)
 			return ((PlayerTickEvent)event).player;
+		if(event instanceof PlayerEvent)
+			return ((PlayerEvent)event).player;
+		if(event instanceof net.minecraftforge.event.entity.player.PlayerEvent)
+			return ((net.minecraftforge.event.entity.player.PlayerEvent)event).getEntityPlayer();
 		if(event instanceof PlayerPunchedEvent)
-			return ((PlayerPunchedEvent)event).player;
+			return ((PlayerPunchedEvent)event).attacker;
+		if(event instanceof LivingDropsEvent && isSourceFromPlayer(((LivingDropsEvent)event).getSource()))
+			return getPlayerFromSource(((LivingDropsEvent)event).getSource());
 		return null;
 	}
 	
@@ -657,5 +677,17 @@ public class HarshenUtils
 					if(getClass(method.getParameterTypes()[i]).isAssignableFrom(getClass(parameters[i])) && method.getParameterTypes()[i].isArray() == parameters[i].isArray())
 						return method;
 		return null;
+	}
+	
+	private static final DataParameter<Byte> FLAGS = EntityDataManager.<Byte>createKey(Entity.class, DataSerializers.BYTE);
+	
+	public static void setFlag(Entity entity, int flag, boolean set)
+	{
+		byte b0 = ((Byte)entity.getDataManager().get(FLAGS)).byteValue();
+
+        if (set)
+        	entity.getDataManager().set(FLAGS, Byte.valueOf((byte)(b0 | 1 << flag)));
+        else
+        	entity.getDataManager().set(FLAGS, Byte.valueOf((byte)(b0 & ~(1 << flag))));
 	}
 }

@@ -19,13 +19,14 @@ public class RendererMagicTable extends TileEntitySpecialRenderer<TileEntityHars
 		if(te.getWorld().getBlockState(te.getPos().up()).isOpaqueCube())
 			return;
 		int itemsTotal = 0;
+		int getter = 0;
 		for(int i = 0; i < 4; i++)
 			itemsTotal += te.getHandler().getStackInSlot(i).isEmpty() ? 0 : 1;
 		for(int i = 0; i < 4; i++)
 		{
-			ItemStack stack = te.getHandler().getStackInSlot(i).copy();
-			if(i >= itemsTotal)
+			if(te.getHandler().getStackInSlot(i).isEmpty())
 				continue;
+			ItemStack stack = te.getHandler().getStackInSlot(i).copy();
 			stack.setCount(1);
 			EntityItem item = new EntityItem(Minecraft.getMinecraft().world, 0, 0, 0, stack);
 			item.hoverStart = 0;
@@ -34,7 +35,7 @@ public class RendererMagicTable extends TileEntitySpecialRenderer<TileEntityHars
 			{
 				GlStateManager.translate(x, y, z);
 				float accuracy = 1000000f;
-				Point p = HarshenUtils.getPointsAroundCenter(new Point((int) (Math.sin(te.getTimer() / 10f % 100f) * accuracy), (int) (Math.cos(te.getTimer() / 10f % 100f) * accuracy)), new Point(0, 0), itemsTotal).get(i);
+				Point p = HarshenUtils.getPointsAroundCenter(new Point((int) (Math.sin(te.getTimer() / 10f % 100f) * accuracy), (int) (Math.cos(te.getTimer() / 10f % 100f) * accuracy)), new Point(0, 0), itemsTotal).get(getter++);
 				GlStateManager.translate(p.x / accuracy / 2 + 0.5f, 1f, p.y / accuracy / 2 + 0.5f);
 				GlStateManager.scale(0.7f, 0.7f, 0.7f);
 				GlStateManager.translate(0, Math.sin(rotateAngle) / 20f, 0);

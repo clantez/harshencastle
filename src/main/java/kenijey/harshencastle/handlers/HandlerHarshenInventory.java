@@ -4,6 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.UUID;
 
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.interfaces.HarshenEvent;
@@ -18,13 +19,15 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Enchantments;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerPickupXpEvent;
 import net.minecraftforge.fml.common.eventhandler.Event;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 
 public class HandlerHarshenInventory 
@@ -39,7 +42,6 @@ public class HandlerHarshenInventory
 		{
 			if(!event.player.getEntityData().hasKey("harshenInventory") && !(event.player instanceof EntityOtherPlayerMP))
 				HarshenNetwork.sendToServer(new MessagePacketRequestInv());
-			return;
 		}
 		if(!tickMap.containsKey(event.player))
 			tickMap.put(event.player, 0);
@@ -51,13 +53,39 @@ public class HandlerHarshenInventory
 					((IHarshenProvider)handler.getStackInSlot(slot).getItem()).onAdd(event.player);
 				else if(!prevInv.get(slot).isEmpty() && handler.getStackInSlot(slot).isEmpty() && prevInv.get(slot).getItem() instanceof IHarshenProvider)
 					((IHarshenProvider)prevInv.get(slot).getItem()).onRemove(event.player);
-		prevInv.clear();
+		ArrayList<ItemStack> prevInv = new ArrayList<>();
 		for(int slot = 0; slot < handler.getSlots(); slot++)
 		{
 			if(handler.getStackInSlot(slot).getItem() instanceof IHarshenProvider)
 				((IHarshenProvider)handler.getStackInSlot(slot).getItem()).onTick(event.player, tickMap.get(event.player));
 			prevInv.add(handler.getStackInSlot(slot));
 		}	
+		this.prevInv = prevInv;
+	}
+	
+	private static HashMap<UUID, HarshenItemStackHandler> stackMap = new HashMap<>();
+	
+	@SubscribeEvent(priority = EventPriority.LOWEST)
+	public void onPlayerDeath(LivingDeathEvent event)
+	{
+		if(event.getEntityLiving() instanceof EntityPlayer)
+		{
+			HarshenItemStackHandler handler = HarshenUtils.getHandler(event.getEntity().getEntityData());
+			stackMap.put(event.getEntity().getUniqueID(), handler);
+		}
+	}
+	
+	@SubscribeEvent(priority = EventPriority.HIGHEST)
+	public void onPlayerRespawn(PlayerRespawnEvent event)
+	{
+		if(stackMap.containsKey(event.player.getUniqueID()))
+		{
+			event.player.getEntityData().setTag("harshenInventory", stackMap.get(event.player.getUniqueID()).serializeNBT());
+			for(int i = 0; i < stackMap.get(event.player.getUniqueID()).getSlots(); i++)
+				if(stackMap.get(event.player.getUniqueID()).getStackInSlot(i).getItem() instanceof IHarshenProvider)
+					((IHarshenProvider)stackMap.get(event.player.getUniqueID()).getStackInSlot(i).getItem()).onAdd(event.player);
+
+		}
 	}
 	
 	@SubscribeEvent
@@ -93,12 +121,11 @@ public class HandlerHarshenInventory
 	
 	public Event phaseEvent(Event event)
 	{
-		if(event instanceof LivingHurtEvent && ((LivingHurtEvent)event).getSource() instanceof EntityDamageSource && 
-				((EntityDamageSource)((LivingHurtEvent)event).getSource()).getTrueSource() instanceof EntityPlayer)
-			return new PlayerPunchedEvent((EntityPlayer)((EntityDamageSource)((LivingHurtEvent)event).getSource()).getTrueSource(), ((LivingHurtEvent)event).getEntityLiving(), ((LivingHurtEvent)event).getSource(), ((LivingHurtEvent)event).getAmount());
-			
+		if(event instanceof LivingHurtEvent && HarshenUtils.isSourceFromPlayer(((LivingHurtEvent)event).getSource()))
+			return new PlayerPunchedEvent(((LivingHurtEvent)event), HarshenUtils.getPlayerFromSource(((LivingHurtEvent)event).getSource()));
 		return event;
 	}
+		
 	
 	@SubscribeEvent
 	public void onEvent(Event event)
@@ -120,9 +147,13 @@ public class HandlerHarshenInventory
 						if(method != null)
 							method.invoke(object, event);
 					} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-						e.printStackTrace();
+						if(e instanceof InvocationTargetException)
+							((InvocationTargetException)e).getTargetException().printStackTrace();
+						else
+							e.printStackTrace();
 					}
 			}
 		}
+		
 	}
 }

@@ -3,6 +3,8 @@ package kenijey.harshencastle.intergration.jei;
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.HarshenRecipes;
+import kenijey.harshencastle.containers.ContainerMagicTable;
+import kenijey.harshencastle.gui.GuiMagicTable;
 import kenijey.harshencastle.intergration.jei.cauldron.JEICauldronCategory;
 import kenijey.harshencastle.intergration.jei.cauldron.JEICauldronHandler;
 import kenijey.harshencastle.intergration.jei.hereticritual.JEIHereticRitualCategory;
@@ -35,6 +37,9 @@ public class JEIHarshenCastle implements IModPlugin
 				new JEIHereticRitualHandler(),
 				new JEIMagicTableHandler());
 		
+		registry.getRecipeTransferRegistry().addRecipeTransferHandler(ContainerMagicTable.class, JEICategoryUIDs.MAGIC_TABLE, 0, 5, 5, 36);
+		registry.addRecipeClickArea(GuiMagicTable.class, 105, 77, 59, 34, JEICategoryUIDs.MAGIC_TABLE);
+				
 		registry.addRecipes(HarshenRecipes.allRitualRecipes, JEICategoryUIDs.RITUAL);
 		registry.addRecipes(HarshenRecipes.allCauldronRecipes, JEICategoryUIDs.CAULDRON);
 		registry.addRecipes(HarshenRecipes.allPedestalRecipes, JEICategoryUIDs.PENDESTAL_SLAB);

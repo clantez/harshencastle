@@ -43,6 +43,7 @@ import kenijey.harshencastle.handlers.HandlerRaptorScythe;
 import kenijey.harshencastle.handlers.HandlerSoulHarsherSword;
 import kenijey.harshencastle.handlers.HandlerVillagerSpawn;
 import kenijey.harshencastle.handlers.HandlerZombieEyeDrop;
+import kenijey.harshencastle.handlers.vanillaInventory.HandlerTotemOfUndying;
 import kenijey.harshencastle.models.ModelArmour;
 import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.objecthandlers.FaceRenderer;
@@ -123,7 +124,7 @@ public class CommonProxy
     
     private void setUpVanillaProviders()
     {
-    	HarshenUtils.registerInventoryItem(Items.TOTEM_OF_UNDYING, new VanillaProviderToInterface(EnumInventorySlots.NECK, 0));
+    	HarshenUtils.registerInventoryItem(Items.TOTEM_OF_UNDYING, new VanillaProviderToInterface(EnumInventorySlots.NECK, 0, new HandlerTotemOfUndying()));
     }
     
     private void setUpEnumValues()

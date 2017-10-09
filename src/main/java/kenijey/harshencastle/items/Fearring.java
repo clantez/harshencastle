@@ -2,9 +2,12 @@ package kenijey.harshencastle.items;
 
 import kenijey.harshencastle.base.BaseItemInventory;
 import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
-import kenijey.harshencastle.handlers.inventory.HandlerFearring;
-import net.minecraft.entity.player.EntityPlayer;
+import kenijey.harshencastle.interfaces.HarshenEvent;
+import kenijey.harshencastle.objecthandlers.PlayerPunchedEvent;
+import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionEffect;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 public class Fearring extends BaseItemInventory
 {
@@ -22,6 +25,21 @@ public class Fearring extends BaseItemInventory
 	@Override
 	public Object getProvider(ItemStack stack) {
 		return new HandlerFearring();
+	}
+	
+	public class HandlerFearring
+	{
+		@HarshenEvent
+		public void onPlayerTick(LivingHurtEvent event)
+		{
+			event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 30));
+		}
+		
+		@HarshenEvent
+		public void onPlayerPunch(PlayerPunchedEvent event)
+		{
+			event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 150));
+		}
 	}
 
 }
