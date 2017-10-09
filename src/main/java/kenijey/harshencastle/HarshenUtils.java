@@ -10,12 +10,14 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
 import kenijey.harshencastle.base.BasePontusResourceBiome;
 import kenijey.harshencastle.biomes.HarshenBiomes;
 import kenijey.harshencastle.biomes.PontusBiomeProvider;
 import kenijey.harshencastle.config.HarshenConfigs;
+import kenijey.harshencastle.enchantment.HarshenEnchantmetns;
 import kenijey.harshencastle.enums.CauldronLiquid;
 import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
 import kenijey.harshencastle.enums.items.EnumGlassContainer;
@@ -28,12 +30,15 @@ import kenijey.harshencastle.objecthandlers.PlayerPunchedEvent;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -59,6 +64,7 @@ import net.minecraft.world.storage.loot.LootContext;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -686,10 +692,22 @@ public class HarshenUtils
 	public static void setFlag(Entity entity, int flag, boolean set)
 	{
 		byte b0 = ((Byte)entity.getDataManager().get(FLAGS)).byteValue();
-
-        if (set)
-        	entity.getDataManager().set(FLAGS, Byte.valueOf((byte)(b0 | 1 << flag)));
-        else
-        	entity.getDataManager().set(FLAGS, Byte.valueOf((byte)(b0 & ~(1 << flag))));
+        if (set) entity.getDataManager().set(FLAGS, Byte.valueOf((byte)(b0 | 1 << flag)));
+        else entity.getDataManager().set(FLAGS, Byte.valueOf((byte)(b0 & ~(1 << flag))));
 	}
+	
+	public static boolean isSlotAllowed(ItemStack stack, EnumInventorySlots slotIn, EnumInventorySlots askingSlot)
+	{
+		return slotIn.isAllowed(askingSlot) || EnchantmentHelper.getEnchantmentLevel(HarshenEnchantmetns.MIXUP, stack) > 0;
+	}
+	
+	
+	
+    public final static EnumEnchantmentType HARSHEN_ITEMS_ONLY = EnumHelper.addEnchantmentType("harshen_items", new Predicate<Item>() {
+    	
+		@Override
+		public boolean apply(Item input) {
+			return hasProvider(input);
+		}
+	});
 }

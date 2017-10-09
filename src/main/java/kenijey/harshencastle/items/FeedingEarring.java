@@ -21,9 +21,8 @@ public class FeedingEarring extends Item implements IHarshenProvider
 	
 	@Override
 	public void onTick(EntityPlayer player, int tick) {
-		System.out.println(player.getFoodStats().getSaturationLevel());
-		if(tick%180==0 && player.getFoodStats().getSaturationLevel() < 10f)
-			player.getFoodStats().addStats(1, 1.0F);
+		if(player.getFoodStats().getFoodLevel() < 20)
+			player.getFoodStats().setFoodLevel(20);
 	}
 
 }
