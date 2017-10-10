@@ -31,6 +31,8 @@ import kenijey.harshencastle.objecthandlers.PlayerPunchedEvent;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.entity.Entity;
@@ -42,6 +44,7 @@ import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemEnchantedBook;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
@@ -692,12 +695,20 @@ public class HarshenUtils
         else entity.getDataManager().set(FLAGS, Byte.valueOf((byte)(b0 & ~(1 << flag))));
 	}
 	
+	public static ItemStack getBookWith(Enchantment enchantment, int level)
+	{
+		return ItemEnchantedBook.getEnchantedItemStack(new EnchantmentData(enchantment, level));
+	}
+	
+	public static ItemStack getMixupBook()
+	{
+		return getBookWith(HarshenEnchantmetns.MIXUP, 1);
+	}
+	
 	public static boolean isSlotAllowed(ItemStack stack, EnumInventorySlots slotIn, EnumInventorySlots askingSlot)
 	{
 		return slotIn.isAllowed(askingSlot) || EnchantmentHelper.getEnchantmentLevel(HarshenEnchantmetns.MIXUP, stack) > 0;
 	}
-	
-	
 	
     public final static EnumEnchantmentType HARSHEN_ITEMS_ONLY = EnumHelper.addEnchantmentType("harshen_items", new Predicate<Item>() {
     	

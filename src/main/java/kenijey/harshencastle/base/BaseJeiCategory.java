@@ -23,7 +23,7 @@ public abstract class BaseJeiCategory implements IRecipeCategory{
 		IGuiHelper guiHelper = reg.getJeiHelpers().getGuiHelper();
 		this.UID = UID;
 		String name = UID.split("\\.")[UID.split("\\.").length-1];
-		background = guiHelper.createBlankDrawable(150, 110);
+		background = guiHelper.createBlankDrawable(150, 100);
 		localizedName = I18n.format("jei." + name + ".name");
 		overlay = getOverlay(guiHelper, name);
 		createDrawable(guiHelper);

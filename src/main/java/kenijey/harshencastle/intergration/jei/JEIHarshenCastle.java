@@ -54,8 +54,7 @@ public class JEIHarshenCastle implements IModPlugin
 					continue;
 				ItemStack stack = new ItemStack(item);
 				stack.addEnchantment(HarshenEnchantmetns.MIXUP, 1);
-				registry.addAnvilRecipe(new ItemStack(item), HarshenUtils.toArray(ItemEnchantedBook.getEnchantedItemStack(new EnchantmentData(HarshenEnchantmetns.MIXUP, 1))),
-						HarshenUtils.toArray(stack));
+				registry.addAnvilRecipe(new ItemStack(item), HarshenUtils.toArray(HarshenUtils.getMixupBook()), HarshenUtils.toArray(stack));
 			}		
 		
 		registry.addRecipes(HarshenRecipes.allRitualRecipes, JEICategoryUIDs.RITUAL);

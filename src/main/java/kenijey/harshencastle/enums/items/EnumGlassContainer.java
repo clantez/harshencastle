@@ -26,15 +26,16 @@ public enum EnumGlassContainer implements IStringSerializable, IIDSet
 	HARSHEN_DIMENSIONAL_FLUID("harshen_dimensional_fluid", HarshenFluids.harshen_dimensional_fluid, 0x324B64),
 	BLOOD("blood", 0x870705),
 	LAVA("lava", Blocks.LAVA, 0xD96415),
-	MILK("milk", -1),
+	MILK("milk"),
 	WATER("water", Blocks.WATER, 0x598fe5),
 	EARTH("earth", Blocks.DIRT, 0xc6854d),
 	SAND("sand", Blocks.SAND, 0xf4cf60),
 	COAL("coal", Blocks.COAL_BLOCK, 0x605a5a),
-	DIAMOND("diamond", Blocks.DIAMOND_BLOCK, 0x67dbc7);
+	DIAMOND("diamond", Blocks.DIAMOND_BLOCK, 0x67dbc7),
+	MAGIC("magic");
 		
 	private int meta;
-	private String name;
+	private final String name;
 	private PotionEffect[] effects;
 	private CauldronLiquid type;
 	private boolean isSubContainer = false;
@@ -55,6 +56,11 @@ public enum EnumGlassContainer implements IStringSerializable, IIDSet
 		this.color = color;
 		this.name = name;
 		this.effects = effects;
+	}
+	
+	private EnumGlassContainer(String name) 
+	{
+		this(name, -1);
 	}
 	
 	private EnumGlassContainer(String name, int color) 

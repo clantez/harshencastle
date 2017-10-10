@@ -161,14 +161,15 @@ public abstract class BaseHarshenParticle extends Particle
         float f3 = (float)(this.posX - interpPosX);
         float f4 = (float)(this.posY - interpPosY);
         float f5 = (float)(this.posZ - interpPosZ);
-        float f6 = getBrightnessForRender(partialTicks);
-        f6 = 1;
+        int i = this.getBrightnessForRender(partialTicks);
+        int j11 = i >> 16 & 65535;
+        int k11 = i & 65535;
         float size = 0.1F * (isCauldronTop ? 3.15f : this.particleScale);
         Minecraft.getMinecraft().getTextureManager().bindTexture(location);
         float k = (float)this.particleTextureIndexX / 16.0F;
-        float k1 = isFullTexture() ? 2 : k + 0.0624375F;
+        float k1 = isFullTexture() ? 1 : k + 0.0624375F;
         float k2 = (float)this.particleTextureIndexY / 16.0F;
-        float k3 = isFullTexture() ? 0 : k2 + 0.0624375F;
+        float k3 = isFullTexture() ? 1 : k2 + 0.0624375F;
         double[] t = {k1, k3, k1, k2, k, k2, k, k3};
         if(location instanceof EntityThrowLocation)
         {
@@ -180,6 +181,7 @@ public abstract class BaseHarshenParticle extends Particle
             double[] t1 = {fi, fi3, fi1, fi3, fi1, fi2, fi, fi2};
             t = t1;
         }
+        float f6 = MathHelper.clamp( world.getLight(new BlockPos(posX, posY, posZ)) / 16f, 0.3f, 1f);
         buffer.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR);
         buffer.pos((double)(f3 - rotX * size- rotXY * size), (double)f4 - rotZ * size, (double)(f5 - rotYZ * size - rotXZ * size)).tex(t[0], t[1]).color(f6, f6, f6, this.particleAlpha).endVertex();
         buffer.pos((double)(f3 - rotX * size + rotXY * size), (double)f4 + rotZ * size, (double)(f5 - rotYZ * size + rotXZ * size)).tex(t[2], t[3]).color(f6, f6, f6, this.particleAlpha).endVertex();

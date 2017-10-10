@@ -220,7 +220,7 @@ public class HarshenItems
 		regMetaItem(PROPS, EnumProp.getNames(), "prop_");
 		regMetaItem(BLOOD_COLLECTOR, EnumBloodCollector.getNames(), "blood_collector_");
 		regMetaItem(RITUAL_CRYSTAL, 12, EnumRitualCrystal.getNames(), "ritual_crystal_");
-		regMetaItem(GLASS_CONTAINER, emptyList(EnumGlassContainer.values().length), "glass_container", new exceptionName(0, "_empty"));
+		regMetaItem(GLASS_CONTAINER, emptyList(EnumGlassContainer.values().length), "glass_container", new exceptionName(0, "_empty"), new exceptionName(EnumGlassContainer.MAGIC.getMeta(), "_magic"));
 	}
 	
 	public final static ArrayList<Item> ALL_ITEMS= new ArrayList<Item>();

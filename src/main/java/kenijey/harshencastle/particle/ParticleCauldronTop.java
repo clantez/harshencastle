@@ -29,6 +29,11 @@ public class ParticleCauldronTop extends BaseHarshenParticle
 	}
 	
 	@Override
+	protected boolean isFullTexture() {
+		return fxLayer == 3;
+	}
+	
+	@Override
 	protected int getXIndex() {
 		return 0;
 	}

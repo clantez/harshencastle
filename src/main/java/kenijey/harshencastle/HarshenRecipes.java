@@ -3,6 +3,7 @@ package kenijey.harshencastle;
 import java.util.ArrayList;
 
 import kenijey.harshencastle.armor.HarshenArmors;
+import kenijey.harshencastle.enchantment.HarshenEnchantmetns;
 import kenijey.harshencastle.enums.ItemLiquidTypeset;
 import kenijey.harshencastle.enums.items.EnumGlassContainer;
 import kenijey.harshencastle.recipies.CauldronRecipes;
@@ -11,9 +12,11 @@ import kenijey.harshencastle.recipies.MagicTableRecipe;
 import kenijey.harshencastle.recipies.PedestalSlabRecipes;
 import kenijey.harshencastle.recipies.RitualRecipes;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemEnchantedBook;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -30,7 +33,9 @@ public class HarshenRecipes {
 	{
 		craftingRegistry();
 		
-		MagicTableRecipe.addRecipe(array(new ItemStack(Items.COAL), new ItemStack(Blocks.LOG), new ItemStack(Items.DIAMOND), new ItemStack(Blocks.STONE)), new ItemStack(Blocks.DIAMOND_BLOCK));
+		MagicTableRecipe.addRecipe(array(EnumGlassContainer.DIAMOND.getStack(), EnumGlassContainer.LAVA.getStack(), new ItemStack(Items.BOOK), EnumGlassContainer.MAGIC.getStack()), HarshenUtils.getMixupBook());
+		MagicTableRecipe.addRecipe(array(new ItemStack(Blocks.DIRT), new ItemStack(Blocks.DIRT), new ItemStack(Blocks.DIRT), new ItemStack(Blocks.DIRT)), new ItemStack(HarshenBlocks.JEWEL_DIRT));
+
 		
 		RitualRecipes.addRecipe(array(new ItemStack(HarshenItems.PONTUS_WORLD_GATE_PARTS, 1, 0), new ItemStack(HarshenItems.PONTUS_WORLD_GATE_PARTS, 1, 1),
 				new ItemStack(HarshenItems.PONTUS_WORLD_GATE_PARTS, 1 ,2), new ItemStack(HarshenItems.HARSHEN_SOUL_FRAGMENT)), new ItemStack(HarshenItems.PONTUS_WORLD_GATE_SPAWNER, 1, 0), true);		

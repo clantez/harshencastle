@@ -14,12 +14,19 @@ public class GuiMagicTable extends GuiContainer
 		super(new ContainerMagicTable(te, player));
 		ySize = 210;
 	}
+	
+	@Override
+	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+		super.drawScreen(mouseX, mouseY, partialTicks);
+        this.renderHoveredToolTip(mouseX, mouseY);
+	}
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
 		this.drawDefaultBackground();
 		this.mc.getTextureManager().bindTexture(new ResourceLocation(HarshenCastle.MODID, "textures/gui/container/magic_table.png"));
 		this.drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize);
+
 	}
 
 }
