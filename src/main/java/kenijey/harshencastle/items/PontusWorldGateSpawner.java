@@ -37,7 +37,6 @@ public class PontusWorldGateSpawner extends BaseItemMetaData
 	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 		String prefix = stack.getMetadata() == 0? "gatespawner" : "gatespawnerenhanced";
-		tooltip.add(new TextComponentTranslation(" ").getFormattedText());
 		tooltip.add("\u00A73" + new TextComponentTranslation(prefix + "1").getFormattedText());
 		tooltip.add("\u00a73" + new TextComponentTranslation(prefix + "2").getFormattedText());
 		super.addInformation(stack, worldIn, tooltip, flagIn);

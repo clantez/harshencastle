@@ -24,8 +24,7 @@ public class TileEntityHarshenDimensionalGate extends BaseHarshenTileEntity impl
 							.withProperty(HarshenDimensionalGate.FOREVER, world.getBlockState(pos).getValue(HarshenDimensionalGate.FOREVER)), 3);
 					entityitem.getItem().setCount(entityitem.getItem().getCount() - 1);
 				}
-			
-		if(getBlockMetadata() == 2)
+		if(getBlockMetadata() == 0)
 			if(ticksLeft-- <= 0)
 				((HarshenDimensionalGate)world.getBlockState(pos).getBlock()).deactivate(world, pos);
 	}

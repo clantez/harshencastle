@@ -1,4 +1,5 @@
 {
+	"parent": "item/generated",
     "textures": {
         "0": "harshencastle:items/pontus_cube"
     },

@@ -115,7 +115,7 @@ public class HandlerHarshenInventory
 		if(HarshenUtils.hasProvider(event.getItemStack().getItem()))
 		{
 			IVanillaProvider provider = HarshenUtils.getProvider(event.getItemStack().getItem());
-			event.getToolTip().add("\u00A75" + new TextComponentTranslation("accessoryitem").getFormattedText() + " \u00A77" + new TextComponentTranslation(provider.getSlot().getName()).getFormattedText());
+			event.getToolTip().add("\u00A75" + new TextComponentTranslation("accessoryitem", "\u00A77" + new TextComponentTranslation(provider.getSlot().getName()).getFormattedText()).getFormattedText());
 			if(provider.toolTipLines() > 0)
 				event.getToolTip().add(" ");
 			for(int i = 0; i < provider.toolTipLines(); i ++)

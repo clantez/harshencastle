@@ -24,6 +24,11 @@ public class RingOfBlood extends Item implements IHarshenProvider
 	}
 	
 	@Override
+	public int toolTipLines() {
+		return 1;
+	}
+	
+	@Override
 	public void onAdd(EntityPlayer player) {
 		IAttributeInstance attributeHealth = player.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH);
 		AttributeModifier modifierHealth = new AttributeModifier(UUID.fromString("83cd6b7e-a838-11e7-abc4-cec278b6b50a"), "ringOfBloodHealth4", 4, 0).setSaved(true);

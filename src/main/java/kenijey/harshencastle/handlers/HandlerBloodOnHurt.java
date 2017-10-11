@@ -23,8 +23,8 @@ public class HandlerBloodOnHurt
 	@SubscribeEvent
 	public void onLivingHurt(LivingHurtEvent event)
 	{
-		if(new Random().nextDouble() < GeneralConfig.bloodChance && event.getSource() instanceof EntityDamageSource)
-			if(HarshenUtils.toArray(AllowedEntities).contains(event.getEntity().getClass()) && event.getEntity().world.isAirBlock(event.getEntity().getPosition()) && GeneralConfig.bloodDrops)
+		if(new Random().nextDouble() < GeneralConfig.bloodChance && event.getSource() instanceof EntityDamageSource && HarshenUtils.toArray(AllowedEntities).contains(event.getEntity().getClass()))
+			if(event.getEntity().world.isAirBlock(event.getEntity().getPosition()) && GeneralConfig.bloodDrops)
 				event.getEntity().getEntityWorld().setBlockState(event.getEntity().getPosition(), HarshenBlocks.BLOOD_BLOCK.getDefaultState(), 3);
 			else if(event.getSource().getTrueSource() instanceof EntityPlayer && GeneralConfig.bloodOffHand &&
 					((EntityPlayer)event.getSource().getTrueSource()).getHeldItemOffhand().getItem() == HarshenItems.BLOOD_COLLECTOR)

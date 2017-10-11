@@ -16,12 +16,6 @@ public class BloodEssence extends Item implements IBloodSupply
 		setUnlocalizedName("blood_essence");
 		setRegistryName("blood_essence");
 	}
-
-	@Override
-	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-		tooltip.add("\u00A74" + new TextComponentTranslation("bessence1").getFormattedText());
-		super.addInformation(stack, worldIn, tooltip, flagIn);
-	}
 	
 	@Override
 	public int getAmountPerSecond() {

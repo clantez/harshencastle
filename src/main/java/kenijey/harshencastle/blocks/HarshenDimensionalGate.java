@@ -27,6 +27,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 
@@ -83,6 +84,8 @@ public class HarshenDimensionalGate extends Block implements ITileEntityProvider
 					else
 						HarshenUtils.transferPlayerToDimension((EntityPlayerMP) playerIn, DimensionPontus.DIMENSION_ID, pos, getStateFromMeta(3));
 			}
+			else
+				playerIn.sendStatusMessage(new TextComponentTranslation("block.gate.reactivate"), true);
 		return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
 	}
 	

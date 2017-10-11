@@ -17,14 +17,6 @@ public class EnionBow extends BaseHarshenBow
 		setUnlocalizedName("enion_bow");
 		setRegistryName("enion_bow");
 	}
-	
-	@Override
-	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-		tooltip.add("\u00A7b" + new TextComponentTranslation("enionbow1").getFormattedText());
-		tooltip.add("\u00A7b" + new TextComponentTranslation("enionbow2").getFormattedText());
-		tooltip.add(new TextComponentTranslation(" ").getFormattedText());
-		super.addInformation(stack, worldIn, tooltip, flagIn);
-	}
 
 	@Override
 	public int getMaxDamage() {
