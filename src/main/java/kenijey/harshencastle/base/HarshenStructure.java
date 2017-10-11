@@ -6,6 +6,7 @@ import java.util.Random;
 import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.template.HarshenTemplate;
+import net.minecraft.block.BlockLiquid;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -67,11 +68,6 @@ public class HarshenStructure
 		return true;
 	}
 	
-	public boolean addPositionOnGenerate()
-	{
-		return false;
-	}
-	
 	public BlockPos addPos()
 	{
 		return BlockPos.ORIGIN;
@@ -106,6 +102,8 @@ public class HarshenStructure
 	        BlockPos pos = HarshenUtils.getTopBlock(world, new BlockPos(x, 0, z)).add(originAddition).add(addPos());
 	        if(pos.getY() < 0)
 	        	pos = new BlockPos(pos.getX(), 5, pos.getZ());
+	        if(world.getBlockState(pos).getBlock() instanceof BlockLiquid && !canSpawnOnWater())
+	        	return false;
 	        loadIntoWorld(world, pos, random, useRuin);
 	        for(int x1 = 0; x1 < size.getX(); x1++) 
 	        	for(int z1 = 0; z1 < size.getZ(); z1++)
@@ -114,6 +112,10 @@ public class HarshenStructure
 		        			world.setBlockState(pos.add(x1, -y1, z1), world.getBlockState(pos.add(x1, 0, z1)));
 	        return true;
 		}
+		return false;
+	}
+	
+	public boolean canSpawnOnWater() {
 		return false;
 	}
 	

@@ -23,7 +23,6 @@ public class JEIRitualCategory extends BaseJeiCategory
 			return;
 		JEIRitualWrapper wrapper = (JEIRitualWrapper) recipeWrapper;
 		List<List<ItemStack>> stackList = ingredients.getInputs(ItemStack.class);
-		Collections.shuffle(stackList);
 		for(int i = 0; i < 4; i++)
 			addSlot(recipeLayout, stackList, i);
 		recipeLayout.getItemStacks().init(4, false, 122, 45);

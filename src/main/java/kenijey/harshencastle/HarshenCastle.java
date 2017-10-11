@@ -6,6 +6,10 @@ import org.apache.logging.log4j.Logger;
 import kenijey.harshencastle.commands.CommandHarshenCastleLoader;
 import kenijey.harshencastle.creativetabs.HarshenTab;
 import kenijey.harshencastle.proxy.CommonProxy;
+import mezz.jei.config.SessionData;
+import mezz.jei.util.Log;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.IReloadableResourceManager;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -31,7 +35,7 @@ public class HarshenCastle {
     
     public static final CreativeTabs harshenTab = new HarshenTab();
     
-    public static final Logger LOGGER = LogManager.getFormatterLogger(MODID); 
+    public static final Logger LOGGER = LogManager.getLogger(MODID); 
 
     
     @Instance(MODID)
@@ -67,4 +71,10 @@ public class HarshenCastle {
 	{
     	event.registerServerCommand(new CommandHarshenCastleLoader());
 	}
+    
+    @EventHandler
+    public void onLoad(FMLLoadCompleteEvent event)
+    {
+		proxy.onLoad(event);
+    }
 }

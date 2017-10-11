@@ -17,6 +17,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
@@ -60,7 +61,10 @@ public class XrayPendant extends Item implements IHarshenProvider
 		{
 			EntityPlayer player = net.minecraft.client.Minecraft.getMinecraft().player;
 			BlockPos pos = player.getPosition();
-			String blockName = HarshenUtils.getFirstOccuringItem(player,  HarshenItems.XRAY_PENDANT).getTagCompound().getString("BlockToSearch");
+			ItemStack stack = HarshenUtils.getFirstOccuringItem(player,  HarshenItems.XRAY_PENDANT);
+			if(!stack.hasTagCompound())
+				stack.setTagCompound(new NBTTagCompound());
+			String blockName = stack.getTagCompound().getString("BlockToSearch");
 			boolean flag = HarshenUtils.toArray(AccessoryConfig.blackListedXrays).contains(blockName);
 			if(!flag)
 			{

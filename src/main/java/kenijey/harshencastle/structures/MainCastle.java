@@ -22,7 +22,7 @@ public class MainCastle extends HarshenStructure
 	}
 	
 	@Override
-	public boolean addPositionOnGenerate() {
+	public boolean canSpawnOnWater() {
 		return true;
 	}
 	

@@ -15,6 +15,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemEnchantedBook;
 import net.minecraft.item.ItemStack;
@@ -29,14 +30,22 @@ public class HarshenRecipes {
 	public static ArrayList<PedestalSlabRecipes> allPedestalRecipes = new ArrayList<>();
 	public static ArrayList<MagicTableRecipe> allMagicTableRecipes = new ArrayList<>();
 	
+	private static boolean hasInit; 
+	
 	public static void register()
 	{
-		craftingRegistry();
+		allRitualRecipes.clear();
+		allCauldronRecipes.clear();
+		allHereticCauldronRecipes.clear();
+		allPedestalRecipes.clear();
+		allMagicTableRecipes.clear();
+		
+		if(!hasInit)
+			craftingRegistry();
 		
 		MagicTableRecipe.addRecipe(array(EnumGlassContainer.DIAMOND.getStack(), EnumGlassContainer.LAVA.getStack(), new ItemStack(Items.BOOK), EnumGlassContainer.MAGIC.getStack()), HarshenUtils.getMixupBook());
 		MagicTableRecipe.addRecipe(array(new ItemStack(Blocks.DIRT), new ItemStack(Blocks.DIRT), new ItemStack(Blocks.DIRT), new ItemStack(Blocks.DIRT)), new ItemStack(HarshenBlocks.JEWEL_DIRT));
 
-		
 		RitualRecipes.addRecipe(array(new ItemStack(HarshenItems.PONTUS_WORLD_GATE_PARTS, 1, 0), new ItemStack(HarshenItems.PONTUS_WORLD_GATE_PARTS, 1, 1),
 				new ItemStack(HarshenItems.PONTUS_WORLD_GATE_PARTS, 1 ,2), new ItemStack(HarshenItems.HARSHEN_SOUL_FRAGMENT)), new ItemStack(HarshenItems.PONTUS_WORLD_GATE_SPAWNER, 1, 0), true);		
 		
@@ -120,7 +129,10 @@ public class HarshenRecipes {
 				new ItemStack(Items.EMERALD), new ItemStack(Items.QUARTZ), new ItemStack(Items.ENDER_EYE),
 				new ItemStack(Blocks.END_ROD), new ItemStack(Blocks.LAPIS_ORE));
 		
-		
+		HereticRitualRecipes.addRecipe(EnumGlassContainer.EMPTY.getStack(), EnumGlassContainer.MAGIC.getStack(), EnumGlassContainer.HARSHING_WATER.getType(), 
+				new ItemStack(HarshenItems.RITUAL_CRYSTAL, 1, 1), new ItemStack(Items.DYE, 1, EnumDyeColor.PURPLE.getDyeDamage()), new ItemStack(Items.DYE, 1, EnumDyeColor.PINK.getDyeDamage()),
+				new ItemStack(Items.END_CRYSTAL), new ItemStack(Items.ENDER_PEARL), new ItemStack(Items.ENDER_EYE),
+				new ItemStack(Items.BLAZE_POWDER), new ItemStack(HarshenItems.HARSHEN_SOUL_FRAGMENT));
 		
 		CauldronRecipes.addRecipe(new ItemStack(HarshenItems.RITUAL_CRYSTAL, 1, 0), new ItemStack(HarshenItems.RITUAL_CRYSTAL, 1, 1), EnumGlassContainer.BLOOD);
 		CauldronRecipes.addRecipe(new ItemStack(HarshenItems.HARSHEN_SOUL_INGOT, 1, 0), new ItemStack(HarshenItems.SOUL_INFUSED_INGOT, 1, 0), EnumGlassContainer.HARSHING_WATER);
@@ -136,6 +148,8 @@ public class HarshenRecipes {
 				CauldronRecipes.addRecipe(new ItemStack(((IBlockState) glass.getType().getStateOrLoc()).getBlock()), ItemLiquidTypeset.getStackFromType(glass.getType()), EnumGlassContainer.WATER);
 				CauldronRecipes.addRecipe(new ItemStack(HarshenItems.SOLIDIFYING_PASTE), new ItemStack(Item.getItemFromBlock(((IBlockState)glass.getType().getStateOrLoc()).getBlock())), glass);
 			}
+		
+		hasInit = true;
 	}
 	
 	public static void craftingRegistry()

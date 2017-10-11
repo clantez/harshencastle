@@ -3,7 +3,6 @@ package kenijey.harshencastle.proxy;
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.HarshenItems;
-import kenijey.harshencastle.HarshenRecipes;
 import kenijey.harshencastle.HarshenSounds;
 import kenijey.harshencastle.HarshenStructures;
 import kenijey.harshencastle.HarshenUtils;
@@ -66,6 +65,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
@@ -123,7 +123,7 @@ public class CommonProxy
     
     private void setUpVanillaProviders()
     {
-    	HarshenUtils.registerInventoryItem(Items.TOTEM_OF_UNDYING, new VanillaProviderToInterface(EnumInventorySlots.NECK, 0, new HandlerTotemOfUndying()));
+    	HarshenUtils.registerInventoryItem(Items.TOTEM_OF_UNDYING, new VanillaProviderToInterface(EnumInventorySlots.NECK, new HandlerTotemOfUndying()).setToolTipLines(0).disableEventMultiplication());
     }
     
     private void setUpEnumValues()
@@ -178,9 +178,6 @@ public class CommonProxy
     			new HandlerExtraRange());
     	
     	GameRegistry.registerWorldGenerator(new WorldGen(), 0);
-    	
-    	HarshenRecipes.register();
-    	
     }
 
     public void postInit(FMLPostInitializationEvent event) 
@@ -220,5 +217,9 @@ public class CommonProxy
 	public void addErroredPosition(FaceRenderer renderer){}
 	
 	public void resetErroredPositions(){}
+
+	public void onLoad(FMLLoadCompleteEvent event) {
+		
+	}
 
 }

@@ -4,6 +4,7 @@ import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.HarshenClientUtils;
 import kenijey.harshencastle.HarshenItems;
+import kenijey.harshencastle.HarshenRecipes;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.armor.HarshenArmors;
 import kenijey.harshencastle.dimensions.pontus.PontusWorldProvider;
@@ -11,6 +12,7 @@ import kenijey.harshencastle.entity.EntityFactories;
 import kenijey.harshencastle.entity.EntitySoulPart;
 import kenijey.harshencastle.entity.EntitySoullessKnight;
 import kenijey.harshencastle.entity.EntityThrown;
+import kenijey.harshencastle.entityrender.RenderEntityThrown;
 import kenijey.harshencastle.enums.ItemLiquidTypeset;
 import kenijey.harshencastle.enums.gui.EnumGuiTypes;
 import kenijey.harshencastle.enums.items.EnumGlassContainer;
@@ -56,6 +58,7 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.renderer.color.ItemColors;
+import net.minecraft.client.resources.IReloadableResourceManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumParticleTypes;
@@ -65,6 +68,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
@@ -141,7 +145,8 @@ public class ClientProxy extends CommonProxy
     			new HandlerRendererGuiInventory(), 
     			new HandlerFlatPlateRenderer(),
     			new HandlerUpdateChecker(),
-    			new HandlerRenderError());
+    			new HandlerRenderError(),
+    			new RenderEntityThrown(null));
     	
     	
     	
@@ -257,4 +262,13 @@ public class ClientProxy extends CommonProxy
     public void resetErroredPositions() {
     	HandlerRenderError.erroredPositions.clear();
     }
+    
+    @Override
+    public void onLoad(FMLLoadCompleteEvent event) {
+    	((IReloadableResourceManager)  Minecraft.getMinecraft().getResourceManager()).registerReloadListener(resourceManager -> {
+			HarshenRecipes.register();
+			HarshenCastle.LOGGER.info("All recipes loaded");
+		});
+    }
+    
 }

@@ -11,7 +11,13 @@ import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.event.RenderWorldLastEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class RenderEntityThrown extends Render<EntityThrown>
 {
@@ -29,7 +35,6 @@ public class RenderEntityThrown extends Render<EntityThrown>
      */
     public void doRender(EntityThrown entity, double x, double y, double z, float entityYaw, float partialTicks)
     {
-
     	if(entity.isLocation())
     	{
     		GlStateManager.pushMatrix();
@@ -44,11 +49,12 @@ public class RenderEntityThrown extends Render<EntityThrown>
             float f1 = (float)(i % 4 * 16 + 16) / 64.0F;
             float f2 = (float)(i / 4 * 16 + 0) / 64.0F;
             float f3 = (float)(i / 4 * 16 + 16) / 64.0F;
-            GlStateManager.translate(0.0F, 0.1F, 0.0F);
+            GlStateManager.translate(0.0F, -0.1F, 0.0F);
             GlStateManager.rotate(180.0F - this.renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
             GlStateManager.rotate((float)(this.renderManager.options.thirdPersonView == 2 ? -1 : 1) * -this.renderManager.playerViewX, 1.0F, 0.0F, 0.0F);
             float f7 = 0.3F;
             GlStateManager.scale(0.3F, 0.3F, 0.3F);
+            GlStateManager.translate(0.1F, 0.0F, 0.0F);
             Tessellator tessellator = Tessellator.getInstance();
             BufferBuilder bufferbuilder = tessellator.getBuffer();
             bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR_NORMAL);
@@ -96,6 +102,15 @@ public class RenderEntityThrown extends Render<EntityThrown>
             GlStateManager.popMatrix();
     	}
     }
+    
+    @SubscribeEvent
+    public void renderWorldLast(RenderWorldLastEvent event)
+	{
+		EntityPlayer player = net.minecraft.client.Minecraft.getMinecraft().player;
+		for(Entity e : player.world.getLoadedEntityList())
+			if(e instanceof EntityThrown)
+				Minecraft.getMinecraft().getRenderManager().renderEntityStatic(e, event.getPartialTicks(), false);
+	}
  
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.

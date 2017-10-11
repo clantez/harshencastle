@@ -40,10 +40,4 @@ public class PontusRitual extends HarshenStructure
 				((TileEntityHarshenDimensionalPedestal)world.getTileEntity(position.offset(facing))).setItem(stacks.get(facing.getHorizontalIndex()));	
 		world.setBlockToAir(position);
 	}
-	
-	@Override
-	public boolean addPositionOnGenerate() {
-		return true;
-	}
-
 }

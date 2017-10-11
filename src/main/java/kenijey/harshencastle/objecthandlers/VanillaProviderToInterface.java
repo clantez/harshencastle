@@ -8,17 +8,30 @@ public class VanillaProviderToInterface implements IVanillaProvider
 {
 
 	private final EnumInventorySlots slot;
-	private final int toolTipLines;
 	private final Object provider;
 	
-	public VanillaProviderToInterface(EnumInventorySlots slot, int toolTipLines, Object provider) {
+	private boolean multipleEvent = true;
+	private int toolTipLines;
+
+	
+	public VanillaProviderToInterface(EnumInventorySlots slot, Object provider) {
 		this.slot = slot;
-		this.toolTipLines = toolTipLines;
 		this.provider = provider;
 	}
 	
-	public VanillaProviderToInterface(EnumInventorySlots slot, Object provider) {
-		this(slot, 2, provider);
+	public VanillaProviderToInterface setToolTipLines(int toolTipLines) {
+		this.toolTipLines = toolTipLines;
+		return this;
+	}
+	
+	public VanillaProviderToInterface disableEventMultiplication() {
+		this.multipleEvent = false;
+		return this;
+	}
+	
+	@Override
+	public boolean multiplyEvent(ItemStack stack) {
+		return multipleEvent;
 	}
 	
 	@Override

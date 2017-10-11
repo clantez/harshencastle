@@ -32,6 +32,11 @@ public class JEIHereticRitualCategory extends BaseJeiCategory
 		super(UID, reg);
 	}
 	
+	@Override
+	protected boolean render2PerPage() {
+		return false;
+	}
+	
 	private static HashMap<CauldronLiquid, IDrawable> fluidTypes = new HashMap<>();
 	
 	private IDrawable currentFluid;
@@ -62,7 +67,6 @@ public class JEIHereticRitualCategory extends BaseJeiCategory
 		stackList.remove(0);
 		for(int i = 0; i < 8; i++)
 			revampedList.add(stackList.get(i));
-		Collections.shuffle(revampedList);
 		for(int i = 0; i < 8; i++) {
 			recipeLayout.getItemStacks().init(index, true, point.x, point.y);
 			recipeLayout.getItemStacks().set(index, revampedList.get(i));

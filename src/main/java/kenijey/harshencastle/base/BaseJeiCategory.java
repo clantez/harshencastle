@@ -23,10 +23,15 @@ public abstract class BaseJeiCategory implements IRecipeCategory{
 		IGuiHelper guiHelper = reg.getJeiHelpers().getGuiHelper();
 		this.UID = UID;
 		String name = UID.split("\\.")[UID.split("\\.").length-1];
-		background = guiHelper.createBlankDrawable(150, 100);
+		background = guiHelper.createBlankDrawable(150, 100 + (render2PerPage()? 0 : 10));
 		localizedName = I18n.format("jei." + name + ".name");
 		overlay = getOverlay(guiHelper, name);
 		createDrawable(guiHelper);
+	}
+	
+	protected boolean render2PerPage()
+	{
+		return true;
 	}
 	
 	protected IDrawable getOverlay(IGuiHelper guiHelper, String name)

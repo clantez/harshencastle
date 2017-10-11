@@ -9,5 +9,7 @@ public interface IVanillaProvider
 	
 	public default int toolTipLines(){ return 2;};
 	
-	public default Object getProvider(ItemStack stack){return null;};//Will make abstract
+	public default Object getProvider(ItemStack stack){return null;};
+	
+	public default boolean multiplyEvent(ItemStack stack){return true;};
 }

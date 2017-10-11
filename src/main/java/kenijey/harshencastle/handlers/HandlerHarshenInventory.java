@@ -18,6 +18,7 @@ import net.minecraft.client.entity.EntityOtherPlayerMP;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Enchantments;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -29,6 +30,8 @@ import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class HandlerHarshenInventory 
 {	
@@ -104,10 +107,11 @@ public class HandlerHarshenInventory
          	}
 	}
 	
+	
 	@SubscribeEvent
+	@SideOnly(Side.CLIENT)
 	public void onToolTip(ItemTooltipEvent event)
 	{
-		
 		if(HarshenUtils.hasProvider(event.getItemStack().getItem()))
 		{
 			IVanillaProvider provider = HarshenUtils.getProvider(event.getItemStack().getItem());
@@ -134,6 +138,7 @@ public class HandlerHarshenInventory
 		if(HarshenUtils.isPlayerInvolved(event))
 		{
 			EntityPlayer player = HarshenUtils.getPlayer(event);
+			ArrayList<Item> loadedItems = new ArrayList<>();
 			for(int i = 0; i < HarshenUtils.getHandler(player).getSlots(); i ++)
 			{
 				ItemStack stack = HarshenUtils.getHandler(player).getStackInSlot(i);
@@ -141,7 +146,7 @@ public class HandlerHarshenInventory
 					continue; //practically impossible
 				IVanillaProvider provider = HarshenUtils.getProvider(stack);
 				Object object = provider.getProvider(stack);
-				if(object != null)
+				if(object != null && !(loadedItems.contains(stack.getItem()) && !provider.multiplyEvent(stack)))
 					try {
 						Method method = HarshenUtils.getMethod(object.getClass(), HarshenEvent.class, event.getClass());
 						if(method != null)
@@ -152,6 +157,7 @@ public class HandlerHarshenInventory
 						else
 							e.printStackTrace();
 					}
+				loadedItems.add(stack.getItem());
 			}
 		}
 		
