@@ -257,10 +257,10 @@ public class HarshenItems
 		HarshenConfigs.ITEMS.allComponants.add(item);
 	}
 	
-	public static void regMetaItem(BaseItemMetaData item, int stackSize, String[] names, String prefix, exceptionName...exceptionNames)
+	public static void regMetaItem(BaseItemMetaData item, int stackSize, String[] names, String prefix, ExceptionName...exceptionNames)
 	{
 		item.setMaxStackSize(stackSize);
-		for(exceptionName exc : exceptionNames)
+		for(ExceptionName exc : exceptionNames)
 			names[exc.position] = exc.name;
 		HarshenConfigs.ITEMS.allComponants.add(item);
 		allMetaItems.add(item);
@@ -272,7 +272,7 @@ public class HarshenItems
 	private static ArrayList<String[]> allMetaNames = new ArrayList<String[]>();
 	private static ArrayList<String> allMetaPrefix = new ArrayList<String>();
 	
-	public static void regMetaItem(BaseItemMetaData item, String[] names, String prefix, exceptionName...exceptionNames)
+	public static void regMetaItem(BaseItemMetaData item, String[] names, String prefix, ExceptionName...exceptionNames)
 	{
 		regMetaItem(item, 1, names, prefix, exceptionNames);
 	}
@@ -306,11 +306,11 @@ public class HarshenItems
 	}
 }
 
-class exceptionName
+class ExceptionName
 {
 	public final int position;
 	public final String name;
-	public exceptionName(int position, String name) {
+	public ExceptionName(int position, String name) {
 		this.position = position;
 		this.name = name;
 	}
