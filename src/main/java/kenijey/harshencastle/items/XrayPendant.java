@@ -97,7 +97,7 @@ public class XrayPendant extends Item implements IHarshenProvider
 					}
 				Collections.reverse(finalBlockPositions);
 				for(BlockPos finalPos : finalBlockPositions)
-					HarshenClientUtils.renderGhostBlock(net.minecraft.client.Minecraft.getMinecraft().world.getBlockState(finalPos), finalPos, true, event.getPartialTicks());
+					HarshenClientUtils.renderGhostBlock(net.minecraft.client.Minecraft.getMinecraft().world.getBlockState(finalPos), finalPos, /**/ true, event.getPartialTicks());
 			}
 		}
 	}

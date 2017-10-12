@@ -6,6 +6,7 @@ import javax.annotation.Nullable;
 
 import kenijey.harshencastle.base.BaseHarshenStaff;
 import kenijey.harshencastle.entity.EntityThrown;
+import kenijey.harshencastle.objecthandlers.EntityThrowSpawnData;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -74,19 +75,29 @@ public class EnderBow extends BaseHarshenStaff
 	@Override
 	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft) {
 		float f = ItemBow.getArrowVelocity(getMaxItemUseDuration(stack) - timeLeft);
-		spawnThrownEntity(worldIn, entityLiving, 3f * f, 1, new EntityThrown.HitResult() {
-			@Override
-			public void onHit(EntityThrown entity, RayTraceResult result, boolean isServer) 
-			{
-				if(result.entityHit != null && result.entityHit != entity.getThrower())
-				{
-					entity.setDead();
-					if(result.entityHit.attackEntityFrom(new EntityDamageSourceIndirect("ender_bow", entity, entity.getThrower() == null ? entity : entity.getThrower()).setProjectile(), f * 20f))
-						entity.playSound(SoundEvents.ENTITY_ARROW_HIT, 1.0F, 1.2F / (itemRand.nextFloat() * 0.2F + 0.9F));
-				}
-			}
-		}).setIgnoreBlocks(true);
+		spawnThrownEntity(worldIn, entityLiving, 3f * f, new HarshenEnderArrow(f), new EntityThrowSpawnData(1).setIgnoreBlocks(true));
         worldIn.playSound((EntityPlayer)null, entityLiving.posX, entityLiving.posY, entityLiving.posZ, SoundEvents.ENTITY_ENDERMITE_AMBIENT, SoundCategory.PLAYERS, 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
 		stack.damageItem(1, entityLiving);
+	}
+	
+	public static class HarshenEnderArrow implements EntityThrown.HitResult
+	{
+		
+		private final float power;
+		
+		public HarshenEnderArrow(float power) {
+			this.power = power;
+		}
+
+		@Override
+		public void onHit(EntityThrown entity, RayTraceResult result, boolean isServer) {
+			if(result.entityHit != null && result.entityHit != entity.getThrower())
+			{
+				entity.setDead();
+				if(result.entityHit.attackEntityFrom(new EntityDamageSourceIndirect("ender_bow", entity, entity.getThrower() == null ? entity : entity.getThrower()).setProjectile(), power * 20f))
+					entity.playSound(SoundEvents.ENTITY_ARROW_HIT, 1.0F, 1.2F / (itemRand.nextFloat() * 0.2F + 0.9F));
+			}
+		}
+		
 	}
 }

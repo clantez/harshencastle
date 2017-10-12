@@ -42,7 +42,7 @@ public class BloodPlacer extends BlockHorizontal
 				&& ((TileEntityBloodVessel)worldIn.getTileEntity(pos.up())).canRemove(1))
 		{
 			blocksOnMap.put(pos, true);
-			((TileEntityBloodVessel)worldIn.getTileEntity(pos.up())).remove(1);
+			((TileEntityBloodVessel)worldIn.getTileEntity(pos.up())).change(-1);
 			HarshenNetwork.sendToAll(new MessagePacketTileEntityBloodPlacerUpdated(pos.up(), ((TileEntityBloodVessel)worldIn.getTileEntity(pos.up())).getPossibleRemove()));
 			worldIn.setBlockState(pos.offset(state.getValue(FACING)), HarshenBlocks.BLOOD_BLOCK.getDefaultState(), 3);
 		}

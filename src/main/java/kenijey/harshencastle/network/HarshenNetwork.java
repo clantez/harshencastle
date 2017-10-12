@@ -11,6 +11,7 @@ import kenijey.harshencastle.network.packets.MessagePacketRequestInv;
 import kenijey.harshencastle.network.packets.MessagePacketReviveInventory;
 import kenijey.harshencastle.network.packets.MessagePacketRingUpdate;
 import kenijey.harshencastle.network.packets.MessagePacketSpawnBloodParticle;
+import kenijey.harshencastle.network.packets.MessagePacketUpdateComplexEntity;
 import kenijey.harshencastle.network.packets.MessagePacketSpawnItemParticles;
 import kenijey.harshencastle.network.packets.MessagePacketSummonFirework;
 import kenijey.harshencastle.network.packets.MessagePacketTileEntityBloodPlacerUpdated;
@@ -46,6 +47,7 @@ public class HarshenNetwork
 		registerMessage(MessagePacketKillAllWithTag.class, Side.CLIENT);
 		registerMessage(MessagePacketHitWithRange.class, Side.SERVER);
 		registerMessage(MessagePacketReviveInventory.class, Side.CLIENT);
+		registerMessage(MessagePacketUpdateComplexEntity.class, Side.CLIENT);
 	}
 	
 	

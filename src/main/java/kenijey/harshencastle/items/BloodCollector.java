@@ -102,14 +102,14 @@ public class BloodCollector extends BaseItemMetaData
 			case MAIN_HAND:
 				int tileEntityRemove = player.isSneaking() ? getNBT(player.getHeldItem(hand)).getInteger("Blood") : 1;
 				if(vessel.canAdd(tileEntityRemove) && remove(player, hand, tileEntityRemove))
-					vessel.add(tileEntityRemove);
+					vessel.change(tileEntityRemove);
 				else if(vessel.canAdd(vessel.getPossibleAdd()) && remove(player, hand, vessel.getPossibleAdd()))
-					vessel.add(vessel.getPossibleAdd());
+					vessel.change(vessel.getPossibleAdd());
 				break;
 			default:
 				int tileEntityRemoveOffHand = player.isSneaking() ? Math.min(vessel.getPossibleRemove(), 50 - getNBT(player.getHeldItem(hand)).getInteger("Blood")) : 1;
 				if(vessel.canRemove(tileEntityRemoveOffHand) && fill(player, hand, tileEntityRemoveOffHand))
-					vessel.remove(tileEntityRemoveOffHand);
+					vessel.change(-tileEntityRemoveOffHand);
 				break;
 			}
 		}

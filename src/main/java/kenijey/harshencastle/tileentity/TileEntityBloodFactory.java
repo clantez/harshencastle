@@ -46,7 +46,7 @@ public class TileEntityBloodFactory extends BaseTileEntityHarshenSingleItemInven
 			if(!((TileEntityBloodVessel)world.getTileEntity(pos.down())).canAdd(itemSupply.getAmountPerSecond()))
 				deactivate();
 			else
-				((TileEntityBloodVessel)world.getTileEntity(pos.down())).add(itemSupply.getAmountPerSecond());
+				((TileEntityBloodVessel)world.getTileEntity(pos.down())).change(itemSupply.getAmountPerSecond());
 
 		}
 	}

@@ -3,7 +3,10 @@ package kenijey.harshencastle.base;
 import java.util.List;
 
 import kenijey.harshencastle.entity.EntityThrown;
+import kenijey.harshencastle.network.HarshenNetwork;
+import kenijey.harshencastle.network.packets.MessagePacketUpdateComplexEntity;
 import kenijey.harshencastle.objecthandlers.EntityThrowLocation;
+import kenijey.harshencastle.objecthandlers.EntityThrowSpawnData;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -52,20 +55,19 @@ public abstract class BaseHarshenStaff extends Item
 	@Override
 	public abstract ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving);
 	
-	protected EntityThrown spawnThrownEntity(World worldIn, EntityLivingBase entityLiving, float speed, ItemStack stack, EntityThrown.HitResult hitResult)
-	{
-		return spawnInWorld(worldIn, new EntityThrown(worldIn, entityLiving, hitResult, stack), entityLiving, speed);
-	}
 	
-	protected EntityThrown spawnThrownEntity(World worldIn, EntityLivingBase entityLiving, float speed, int resourceID, EntityThrown.HitResult hitResult)
+	protected EntityThrown spawnThrownEntity(World worldIn, EntityLivingBase entityLiving, float speed, EntityThrown.HitResult hitResult, EntityThrowSpawnData spawnData)
 	{
-		return spawnInWorld(worldIn, new EntityThrown(worldIn, entityLiving, hitResult, new EntityThrowLocation(resourceID)), entityLiving, speed);
-	}
-	
-	private EntityThrown spawnInWorld(World worldIn, EntityThrown thrown, EntityLivingBase entityLiving, float speed)
-	{
-		thrown.setHeadingFromThrower(entityLiving, entityLiving.rotationPitch, entityLiving.rotationYaw, 0.0F, speed, 0f);
+		if(worldIn.isRemote)
+			return null;
+		EntityThrown thrown = new EntityThrown(worldIn, entityLiving, hitResult, spawnData.isLocation ? spawnData.location : spawnData.stack);
+		thrown.setHeadingFromThrower(entityLiving, entityLiving.rotationPitch, entityLiving.rotationYaw, 0.0F, speed, 1f);
+		
+		thrown.setIgnoreBlocks(spawnData.ignoreBlocks);
+		
 		worldIn.spawnEntity(thrown);
+		
+		HarshenNetwork.sendToPlayersInWorld(worldIn, new MessagePacketUpdateComplexEntity(thrown.getEntityId(), thrown.serializeNBT()));
 		return thrown;
 	}
 	

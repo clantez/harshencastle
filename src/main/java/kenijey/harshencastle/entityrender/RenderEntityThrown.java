@@ -15,8 +15,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class RenderEntityThrown extends Render<EntityThrown>
@@ -110,6 +108,7 @@ public class RenderEntityThrown extends Render<EntityThrown>
 		for(Entity e : player.world.getLoadedEntityList())
 			if(e instanceof EntityThrown)
 				Minecraft.getMinecraft().getRenderManager().renderEntityStatic(e, event.getPartialTicks(), false);
+
 	}
  
     /**

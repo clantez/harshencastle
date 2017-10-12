@@ -36,8 +36,8 @@ public class MessagePacketTileEntityBloodPlacerUpdated extends BaseMessagePacket
 	}
 
 	@Override
-	public void onReceived(MessagePacketTileEntityBloodPlacerUpdated message, EntityPlayer player) {	
-		if(Minecraft.getMinecraft().world.getTileEntity(message.position) instanceof TileEntityBloodVessel)
+	public void onReceived(MessagePacketTileEntityBloodPlacerUpdated message, EntityPlayer player) {
+		if(Minecraft.getMinecraft().world != null && Minecraft.getMinecraft().world.getTileEntity(message.position) instanceof TileEntityBloodVessel)
 			((TileEntityBloodVessel)Minecraft.getMinecraft().world.getTileEntity(message.position)).setBloodLevel(message.amount);
 	}
 }

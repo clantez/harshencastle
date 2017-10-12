@@ -1,17 +1,19 @@
 package kenijey.harshencastle;
 
 import java.awt.Point;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.EOFException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.PrintStream;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 
 import javax.annotation.Nullable;
 
@@ -46,7 +48,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemEnchantedBook;
@@ -723,22 +724,25 @@ public class HarshenUtils
 		}
 	});
 	
-   public static byte[] serialize(Object obj) throws IOException 
+   public static byte[] serialize(Object obj)
    {
-        try(ByteArrayOutputStream b = new ByteArrayOutputStream()){
-            try(ObjectOutputStream o = new ObjectOutputStream(b)){
-                o.writeObject(obj);
-            }
-            return b.toByteArray();
-        }
+	   try {
+		   ByteArrayOutputStream b = new ByteArrayOutputStream();
+		   new ObjectOutputStream(b).writeObject(obj);
+	       return b.toByteArray();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return new byte[0];
+		}
     }
 
-    public static Object deserialize(byte[] bytes) throws IOException, ClassNotFoundException 
+    public static Object deserialize(byte[] bytes)
     {
-        try(ByteArrayInputStream b = new ByteArrayInputStream(bytes)){
-            try(ObjectInputStream o = new ObjectInputStream(b)){
-                return o.readObject();
-            }
-        }
+    	try {
+			return new ObjectInputStream(new ByteArrayInputStream(bytes)).readObject();
+		} catch (ClassNotFoundException | IOException e) {	
+			(e instanceof EOFException ? new IllegalArgumentException("A problem occurred (most likely your trying to register an object with a Anonymous inner type. Please dont)") : e).printStackTrace();
+			return null;
+		}
     }
 }

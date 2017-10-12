@@ -20,6 +20,7 @@ import kenijey.harshencastle.enums.items.EnumRitualStick;
 import kenijey.harshencastle.enums.particle.EnumHarshenParticle;
 import kenijey.harshencastle.gui.GuiBookScreen;
 import kenijey.harshencastle.gui.GuiXrayPendantScreen;
+import kenijey.harshencastle.handlers.client.HandlerEntityUpdater;
 import kenijey.harshencastle.handlers.client.HandlerFlatPlateRenderer;
 import kenijey.harshencastle.handlers.client.HandlerGameOverlay;
 import kenijey.harshencastle.handlers.client.HandlerGuiEvent;
@@ -146,7 +147,8 @@ public class ClientProxy extends CommonProxy
     			new HandlerFlatPlateRenderer(),
     			new HandlerUpdateChecker(),
     			new HandlerRenderError(),
-    			new RenderEntityThrown(null));
+    			new RenderEntityThrown(null),
+    			new HandlerEntityUpdater());
     	
     	
     	

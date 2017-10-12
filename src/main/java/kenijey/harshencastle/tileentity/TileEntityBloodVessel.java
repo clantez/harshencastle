@@ -5,6 +5,8 @@ import kenijey.harshencastle.base.BaseHarshenTileEntity;
 import kenijey.harshencastle.blocks.BloodVessel;
 import kenijey.harshencastle.enums.particle.EnumHarshenParticle;
 import kenijey.harshencastle.interfaces.IHudDisplay;
+import kenijey.harshencastle.network.HarshenNetwork;
+import kenijey.harshencastle.network.packets.MessagePacketTileEntityBloodPlacerUpdated;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.MathHelper;
@@ -15,14 +17,11 @@ public class TileEntityBloodVessel extends BaseHarshenTileEntity implements IHud
 	private int bloodLevel = 0;
 	public static final int maxLevel = 50;
 		
-	public void add(int amount)
+	public void change(int amount)
 	{
 		bloodLevel = MathHelper.clamp(bloodLevel += amount, 0, maxLevel);
-	}
-	
-	public void remove(int amount)
-	{
-		bloodLevel = MathHelper.clamp(bloodLevel -= amount, 0, maxLevel);
+		markDirty();
+		HarshenNetwork.sendToPlayersInWorld(world, new MessagePacketTileEntityBloodPlacerUpdated(pos, bloodLevel));
 	}
 	
 	public boolean canRemove(int amount)
