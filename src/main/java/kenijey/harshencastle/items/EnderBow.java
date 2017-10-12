@@ -34,14 +34,7 @@ public class EnderBow extends BaseHarshenStaff
             @SideOnly(Side.CLIENT)
             public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn)
             {
-                if (entityIn == null)
-                {
-                    return 0.0F;
-                }
-                else
-                {
-                    return entityIn.getActiveItemStack().getItem() instanceof EnderBow? (float)(stack.getMaxItemUseDuration() - entityIn.getItemInUseCount()) / 15.0F : 0.0F;
-                }
+                return entityIn != null && entityIn.getActiveItemStack().getItem() instanceof EnderBow? (float)(stack.getMaxItemUseDuration() - entityIn.getItemInUseCount()) / 15F : 0.0F;
             }
         });
 		this.addPropertyOverride(new ResourceLocation("pulling"), new IItemPropertyGetter()
@@ -74,6 +67,8 @@ public class EnderBow extends BaseHarshenStaff
 	
 	@Override
 	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft) {
+		if(getMaxItemUseDuration(stack) - timeLeft < 10)
+			return;
 		float f = ItemBow.getArrowVelocity(getMaxItemUseDuration(stack) - timeLeft);
 		spawnThrownEntity(worldIn, entityLiving, 3f * f, new HarshenEnderArrow(f), new EntityThrowSpawnData(1).setIgnoreBlocks(true));
         worldIn.playSound((EntityPlayer)null, entityLiving.posX, entityLiving.posY, entityLiving.posZ, SoundEvents.ENTITY_ENDERMITE_AMBIENT, SoundCategory.PLAYERS, 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
