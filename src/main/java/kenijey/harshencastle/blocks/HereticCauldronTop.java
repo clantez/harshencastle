@@ -8,6 +8,10 @@ import javax.annotation.Nullable;
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.tileentity.TileEntityHereticCauldron;
 import kenijey.harshencastle.tileentity.TileEntityHereticCauldronTop;
+import mcjty.theoneprobe.api.IProbeHitData;
+import mcjty.theoneprobe.api.IProbeInfo;
+import mcjty.theoneprobe.api.IProbeInfoAccessor;
+import mcjty.theoneprobe.api.ProbeMode;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -15,18 +19,20 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class HereticCauldronTop extends Block implements ITileEntityProvider
+public class HereticCauldronTop extends Block implements ITileEntityProvider, IProbeInfoAccessor
 {
 
 	public HereticCauldronTop() {
@@ -103,6 +109,34 @@ public class HereticCauldronTop extends Block implements ITileEntityProvider
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta) {
 		return new TileEntityHereticCauldronTop();
+	}
+
+	@Override
+	public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, EntityPlayer player, World world,
+			IBlockState blockState, IProbeHitData data) {
+		if(world.getBlockState(data.getPos().down()).getBlock() instanceof HereticCauldron)
+			((HereticCauldron)world.getBlockState(data.getPos().down()).getBlock()).addProbeInfo(mode, probeInfo, player, world, world.getBlockState(data.getPos().down()), new IProbeHitData() {
+				
+				@Override
+				public EnumFacing getSideHit() {
+					return data.getSideHit();
+				}
+				
+				@Override
+				public BlockPos getPos() {
+					return data.getPos().down();
+				}
+				
+				@Override
+				public ItemStack getPickBlock() {
+					return data.getPickBlock();
+				}
+				
+				@Override
+				public Vec3d getHitVec() {
+					return data.getHitVec();
+				}
+			});
 	}
 
 }

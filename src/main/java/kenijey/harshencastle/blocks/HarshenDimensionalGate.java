@@ -3,13 +3,16 @@ package kenijey.harshencastle.blocks;
 import java.util.List;
 
 import kenijey.harshencastle.HarshenCastle;
+import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.dimensions.DimensionPontus;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDimensionalGate;
 import mcjty.theoneprobe.api.ElementAlignment;
 import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
+import mcjty.theoneprobe.api.IProbeInfoAccessor;
 import mcjty.theoneprobe.api.IProbeInfoProvider;
+import mcjty.theoneprobe.api.ITextStyle;
 import mcjty.theoneprobe.api.ProbeMode;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
@@ -23,6 +26,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
@@ -34,7 +38,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class HarshenDimensionalGate extends Block implements ITileEntityProvider, IProbeInfoProvider
+public class HarshenDimensionalGate extends Block implements ITileEntityProvider, IProbeInfoAccessor
 {
 
 	public static final PropertyBool ACTIVE = PropertyBool.create("active");
@@ -135,16 +139,13 @@ public class HarshenDimensionalGate extends Block implements ITileEntityProvider
 	}
 
 	@Override
-	public String getID() {
-		return HarshenCastle.MODID + "dimensional_gate";
-	}
-
-	@Override
 	public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, EntityPlayer player, World world,
-			IBlockState blockState, IProbeHitData data) {	
-        IProbeInfo horizontal = probeInfo.horizontal(probeInfo.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER));
-        horizontal.text(TextFormatting.GREEN + "Mode: m");
-        System.out.println("hhh");
+			IBlockState blockState, IProbeHitData data) {
+		System.out.println("ss");
+		if(getMetaFromState(blockState) == 0)
+			probeInfo.text(TextFormatting.DARK_AQUA + new TextComponentTranslation("top.gate.timeleft", ((TileEntityHarshenDimensionalGate)world.getTileEntity(data.getPos())).getTick() / 20).getUnformattedText());
+		else if(!blockState.getValue(ACTIVE))
+			probeInfo.horizontal().item(new ItemStack(HarshenItems.RITUAL_CRYSTAL, 1, 1)).text(TextFormatting.RED + new TextComponentTranslation("top.gate.notactive").getUnformattedText());
 	}
 
 }

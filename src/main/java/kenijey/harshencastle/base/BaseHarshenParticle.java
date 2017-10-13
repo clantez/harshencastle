@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -157,10 +158,11 @@ public abstract class BaseHarshenParticle extends Particle
             return;
     	}
         GlStateManager.disableLighting();
+        GlStateManager.depthMask(false);
         float f2 = 0.125F;
-        float f3 = (float)(this.posX - interpPosX);
-        float f4 = (float)(this.posY - interpPosY);
-        float f5 = (float)(this.posZ - interpPosZ);
+        float f3 = (float)(this.prevPosX + (this.posX - this.prevPosX) * (double)partialTicks - interpPosX);
+        float f4 = (float)(this.prevPosY + (this.posY - this.prevPosY) * (double)partialTicks - interpPosY);
+        float f5 = (float)(this.prevPosZ + (this.posZ - this.prevPosZ) * (double)partialTicks - interpPosZ);
         int i = this.getBrightnessForRender(partialTicks);
         int j11 = i >> 16 & 65535;
         int k11 = i & 65535;
@@ -183,12 +185,14 @@ public abstract class BaseHarshenParticle extends Particle
         }
         float f6 = MathHelper.clamp( world.getLight(new BlockPos(posX, posY, posZ)) / 16f, 0.3f, 1f);
         buffer.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR);
-        buffer.pos((double)(f3 - rotX * size- rotXY * size), (double)f4 - rotZ * size, (double)(f5 - rotYZ * size - rotXZ * size)).tex(t[0], t[1]).color(f6, f6, f6, this.particleAlpha).endVertex();
-        buffer.pos((double)(f3 - rotX * size + rotXY * size), (double)f4 + rotZ * size, (double)(f5 - rotYZ * size + rotXZ * size)).tex(t[2], t[3]).color(f6, f6, f6, this.particleAlpha).endVertex();
-        buffer.pos((double)(f3 + rotX * size + rotXY * size), (double)f4 + rotZ * size, (double)(f5 + rotYZ * size + rotXZ * size)).tex(t[4], t[5]).color(f6, f6, f6, this.particleAlpha).endVertex();
-        buffer.pos((double)(f3 + rotX * size - rotXY * size), (double)f4 - rotZ * size, (double)(f5 + rotYZ * size - rotXZ * size)).tex(t[6], t[7]).color(f6, f6, f6, this.particleAlpha).endVertex();
+        buffer.pos((double)(f3 - rotX * size - rotXY * size), (double)(f4 - rotZ * size), (double)(f5 - rotYZ * size - rotXZ * size)).tex(t[0], t[1]).color(f6, f6, f6, this.particleAlpha).endVertex();
+        buffer.pos((double)(f3 - rotX * size + rotXY * size), (double)(f4 + rotZ * size), (double)(f5 - rotYZ * size + rotXZ * size)).tex(t[2], t[3]).color(f6, f6, f6, this.particleAlpha).endVertex();
+        buffer.pos((double)(f3 + rotX * size + rotXY * size), (double)(f4 + rotZ * size), (double)(f5 + rotYZ * size + rotXZ * size)).tex(t[4], t[5]).color(f6, f6, f6, this.particleAlpha).endVertex();
+        buffer.pos((double)(f3 + rotX * size - rotXY * size), (double)(f4 - rotZ * size), (double)(f5 + rotYZ * size - rotXZ * size)).tex(t[6], t[7]).color(f6, f6, f6, this.particleAlpha).endVertex();
         Tessellator.getInstance().draw();
         GlStateManager.enableLighting();
+        GlStateManager.depthMask(true);
+
     }
     
     protected boolean isFullTexture() 

@@ -287,6 +287,12 @@ soul_binding_pendant2=Has only 5 uses
 reach_pendant1=Reach more!
 reach_pendant2=(+1 block, approximately)
 
+#The One Probe
+top.gate.timeleft=Seconds Left: %s
+top.gate.notactive=Not active. Throw an active ritual crystal to activate
+top.inventory.containing=Item:
+top.cauldron.liquid=Liquid: %s
+
 #misc
 itemGroup.harshenTab=Harshen Castle
 message.failed=You should use Soul Harsher Pickaxe.
