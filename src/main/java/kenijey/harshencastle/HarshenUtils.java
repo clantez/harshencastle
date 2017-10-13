@@ -7,8 +7,9 @@ import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.PrintStream;
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Array;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,6 +39,7 @@ import kenijey.harshencastle.objecthandlers.PlayerPunchedEvent;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -63,6 +65,7 @@ import net.minecraft.network.play.server.SPacketRespawn;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -77,6 +80,11 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidUtil;
+import net.minecraftforge.fluids.IFluidBlock;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
@@ -120,8 +128,13 @@ public class HarshenUtils
 	
 	public static boolean glassContainerHasBlock(EnumGlassContainer glass)
 	{
-		 return glass.isSubContainer() && glass.getType().hasState() && glass.isPaste()
+		 return glassContainerHasState(glass)
 				 && Item.getItemFromBlock(((IBlockState)glass.getType().getStateOrLoc()).getBlock()) != Items.AIR;
+	}
+	
+	public static boolean glassContainerHasState(EnumGlassContainer glass)
+	{
+		return glass.isSubContainer() && glass.getType().hasState() && glass.isPaste();
 	}
 	
 	public static boolean glassContainerHasBlock(CauldronLiquid liquid)
@@ -178,6 +191,16 @@ public class HarshenUtils
 		for(T componant : list)
 			array.add(componant);
 		return array;
+	}
+	
+	public static <T> T[] toList(List<T> array)
+	{
+		if(array.isEmpty())
+			return listOf();
+		T[] list = (T[]) Array.newInstance(array.get(0).getClass(), array.size());
+		for(int i = 0; i < array.size(); i++)
+			list[i] = array.get(i);
+		return list;
 	}
 	
 	public static <T> T[] listOf(T...list)
@@ -745,4 +768,64 @@ public class HarshenUtils
 			return null;
 		}
     }
-}
+    
+    public static List<String> getAllOreDictionaryList()
+    {
+    	try {
+        	Field f = OreDictionary.class.getDeclaredField("idToName");
+        	f.setAccessible(true);
+			List<String> stringList = (List<String>) f.get(new OreDictionary());
+	    	f.setAccessible(false);
+	    	return stringList;
+		} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
+			e.printStackTrace();
+		}
+    	return toArray();
+    }
+    
+    public static ArrayList<ItemStack> getAllRelatives(ItemStack itemStack)
+    {
+    	ItemStack stack = itemStack.copy();
+    	ArrayList<ItemStack> stackList = toArray();
+    	for(String s : getAllOreDictionaryList())
+    		stack1:
+    		for(ItemStack stack1 : OreDictionary.getOres(s)){
+    			if(OreDictionary.itemMatches(stack1, stack, false))
+    			{
+    				for(ItemStack stack2 : OreDictionary.getOres(s))
+    					if(stack2.getMetadata() == OreDictionary.WILDCARD_VALUE)
+    						stackList.addAll(getStacksWithWildCard(stack2));
+    					else
+    						stackList.add(stack2.copy());
+    				break stack1;
+    			}
+    		}
+    	return stackList.isEmpty() ? toArray(stack) : stackList;
+    }
+    
+    public static ArrayList<ItemStack> getStacksWithWildCard(ItemStack wildCardStack)
+    {
+    	if(wildCardStack.getMetadata() != OreDictionary.WILDCARD_VALUE)
+    		return toArray();
+    	ArrayList<ItemStack> stackList = new ArrayList<>();
+    	NonNullList<ItemStack> innerStacklist = NonNullList.create();
+    	wildCardStack.getItem().getSubItems(CreativeTabs.SEARCH, innerStacklist);
+		for(ItemStack stack : innerStacklist)
+			stackList.add(stack.copy());
+		return stackList;
+    }
+    
+    public static ItemStack phaseBucket(Block block)
+    {
+    	if(block instanceof BlockLiquid || block instanceof IFluidBlock)
+    	{
+    		Fluid fluid = block instanceof BlockLiquid ? FluidRegistry.lookupFluidForBlock(block) : ((IFluidBlock)block).getFluid();
+    		if(fluid == null)
+    			return new ItemStack(block);
+    		ItemStack stack = FluidUtil.getFilledBucket(new FluidStack(fluid, 1000));
+    		return stack.isEmpty() ? new ItemStack(block) : stack; 
+    	}
+    	
+    	return new ItemStack(block);
+    }
+} 

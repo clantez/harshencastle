@@ -43,6 +43,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.UniversalBucket;
 import net.minecraftforge.items.CapabilityItemHandler;
+import scala.xml.dtd.EMPTY;
 
 public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemInventory
 {
@@ -199,7 +200,8 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 	        this.world.playSound((EntityPlayer)null, pos, SoundEvents.ITEM_BUCKET_FILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
 	        return true;
         }
-        else if(item instanceof UniversalBucket && fluid == CauldronLiquid.NONE)
+        else if(item instanceof UniversalBucket && fluid == CauldronLiquid.NONE &&
+        		CauldronLiquid.getFromState(((UniversalBucket)item).getFluid(itemstack).getFluid().getBlock().getDefaultState()) != CauldronLiquid.NONE)
         {
         	itemstack.shrink(1);
         	give(playerIn, hand, new ItemStack(Items.BUCKET));

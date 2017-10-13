@@ -109,17 +109,17 @@ public class CommonProxy
 		HarshenDimensions.register();
 		
 		HarshenBiomes.register();
-		
-		HarshenSounds.preInit();
-		
+				
 		HarshenNetwork.preInit();
+		
+		HarshenSounds.register();
 				
 		HarshenVillagers.preInit();
 		
 		setUpVanillaProviders();
 						
 		HarshenCastle.LOGGER.info("HarshenCastle loaded correctly");
-    }
+    }	
     
     private void setUpVanillaProviders()
     {

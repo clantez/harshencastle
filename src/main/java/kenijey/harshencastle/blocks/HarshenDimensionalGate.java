@@ -2,25 +2,27 @@ package kenijey.harshencastle.blocks;
 
 import java.util.List;
 
-import kenijey.harshencastle.HarshenBlocks;
+import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.dimensions.DimensionPontus;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDimensionalGate;
+import mcjty.theoneprobe.api.ElementAlignment;
+import mcjty.theoneprobe.api.IProbeHitData;
+import mcjty.theoneprobe.api.IProbeInfo;
+import mcjty.theoneprobe.api.IProbeInfoProvider;
+import mcjty.theoneprobe.api.ProbeMode;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.network.play.server.SPacketEntityEffect;
-import net.minecraft.network.play.server.SPacketPlayerAbilities;
-import net.minecraft.network.play.server.SPacketRespawn;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
@@ -28,21 +30,23 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
 
-public class HarshenDimensionalGate extends Block implements ITileEntityProvider
+public class HarshenDimensionalGate extends Block implements ITileEntityProvider, IProbeInfoProvider
 {
 
 	public static final PropertyBool ACTIVE = PropertyBool.create("active");
 	public static final PropertyBool FOREVER = PropertyBool.create("ignore_countdown");
+	public static final PropertyInteger TIMER = PropertyInteger.create("seconds_left", 0, TileEntityHarshenDimensionalGate.TOTAL_TICKS / 20);
 
 	
 	public HarshenDimensionalGate() {
 		super(Material.ROCK);
 		setRegistryName("harshen_dimensional_gate");
 		setUnlocalizedName("harshen_dimensional_gate");
-		setDefaultState(this.blockState.getBaseState().withProperty(ACTIVE, false).withProperty(FOREVER, false));
+		setDefaultState(this.blockState.getBaseState().withProperty(ACTIVE, false).withProperty(FOREVER, false).withProperty(TIMER, 0));
 		setHardness(10f);
 		setResistance(50f);
 	}
@@ -51,6 +55,11 @@ public class HarshenDimensionalGate extends Block implements ITileEntityProvider
 	{
 		worldIn.setBlockState(pos, this.getDefaultState(), 3);
 		//sound?
+	}
+	
+	@Override
+	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
+		return state.withProperty(TIMER, Math.min(599, ((TileEntityHarshenDimensionalGate)worldIn.getTileEntity(pos)).getTick() / 20));
 	}
 	
 	@Override
@@ -89,8 +98,6 @@ public class HarshenDimensionalGate extends Block implements ITileEntityProvider
 		return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
 	}
 	
-	
-	
 	@Override
 	public boolean isFullBlock(IBlockState state) {
 		return false;
@@ -119,12 +126,25 @@ public class HarshenDimensionalGate extends Block implements ITileEntityProvider
 
     protected BlockStateContainer createBlockState()
     {
-        return new BlockStateContainer(this, new IProperty[] {ACTIVE, FOREVER});
+        return new BlockStateContainer(this, new IProperty[] {ACTIVE, FOREVER, TIMER});
     }
 
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta) {
 		return new TileEntityHarshenDimensionalGate();
+	}
+
+	@Override
+	public String getID() {
+		return HarshenCastle.MODID + "dimensional_gate";
+	}
+
+	@Override
+	public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, EntityPlayer player, World world,
+			IBlockState blockState, IProbeHitData data) {	
+        IProbeInfo horizontal = probeInfo.horizontal(probeInfo.defaultLayoutStyle().alignment(ElementAlignment.ALIGN_CENTER));
+        horizontal.text(TextFormatting.GREEN + "Mode: m");
+        System.out.println("hhh");
 	}
 
 }

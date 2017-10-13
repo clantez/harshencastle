@@ -120,7 +120,8 @@ public class HarshenBlocks {
 	public static final BlockLog PONTUS_CHAOTIC_WOOD = new PontusChaoticWood();
 	public static final BlockLog PONTUS_FAR_WOOD = new PontusFarWood();
 
-	public static void preInit() {
+	public static void preInit() 
+	{
 		regBlock(HARSHEN_DIMENSIONAL_STONE, 64);
 		regBlock(HARSHEN_HIDDEN_PLATE, 64);
 		regBlock(HARSHEN_DIMENSIONAL_PRESSURE_PLATE, 64);
@@ -134,7 +135,7 @@ public class HarshenBlocks {
 		regBlock(HARSHEN_DIMENSIONAL_ROCK, 64);
 		regBlock(HARSHEN_CHAOTIC_ROCK, 64);
 		regBlock(HARSHEN_FAR_ROCK, 64);
-		regBlock(HARSHEN_DIMENSIONAL_GATE, 1, HarshenDimensionalGate.FOREVER);
+		regBlock(HARSHEN_DIMENSIONAL_GATE, 1, HarshenDimensionalGate.FOREVER, HarshenDimensionalGate.TIMER);
 		regBlock(HARSHEN_SPAWNER, 64);
 		regBlock(PONTUS_DEAD_WOOD, 64);
 		regBlock(PONTUS_CHAOTIC_WOOD, 64);

@@ -8,19 +8,25 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 public class HarshenSounds {
 	
-	public static SoundEvent bloodCollectorUse;
-	public static SoundEvent customArrowHit;
-	public static SoundEvent ripperShoot;
-	public static SoundEvent lightningRitual;
-	public static SoundEvent hereticRitual;
+	public final static SoundEvent BLOOD_COLLECTOR_USE = reg("blood.collector");
+	public final static SoundEvent CUSTOM_ARROW_HIT = reg("lightning.hit");
+	public final static SoundEvent RIPPER_SHOOT = reg("ripper.shoot");
+	public final static SoundEvent LIGHTNING_RITUAL = reg("lightning.ritual");
+	public final static SoundEvent HERETIC_RITUAL = reg("heretic.ritual");
 	
-	public static void preInit()
+	
+	public static void register()
 	{
-		bloodCollectorUse = reg("blood.collector");
-		customArrowHit = reg("lightning.hit");
-		ripperShoot = reg("ripper.shoot");
-		lightningRitual = reg("lightning.ritual");
-		hereticRitual = reg("heretic.ritual");
+		loadSound(BLOOD_COLLECTOR_USE);
+		loadSound(CUSTOM_ARROW_HIT);
+		loadSound(RIPPER_SHOOT);
+		loadSound(LIGHTNING_RITUAL);
+		loadSound(HERETIC_RITUAL);
+	}
+	
+	private static void loadSound(SoundEvent event)
+	{
+		event.toString();
 	}
 	
 	private static ArrayList<SoundEvent> reg(String... name)

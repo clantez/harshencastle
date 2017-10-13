@@ -73,7 +73,6 @@ public class CauldronLiquid
 		for(CauldronLiquid liquid : allLiquids)
 			if(liquid.hasState() && liquid.state.getBlock() == state.getBlock())
 				return liquid;
-			
 		return NONE;
 	}
 	

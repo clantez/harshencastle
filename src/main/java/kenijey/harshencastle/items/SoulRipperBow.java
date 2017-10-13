@@ -31,7 +31,7 @@ public class SoulRipperBow extends BaseHarshenBow
 	
 	@Override
 	protected SoundEvent bowSound() {
-		return HarshenSounds.ripperShoot;
+		return HarshenSounds.RIPPER_SHOOT;
 	}
 
 	@Override

@@ -72,6 +72,11 @@ public class GlassContainer extends BaseItemMetaData
         return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
     }
 	
+	@Override
+	public int getItemStackLimit(ItemStack stack) {
+		return stack.getMetadata() == 0 ? 64 : this.maxStackSize;
+	}
+	
 	private boolean hasDrinkEffect(EntityPlayer playerIn, EnumHand handIn)
 	{
 		return hasDrinkEffect(playerIn.getHeldItem(handIn).getMetadata());
@@ -110,4 +115,5 @@ public class GlassContainer extends BaseItemMetaData
 	protected String[] getNames() {
 		return EnumGlassContainer.getNames();
 	}
+	
 }

@@ -43,7 +43,7 @@ public class HarshenArrow extends EntityTippedArrow
 	@Override
 	public void playSound(SoundEvent soundIn, float volume, float pitch) {
 		if(soundIn == SoundEvents.ENTITY_ARROW_HIT && playCustomSound)	
-			soundIn = HarshenSounds.customArrowHit;
+			soundIn = HarshenSounds.CUSTOM_ARROW_HIT;
 		playCustomSound = false;
 		super.playSound(soundIn, volume, pitch);
 	}

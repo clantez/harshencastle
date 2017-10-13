@@ -1,26 +1,30 @@
 package kenijey.harshencastle;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import kenijey.harshencastle.armor.HarshenArmors;
-import kenijey.harshencastle.enchantment.HarshenEnchantmetns;
 import kenijey.harshencastle.enums.ItemLiquidTypeset;
 import kenijey.harshencastle.enums.items.EnumGlassContainer;
+import kenijey.harshencastle.objecthandlers.HarshenGlassContainerIngredient;
 import kenijey.harshencastle.recipies.CauldronRecipes;
 import kenijey.harshencastle.recipies.HereticRitualRecipes;
 import kenijey.harshencastle.recipies.MagicTableRecipe;
 import kenijey.harshencastle.recipies.PedestalSlabRecipes;
 import kenijey.harshencastle.recipies.RitualRecipes;
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemEnchantedBook;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.OreDictionary.OreRegisterEvent;
 
 public class HarshenRecipes {
 	
@@ -42,10 +46,11 @@ public class HarshenRecipes {
 		
 		if(!hasInit)
 			craftingRegistry();
-		
+				
 		MagicTableRecipe.addRecipe(array(EnumGlassContainer.DIAMOND.getStack(), EnumGlassContainer.LAVA.getStack(), new ItemStack(Items.BOOK), EnumGlassContainer.MAGIC.getStack()), HarshenUtils.getMixupBook());
 		MagicTableRecipe.addRecipe(array(new ItemStack(Blocks.DIRT), new ItemStack(Blocks.DIRT), new ItemStack(Blocks.DIRT), new ItemStack(Blocks.DIRT)), new ItemStack(HarshenBlocks.JEWEL_DIRT));
-
+		MagicTableRecipe.addRecipe(array(new ItemStack(Items.ROTTEN_FLESH), EnumGlassContainer.COAL.getStack(), new ItemStack(HarshenItems.ZOMBIE_EYE), new ItemStack(Items.STONE_SWORD)), new ItemStack(HarshenItems.REACH_PENDANT));
+		
 		RitualRecipes.addRecipe(array(new ItemStack(HarshenItems.PONTUS_WORLD_GATE_PARTS, 1, 0), new ItemStack(HarshenItems.PONTUS_WORLD_GATE_PARTS, 1, 1),
 				new ItemStack(HarshenItems.PONTUS_WORLD_GATE_PARTS, 1 ,2), new ItemStack(HarshenItems.HARSHEN_SOUL_FRAGMENT)), new ItemStack(HarshenItems.PONTUS_WORLD_GATE_SPAWNER, 1, 0), true);		
 		
@@ -143,10 +148,23 @@ public class HarshenRecipes {
 		CauldronRecipes.addRecipe(new ItemStack(HarshenItems.GLASS_CONTAINER), new ItemStack(HarshenItems.GLASS_CONTAINER, 1, 2), EnumGlassContainer.BLOOD);
 		
 		for(EnumGlassContainer glass : EnumGlassContainer.values())
-			if(HarshenUtils.glassContainerHasBlock(glass))
+			if(HarshenUtils.glassContainerHasState(glass))
 			{
-				CauldronRecipes.addRecipe(new ItemStack(((IBlockState) glass.getType().getStateOrLoc()).getBlock()), ItemLiquidTypeset.getStackFromType(glass.getType()), EnumGlassContainer.WATER);
-				CauldronRecipes.addRecipe(new ItemStack(HarshenItems.SOLIDIFYING_PASTE), new ItemStack(Item.getItemFromBlock(((IBlockState)glass.getType().getStateOrLoc()).getBlock())), glass);
+				Block block = ((IBlockState) glass.getType().getStateOrLoc()).getBlock();
+				if(HarshenUtils.glassContainerHasBlock(glass))
+				{
+					CauldronRecipes.addRecipe(new ItemStack(block), ItemLiquidTypeset.getStackFromType(glass.getType()), EnumGlassContainer.WATER);
+					CauldronRecipes.addRecipe(new ItemStack(HarshenItems.SOLIDIFYING_PASTE), new ItemStack(Item.getItemFromBlock(block)), glass);
+				}
+				if(!hasInit)
+				{
+					HarshenGlassContainerIngredient[] ingridientList = new HarshenGlassContainerIngredient[9];
+					ingridientList[0] = new HarshenGlassContainerIngredient(EnumGlassContainer.EMPTY.getStack()); 
+					for(int i = 1; i < 9; i++)
+						ingridientList[i] = new HarshenGlassContainerIngredient(HarshenUtils.toList(HarshenUtils.getAllRelatives(HarshenUtils.phaseBucket(block))));
+					GameRegistry.addShapelessRecipe(new ResourceLocation(HarshenCastle.MODID, glass.getName() + "_container"), new ResourceLocation("harshen_items"), glass.getStack(), ingridientList);
+				}
+					
 			}
 		
 		hasInit = true;
@@ -318,7 +336,7 @@ public class HarshenRecipes {
 		
 		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "glass_container"), new ResourceLocation("harshen_items"),
-				new ItemStack(HarshenItems.GLASS_CONTAINER),
+				new ItemStack(HarshenItems.GLASS_CONTAINER, 32),
 				" g ",
 				"g g",
 				" g ",
@@ -438,5 +456,4 @@ public class HarshenRecipes {
 	{
 		return HarshenUtils.toArray(list);
 	}
-	
 }

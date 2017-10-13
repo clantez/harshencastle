@@ -132,7 +132,7 @@ public class TileEntityHarshenDimensionalPedestal extends BaseTileEntityHarshenS
 					{
 						if(!checkingUp)
 						{
-							world.playSound(null, position, HarshenSounds.lightningRitual, SoundCategory.BLOCKS, 3f, 1f);
+							world.playSound(null, position, HarshenSounds.LIGHTNING_RITUAL, SoundCategory.BLOCKS, 3f, 1f);
 							this.workingRecipe = recipe.setUpRitual(world, position);
 							activate(position, blocks);
 						}

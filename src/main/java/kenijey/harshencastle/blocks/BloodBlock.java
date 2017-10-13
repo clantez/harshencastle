@@ -52,7 +52,7 @@ public class BloodBlock extends Block
 			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if(!inUse.contains(pos) && playerIn.getHeldItem(hand).getItem() instanceof BloodCollector && ((BloodCollector)playerIn.getHeldItem(hand).getItem()).fill(playerIn, hand, 1))
 		{
-			worldIn.playSound(pos.getX(), pos.getY(), pos.getZ(), HarshenSounds.bloodCollectorUse, SoundCategory.BLOCKS, 1f, new Random().nextFloat(), false);
+			worldIn.playSound(pos.getX(), pos.getY(), pos.getZ(), HarshenSounds.BLOOD_COLLECTOR_USE, SoundCategory.BLOCKS, 1f, new Random().nextFloat(), false);
 			worldIn.setBlockToAir(pos);
 		}	
 		return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);

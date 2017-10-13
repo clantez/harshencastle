@@ -12,10 +12,14 @@ import net.minecraft.util.math.AxisAlignedBB;
 public class TileEntityHarshenDimensionalGate extends BaseHarshenTileEntity implements ITickable
 {
 	
-	private int ticksLeft = 12000;
+	public final static int TOTAL_TICKS = 12000; // make sure divisible by 20
+	private int ticksLeft = -1;
 
 	@Override
 	public void update() {
+		if(ticksLeft < 0)
+			ticksLeft = getBlockMetadata() == 0 ? TOTAL_TICKS : 0;
+		
 		if(getBlockType() == HarshenBlocks.HARSHEN_DIMENSIONAL_GATE && !world.getBlockState(pos).getValue(HarshenDimensionalGate.ACTIVE) && !world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos, pos.add(1, 1, 1))).isEmpty())
 			for(EntityItem entityitem : world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos, pos.add(1, 1, 1))))
 				if(entityitem.getItem().getItem() == HarshenItems.RITUAL_CRYSTAL && entityitem.getItem().getMetadata() == 1)
