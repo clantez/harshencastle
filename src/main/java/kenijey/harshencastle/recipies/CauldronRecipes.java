@@ -52,9 +52,9 @@ public class CauldronRecipes
 		return catalyst;
 	}
 	
-	public static void addRecipe(HarshenStack input, ItemStack output, EnumGlassContainer type)
+	public static void addRecipe(HarshenStack input, ItemStack output, CauldronLiquid type)
 	{
-		CauldronRecipes recipe = new CauldronRecipes(input, output, type.getType());
+		CauldronRecipes recipe = new CauldronRecipes(input, output, type);
 		if(!recipe.isFalse)
 			HarshenRecipes.allCauldronRecipes.add(recipe);
 	}

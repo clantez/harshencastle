@@ -3,6 +3,7 @@ package kenijey.harshencastle.proxy;
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.HarshenItems;
+import kenijey.harshencastle.HarshenRecipes;
 import kenijey.harshencastle.HarshenSounds;
 import kenijey.harshencastle.HarshenStructures;
 import kenijey.harshencastle.HarshenUtils;
@@ -143,6 +144,9 @@ public class CommonProxy
 
     public void init(FMLInitializationEvent event) 
     {
+    	
+		HarshenRecipes.craftingRegistry();
+
     	HarshenEntities.init();
     	
 		NetworkRegistry.INSTANCE.registerGuiHandler(HarshenCastle.instance, new GuiHandler());
