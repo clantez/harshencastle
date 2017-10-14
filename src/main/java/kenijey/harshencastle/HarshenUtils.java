@@ -15,12 +15,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 import javax.annotation.Nullable;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
+import kenijey.harshencastle.api.HarshenStack;
 import kenijey.harshencastle.base.BasePontusResourceBiome;
 import kenijey.harshencastle.biomes.HarshenBiomes;
 import kenijey.harshencastle.biomes.PontusBiomeProvider;
@@ -87,6 +89,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.IFluidBlock;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.discovery.ASMDataTable;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
@@ -394,6 +397,17 @@ public class HarshenUtils
 		return flag;
 	}
 	
+	public static boolean isItemFalse(HarshenStack stack)
+	{
+		for(ItemStack itemStack : stack.getStackList())
+			if(!isItemAvalible(itemStack))
+				return true;
+		return false;
+	}
+	/**
+	 * @Deprecated use the HarshenStack version
+	 */
+	@Deprecated 
 	public static boolean isItemFalse(ItemStack stack)
 	{
 		return !isItemAvalible(stack);
@@ -501,6 +515,8 @@ public class HarshenUtils
 		return blockList;
 	}
 	
+	/**@Deprecated use HarshenStack version instead*/
+	@Deprecated
 	public static boolean areInputsEqual(ArrayList<ItemStack> inputList, ArrayList<ItemStack> worldInputList)
 	{
 		ArrayList<ItemStack> doneItems = new ArrayList<>(worldInputList);
@@ -510,6 +526,20 @@ public class HarshenUtils
 				if(OreDictionary.itemMatches(stack, stack1, false) && doneItems.contains(stack1))
 				{
 					doneItems.remove(stack1);
+					continue stackTestingLoop;
+				}
+		return doneItems.isEmpty();
+	}
+	
+	public static boolean areHStacksEqual(ArrayList<HarshenStack> inputList, ArrayList<ItemStack> worldInputList)
+	{
+		ArrayList<ItemStack> doneItems = new ArrayList<>(worldInputList);
+		stackTestingLoop:
+		for(ItemStack stack : worldInputList)
+			for(HarshenStack hStack : inputList)
+				if(hStack.containsItem(stack))
+				{
+					doneItems.remove(stack);
 					continue stackTestingLoop;
 				}
 		return doneItems.isEmpty();
@@ -839,4 +869,21 @@ public class HarshenUtils
     {
     	return getDye(EnumDyeColor.BLUE);
     }
+    
+    public static <T> List<T> getInstancesOfAnnotation(ASMDataTable asmDataTable, Class annotationClass, Class<T> instanceClass) {
+		String annotationClassName = annotationClass.getCanonicalName();
+		Set<ASMDataTable.ASMData> asmDatas = asmDataTable.getAll(annotationClassName);
+		List<T> instances = new ArrayList<>();
+		for (ASMDataTable.ASMData asmData : asmDatas) {
+			try {
+				Class<?> asmClass = Class.forName(asmData.getClassName());
+				Class<? extends T> asmInstanceClass = asmClass.asSubclass(instanceClass);
+				T instance = asmInstanceClass.newInstance();
+				instances.add(instance);
+			} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | LinkageError e) {
+				HarshenCastle.LOGGER.error("Failed to load: {}", asmData.getClassName(), e);
+			}
+		}
+		return instances;
+	}
 } 

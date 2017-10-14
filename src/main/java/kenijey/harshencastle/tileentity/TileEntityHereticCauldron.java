@@ -337,7 +337,7 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 			isActiveInBackground = true;
 		}
 
-		if(setRecipe && players[0] != null)
+		if(setRecipe && players[0] != null && world.isRemote)
 		{
 			if(!erroredPositions.isEmpty())
 			{

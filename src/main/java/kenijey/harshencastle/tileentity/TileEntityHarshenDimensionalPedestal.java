@@ -5,6 +5,7 @@ import java.util.Random;
 
 import kenijey.harshencastle.HarshenSounds;
 import kenijey.harshencastle.HarshenUtils;
+import kenijey.harshencastle.api.HarshenStack;
 import kenijey.harshencastle.base.BaseTileEntityHarshenSingleItemInventoryActive;
 import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.network.packets.MessagePacketKillAllWithTag;
@@ -106,9 +107,7 @@ public class TileEntityHarshenDimensionalPedestal extends BaseTileEntityHarshenS
 		{
 			if(found)
 				break;
-			ArrayList<Item> localItems = new ArrayList<Item>();
-			for(ItemStack stack : recipe.getInputs())
-				localItems.add(stack.getItem());
+			ArrayList<HarshenStack> localItems = new ArrayList<>(recipe.getInputs());
 			for(EnumFacing facing : EnumFacing.HORIZONTALS)
 			{
 				BlockPos position = pos.offset(facing);
@@ -126,8 +125,20 @@ public class TileEntityHarshenDimensionalPedestal extends BaseTileEntityHarshenS
 				if(!isBlock.contains(false))
 				{
 					for(EnumFacing face : EnumFacing.HORIZONTALS)
-						if(localItems.contains(((TileEntityHarshenDimensionalPedestal) world.getTileEntity(position.offset(face))).getItem().getItem()))
-							localItems.remove(((TileEntityHarshenDimensionalPedestal) world.getTileEntity(position.offset(face))).getItem().getItem());
+					{
+						TileEntityHarshenDimensionalPedestal pedestal = (TileEntityHarshenDimensionalPedestal) world.getTileEntity(position.offset(face));
+						HarshenStack removeStack = null;
+						for(HarshenStack hStack : localItems)
+							if(hStack.containsItem(pedestal.getItem()))
+							{
+								removeStack = hStack;
+								break;
+							}
+						if(removeStack != null)
+							localItems.remove(removeStack);
+					}
+					//	if(localItems.contains(((TileEntityHarshenDimensionalPedestal) world.getTileEntity(position.offset(face))).getItem().getItem()))
+						//	localItems.remove(((TileEntityHarshenDimensionalPedestal) world.getTileEntity(position.offset(face))).getItem().getItem());
 					if(localItems.isEmpty())
 					{
 						if(!checkingUp)

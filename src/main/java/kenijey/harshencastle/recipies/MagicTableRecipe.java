@@ -4,17 +4,18 @@ import java.util.ArrayList;
 
 import kenijey.harshencastle.HarshenRecipes;
 import kenijey.harshencastle.HarshenUtils;
+import kenijey.harshencastle.api.HarshenStack;
 import net.minecraft.item.ItemStack;
 
 public class MagicTableRecipe 
 {	
 	
-	private final ArrayList<ItemStack> inputStacks;
+	private final ArrayList<HarshenStack> inputStacks;
 	private final ItemStack output;
 	private boolean isFalse;
 	
-	private MagicTableRecipe(ArrayList<ItemStack> inputStacks, ItemStack output) {
-		for(ItemStack stack : inputStacks)
+	private MagicTableRecipe(ArrayList<HarshenStack> inputStacks, ItemStack output) {
+		for(HarshenStack stack : inputStacks)
 			if(HarshenUtils.isItemFalse(stack) || HarshenUtils.isItemFalse(output))
 				isFalse = true;
 		this.inputStacks = inputStacks;
@@ -24,12 +25,12 @@ public class MagicTableRecipe
 	public static MagicTableRecipe getRecipeFromStacks(ArrayList<ItemStack> stacks)
 	{
 		for(MagicTableRecipe recipe : HarshenRecipes.allMagicTableRecipes)
-			if(HarshenUtils.areInputsEqual(recipe.getInputStacks(), stacks))
+			if(HarshenUtils.areHStacksEqual(recipe.getInputStacks(), stacks))
 				return recipe;
 		return null;
 	}
 	
-	public ArrayList<ItemStack> getInputStacks() {
+	public ArrayList<HarshenStack> getInputStacks() {
 		return inputStacks;
 	}
 	
@@ -37,7 +38,7 @@ public class MagicTableRecipe
 		return output;
 	}
 	
-	public static void addRecipe(ArrayList<ItemStack> inputStacks, ItemStack output)
+	public static void addRecipe(ArrayList<HarshenStack> inputStacks, ItemStack output)
 	{
 		MagicTableRecipe recipe = new MagicTableRecipe(inputStacks, output);
 		if(!recipe.isFalse)

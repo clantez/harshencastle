@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import kenijey.harshencastle.HarshenRecipes;
 import kenijey.harshencastle.HarshenUtils;
+import kenijey.harshencastle.api.HarshenStack;
 import kenijey.harshencastle.enums.CauldronLiquid;
 import kenijey.harshencastle.enums.items.EnumGlassContainer;
 import net.minecraft.item.ItemStack;
@@ -12,12 +13,12 @@ public class CauldronRecipes
 {
 	private static ArrayList<CauldronRecipes> allRecipes = new ArrayList<CauldronRecipes>();
 	
-	private final ItemStack input;
+	private final HarshenStack input;
 	private final ItemStack output;
 	private final CauldronLiquid catalyst;
 	private boolean isFalse = false;
 	
-	private CauldronRecipes(ItemStack input, ItemStack output, CauldronLiquid catalyst)
+	private CauldronRecipes(HarshenStack input, ItemStack output, CauldronLiquid catalyst)
 	{
 		if(HarshenUtils.isItemFalse(input) || HarshenUtils.isItemFalse(output))
 			isFalse = true;
@@ -31,12 +32,12 @@ public class CauldronRecipes
 	{
 		ArrayList<CauldronRecipes> working = new ArrayList<CauldronRecipes>();
 		for(CauldronRecipes recipe : allRecipes)
-			if(recipe.getInput().isItemEqual(input) && recipe.getCatalyst() == fluid)
+			if(recipe.getInput().containsItem(input) && recipe.getCatalyst() == fluid)
 				return recipe;
 		return null;
 	}
 	
-	public ItemStack getInput() 
+	public HarshenStack getInput() 
 	{
 		return input;
 	}
@@ -51,7 +52,7 @@ public class CauldronRecipes
 		return catalyst;
 	}
 	
-	public static void addRecipe(ItemStack input, ItemStack output, EnumGlassContainer type)
+	public static void addRecipe(HarshenStack input, ItemStack output, EnumGlassContainer type)
 	{
 		CauldronRecipes recipe = new CauldronRecipes(input, output, type.getType());
 		if(!recipe.isFalse)

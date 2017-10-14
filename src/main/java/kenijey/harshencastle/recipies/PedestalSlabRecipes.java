@@ -4,17 +4,18 @@ import java.util.ArrayList;
 
 import kenijey.harshencastle.HarshenRecipes;
 import kenijey.harshencastle.HarshenUtils;
+import kenijey.harshencastle.api.HarshenStack;
 import net.minecraft.item.ItemStack;
 
 public class PedestalSlabRecipes 
 {
 	private static ArrayList<PedestalSlabRecipes> allRecipes = new ArrayList<PedestalSlabRecipes>();
 	
-	private final ItemStack input;
+	private final HarshenStack input;
 	private final ItemStack output;
 	private boolean isFalse;
 	
-	private PedestalSlabRecipes(ItemStack input, ItemStack output)
+	private PedestalSlabRecipes(HarshenStack input, ItemStack output)
 	{
 		if(HarshenUtils.isItemFalse(input) || HarshenUtils.isItemFalse(output))
 			isFalse = true;
@@ -27,12 +28,12 @@ public class PedestalSlabRecipes
 	{
 		ArrayList<PedestalSlabRecipes> working = new ArrayList<PedestalSlabRecipes>();
 		for(PedestalSlabRecipes recipe : allRecipes)
-			if(recipe.getInput().isItemEqual(input))
+			if(recipe.getInput().containsItem(input))
 				return recipe;
 		return null;
 	}
 	
-	public ItemStack getInput() 
+	public HarshenStack getInput() 
 	{
 		return input;
 	}
@@ -42,7 +43,7 @@ public class PedestalSlabRecipes
 		return output;
 	}
 	
-	public static void addRecipe(ItemStack input, ItemStack output)
+	public static void addRecipe(HarshenStack input, ItemStack output)
 	{
 		PedestalSlabRecipes recipe = new PedestalSlabRecipes(input, output);
 		if(!recipe.isFalse)

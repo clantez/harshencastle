@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import kenijey.harshencastle.HarshenRecipes;
 import kenijey.harshencastle.HarshenUtils;
+import kenijey.harshencastle.api.HarshenStack;
 import kenijey.harshencastle.enums.CauldronLiquid;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
@@ -13,18 +14,18 @@ public class HereticRitualRecipes
 {
 	private static ArrayList<HereticRitualRecipes> allRecipes = new ArrayList<HereticRitualRecipes>();
 	
-	private final ItemStack cauldronItem;
+	private final HarshenStack cauldronItem;
 	private final ItemStack output;
-	private final ArrayList<ItemStack> pedestalItems;
+	private final ArrayList<HarshenStack> pedestalItems;
 	private final CauldronLiquid catalyst;
 	private boolean isFalse;
 	private String tag;
 	
-	private HereticRitualRecipes(ItemStack cauldronItem, ItemStack output, CauldronLiquid catalyst, ItemStack... pedstalItems)
+	private HereticRitualRecipes(HarshenStack cauldronItem, ItemStack output, CauldronLiquid catalyst, HarshenStack... pedstalItems)
 	{
 		if(pedstalItems.length != 8)
 			throw new IllegalArgumentException("input size for ritual recipe was not 8");
-		ArrayList<ItemStack> stackList = new ArrayList<>();
+		ArrayList<HarshenStack> stackList = new ArrayList<>();
 		for(int i = 0; i < 8; i++)
 			if(HarshenUtils.isItemFalse(pedstalItems[i]))
 				isFalse = true;
@@ -40,19 +41,20 @@ public class HereticRitualRecipes
 		allRecipes.add(this);
 	}
 	
-	public ArrayList<ItemStack> getPedestalItems() {
+	public ArrayList<HarshenStack> getPedestalItems() {
 		return pedestalItems;
 	}
 	
 	public static HereticRitualRecipes getRecipe(ItemStack cauldronInput, CauldronLiquid fluid, ArrayList<ItemStack> pedestalItems) 
 	{
+		pedestalItems = new ArrayList<>(pedestalItems);
 		for(HereticRitualRecipes recipe : allRecipes)
-			if(recipe.getCauldronInput().isItemEqual(cauldronInput) && recipe.getCatalyst() == fluid && HarshenUtils.areInputsEqual(recipe.getPedestalItems(), pedestalItems))
+			if(recipe.getCauldronInput().containsItem(cauldronInput) && recipe.getCatalyst() == fluid && HarshenUtils.areHStacksEqual(recipe.getPedestalItems(), pedestalItems))
 				return recipe;
 		return null;
 	}
 
-	public ItemStack getCauldronInput() 
+	public HarshenStack getCauldronInput() 
 	{
 		return cauldronItem;
 	}
@@ -67,7 +69,7 @@ public class HereticRitualRecipes
 		return catalyst;
 	}
 	
-	public static void addRecipe(ItemStack cauldronItem, ItemStack output, CauldronLiquid catalyst, ItemStack... pedstalItems)
+	public static void addRecipe(HarshenStack cauldronItem, ItemStack output, CauldronLiquid catalyst, HarshenStack... pedstalItems)
 	{
 		HereticRitualRecipes recipe = new HereticRitualRecipes(cauldronItem, output, catalyst, pedstalItems);
 		if(!recipe.isFalse)

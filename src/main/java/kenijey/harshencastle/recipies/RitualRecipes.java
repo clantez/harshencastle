@@ -5,6 +5,7 @@ import java.util.List;
 
 import kenijey.harshencastle.HarshenRecipes;
 import kenijey.harshencastle.HarshenUtils;
+import kenijey.harshencastle.api.HarshenStack;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -12,30 +13,30 @@ import net.minecraft.world.World;
 public class RitualRecipes {
 
 	private static ArrayList<RitualRecipes> allRecipies = new ArrayList<RitualRecipes>();
-	private final List<ItemStack> inputs;
+	private final List<HarshenStack> inputs;
 	private final ItemStack output;
 	private final boolean useLightning;
 	private BlockPos positionOfRitual;
 	private boolean isFalse;
 	private String tag;
 	
-	private RitualRecipes(List<ItemStack> inputs, ItemStack output, boolean useLightning) 
+	private RitualRecipes(List<HarshenStack> inputs, ItemStack output, boolean useLightning) 
 	{
 		if(inputs.size() != 4)
 			throw new IllegalArgumentException("input size for ritual recipe was not 4");
 		for(int i = 0; i < 4; i++)
 			if(HarshenUtils.isItemFalse(inputs.get(i)))
 				isFalse = true;
-		if(HarshenUtils.isItemFalse(output))
+		if(!HarshenUtils.isItemAvalible(output))
 			isFalse = true;
 		
-		this.inputs = inputs;
-		this.output = output;
+		this.inputs = new ArrayList<HarshenStack>(inputs);
+		this.output = output.copy();
 		this.useLightning = useLightning;
 		allRecipies.add(this);
 	}
 	
-	private RitualRecipes(List<ItemStack> inputs, ItemStack output, boolean useLightning, BlockPos position) 
+	private RitualRecipes(List<HarshenStack> inputs, ItemStack output, boolean useLightning, BlockPos position) 
 	{
 		this(inputs, output, useLightning);
 		this.positionOfRitual = position;
@@ -50,8 +51,7 @@ public class RitualRecipes {
 		return working;
 	}
 	
-	public List<ItemStack> getInputs()
-	{
+	public List<HarshenStack> getInputs() {
 		return inputs;
 	}
 	
@@ -82,9 +82,10 @@ public class RitualRecipes {
 	private boolean hasItem(ItemStack stack)
 	{
 		boolean flag = false;
-		for(ItemStack stack1 : this.inputs)
-			if(stack.isItemEqual(stack1))
-				flag = true;
+		for(HarshenStack hStack : this.inputs)
+			for(ItemStack stack1 : hStack.getStackList())
+				if(stack.isItemEqual(stack1))
+					flag = true;
 		return flag;
 	}
 	
@@ -93,7 +94,7 @@ public class RitualRecipes {
 		return this.useLightning;
 	}
 	
-	public static void addRecipe(List<ItemStack> inputs, ItemStack output, boolean useLightning)
+	public static void addRecipe(List<HarshenStack> inputs, ItemStack output, boolean useLightning)
 	{
 		RitualRecipes recipe = new RitualRecipes(inputs, output, useLightning);
 		if(!recipe.isFalse)

@@ -20,7 +20,7 @@ public class JEIPedestalSlabWrapper extends BaseJeiWrapper
 	@SuppressWarnings("unchecked")
 	public JEIPedestalSlabWrapper(PedestalSlabRecipes recipe) {
 		ImmutableList.Builder<List<ItemStack>> builder = ImmutableList.builder();
-		builder.add(ImmutableList.of(recipe.getInput()));
+		builder.add(recipe.getInput().getStackList());
 		input = builder.build();
 		output = recipe.getOutput();
 	}

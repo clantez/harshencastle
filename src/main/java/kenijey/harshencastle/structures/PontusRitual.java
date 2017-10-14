@@ -6,6 +6,7 @@ import java.util.Random;
 
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenRecipes;
+import kenijey.harshencastle.api.HarshenStack;
 import kenijey.harshencastle.base.HarshenStructure;
 import kenijey.harshencastle.dimensions.DimensionPontus;
 import kenijey.harshencastle.recipies.RitualRecipes;
@@ -26,8 +27,8 @@ public class PontusRitual extends HarshenStructure
 	{
 		RitualRecipes recipe = HarshenRecipes.allRitualRecipes.get(random.nextInt(HarshenRecipes.allRitualRecipes.size()));
 		ArrayList<ItemStack> stacks = new ArrayList<>();
-		for(ItemStack stack : recipe.getInputs())
-			stacks.add(stack.copy());
+		for(HarshenStack stack : recipe.getInputs())
+			stacks.add(stack.getStackList().get(random.nextInt(stack.getStackList().size())));
 		stacks.remove(random.nextInt(stacks.size()));
 		BlockPos position = pos.subtract(originAddition);
 		ArrayList<EnumFacing> shuffledFacing = new ArrayList<>();

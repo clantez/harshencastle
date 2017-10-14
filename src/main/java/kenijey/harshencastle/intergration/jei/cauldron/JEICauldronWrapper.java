@@ -27,7 +27,7 @@ public class JEICauldronWrapper extends BaseJeiWrapper
 	@SuppressWarnings("unchecked")
 	public JEICauldronWrapper(CauldronRecipes recipe) {
 		ImmutableList.Builder<List<ItemStack>> builder = ImmutableList.builder();
-		builder.add(ImmutableList.of(recipe.getInput()));
+		builder.add(recipe.getInput().getStackList());
 		if(HarshenUtils.glassContainerHasBlock(recipe.getCatalyst()))
 			builder.add(ImmutableList.of(new ItemStack(HarshenItems.ITEM_LIQUID, 1, ItemLiquidTypeset.getMetaFromType(recipe.getCatalyst()))));
 		builder.add(ImmutableList.of(EnumGlassContainer.getContainerFromType(recipe.getCatalyst()).getStack()));

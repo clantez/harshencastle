@@ -6,6 +6,7 @@ import javax.annotation.Nonnull;
 
 import com.google.common.collect.ImmutableList;
 
+import kenijey.harshencastle.api.HarshenStack;
 import kenijey.harshencastle.base.BaseJeiWrapper;
 import kenijey.harshencastle.recipies.RitualRecipes;
 import mezz.jei.api.ingredients.IIngredients;
@@ -20,8 +21,8 @@ public class JEIRitualWrapper extends BaseJeiWrapper
 	@SuppressWarnings("unchecked")
 	public JEIRitualWrapper(RitualRecipes recipe) {
 		ImmutableList.Builder<List<ItemStack>> builder = ImmutableList.builder();
-		for(Object o : recipe.getInputs())
-			builder.add(ImmutableList.of((ItemStack) o));
+		for(HarshenStack hStack : recipe.getInputs())
+			builder.add(hStack.getStackList());
 		input = builder.build();
 		output = recipe.getOutput();
 	}

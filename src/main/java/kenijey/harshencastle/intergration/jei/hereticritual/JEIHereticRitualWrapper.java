@@ -9,6 +9,7 @@ import com.google.common.collect.ImmutableList;
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.HarshenUtils;
+import kenijey.harshencastle.api.HarshenStack;
 import kenijey.harshencastle.base.BaseJeiWrapper;
 import kenijey.harshencastle.enums.CauldronLiquid;
 import kenijey.harshencastle.enums.ItemLiquidTypeset;
@@ -26,9 +27,9 @@ public class JEIHereticRitualWrapper extends BaseJeiWrapper
 	@SuppressWarnings("unchecked")
 	public JEIHereticRitualWrapper(HereticRitualRecipes recipe) {
 		ImmutableList.Builder<List<ItemStack>> builder = ImmutableList.builder();
-		builder.add(ImmutableList.of(recipe.getCauldronInput()));
-		for(Object o : recipe.getPedestalItems())
-			builder.add(ImmutableList.of((ItemStack) o));
+		builder.add(recipe.getCauldronInput().getStackList());
+		for(HarshenStack stack : recipe.getPedestalItems())
+			builder.add(stack.getStackList());
 		if(HarshenUtils.glassContainerHasBlock(recipe.getCatalyst()))
 			builder.add(ImmutableList.of(new ItemStack(HarshenItems.ITEM_LIQUID, 1, ItemLiquidTypeset.getMetaFromType(recipe.getCatalyst()))));
 		builder.add(ImmutableList.of(EnumGlassContainer.getContainerFromType(recipe.getCatalyst()).getStack()));

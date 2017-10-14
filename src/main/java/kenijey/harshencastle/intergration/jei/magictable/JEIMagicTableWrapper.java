@@ -6,6 +6,7 @@ import javax.annotation.Nonnull;
 
 import com.google.common.collect.ImmutableList;
 
+import kenijey.harshencastle.api.HarshenStack;
 import kenijey.harshencastle.base.BaseJeiWrapper;
 import kenijey.harshencastle.recipies.MagicTableRecipe;
 import mezz.jei.api.ingredients.IIngredients;
@@ -20,8 +21,8 @@ public class JEIMagicTableWrapper extends BaseJeiWrapper
 	@SuppressWarnings("unchecked")
 	public JEIMagicTableWrapper(MagicTableRecipe recipe) {
 		ImmutableList.Builder<List<ItemStack>> builder = ImmutableList.builder();
-		for(ItemStack stack : recipe.getInputStacks())
-			builder.add(ImmutableList.of(stack));
+		for(HarshenStack stack : recipe.getInputStacks())
+			builder.add(stack.getStackList());
 		input = builder.build();
 		output = recipe.getOutput();
 	}

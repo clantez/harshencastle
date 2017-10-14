@@ -19,7 +19,7 @@ public class TileEntityPedestalSlab extends BaseTileEntityHarshenSingleItemInven
 	protected boolean checkForCompleation(boolean checkingUp) {
 		boolean flag = false;
 		for(PedestalSlabRecipes recipe : HarshenRecipes.allPedestalRecipes)
-			if(recipe.getInput().getItem() == getItem().getItem())
+			if(recipe.getInput().containsItem(getItem()))
 			{
 				if(!checkingUp)
 					workingRecipe = recipe;
