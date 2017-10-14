@@ -50,6 +50,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemEnchantedBook;
@@ -506,7 +507,7 @@ public class HarshenUtils
 		stackTestingLoop:
 		for(ItemStack stack : inputList)
 			for(ItemStack stack1 : worldInputList)
-				if(stack1.isItemEqual(stack) && doneItems.contains(stack1))
+				if(OreDictionary.itemMatches(stack, stack1, false) && doneItems.contains(stack1))
 				{
 					doneItems.remove(stack1);
 					continue stackTestingLoop;
@@ -827,5 +828,15 @@ public class HarshenUtils
     	}
     	
     	return new ItemStack(block);
+    }
+    
+    public static ItemStack getDye(EnumDyeColor color)
+    {
+    	return new ItemStack(Items.DYE, 1, color.getDyeDamage());
+    }
+    
+    public static ItemStack getLapis()
+    {
+    	return getDye(EnumDyeColor.BLUE);
     }
 } 

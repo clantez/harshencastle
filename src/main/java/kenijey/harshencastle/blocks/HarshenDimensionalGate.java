@@ -141,7 +141,6 @@ public class HarshenDimensionalGate extends Block implements ITileEntityProvider
 	@Override
 	public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, EntityPlayer player, World world,
 			IBlockState blockState, IProbeHitData data) {
-		System.out.println("ss");
 		if(getMetaFromState(blockState) == 0)
 			probeInfo.text(TextFormatting.DARK_AQUA + new TextComponentTranslation("top.gate.timeleft", ((TileEntityHarshenDimensionalGate)world.getTileEntity(data.getPos())).getTick() / 20).getUnformattedText());
 		else if(!blockState.getValue(ACTIVE))

@@ -65,6 +65,11 @@ public class JEICauldronCategory extends BaseJeiCategory
 	}
 	
 	@Override
+	protected boolean render2PerPage() {
+		return false;
+	}
+	
+	@Override
 	protected void drawMore(Minecraft minecraft) {
 		if(currentFluid != null)
 			currentFluid.draw(minecraft, 56, 49);

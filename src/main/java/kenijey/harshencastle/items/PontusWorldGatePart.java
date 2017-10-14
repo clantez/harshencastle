@@ -19,14 +19,7 @@ public class PontusWorldGatePart extends BaseItemMetaData
 		setUnlocalizedName("pontus_world_gate_part");
 		setRegistryName("pontus_world_gate_part");		
 	}
-	
-	@Override
-	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
-		if(tab instanceof HarshenTab)
-			for(EnumPontusGateSpawnerParts l : EnumPontusGateSpawnerParts.values())
-				items.add(new ItemStack(this, 1, l.getMeta()));
-	}
-	
+
 	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 		tooltip.add("\u00A73" + new TextComponentTranslation("gatepart1").getFormattedText());

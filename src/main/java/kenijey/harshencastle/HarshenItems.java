@@ -26,6 +26,7 @@ import kenijey.harshencastle.items.ElementalPendant;
 import kenijey.harshencastle.items.ElytraPendant;
 import kenijey.harshencastle.items.EmeraldShard;
 import kenijey.harshencastle.items.EmpoweredSoulHarsherSword;
+import kenijey.harshencastle.items.EmptyRing;
 import kenijey.harshencastle.items.EnderBow;
 import kenijey.harshencastle.items.EnderPendant;
 import kenijey.harshencastle.items.EnionBow;
@@ -151,6 +152,7 @@ public class HarshenItems
 	public static final Item SOUL_BINDING_PENDANT = new SoulBindingPendant();
 	public static final Item REACH_PENDANT = new ReachPendant();
 	public static final Item RING_OF_FLIGHT = new RingOfFlight();
+	public static final Item EMPTY_RING = new EmptyRing();
 	
 	public static void preInit()
 	{
@@ -178,7 +180,7 @@ public class HarshenItems
 		regItem(ENION_BOW);
 		regItem(SOUL_RIPPER_BOW);
 		regItem(BROKEN_ARROW, 64);
-		regItem(VALOR_BADGE, 31);
+		regItem(VALOR_BADGE, 32);
 		regItem(IRON_SCYTHE);
 		regItem(RAPTOR_SCYTHE);
 		regItem(MYSTIC_FEATHER, 12);
@@ -188,6 +190,7 @@ public class HarshenItems
 		regItem(DIAMOND_SHARD, 64);
 		regItem(EMERALD_SHARD, 64);
 		regItem(IRON_HEART, 64);
+		regItem(EMPTY_RING, 16);
 		
 		regItem(ZOMBI_PENDANT);
 		regItem(PUNCHY_RING);

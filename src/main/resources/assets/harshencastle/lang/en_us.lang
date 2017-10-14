@@ -83,6 +83,7 @@ item.iron_heart.name=Iron Heart
 item.ring_of_blood.name=Ring of Blood
 item.soul_binding_pendant.name=Soul Binding Pendant
 item.reach_pendant.name=Reach Pendant
+item.empty_ring.name=Empty Ring
 
 #keybindings
 key.telering.description=Telering Teleport Key
