@@ -5,10 +5,10 @@ import java.util.Collections;
 import java.util.Random;
 
 import kenijey.harshencastle.HarshenBlocks;
-import kenijey.harshencastle.HarshenRecipes;
 import kenijey.harshencastle.api.HarshenStack;
 import kenijey.harshencastle.base.HarshenStructure;
 import kenijey.harshencastle.dimensions.DimensionPontus;
+import kenijey.harshencastle.internal.HarshenAPIHandler;
 import kenijey.harshencastle.recipies.RitualRecipes;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDimensionalPedestal;
 import net.minecraft.item.ItemStack;
@@ -25,7 +25,7 @@ public class PontusRitual extends HarshenStructure
 	@Override
 	public void postAddition(World world, BlockPos pos, Random random) 
 	{
-		RitualRecipes recipe = HarshenRecipes.allRitualRecipes.get(random.nextInt(HarshenRecipes.allRitualRecipes.size()));
+		RitualRecipes recipe = HarshenAPIHandler.allRitualRecipes.get(random.nextInt(HarshenAPIHandler.allRitualRecipes.size()));
 		ArrayList<ItemStack> stacks = new ArrayList<>();
 		for(HarshenStack stack : recipe.getInputs())
 			stacks.add(stack.getStackList().get(random.nextInt(stack.getStackList().size())));

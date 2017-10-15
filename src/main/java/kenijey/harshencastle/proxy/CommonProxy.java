@@ -2,8 +2,8 @@ package kenijey.harshencastle.proxy;
 
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenCastle;
+import kenijey.harshencastle.HarshenCraftingRecipes;
 import kenijey.harshencastle.HarshenItems;
-import kenijey.harshencastle.HarshenRecipes;
 import kenijey.harshencastle.HarshenSounds;
 import kenijey.harshencastle.HarshenStructures;
 import kenijey.harshencastle.HarshenUtils;
@@ -44,6 +44,7 @@ import kenijey.harshencastle.handlers.HandlerSoulHarsherSword;
 import kenijey.harshencastle.handlers.HandlerVillagerSpawn;
 import kenijey.harshencastle.handlers.HandlerZombieEyeDrop;
 import kenijey.harshencastle.handlers.vanillaInventory.HandlerTotemOfUndying;
+import kenijey.harshencastle.internal.HarshenAPIHandler;
 import kenijey.harshencastle.models.ModelArmour;
 import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.objecthandlers.FaceRenderer;
@@ -76,6 +77,7 @@ public class CommonProxy
 {
     public void preInit(FMLPreInitializationEvent event) 
     {    	
+    	
     	HarshenConfigs.IDS.preInit(); //dont mess with order
     	HarshenConfigs.GENERAL.preInit();
     	
@@ -118,6 +120,8 @@ public class CommonProxy
 		HarshenVillagers.preInit();
 		
 		setUpVanillaProviders();
+		
+		HarshenAPIHandler.loadPlugins(event.getAsmData());
 						
 		HarshenCastle.LOGGER.info("HarshenCastle loaded correctly");
     }	
@@ -145,7 +149,7 @@ public class CommonProxy
     public void init(FMLInitializationEvent event) 
     {
     	
-		HarshenRecipes.craftingRegistry();
+		HarshenCraftingRecipes.register();
 
     	HarshenEntities.init();
     	

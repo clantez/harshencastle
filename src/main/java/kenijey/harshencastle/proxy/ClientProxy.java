@@ -4,7 +4,6 @@ import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.HarshenClientUtils;
 import kenijey.harshencastle.HarshenItems;
-import kenijey.harshencastle.HarshenRecipes;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.armor.HarshenArmors;
 import kenijey.harshencastle.dimensions.pontus.PontusWorldProvider;
@@ -28,6 +27,7 @@ import kenijey.harshencastle.handlers.client.HandlerKeyBinding;
 import kenijey.harshencastle.handlers.client.HandlerRenderError;
 import kenijey.harshencastle.handlers.client.HandlerRendererGuiInventory;
 import kenijey.harshencastle.handlers.client.HandlerUpdateChecker;
+import kenijey.harshencastle.internal.HarshenAPIHandler;
 import kenijey.harshencastle.itemrenderer.RendererBloodFactory;
 import kenijey.harshencastle.itemrenderer.RendererDimensionalPedestal;
 import kenijey.harshencastle.itemrenderer.RendererHarshenDisplayBlock;
@@ -268,7 +268,7 @@ public class ClientProxy extends CommonProxy
     @Override
     public void onLoad(FMLLoadCompleteEvent event) {
     	((IReloadableResourceManager)  Minecraft.getMinecraft().getResourceManager()).registerReloadListener(resourceManager -> {
-			HarshenRecipes.register();
+			HarshenAPIHandler.register();
 			HarshenCastle.LOGGER.info("All recipes loaded");
 		});
     }

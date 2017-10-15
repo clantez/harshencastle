@@ -3,9 +3,9 @@ package kenijey.harshencastle.recipies;
 import java.util.ArrayList;
 import java.util.List;
 
-import kenijey.harshencastle.HarshenRecipes;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.api.HarshenStack;
+import kenijey.harshencastle.internal.HarshenAPIHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -98,6 +98,6 @@ public class RitualRecipes {
 	{
 		RitualRecipes recipe = new RitualRecipes(inputs, output, useLightning);
 		if(!recipe.isFalse)
-			HarshenRecipes.allRitualRecipes.add(recipe);
+			HarshenAPIHandler.allRitualRecipes.add(recipe);
 	}
 }

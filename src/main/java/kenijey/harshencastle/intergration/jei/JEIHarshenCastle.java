@@ -2,7 +2,6 @@ package kenijey.harshencastle.intergration.jei;
 
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenItems;
-import kenijey.harshencastle.HarshenRecipes;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.containers.ContainerMagicTable;
 import kenijey.harshencastle.enchantment.HarshenEnchantmetns;
@@ -18,6 +17,7 @@ import kenijey.harshencastle.intergration.jei.pedestalslab.JEIPedestalSlabCatego
 import kenijey.harshencastle.intergration.jei.pedestalslab.JEIPedestalSlabHandler;
 import kenijey.harshencastle.intergration.jei.ritual.JEIRitualCategory;
 import kenijey.harshencastle.intergration.jei.ritual.JEIRitualHandler;
+import kenijey.harshencastle.internal.HarshenAPIHandler;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.JEIPlugin;
@@ -57,11 +57,11 @@ public class JEIHarshenCastle implements IModPlugin
 				registry.addAnvilRecipe(new ItemStack(item), HarshenUtils.toArray(HarshenUtils.getMixupBook()), HarshenUtils.toArray(stack));
 			}		
 		
-		registry.addRecipes(HarshenRecipes.allRitualRecipes, JEICategoryUIDs.RITUAL);
-		registry.addRecipes(HarshenRecipes.allCauldronRecipes, JEICategoryUIDs.CAULDRON);
-		registry.addRecipes(HarshenRecipes.allPedestalRecipes, JEICategoryUIDs.PENDESTAL_SLAB);
-		registry.addRecipes(HarshenRecipes.allHereticCauldronRecipes, JEICategoryUIDs.HERETIC_RITUAL);
-		registry.addRecipes(HarshenRecipes.allMagicTableRecipes, JEICategoryUIDs.MAGIC_TABLE);
+		registry.addRecipes(HarshenAPIHandler.allRitualRecipes, JEICategoryUIDs.RITUAL);
+		registry.addRecipes(HarshenAPIHandler.allCauldronRecipes, JEICategoryUIDs.CAULDRON);
+		registry.addRecipes(HarshenAPIHandler.allPedestalRecipes, JEICategoryUIDs.PENDESTAL_SLAB);
+		registry.addRecipes(HarshenAPIHandler.allHereticCauldronRecipes, JEICategoryUIDs.HERETIC_RITUAL);
+		registry.addRecipes(HarshenAPIHandler.allMagicTableRecipes, JEICategoryUIDs.MAGIC_TABLE);
 		registry.addRecipeCatalyst(new ItemStack(HarshenBlocks.HARSHEN_DIMENSIONAL_PEDESTAL), JEICategoryUIDs.RITUAL);
 		registry.addRecipeCatalyst(new ItemStack(HarshenItems.RITUAL_STICK), JEICategoryUIDs.CAULDRON);
 		registry.addRecipeCatalyst(new ItemStack(HarshenItems.RITUAL_STICK, 1, 1), JEICategoryUIDs.HERETIC_RITUAL);

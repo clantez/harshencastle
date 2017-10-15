@@ -1,9 +1,9 @@
 package kenijey.harshencastle.proxy;
 
 import kenijey.harshencastle.HarshenCastle;
-import kenijey.harshencastle.HarshenRecipes;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.handlers.server.HandlerSyncConfig;
+import kenijey.harshencastle.internal.HarshenAPIHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -19,7 +19,7 @@ public class ServerProxy extends CommonProxy
 	
 	@Override
 	public void onLoad(FMLLoadCompleteEvent event) {
-		HarshenRecipes.register();
+		HarshenAPIHandler.register();
 		HarshenCastle.LOGGER.info("All recipes loaded");
 		super.onLoad(event);
 	}

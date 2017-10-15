@@ -2,10 +2,10 @@ package kenijey.harshencastle.recipies;
 
 import java.util.ArrayList;
 
-import kenijey.harshencastle.HarshenRecipes;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.api.HarshenStack;
 import kenijey.harshencastle.enums.CauldronLiquid;
+import kenijey.harshencastle.internal.HarshenAPIHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -73,7 +73,7 @@ public class HereticRitualRecipes
 	{
 		HereticRitualRecipes recipe = new HereticRitualRecipes(cauldronItem, output, catalyst, pedstalItems);
 		if(!recipe.isFalse)
-			HarshenRecipes.allHereticCauldronRecipes.add(recipe);
+			HarshenAPIHandler.allHereticCauldronRecipes.add(recipe);
 	}
 	
 	public HereticRitualRecipes setTag(String tag)

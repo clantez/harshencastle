@@ -2,5 +2,5 @@ package kenijey.harshencastle.api;
 
 public interface IHarshenPlugin 
 {
-	void register(IHarshenPluginHandler handler);
+	void register(IHarshenRegistry registry);
 }

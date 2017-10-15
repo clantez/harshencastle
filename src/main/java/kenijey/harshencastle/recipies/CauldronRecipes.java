@@ -2,11 +2,11 @@ package kenijey.harshencastle.recipies;
 
 import java.util.ArrayList;
 
-import kenijey.harshencastle.HarshenRecipes;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.api.HarshenStack;
 import kenijey.harshencastle.enums.CauldronLiquid;
 import kenijey.harshencastle.enums.items.EnumGlassContainer;
+import kenijey.harshencastle.internal.HarshenAPIHandler;
 import net.minecraft.item.ItemStack;
 
 public class CauldronRecipes 
@@ -56,7 +56,7 @@ public class CauldronRecipes
 	{
 		CauldronRecipes recipe = new CauldronRecipes(input, output, type);
 		if(!recipe.isFalse)
-			HarshenRecipes.allCauldronRecipes.add(recipe);
+			HarshenAPIHandler.allCauldronRecipes.add(recipe);
 	}
 	
 }

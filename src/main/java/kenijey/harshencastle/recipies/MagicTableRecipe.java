@@ -2,9 +2,9 @@ package kenijey.harshencastle.recipies;
 
 import java.util.ArrayList;
 
-import kenijey.harshencastle.HarshenRecipes;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.api.HarshenStack;
+import kenijey.harshencastle.internal.HarshenAPIHandler;
 import net.minecraft.item.ItemStack;
 
 public class MagicTableRecipe 
@@ -24,7 +24,7 @@ public class MagicTableRecipe
 	
 	public static MagicTableRecipe getRecipeFromStacks(ArrayList<ItemStack> stacks)
 	{
-		for(MagicTableRecipe recipe : HarshenRecipes.allMagicTableRecipes)
+		for(MagicTableRecipe recipe : HarshenAPIHandler.allMagicTableRecipes)
 			if(HarshenUtils.areHStacksEqual(recipe.getInputStacks(), stacks))
 				return recipe;
 		return null;
@@ -42,6 +42,6 @@ public class MagicTableRecipe
 	{
 		MagicTableRecipe recipe = new MagicTableRecipe(inputStacks, output);
 		if(!recipe.isFalse)
-			HarshenRecipes.allMagicTableRecipes.add(recipe);
+			HarshenAPIHandler.allMagicTableRecipes.add(recipe);
 	}
 }

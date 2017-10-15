@@ -2,9 +2,9 @@ package kenijey.harshencastle.recipies;
 
 import java.util.ArrayList;
 
-import kenijey.harshencastle.HarshenRecipes;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.api.HarshenStack;
+import kenijey.harshencastle.internal.HarshenAPIHandler;
 import net.minecraft.item.ItemStack;
 
 public class PedestalSlabRecipes 
@@ -47,7 +47,7 @@ public class PedestalSlabRecipes
 	{
 		PedestalSlabRecipes recipe = new PedestalSlabRecipes(input, output);
 		if(!recipe.isFalse)
-			HarshenRecipes.allPedestalRecipes.add(recipe);
+			HarshenAPIHandler.allPedestalRecipes.add(recipe);
 	}
 	
 }

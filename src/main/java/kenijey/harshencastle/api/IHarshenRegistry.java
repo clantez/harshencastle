@@ -5,7 +5,7 @@ import java.util.List;
 import kenijey.harshencastle.enums.CauldronLiquid;
 import net.minecraft.item.ItemStack;
 
-public interface IHarshenPluginHandler 
+public interface IHarshenRegistry 
 {
 	void registerRitualRecipe(ItemStack output, boolean useLightning, HarshenStack... inputs);
 	

@@ -4,9 +4,9 @@ import java.util.Random;
 
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenCastle;
-import kenijey.harshencastle.HarshenRecipes;
 import kenijey.harshencastle.base.BaseTileEntityHarshenSingleItemInventoryActive;
 import kenijey.harshencastle.enums.particle.EnumHarshenParticle;
+import kenijey.harshencastle.internal.HarshenAPIHandler;
 import kenijey.harshencastle.recipies.PedestalSlabRecipes;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.Vec3d;
@@ -18,7 +18,7 @@ public class TileEntityPedestalSlab extends BaseTileEntityHarshenSingleItemInven
 	@Override
 	protected boolean checkForCompleation(boolean checkingUp) {
 		boolean flag = false;
-		for(PedestalSlabRecipes recipe : HarshenRecipes.allPedestalRecipes)
+		for(PedestalSlabRecipes recipe : HarshenAPIHandler.allPedestalRecipes)
 			if(recipe.getInput().containsItem(getItem()))
 			{
 				if(!checkingUp)
