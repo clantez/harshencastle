@@ -73,11 +73,7 @@ public class TileEntityHarshenDimensionalPedestal extends BaseTileEntityHarshenS
 		workingRecipe = null;
 	}
 	
-	@Override
-	public void deactivate() {
-		super.deactivate();
-	}
-	
+
 	public void deactiveateNonController()
 	{
 		activeNonControllerTimer = 0;

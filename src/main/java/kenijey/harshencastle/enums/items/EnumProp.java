@@ -1,6 +1,6 @@
 package kenijey.harshencastle.enums.items;
 
-import kenijey.harshencastle.interfaces.IIDSet;
+import kenijey.harshencastle.api.IIDSet;
 import net.minecraft.util.IStringSerializable;
 
 public enum EnumProp implements IStringSerializable, IIDSet

@@ -81,12 +81,10 @@ public class RitualRecipes {
 	
 	private boolean hasItem(ItemStack stack)
 	{
-		boolean flag = false;
 		for(HarshenStack hStack : this.inputs)
-			for(ItemStack stack1 : hStack.getStackList())
-				if(stack.isItemEqual(stack1))
-					flag = true;
-		return flag;
+			if(hStack.containsItem(stack))
+				return true;
+		return false;
 	}
 	
 	public boolean lightning()

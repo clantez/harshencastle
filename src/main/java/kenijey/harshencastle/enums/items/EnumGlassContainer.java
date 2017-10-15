@@ -2,9 +2,10 @@ package kenijey.harshencastle.enums.items;
 
 import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.HarshenItems;
-import kenijey.harshencastle.enums.CauldronLiquid;
+import kenijey.harshencastle.api.CauldronLiquid;
+import kenijey.harshencastle.api.HarshenStack;
+import kenijey.harshencastle.api.IIDSet;
 import kenijey.harshencastle.fluids.HarshenFluids;
-import kenijey.harshencastle.interfaces.IIDSet;
 import kenijey.harshencastle.potions.HarshenPotions;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -106,6 +107,11 @@ public enum EnumGlassContainer implements IStringSerializable, IIDSet
 	public ItemStack getStack()
 	{
 		return new ItemStack(HarshenItems.GLASS_CONTAINER, 1, this.meta);
+	}
+	
+	public HarshenStack getHarshenStack()
+	{
+		return new HarshenStack(getStack());
 	}
 
 	@Override

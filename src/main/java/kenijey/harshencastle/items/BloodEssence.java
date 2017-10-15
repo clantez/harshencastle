@@ -1,13 +1,7 @@
 package kenijey.harshencastle.items;
 
-import java.util.List;
-
 import kenijey.harshencastle.interfaces.IBloodSupply;
-import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.world.World;
 
 public class BloodEssence extends Item implements IBloodSupply
 {

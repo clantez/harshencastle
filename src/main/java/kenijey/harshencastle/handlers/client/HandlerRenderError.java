@@ -17,12 +17,13 @@ public class HandlerRenderError
 	@SubscribeEvent
 	public void playerOverLay(RenderWorldLastEvent event)
 	{
-
+		ArrayList<FaceRenderer> erroredPositions = new ArrayList<>(this.erroredPositions);
 		for(FaceRenderer render: erroredPositions)
-			if(render.getPosition().distanceSq(Minecraft.getMinecraft().player.posX, Minecraft.getMinecraft().player.posY, Minecraft.getMinecraft().player.posZ) < 400)
-				if(render.getFace() == null)
-					HarshenClientUtils.renderFullBoxAt(render.getPosition(), event.getPartialTicks(), new Vector4f(1, 0, 0, 1), 5);
-				else
-					HarshenClientUtils.renderFaceAt(render.getFace(), render.getPosition(), event.getPartialTicks(), new Vector4f(1, 0, 0, 1), 5);
+			if(Minecraft.getMinecraft().world.getBlockState(render.getPosition()).getBlock() == render.getState().getBlock() &&
+				Minecraft.getMinecraft().world.getBlockState(render.getPosition()).getBlock().getMetaFromState(Minecraft.getMinecraft().world.getBlockState(render.getPosition())) == 
+					render.getState().getBlock().getMetaFromState(render.getState()))
+				this.erroredPositions.remove(render);
+			else if(render.getPosition().distanceSq(Minecraft.getMinecraft().player.posX, Minecraft.getMinecraft().player.posY, Minecraft.getMinecraft().player.posZ) < 400)
+				HarshenClientUtils.renderGhostBlock(render.getState(), render.getPosition(), true, event.getPartialTicks());
 	}
 }

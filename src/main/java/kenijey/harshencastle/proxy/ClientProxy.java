@@ -2,7 +2,6 @@ package kenijey.harshencastle.proxy;
 
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenCastle;
-import kenijey.harshencastle.HarshenClientUtils;
 import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.armor.HarshenArmors;
@@ -105,13 +104,6 @@ public class ClientProxy extends CommonProxy
 	public int getrenderDistance() {
 		return Minecraft.getMinecraft().gameSettings.renderDistanceChunks;
 	}
-	
-	@Override
-    public void preInit(FMLPreInitializationEvent event) 
-    {
-    	super.preInit(event);
-    	new HarshenClientUtils();
-    }
 	
 	@Override
 	public void openGui(EnumGuiTypes gui, Object... info) {

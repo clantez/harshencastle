@@ -22,17 +22,18 @@ import javax.annotation.Nullable;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
+import kenijey.harshencastle.api.BlockItem;
+import kenijey.harshencastle.api.CauldronLiquid;
+import kenijey.harshencastle.api.EnumInventorySlots;
 import kenijey.harshencastle.api.HarshenStack;
+import kenijey.harshencastle.api.IHarshenProvider;
 import kenijey.harshencastle.base.BasePontusResourceBiome;
 import kenijey.harshencastle.biomes.HarshenBiomes;
 import kenijey.harshencastle.biomes.PontusBiomeProvider;
 import kenijey.harshencastle.config.HarshenConfigs;
 import kenijey.harshencastle.enchantment.HarshenEnchantmetns;
-import kenijey.harshencastle.enums.CauldronLiquid;
-import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
 import kenijey.harshencastle.enums.items.EnumGlassContainer;
 import kenijey.harshencastle.handlers.HandlerPontusAllowed;
-import kenijey.harshencastle.interfaces.IVanillaProvider;
 import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.network.packets.MessagePacketSetItemInSlot;
 import kenijey.harshencastle.objecthandlers.HarshenItemStackHandler;
@@ -94,7 +95,6 @@ import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import net.minecraftforge.oredict.OreDictionary;
-import net.minecraftforge.registries.IForgeRegistryEntry.Impl;
 
 public class HarshenUtils
 {	
@@ -579,38 +579,41 @@ public class HarshenUtils
 		return entityToAttack;
 	}
 	
-	private static final HashMap<Impl, IVanillaProvider> INVENTORY_ITEMS = new HashMap<>();
+	private static final HashMap<BlockItem, IHarshenProvider> INVENTORY_ITEMS = new HashMap<>();
 
-	public static void registerInventoryItem(Impl impl, IVanillaProvider provider)
+	public static void registerInventoryItem(BlockItem impl, IHarshenProvider provider)
 	{
 		INVENTORY_ITEMS.put(impl, provider);
 	}
 	
 	@Nullable
-	public static IVanillaProvider getProvider(Impl impl)
+	public static IHarshenProvider getProvider(BlockItem impl)
 	{
-		return impl instanceof IVanillaProvider ? (IVanillaProvider) impl : INVENTORY_ITEMS.get(impl); 
+		for(BlockItem item : INVENTORY_ITEMS.keySet())
+			if(item.impl == impl.impl)
+				return INVENTORY_ITEMS.get(item);
+		return null; 
 	}
 	
 	@Nullable
-	public static IVanillaProvider getProvider(ItemStack stack)
+	public static IHarshenProvider getProvider(ItemStack stack)
 	{
-		return getProvider(getImpl(stack));
+		return getProvider(getBlockItem(stack));
 	}
 	
-	public static boolean hasProvider(Impl impl)
+	public static boolean hasProvider(BlockItem impl)
 	{
 		return getProvider(impl) != null;
 	}
 	
-	public static Impl getImpl(ItemStack stack)
+	public static BlockItem getBlockItem(ItemStack stack)
 	{
-		return stack.getItem() instanceof ItemBlock ? ((ItemBlock)stack.getItem()).getBlock() : stack.getItem();
+		return stack.getItem() instanceof ItemBlock ? new BlockItem(((ItemBlock)stack.getItem()).getBlock()) : new BlockItem(stack.getItem());
 	}
 	
 	public static boolean hasProvider(ItemStack stack)
 	{
-		return hasProvider(getImpl(stack));
+		return hasProvider(getBlockItem(stack));
 	}
 	
 	public static void transferPlayerToDimension(EntityPlayerMP player, int dimensionIn, BlockPos pos)
@@ -774,7 +777,7 @@ public class HarshenUtils
     	
 		@Override
 		public boolean apply(Item input) {
-			return hasProvider(input);
+			return hasProvider(new BlockItem(input));
 		}
 	});
 	
@@ -886,4 +889,13 @@ public class HarshenUtils
 		}
 		return instances;
 	}
+    
+    public static <T> T getObjectFromItemMap(HashMap<ItemStack, T> hashMap, ItemStack key)
+    {
+    	for(ItemStack stack : hashMap.keySet()){
+    		if(stack.isItemEqual(key))
+    			return hashMap.get(stack);
+    	}
+    	return null;
+    }
 } 

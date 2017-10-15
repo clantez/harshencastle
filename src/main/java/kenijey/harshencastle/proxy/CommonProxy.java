@@ -9,6 +9,7 @@ import kenijey.harshencastle.HarshenStructures;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.HarshenVillagers;
 import kenijey.harshencastle.WorldGen;
+import kenijey.harshencastle.api.EnumInventorySlots;
 import kenijey.harshencastle.armor.HarshenArmors;
 import kenijey.harshencastle.base.HarshenStructure;
 import kenijey.harshencastle.biomes.HarshenBiomes;
@@ -20,7 +21,6 @@ import kenijey.harshencastle.entity.HarshenEntities;
 import kenijey.harshencastle.enums.ItemLiquidTypeset;
 import kenijey.harshencastle.enums.SetIds;
 import kenijey.harshencastle.enums.gui.EnumGuiTypes;
-import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
 import kenijey.harshencastle.enums.items.EnumBloodCollector;
 import kenijey.harshencastle.enums.items.EnumGlassContainer;
 import kenijey.harshencastle.enums.items.EnumPontusGateSpawner;
@@ -43,12 +43,10 @@ import kenijey.harshencastle.handlers.HandlerRaptorScythe;
 import kenijey.harshencastle.handlers.HandlerSoulHarsherSword;
 import kenijey.harshencastle.handlers.HandlerVillagerSpawn;
 import kenijey.harshencastle.handlers.HandlerZombieEyeDrop;
-import kenijey.harshencastle.handlers.vanillaInventory.HandlerTotemOfUndying;
 import kenijey.harshencastle.internal.HarshenAPIHandler;
 import kenijey.harshencastle.models.ModelArmour;
 import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.objecthandlers.FaceRenderer;
-import kenijey.harshencastle.objecthandlers.VanillaProviderToInterface;
 import kenijey.harshencastle.potions.HarshenPotions;
 import kenijey.harshencastle.tileentity.TileEntityBloodFactory;
 import kenijey.harshencastle.tileentity.TileEntityBloodVessel;
@@ -64,7 +62,6 @@ import kenijey.harshencastle.tileentity.TileEntityPedestalSlab;
 import net.minecraft.block.Block;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
@@ -77,7 +74,7 @@ public class CommonProxy
 {
     public void preInit(FMLPreInitializationEvent event) 
     {    	
-    	
+    	    	
     	HarshenConfigs.IDS.preInit(); //dont mess with order
     	HarshenConfigs.GENERAL.preInit();
     	
@@ -118,18 +115,12 @@ public class CommonProxy
 		HarshenSounds.register();
 				
 		HarshenVillagers.preInit();
-		
-		setUpVanillaProviders();
-		
+				
 		HarshenAPIHandler.loadPlugins(event.getAsmData());
 						
 		HarshenCastle.LOGGER.info("HarshenCastle loaded correctly");
     }	
     
-    private void setUpVanillaProviders()
-    {
-    	HarshenUtils.registerInventoryItem(Items.TOTEM_OF_UNDYING, new VanillaProviderToInterface(EnumInventorySlots.NECK, new HandlerTotemOfUndying()).setToolTipLines(0).disableEventMultiplication());
-    }
     
     private void setUpEnumValues()
     {

@@ -1,6 +1,6 @@
 package kenijey.harshencastle.enums;
 
-import kenijey.harshencastle.interfaces.IIDSet;
+import kenijey.harshencastle.api.IIDSet;
 
 public class SetIds 
 {

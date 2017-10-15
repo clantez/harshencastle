@@ -159,7 +159,6 @@ public abstract class BaseHarshenParticle extends Particle
     	}
         GlStateManager.disableLighting();
         GlStateManager.depthMask(false);
-        float f2 = 0.125F;
         float f3 = (float)(this.prevPosX + (this.posX - this.prevPosX) * (double)partialTicks - interpPosX);
         float f4 = (float)(this.prevPosY + (this.posY - this.prevPosY) * (double)partialTicks - interpPosY);
         float f5 = (float)(this.prevPosZ + (this.posZ - this.prevPosZ) * (double)partialTicks - interpPosZ);

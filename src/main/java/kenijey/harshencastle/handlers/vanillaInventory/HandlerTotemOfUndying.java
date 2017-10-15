@@ -1,7 +1,7 @@
 package kenijey.harshencastle.handlers.vanillaInventory;
 
 import kenijey.harshencastle.HarshenUtils;
-import kenijey.harshencastle.interfaces.HarshenEvent;
+import kenijey.harshencastle.api.HarshenEvent;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;

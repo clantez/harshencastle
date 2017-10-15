@@ -2,8 +2,8 @@ package kenijey.harshencastle.items;
 
 import java.util.List;
 
+import kenijey.harshencastle.api.CauldronLiquid;
 import kenijey.harshencastle.base.BaseItemMetaData;
-import kenijey.harshencastle.enums.CauldronLiquid;
 import kenijey.harshencastle.enums.ItemLiquidTypeset;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;

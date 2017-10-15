@@ -3,8 +3,8 @@ package kenijey.harshencastle.inventory;
 import java.awt.Point;
 
 import kenijey.harshencastle.HarshenUtils;
+import kenijey.harshencastle.api.EnumInventorySlots;
 import kenijey.harshencastle.base.BaseHarshenContainer;
-import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.Slot;

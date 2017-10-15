@@ -1,20 +1,21 @@
 package kenijey.harshencastle.objecthandlers;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 
 public class FaceRenderer 
 {
-	private final EnumFacing face;
+	private final IBlockState state;
 	private final BlockPos position;
 	
-	public FaceRenderer(BlockPos position, EnumFacing face) {
+	public FaceRenderer(BlockPos position, IBlockState state) {
 		this.position = position;
-		this.face = face;
+		this.state = state;
 	}
 	
-	public EnumFacing getFace() {
-		return face;
+	public IBlockState getState() {
+		return state;
 	}
 
 	public BlockPos getPosition() {

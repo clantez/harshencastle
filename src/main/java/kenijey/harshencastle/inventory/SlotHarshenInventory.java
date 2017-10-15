@@ -1,15 +1,10 @@
 package kenijey.harshencastle.inventory;
 
 import kenijey.harshencastle.HarshenUtils;
-import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
-import kenijey.harshencastle.interfaces.IVanillaProvider;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.ItemBlock;
+import kenijey.harshencastle.api.EnumInventorySlots;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
-import net.minecraftforge.registries.IForgeRegistryEntry.Impl;
 
 public class SlotHarshenInventory extends SlotItemHandler
 {

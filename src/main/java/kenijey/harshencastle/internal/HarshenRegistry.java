@@ -1,24 +1,43 @@
 package kenijey.harshencastle.internal;
 
-import kenijey.harshencastle.HarshenCastle;
+import java.util.HashMap;
+
 import kenijey.harshencastle.HarshenUtils;
+import kenijey.harshencastle.api.BlockItem;
+import kenijey.harshencastle.api.CauldronLiquid;
+import kenijey.harshencastle.api.EnumInventorySlots;
 import kenijey.harshencastle.api.HarshenStack;
+import kenijey.harshencastle.api.IHarshenHelper;
+import kenijey.harshencastle.api.IHarshenProvider;
 import kenijey.harshencastle.api.IHarshenRegistry;
-import kenijey.harshencastle.enums.CauldronLiquid;
+import kenijey.harshencastle.objecthandlers.VanillaProviderToInterface;
 import kenijey.harshencastle.recipies.CauldronRecipes;
 import kenijey.harshencastle.recipies.HereticRitualRecipes;
 import kenijey.harshencastle.recipies.MagicTableRecipe;
 import kenijey.harshencastle.recipies.PedestalSlabRecipes;
 import kenijey.harshencastle.recipies.RitualRecipes;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.MathHelper;
 
 public class HarshenRegistry implements IHarshenRegistry
 {
-
+	
+	private static final HashMap<ItemStack, CauldronLiquid> INPUT_MAP = new HashMap<>();
+	private static final HashMap<CauldronLiquid, ItemStack> OUTPUT_MAP = new HashMap<>();
+	private static final HashMap<ItemStack, CauldronLiquid> ITEMLIQUID_MAP = new HashMap<>();
+	
+	private final String modID;
+	
+	public HarshenRegistry(String modID) 
+	{
+		this.modID = modID;
+	}
+	
 	@Override
-	public void registerRitualRecipe(ItemStack output, boolean useLightning, HarshenStack... inputs) {
-		if(inputs.length == 4)
-			RitualRecipes.addRecipe(HarshenUtils.toArray(inputs), output, useLightning);
+	public void registerRitualRecipe(ItemStack output, boolean useLightning, HarshenStack input1, HarshenStack input2, HarshenStack input3, HarshenStack input4) {
+		RitualRecipes.addRecipe(HarshenUtils.toArray(input1, input2, input3, input4), output, useLightning);
 	}
 
 	@Override
@@ -27,26 +46,88 @@ public class HarshenRegistry implements IHarshenRegistry
 	}
 
 	@Override
-	public void registerHereticRecipe(HarshenStack cauldronItem, ItemStack output, CauldronLiquid catalyst,
-			HarshenStack... pedstalItems) {
-		if(pedstalItems.length == 8)
-			HereticRitualRecipes.addRecipe(cauldronItem, output, catalyst, pedstalItems);
+	public void registerHereticRecipe(HarshenStack cauldronItem, ItemStack output, CauldronLiquid catalyst,  HarshenStack input1, HarshenStack input2, HarshenStack input3, HarshenStack input4, 
+			 HarshenStack input5, HarshenStack input6, HarshenStack input7, HarshenStack input8) {
+		HereticRitualRecipes.addRecipe(cauldronItem, output, catalyst, HarshenUtils.listOf(input1, input2, input3, input4, input5, input6, input7, input8));
 	}
 
 	@Override
-	public void registerPedestalRecipe(HarshenStack input, ItemStack output) {
+	public void registerPedestalSlabRecipe(HarshenStack input, ItemStack output) {
 		PedestalSlabRecipes.addRecipe(input, output);
 	}
 
 	@Override
-	public void registerMagicTableRecipe(ItemStack output, HarshenStack... inputs) {
-		if(inputs.length == 4)
-			MagicTableRecipe.addRecipe(HarshenUtils.toArray(inputs), output);
+	public void registerMagicTableRecipe(ItemStack output, HarshenStack input1, HarshenStack input2, HarshenStack input3, HarshenStack input4) {
+			MagicTableRecipe.addRecipe(HarshenUtils.toArray(input1, input2, input3, input4), output);
 	}
 
 	@Override
-	public boolean hasInit() {
-		return HarshenAPIHandler.hasInit;
+	public CauldronLiquid registerCauldronLiquid(ItemStack fullItem, ItemStack emptyItem, CauldronLiquid liquid, int fillBy) {
+		fillBy = MathHelper.clamp(fillBy, 1, 3);
+		liquid.setModID(modID);
+		if(emptyItem == null || emptyItem.isEmpty())
+			return registerItemLiquid(fullItem, liquid).setFillBy(fillBy);
+		liquid.setFillBy(fillBy);
+		INPUT_MAP.put(fullItem, liquid);
+		OUTPUT_MAP.put(liquid, emptyItem);
+		return liquid;
+	}
+	
+	private CauldronLiquid registerItemLiquid(ItemStack inputItem, CauldronLiquid liquid)
+	{
+		CauldronLiquid l = liquid.hasState() ? new CauldronLiquid(liquid.getName().split(":")[1], (IBlockState)liquid.getStateOrLoc()).setModID(liquid.getName().split(":")[0])
+				: new CauldronLiquid(liquid.getName().split(":")[1], (ResourceLocation) liquid.getStateOrLoc()).setModID(liquid.getName().split(":")[0]);
+		ITEMLIQUID_MAP.put(inputItem, l);
+		return l;
 	}
 
+	public static CauldronLiquid getLiquidFromStack(ItemStack key)
+	{
+		return HarshenUtils.getObjectFromItemMap(HarshenUtils.getObjectFromItemMap(INPUT_MAP, key) != null ? INPUT_MAP : ITEMLIQUID_MAP, key);
+	}
+	
+	public static ItemStack getOutPutItem(CauldronLiquid liquid)
+	{
+		for(CauldronLiquid l : OUTPUT_MAP.keySet())
+			if(l == liquid)
+				return OUTPUT_MAP.get(l).copy(); 
+		return null;
+	}
+	
+	public static ItemStack getInputFromOutput(CauldronLiquid prevLiquid)
+	{
+		for(ItemStack stack : INPUT_MAP.keySet())
+			if(INPUT_MAP.get(stack) == prevLiquid)
+				return stack.copy();
+		return ItemStack.EMPTY;
+	}
+	
+	public static CauldronLiquid getRelativeFluid(CauldronLiquid prevLiquid)
+	{
+		for(ItemStack stack : INPUT_MAP.keySet())
+			if(INPUT_MAP.get(stack).getName().equals(prevLiquid.getName()))
+				return INPUT_MAP.get(stack);
+		return prevLiquid;
+	}
+
+	@Override
+	public void registerInventoryItem(BlockItem item, EnumInventorySlots slot, Object provider, boolean multiplyEvent,
+			int toolTipLines) 
+	{		
+		registerInventoryItem(item, new VanillaProviderToInterface(slot, provider, multiplyEvent, toolTipLines));
+	}
+
+	@Override
+	public void registerInventoryItem(BlockItem item, IHarshenProvider provider) {
+		HarshenUtils.registerInventoryItem(item, provider);
+	}
+
+	@Override
+	public IHarshenHelper getHelper() {
+		return new HarshenHelper();
+	}
+	
+	public static class HarshenHelper implements IHarshenHelper
+	{
+	}
 }

@@ -2,8 +2,8 @@ package kenijey.harshencastle.items;
 
 import java.util.List;
 
+import kenijey.harshencastle.api.CauldronLiquid;
 import kenijey.harshencastle.base.BaseItemMetaData;
-import kenijey.harshencastle.enums.CauldronLiquid;
 import kenijey.harshencastle.enums.items.EnumGlassContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -52,7 +52,7 @@ public class GlassContainer extends BaseItemMetaData
 		if(liquid == null)
 			return null;
 		String s = liquid.hasState() && !((IBlockState)liquid.getStateOrLoc()).getBlock().getLocalizedName().equals("tile.null.name") ? 
-				((IBlockState)liquid.getStateOrLoc()).getBlock().getLocalizedName() :  new TextComponentTranslation("fluid." + liquid.getName()).getUnformattedText(); 
+				((IBlockState)liquid.getStateOrLoc()).getBlock().getLocalizedName() :  new TextComponentTranslation("fluid." + liquid.getName().split(":")[1]).getUnformattedText(); 
 		if(s.split(" ").length > 2 && s.split(" ")[0].equalsIgnoreCase("block") && s.split(" ")[1].equalsIgnoreCase("of"))
 		{
 			String s1 = "";

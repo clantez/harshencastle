@@ -1,37 +1,28 @@
 package kenijey.harshencastle.objecthandlers;
 
-import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
-import kenijey.harshencastle.interfaces.IVanillaProvider;
+import kenijey.harshencastle.api.EnumInventorySlots;
+import kenijey.harshencastle.api.IHarshenProvider;
 import net.minecraft.item.ItemStack;
 
-public class VanillaProviderToInterface implements IVanillaProvider
+public class VanillaProviderToInterface implements IHarshenProvider
 {
 
 	private final EnumInventorySlots slot;
 	private final Object provider;
 	
-	private boolean multipleEvent = true;
-	private int toolTipLines;
+	private final boolean multiplyEvent;
+	private final int toolTipLines;
 
 	
-	public VanillaProviderToInterface(EnumInventorySlots slot, Object provider) {
+	public VanillaProviderToInterface(EnumInventorySlots slot, Object provider, boolean multiplyEvent, int toolTipLines) {
 		this.slot = slot;
 		this.provider = provider;
-	}
-	
-	public VanillaProviderToInterface setToolTipLines(int toolTipLines) {
+		this.multiplyEvent = multiplyEvent;
 		this.toolTipLines = toolTipLines;
-		return this;
 	}
 	
-	public VanillaProviderToInterface disableEventMultiplication() {
-		this.multipleEvent = false;
-		return this;
-	}
-	
-	@Override
-	public boolean multiplyEvent(ItemStack stack) {
-		return multipleEvent;
+	public boolean isMultiplyEvent(ItemStack stack) {
+		return multiplyEvent;
 	}
 	
 	@Override

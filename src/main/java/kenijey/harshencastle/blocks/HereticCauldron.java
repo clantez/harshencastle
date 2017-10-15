@@ -6,9 +6,9 @@ import java.util.Random;
 import javax.annotation.Nullable;
 
 import kenijey.harshencastle.HarshenBlocks;
+import kenijey.harshencastle.api.CauldronLiquid;
 import kenijey.harshencastle.base.BaseBlockHarshenSingleInventory;
 import kenijey.harshencastle.base.BaseTileEntityHarshenSingleItemInventory;
-import kenijey.harshencastle.enums.CauldronLiquid;
 import kenijey.harshencastle.enums.items.EnumGlassContainer;
 import kenijey.harshencastle.items.GlassContainer;
 import kenijey.harshencastle.tileentity.TileEntityHereticCauldron;
@@ -64,10 +64,6 @@ public class HereticCauldron extends BaseBlockHarshenSingleInventory
 		super(Material.IRON);
 		setRegistryName("heretic_cauldron");
 		setUnlocalizedName("heretic_cauldron");
-		TileEntityHereticCauldron.fluidMap.put(EnumGlassContainer.LAVA.getType(), Items.LAVA_BUCKET);
-		TileEntityHereticCauldron.fluidMap.put(EnumGlassContainer.MILK.getType(), Items.MILK_BUCKET);
-		TileEntityHereticCauldron.fluidMap.put(EnumGlassContainer.WATER.getType(), Items.WATER_BUCKET);
-
 		setHardness(5.0F);
 		setResistance(5.0F);
 	}
@@ -140,14 +136,14 @@ public class HereticCauldron extends BaseBlockHarshenSingleInventory
 			stack.setTagCompound(null);
 			return;
 		}
-		nbt.setInteger("FluidValue", getTile(worldIn, pos).getFluid().getId());
+		nbt.setString("FluidValue", getTile(worldIn, pos).getFluid().getName());
 		nbt.setInteger("FluidLevel", getTile(worldIn, pos).getLevel());
 	}
 	
 	@Override
 	protected String extraName(NBTTagCompound nbt, boolean isItem) {
 		return nbt.getInteger("FluidLevel") == 0 ? "" : 
-			(isItem? " & " : "") +  GlassContainer.getGlassContaining(CauldronLiquid.getFromId(nbt.getInteger("FluidValue")));
+			(isItem? " & " : "") +  GlassContainer.getGlassContaining(CauldronLiquid.getFromName(nbt.getString("FluidValue")));
 	}
 	
 	@Override
@@ -155,7 +151,7 @@ public class HereticCauldron extends BaseBlockHarshenSingleInventory
 	{
 		if(!hasKey(stack, "FluidValue"))
 			return;
-		((TileEntityHereticCauldron)tileEntity).setFluid(CauldronLiquid.getFromId(stack.getTagCompound().getInteger("FluidValue")));
+		((TileEntityHereticCauldron)tileEntity).setFluid(CauldronLiquid.getFromName(stack.getTagCompound().getString("FluidValue")));
 		((TileEntityHereticCauldron)tileEntity).setLevel(stack.getTagCompound().getInteger("FluidLevel"));
 
 	}

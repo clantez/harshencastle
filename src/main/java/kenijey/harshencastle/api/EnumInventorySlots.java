@@ -1,10 +1,12 @@
-package kenijey.harshencastle.enums.inventory;
+package kenijey.harshencastle.api;
 
 import java.awt.Point;
 import java.util.ArrayList;
-
-import kenijey.harshencastle.interfaces.IIDSet;
-
+/**
+ * The Inventory Slots for HarshenCastle.
+ * @author Wyn Price
+ *
+ */
 public enum EnumInventorySlots implements IIDSet
 {
 	LEFT_EAR("earring", 56, 14, 1),

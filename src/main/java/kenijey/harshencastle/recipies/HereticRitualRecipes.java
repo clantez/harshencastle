@@ -3,8 +3,8 @@ package kenijey.harshencastle.recipies;
 import java.util.ArrayList;
 
 import kenijey.harshencastle.HarshenUtils;
+import kenijey.harshencastle.api.CauldronLiquid;
 import kenijey.harshencastle.api.HarshenStack;
-import kenijey.harshencastle.enums.CauldronLiquid;
 import kenijey.harshencastle.internal.HarshenAPIHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;

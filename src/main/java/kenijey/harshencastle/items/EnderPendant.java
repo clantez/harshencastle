@@ -1,9 +1,9 @@
 package kenijey.harshencastle.items;
 
+import kenijey.harshencastle.api.EnumInventorySlots;
+import kenijey.harshencastle.api.HarshenEvent;
+import kenijey.harshencastle.api.IHarshenProvider;
 import kenijey.harshencastle.config.AccessoryConfig;
-import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
-import kenijey.harshencastle.interfaces.HarshenEvent;
-import kenijey.harshencastle.interfaces.IHarshenProvider;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;

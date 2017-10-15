@@ -1,7 +1,7 @@
 package kenijey.harshencastle.items;
 
-import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
-import kenijey.harshencastle.interfaces.IHarshenProvider;
+import kenijey.harshencastle.api.EnumInventorySlots;
+import kenijey.harshencastle.api.IHarshenProvider;
 import net.minecraft.item.Item;
 
 public class ReachPendant extends Item implements IHarshenProvider

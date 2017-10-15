@@ -1,6 +1,10 @@
 package kenijey.harshencastle;
 
 import kenijey.harshencastle.armor.HarshenArmors;
+import kenijey.harshencastle.enums.items.EnumGlassContainer;
+import kenijey.harshencastle.objecthandlers.HarshenGlassContainerIngredient;
+import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -309,5 +313,15 @@ public class HarshenCraftingRecipes
 				
 				'c', new ItemStack(Blocks.WEB),
 				's', new ItemStack(Items.STRING));
+		for(EnumGlassContainer glass : EnumGlassContainer.values())
+			if(HarshenUtils.glassContainerHasState(glass))
+			{
+				Block block = ((IBlockState) glass.getType().getStateOrLoc()).getBlock();
+				HarshenGlassContainerIngredient[] ingridientList = new HarshenGlassContainerIngredient[9];
+				ingridientList[0] = new HarshenGlassContainerIngredient(EnumGlassContainer.EMPTY.getStack()); 
+				for(int i = 1; i < 9; i++)
+					ingridientList[i] = new HarshenGlassContainerIngredient(HarshenUtils.toList(HarshenUtils.getAllRelatives(HarshenUtils.phaseBucket(block))));
+				GameRegistry.addShapelessRecipe(new ResourceLocation(HarshenCastle.MODID, glass.getType().getName().split(":")[1] + "_container"), new ResourceLocation("harshen_items"), glass.getStack(), ingridientList);
+			}
 	}
 }

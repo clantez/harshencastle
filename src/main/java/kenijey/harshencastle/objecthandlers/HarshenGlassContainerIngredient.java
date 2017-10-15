@@ -1,12 +1,8 @@
 package kenijey.harshencastle.objecthandlers;
 
-import java.util.ArrayList;
-
-import kenijey.harshencastle.HarshenUtils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.UniversalBucket;
 
 public class HarshenGlassContainerIngredient extends Ingredient 

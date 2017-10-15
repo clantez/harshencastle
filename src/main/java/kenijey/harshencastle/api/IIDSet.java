@@ -1,4 +1,4 @@
-package kenijey.harshencastle.interfaces;
+package kenijey.harshencastle.api;
 
 public interface IIDSet {
 	public void setId(int id);

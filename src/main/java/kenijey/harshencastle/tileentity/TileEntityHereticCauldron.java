@@ -8,14 +8,13 @@ import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.HarshenUtils;
+import kenijey.harshencastle.api.CauldronLiquid;
 import kenijey.harshencastle.base.BaseTileEntityHarshenSingleItemInventory;
 import kenijey.harshencastle.blocks.BloodBlock;
-import kenijey.harshencastle.enums.CauldronLiquid;
 import kenijey.harshencastle.enums.items.EnumGlassContainer;
 import kenijey.harshencastle.enums.particle.EnumHarshenParticle;
+import kenijey.harshencastle.internal.HarshenRegistry;
 import kenijey.harshencastle.items.BloodCollector;
-import kenijey.harshencastle.items.GlassContainer;
-import kenijey.harshencastle.items.ItemLiquid;
 import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.network.packets.MessagePacketSpawnBloodParticle;
 import kenijey.harshencastle.network.packets.MessagePacketSpawnItemParticles;
@@ -23,6 +22,7 @@ import kenijey.harshencastle.objecthandlers.FaceRenderer;
 import kenijey.harshencastle.recipies.CauldronRecipes;
 import kenijey.harshencastle.recipies.HereticRitualRecipes;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -38,12 +38,8 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.UniversalBucket;
 import net.minecraftforge.items.CapabilityItemHandler;
-import scala.xml.dtd.EMPTY;
 
 public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemInventory
 {
@@ -55,7 +51,6 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 	public boolean isActiveInBackground = false;
 	private ItemStack switchedItem = ItemStack.EMPTY;
 	private int[] drainPos = {50, 75, 100, Integer.MAX_VALUE};
-	public static final HashMap<CauldronLiquid, Item> fluidMap = new HashMap<>();
 	private CauldronLiquid fluid = CauldronLiquid.NONE;
 	private int level = 0;
 	private CauldronLiquid workingFluid = CauldronLiquid.NONE;
@@ -64,7 +59,12 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 	
 	@Override
 	public void tick() {
-		if(level <= 0)
+		if(level <= 0 && fluid != CauldronLiquid.NONE)
+		{
+			level = 0;
+			fluid = CauldronLiquid.NONE;
+		}
+		else if(fluid == CauldronLiquid.NONE && level > 0)
 		{
 			level = 0;
 			fluid = CauldronLiquid.NONE;
@@ -165,42 +165,26 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
         		}
         	return true;
         }
-        if(item instanceof GlassContainer)
+        CauldronLiquid potentionalLiquid = HarshenRegistry.getLiquidFromStack(itemstack);
+        if(potentionalLiquid != null && (level <= 0 || (fluid == potentionalLiquid && level + potentionalLiquid.getFillBy() < 4)))
         {
-        	if(EnumGlassContainer.getContainerFromMeta(itemstack.getMetadata()).isSubContainer() && level != 3 &&
-        			(fluid == CauldronLiquid.NONE || fluid == EnumGlassContainer.getContainerFromMeta(itemstack.getMetadata()).getType()))
-        	{
-        		level ++;
-        		fluid = EnumGlassContainer.getContainerFromMeta(itemstack.getMetadata()).getType();
-        		itemstack.shrink(1);
-        		give(playerIn, hand, new ItemStack(HarshenItems.GLASS_CONTAINER));
-        		return true;
-        	}
-        	else if(itemstack.getMetadata() == 0 && fluid != CauldronLiquid.NONE)
-        	{	
-        		if(CauldronRecipes.getRecipe(itemstack, fluid) != null && level == 3)
-        		{
-        			alterSameGlassContainer = !alterSameGlassContainer;
-        			if(alterSameGlassContainer)
-        				return false;
-        		}
-        		itemstack.shrink(1);
-        		give(playerIn, hand, new ItemStack(HarshenItems.GLASS_CONTAINER, 1, EnumGlassContainer.getContainerFromType(fluid).getMeta()));
-        		level--;
-        		return true;
-        	}
+        	fluid = HarshenRegistry.getRelativeFluid(potentionalLiquid);
+        	level += potentionalLiquid.getFillBy();
+        	itemstack.shrink(1);
+        	if(HarshenRegistry.getOutPutItem(potentionalLiquid) != null)
+        		give(playerIn, hand, HarshenRegistry.getOutPutItem(potentionalLiquid));
+        	return true;
         }
-        if(fluidMap.containsValue(item) && fluid == CauldronLiquid.NONE)
+        ItemStack potentionalItem = HarshenRegistry.getOutPutItem(fluid);
+        if(potentionalItem != null && !itemstack.isEmpty() && potentionalItem.isItemEqual(itemstack) && level - fluid.getFillBy() >= 0)
         {
-        	CauldronLiquid[] type = new CauldronLiquid[fluidMap.keySet().size()];
-        	playerIn.setHeldItem(hand, ItemStack.EMPTY);
-        	give(playerIn, hand, new ItemStack(Items.BUCKET));
-        	level = 3;
-			fluid = fluidMap.keySet().toArray(type)[valueOfLevel(item)];
-	        this.world.playSound((EntityPlayer)null, pos, SoundEvents.ITEM_BUCKET_FILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
-	        return true;
+        	level -= fluid.getFillBy();
+        	ItemStack oldStack = itemstack.copy();
+        	itemstack.shrink(1);
+        	give(playerIn, hand, HarshenRegistry.getInputFromOutput(fluid));
+        	return true;
         }
-        else if(item instanceof UniversalBucket && fluid == CauldronLiquid.NONE &&
+        if(item instanceof UniversalBucket && fluid == CauldronLiquid.NONE &&
         		CauldronLiquid.getFromState(((UniversalBucket)item).getFluid(itemstack).getFluid().getBlock().getDefaultState()) != CauldronLiquid.NONE)
         {
         	itemstack.shrink(1);
@@ -209,26 +193,6 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
         	fluid = CauldronLiquid.getFromState(((UniversalBucket)item).getFluid(itemstack).getFluid().getBlock().getDefaultState());
 	        this.world.playSound((EntityPlayer)null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
 	        return true;
-        }
-        else if (item == Items.BUCKET && fluid != EnumGlassContainer.BLOOD.getType())
-        {
-            if (level == 3)
-            {
-                itemstack.shrink(1);
-                this.world.playSound((EntityPlayer)null, pos, SoundEvents.ITEM_BUCKET_FILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                ItemStack stack = fluidMap.containsKey(fluid) ?  new ItemStack(fluidMap.get(fluid)) : FluidUtil.getFilledBucket(new FluidStack(FluidRegistry.getFluid(fluid.getName()), 1000));
-            	give(playerIn, hand, stack);
-            	level = 0;
-                fluid = CauldronLiquid.NONE;	
-            }
-            return true;
-        }
-        else if(item instanceof ItemLiquid && fluid == CauldronLiquid.NONE)
-        {
-        	level = 3;
-        	fluid = ((ItemLiquid)item).getLiquid(itemstack);
-        	itemstack.shrink(1);
-        	return true;
         }
         else if(item == HarshenItems.RITUAL_STICK)
         {
@@ -259,6 +223,8 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 	private ArrayList<BlockPos> deletedBloodPos = new ArrayList<>();
 	private ArrayList<BlockPos> erroredPositions = new ArrayList<>();
 	private ArrayList<Block> blockErrorList = new ArrayList<>();
+	private ArrayList<IBlockState> renderBlockErrorList = new ArrayList<>();
+
 	
 	private boolean checkForLargeRitual(boolean setRecipe, EntityPlayer... players)
 	{
@@ -270,6 +236,7 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 		ArrayList<BlockPos> bloodPos = new ArrayList<>();
 		pedestals.clear();
 		blockErrorList.clear();
+		renderBlockErrorList.clear();
 		if(world.isRemote && setRecipe && players[0] != null && players[0].getUniqueID().equals(HarshenCastle.proxy.getPlayer().getUniqueID()))
 			HarshenCastle.proxy.resetErroredPositions();
 		erroredPositions.clear();
@@ -344,12 +311,8 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 				players[0].sendStatusMessage(new TextComponentTranslation("ritual.fail.position", erroredPositions.get(0).getX(), erroredPositions.get(0).getY(), erroredPositions.get(0).getZ(),
 						blockErrorList.get(0) == Blocks.BARRIER ? I18n.translateToLocal("ritual.not") + " " + blockErrorList.get(1).getLocalizedName() : blockErrorList.get(0).getLocalizedName(),
 						blockErrorList.get(1).getLocalizedName()), false);
-				for(BlockPos pos : erroredPositions)
-					if(players[0].getUniqueID().equals(HarshenCastle.proxy.getPlayer().getUniqueID()))
-						if(blockErrorList.get(erroredPositions.indexOf(pos) * 2) == HarshenBlocks.BLOOD_BLOCK)
-							HarshenCastle.proxy.addErroredPosition(new FaceRenderer(pos, EnumFacing.DOWN));
-						else
-							HarshenCastle.proxy.addErroredPosition(new FaceRenderer(pos, null));
+				for(int i = 0; i < erroredPositions.size(); i++)
+					HarshenCastle.proxy.addErroredPosition(new FaceRenderer(erroredPositions.get(i), renderBlockErrorList.get(i)));
 			}
 			else if(this.overstandingRecipe == null)
 				players[0].sendStatusMessage(new TextComponentTranslation("ritual.fail.recipe"), false);
@@ -364,6 +327,7 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 		erroredPositions.add(pos);
 		blockErrorList.add(expected);
 		blockErrorList.add(world.getBlockState(pos).getBlock());
+		renderBlockErrorList.add(expected.getDefaultState());
 	}
 	
 	public void killRitual()
@@ -421,20 +385,6 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 		return this;
 	}
 	
-	private int valueOfLevel(Item item)
-	{
-		int i = 0;
-		for(Item type : fluidMap.values())
-		{
-			if(type == item)
-				break;
-			i++;
-		}
-		return i;
-			
-	}
-
-	
 	public int getActiveTimer()
 	{
 		return activeTimer;
@@ -490,7 +440,7 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 	
 	@Override
 	public void readFromNBT(NBTTagCompound compound) {
-		fluid = CauldronLiquid.getFromId(compound.getInteger("cauldronType"));
+		fluid = CauldronLiquid.getFromName(compound.getString("cauldronType"));
 		level = compound.getInteger("cauldronLevel");
 		isActive = compound.getBoolean("isActive");
 		switchedItem = new ItemStack(compound.getCompoundTag("switchedItemStack"));
@@ -499,7 +449,7 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 	
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-		nbt.setInteger("cauldronType", fluid.getId());
+		nbt.setString("cauldronType", fluid.getName());
 		nbt.setInteger("cauldronLevel", level);
 		nbt.setBoolean("isActive", isActive);
 		nbt.setTag("switchedItemStack", switchedItem.serializeNBT());

@@ -1,8 +1,8 @@
 package kenijey.harshencastle.items;
 
-import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
-import kenijey.harshencastle.interfaces.HarshenEvent;
-import kenijey.harshencastle.interfaces.IHarshenProvider;
+import kenijey.harshencastle.api.EnumInventorySlots;
+import kenijey.harshencastle.api.HarshenEvent;
+import kenijey.harshencastle.api.IHarshenProvider;
 import kenijey.harshencastle.objecthandlers.PlayerPunchedEvent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

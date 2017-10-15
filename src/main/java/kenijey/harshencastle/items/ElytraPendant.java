@@ -1,9 +1,9 @@
 package kenijey.harshencastle.items;
 
 import kenijey.harshencastle.HarshenUtils;
-import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
-import kenijey.harshencastle.interfaces.HarshenEvent;
-import kenijey.harshencastle.interfaces.IHarshenProvider;
+import kenijey.harshencastle.api.EnumInventorySlots;
+import kenijey.harshencastle.api.HarshenEvent;
+import kenijey.harshencastle.api.IHarshenProvider;
 import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.network.packets.MessagePacketSummonFirework;
 import net.minecraft.init.Items;

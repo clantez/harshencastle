@@ -2,9 +2,9 @@ package kenijey.harshencastle.items;
 
 import java.util.ArrayList;
 
-import kenijey.harshencastle.enums.inventory.EnumInventorySlots;
-import kenijey.harshencastle.interfaces.HarshenEvent;
-import kenijey.harshencastle.interfaces.IHarshenProvider;
+import kenijey.harshencastle.api.EnumInventorySlots;
+import kenijey.harshencastle.api.HarshenEvent;
+import kenijey.harshencastle.api.IHarshenProvider;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;

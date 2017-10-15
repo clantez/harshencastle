@@ -7,9 +7,9 @@ import java.util.HashMap;
 import java.util.UUID;
 
 import kenijey.harshencastle.HarshenUtils;
-import kenijey.harshencastle.interfaces.HarshenEvent;
-import kenijey.harshencastle.interfaces.IHarshenProvider;
-import kenijey.harshencastle.interfaces.IVanillaProvider;
+import kenijey.harshencastle.api.BlockItem;
+import kenijey.harshencastle.api.HarshenEvent;
+import kenijey.harshencastle.api.IHarshenProvider;
 import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.network.packets.MessagePacketRequestInv;
 import kenijey.harshencastle.objecthandlers.HarshenItemStackHandler;
@@ -116,9 +116,9 @@ public class HandlerHarshenInventory
 	@SideOnly(Side.CLIENT)
 	public void onToolTip(ItemTooltipEvent event)
 	{
-		if(HarshenUtils.hasProvider(event.getItemStack().getItem()))
+		if(HarshenUtils.hasProvider(new BlockItem(event.getItemStack().getItem())))
 		{
-			IVanillaProvider provider = HarshenUtils.getProvider(event.getItemStack().getItem());
+			IHarshenProvider provider = HarshenUtils.getProvider(new BlockItem(event.getItemStack().getItem()));
 			event.getToolTip().add("\u00A75" + new TextComponentTranslation("accessoryitem", "\u00A77" + new TextComponentTranslation(provider.getSlot().getName()).getFormattedText()).getFormattedText());
 			if(provider.toolTipLines() > 0)
 				event.getToolTip().add(" ");
@@ -148,9 +148,9 @@ public class HandlerHarshenInventory
 				ItemStack stack = HarshenUtils.getHandler(player).getStackInSlot(i);
 				if(!HarshenUtils.hasProvider(stack))
 					continue; //practically impossible
-				IVanillaProvider provider = HarshenUtils.getProvider(stack);
+				IHarshenProvider provider = HarshenUtils.getProvider(stack);
 				Object object = provider.getProvider(stack);
-				if(object != null && !(loadedItems.contains(stack.getItem()) && !provider.multiplyEvent(stack)))
+				if(object != null && !(loadedItems.contains(stack.getItem()) && !provider.isMultiplyEvent(stack)))
 					try {
 						Method method = HarshenUtils.getMethod(object.getClass(), HarshenEvent.class, event.getClass());
 						if(method != null)

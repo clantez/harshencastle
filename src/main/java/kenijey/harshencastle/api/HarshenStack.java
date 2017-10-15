@@ -1,15 +1,9 @@
 package kenijey.harshencastle.api;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import javax.annotation.Nullable;
-
-import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.oredict.OreDictionary;
 /**
@@ -26,13 +20,20 @@ import net.minecraftforge.oredict.OreDictionary;
  * @author Wyn Price
  *
  */
-public class HarshenStack 
+public class HarshenStack
 {
 	/**The list containing all the stacks that this class represents*/
 	private ArrayList<ItemStack> stackList = new ArrayList<>();
 	
 	/**Should ItemStacks be dependant on NBT*/
 	private boolean dependOnNBT = false;
+	
+	/**
+	 * Used to create an empty list
+	 */
+	public HarshenStack() {
+		stackList.add(ItemStack.EMPTY);
+	}
 	
 	/**
 	 * Used to create lists of stacks
@@ -46,26 +47,26 @@ public class HarshenStack
 	
 	/**
 	 * Used to create a list of stacks, from oreDictionary
-	 * @param oreDictName The OreDictionary value you want to use
+	 * @param oreDictName A list of OreDictionary value you want to use
 	 */
-	public HarshenStack(String oreDictName) {
-		NonNullList<ItemStack> stackList = OreDictionary.getOres(oreDictName);
-		if(stackList.isEmpty())
+	public HarshenStack(String... oreDictNames) {
+		for(String oreDictName : oreDictNames)
 		{
-			stackList.add(ItemStack.EMPTY);
-			new IllegalArgumentException("Oredictionary vaule " + oreDictName + " doesnt exist").printStackTrace(System.out);
+			NonNullList<ItemStack> stackList = OreDictionary.getOres(oreDictName);
+			if(stackList.isEmpty())
+				new IllegalArgumentException("Oredictionary vaule " + oreDictName + " doesnt exist").printStackTrace(System.out);
+			else
+				for(ItemStack stack : stackList)
+					if(stack.getMetadata() == OreDictionary.WILDCARD_VALUE)
+					{
+				    	NonNullList<ItemStack> innerStacklist = NonNullList.create();
+				    	stack.getItem().getSubItems(CreativeTabs.SEARCH, innerStacklist);
+						for(ItemStack wildStack : innerStacklist)
+							this.stackList.add(stack.copy());
+					}
+					else
+						this.stackList.add(stack);
 		}
-		else
-			for(ItemStack stack : stackList)
-				if(stack.getMetadata() == OreDictionary.WILDCARD_VALUE)
-				{
-			    	NonNullList<ItemStack> innerStacklist = NonNullList.create();
-			    	stack.getItem().getSubItems(CreativeTabs.SEARCH, innerStacklist);
-					for(ItemStack wildStack : innerStacklist)
-						this.stackList.add(stack.copy());
-				}
-				else
-					this.stackList.add(stack);
 	}
 	
 	private HarshenStack(ArrayList<ItemStack> stackList)
@@ -115,37 +116,9 @@ public class HarshenStack
 	public boolean containsItem(ItemStack stack)
 	{
 		for(ItemStack innerStack :  getStackList())
-			if((innerStack.isItemEqual(stack) && (dependOnNBT ? ItemStack.areItemStackShareTagsEqual(innerStack, stack) : true)) ||
-					(innerStack.isEmpty() && stack.isEmpty()))
+			if(((innerStack.getMetadata() == OreDictionary.WILDCARD_VALUE ? innerStack.getItem() == stack.getItem() : innerStack.isItemEqual(stack)) && 
+					(dependOnNBT ? ItemStack.areItemStackShareTagsEqual(innerStack, stack) : true)) || (innerStack.isEmpty() && stack.isEmpty()))
 				return true;
 		return false;
-	}
-	
-	
-	//Below are old versions used so I can test without changing EVERYTHING
-	
-	/**@deprecated For old code. You need to change this*/
-	@Deprecated
-	public HarshenStack(Block blockIn){this(blockIn, 1);}
-	/**@deprecated For old code. You need to change this*/
-	@Deprecated
-	public HarshenStack(Block blockIn, int amount){this(blockIn, amount, 0);}
-	/**@deprecated For old code. You need to change this*/
-	@Deprecated
-	public HarshenStack(Block blockIn, int amount, int meta){this(Item.getItemFromBlock(blockIn), amount, meta);}
-	/**@deprecated For old code. You need to change this*/
-	@Deprecated
-	public HarshenStack(Item itemIn){this(itemIn, 1);}
-	/**@deprecated For old code. You need to change this*/
-	@Deprecated
-	public HarshenStack(Item itemIn, int amount){this(itemIn, amount, 0);}
-	/**@deprecated For old code. You need to change this*/
-	@Deprecated
-	public HarshenStack(Item itemIn, int amount, int meta){this(itemIn, amount, meta, null);}
-	/**@deprecated For old code. You need to change this*/
-	@Deprecated
-	public HarshenStack(Item itemIn, int amount, int meta, @Nullable NBTTagCompound capNBT)
-	{
-		this.stackList.add(new ItemStack(itemIn, amount, meta, capNBT));
 	}
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.HarshenUtils;
+import kenijey.harshencastle.api.CauldronLiquid;
 import kenijey.harshencastle.enums.items.EnumGlassContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
