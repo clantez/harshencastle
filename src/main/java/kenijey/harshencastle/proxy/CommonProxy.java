@@ -43,11 +43,13 @@ import kenijey.harshencastle.handlers.HandlerRaptorScythe;
 import kenijey.harshencastle.handlers.HandlerSoulHarsherSword;
 import kenijey.harshencastle.handlers.HandlerVillagerSpawn;
 import kenijey.harshencastle.handlers.HandlerZombieEyeDrop;
+import kenijey.harshencastle.interfaces.ICommandStructure;
 import kenijey.harshencastle.internal.HarshenAPIHandler;
 import kenijey.harshencastle.models.ModelArmour;
 import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.objecthandlers.FaceRenderer;
 import kenijey.harshencastle.potions.HarshenPotions;
+import kenijey.harshencastle.structures.faux.FauxCauldronStructure;
 import kenijey.harshencastle.tileentity.TileEntityBloodFactory;
 import kenijey.harshencastle.tileentity.TileEntityBloodVessel;
 import kenijey.harshencastle.tileentity.TileEntityFlatPlate;
@@ -177,6 +179,12 @@ public class CommonProxy
     			new HandlerExtraRange());
     	
     	GameRegistry.registerWorldGenerator(new WorldGen(), 0);
+    	
+    	ICommandStructure[] customStructures = {
+    			new FauxCauldronStructure()
+    	};
+    	
+    	ICommandStructure.ALL_STRUCTURES.addAll(HarshenUtils.toArray(customStructures));
     }
 
     public void postInit(FMLPostInitializationEvent event) 

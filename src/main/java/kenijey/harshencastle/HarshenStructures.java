@@ -9,7 +9,7 @@ import kenijey.harshencastle.structures.TreeDome;
 
 public class HarshenStructures 
 {
-	public static final HarshenStructure CASTLE = new MainCastle();;
+	public static final HarshenStructure CASTLE = new MainCastle();
 	public static final HarshenStructure SHRINE = new Shrine();
 	public static final HarshenStructure PONTUS_TREE_DOME = new TreeDome();
 	public static final HarshenStructure PONTUS_RITUAL = new PontusRitual();

@@ -5,6 +5,7 @@ import java.util.Random;
 
 import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.HarshenUtils;
+import kenijey.harshencastle.interfaces.ICommandStructure;
 import kenijey.harshencastle.template.HarshenTemplate;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.util.ResourceLocation;
@@ -12,7 +13,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.template.PlacementSettings;
 
-public class HarshenStructure 
+public class HarshenStructure implements ICommandStructure
 {
 	public static ArrayList<HarshenStructure> allStructures = new ArrayList<>();
 	
@@ -59,8 +60,13 @@ public class HarshenStructure
 			HarshenTemplate t = HarshenTemplate.getTemplate(struc.location);
 			struc.setSize(t.getSize());
 			struc.setPos(t.getPos());
+			ICommandStructure.ALL_STRUCTURES.add(struc);
 		}
 		hasLoaded = true;
+	}
+	
+	public String getShowName() {
+		return showName;
 	}
 	
 	public boolean canLoadAt(int dimension, int chunkX, int chunkZ)
@@ -125,5 +131,15 @@ public class HarshenStructure
 	
 	public ResourceLocation getLocation() {
 		return location;
+	}
+
+	@Override
+	public String structureName() {
+		return showName;
+	}
+
+	@Override
+	public void addToWorld(World world, BlockPos pos, Random random, boolean useRuin) {
+		HarshenTemplate.getTemplate(location).addBlocksToWorld(world, pos, new PlacementSettings().setIgnoreEntities(false).setIgnoreStructureBlock(true), random, useRuin);
 	}
 }

@@ -1,22 +1,27 @@
 package kenijey.harshencastle.commands;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 import kenijey.harshencastle.base.BaseConfig;
 import kenijey.harshencastle.handlers.HandlerPontusAllowed;
 import kenijey.harshencastle.handlers.server.HandlerSyncConfig;
 import kenijey.harshencastle.interfaces.HarshenCommand;
 import kenijey.harshencastle.interfaces.HarshenCommandTabList;
+import kenijey.harshencastle.interfaces.ICommandStructure;
 import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.network.packets.MessagePacketPlayerHasAccess;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
+import net.minecraft.command.NumberInvalidException;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 
 public class HarshenCastleCommands 
 {
@@ -46,6 +51,53 @@ public class HarshenCastleCommands
 			BlockPos targetPos)
 	{
 		return args.length != 1? Collections.emptyList() : CommandBase.getListOfStringsMatchingLastWord(args, server.getOnlinePlayerNames());
+	}
+	
+	@HarshenCommand
+	public static void loadstructure(MinecraftServer server, ICommandSender sender, String[] args) throws NumberInvalidException
+	{
+		if(args.length < 1)
+		{
+			message(server, "usage");
+			return;
+		}
+		ICommandStructure struc = null;
+		for(ICommandStructure structure : ICommandStructure.ALL_STRUCTURES)
+			if(structure.structureName().equals(args[0]))
+				struc = structure;
+		if(struc != null)
+		{
+            BlockPos blockpos = sender.getPosition();
+            Vec3d vec3d = sender.getPositionVector();
+            double d0 = vec3d.x;
+            double d1 = vec3d.y;
+            double d2 = vec3d.z;
+
+            if (args.length >= 4)
+            {
+                d0 = CommandBase.parseDouble(d0, args[1], true);
+                d1 = CommandBase.parseDouble(d1, args[2], false);
+                d2 = CommandBase.parseDouble(d2, args[3], true);
+                blockpos = new BlockPos(d0, d1, d2);
+            }
+            struc.addToWorld(sender.getEntityWorld(), blockpos, new Random(), false);
+            message(sender, "success");
+		}
+		else
+			message(sender, "notfound");
+	}
+	
+	@HarshenCommandTabList
+	public static List<String> loadstructure_tabList(MinecraftServer server, ICommandSender sender, String[] args,
+			BlockPos targetPos)
+	{
+		ArrayList<String> stringList = new ArrayList<>();
+		if(args.length == 1)
+			for(ICommandStructure structure : ICommandStructure.ALL_STRUCTURES)
+				stringList.add(structure.structureName());
+		else if(args.length < 5)
+			 stringList.addAll(CommandBase.getTabCompletionCoordinate(args, 1, targetPos));
+		return stringList;
 	}
 
 	private static void message(ICommandSender sender, String translationSuffix, Object... args) {
