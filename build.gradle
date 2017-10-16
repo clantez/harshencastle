@@ -78,4 +78,8 @@ task apiJar(type: Jar) {
     from(sourceSets.main.output) {
         include "kenijey/harshencastle/api/**"
     }
+    
+ artifacts {
+        archives apiJar
+    }
 }
