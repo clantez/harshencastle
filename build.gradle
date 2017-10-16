@@ -79,8 +79,25 @@ task apiJar(type: Jar) {
     from(sourceSets.main.output) {
         include "kenijey/harshencastle/api/**"
     }
+}
     
- artifacts {
+artifacts {
         archives apiJar
+}
+    
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            artifact apiJar
+            artifact sourceJar
+        }
+    }
+}
+publishing {
+    repositories {
+        maven {
+            url ""//help how do i set up this
+        }
     }
 }
