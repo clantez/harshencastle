@@ -161,10 +161,11 @@ public class HarshenCraftingRecipes
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "one_ring"), new ResourceLocation("harshen_items"),
 				new ItemStack(HarshenItems.ONE_RING),
 				" g ",
-				"geg",
+				"pep",
 				" g ",
 				
 				'e', new ItemStack(HarshenItems.EMPTY_RING),
+				'p', new ItemStack(HarshenItems.POWDER_OF_HERETISM),
 				'g', "ingotGold");
 		
 		

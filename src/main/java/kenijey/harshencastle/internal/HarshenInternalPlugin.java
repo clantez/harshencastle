@@ -126,8 +126,8 @@ public class HarshenInternalPlugin implements IHarshenPlugin {
 		foods.toArray(foodStacks);
 		registry.registerRitualRecipe(new ItemStack(HarshenItems.FEEDING_EARRING), true, new HarshenStack(foodStacks),new HarshenStack(foodStacks),
 				new HarshenStack(foodStacks), new HarshenStack(new ItemStack(HarshenItems.HARSHEN_CRYSTAL)));
-		registry.registerRitualRecipe(new ItemStack(HarshenItems.LIGHTNING_STAFF), true, new HarshenStack(new ItemStack(Items.DRAGON_BREATH)), new HarshenStack(new ItemStack(HarshenItems.RITUAL_CRYSTAL, 1, 1)),
-				new HarshenStack(new ItemStack(HarshenBlocks.JEWEL_DIRT, 1, OreDictionary.WILDCARD_VALUE)), new HarshenStack(new ItemStack(HarshenItems.BLOOD_INFUSED_ENDER_EYE)));
+		registry.registerRitualRecipe(new ItemStack(HarshenItems.LIGHTNING_STAFF), true, new HarshenStack("blockPrismarineDark"), new HarshenStack(new ItemStack(HarshenItems.RITUAL_CRYSTAL, 1, 1)),
+				new HarshenStack(new ItemStack(HarshenItems.RITUAL_STICK, 1, 1)), new HarshenStack(new ItemStack(HarshenItems.VALOR_BADGE)));
 		
 		//cauldron recipes
 		registry.registerCauldronLiquid(EnumGlassContainer.LAVA.getStack(), EnumGlassContainer.EMPTY.getStack(), EnumGlassContainer.LAVA.getType(), 1);
