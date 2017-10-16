@@ -25,7 +25,7 @@ public class HarshenStack
 	/**The list containing all the stacks that this class represents*/
 	private ArrayList<ItemStack> stackList = new ArrayList<>();
 	
-	/**Should ItemStacks be dependant on NBT*/
+	/**Should ItemStacks be dependent on NBT*/
 	private boolean dependOnNBT = false;
 	
 	/**

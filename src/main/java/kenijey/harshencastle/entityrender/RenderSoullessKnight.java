@@ -2,6 +2,7 @@ package kenijey.harshencastle.entityrender;
 
 import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.entity.EntitySoullessKnight;
+import kenijey.harshencastle.models.ModelHarshenSoul;
 import kenijey.harshencastle.models.ModelSoullessKnight;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -16,13 +17,13 @@ public class RenderSoullessKnight extends RenderLiving
 
     public RenderSoullessKnight(RenderManager manager)
     {
-        super(manager, new ModelSoullessKnight(), 0.3F);
+        super(manager, new ModelHarshenSoul(), 0.3F);
         this.addLayer(new LayerHeldItem(this));
     }
     
     protected ResourceLocation getEntityTexture(EntitySoullessKnight entity)
     {
-        return TEXTURES;
+        return new ResourceLocation(HarshenCastle.MODID, "textures/entity/harshen_soul.png");
     }
 
     protected ResourceLocation getEntityTexture(Entity entity)
