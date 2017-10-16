@@ -298,7 +298,7 @@ public class HarshenCraftingRecipes
 				'i', new ItemStack(HarshenItems.ITIUM));
 		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "empty_ring"), new ResourceLocation("harshen_items"),
-				new ItemStack(HarshenItems.EMPTY_RING, 8),
+				new ItemStack(HarshenItems.EMPTY_RING, 2),
 				" n ",
 				"n n",
 				" n ",
