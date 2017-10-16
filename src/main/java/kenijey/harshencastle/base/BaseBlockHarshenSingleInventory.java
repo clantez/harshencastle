@@ -2,10 +2,6 @@ package kenijey.harshencastle.base;
 
 import java.util.HashMap;
 
-import mcjty.theoneprobe.api.IProbeHitData;
-import mcjty.theoneprobe.api.IProbeInfo;
-import mcjty.theoneprobe.api.IProbeInfoAccessor;
-import mcjty.theoneprobe.api.ProbeMode;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -23,15 +19,13 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-public abstract class BaseBlockHarshenSingleInventory extends Block implements ITileEntityProvider, IProbeInfoAccessor
+public abstract class BaseBlockHarshenSingleInventory extends Block implements ITileEntityProvider
 {
 	private static HashMap<BlockPos, Boolean> creativeBreakMap = new HashMap<>();
 	
@@ -154,15 +148,6 @@ public abstract class BaseBlockHarshenSingleInventory extends Block implements I
 	protected boolean hasKey(ItemStack stack, String key)
 	{
 		return stack.hasTagCompound() && stack.getTagCompound().hasKey(key);
-	}
-	
-	@Override
-	public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, EntityPlayer player, World world,
-			IBlockState blockState, IProbeHitData data)
-	{
-		BaseTileEntityHarshenSingleItemInventory tileEntity = ((BaseTileEntityHarshenSingleItemInventory)world.getTileEntity(data.getPos()));
-		if(!tileEntity.isEmpty())
-			probeInfo.horizontal().text(TextFormatting.GREEN + new TextComponentTranslation("top.inventory.containing").getUnformattedText()).item(tileEntity.getItem());
 	}
 
 }

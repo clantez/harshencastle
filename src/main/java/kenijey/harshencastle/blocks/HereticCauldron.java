@@ -9,17 +9,12 @@ import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.api.CauldronLiquid;
 import kenijey.harshencastle.base.BaseBlockHarshenSingleInventory;
 import kenijey.harshencastle.base.BaseTileEntityHarshenSingleItemInventory;
-import kenijey.harshencastle.enums.items.EnumGlassContainer;
 import kenijey.harshencastle.items.GlassContainer;
 import kenijey.harshencastle.tileentity.TileEntityHereticCauldron;
-import mcjty.theoneprobe.api.IProbeHitData;
-import mcjty.theoneprobe.api.IProbeInfo;
-import mcjty.theoneprobe.api.ProbeMode;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -28,8 +23,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -154,13 +147,5 @@ public class HereticCauldron extends BaseBlockHarshenSingleInventory
 		((TileEntityHereticCauldron)tileEntity).setFluid(CauldronLiquid.getFromName(stack.getTagCompound().getString("FluidValue")));
 		((TileEntityHereticCauldron)tileEntity).setLevel(stack.getTagCompound().getInteger("FluidLevel"));
 
-	}
-	
-	@Override
-	public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, EntityPlayer player, World world,
-			IBlockState blockState, IProbeHitData data) {
-		super.addProbeInfo(mode, probeInfo, player, world, blockState, data);
-		if(getTile(world, data.getPos()).getFluid() != CauldronLiquid.NONE)
-			probeInfo.text(TextFormatting.GREEN + new TextComponentTranslation("top.cauldron.liquid", GlassContainer.getGlassContaining(getTile(world, data.getPos()).getFluid())).getUnformattedText());
 	}
 }

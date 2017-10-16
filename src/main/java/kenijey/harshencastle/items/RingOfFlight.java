@@ -27,7 +27,7 @@ public class RingOfFlight extends Item implements IHarshenProvider
 	}
 	
 	@Override
-	public void onRemove(EntityPlayer player) {
+	public void onRemove(EntityPlayer player, int slot) {
 		player.capabilities.allowFlying = shouldBeOn(player, false);
 		
 		if(player.capabilities.isFlying && !player.capabilities.allowFlying)

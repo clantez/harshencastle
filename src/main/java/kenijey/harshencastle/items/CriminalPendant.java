@@ -24,7 +24,7 @@ public class CriminalPendant extends Item implements IHarshenProvider
 	}
 	
 	@Override
-	public void onAdd(EntityPlayer player) {
+	public void onAdd(EntityPlayer player, int slot) {
 		IAttributeInstance attributeHealth = player.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH);
 		AttributeModifier modifierHealth = new AttributeModifier(UUID.fromString("72eb8438-8f2b-11e7-bb31-be2e44b06b34"), "criminalPendantHealth6", 6, 0).setSaved(true);
 		if(!attributeHealth.hasModifier(modifierHealth))	
@@ -32,7 +32,7 @@ public class CriminalPendant extends Item implements IHarshenProvider
 	}
 	
 	@Override
-	public void onRemove(EntityPlayer player) {
+	public void onRemove(EntityPlayer player, int slot) {
 		player.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).removeModifier(UUID.fromString("72eb8438-8f2b-11e7-bb31-be2e44b06b34"));
 	}
 	

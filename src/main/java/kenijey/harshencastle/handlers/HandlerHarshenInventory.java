@@ -56,9 +56,9 @@ public class HandlerHarshenInventory
 		if(prevInv.size() != 0)
 			for(int slot = 0; slot < handler.getSlots(); slot++)
 				if(!prevInv.get(slot).isItemEqual(handler.getStackInSlot(slot)) && handler.getStackInSlot(slot).getItem() instanceof IHarshenProvider)
-					((IHarshenProvider)handler.getStackInSlot(slot).getItem()).onAdd(event.player);
+					((IHarshenProvider)handler.getStackInSlot(slot).getItem()).onAdd(event.player, slot);
 				else if(!prevInv.get(slot).isEmpty() && handler.getStackInSlot(slot).isEmpty() && prevInv.get(slot).getItem() instanceof IHarshenProvider)
-					((IHarshenProvider)prevInv.get(slot).getItem()).onRemove(event.player);
+					((IHarshenProvider)prevInv.get(slot).getItem()).onRemove(event.player, slot);
 		ArrayList<ItemStack> tickHandlerInventory = new ArrayList<>();
 		for(int slot = 0; slot < handler.getSlots(); slot++)
 		{
@@ -90,7 +90,7 @@ public class HandlerHarshenInventory
 			event.player.getEntityData().setTag("harshenInventory", stackMap.get(event.player.getUniqueID()).serializeNBT());
 			for(int i = 0; i < stackMap.get(event.player.getUniqueID()).getSlots(); i++)
 				if(stackMap.get(event.player.getUniqueID()).getStackInSlot(i).getItem() instanceof IHarshenProvider)
-					((IHarshenProvider)stackMap.get(event.player.getUniqueID()).getStackInSlot(i).getItem()).onAdd(event.player);
+					((IHarshenProvider)stackMap.get(event.player.getUniqueID()).getStackInSlot(i).getItem()).onAdd(event.player, i);
 
 		}
 	}

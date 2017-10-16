@@ -51,11 +51,11 @@ public interface IHarshenProvider
 	 * Called when the items removed from the players inventory. Called ServerSide and ClientSide
 	 * @param player The Player who just removed the item out of their inventory
 	 */
-	public default void onRemove(EntityPlayer player){};
+	public default void onRemove(EntityPlayer player, int slot){};
 	
 	/**
 	 * Called when the items added to the players inventory. Called ServerSide and ClientSide.
 	 * @param player The player who just added the item to their own inventory
 	 */
-	public default void onAdd(EntityPlayer player){};
+	public default void onAdd(EntityPlayer player, int slot){};
 }

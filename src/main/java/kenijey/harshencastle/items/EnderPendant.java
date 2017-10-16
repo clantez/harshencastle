@@ -30,17 +30,10 @@ public class EnderPendant extends Item implements IHarshenProvider
 	}
 	
 	@Override
-	public void onRemove(EntityPlayer player) {
+	public void onRemove(EntityPlayer player, int slot) {
 		if(player.world.isRemote)
 			for(Entity e : player.world.getLoadedEntityList())
 				e.setGlowing(false);
-		IHarshenProvider.super.onRemove(player);
-	}
-	
-	@Override
-	public void onAdd(EntityPlayer player) {
-		// TODO Auto-generated method stub
-		IHarshenProvider.super.onAdd(player);
 	}
 	
 	public class EnderPendantHandler
