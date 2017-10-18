@@ -40,7 +40,7 @@ public class RendererMagicTable extends TileEntitySpecialRenderer<TileEntityHars
 				GlStateManager.scale(0.7f, 0.7f, 0.7f);
 				GlStateManager.translate(0, Math.sin(rotateAngle) / 20f, 0);
 				GlStateManager.rotate(te.getTimer() % 360 * 20f , 0, 1, 0);
-				Minecraft.getMinecraft().getRenderManager().renderEntity(item, 0f, 0f, 0f, 0f, 0f, false);
+				Minecraft.getMinecraft().getRenderManager().doRenderEntity(item, 0f, 0f, 0f, 0f, 0f, false);
 			}
 			GlStateManager.popMatrix();
 		}

@@ -43,7 +43,7 @@ public class EnderPendant extends Item implements IHarshenProvider
 		{
 			for(Entity e : net.minecraft.client.Minecraft.getMinecraft().world.getLoadedEntityList())
 				e.setGlowing(e instanceof EntityLivingBase &&
-						net.minecraft.client.Minecraft.getMinecraft().player.getDistance(e) < AccessoryConfig.enderPendantDistance);
+						net.minecraft.client.Minecraft.getMinecraft().player.getDistanceToEntity(e) < AccessoryConfig.enderPendantDistance);
 		}
 	}
 
