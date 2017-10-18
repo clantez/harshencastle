@@ -24,7 +24,7 @@ public abstract class BaseItemRenderer<T extends BaseTileEntityHarshenSingleItem
 			GlStateManager.translate(0, Math.sin(rotateAngle) / 20f, 0);
 			moveMore(te);
 			GlStateManager.rotate(te.getTimer() % 360 * getMovementSpeed(te), 0, 1, 0);
-			Minecraft.getMinecraft().getRenderManager().doRenderEntity(item, 0f, 0f, 0f, 0f, 0f, false);
+			Minecraft.getMinecraft().getRenderManager().renderEntity(item, 0f, 0f, 0f, 0f, 0f, false);
 			
 		}
 		GlStateManager.popMatrix();

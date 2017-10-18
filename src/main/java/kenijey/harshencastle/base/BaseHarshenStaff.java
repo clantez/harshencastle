@@ -60,7 +60,7 @@ public abstract class BaseHarshenStaff extends Item
 		if(worldIn.isRemote)
 			return null;
 		EntityThrown thrown = new EntityThrown(worldIn, entityLiving, hitResult, spawnData.isLocation ? spawnData.location : spawnData.stack);
-		thrown.setHeadingFromThrower(entityLiving, entityLiving.rotationPitch, entityLiving.rotationYaw, 0.0F, speed, 1f);
+		thrown.shoot(entityLiving, entityLiving.rotationPitch, entityLiving.rotationYaw, 0.0F, speed, 1f);
 		
 		thrown.setIgnoreBlocks(spawnData.ignoreBlocks);
 		
