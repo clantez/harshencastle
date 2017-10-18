@@ -40,7 +40,7 @@ public class HarshenInternalPlugin implements IHarshenPlugin {
 		//magic table recipes
 		registry.registerMagicTableRecipe(HarshenUtils.getMixupBook(), EnumGlassContainer.DIAMOND.getHarshenStack(), EnumGlassContainer.LAVA.getHarshenStack(), new HarshenStack(new ItemStack(Items.BOOK), new ItemStack(HarshenBlocks.ARCHIVE)), EnumGlassContainer.MAGIC.getHarshenStack());
 		registry.registerMagicTableRecipe(new ItemStack(HarshenBlocks.JEWEL_DIRT), new HarshenStack(new ItemStack(Blocks.DIRT)), new HarshenStack(new ItemStack(Blocks.DIRT)), new HarshenStack(new ItemStack(Blocks.DIRT)), new HarshenStack(new ItemStack(Blocks.DIRT)));
-		registry.registerMagicTableRecipe(new ItemStack(HarshenItems.REACH_PENDANT), new HarshenStack(new ItemStack(Items.ROTTEN_FLESH)), EnumGlassContainer.COAL.getHarshenStack(), new HarshenStack(new ItemStack(HarshenItems.ZOMBIE_EYE)), new HarshenStack(new ItemStack(Items.STONE_SWORD)));
+		registry.registerMagicTableRecipe(new ItemStack(HarshenItems.REACH_PENDANT), new HarshenStack(new ItemStack(Items.SLIME_BALL)), EnumGlassContainer.MAGIC.getHarshenStack(), new HarshenStack(new ItemStack(HarshenItems.POWDER_OF_HERETISM)), new HarshenStack(new ItemStack(Items.STONE_SWORD)));
 		
 		//pedestal slab recipes
 		registry.registerPedestalSlabRecipe(new HarshenStack("cobblestone"), new ItemStack(Blocks.NETHERRACK));
