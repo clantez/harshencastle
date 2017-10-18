@@ -10,6 +10,7 @@ public class IdConfig extends BaseConfig {
 	public static int EntitySoulPart;
 	public static int EntitySoullessKnight;
 	public static int EntityThrown;
+	public static int EntityHarshenSoul;
 
 	
 	@Override
@@ -23,6 +24,7 @@ public class IdConfig extends BaseConfig {
 		EntitySoullessKnight = get("entity_soulless_knight", 83);
 		EntitySoulPart = get("entity_soul_part", 84);
 		EntityThrown = get("entity_thrown", 85);
+		EntityHarshenSoul = get("entity_harshen_soul", 86);
 	}
 	
 	@Override

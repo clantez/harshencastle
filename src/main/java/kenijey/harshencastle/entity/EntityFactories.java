@@ -1,6 +1,7 @@
 package kenijey.harshencastle.entity;
 
 import kenijey.harshencastle.entityrender.RenderEntityThrown;
+import kenijey.harshencastle.entityrender.RenderHarshenSoul;
 import kenijey.harshencastle.entityrender.RenderSoulPart;
 import kenijey.harshencastle.entityrender.RenderSoullessKnight;
 import net.minecraft.client.renderer.entity.Render;
@@ -30,6 +31,14 @@ public class EntityFactories
     	@Override
         public Render<? super EntityThrown> createRenderFor(RenderManager manager) {
           return new RenderEntityThrown(manager);
+        }
+    }
+    
+    public static class FactoryHarhenSoul implements IRenderFactory<EntityHarshenSoul> 
+    {
+    	@Override
+        public Render<? super EntityHarshenSoul> createRenderFor(RenderManager manager) {
+          return new RenderHarshenSoul(manager);
         }
     }
 }

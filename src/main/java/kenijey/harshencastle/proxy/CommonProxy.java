@@ -32,6 +32,7 @@ import kenijey.harshencastle.fluids.HarshenFluids;
 import kenijey.harshencastle.handlers.GuiHandler;
 import kenijey.harshencastle.handlers.HandlerBlockBurn;
 import kenijey.harshencastle.handlers.HandlerBloodOnHurt;
+import kenijey.harshencastle.handlers.HandlerBurnInDaylight;
 import kenijey.harshencastle.handlers.HandlerExtraRange;
 import kenijey.harshencastle.handlers.HandlerGlassContainer;
 import kenijey.harshencastle.handlers.HandlerHarshenArmourEffects;
@@ -115,7 +116,7 @@ public class CommonProxy
 		HarshenNetwork.preInit();
 		
 		HarshenSounds.register();
-				
+		
 		HarshenVillagers.preInit();
 				
 		HarshenAPIHandler.loadPlugins(event.getAsmData());
@@ -176,7 +177,8 @@ public class CommonProxy
     			new HandlerIronHeartDrop(),
     			new HandlerBlockBurn(),
     			new HandlerVillagerSpawn(),
-    			new HandlerExtraRange());
+    			new HandlerExtraRange(),
+    			new HandlerBurnInDaylight());
     	
     	GameRegistry.registerWorldGenerator(new WorldGen(), 0);
     	
