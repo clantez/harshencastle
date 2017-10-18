@@ -87,7 +87,7 @@ publishing {
 publishing {
     repositories {
         maven {
-            url ""//help how do i set up this
+            url "https:maven.wynprice.com"
         }
     }
 }
