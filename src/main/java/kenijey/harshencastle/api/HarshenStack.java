@@ -16,7 +16,7 @@ import net.minecraftforge.oredict.OreDictionary;
  *<br>+A stone sword
  *<br>+either a gold pickaxe or a diamond pickaxe.
  *<br>would need {@link HarshenStack}, the first {@link HarshenStack} being a carrot, the second a stone sword 
- * and the last {@link HarshenStack} being the Gold Pickaxe and Diamond Pickaxe
+ * and the last {@link HarshenStack} being the Gold Pickaxe and Diamond Pickaxe</p>
  * @author Wyn Price
  *
  */
