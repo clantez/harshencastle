@@ -56,7 +56,7 @@ public class ParticleItem extends BaseHarshenParticle {
             if (flag && bakedquad.hasTintIndex())
             {
             	flag2 = true;
-                k = Minecraft.getMinecraft().getItemColors().getColorFromItemstack(stack, bakedquad.getTintIndex());
+                k = Minecraft.getMinecraft().getItemColors().colorMultiplier(stack, bakedquad.getTintIndex());
                 if (EntityRenderer.anaglyphEnable)
                     k = TextureUtil.anaglyphColor(k);
 

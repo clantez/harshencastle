@@ -95,7 +95,7 @@ public class RendererHereticCauldron extends TileEntitySpecialRenderer<TileEntit
 			GlStateManager.scale(0.7f, 0.7f, 0.7f);
 			GlStateManager.rotate(te.getTimer() % 360 * 10, 0, 1, 0);
 			if(flag)
-				Minecraft.getMinecraft().getRenderManager().doRenderEntity(ITEM, 0f, 0f, 0f, 0f, 0f, false);
+				Minecraft.getMinecraft().getRenderManager().renderEntity(ITEM, 0f, 0f, 0f, 0f, 0f, false);
 		}
 		GlStateManager.popMatrix();
 		

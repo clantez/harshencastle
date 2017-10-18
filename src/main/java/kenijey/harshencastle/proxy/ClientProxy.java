@@ -150,7 +150,7 @@ public class ClientProxy extends CommonProxy
     	itemcolors.registerItemColorHandler(new IItemColor() {
 			
 			@Override
-			public int getColorFromItemstack(ItemStack stack, int tintIndex) {
+			public int colorMultiplier(ItemStack stack, int tintIndex) {
 				return tintIndex == 1 ? -1 : EnumGlassContainer.getContainerFromMeta(stack.getMetadata()).color;
 			}
 		}, HarshenItems.GLASS_CONTAINER);
@@ -158,7 +158,7 @@ public class ClientProxy extends CommonProxy
     	itemcolors.registerItemColorHandler(new IItemColor() {
 			
 			@Override
-			public int getColorFromItemstack(ItemStack stack, int tintIndex) {
+			public int colorMultiplier(ItemStack stack, int tintIndex) {
 				return EnumRitualStick.getColorFromMeta(stack.getMetadata());
 			}
 		}, HarshenItems.RITUAL_STICK);
@@ -166,7 +166,7 @@ public class ClientProxy extends CommonProxy
     	itemcolors.registerItemColorHandler(new IItemColor(){
 
 			@Override
-			public int getColorFromItemstack(ItemStack stack, int tintIndex) {
+			public int colorMultiplier(ItemStack stack, int tintIndex) {
 				return ItemLiquidTypeset.getFromMeta(stack.getMetadata()) == null ? -1 : EnumGlassContainer.getContainerFromType(ItemLiquidTypeset.getFromMeta(stack.getMetadata()).getType()).color;
 			}
     	}, HarshenItems.ITEM_LIQUID);
