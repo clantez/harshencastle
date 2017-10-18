@@ -12,10 +12,7 @@ import kenijey.harshencastle.entity.EntitySoulPart;
 import kenijey.harshencastle.entity.EntitySoullessKnight;
 import kenijey.harshencastle.entity.EntityThrown;
 import kenijey.harshencastle.entityrender.RenderEntityThrown;
-import kenijey.harshencastle.enums.ItemLiquidTypeset;
 import kenijey.harshencastle.enums.gui.EnumGuiTypes;
-import kenijey.harshencastle.enums.items.EnumGlassContainer;
-import kenijey.harshencastle.enums.items.EnumRitualStick;
 import kenijey.harshencastle.enums.particle.EnumHarshenParticle;
 import kenijey.harshencastle.gui.GuiBookScreen;
 import kenijey.harshencastle.gui.GuiXrayPendantScreen;
@@ -23,6 +20,7 @@ import kenijey.harshencastle.handlers.client.HandlerEntityUpdater;
 import kenijey.harshencastle.handlers.client.HandlerFlatPlateRenderer;
 import kenijey.harshencastle.handlers.client.HandlerGameOverlay;
 import kenijey.harshencastle.handlers.client.HandlerGuiEvent;
+import kenijey.harshencastle.handlers.client.HandlerItemColors;
 import kenijey.harshencastle.handlers.client.HandlerKeyBinding;
 import kenijey.harshencastle.handlers.client.HandlerRenderError;
 import kenijey.harshencastle.handlers.client.HandlerRendererGuiInventory;
@@ -57,7 +55,6 @@ import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticlePortal;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
-import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.client.resources.IReloadableResourceManager;
 import net.minecraft.entity.player.EntityPlayer;
@@ -147,29 +144,9 @@ public class ClientProxy extends CommonProxy
     	
     	
     	ItemColors itemcolors = Minecraft.getMinecraft().getItemColors();
-    	itemcolors.registerItemColorHandler(new IItemColor() {
-			
-			@Override
-			public int getColorFromItemstack(ItemStack stack, int tintIndex) {
-				return tintIndex == 1 ? -1 : EnumGlassContainer.getContainerFromMeta(stack.getMetadata()).color;
-			}
-		}, HarshenItems.GLASS_CONTAINER);
-    	
-    	itemcolors.registerItemColorHandler(new IItemColor() {
-			
-			@Override
-			public int getColorFromItemstack(ItemStack stack, int tintIndex) {
-				return EnumRitualStick.getColorFromMeta(stack.getMetadata());
-			}
-		}, HarshenItems.RITUAL_STICK);
-    	
-    	itemcolors.registerItemColorHandler(new IItemColor(){
-
-			@Override
-			public int getColorFromItemstack(ItemStack stack, int tintIndex) {
-				return ItemLiquidTypeset.getFromMeta(stack.getMetadata()) == null ? -1 : EnumGlassContainer.getContainerFromType(ItemLiquidTypeset.getFromMeta(stack.getMetadata()).getType()).color;
-			}
-    	}, HarshenItems.ITEM_LIQUID);
+    	itemcolors.registerItemColorHandler(new HandlerItemColors.ItemColorGlassContainer(), HarshenItems.GLASS_CONTAINER);
+    	itemcolors.registerItemColorHandler(new HandlerItemColors.ItemColorRitualStick(), HarshenItems.RITUAL_STICK);
+    	itemcolors.registerItemColorHandler(new HandlerItemColors.ItemColorItemLiquid(), HarshenItems.ITEM_LIQUID);
     }
     
     @Override
