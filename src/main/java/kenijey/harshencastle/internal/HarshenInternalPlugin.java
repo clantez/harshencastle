@@ -128,7 +128,7 @@ public class HarshenInternalPlugin implements IHarshenPlugin {
 				foods.add(new ItemStack(item, 1, OreDictionary.WILDCARD_VALUE));
 		ItemStack[] foodStacks = new ItemStack[foods.size()];
 		foods.toArray(foodStacks);
-		registry.registerRitualRecipe(new ItemStack(HarshenItems.FEEDING_EARRING), true, new HarshenStack(foodStacks),new HarshenStack(foodStacks),
+		registry.registerRitualRecipe(new ItemStack(HarshenItems.FEEDING_EARRING), true, new HarshenStack(new ItemStack(HarshenItems.BLOODY_APPLE)),new HarshenStack(new ItemStack(HarshenItems.BLOOD_INFUSED_ENDER_EYE)),
 				new HarshenStack(foodStacks), new HarshenStack(new ItemStack(HarshenItems.HARSHEN_CRYSTAL)));
 		registry.registerRitualRecipe(new ItemStack(HarshenItems.LIGHTNING_STAFF), true, new HarshenStack("blockPrismarineDark"), new HarshenStack(new ItemStack(HarshenItems.RITUAL_CRYSTAL, 1, 1)),
 				new HarshenStack(new ItemStack(HarshenItems.RITUAL_STICK, 1, 1)), new HarshenStack(new ItemStack(HarshenItems.VALOR_BADGE)));
