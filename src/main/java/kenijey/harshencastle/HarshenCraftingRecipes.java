@@ -182,7 +182,7 @@ public class HarshenCraftingRecipes
 		
 		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "glass_container"), new ResourceLocation("harshen_items"),
-				new ItemStack(HarshenItems.GLASS_CONTAINER),
+				new ItemStack(HarshenItems.GLASS_CONTAINER, 32),
 				" g ",
 				"g g",
 				" g ",
