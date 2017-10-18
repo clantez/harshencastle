@@ -286,7 +286,7 @@ ring_of_blood1=+2 hearts when worn
 soul_binding_pendant1=Keeps your items in your inventory over death
 soul_binding_pendant2=Has only 5 uses
 reach_pendant1=Reach more!
-reach_pendant2=(+1 block, approximately)
+reach_pendant2=(+2 blocks, approximately)
 
 #The One Probe
 top.gate.timeleft=Seconds Left: %s
@@ -305,11 +305,12 @@ liquid=Liquid
 entity.Villager.badge=Valor Badge Trader
 block.gate.reactivate=The Block is deactivated. Throw an Active Ritual Crystal into this to reactivate
 
-#JEI Recipies
+#JEI Categories
 jei.ritual.name=Lightning Ritual
 jei.cauldron.name=Heretic Cauldron Experiment
 jei.pedestalslab.name=Blood Ritual
 jei.hereticritual.name=Heretic Ritual
+jei.magictable.name=Magic Table
 
 #JEI Description
 jei.harshen_soul_fragment.description=You can mine Harshen Soul Ore, but you need to use Soul Harsher Pickaxe to do that. Neither way, you will die in pain.
