@@ -1,4 +1,4 @@
-print("\nJars build. Attempting to build pom file...")
+print("Jars successfully built.\nAttempting to build pom file...")
 version = ""; curly_boi = 0
 for line in open("build.gradle", "r").read().split("\n"):
     if "version" in line.split("=")[0] and curly_boi == 0: version = line.split("=")[1].split('"')[1]
@@ -15,4 +15,4 @@ pomfile.write("""<?xml version="1.0" encoding="UTF-8"?>
 </project>
 """)
 pomfile.close()
-print("All operations were successfully compleated.\n")
+print("All operations were successfully compleated")
