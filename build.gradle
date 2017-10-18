@@ -70,9 +70,16 @@ task apiJar(type: Jar) {
         include "kenijey/harshencastle/api/**"
     }
 }
+
+task sourcesJar(type: Jar) {
+	classifier = 'sources'
+	from sourceSets.main.allJava
+	from sourceSets.api.allJava
+}
     
 artifacts {
         archives apiJar
+	archives sourcesJar
 }
     
 publishing {
@@ -80,7 +87,7 @@ publishing {
         mavenJava(MavenPublication) {
             from components.java
             artifact apiJar
-            artifact sourceJar
+            artifact sourcesJar
         }
     }
 }
@@ -94,6 +101,6 @@ publishing {
 
 model {
     tasks.generatePomFileForMavenJavaPublication {
-        destination = file("$buildDir/generated-pom.xml")
+        destination = file("$buildDir/build/generated-pom.xml")
     }
 }
