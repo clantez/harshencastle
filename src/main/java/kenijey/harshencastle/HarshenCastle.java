@@ -23,7 +23,8 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 		name = HarshenCastle.MODNAME,
 		version = HarshenCastle.VERSION, 
 		useMetadata = true, 
-		acceptedMinecraftVersions = "[1.12,1.13]")
+		acceptedMinecraftVersions = "[1.12,1.13]",
+		dependencies = "required-after:forge@[14.23.0.2502,)")
 
 public class HarshenCastle {
 
