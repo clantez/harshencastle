@@ -4,7 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 /**
- * The Interface used to create items that can go into the custom inventory slots.
+ * The Interface used to interact with everything harshencastle related.
  * @author Wyn Price
  *
  */
@@ -34,8 +34,7 @@ public interface IHarshenProvider
 	/**
 	 * Should the Event be multiplied. If the player has more than on of this item in their custom inventory, should the code run once per item, or only on the first avalible item.
 	 * @param stack The ItemStack passed in. Used if you want different results for different metadata/NBT
-	 * @return 
-	 * true if the event should be run on every item the items in the inventory
+	 * @return true if the event should be run on every item the items in the inventory
 	 * <br>false if it shouldn't
 	 */
 	public default boolean isMultiplyEvent(ItemStack stack){return true;};
