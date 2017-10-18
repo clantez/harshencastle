@@ -1,7 +1,6 @@
 package kenijey.harshencastle.objecthandlers;
 
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 
 public class FaceRenderer 

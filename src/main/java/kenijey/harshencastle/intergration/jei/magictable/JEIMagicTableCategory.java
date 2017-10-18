@@ -2,17 +2,12 @@ package kenijey.harshencastle.intergration.jei.magictable;
 
 import java.awt.Point;
 
-import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.base.BaseJeiCategory;
-import mezz.jei.api.IGuiHelper;
-import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ResourceLocation;
 
 public class JEIMagicTableCategory extends BaseJeiCategory
 {

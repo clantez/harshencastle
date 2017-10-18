@@ -2,8 +2,6 @@ package kenijey.harshencastle.handlers.client;
 
 import java.util.ArrayList;
 
-import javax.vecmath.Vector4f;
-
 import kenijey.harshencastle.HarshenClientUtils;
 import kenijey.harshencastle.objecthandlers.FaceRenderer;
 import net.minecraft.client.Minecraft;

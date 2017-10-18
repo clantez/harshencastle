@@ -1,0 +1,19 @@
+{
+  "type": "forge:ore_shapeless",
+  "group": "harshen_items",
+  "ingredients": [
+    {
+	  "item": "harshencastle:pontus_chaotic_wood"
+    },
+	{
+	  "item": "harshencastle:pontus_far_wood"
+    },
+	{
+      "item": "harshencastle:pontus_dead_wood"
+    }
+  ],
+  "result": {
+    "item": "harshencastle:harshen_dimensional_wood_crate",
+	 "count": 1
+  }
+}

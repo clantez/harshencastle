@@ -40,7 +40,7 @@ public class HarshenInternalPlugin implements IHarshenPlugin {
 		//magic table recipes
 		registry.registerMagicTableRecipe(HarshenUtils.getMixupBook(), EnumGlassContainer.DIAMOND.getHarshenStack(), EnumGlassContainer.LAVA.getHarshenStack(), new HarshenStack(new ItemStack(Items.BOOK), new ItemStack(HarshenBlocks.ARCHIVE)), EnumGlassContainer.MAGIC.getHarshenStack());
 		registry.registerMagicTableRecipe(new ItemStack(HarshenBlocks.JEWEL_DIRT), new HarshenStack(new ItemStack(Blocks.DIRT)), new HarshenStack(new ItemStack(Blocks.DIRT)), new HarshenStack(new ItemStack(Blocks.DIRT)), new HarshenStack(new ItemStack(Blocks.DIRT)));
-		registry.registerMagicTableRecipe(new ItemStack(HarshenItems.REACH_PENDANT), new HarshenStack(new ItemStack(Items.ROTTEN_FLESH)), EnumGlassContainer.COAL.getHarshenStack(), new HarshenStack(new ItemStack(HarshenItems.ZOMBIE_EYE)), new HarshenStack(new ItemStack(Items.STONE_SWORD)));
+		registry.registerMagicTableRecipe(new ItemStack(HarshenItems.REACH_PENDANT), new HarshenStack(new ItemStack(Items.SLIME_BALL)), EnumGlassContainer.MAGIC.getHarshenStack(), new HarshenStack(new ItemStack(HarshenItems.POWDER_OF_HERETISM)), new HarshenStack(new ItemStack(Items.STONE_SWORD)));
 		
 		//pedestal slab recipes
 		registry.registerPedestalSlabRecipe(new HarshenStack("cobblestone"), new ItemStack(Blocks.NETHERRACK));
@@ -62,18 +62,22 @@ public class HarshenInternalPlugin implements IHarshenPlugin {
 		HarshenStack blockGemStack = new HarshenStack("blockGold", "blockDiamond", "blockEmerald");
 		registry.registerHereticRecipe(new HarshenStack(new ItemStack(Items.APPLE)), new ItemStack(Items.GOLDEN_APPLE, 1, 1), EnumGlassContainer.HARSHING_WATER.getType(),
 				blockGemStack.clone(), blockGemStack.clone(), blockGemStack.clone(), blockGemStack.clone(), blockGemStack.clone(), blockGemStack.clone(), blockGemStack.clone(), blockGemStack.clone());
+		
 		registry.registerHereticRecipe(new HarshenStack(new ItemStack(HarshenItems.ITIUM)), new ItemStack(HarshenItems.XRAY_PENDANT), EnumGlassContainer.EARTH.getType(), 
 				new HarshenStack(new ItemStack(HarshenItems.RITUAL_CRYSTAL, 1, 1)), new HarshenStack(new ItemStack(HarshenItems.POWDER_OF_HERETISM)), new HarshenStack(new ItemStack(HarshenItems.SOUL_INFUSED_INGOT)),
 				new HarshenStack("gemEmerald"), new HarshenStack("gemQuartz"), new HarshenStack(new ItemStack(Items.ENDER_EYE)),
 				new HarshenStack(new ItemStack(Blocks.END_ROD)), new HarshenStack("oreLapis"));
+		
 		registry.registerHereticRecipe(EnumGlassContainer.EMPTY.getHarshenStack(), EnumGlassContainer.MAGIC.getStack(), EnumGlassContainer.HARSHING_WATER.getType(), 
-				new HarshenStack(new ItemStack(HarshenItems.RITUAL_CRYSTAL, 1, 1)), new HarshenStack("dyePurple"), new HarshenStack("dyePink"),
-				new HarshenStack(new ItemStack(Items.END_CRYSTAL)), new HarshenStack("enderpearl"), new HarshenStack(new ItemStack(Items.ENDER_EYE)),
+				new HarshenStack(new ItemStack(HarshenItems.LIGHT_EMITTED_ESSENCE)), new HarshenStack("dyePurple"), new HarshenStack("dyePink"),
+				new HarshenStack(new ItemStack(Items.FERMENTED_SPIDER_EYE)), new HarshenStack("enderpearl"), new HarshenStack(new ItemStack(Items.CHORUS_FRUIT)),
 				new HarshenStack(new ItemStack(Items.BLAZE_POWDER)), new HarshenStack(new ItemStack(HarshenItems.HARSHEN_SOUL_FRAGMENT)));
-		registry.registerHereticRecipe(new HarshenStack("netherStar"), new ItemStack(HarshenItems.SOUL_BINDING_PENDANT), EnumGlassContainer.MAGIC.getType(), 
-				new HarshenStack(new ItemStack(HarshenItems.RITUAL_CRYSTAL, 1, 1)), new HarshenStack("dyeRed"), new HarshenStack(new ItemStack(HarshenItems.SOUL_INFUSED_INGOT)),
-				new HarshenStack(new ItemStack(HarshenItems.HARSHEN_SOUL_FRAGMENT)), new HarshenStack(new ItemStack(Items.FERMENTED_SPIDER_EYE)), new HarshenStack(new ItemStack(Items.CHORUS_FRUIT)),
-				new HarshenStack(new ItemStack(Items.BLAZE_ROD)), new HarshenStack(new ItemStack(Items.GOLDEN_APPLE, 1, 1)));
+		
+		registry.registerHereticRecipe(new HarshenStack(new ItemStack(HarshenItems.IRON_HEART)), new ItemStack(HarshenItems.SOUL_BINDING_PENDANT), EnumGlassContainer.MAGIC.getType(), 
+				new HarshenStack(new ItemStack(HarshenItems.RITUAL_CRYSTAL, 1, 1)), new HarshenStack("dyeRed"), new HarshenStack(new ItemStack(HarshenItems.VALOR_BADGE)),
+				new HarshenStack(new ItemStack(HarshenItems.POWDER_OF_HERETISM)), new HarshenStack(new ItemStack(Items.GHAST_TEAR)), new HarshenStack(new ItemStack(Items.GLOWSTONE_DUST)),
+				new HarshenStack(new ItemStack(Blocks.PACKED_ICE)), new HarshenStack(new ItemStack(HarshenItems.BLOODY_APPLE)));
+		
 		
 		//ritual recipes
 		registry.registerRitualRecipe(new ItemStack(HarshenItems.PONTUS_WORLD_GATE_SPAWNER), true, new HarshenStack(new ItemStack(HarshenItems.PONTUS_WORLD_GATE_PARTS)), new HarshenStack(new ItemStack(HarshenItems.PONTUS_WORLD_GATE_PARTS, 1, 1)),
@@ -82,7 +86,7 @@ public class HarshenInternalPlugin implements IHarshenPlugin {
 				new HarshenStack(new ItemStack(HarshenItems.BLOOD_INFUSED_ENDER_EYE, 1 ,0)), new HarshenStack(new ItemStack(HarshenItems.BLOOD_ESSENCE)));
 		registry.registerRitualRecipe(new ItemStack(HarshenItems.PONTUS_WORLD_GATE_SPAWNER, 1, 1), true, new HarshenStack(new ItemStack(HarshenItems.PONTUS_WORLD_GATE_SPAWNER)), new HarshenStack(new ItemStack(HarshenItems.RITUAL_CRYSTAL, 1, 1)),
 				new HarshenStack("blockEmerald"), new HarshenStack("netherStar"));
-		registry.registerRitualRecipe(new ItemStack(Items.NETHER_STAR), true, new HarshenStack(new ItemStack(HarshenItems.ITIUM)), new HarshenStack(new ItemStack(HarshenItems.LIGHT_EMITTED_SEED)),
+		registry.registerRitualRecipe(new ItemStack(Items.NETHER_STAR), true, new HarshenStack(new ItemStack(HarshenItems.ITIUM)), new HarshenStack(new ItemStack(HarshenItems.LIGHT_EMITTED_ESSENCE)),
 				new HarshenStack(new ItemStack(HarshenItems.RITUAL_CRYSTAL, 1 , 1)), new HarshenStack("gemQuartz"));
 		registry.registerRitualRecipe(new ItemStack(HarshenItems.SOUL_HARSHER_SWORD, 1, 0), true, new HarshenStack(new ItemStack(HarshenItems.HARSHEN_SOUL_INGOT, 1, 0)), new HarshenStack(new ItemStack(HarshenItems.HARSHEN_SOUL_FRAGMENT, 1, 0)),
 				new HarshenStack(new ItemStack(HarshenItems.RITUAL_CRYSTAL, 1 ,1)), new HarshenStack(new ItemStack(Items.IRON_SWORD)));
@@ -124,7 +128,7 @@ public class HarshenInternalPlugin implements IHarshenPlugin {
 				foods.add(new ItemStack(item, 1, OreDictionary.WILDCARD_VALUE));
 		ItemStack[] foodStacks = new ItemStack[foods.size()];
 		foods.toArray(foodStacks);
-		registry.registerRitualRecipe(new ItemStack(HarshenItems.FEEDING_EARRING), true, new HarshenStack(foodStacks),new HarshenStack(foodStacks),
+		registry.registerRitualRecipe(new ItemStack(HarshenItems.FEEDING_EARRING), true, new HarshenStack(new ItemStack(HarshenItems.BLOODY_APPLE)),new HarshenStack(new ItemStack(HarshenItems.BLOOD_INFUSED_ENDER_EYE)),
 				new HarshenStack(foodStacks), new HarshenStack(new ItemStack(HarshenItems.HARSHEN_CRYSTAL)));
 		registry.registerRitualRecipe(new ItemStack(HarshenItems.LIGHTNING_STAFF), true, new HarshenStack("blockPrismarineDark"), new HarshenStack(new ItemStack(HarshenItems.RITUAL_CRYSTAL, 1, 1)),
 				new HarshenStack(new ItemStack(HarshenItems.RITUAL_STICK, 1, 1)), new HarshenStack(new ItemStack(HarshenItems.VALOR_BADGE)));

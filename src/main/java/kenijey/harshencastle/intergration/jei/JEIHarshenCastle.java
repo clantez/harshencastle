@@ -5,7 +5,6 @@ import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.containers.ContainerMagicTable;
 import kenijey.harshencastle.enchantment.HarshenEnchantmetns;
-import kenijey.harshencastle.enchantment.HarshenMixupEnchantment;
 import kenijey.harshencastle.gui.GuiMagicTable;
 import kenijey.harshencastle.intergration.jei.cauldron.JEICauldronCategory;
 import kenijey.harshencastle.intergration.jei.cauldron.JEICauldronHandler;
@@ -23,13 +22,9 @@ import mezz.jei.api.IModRegistry;
 import mezz.jei.api.JEIPlugin;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import net.minecraft.block.Block;
-import net.minecraft.enchantment.EnchantmentData;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemEnchantedBook;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import net.minecraftforge.oredict.OreDictionary;
 
 @JEIPlugin
 public class JEIHarshenCastle implements IModPlugin 

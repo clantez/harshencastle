@@ -33,7 +33,7 @@ public class SoulBindingPendant extends Item implements IHarshenProvider
 	public SoulBindingPendant() {
 		setRegistryName("soul_binding_pendant");
 		setUnlocalizedName("soul_binding_pendant");
-		setMaxDamage(5);
+		setMaxDamage(32);
 	}
 	
 	@Override

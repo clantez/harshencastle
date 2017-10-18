@@ -29,7 +29,7 @@ public class HarshenCastle {
 
     public static final String MODID = "harshencastle";
     public static final String MODNAME = "Harshen Castle";
-    public static final String VERSION = "0.12.0";
+    public static final String VERSION = "0.12.1";
     public static final String UPDATE_URL = "http://www.wynprice.com/moddedUpdateCheckers/harshencastle.json";
 
     @SidedProxy(clientSide = "kenijey.harshencastle.proxy.ClientProxy", serverSide = "kenijey.harshencastle.proxy.ServerProxy")

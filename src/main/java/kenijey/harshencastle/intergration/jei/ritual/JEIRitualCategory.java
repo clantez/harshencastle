@@ -1,7 +1,6 @@
 package kenijey.harshencastle.intergration.jei.ritual;
 
 import java.awt.Dimension;
-import java.util.Collections;
 import java.util.List;
 
 import kenijey.harshencastle.base.BaseJeiCategory;

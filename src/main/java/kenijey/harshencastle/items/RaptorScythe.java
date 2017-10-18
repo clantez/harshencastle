@@ -7,7 +7,7 @@ import net.minecraftforge.common.util.EnumHelper;
 
 public class RaptorScythe extends BaseHarshenScythe
 {
-	private static ToolMaterial toolMaterial = EnumHelper.addToolMaterial("iron_scythe", 3, 1010, 13.5f, 10f, 30);
+	private static ToolMaterial toolMaterial = EnumHelper.addToolMaterial("iron_scythe", 3, 1010, 13.5f, 12f, 30);
 
 	public RaptorScythe() 
 	{
