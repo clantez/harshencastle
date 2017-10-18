@@ -2,10 +2,8 @@ package kenijey.harshencastle.items;
 
 import java.util.UUID;
 
-import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.api.EnumInventorySlots;
 import kenijey.harshencastle.api.IHarshenProvider;
-import kenijey.harshencastle.objecthandlers.HarshenItemStackHandler;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;

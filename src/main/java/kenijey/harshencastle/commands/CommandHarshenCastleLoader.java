@@ -6,7 +6,6 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.base.BaseHarshenCommand;
 import kenijey.harshencastle.interfaces.HarshenCommand;
 import kenijey.harshencastle.interfaces.HarshenCommandTabList;

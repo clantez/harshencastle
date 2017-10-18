@@ -3,10 +3,8 @@ package kenijey.harshencastle.network.packets;
 import io.netty.buffer.ByteBuf;
 import kenijey.harshencastle.base.BaseMessagePacket;
 import kenijey.harshencastle.handlers.client.HandlerEntityUpdater;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.world.chunk.storage.AnvilChunkLoader;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 
 public class MessagePacketUpdateComplexEntity extends BaseMessagePacket<MessagePacketUpdateComplexEntity>

@@ -6,7 +6,6 @@ import java.util.Random;
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.interfaces.ICommandStructure;
-import kenijey.harshencastle.tileentity.TileEntityHarshenDimensionalPedestal;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;

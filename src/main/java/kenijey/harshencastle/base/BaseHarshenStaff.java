@@ -5,7 +5,6 @@ import java.util.List;
 import kenijey.harshencastle.entity.EntityThrown;
 import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.network.packets.MessagePacketUpdateComplexEntity;
-import kenijey.harshencastle.objecthandlers.EntityThrowLocation;
 import kenijey.harshencastle.objecthandlers.EntityThrowSpawnData;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
