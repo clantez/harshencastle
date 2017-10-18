@@ -110,7 +110,7 @@ public class HarshenCraftingRecipes
 				
 				'e', new ItemStack(HarshenItems.HARSHEN_SOUL_FRAGMENT),
 				'c', new ItemStack(HarshenItems.HARSHEN_CRYSTAL),
-				'l', new ItemStack(HarshenItems.LIGHT_EMITTED_SEED));
+				'l', new ItemStack(HarshenItems.LIGHT_EMITTED_ESSENCE));
 		
 		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "pedestal_slab"), new ResourceLocation("harshen_items"),
@@ -133,7 +133,7 @@ public class HarshenCraftingRecipes
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "ritual_stick"), new ResourceLocation("harshen_items"),
 				new ItemStack(HarshenItems.RITUAL_STICK, 1, 0),
 				" s ",
-				" s ",
+				"s  ",
 				
 				's', "stickWood");
 		
@@ -198,17 +198,17 @@ public class HarshenCraftingRecipes
 				
 				'z', new ItemStack(HarshenItems.ZOMBIE_EYE),
 				'g', new ItemStack(Items.GOLD_INGOT),
-				'e', new ItemStack(HarshenItems.LIGHT_EMITTED_SEED));
+				'e', new ItemStack(HarshenItems.LIGHT_EMITTED_ESSENCE));
 		
 		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "punchy_ring"), new ResourceLocation("harshen_items"),
 				new ItemStack(HarshenItems.PUNCHY_RING),
-				"nrn",
-				" b ",
+				"nbn",
+				" i ",
 				
 				'n', "nuggetIron",
 				'b', new ItemStack(Blocks.IRON_BARS),
-				'r', new ItemStack(HarshenItems.RING_OF_BLOOD));
+				'i', new ItemStack(Items.IRON_INGOT));
 		
 		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "iron_bow"), new ResourceLocation("harshen_items"),
@@ -318,9 +318,9 @@ public class HarshenCraftingRecipes
 			if(HarshenUtils.glassContainerHasState(glass))
 			{
 				Block block = ((IBlockState) glass.getType().getStateOrLoc()).getBlock();
-				HarshenGlassContainerIngredient[] ingridientList = new HarshenGlassContainerIngredient[9];
+				HarshenGlassContainerIngredient[] ingridientList = new HarshenGlassContainerIngredient[2];
 				ingridientList[0] = new HarshenGlassContainerIngredient(EnumGlassContainer.EMPTY.getStack()); 
-				for(int i = 1; i < 9; i++)
+				for(int i = 1; i < 2; i++)
 					ingridientList[i] = new HarshenGlassContainerIngredient(HarshenUtils.toList(HarshenUtils.getAllRelatives(HarshenUtils.phaseBucket(block))));
 				GameRegistry.addShapelessRecipe(new ResourceLocation(HarshenCastle.MODID, glass.getType().getName().split(":")[1] + "_container"), new ResourceLocation("harshen_items"), glass.getStack(), ingridientList);
 			}
