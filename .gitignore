@@ -16,6 +16,6 @@ hs_err_pid*
 /*
 !/src
 !build.gradle
-!build.bat
+!buildAPI.bat
 !build_pom.py
 !remove_previous.py
