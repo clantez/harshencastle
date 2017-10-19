@@ -4,6 +4,7 @@ call remove_previous.py
 cd ..
 call gradlew.bat publishToMavenLocal > build.log
 cd scripts
-call build_pom.py
+call upload_api.py
 call temp_batchfile.bat
+cd ..
 pause
