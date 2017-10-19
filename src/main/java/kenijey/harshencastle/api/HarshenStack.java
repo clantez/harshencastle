@@ -19,6 +19,7 @@ import net.minecraftforge.oredict.OreDictionary;
  *<br>+either a gold pickaxe or a diamond pickaxe.
  *<br>would need {@link HarshenStack}, the first {@link HarshenStack} being a carrot, the second a stone sword 
  * and the last {@link HarshenStack} being the Gold Pickaxe and Diamond Pickaxe</p>
+ *<br> If you are still confused about how this class is used, see {@link HarshenStack#containsItem}
  * @author Wyn Price
  *
  */
@@ -61,8 +62,8 @@ public class HarshenStack
 				for(ItemStack stack : stackList)
 					if(stack.getMetadata() == OreDictionary.WILDCARD_VALUE)
 					{
-				    	NonNullList<ItemStack> innerStacklist = NonNullList.create();
-				    	stack.getItem().getSubItems(CreativeTabs.SEARCH, innerStacklist);
+				    		NonNullList<ItemStack> innerStacklist = NonNullList.create();
+				    		stack.getItem().getSubItems(CreativeTabs.SEARCH, innerStacklist);
 						for(ItemStack wildStack : innerStacklist)
 							this.stackList.add(stack.copy());
 					}
@@ -111,7 +112,8 @@ public class HarshenStack
 	}
 	
 	/**
-	 * Can the input stack be used as an input item 
+	 * Can the input stack be used as an input item. Returns true if the stackList ({@link HarshenStack#getStackList})
+	 * contains the input item.
 	 * @param stack the stack to test with
 	 * @return true if the stack can be used, false if not
 	 */
