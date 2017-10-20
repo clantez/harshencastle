@@ -10,7 +10,8 @@ public interface IHarshenPlugin
 {
 	
 	/**
-	 * Where all of the registering is done. This is the only function that will be called by HarshenCastle.
+	 * Where all of the registering is done. HarshenCastle will only call this funcion while registering things.
+	 * Can be reloaded with F3 + T.
 	 * @param registry The Registry Used to register things.
 	 */
 	void register(IHarshenRegistry registry);
