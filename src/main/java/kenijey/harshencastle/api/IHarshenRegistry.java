@@ -100,7 +100,9 @@ public interface IHarshenRegistry
 	void registerInventoryItem(BlockItem item, IHarshenProvider provider);
 
 	/**
-	 * Used to get the helper for this API
+	 * Used to get the helper for this API.
+	 *<br>If you want somthing added to this, please make an issue on my github page, and (depending on how difficult it is)
+	 * I'd be happy to add it
 	 * @return the helper
 	 */
 	IHarshenHelper getHelper();
