@@ -8,7 +8,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.ResourceLocation;
 /**
  * The liquid that can go inside the HereticCauldron.
- * It holds information about what to render as the liquid, and how large each a.u. relative to the cauldron 3 level limit.
+ * It holds information about what to render as the liquid, and how large each one of these class is, relative to the cauldron 3 level limit.
  * 
  * @author Wyn Price
  *
