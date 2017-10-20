@@ -14,6 +14,7 @@ import com.google.common.base.Predicates;
 import kenijey.harshencastle.handlers.GuiHandler;
 import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.network.packets.MessagePacketOpenInv;
+import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockRendererDispatcher;
@@ -30,6 +31,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.BlockFluidBase;
 
 public class HarshenClientUtils 
 {
@@ -110,7 +112,10 @@ public class HarshenClientUtils
         vb.begin(7, DefaultVertexFormats.BLOCK);
         World world = Minecraft.getMinecraft().world;
         BlockRendererDispatcher dispatcher = Minecraft.getMinecraft().getBlockRendererDispatcher();
-        dispatcher.renderBlock(state, position.add(0, noDepth ? 500 : 0, 0), world, vb);
+        if(state.getBlock() instanceof BlockLiquid || state.getBlock() instanceof BlockFluidBase)
+        	dispatcher.renderBlock(state, position.add(0, noDepth ? 500 : 0, 0), world, vb);
+        else
+        	dispatcher.getBlockModelRenderer().renderModel(world, dispatcher.getModelForState(state), state, position.add(0, noDepth ? 500 : 0, 0), vb, false);
         for(int i = 0; i < vb.getVertexCount(); i++)
         	vb.putColorMultiplier(color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, i);
         vb.color(1, 1, 1, 0.1f);
