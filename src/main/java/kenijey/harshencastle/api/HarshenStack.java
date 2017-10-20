@@ -8,9 +8,9 @@ import net.minecraft.util.NonNullList;
 import net.minecraftforge.oredict.OreDictionary;
 /**
  * A custom class used for handling ItemStacks and {@link OreDictionary}. 
- * Each HarshenStack will represent the different items that can be used to represent one itemstack.
+ * Each HarshenStack will represent the different items that can be used to represent one "slot" in the recipe.
  * <br>Its a bit like {@link OreDictionary}, one class of this can hold multiple ItemStacks, and are used to activate a recipe if any of 
- * the stacks are in one of HarshenStacks slots. If a recipe wanted either a Carrot or a Potato as a one of the input items, HarshenStack 
+ * the input stacks are in one of HarshenStacks slots. If a recipe wanted either a Carrot or a Potato as a one of the input items, HarshenStack 
  * <br> would be usfull as it would activate the recipe if all other inputs are right and there is either a carrot or a potato
  * <p>
  * For example a recipe that could take the inputs of:
