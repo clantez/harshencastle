@@ -93,6 +93,7 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.discovery.ASMDataTable;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -428,7 +429,18 @@ public class HarshenUtils
 		for(ItemStack oreStack : OreDictionary.getOres(blockName))
 			if(oreStack.getItem() instanceof ItemBlock)
 				blocks.add(((ItemBlock)oreStack.getItem()).getBlock());
-		return blocks;
+		ArrayList<Block> finalBlocks = new ArrayList<>();
+		for(Block b : blocks)
+		{
+			NonNullList<ItemStack> items = NonNullList.create();
+			b.getSubBlocks(CreativeTabs.SEARCH, items);
+			for(ItemStack stack : items)
+				if(!stack.isEmpty())
+					finalBlocks.add(Block.getBlockFromItem(stack.getItem()));
+				else
+					finalBlocks.add(b);
+		}
+		return finalBlocks;
 	}
 	
 	public static void registerHandlers(Object... handlers)
@@ -723,7 +735,7 @@ public class HarshenUtils
 	{
 		if(event instanceof LivingEvent && ((LivingEvent)event).getEntity() instanceof EntityPlayer)
 			return (EntityPlayer)((LivingEvent)event).getEntity();
-		if(event instanceof RenderGameOverlayEvent || event instanceof RenderWorldLastEvent)
+		if(event instanceof RenderGameOverlayEvent || event instanceof RenderWorldLastEvent || event instanceof ClientTickEvent)
 			return HarshenCastle.proxy.getPlayer();
 		if(event instanceof PlayerTickEvent)
 			return ((PlayerTickEvent)event).player;
@@ -810,7 +822,11 @@ public class HarshenUtils
         	f.setAccessible(true);
 			List<String> stringList = (List<String>) f.get(new OreDictionary());
 	    	f.setAccessible(false);
-	    	return stringList;
+	    	ArrayList<String> finalList = new ArrayList<>();
+	    	for(String s : stringList)
+	    		if(!OreDictionary.getOres(s).isEmpty())
+	    			finalList.add(s);
+	    	return finalList;
 		} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
 			e.printStackTrace();
 		}
