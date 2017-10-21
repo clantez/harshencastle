@@ -29,6 +29,7 @@ import kenijey.harshencastle.handlers.client.HandlerRendererGuiInventory;
 import kenijey.harshencastle.handlers.client.HandlerUpdateChecker;
 import kenijey.harshencastle.internal.HarshenAPIHandler;
 import kenijey.harshencastle.itemrenderer.RendererBloodFactory;
+import kenijey.harshencastle.itemrenderer.RendererCauldronBlock;
 import kenijey.harshencastle.itemrenderer.RendererDimensionalPedestal;
 import kenijey.harshencastle.itemrenderer.RendererHarshenDisplayBlock;
 import kenijey.harshencastle.itemrenderer.RendererHarshenSpawner;
@@ -43,6 +44,7 @@ import kenijey.harshencastle.particle.ParticleCauldronTop;
 import kenijey.harshencastle.particle.ParticleItem;
 import kenijey.harshencastle.skyrenders.WeatherPontus;
 import kenijey.harshencastle.tileentity.TileEntityBloodFactory;
+import kenijey.harshencastle.tileentity.TileEntityCaulronBlock;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDimensionalPedestal;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDisplayBlock;
 import kenijey.harshencastle.tileentity.TileEntityHarshenMagicTable;
@@ -94,6 +96,7 @@ public class ClientProxy extends CommonProxy
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPedestalSlab.class, new RendererPedestalSlab());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBloodFactory.class, new RendererBloodFactory());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHarshenMagicTable.class, new RendererMagicTable());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCaulronBlock.class, new RendererCauldronBlock());
 
 		
 		RenderingRegistry.registerEntityRenderingHandler(EntitySoullessKnight.class, new EntityFactories.FactorySoullessKnight());

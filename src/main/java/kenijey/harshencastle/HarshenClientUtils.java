@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 import javax.vecmath.Vector4f;
 
+import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector3f;
 
 import com.google.common.base.Predicate;
@@ -101,6 +102,8 @@ public class HarshenClientUtils
 	
 	public static void renderGhostBlock(IBlockState state, BlockPos position, Color color, boolean noDepth, float partialTicks)
 	{
+		GlStateManager.enableBlend();
+        GlStateManager.blendFunc(GL11.GL_BLEND_SRC, GL11.GL_BLEND_DST);
 		BufferBuilder vb;
 		if(noDepth)
 		{
@@ -120,6 +123,7 @@ public class HarshenClientUtils
         	vb.putColorMultiplier(color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, i);
         vb.color(1, 1, 1, 0.1f);
         postRender();
+        GlStateManager.disableBlend();
         GlStateManager.depthFunc(515);
 	}
 	

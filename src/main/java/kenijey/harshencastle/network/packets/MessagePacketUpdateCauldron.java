@@ -1,0 +1,58 @@
+package kenijey.harshencastle.network.packets;
+
+import io.netty.buffer.ByteBuf;
+import kenijey.harshencastle.base.BaseMessagePacket;
+import kenijey.harshencastle.blocks.CauldronBlock;
+import kenijey.harshencastle.tileentity.TileEntityCaulronBlock;
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.math.BlockPos;
+
+public class MessagePacketUpdateCauldron extends BaseMessagePacket<MessagePacketUpdateCauldron>
+{
+	
+	public MessagePacketUpdateCauldron() {
+	}
+	
+	private BlockPos position;
+	private boolean active;
+	private boolean leader;
+	
+	public MessagePacketUpdateCauldron(BlockPos pos, boolean active, boolean leader) {
+		this.position = pos;
+		this.active = active;
+		this.leader = leader;
+	}
+
+	@Override
+	public void toBytes(ByteBuf buf) {		
+		buf.writeInt(position.getX());
+		buf.writeInt(position.getY());
+		buf.writeInt(position.getZ());
+		buf.writeBoolean(active);
+		buf.writeBoolean(leader);
+
+	}
+
+	@Override
+	public void fromBytes(ByteBuf buf) {
+		this.position = new BlockPos(buf.readInt(), buf.readInt(), buf.readInt());
+		this.active = buf.readBoolean();
+		this.leader = buf.readBoolean();
+	}
+
+	@Override
+	public void onReceived(MessagePacketUpdateCauldron message, EntityPlayer player) {
+		if(message.active && !CauldronBlock.CAULDRON_POSITIONS.contains(message.position))
+		{
+			CauldronBlock.CAULDRON_POSITIONS.add(message.position);
+			((TileEntityCaulronBlock)player.world.getTileEntity(message.position)).setLeader(message.leader);
+		}
+			if(!message.active && CauldronBlock.CAULDRON_POSITIONS.contains(message.position))
+			CauldronBlock.CAULDRON_POSITIONS.remove(message.position);
+		Minecraft.getMinecraft().renderGlobal.markBlockRangeForRenderUpdate(message.position.getX(), message.position.getY(), message.position.getZ(), 
+				message.position.getX(), message.position.getY(), message.position.getZ());
+
+	}
+	
+}

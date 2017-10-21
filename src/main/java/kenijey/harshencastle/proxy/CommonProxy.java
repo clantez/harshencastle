@@ -53,6 +53,7 @@ import kenijey.harshencastle.potions.HarshenPotions;
 import kenijey.harshencastle.structures.faux.FauxCauldronStructure;
 import kenijey.harshencastle.tileentity.TileEntityBloodFactory;
 import kenijey.harshencastle.tileentity.TileEntityBloodVessel;
+import kenijey.harshencastle.tileentity.TileEntityCaulronBlock;
 import kenijey.harshencastle.tileentity.TileEntityFlatPlate;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDimensionalGate;
 import kenijey.harshencastle.tileentity.TileEntityHarshenDimensionalPedestal;
@@ -160,7 +161,8 @@ public class CommonProxy
     			TileEntityBloodVessel.class,
     			TileEntityBloodFactory.class,
     			TileEntityFlatPlate.class,
-    			TileEntityHarshenMagicTable.class
+    			TileEntityHarshenMagicTable.class,
+    			TileEntityCaulronBlock.class
     	};
     	for(Class clas : tileEntityClasses)
     		GameRegistry.registerTileEntity(clas, HarshenCastle.MODID + clas.getSimpleName());	
