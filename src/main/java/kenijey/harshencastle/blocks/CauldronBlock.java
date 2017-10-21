@@ -38,6 +38,11 @@ public class CauldronBlock extends Block implements ITileEntityProvider
 		return false;
 	}
 	
+	public boolean isFullCube(IBlockState state)
+    {
+        return false;
+    }
+	
 	public static void registerModels()
 	{
 		for(int i = TileEntityCaulronBlock.MIN_LEVELS; i <= TileEntityCaulronBlock.MAX_LEVELS; i++)
