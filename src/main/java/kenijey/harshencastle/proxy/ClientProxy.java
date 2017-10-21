@@ -5,6 +5,7 @@ import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.armor.HarshenArmors;
+import kenijey.harshencastle.blocks.CauldronBlock;
 import kenijey.harshencastle.dimensions.pontus.PontusWorldProvider;
 import kenijey.harshencastle.entity.EntityFactories;
 import kenijey.harshencastle.entity.EntityHarshenSoul;
@@ -266,6 +267,7 @@ public class ClientProxy extends CommonProxy
     public void onLoad(FMLLoadCompleteEvent event) {
     	((IReloadableResourceManager)  Minecraft.getMinecraft().getResourceManager()).registerReloadListener(resourceManager -> {
 			HarshenAPIHandler.register();
+			CauldronBlock.registerModels();
 			HarshenCastle.LOGGER.info("All recipes loaded");
 		});
     }

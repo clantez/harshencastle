@@ -17,11 +17,13 @@ public class MessagePacketUpdateCauldron extends BaseMessagePacket<MessagePacket
 	private BlockPos position;
 	private boolean active;
 	private boolean leader;
+	private int size;
 	
-	public MessagePacketUpdateCauldron(BlockPos pos, boolean active, boolean leader) {
+	public MessagePacketUpdateCauldron(BlockPos pos, boolean active, boolean leader, int size) {
 		this.position = pos;
 		this.active = active;
 		this.leader = leader;
+		this.size = size;
 	}
 
 	@Override
@@ -31,7 +33,7 @@ public class MessagePacketUpdateCauldron extends BaseMessagePacket<MessagePacket
 		buf.writeInt(position.getZ());
 		buf.writeBoolean(active);
 		buf.writeBoolean(leader);
-
+		buf.writeInt(size);
 	}
 
 	@Override
@@ -39,6 +41,7 @@ public class MessagePacketUpdateCauldron extends BaseMessagePacket<MessagePacket
 		this.position = new BlockPos(buf.readInt(), buf.readInt(), buf.readInt());
 		this.active = buf.readBoolean();
 		this.leader = buf.readBoolean();
+		this.size = buf.readInt();
 	}
 
 	@Override
@@ -46,9 +49,16 @@ public class MessagePacketUpdateCauldron extends BaseMessagePacket<MessagePacket
 		if(message.active && !CauldronBlock.CAULDRON_POSITIONS.contains(message.position))
 		{
 			CauldronBlock.CAULDRON_POSITIONS.add(message.position);
-			((TileEntityCaulronBlock)player.world.getTileEntity(message.position)).setLeader(message.leader);
+			
+			TileEntityCaulronBlock te = ((TileEntityCaulronBlock)player.world.getTileEntity(message.position));
+			if(te != null)
+			{
+				te.setLeader(message.leader);
+				if(message.leader)
+					te.setLegacySize(message.size);
+			}
 		}
-			if(!message.active && CauldronBlock.CAULDRON_POSITIONS.contains(message.position))
+		if(!message.active && CauldronBlock.CAULDRON_POSITIONS.contains(message.position))
 			CauldronBlock.CAULDRON_POSITIONS.remove(message.position);
 		Minecraft.getMinecraft().renderGlobal.markBlockRangeForRenderUpdate(message.position.getX(), message.position.getY(), message.position.getZ(), 
 				message.position.getX(), message.position.getY(), message.position.getZ());

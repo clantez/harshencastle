@@ -2,47 +2,80 @@ package kenijey.harshencastle.tileentity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.network.packets.MessagePacketUpdateCauldron;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
 public class TileEntityCaulronBlock extends TileEntity implements Serializable 
 {
+	public final static int MIN_LEVELS = 2;
+	public final static int MAX_LEVELS = 5;
+
+	public final static int LEVEL_RANGE = (MAX_LEVELS - MIN_LEVELS) + 1;
+	
 	private CauldronMultiBlock controller;
 	
+	private int legacySize;
+	
 	private boolean isLeader;
-	//TODO fix ~~
-	/**
-	 * Make it so that after it collects all the possible ones, it adds them to a list then for each leader in each group, making sure the leaders are going
-	 * from ones with the highest cauldron size to lowest. If all the cauldron blocks are not active, then turn them active and set this to a global leader;
-	 * sending the info to the client. this way itll stop there being multiple cauldron making up one big cauldron. If this dosnt work set it so the blocks cant have 
-	 * adjacent blocks or that they have to right clicked
-	 * @param world
-	 */
-	//
+
 	public static void testForCauldron(World world)
 	{
-		if(!world.isRemote)
-			for(TileEntity te : new ArrayList<TileEntity>(world.loadedTileEntityList))
-				if(te instanceof TileEntityCaulronBlock)
-					((TileEntityCaulronBlock)te).testForActivation();
+		if(world.isRemote)
+			return;
+		ArrayList<TileEntityCaulronBlock> blocksNearby = new ArrayList<>();
+		for(TileEntity te : new ArrayList<TileEntity>(world.loadedTileEntityList))
+			if(te instanceof TileEntityCaulronBlock)
+				blocksNearby.add(((TileEntityCaulronBlock)te));
+		for(TileEntityCaulronBlock te : blocksNearby)
+			te.testForActivation();
+		for(TileEntityCaulronBlock te : blocksNearby)
+			te.deactivate();
+		HashMap<Integer, ArrayList<CauldronMultiBlock>> sizeMap = new HashMap<>();
+		for(int i = MIN_LEVELS; i <= MAX_LEVELS; i++)
+			sizeMap.put(i, new ArrayList<CauldronMultiBlock>());
+		for(CauldronMultiBlock cmb : LEADER_MAP.values())
+			sizeMap.get(cmb.size).add(cmb);
+		for(int i = MAX_LEVELS; i >= MIN_LEVELS; i--)
+			for(CauldronMultiBlock cmb : sizeMap.get(i))
+			{
+				boolean isFalse = false;
+				for(int x = 0; x < cmb.size; x++)
+					for(int z = 0; z < cmb.size; z++)
+						if(!(world.getTileEntity(cmb.positions.get(0).pos.add(x, 0, z)) instanceof TileEntityCaulronBlock
+								&& !((TileEntityCaulronBlock)world.getTileEntity(cmb.positions.get(0).pos.add(x, 0, z))).isCauldron()))
+							isFalse = true;;
+				if(!isFalse)
+				{
+					for(int x = 0; x < cmb.size; x++)
+						for(int z = 0; z < cmb.size; z++)
+							((TileEntityCaulronBlock)world.getTileEntity(cmb.positions.get(0).pos.add(x, 0, z))).activate(cmb);
+				}
+			}				
 	}
 	
+	@Override
+	public AxisAlignedBB getRenderBoundingBox() {
+		return isLeader ? new AxisAlignedBB(pos, pos.add(getSize(), 1, getSize())) : super.getRenderBoundingBox();
+	}
+		
 	private void activate(CauldronMultiBlock controller)
 	{
 		if(isCauldron() && controller.size < this.controller.size)
 			return;
-		HarshenNetwork.sendToPlayersInWorld(world, new MessagePacketUpdateCauldron(pos, true, controller.positions.get(0) == this));
+		HarshenNetwork.sendToPlayersInWorld(world, new MessagePacketUpdateCauldron(pos, true, controller.positions.get(0) == this, controller.size));
 		world.scheduleBlockUpdate(pos, HarshenBlocks.CAULDRON_BLOCK, 500, 0);
 		this.controller = controller;
 	}
 	
 	public void deactivate()
 	{
-		HarshenNetwork.sendToPlayersInWorld(world, new MessagePacketUpdateCauldron(pos, false, false));
+		HarshenNetwork.sendToPlayersInWorld(world, new MessagePacketUpdateCauldron(pos, false, false, -1));
 		world.scheduleBlockUpdate(pos, HarshenBlocks.CAULDRON_BLOCK, 500, 0);
 		controller = null;
 		isLeader = false;
@@ -60,7 +93,11 @@ public class TileEntityCaulronBlock extends TileEntity implements Serializable
 	
 	public int getSize()
 	{
-		return this.controller.size;
+		return isCauldron() ? this.controller.getSize() : legacySize;
+	}
+	
+	public void setLegacySize(int legacySize) {
+		this.legacySize = legacySize;
 	}
 	
 	private void testForActivation()
@@ -68,7 +105,7 @@ public class TileEntityCaulronBlock extends TileEntity implements Serializable
 		int cauldronSize = -1;
 		ArrayList<TileEntityCaulronBlock> tileEntites = new  ArrayList<>();
 		cauldronSizeList:
-		for(int i = 5; i >= 2; i--)
+		for(int i = MAX_LEVELS; i >= MIN_LEVELS; i--)
 		{
 			ArrayList<TileEntityCaulronBlock> te = new  ArrayList<>();
 			boolean testCauldron = true;
@@ -89,13 +126,10 @@ public class TileEntityCaulronBlock extends TileEntity implements Serializable
 			}
 		}
 		if(cauldronSize > 0)
-		{
-			CauldronMultiBlock multiBlock = new CauldronMultiBlock(cauldronSize, tileEntites);
-			tileEntites.get(0).setLeader(true);
-			for(TileEntityCaulronBlock te : tileEntites)
-				te.activate(multiBlock);
-		}
+			LEADER_MAP.put(tileEntites.get(0), new CauldronMultiBlock(cauldronSize, tileEntites));
 	}
+	
+	private static final HashMap<TileEntityCaulronBlock, CauldronMultiBlock> LEADER_MAP = new HashMap<>();
 	
 	public void setLeader(boolean leader)
 	{
@@ -114,6 +148,10 @@ public class TileEntityCaulronBlock extends TileEntity implements Serializable
 		public CauldronMultiBlock(int size, ArrayList<TileEntityCaulronBlock> positions) {
 			this.positions = positions;
 			this.size = size;
+		}
+		
+		public int getSize() {
+			return size;
 		}
 		
 		public void breakBlock(World world)

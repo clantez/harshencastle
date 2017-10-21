@@ -22,16 +22,21 @@ import net.minecraft.client.renderer.BlockRendererDispatcher;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EntitySelectors;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.IModel;
+import net.minecraftforge.client.model.ModelLoaderRegistry;
+import net.minecraftforge.common.model.TRSRTransformation;
 import net.minecraftforge.fluids.BlockFluidBase;
 
 public class HarshenClientUtils 
@@ -102,8 +107,36 @@ public class HarshenClientUtils
 	
 	public static void renderGhostBlock(IBlockState state, BlockPos position, Color color, boolean noDepth, float partialTicks)
 	{
+		if(!(state.getBlock() instanceof BlockLiquid) && !(state.getBlock() instanceof BlockFluidBase))
+		{
+			renderGhostModel(Minecraft.getMinecraft().getBlockRendererDispatcher().getModelForState(state), position, color, noDepth, partialTicks);
+			return;
+		}
 		GlStateManager.enableBlend();
-        GlStateManager.blendFunc(GL11.GL_BLEND_SRC, GL11.GL_BLEND_DST);
+        GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE_MINUS_DST_COLOR);
+		BufferBuilder vb;
+		if(noDepth)
+		{
+            GlStateManager.depthFunc(519);
+			vb = prepRenderBlockDepth(partialTicks, true);
+		}
+		else
+	        vb = prepRender(partialTicks, true);
+        vb.begin(7, DefaultVertexFormats.BLOCK);
+        World world = Minecraft.getMinecraft().world;
+        Minecraft.getMinecraft().getBlockRendererDispatcher().renderBlock(state, position.add(0, noDepth ? 500 : 0, 0), world, vb);
+        for(int i = 0; i < vb.getVertexCount(); i++)
+        	vb.putColorMultiplier(color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, i);
+        vb.color(1, 1, 1, 0.1f);
+        postRender();
+        GlStateManager.disableBlend();
+        GlStateManager.depthFunc(515);
+	}
+	
+	public static void renderGhostModel(IBakedModel model, BlockPos position, Color color, boolean noDepth, float partialTicks)
+	{
+		GlStateManager.enableBlend();
+        GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE_MINUS_DST_COLOR);
 		BufferBuilder vb;
 		if(noDepth)
 		{
@@ -115,16 +148,18 @@ public class HarshenClientUtils
         vb.begin(7, DefaultVertexFormats.BLOCK);
         World world = Minecraft.getMinecraft().world;
         BlockRendererDispatcher dispatcher = Minecraft.getMinecraft().getBlockRendererDispatcher();
-        if(state.getBlock() instanceof BlockLiquid || state.getBlock() instanceof BlockFluidBase)
-        	dispatcher.renderBlock(state, position.add(0, noDepth ? 500 : 0, 0), world, vb);
-        else
-        	dispatcher.getBlockModelRenderer().renderModel(world, dispatcher.getModelForState(state), state, position.add(0, noDepth ? 500 : 0, 0), vb, false);
+        dispatcher.getBlockModelRenderer().renderModel(world, model, Minecraft.getMinecraft().world.getBlockState(position), position.add(0, noDepth ? 500 : 0, 0), vb, false);
         for(int i = 0; i < vb.getVertexCount(); i++)
         	vb.putColorMultiplier(color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, i);
         vb.color(1, 1, 1, 0.1f);
         postRender();
-        GlStateManager.disableBlend();
         GlStateManager.depthFunc(515);
+        GlStateManager.disableBlend();
+	}
+	
+	public static void renderGhostModel(IBakedModel model, BlockPos position, boolean noDepth, float partialTicks)
+	{
+		renderGhostModel(model, position, Color.WHITE, noDepth, partialTicks);
 	}
 	
 	public static void renderGhostBlock(IBlockState state, BlockPos position, boolean noDepth, float partialTicks)
@@ -325,4 +360,18 @@ public class HarshenClientUtils
         }
         return null;
     }
+	
+	public static IBakedModel getModel(ResourceLocation resourceLocation) 
+	{
+		IBakedModel bakedModel;
+		IModel model;
+		try {
+	        model = ModelLoaderRegistry.getModel(resourceLocation);
+		} catch (Exception e) {
+          throw new RuntimeException(e);
+		}
+		bakedModel = model.bake(TRSRTransformation.identity(), DefaultVertexFormats.BLOCK,
+				location -> Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(location.toString()));
+	    return bakedModel;
+	}
 }
