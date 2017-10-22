@@ -2,6 +2,7 @@ package kenijey.harshencastle.blocks;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.HarshenClientUtils;
@@ -11,11 +12,13 @@ import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.IBakedModel;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -31,6 +34,37 @@ public class CauldronBlock extends Block implements ITileEntityProvider
 		super(Material.IRON);
 		setRegistryName("cauldron_block");
 		setUnlocalizedName("cauldron_block");
+	}
+	
+	@Override
+	public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox,
+			List<AxisAlignedBB> collidingBoxes, Entity entityIn, boolean isActualState) {
+		if(CAULDRON_POSITIONS.contains(pos))
+			if(worldIn.getBlockState(pos.down()).getBlock() != this)
+				addCollisionBoxToList(pos, entityBox, collidingBoxes, new AxisAlignedBB(0, 0, 0, 1, 0.5, 1));
+			else
+			{
+				ArrayList<EnumFacing> openDirections = new ArrayList<>();
+				for(EnumFacing face : EnumFacing.HORIZONTALS)
+					if(worldIn.getBlockState(pos.offset(face)).getBlock() != this)
+						openDirections.add(face);
+				if(openDirections.isEmpty())
+					addCollisionBoxToList(pos, entityBox, collidingBoxes, NULL_AABB);
+				else
+				{
+					if(openDirections.contains(EnumFacing.NORTH))
+						addCollisionBoxToList(pos, entityBox, collidingBoxes, new AxisAlignedBB(0, 0, 0, 1, 1, 0.5));
+					if(openDirections.contains(EnumFacing.EAST))
+						addCollisionBoxToList(pos, entityBox, collidingBoxes, new AxisAlignedBB(1, 0, 0, 0.5, 1, 1));
+					if(openDirections.contains(EnumFacing.SOUTH))
+						addCollisionBoxToList(pos, entityBox, collidingBoxes, new AxisAlignedBB(0, 0, 1, 1, 1, 0.5));
+					if(openDirections.contains(EnumFacing.WEST))
+						addCollisionBoxToList(pos, entityBox, collidingBoxes, new AxisAlignedBB(0, 0, 0, 0.5, 1, 1));
+				}
+			}
+		else
+			addCollisionBoxToList(pos, entityBox, collidingBoxes, FULL_BLOCK_AABB);		
+
 	}
 	
 	@Override
@@ -52,7 +86,7 @@ public class CauldronBlock extends Block implements ITileEntityProvider
 	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer,
 			ItemStack stack) {
-		TileEntityCaulronBlock.testForCauldron(worldIn);
+		TileEntityCaulronBlock.testForCauldron(worldIn, pos);
 	}
 	
 	@Override

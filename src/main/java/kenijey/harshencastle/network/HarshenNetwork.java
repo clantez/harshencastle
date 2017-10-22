@@ -71,7 +71,9 @@ public class HarshenNetwork
 	
 	public static void sendToPlayersInWorld(World world, IMessage message)
 	{
-		if(!world.isRemote)
+		if(world == null)
+			sendToAll(message);
+		else if(!world.isRemote)
 			INSTANCE.sendToDimension(message, world.provider.getDimension());
 	}
 	

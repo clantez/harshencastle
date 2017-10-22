@@ -1,6 +1,7 @@
 package kenijey.harshencastle.handlers.server;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import kenijey.harshencastle.tileentity.TileEntityCaulronBlock;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -21,7 +22,15 @@ public class HandlerCauldronLoadOnWorldCreate
 		{
 			worldName = event.world.getWorldInfo().getWorldName();
 			dimensionsLoaded.add(event.world.provider.getDimension());
-			TileEntityCaulronBlock.testForCauldron(event.world);
+			TileEntityCaulronBlock.testForCauldron(event.world, null);
 		}
+		
+		if(!event.world.isRemote && !UPDATE_LIST.isEmpty())
+			for(TileEntityCaulronBlock te : UPDATE_LIST)
+				TileEntityCaulronBlock.testForCauldron(event.world, te.getPos());
+
+		UPDATE_LIST.clear();
 	}
+	
+	public final static ArrayList<TileEntityCaulronBlock> UPDATE_LIST = new ArrayList<>();
 }

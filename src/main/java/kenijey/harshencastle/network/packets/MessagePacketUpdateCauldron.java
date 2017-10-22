@@ -16,13 +16,11 @@ public class MessagePacketUpdateCauldron extends BaseMessagePacket<MessagePacket
 	
 	private BlockPos position;
 	private boolean active;
-	private boolean leader;
 	private int size;
 	
-	public MessagePacketUpdateCauldron(BlockPos pos, boolean active, boolean leader, int size) {
+	public MessagePacketUpdateCauldron(BlockPos pos, boolean active, int size) {
 		this.position = pos;
 		this.active = active;
-		this.leader = leader;
 		this.size = size;
 	}
 
@@ -32,7 +30,6 @@ public class MessagePacketUpdateCauldron extends BaseMessagePacket<MessagePacket
 		buf.writeInt(position.getY());
 		buf.writeInt(position.getZ());
 		buf.writeBoolean(active);
-		buf.writeBoolean(leader);
 		buf.writeInt(size);
 	}
 
@@ -40,7 +37,6 @@ public class MessagePacketUpdateCauldron extends BaseMessagePacket<MessagePacket
 	public void fromBytes(ByteBuf buf) {
 		this.position = new BlockPos(buf.readInt(), buf.readInt(), buf.readInt());
 		this.active = buf.readBoolean();
-		this.leader = buf.readBoolean();
 		this.size = buf.readInt();
 	}
 
@@ -52,11 +48,7 @@ public class MessagePacketUpdateCauldron extends BaseMessagePacket<MessagePacket
 			
 			TileEntityCaulronBlock te = ((TileEntityCaulronBlock)player.world.getTileEntity(message.position));
 			if(te != null)
-			{
-				te.setLeader(message.leader);
-				if(message.leader)
-					te.setLegacySize(message.size);
-			}
+				te.setLegacySize(message.size);
 		}
 		if(!message.active && CauldronBlock.CAULDRON_POSITIONS.contains(message.position))
 			CauldronBlock.CAULDRON_POSITIONS.remove(message.position);

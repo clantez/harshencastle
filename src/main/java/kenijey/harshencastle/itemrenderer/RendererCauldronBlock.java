@@ -2,7 +2,12 @@ package kenijey.harshencastle.itemrenderer;
 
 import org.lwjgl.opengl.GL11;
 
+import kenijey.harshencastle.HarshenClientUtils;
+import kenijey.harshencastle.HarshenStructures;
+import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.blocks.CauldronBlock;
+import kenijey.harshencastle.template.HarshenTemplate;
+import kenijey.harshencastle.template.HarshenTemplateRenderer;
 import kenijey.harshencastle.tileentity.TileEntityCaulronBlock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -29,13 +34,13 @@ public class RendererCauldronBlock extends TileEntitySpecialRenderer<TileEntityC
         this.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
         World world = getWorld();
 		int scaleSize = (te.getSize() - TileEntityCaulronBlock.MIN_LEVELS) + 2;
-		GlStateManager.scale(scaleSize, 1, scaleSize);
+		GlStateManager.scale(scaleSize, scaleSize, scaleSize);
         GlStateManager.translate(-te.getPos().getX(), -te.getPos().getY(), -te.getPos().getZ());
         Tessellator tessellator = Tessellator.getInstance();
         tessellator.getBuffer().begin(GL11.GL_QUADS, DefaultVertexFormats.BLOCK);
-        if(CauldronBlock.CAULDRON_POSITIONS.contains(te.getPos()) && te.isLeader())
-        Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelRenderer().renderModel(world, CauldronBlock.MODELS.get(te.getSize()),
-        		world.getBlockState(te.getPos()), te.getPos(), Tessellator.getInstance().getBuffer(), false);
+        if(CauldronBlock.CAULDRON_POSITIONS.contains(te.getPos()) && te.isLeader() && world != null)
+	        Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelRenderer().renderModel(world, CauldronBlock.MODELS.get(te.getSize()),
+	        		world.getBlockState(te.getPos()), te.getPos(), Tessellator.getInstance().getBuffer(), false);
         tessellator.draw();
         GlStateManager.disableBlend();
         GlStateManager.enableLighting();
