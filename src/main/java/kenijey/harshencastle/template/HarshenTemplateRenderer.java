@@ -3,6 +3,7 @@ package kenijey.harshencastle.template;
 import java.util.HashMap;
 
 import kenijey.harshencastle.HarshenClientUtils;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -22,7 +23,8 @@ public class HarshenTemplateRenderer extends HarshenTemplate
     	if(blocks.size() > 30000)
             return;
     	for(Template.BlockInfo block : blocks){
-    		HarshenClientUtils.renderGhostBlock(block.blockState, basePos.add(block.pos), false, partialTicks);
+    		if(block.blockState.getBlock() != Blocks.AIR)
+    			HarshenClientUtils.renderGhostBlock(block.blockState, basePos.add(block.pos), false, partialTicks);
     	}
     }
     
