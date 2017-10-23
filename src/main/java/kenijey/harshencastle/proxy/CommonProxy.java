@@ -28,7 +28,6 @@ import kenijey.harshencastle.enums.items.EnumPontusGateSpawnerParts;
 import kenijey.harshencastle.enums.items.EnumProp;
 import kenijey.harshencastle.enums.items.EnumRitualStick;
 import kenijey.harshencastle.enums.particle.EnumHarshenParticle;
-import kenijey.harshencastle.fluids.HarshenFluids;
 import kenijey.harshencastle.handlers.GuiHandler;
 import kenijey.harshencastle.handlers.HandlerBlockBurn;
 import kenijey.harshencastle.handlers.HandlerBloodOnHurt;
@@ -84,9 +83,7 @@ public class CommonProxy
     	
     	HarshenPotions.preInit();
 		HarshenPotions.register();
-		
-    	HarshenFluids.register();
-		
+				
     	setUpEnumValues();
     	
     	HarshenEnchantmetns.preInit();

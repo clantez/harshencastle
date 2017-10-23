@@ -172,7 +172,7 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
         	level += potentionalLiquid.getFillBy();
         	itemstack.shrink(1);
         	if(HarshenRegistry.getOutPutItem(potentionalLiquid) != null)
-        		give(playerIn, hand, HarshenRegistry.getOutPutItem(potentionalLiquid));
+        		HarshenUtils.give(playerIn, hand, HarshenRegistry.getOutPutItem(potentionalLiquid));
         	return true;
         }
         ItemStack potentionalItem = HarshenRegistry.getOutPutItem(fluid);
@@ -181,7 +181,7 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
         	level -= fluid.getFillBy();
         	ItemStack oldStack = itemstack.copy();
         	itemstack.shrink(1);
-        	give(playerIn, hand, HarshenRegistry.getInputFromOutput(fluid));
+        	HarshenUtils.give(playerIn, hand, HarshenRegistry.getInputFromOutput(fluid));
         	return true;
         }
         else if(item == HarshenItems.RITUAL_STICK)
@@ -341,15 +341,6 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
 			particle = true;
 			return false;
 		}
-		return true;
-	}
-	
-	private boolean give(EntityPlayer playerIn, EnumHand hand, ItemStack stack)
-	{
-		if(playerIn.getHeldItem(hand).isEmpty())
-            playerIn.setHeldItem(hand, stack);
-        else if (!playerIn.inventory.addItemStackToInventory(stack))
-            playerIn.dropItem(stack, false);
 		return true;
 	}
 	

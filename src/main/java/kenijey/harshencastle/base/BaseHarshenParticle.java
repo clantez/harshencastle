@@ -32,7 +32,6 @@ public abstract class BaseHarshenParticle extends Particle
     public BaseHarshenParticle(World world, double xCoordIn, double yCoordIn, double zCoordIn, double motionXIn, double motionYIn, double motionZIn, float par14, boolean disableMoving, ResourceLocation location)
     {
         super(world, xCoordIn, yCoordIn, zCoordIn, 0.0D, 0.0D, 0.0D);
-        
         this.particleTextureIndexX = getXIndex();
         this.particleTextureIndexY = getYIndex();
         this.motionX *= 0.10000000149011612D;

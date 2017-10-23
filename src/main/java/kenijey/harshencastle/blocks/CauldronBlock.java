@@ -14,9 +14,11 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -64,7 +66,6 @@ public class CauldronBlock extends Block implements ITileEntityProvider
 			}
 		else
 			addCollisionBoxToList(pos, entityBox, collidingBoxes, FULL_BLOCK_AABB);		
-
 	}
 	
 	@Override
@@ -93,6 +94,12 @@ public class CauldronBlock extends Block implements ITileEntityProvider
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
 		((TileEntityCaulronBlock) worldIn.getTileEntity(pos)).breakBlock();
 		super.breakBlock(worldIn, pos, state);
+	}
+	
+	@Override
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
+			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		return ((TileEntityCaulronBlock)worldIn.getTileEntity(pos)).onActivated(playerIn, hand);
 	}
 
 	@Override

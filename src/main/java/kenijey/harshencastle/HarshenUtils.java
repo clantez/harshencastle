@@ -69,6 +69,7 @@ import net.minecraft.network.play.server.SPacketRespawn;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -914,4 +915,13 @@ public class HarshenUtils
     	}
     	return null;
     }
+    
+    public static boolean give(EntityPlayer playerIn, EnumHand hand, ItemStack stack)
+	{
+		if(playerIn.getHeldItem(hand).isEmpty())
+            playerIn.setHeldItem(hand, stack);
+        else if (!playerIn.inventory.addItemStackToInventory(stack))
+            playerIn.dropItem(stack, false);
+		return true;
+	}
 } 

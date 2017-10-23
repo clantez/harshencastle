@@ -5,12 +5,23 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import kenijey.harshencastle.HarshenBlocks;
+import kenijey.harshencastle.HarshenUtils;
+import kenijey.harshencastle.api.CauldronLiquid;
 import kenijey.harshencastle.blocks.CauldronBlock;
+import kenijey.harshencastle.enums.items.EnumGlassContainer;
+import kenijey.harshencastle.internal.HarshenRegistry;
+import kenijey.harshencastle.items.BloodCollector;
 import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.network.packets.MessagePacketUpdateCauldron;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -84,6 +95,49 @@ public class TileEntityCaulronBlock extends TileEntity implements Serializable
 			}				
 	}
 	
+	public boolean onActivated(EntityPlayer playerIn, EnumHand hand)
+	{
+		if(!isCauldron())
+			return false;
+		ItemStack itemstack = playerIn.getHeldItem(hand);
+        Item item = itemstack.getItem();
+        if (itemstack.isEmpty())
+        	return false;
+        boolean flag;
+        if(item instanceof BloodCollector && (controller.fluid ==  EnumGlassContainer.BLOOD.getType() || controller.fluid == CauldronLiquid.NONE))
+        {
+        	if(controller.level != 3)
+        		if (playerIn.capabilities.isCreativeMode || (!playerIn.capabilities.isCreativeMode && ((BloodCollector)item).remove(playerIn, hand, 3)))
+                {
+        			this.world.playSound((EntityPlayer)null, pos, SoundEvents.ITEM_BOTTLE_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
+        			controller.level ++;
+        			controller.fluid = EnumGlassContainer.BLOOD.getType();
+        		}
+        	return true;
+        }
+        CauldronLiquid potentionalLiquid = HarshenRegistry.getLiquidFromStack(itemstack);
+        if(potentionalLiquid != null && (controller.level <= 0 || (controller.fluid == potentionalLiquid && controller.level + potentionalLiquid.getFillBy() < 4)))
+        {
+        	controller.fluid = HarshenRegistry.getRelativeFluid(potentionalLiquid);
+        	controller.level += potentionalLiquid.getFillBy();
+        	itemstack.shrink(1);
+        	if(HarshenRegistry.getOutPutItem(potentionalLiquid) != null)
+        		HarshenUtils.give(playerIn, hand, HarshenRegistry.getOutPutItem(potentionalLiquid));
+        	return true;
+        }
+        ItemStack potentionalItem = HarshenRegistry.getOutPutItem(controller.fluid);
+        if(potentionalItem != null && !itemstack.isEmpty() && potentionalItem.isItemEqual(itemstack) && controller.level - controller.fluid.getFillBy() >= 0)
+        {
+        	controller.level -= controller.fluid.getFillBy();
+        	ItemStack oldStack = itemstack.copy();
+        	itemstack.shrink(1);
+        	HarshenUtils.give(playerIn, hand, HarshenRegistry.getInputFromOutput(controller.fluid));
+        	return true;
+        }
+        
+        return false;
+	}
+	
 	@Override
 	public AxisAlignedBB getRenderBoundingBox() {
 		return isLeader() ? new AxisAlignedBB(pos, pos.add(getSize(), getSize(), getSize())).grow(5) : super.getRenderBoundingBox();
@@ -100,6 +154,25 @@ public class TileEntityCaulronBlock extends TileEntity implements Serializable
 			return;
 		HarshenNetwork.sendToPlayersInWorld(world, new MessagePacketUpdateCauldron(pos, true, controller.size));
 		this.controller = controller;
+	}
+	
+	public void setupCauldronMultiblock(int size)
+	{
+		ArrayList<TileEntityCaulronBlock> cauldrons = new ArrayList<>();
+		if(isLeader())
+			for(int x = 0; x < size; x++)
+				for(int y = 0; y < size; y++)
+					for(int z = 0; z < size; z++)
+						if(world.getTileEntity(pos.add(x, y, z)) instanceof TileEntityCaulronBlock)
+							cauldrons.add((TileEntityCaulronBlock) world.getTileEntity(pos.add(x, y, z)));
+		CauldronMultiBlock cmb = new CauldronMultiBlock(size, cauldrons);
+		for(TileEntityCaulronBlock te : cauldrons)
+			te.setController(cmb);
+	}
+	
+	public void setController(CauldronMultiBlock controller) {
+		if(world.isRemote)
+			this.controller = controller;
 	}
 	
 	public void deactivate()
@@ -199,8 +272,19 @@ public class TileEntityCaulronBlock extends TileEntity implements Serializable
 		return super.writeToNBT(compound);
 	}
 	
+	public int getLevel() {
+		return controller.level;
+	}
+	
+	public CauldronLiquid getFluid() {
+		return controller.fluid;
+	}
+	
 	public static class CauldronMultiBlock implements Serializable
 	{
+		public CauldronLiquid fluid = CauldronLiquid.NONE;
+		public int level = 0;
+		
 		private final ArrayList<TileEntityCaulronBlock> positions;
 		private final int size;
 				

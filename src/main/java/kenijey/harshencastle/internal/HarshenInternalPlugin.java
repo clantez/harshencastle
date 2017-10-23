@@ -139,6 +139,8 @@ public class HarshenInternalPlugin implements IHarshenPlugin {
 		registry.registerCauldronLiquid(EnumGlassContainer.LAVA.getStack(), EnumGlassContainer.EMPTY.getStack(), EnumGlassContainer.LAVA.getType(), 1);
 		registry.registerCauldronLiquid(EnumGlassContainer.WATER.getStack(), EnumGlassContainer.EMPTY.getStack(), EnumGlassContainer.WATER.getType(), 1);
 		registry.registerCauldronLiquid(EnumGlassContainer.MILK.getStack(), EnumGlassContainer.EMPTY.getStack(), EnumGlassContainer.MILK.getType(), 1);
+		
+		//cauldron fluids
 		for(EnumGlassContainer container : EnumGlassContainer.values())
 			if(container.isSubContainer())
 			{
@@ -147,10 +149,8 @@ public class HarshenInternalPlugin implements IHarshenPlugin {
 					registry.registerCauldronLiquid(new ItemStack(HarshenItems.ITEM_LIQUID, 1, ItemLiquidTypeset.getMetaFromType(container.getType())),
 							ItemStack.EMPTY, container.getType(), 3);
 			}
-		
 		registry.registerCauldronLiquid(new FluidStack(HarshenFluids.HARSHEN_DIMENSIONAL_FLUID, 1000), EnumGlassContainer.HARSHEN_DIMENSIONAL_FLUID.getType(), 3);
-		registry.registerCauldronLiquid(new FluidStack(HarshenFluids.HARSHING_WATER, 1000), EnumGlassContainer.HARSHEN_DIMENSIONAL_FLUID.getType(), 3);
-
+		registry.registerCauldronLiquid(new FluidStack(HarshenFluids.HARSHING_WATER, 1000), EnumGlassContainer.HARSHING_WATER.getType(), 3);
 		
 		//inventory items
     	registry.registerInventoryItem(new BlockItem(Items.TOTEM_OF_UNDYING), EnumInventorySlots.NECK, new HandlerTotemOfUndying(), false, 0);
