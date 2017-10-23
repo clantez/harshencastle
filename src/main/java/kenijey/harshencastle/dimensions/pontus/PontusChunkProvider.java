@@ -51,7 +51,7 @@ public class PontusChunkProvider implements IChunkGenerator
     private final WorldType terrainType;
     private final double[] heightMap;
     private final float[] biomeWeights;
-    private IBlockState oceanBlock = HarshenFluids.harshen_dimensional_fluid_block.getDefaultState();
+    private IBlockState oceanBlock = HarshenFluids.HARSHEN_DIMENSIONAL_FLUID_BLOCK.getDefaultState();
     private double[] depthBuffer = new double[256];
     private MapGenBase caveGenerator = new PontusCaveGenerator();
     private MapGenBase ravineGenerator = new PontusRavineGenerator();
@@ -106,7 +106,7 @@ public class PontusChunkProvider implements IChunkGenerator
             }
         }
 
-        this.oceanBlock = HarshenFluids.harshen_dimensional_fluid_block.getDefaultState();
+        this.oceanBlock = HarshenFluids.HARSHEN_DIMENSIONAL_FLUID_BLOCK.getDefaultState();
         worldIn.setSeaLevel(this.seaLevel);
 
         net.minecraftforge.event.terraingen.InitNoiseGensEvent.ContextOverworld ctx =
@@ -381,7 +381,7 @@ public class PontusChunkProvider implements IChunkGenerator
             int i1 = this.rand.nextInt(16) + 8;
             int j1 = this.rand.nextInt(256);
             int k1 = this.rand.nextInt(16) + 8;
-            (new WorldGenLakes(HarshenFluids.harshen_dimensional_fluid_block)).generate(this.world, this.rand, blockpos.add(i1, j1, k1));
+            (new WorldGenLakes(HarshenFluids.HARSHEN_DIMENSIONAL_FLUID_BLOCK)).generate(this.world, this.rand, blockpos.add(i1, j1, k1));
         }
 
         if (this.rand.nextInt(5) == 0)
@@ -393,7 +393,7 @@ public class PontusChunkProvider implements IChunkGenerator
 
             if (l2 < this.world.getSeaLevel() || this.rand.nextInt(2) == 0)
             {
-                (new WorldGenLakes(HarshenFluids.harshing_water_block)).generate(this.world, this.rand, blockpos.add(i2, l2, k3));
+                (new WorldGenLakes(HarshenFluids.HARSHING_WATER_BLOCK)).generate(this.world, this.rand, blockpos.add(i2, l2, k3));
             }
         }
         biome.decorate(this.world, this.rand, new BlockPos(i, 0, j));

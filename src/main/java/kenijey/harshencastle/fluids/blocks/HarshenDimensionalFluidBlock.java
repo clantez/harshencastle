@@ -20,7 +20,7 @@ public class HarshenDimensionalFluidBlock extends BaseFluidBlock
 {
     public HarshenDimensionalFluidBlock()
     {
-        super(HarshenFluids.harshen_dimensional_fluid);
+        super(HarshenFluids.HARSHEN_DIMENSIONAL_FLUID);
     }
     
     @Override

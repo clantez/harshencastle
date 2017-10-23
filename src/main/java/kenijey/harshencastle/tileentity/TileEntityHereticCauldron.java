@@ -184,16 +184,6 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
         	give(playerIn, hand, HarshenRegistry.getInputFromOutput(fluid));
         	return true;
         }
-        if(item instanceof UniversalBucket && fluid == CauldronLiquid.NONE &&
-        		CauldronLiquid.getFromState(((UniversalBucket)item).getFluid(itemstack).getFluid().getBlock().getDefaultState()) != CauldronLiquid.NONE)
-        {
-        	itemstack.shrink(1);
-        	give(playerIn, hand, new ItemStack(Items.BUCKET));
-        	level = 3;
-        	fluid = CauldronLiquid.getFromState(((UniversalBucket)item).getFluid(itemstack).getFluid().getBlock().getDefaultState());
-	        this.world.playSound((EntityPlayer)null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
-	        return true;
-        }
         else if(item == HarshenItems.RITUAL_STICK)
         {
         	ItemStack stack = getItem();

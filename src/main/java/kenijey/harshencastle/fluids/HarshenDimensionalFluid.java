@@ -5,12 +5,11 @@ import net.minecraftforge.fluids.Fluid;
 
 public class HarshenDimensionalFluid extends Fluid {
     
-    public static final String name = "harshen_dimensional_fluid";
-    public static final HarshenDimensionalFluid instance = new HarshenDimensionalFluid();
+    public static final String NAME = "harshen_dimensional_fluid";
 
     public HarshenDimensionalFluid()
     {
-        super(name, new ResourceLocation("harshencastle:blocks/harshen_dimensional_fluid_still"), new ResourceLocation("harshencastle:blocks/harshen_dimensional_fluid_flowing"));
+        super(NAME, new ResourceLocation("harshencastle:blocks/harshen_dimensional_fluid_still"), new ResourceLocation("harshencastle:blocks/harshen_dimensional_fluid_flowing"));
 		setViscosity(1000);
 		setDensity(500);
     }

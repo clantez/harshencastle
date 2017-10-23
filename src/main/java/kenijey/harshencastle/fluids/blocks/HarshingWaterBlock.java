@@ -14,7 +14,7 @@ public class HarshingWaterBlock extends BaseFluidBlock
 {
 
 	public HarshingWaterBlock() {
-		super(HarshenFluids.harshing_water);
+		super(HarshenFluids.HARSHING_WATER);
 	}
 
 	@Override

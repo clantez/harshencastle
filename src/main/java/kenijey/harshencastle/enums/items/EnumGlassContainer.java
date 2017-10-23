@@ -23,8 +23,8 @@ public enum EnumGlassContainer implements IStringSerializable, IIDSet
 	REGEN("regen", 0xF40D09, new PotionEffect(MobEffects.REGENERATION, 100, 200)),
 	CURE("cure", 0xEFEDA2, new PotionEffect(HarshenPotions.potionPure, 1)),
 	
-	HARSHING_WATER("harshing_water", HarshenFluids.harshing_water, 0x613A63),
-	HARSHEN_DIMENSIONAL_FLUID("harshen_dimensional_fluid", HarshenFluids.harshen_dimensional_fluid, 0x324B64),
+	HARSHING_WATER("harshing_water", HarshenFluids.HARSHING_WATER, 0x613A63),
+	HARSHEN_DIMENSIONAL_FLUID("harshen_dimensional_fluid", HarshenFluids.HARSHEN_DIMENSIONAL_FLUID, 0x324B64),
 	BLOOD("blood", 0x870705),
 	LAVA("lava", Blocks.LAVA, 0xD96415),
 	MILK("milk"),

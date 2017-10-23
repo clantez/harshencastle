@@ -86,7 +86,7 @@ public class TileEntityCaulronBlock extends TileEntity implements Serializable
 	
 	@Override
 	public AxisAlignedBB getRenderBoundingBox() {
-		return isLeader() ? new AxisAlignedBB(pos, pos.add(getSize(), getSize(), getSize())) : super.getRenderBoundingBox();
+		return isLeader() ? new AxisAlignedBB(pos, pos.add(getSize(), getSize(), getSize())).grow(5) : super.getRenderBoundingBox();
 	}
 	
 	@Override

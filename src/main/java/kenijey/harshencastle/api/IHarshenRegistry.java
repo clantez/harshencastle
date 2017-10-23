@@ -1,6 +1,7 @@
 package kenijey.harshencastle.api;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 /**
@@ -75,7 +76,16 @@ public interface IHarshenRegistry
 	 * 		Please set your previously registered CauldronLiquid to the return of this
 	 */
 	CauldronLiquid registerCauldronLiquid(ItemStack fullItem, ItemStack emptyItem, CauldronLiquid liquid, int fillBy);
-	
+
+	/**
+	 * Used to register a CauldronLiquid through forge universal buckets. 
+	 * @param fluid the fluid which the univeral bucket holds.
+	 * @param liquid The Actual Liquid that is used by the cauldron.
+	 * @param fillBy The amount that this item fills the cauldron each time. Clamped to 1 and 3.
+	 * @return The CauldronLiquid you registered. Note on some occasions it will register a new intance of the cauldron liquid.
+	 */
+	CauldronLiquid registerCauldronLiquid(FluidStack fluid, CauldronLiquid liquid, int fillBy);
+
 	/**
 	 * Registers a basic inventory item that can go into the harshencastle custom inventory.
 	 * @param item The item/block that is being registered.

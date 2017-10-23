@@ -12,22 +12,16 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 public class HarshenFluids {
 
 	
-	public static Fluid harshen_dimensional_fluid;
-	public static Block harshen_dimensional_fluid_block;
+	public final static Fluid HARSHEN_DIMENSIONAL_FLUID = new HarshenDimensionalFluid();
+	public final static Block HARSHEN_DIMENSIONAL_FLUID_BLOCK = registerFluidBlock(HARSHEN_DIMENSIONAL_FLUID, new HarshenDimensionalFluidBlock(), HarshenDimensionalFluid.NAME);
 	
-	public static Fluid harshing_water;
-	public static Block harshing_water_block;
+	public final static Fluid HARSHING_WATER = new HarshingWater();
+	public final static Block HARSHING_WATER_BLOCK = registerFluidBlock(HARSHING_WATER, new HarshingWaterBlock(), HarshingWater.NAME);
 
 	public static void register()
 	{
-		harshen_dimensional_fluid = HarshenDimensionalFluid.instance;
-        FluidRegistry.addBucketForFluid(harshen_dimensional_fluid);
-        harshen_dimensional_fluid_block = registerFluidBlock(harshen_dimensional_fluid, new HarshenDimensionalFluidBlock(), HarshenDimensionalFluid.name);
-        
-        harshing_water = HarshingWater.instance;
-        FluidRegistry.addBucketForFluid(harshing_water);
-        harshing_water_block = registerFluidBlock(harshing_water, new HarshingWaterBlock(), HarshingWater.name);
-
+        FluidRegistry.addBucketForFluid(HARSHEN_DIMENSIONAL_FLUID);
+        FluidRegistry.addBucketForFluid(HARSHING_WATER);
 	}
 	
 	public static Block registerFluidBlock(Fluid fluid, Block fluidBlock, String name)

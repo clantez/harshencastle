@@ -17,9 +17,14 @@ import kenijey.harshencastle.recipies.MagicTableRecipe;
 import kenijey.harshencastle.recipies.PedestalSlabRecipes;
 import kenijey.harshencastle.recipies.RitualRecipes;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidUtil;
+import net.minecraftforge.fluids.UniversalBucket;
 
 public class HarshenRegistry implements IHarshenRegistry
 {
@@ -28,6 +33,9 @@ public class HarshenRegistry implements IHarshenRegistry
 	private static final HashMap<CauldronLiquid, ItemStack> OUTPUT_MAP = new HashMap<>();
 	private static final HashMap<ItemStack, CauldronLiquid> ITEMLIQUID_MAP = new HashMap<>();
 	
+	private static final HashMap<Fluid, CauldronLiquid> FORGE_BUCKET_MAP = new HashMap<>();
+	private static final HashMap<Fluid, Integer> FORGE_BUCKET_AMOUNT_MAP = new HashMap<>();
+
 	private final String modID;
 	
 	public HarshenRegistry(String modID) 
@@ -73,6 +81,15 @@ public class HarshenRegistry implements IHarshenRegistry
 		return liquid;
 	}
 	
+	@Override
+	public CauldronLiquid registerCauldronLiquid(FluidStack fluid, CauldronLiquid liquid, int fillBy) {
+		liquid.setModID(modID);
+		liquid.setFillBy(fillBy);
+		FORGE_BUCKET_MAP.put(fluid.getFluid(), liquid);
+		FORGE_BUCKET_AMOUNT_MAP.put(fluid.getFluid(), fluid.amount);
+		return liquid;
+	}
+	
 	private CauldronLiquid registerItemLiquid(ItemStack inputItem, CauldronLiquid liquid)
 	{
 		CauldronLiquid l = liquid.hasState() ? new CauldronLiquid(liquid.getName().split(":")[1], (IBlockState)liquid.getStateOrLoc()).setModID(liquid.getName().split(":")[0])
@@ -83,19 +100,28 @@ public class HarshenRegistry implements IHarshenRegistry
 
 	public static CauldronLiquid getLiquidFromStack(ItemStack key)
 	{
+		if(key.getItem() instanceof UniversalBucket && FluidStack.loadFluidStackFromNBT(key.getTagCompound()) != null &&
+				FORGE_BUCKET_MAP.containsKey(FluidStack.loadFluidStackFromNBT(key.getTagCompound()).getFluid()))
+			return FORGE_BUCKET_MAP.get(FluidStack.loadFluidStackFromNBT(key.getTagCompound()).getFluid());
 		return HarshenUtils.getObjectFromItemMap(HarshenUtils.getObjectFromItemMap(INPUT_MAP, key) != null ? INPUT_MAP : ITEMLIQUID_MAP, key);
 	}
 	
 	public static ItemStack getOutPutItem(CauldronLiquid liquid)
 	{
-		for(CauldronLiquid l : OUTPUT_MAP.keySet())
-			if(l == liquid)
-				return OUTPUT_MAP.get(l).copy(); 
+		if(FORGE_BUCKET_MAP.containsValue(liquid))
+			return new ItemStack(Items.BUCKET);
+		else
+			for(CauldronLiquid l : OUTPUT_MAP.keySet())
+				if(l == liquid)
+					return OUTPUT_MAP.get(l).copy(); 
 		return null;
 	}
 	
 	public static ItemStack getInputFromOutput(CauldronLiquid prevLiquid)
 	{
+		for(Fluid fluid : FORGE_BUCKET_MAP.keySet())
+			if(FORGE_BUCKET_MAP.get(fluid) == prevLiquid)
+				return FluidUtil.getFilledBucket(new FluidStack(fluid, FORGE_BUCKET_AMOUNT_MAP.get(fluid)));
 		for(ItemStack stack : INPUT_MAP.keySet())
 			if(INPUT_MAP.get(stack) == prevLiquid)
 				return stack.copy();

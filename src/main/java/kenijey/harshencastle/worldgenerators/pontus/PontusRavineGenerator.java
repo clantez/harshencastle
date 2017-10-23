@@ -8,6 +8,6 @@ public class PontusRavineGenerator extends MapGenRavine
 {
 	@Override
 	protected void digBlock(ChunkPrimer data, int x, int y, int z, int chunkX, int chunkZ, boolean foundTop) {
-		data.setBlockState(x, y, z, y - 1 < 10 ? HarshenFluids.harshing_water_block.getDefaultState() : AIR);
+		data.setBlockState(x, y, z, y - 1 < 10 ? HarshenFluids.HARSHING_WATER_BLOCK.getDefaultState() : AIR);
 	}
 }

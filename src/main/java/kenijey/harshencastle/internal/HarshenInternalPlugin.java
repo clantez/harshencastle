@@ -15,6 +15,7 @@ import kenijey.harshencastle.api.IHarshenProvider;
 import kenijey.harshencastle.api.IHarshenRegistry;
 import kenijey.harshencastle.enums.ItemLiquidTypeset;
 import kenijey.harshencastle.enums.items.EnumGlassContainer;
+import kenijey.harshencastle.fluids.HarshenFluids;
 import kenijey.harshencastle.handlers.vanillaInventory.HandlerTotemOfUndying;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -22,6 +23,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -145,6 +147,10 @@ public class HarshenInternalPlugin implements IHarshenPlugin {
 					registry.registerCauldronLiquid(new ItemStack(HarshenItems.ITEM_LIQUID, 1, ItemLiquidTypeset.getMetaFromType(container.getType())),
 							ItemStack.EMPTY, container.getType(), 3);
 			}
+		
+		registry.registerCauldronLiquid(new FluidStack(HarshenFluids.HARSHEN_DIMENSIONAL_FLUID, 1000), EnumGlassContainer.HARSHEN_DIMENSIONAL_FLUID.getType(), 3);
+		registry.registerCauldronLiquid(new FluidStack(HarshenFluids.HARSHING_WATER, 1000), EnumGlassContainer.HARSHEN_DIMENSIONAL_FLUID.getType(), 3);
+
 		
 		//inventory items
     	registry.registerInventoryItem(new BlockItem(Items.TOTEM_OF_UNDYING), EnumInventorySlots.NECK, new HandlerTotemOfUndying(), false, 0);

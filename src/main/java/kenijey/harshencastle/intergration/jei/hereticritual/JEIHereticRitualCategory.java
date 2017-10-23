@@ -79,8 +79,8 @@ public class JEIHereticRitualCategory extends BaseJeiCategory
 	
 	@Override
 	protected void createDrawable(IGuiHelper helper) {
-		for(CauldronLiquid fluid : CauldronLiquid.allLiquids)
-			if(!fluid.hasState())
+		for(CauldronLiquid fluid : CauldronLiquid.ALL_LIQUIDS)
+			if(!fluid.hasState() && fluid != CauldronLiquid.NONE)
 				fluidTypes.put(fluid, helper.createDrawable((ResourceLocation) fluid.getStateOrLoc(), 0, 0, 17, 4, 17, 4));
 		
 		ritualFront = helper.createDrawable(new ResourceLocation(HarshenCastle.MODID, "textures/gui/jei/hereticritual-front.png"), 0, 0, 150, 110, 150, 110);

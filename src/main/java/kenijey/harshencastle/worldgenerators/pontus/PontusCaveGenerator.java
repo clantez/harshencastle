@@ -6,7 +6,7 @@ import net.minecraft.world.gen.MapGenCaves;
 
 public class PontusCaveGenerator extends MapGenCaves 
 {
-    protected static final IBlockState BLK_LAVA = HarshenFluids.harshing_water_block.getDefaultState();
+    protected static final IBlockState BLK_LAVA = HarshenFluids.HARSHING_WATER_BLOCK.getDefaultState();
 	
 	
 	@Override

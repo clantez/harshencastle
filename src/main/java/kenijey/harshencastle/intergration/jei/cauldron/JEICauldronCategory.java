@@ -57,8 +57,8 @@ public class JEICauldronCategory extends BaseJeiCategory
 	
 	@Override
 	protected void createDrawable(IGuiHelper helper) {
-		for(CauldronLiquid fluid : CauldronLiquid.allLiquids)
-			if(!fluid.hasState())
+		for(CauldronLiquid fluid : CauldronLiquid.ALL_LIQUIDS)
+			if(!fluid.hasState() && fluid != CauldronLiquid.NONE)
 				fluidTypes.put(fluid, helper.createDrawable((ResourceLocation) fluid.getStateOrLoc(), 0, 0, 38, 14, 38, 14));
 		
 		frontOfCauldron = helper.createDrawable(new ResourceLocation(HarshenCastle.MODID, "textures/gui/jei/cauldron-front.png"), 0, 0, 150, 110, 150, 110);

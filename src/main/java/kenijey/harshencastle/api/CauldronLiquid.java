@@ -15,39 +15,59 @@ import net.minecraft.util.ResourceLocation;
  */
 public class CauldronLiquid
 {
-	public static final CauldronLiquid NONE = new CauldronLiquid("none", (ResourceLocation)null);
 	
+	/**A list containing all registered liquids*/
+	public final static ArrayList<CauldronLiquid> ALL_LIQUIDS = new ArrayList<>();	
+	
+	/**The default empty cauldron liquid.*/
+	public static final CauldronLiquid NONE = new CauldronLiquid("none");
+	
+	/** The name of the liquid */
 	private final String name;
+	/** If the liquid Should render a blockstate, the state will be stored here*/
 	private IBlockState state;
+	/** If the liquid Should render a ResourceLocation, it will be stored here*/
 	private ResourceLocation resourceLoc;
-	
+	/** the amount of which it fills the cauldorn*/
 	private int fillBy;
-	
+	/** The MODID of the mod that registered the liquid. */
 	private String modID;
 	
-	public static ArrayList<CauldronLiquid> allLiquids = new ArrayList<>();	
-	
-	private static int IDSET = 1;
-	
+	/**
+	 * Used internally by all constructors.
+	 * @param name The name of the liquid
+	 */
 	private CauldronLiquid(String name)
 	{
 		this.name = name;
-		if(allLiquids == null)
-			allLiquids = new ArrayList<CauldronLiquid>();
-		allLiquids.add(this);
+		ALL_LIQUIDS.add(this);
 	}
 	
+	/**
+	 * Register a CauldronLiquid, were the textures displayed is a resource location.
+	 * @param name The name of the liquid
+	 * @param textureLocation The location of where the .png file of what the cauldron should render.
+	 */
 	public CauldronLiquid(String name, ResourceLocation textureLocation)
 	{
 		this(name);
 		this.resourceLoc = textureLocation;
 	}
 
+	/**
+	 * Register a CauldronLiquid, were the textures displayed is a resource location.
+	 * @param name The name of the liquid
+	 * @param blockState The blockstate that the cauldron will render the liquid as (note that this will be the texture of the particle tag in the block model)
+	 */
 	public CauldronLiquid(String name, IBlockState blockState) {
 		this(name);
 		this.state = blockState;
 	}
 	
+	/**
+	 * Get the name of the object
+	 * @return the MODID plus the name.
+	 */
 	public String getName() {
 		return modID + ":" + name;
 	}
@@ -57,48 +77,69 @@ public class CauldronLiquid
 		return modID + ":" + name;
 	}
 	
+	/**Used to set the MODID of an object. PLEASE DONT USE THIS.*/
 	public CauldronLiquid setModID(String modID)
 	{
 		this.modID = modID;
 		return this;
 	}
 	
-	
+	/**
+	 * Does the cauldron have a state
+	 * @return true if the liquid was registered with {@link CauldronLiquid#CauldronLiquid(String, IBlockState)}
+	 */
 	public Boolean hasState() {
 		return state != null;
 	}
-	
-	public static CauldronLiquid getEmpty()
-	{
-		return NONE;
-	}
-	
-	
+		
+	/**
+	 * Gets the CauldronLiquid from a state
+	 * @param state the state to get the 
+	 * @return the CauldronLiquid assigned to that state, {@link CauldronLiquid#NONE} if it doesn't exist.
+	 */
 	public static CauldronLiquid getFromState(IBlockState state)
 	{
-		for(CauldronLiquid liquid : allLiquids)
-			if(liquid.hasState() && liquid.state.getBlock() == state.getBlock())
+		for(CauldronLiquid liquid : ALL_LIQUIDS)
+			if(liquid.hasState() && liquid.state.getBlock() == state.getBlock() && liquid.state.getBlock().getMetaFromState(liquid.state) == state.getBlock().getMetaFromState(state))
 				return liquid;
 		return NONE;
 	}
 	
+	/**
+	 * Used to set the {@link CauldronLiquid#fillBy} of this CauldronLiquid.
+	 * @param fillBy The amount to set it to
+	 * @return itself
+	 */
 	public CauldronLiquid setFillBy(int fillBy) {
 		this.fillBy = fillBy;
 		return this;
 	}
 	
+	/**
+	 * The getter for the {@link CauldronLiquid#fillBy}
+	 * @return the {@link CauldronLiquid#fillBy}.
+	 */
 	public int getFillBy() {
 		return fillBy;
 	}
 	
+	/**
+	 * Gets the state or the location of the CauldronLiquid.
+	 * @return The {@link CauldronLiquid#state} if the state exists, {@link CauldronLiquid#resourceLoc} if it dosn't.
+	 */
 	public Object getStateOrLoc()
 	{
 		return state == null? resourceLoc : state;
 	}
 
+	/**
+	 * Gets a CauldronLiquid from the name. Used when loading from NBT
+	 * @param name the name of the CauldronLiquid that is trying to be found
+	 * @return The CauldronLiquid if found, {@link CauldronLiquid#NONE} if not
+	 */
 	public static CauldronLiquid getFromName(String name) {
 		if(name == null || name.isEmpty()) return NONE;
-		for(CauldronLiquid liquid : allLiquids)
+		for(CauldronLiquid liquid : ALL_LIQUIDS)
 			if(liquid.getName().equals(name))
 				return liquid;
 		if(!name.equals("null:none"))

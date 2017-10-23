@@ -15,7 +15,7 @@ public class CauldronUpdate
 	@SubscribeEvent
 	public void onTick(WorldTickEvent event)
 	{
-		if(event.side == Side.CLIENT && ticks++%3==0)
+		if(ticks++%20==0)
 			for(TileEntity te : event.world.loadedTileEntityList)
 				if(te instanceof TileEntityCaulronBlock && ((TileEntityCaulronBlock)te).isLeader())
 					Minecraft.getMinecraft().renderGlobal.markBlockRangeForRenderUpdate(te.getPos().getX(), te.getPos().getY(), te.getPos().getZ(), 
