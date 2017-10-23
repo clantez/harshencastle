@@ -6,7 +6,6 @@ import java.util.HashMap;
 
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.blocks.CauldronBlock;
-import kenijey.harshencastle.handlers.server.HandlerCauldronLoadOnWorldCreate;
 import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.network.packets.MessagePacketUpdateCauldron;
 import net.minecraft.nbt.NBTTagCompound;
@@ -89,6 +88,11 @@ public class TileEntityCaulronBlock extends TileEntity implements Serializable
 	public AxisAlignedBB getRenderBoundingBox() {
 		return isLeader() ? new AxisAlignedBB(pos, pos.add(getSize(), getSize(), getSize())) : super.getRenderBoundingBox();
 	}
+	
+	@Override
+	public boolean shouldRenderInPass(int pass) {
+		return true;
+	}
 		
 	private void activate(CauldronMultiBlock controller)
 	{
@@ -112,7 +116,8 @@ public class TileEntityCaulronBlock extends TileEntity implements Serializable
 				((TileEntityCaulronBlock)world.getTileEntity(pos.offset(face))).addAdjacent(list);
 	}
 	
-	public boolean isLeader() {
+	public boolean isLeader()
+	{
 		boolean flagTE1;
 		boolean flagTE2;
 		boolean flagTE3;
@@ -128,7 +133,7 @@ public class TileEntityCaulronBlock extends TileEntity implements Serializable
 		if(te3 instanceof TileEntityCaulronBlock)
 			flagTE3 = !CauldronBlock.CAULDRON_POSITIONS.contains(te3.getPos());
 		else flagTE3 = true;
-		return flagTE1 && flagTE2 && flagTE3;
+		return CauldronBlock.CAULDRON_POSITIONS.contains(pos) && flagTE1 && flagTE2 && flagTE3;
 	}
 	
 	public void breakBlock()
@@ -186,7 +191,6 @@ public class TileEntityCaulronBlock extends TileEntity implements Serializable
 	public void readFromNBT(NBTTagCompound compound) {
 		super.readFromNBT(compound);
 		this.legacySize = getTileData().getInteger("size");
-		HandlerCauldronLoadOnWorldCreate.UPDATE_LIST.add(this);
 	}
 	
 	@Override
