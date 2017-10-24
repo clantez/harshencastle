@@ -10,11 +10,11 @@ public interface IHarshenPlugin
 {
 	
 	/**
-	 * Where all of the registering is done. HarshenCastle will only call this funcion while registering things.
+	 * Where all of the registering is done. HarshenCastle will only call this while registering things.
 	 * Can be reloaded with F3 + T.
 	 * @param registry The Registry Used to register things.
 	 */
-	void register(IHarshenRegistry registry);
+	default void register(IHarshenRegistry registry) {};
 	
 	/**
 	 * The ModID of your mod. Used to help identify problems and used to separate things registered with the same name.

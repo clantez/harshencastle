@@ -15,7 +15,7 @@ import kenijey.harshencastle.entity.EntityThrown;
 import kenijey.harshencastle.entityrender.RenderEntityThrown;
 import kenijey.harshencastle.enums.ItemLiquidTypeset;
 import kenijey.harshencastle.enums.gui.EnumGuiTypes;
-import kenijey.harshencastle.enums.items.EnumGlassContainer;
+import kenijey.harshencastle.enums.items.GlassContainerValue;
 import kenijey.harshencastle.enums.items.EnumRitualStick;
 import kenijey.harshencastle.enums.particle.EnumHarshenParticle;
 import kenijey.harshencastle.gui.GuiBookScreen;
@@ -157,7 +157,7 @@ public class ClientProxy extends CommonProxy
 			
 			@Override
 			public int colorMultiplier(ItemStack stack, int tintIndex) {
-				return tintIndex == 1 ? -1 : EnumGlassContainer.getContainerFromMeta(stack.getMetadata()).color;
+				return tintIndex == 1 ? -1 : GlassContainerValue.getContainerFromMeta(stack.getMetadata()).color;
 			}
 		}, HarshenItems.GLASS_CONTAINER);
     	
@@ -173,7 +173,7 @@ public class ClientProxy extends CommonProxy
 
 			@Override
 			public int colorMultiplier(ItemStack stack, int tintIndex) {
-				return ItemLiquidTypeset.getFromMeta(stack.getMetadata()) == null ? -1 : EnumGlassContainer.getContainerFromType(ItemLiquidTypeset.getFromMeta(stack.getMetadata()).getType()).color;
+				return ItemLiquidTypeset.getFromMeta(stack.getMetadata()) == null ? -1 : GlassContainerValue.getContainerFromType(ItemLiquidTypeset.getFromMeta(stack.getMetadata()).getType()).color;
 			}
     	}, HarshenItems.ITEM_LIQUID);
     }

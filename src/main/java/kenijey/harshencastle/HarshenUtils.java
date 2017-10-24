@@ -32,7 +32,7 @@ import kenijey.harshencastle.biomes.HarshenBiomes;
 import kenijey.harshencastle.biomes.PontusBiomeProvider;
 import kenijey.harshencastle.config.HarshenConfigs;
 import kenijey.harshencastle.enchantment.HarshenEnchantmetns;
-import kenijey.harshencastle.enums.items.EnumGlassContainer;
+import kenijey.harshencastle.enums.items.GlassContainerValue;
 import kenijey.harshencastle.handlers.HandlerPontusAllowed;
 import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.network.packets.MessagePacketSetItemInSlot;
@@ -132,13 +132,13 @@ public class HarshenUtils
 		return newList;
 	}
 	
-	public static boolean glassContainerHasBlock(EnumGlassContainer glass)
+	public static boolean glassContainerHasBlock(GlassContainerValue glass)
 	{
 		 return glassContainerHasState(glass)
 				 && Item.getItemFromBlock(((IBlockState)glass.getType().getStateOrLoc()).getBlock()) != Items.AIR;
 	}
 	
-	public static boolean glassContainerHasState(EnumGlassContainer glass)
+	public static boolean glassContainerHasState(GlassContainerValue glass)
 	{
 		return glass.isSubContainer() && glass.getType().hasState() && glass.isPaste();
 	}

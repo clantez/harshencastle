@@ -46,7 +46,7 @@ public class RendererCauldronBlock extends TileEntitySpecialRenderer<TileEntityC
 				float moveBy = 0.08f;
 				levelMove.put(te.getPos(), levelMove.get(te.getPos()) + (Math.min(levelMove.get(te.getPos()), te.getLevel()) == te.getLevel()? - moveBy : moveBy));
 			}
-			if(te.getLevel() > 0)
+			if(te.getLevel() > 0 && te.getFluid() != null)
 				particleMap.put(te.getPos(), HarshenCastle.proxy.spawnParticle(EnumHarshenParticle.CAULDRON_LIQUID, new Vec3d(te.getPos()).addVector(0.5D, MathHelper.clamp(Math.sin(serialMove.get(te.getPos()) / 1d) / 50d + 0.05D + levelMove.get(te.getPos()) / 4d, 0.2D, 1D), 0.5D), Vec3d.ZERO, 0.1f, true, te.getFluid().getStateOrLoc()));
 		}
         GlStateManager.pushMatrix();

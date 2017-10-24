@@ -8,7 +8,7 @@ import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.api.CauldronLiquid;
 import kenijey.harshencastle.blocks.CauldronBlock;
-import kenijey.harshencastle.enums.items.EnumGlassContainer;
+import kenijey.harshencastle.enums.items.GlassContainerValues;
 import kenijey.harshencastle.internal.HarshenRegistry;
 import kenijey.harshencastle.items.BloodCollector;
 import kenijey.harshencastle.network.HarshenNetwork;
@@ -104,14 +104,14 @@ public class TileEntityCaulronBlock extends TileEntity implements Serializable
         if (itemstack.isEmpty())
         	return false;
         boolean flag;
-        if(item instanceof BloodCollector && (controller.fluid ==  EnumGlassContainer.BLOOD.getType() || controller.fluid == CauldronLiquid.NONE))
+        if(item instanceof BloodCollector && (controller.fluid ==  GlassContainerValues.BLOOD.getType() || controller.fluid == CauldronLiquid.NONE))
         {
         	if(controller.level != 3)
         		if (playerIn.capabilities.isCreativeMode || (!playerIn.capabilities.isCreativeMode && ((BloodCollector)item).remove(playerIn, hand, 3)))
                 {
         			this.world.playSound((EntityPlayer)null, pos, SoundEvents.ITEM_BOTTLE_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
         			controller.level ++;
-        			controller.fluid = EnumGlassContainer.BLOOD.getType();
+        			controller.fluid = GlassContainerValues.BLOOD.getType();
         		}
         	return true;
         }
@@ -273,10 +273,14 @@ public class TileEntityCaulronBlock extends TileEntity implements Serializable
 	}
 	
 	public int getLevel() {
+		if(controller == null)
+			return 0;
 		return controller.level;
 	}
 	
 	public CauldronLiquid getFluid() {
+		if(controller == null)
+			return null;
 		return controller.fluid;
 	}
 	

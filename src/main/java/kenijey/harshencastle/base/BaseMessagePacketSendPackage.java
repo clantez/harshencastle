@@ -31,7 +31,6 @@ public abstract class BaseMessagePacketSendPackage<REQ extends IMessage> extends
 		NBTTagCompound compound = ByteBufUtils.readTag(buf);
 		for(int i = 0; i < compound.getInteger("size"); i++)
 			objects[i] = HarshenUtils.deserialize(compound.getByteArray("byte" + i));
-		System.out.println(objects);
 	}
 	
 }

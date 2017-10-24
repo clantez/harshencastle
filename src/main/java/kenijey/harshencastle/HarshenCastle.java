@@ -32,6 +32,8 @@ public class HarshenCastle {
     public static final String MODNAME = "Harshen Castle";
     public static final String VERSION = "0.13.1";
     public static final String UPDATE_URL = "http://www.wynprice.com/moddedUpdateCheckers/harshencastle.json";
+    
+    public static boolean hasLoaded;
 
     @SidedProxy(clientSide = "kenijey.harshencastle.proxy.ClientProxy", serverSide = "kenijey.harshencastle.proxy.ServerProxy")
     public static CommonProxy proxy;
@@ -79,5 +81,6 @@ public class HarshenCastle {
     public void onLoad(FMLLoadCompleteEvent event)
     {
 		proxy.onLoad(event);
+		hasLoaded = true;
     }
 }

@@ -4,14 +4,13 @@ import java.util.ArrayList;
 
 import kenijey.harshencastle.base.BaseItemMetaData;
 import kenijey.harshencastle.config.HarshenConfigs;
-import kenijey.harshencastle.enums.ItemLiquidTypeset;
 import kenijey.harshencastle.enums.items.EnumBloodCollector;
-import kenijey.harshencastle.enums.items.EnumGlassContainer;
 import kenijey.harshencastle.enums.items.EnumPontusGateSpawner;
 import kenijey.harshencastle.enums.items.EnumPontusGateSpawnerParts;
 import kenijey.harshencastle.enums.items.EnumProp;
 import kenijey.harshencastle.enums.items.EnumRitualCrystal;
 import kenijey.harshencastle.enums.items.EnumRitualStick;
+import kenijey.harshencastle.enums.items.GlassContainerValues;
 import kenijey.harshencastle.items.BloodCollector;
 import kenijey.harshencastle.items.BloodEssence;
 import kenijey.harshencastle.items.BloodInfusedEnderEye;
@@ -216,14 +215,14 @@ public class HarshenItems
 		regItem(REACH_PENDANT);
 		regItem(RING_OF_FLIGHT);
 		
-		regMetaItem(ITEM_LIQUID, 64, emptyList(ItemLiquidTypeset.length()), "item_liquid");
+		regMetaItem(ITEM_LIQUID, 64, emptyList(65536), "item_liquid");
 		regMetaItem(RITUAL_STICK, emptyList(EnumRitualStick.values().length), "ritual_stick");
 		regMetaItem(PONTUS_WORLD_GATE_SPAWNER, EnumPontusGateSpawner.getNames(), "pontus_world_gate_spawner_");
 		regMetaItem(PONTUS_WORLD_GATE_PARTS, EnumPontusGateSpawnerParts.getNames(), "pontus_world_gate_part_");
 		regMetaItem(PROPS, EnumProp.getNames(), "prop_");
 		regMetaItem(BLOOD_COLLECTOR, EnumBloodCollector.getNames(), "blood_collector_");
 		regMetaItem(RITUAL_CRYSTAL, 12, EnumRitualCrystal.getNames(), "ritual_crystal_");
-		regMetaItem(GLASS_CONTAINER, emptyList(EnumGlassContainer.values().length), "glass_container", new ExceptionName(0, "_empty"), new ExceptionName(EnumGlassContainer.MAGIC.getMeta(), "_magic"));
+		regMetaItem(GLASS_CONTAINER, emptyList(65536), "glass_container", new ExceptionName(0, "_empty"), new ExceptionName(14, "_magic"));
 	}
 	
 	public final static ArrayList<Item> ALL_ITEMS= new ArrayList<Item>();

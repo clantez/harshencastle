@@ -12,7 +12,7 @@ import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.api.CauldronLiquid;
 import kenijey.harshencastle.base.BaseJeiWrapper;
 import kenijey.harshencastle.enums.ItemLiquidTypeset;
-import kenijey.harshencastle.enums.items.EnumGlassContainer;
+import kenijey.harshencastle.enums.items.GlassContainerValue;
 import kenijey.harshencastle.recipies.CauldronRecipes;
 import mezz.jei.api.ingredients.IIngredients;
 import net.minecraft.item.ItemStack;
@@ -30,7 +30,7 @@ public class JEICauldronWrapper extends BaseJeiWrapper
 		builder.add(recipe.getInput().getStackList());
 		if(HarshenUtils.glassContainerHasBlock(recipe.getCatalyst()))
 			builder.add(ImmutableList.of(new ItemStack(HarshenItems.ITEM_LIQUID, 1, ItemLiquidTypeset.getMetaFromType(recipe.getCatalyst()))));
-		builder.add(ImmutableList.of(EnumGlassContainer.getContainerFromType(recipe.getCatalyst()).getStack()));
+		builder.add(ImmutableList.of(GlassContainerValue.getContainerFromType(recipe.getCatalyst()).getStack()));
 		builder.add(ImmutableList.of(new ItemStack(HarshenBlocks.HERETIC_CAULDRON)));
 		input = builder.build();
 		output = recipe.getOutput();

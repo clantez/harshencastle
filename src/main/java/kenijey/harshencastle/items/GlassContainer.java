@@ -2,9 +2,10 @@ package kenijey.harshencastle.items;
 
 import java.util.List;
 
+import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.api.CauldronLiquid;
 import kenijey.harshencastle.base.BaseItemMetaData;
-import kenijey.harshencastle.enums.items.EnumGlassContainer;
+import kenijey.harshencastle.enums.items.GlassContainerValue;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -40,11 +41,15 @@ public class GlassContainer extends BaseItemMetaData
 	
 	@Override
 	public String getUnlocalizedName(ItemStack stack) {
-		String args = getGlassContaining(EnumGlassContainer.getContainerFromMeta(stack.getMetadata()).getType());
+		if(!HarshenCastle.hasLoaded) return "item.glasscontainer"; //Used to prevent the game from crashing during startup
+		String args = getGlassContaining(GlassContainerValue.getContainerFromMeta(stack.getMetadata()).getType());
 		if(args != null)
 			stack.setStackDisplayName(TextFormatting.RESET + new TextComponentTranslation(stack.getItem().getUnlocalizedName() + 
 					".container", args).getFormattedText());
-		return super.getUnlocalizedName(stack);
+		for(int i = 0; i < getNames().length; i ++)
+			if(stack.getItemDamage() == i)
+				return this.getUnlocalizedName() + "." + getNames()[i];
+		return this.getUnlocalizedName() + "." + "illegal";
 	}
 	
 	public static String getGlassContaining(CauldronLiquid liquid)
@@ -84,7 +89,7 @@ public class GlassContainer extends BaseItemMetaData
 	
 	private boolean hasDrinkEffect(int meta)
 	{
-		return EnumGlassContainer.getContainerFromMeta(meta).getEffects() != null;
+		return GlassContainerValue.getContainerFromMeta(meta).getEffects() != null;
 	}
 	
 	@Override
@@ -94,7 +99,7 @@ public class GlassContainer extends BaseItemMetaData
 	
 	@Override
 	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving) {
-		EnumGlassContainer enu = EnumGlassContainer.getContainerFromMeta(stack.getMetadata());
+		GlassContainerValue enu = GlassContainerValue.getContainerFromMeta(stack.getMetadata());
 		if(enu.getEffects() != null)
 			for(PotionEffect effect : enu.getEffects())
 				entityLiving.addPotionEffect(effect);
@@ -113,7 +118,7 @@ public class GlassContainer extends BaseItemMetaData
 
 	@Override
 	protected String[] getNames() {
-		return EnumGlassContainer.getNames();
+		return GlassContainerValue.getNames();
 	}
 	
 }

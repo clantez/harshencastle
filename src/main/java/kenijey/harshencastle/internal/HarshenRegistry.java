@@ -10,6 +10,7 @@ import kenijey.harshencastle.api.HarshenStack;
 import kenijey.harshencastle.api.IHarshenHelper;
 import kenijey.harshencastle.api.IHarshenProvider;
 import kenijey.harshencastle.api.IHarshenRegistry;
+import kenijey.harshencastle.enums.items.GlassContainerValue;
 import kenijey.harshencastle.objecthandlers.VanillaProviderToInterface;
 import kenijey.harshencastle.recipies.CauldronRecipes;
 import kenijey.harshencastle.recipies.HereticRitualRecipes;
@@ -19,6 +20,7 @@ import kenijey.harshencastle.recipies.RitualRecipes;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fluids.Fluid;
@@ -152,6 +154,17 @@ public class HarshenRegistry implements IHarshenRegistry
 	public IHarshenHelper getHelper() {
 		return new HarshenHelper();
 	}
+
+	@Override
+	public int registerGlassContainer(String name, CauldronLiquid liquid, int color) {
+		return GlassContainerValue.registerGlassContainer(name, color, liquid);
+	}
+
+	@Override
+	public int registerGlassContainer(String name, int color, PotionEffect... effects) {
+		return GlassContainerValue.registerGlassContainer(name, color, effects);
+	}
+	
 	
 	public static class HarshenHelper implements IHarshenHelper
 	{

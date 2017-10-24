@@ -18,7 +18,6 @@ public class HarshenAPIHandler
 {
 	
 	public final static ArrayList<IHarshenPlugin> ALL_PLUGINS = new ArrayList<>();
-
 	
 	public static ArrayList<RitualRecipes> allRitualRecipes = new ArrayList<>();
 	public static ArrayList<CauldronRecipes> allCauldronRecipes = new ArrayList<>();
@@ -27,7 +26,19 @@ public class HarshenAPIHandler
 	public static ArrayList<MagicTableRecipe> allMagicTableRecipes = new ArrayList<>();
 		
 	public static void loadPlugins(ASMDataTable asmData) {
-		ALL_PLUGINS.addAll(HarshenUtils.getInstancesOfAnnotation(asmData, HarshenPlugin.class, IHarshenPlugin.class));
+		for(IHarshenPlugin plugin : HarshenUtils.getInstancesOfAnnotation(asmData, HarshenPlugin.class, IHarshenPlugin.class))
+			if(plugin.getModID() != HarshenCastle.MODID) ALL_PLUGINS.add(plugin);
+			else ALL_PLUGINS.add(0, plugin);
+	}
+	
+	private static String getPluginNames()
+	{
+		String allModIds = "";	
+		for(int i = 0; i < ALL_PLUGINS.size(); i++)
+			if(i == 0) allModIds += ALL_PLUGINS.get(i).getModID();
+			else if(i == ALL_PLUGINS.size() - 1) allModIds += " and " + ALL_PLUGINS.get(i).getModID();
+			else allModIds += ", " + ALL_PLUGINS.get(i).getModID();
+		return allModIds;
 	}
 	
 	public static void register()
@@ -37,12 +48,7 @@ public class HarshenAPIHandler
 		allHereticCauldronRecipes.clear();
 		allPedestalRecipes.clear();
 		allMagicTableRecipes.clear();
-		String allModIds = "";	
-		for(int i = 0; i < ALL_PLUGINS.size(); i++)
-			if(i == 0) allModIds += ALL_PLUGINS.get(i).getModID();
-			else if(i == ALL_PLUGINS.size() - 1) allModIds += " and " + ALL_PLUGINS.get(i).getModID();
-			else allModIds += ", " + ALL_PLUGINS.get(i).getModID();
-		HarshenCastle.LOGGER.info("Found plugins for the mods: " + allModIds);
+		HarshenCastle.LOGGER.info("Sending registry events to the following mods: " + getPluginNames());
 		for(IHarshenPlugin plugin : ALL_PLUGINS)
 			try 
 			{

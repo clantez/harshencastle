@@ -1,6 +1,7 @@
 package kenijey.harshencastle.api;
 
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -108,6 +109,23 @@ public interface IHarshenRegistry
 	 * @param provider The provider for that item.
 	 */
 	void registerInventoryItem(BlockItem item, IHarshenProvider provider);
+	
+	/**
+	 * Used to register a glass container into the game. This will register the glass container with a cauldron liquid.
+	 * @param color the background color that is used to render the item.
+	 * @param liquid The liquid that will be used in the cauldron
+	 * @return The value that will be used for the meta data of the registered glass container
+	 */
+	int registerGlassContainer(String name, CauldronLiquid liquid, int color);
+	
+	/**
+	 * Used to register a glass container into the game. This will register a drinkable glass container will a variety of effects.
+	 * @param color the background color that is used to render the item
+	 * @param name the name used for the containers name
+	 * @param effects The list of effects that will be applied when the glass container is drunk
+	 * @return the value that will be used for the meta data of the registered glass container
+	 */
+	int registerGlassContainer(String name, int color, PotionEffect... effects);
 
 	/**
 	 * Used to get the helper for this API.

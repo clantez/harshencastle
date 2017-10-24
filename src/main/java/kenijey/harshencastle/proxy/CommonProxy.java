@@ -18,11 +18,9 @@ import kenijey.harshencastle.dimensions.HarshenDimensions;
 import kenijey.harshencastle.dimensions.pontus.PontusWorldProvider;
 import kenijey.harshencastle.enchantment.HarshenEnchantmetns;
 import kenijey.harshencastle.entity.HarshenEntities;
-import kenijey.harshencastle.enums.ItemLiquidTypeset;
 import kenijey.harshencastle.enums.SetIds;
 import kenijey.harshencastle.enums.gui.EnumGuiTypes;
 import kenijey.harshencastle.enums.items.EnumBloodCollector;
-import kenijey.harshencastle.enums.items.EnumGlassContainer;
 import kenijey.harshencastle.enums.items.EnumPontusGateSpawner;
 import kenijey.harshencastle.enums.items.EnumPontusGateSpawnerParts;
 import kenijey.harshencastle.enums.items.EnumProp;
@@ -76,8 +74,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class CommonProxy 
 {
     public void preInit(FMLPreInitializationEvent event) 
-    {    	
-    	    	
+    {    	    	
     	HarshenConfigs.IDS.preInit(); //dont mess with order
     	HarshenConfigs.GENERAL.preInit();
     	
@@ -118,24 +115,19 @@ public class CommonProxy
 		HarshenVillagers.preInit();
 				
 		HarshenAPIHandler.loadPlugins(event.getAsmData());
-						
+							
 		HarshenCastle.LOGGER.info("HarshenCastle loaded correctly");
     }	
     
     
     private void setUpEnumValues()
     {
-		SetIds.setup(EnumGlassContainer.values());
 		SetIds.setup(EnumBloodCollector.values());
 		SetIds.setup(EnumPontusGateSpawner.values());
 		SetIds.setup(EnumPontusGateSpawnerParts.values());
 		SetIds.setup(EnumProp.values());
 		SetIds.setup(EnumRitualStick.values());
 		SetIds.setup(EnumInventorySlots.values());	
-		
-		for(EnumGlassContainer glass : EnumGlassContainer.values())
-			if(HarshenUtils.glassContainerHasBlock(glass))
-				new ItemLiquidTypeset(glass);
     }
 
     public void init(FMLInitializationEvent event) 

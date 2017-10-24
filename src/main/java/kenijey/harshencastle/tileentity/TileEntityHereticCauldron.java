@@ -11,7 +11,7 @@ import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.api.CauldronLiquid;
 import kenijey.harshencastle.base.BaseTileEntityHarshenSingleItemInventory;
 import kenijey.harshencastle.blocks.BloodBlock;
-import kenijey.harshencastle.enums.items.EnumGlassContainer;
+import kenijey.harshencastle.enums.items.GlassContainerValues;
 import kenijey.harshencastle.enums.particle.EnumHarshenParticle;
 import kenijey.harshencastle.internal.HarshenRegistry;
 import kenijey.harshencastle.items.BloodCollector;
@@ -38,7 +38,6 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.fluids.UniversalBucket;
 import net.minecraftforge.items.CapabilityItemHandler;
 
 public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemInventory
@@ -154,14 +153,14 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
         if (itemstack.isEmpty())
         	return false;
         boolean flag;
-        if(item instanceof BloodCollector && (fluid ==  EnumGlassContainer.BLOOD.getType() || fluid == CauldronLiquid.NONE))
+        if(item instanceof BloodCollector && (fluid ==  GlassContainerValues.BLOOD.getType() || fluid == CauldronLiquid.NONE))
         {
         	if(level != 3)
         		if (playerIn.capabilities.isCreativeMode || (!playerIn.capabilities.isCreativeMode && ((BloodCollector)item).remove(playerIn, hand, 3)))
                 {
         			this.world.playSound((EntityPlayer)null, pos, SoundEvents.ITEM_BOTTLE_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
         			level ++;
-        			fluid = EnumGlassContainer.BLOOD.getType();
+        			fluid = GlassContainerValues.BLOOD.getType();
         		}
         	return true;
         }

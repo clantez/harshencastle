@@ -1,7 +1,7 @@
 package kenijey.harshencastle.handlers;
 
 import kenijey.harshencastle.HarshenItems;
-import kenijey.harshencastle.enums.items.EnumGlassContainer;
+import kenijey.harshencastle.enums.items.GlassContainerValues;
 import kenijey.harshencastle.items.GlassContainer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntityCow;
@@ -31,7 +31,7 @@ public class HandlerGlassContainer
 	public void onEntityRightClick(PlayerInteractEvent.EntityInteract event)
 	{
 		if(event.getEntityPlayer().getHeldItemMainhand().isItemEqual(new ItemStack(HarshenItems.GLASS_CONTAINER)) && event.getTarget().getClass() == EntityCow.class)
-			event.getEntityPlayer().setHeldItem(EnumHand.MAIN_HAND, EnumGlassContainer.MILK.getStack());
+			event.getEntityPlayer().setHeldItem(EnumHand.MAIN_HAND, GlassContainerValues.MILK.getStack());
 
 	}
 }
