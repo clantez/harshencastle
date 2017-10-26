@@ -12,6 +12,7 @@ import kenijey.harshencastle.enums.items.GlassContainerValues;
 import kenijey.harshencastle.internal.HarshenRegistry;
 import kenijey.harshencastle.items.BloodCollector;
 import kenijey.harshencastle.network.HarshenNetwork;
+import kenijey.harshencastle.network.packets.MessagePacketForceCauldronUpdate;
 import kenijey.harshencastle.network.packets.MessagePacketUpdateCauldron;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -44,22 +45,7 @@ public class TileEntityCaulronBlock extends TileEntity implements Serializable
 		if(world.isRemote)
 			return;
 		ArrayList<TileEntityCaulronBlock> blocksNearby = new ArrayList<>();
-		for(TileEntity te : new ArrayList<TileEntity>(world.loadedTileEntityList))
-			if(te instanceof TileEntityCaulronBlock)
-			{
-				ArrayList<TileEntityCaulronBlock> adjacentBlocks = new ArrayList<>();
-				((TileEntityCaulronBlock)te).addAdjacent(adjacentBlocks);
-				boolean update = false;
-				for(int i = 0; i < adjacentBlocks.size() && i < CHECK_SIZE; i++)
-					if(position == null || Math.sqrt(adjacentBlocks.get(i).getPos().distanceSq(position)) < MAX_LEVELS+2)
-					{
-						update = true;
-						break;
-					}
-				if(update)
-					for(TileEntityCaulronBlock t : adjacentBlocks)
-						blocksNearby.add(t);
-			}
+		((TileEntityCaulronBlock)world.getTileEntity(position)).addAdjacent(blocksNearby);
 		for(TileEntityCaulronBlock te : blocksNearby)
 			te.testForActivation();
 		for(TileEntityCaulronBlock te : blocksNearby)
@@ -264,11 +250,17 @@ public class TileEntityCaulronBlock extends TileEntity implements Serializable
 	public void readFromNBT(NBTTagCompound compound) {
 		super.readFromNBT(compound);
 		this.legacySize = getTileData().getInteger("size");
+		if(world != null && world.isRemote && getTileData().getBoolean("isLeader"))
+			HarshenNetwork.sendToServer(new MessagePacketForceCauldronUpdate(pos, getTileData().getInteger("level"), getTileData().getString("fluid")));
 	}
 	
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
 		getTileData().setInteger("size", getSize());
+		getTileData().setBoolean("isLeader", isLeader());
+		getTileData().setInteger("level", getLevel());
+		if(getFluid() != null)
+			getTileData().setString("fluid", getFluid().getName());
 		return super.writeToNBT(compound);
 	}
 	
@@ -276,6 +268,10 @@ public class TileEntityCaulronBlock extends TileEntity implements Serializable
 		if(controller == null)
 			return 0;
 		return controller.level;
+	}
+	
+	public CauldronMultiBlock getController() {
+		return controller;
 	}
 	
 	public CauldronLiquid getFluid() {

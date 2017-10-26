@@ -91,6 +91,11 @@ public class CauldronBlock extends Block implements ITileEntityProvider
 	}
 	
 	@Override
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+		TileEntityCaulronBlock.testForCauldron(worldIn, pos);
+	}
+	
+	@Override
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
 		((TileEntityCaulronBlock) worldIn.getTileEntity(pos)).breakBlock();
 		super.breakBlock(worldIn, pos, state);

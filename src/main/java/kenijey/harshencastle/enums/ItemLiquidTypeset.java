@@ -6,19 +6,20 @@ import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.api.CauldronLiquid;
 import kenijey.harshencastle.enums.items.GlassContainerValue;
+import kenijey.harshencastle.enums.items.GlassContainerValues;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 
 public class ItemLiquidTypeset 
 {
 	private static ArrayList<ItemLiquidTypeset> allItemSet = new ArrayList<>();
-	
+		
 	private final String name;
 	private final CauldronLiquid type;
 	
 	private ItemLiquidTypeset(GlassContainerValue glass) 
 	{
-		if(!HarshenUtils.glassContainerHasBlock(glass))
+		if(glass != GlassContainerValues.EMPTY && !HarshenUtils.glassContainerHasBlock(glass))
 			new IllegalArgumentException(glass.getName() + " container cant be passed as an itemliquid as it has no item").printStackTrace();
 		name = glass.getName() + "ite";
 		type = glass.getType();
@@ -36,7 +37,7 @@ public class ItemLiquidTypeset
 		for(ItemLiquidTypeset set : allItemSet)
 			if(set.getMeta() == meta)
 				return set;
-		return null;
+		return new ItemLiquidTypeset(GlassContainerValues.EMPTY);
 	}
 	
 	public static int getMetaFromType(CauldronLiquid type)

@@ -51,7 +51,7 @@ public class RendererHereticCauldron extends TileEntitySpecialRenderer<TileEntit
 				levelMove.put(te.getPos(), levelMove.get(te.getPos()) + (Math.min(levelMove.get(te.getPos()), te.getLevel()) == te.getLevel()? - moveBy : moveBy));
 			}
 			if(te.getLevel() > 0)
-				particleMap.put(te.getPos(), HarshenCastle.proxy.spawnParticle(EnumHarshenParticle.CAULDRON_LIQUID, new Vec3d(te.getPos()).addVector(0.5D, MathHelper.clamp(Math.sin(serialMove.get(te.getPos()) / 200d) / 50d + 0.05D + levelMove.get(te.getPos()) / 4d, 0.2D, 1D), 0.5D), Vec3d.ZERO, 3.0001f, true, te.getFluid().getStateOrLoc()));
+				particleMap.put(te.getPos(), HarshenCastle.proxy.spawnParticle(EnumHarshenParticle.CAULDRON_LIQUID, new Vec3d(te.getPos()).addVector(0.5D, MathHelper.clamp(Math.sin(serialMove.get(te.getPos()) / 200d) / 50d + 0.05D + levelMove.get(te.getPos()) / 4d, 0.2D, 1D), 0.5D), Vec3d.ZERO, -1, true, te.getFluid().getStateOrLoc()));
 			GlStateManager.translate(x, y, z);
 			GlStateManager.translate(0.5f, 1.45f,0.5f);
 			boolean flag = true;

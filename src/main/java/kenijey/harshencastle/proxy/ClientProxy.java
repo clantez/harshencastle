@@ -233,9 +233,9 @@ public class ClientProxy extends CommonProxy
 		        case CAULDRON_LIQUID:
 		        	if(info.length > 0)
 		        		if(info[0] instanceof ResourceLocation)
-		        			entityFx = new ParticleCauldronTop(minecraft.world, position.x, position.y, position.z, scale, (ResourceLocation) info[0]);
+		        			entityFx = new ParticleCauldronTop(minecraft.world, position.x, position.y, position.z, scale, (ResourceLocation) info[0]).setDirectScale(scale);
 		        		else if(info[0] instanceof IBlockState)
-		        			entityFx = new ParticleCauldronTop(minecraft.world, position.x, position.y, position.z, scale, ((IBlockState) info[0]));
+		        			entityFx = new ParticleCauldronTop(minecraft.world, position.x, position.y, position.z, scale, ((IBlockState) info[0])).setDirectScale(scale);
 		        	break;
 		        default:
 		            break;

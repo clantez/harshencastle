@@ -4,6 +4,7 @@ import io.netty.buffer.ByteBuf;
 import kenijey.harshencastle.base.BaseMessagePacket;
 import kenijey.harshencastle.blocks.CauldronBlock;
 import kenijey.harshencastle.tileentity.TileEntityCaulronBlock;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 
@@ -53,8 +54,10 @@ public class MessagePacketUpdateCauldron extends BaseMessagePacket<MessagePacket
 		if(!message.active && CauldronBlock.CAULDRON_POSITIONS.contains(message.position))
 		{
 			CauldronBlock.CAULDRON_POSITIONS.remove(message.position);
-			((TileEntityCaulronBlock)player.world.getTileEntity(message.position)).breakBlock();
 		}	
+		
+		Minecraft.getMinecraft().renderGlobal.markBlockRangeForRenderUpdate(message.position.getX(), message.position.getY(), message.position.getZ(), 
+				message.position.getX(), message.position.getY(), message.position.getZ());
 	}
 	
 }

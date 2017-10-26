@@ -1,6 +1,7 @@
 package kenijey.harshencastle.network;
 
 import kenijey.harshencastle.HarshenCastle;
+import kenijey.harshencastle.network.packets.MessagePacketForceCauldronUpdate;
 import kenijey.harshencastle.network.packets.MessagePacketHitWithRange;
 import kenijey.harshencastle.network.packets.MessagePacketKillAllWithTag;
 import kenijey.harshencastle.network.packets.MessagePacketOpenInv;
@@ -50,6 +51,8 @@ public class HarshenNetwork
 		registerMessage(MessagePacketReviveInventory.class, Side.CLIENT);
 		registerMessage(MessagePacketUpdateComplexEntity.class, Side.CLIENT);
 		registerMessage(MessagePacketUpdateCauldron.class, Side.CLIENT);
+		registerMessage(MessagePacketForceCauldronUpdate.class, Side.CLIENT);
+		registerMessage(MessagePacketForceCauldronUpdate.class, Side.SERVER);
 	}
 	
 	
