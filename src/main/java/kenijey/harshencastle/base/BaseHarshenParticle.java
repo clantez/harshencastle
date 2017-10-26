@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -117,14 +118,13 @@ public abstract class BaseHarshenParticle extends Particle
     		}
             this.particleTextureIndexX = getXIndex();
             this.particleTextureIndexY = getYIndex();
-            GlStateManager.depthMask(false);
             GlStateManager.enableBlend();
             GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
             float f = ((float)this.particleTextureIndexX + this.particleTextureJitterX / 4.0F) / 16.0F;
             float f1 = f + 0.015609375F;
             float f2 = ((float)this.particleTextureIndexY + this.particleTextureJitterY / 4.0F) / 16.0F;
             float f3 = f2 + 0.015609375F;
-            float f4 = 0.1F * (isCauldronTop ? 3.15f : this.particleScale);
+            float f4 = directScale > 0 ? directScale : (0.1F * (isCauldronTop ? 3.15f : this.particleScale));
             if (this.particleTexture != null)
             {
             	f = this.particleTexture.getInterpolatedU((double)(this.particleTextureJitterX / 4.0F * 16.0F));
@@ -156,14 +156,13 @@ public abstract class BaseHarshenParticle extends Particle
             return;
     	}
         GlStateManager.disableLighting();
-        GlStateManager.depthMask(false);
-        float f3 = (float)(this.prevPosX + (this.posX - this.prevPosX) * (double)partialTicks - interpPosX);
-        float f4 = (float)(this.prevPosY + (this.posY - this.prevPosY) * (double)partialTicks - interpPosY);
-        float f5 = (float)(this.prevPosZ + (this.posZ - this.prevPosZ) * (double)partialTicks - interpPosZ);
+        float f3 =(float)((this.prevPosX + (this.posX - this.prevPosX) * (double)partialTicks - interpPosX) - (Minecraft.getMinecraft().player.motionX / 2f));
+        float f4 = (float)((this.prevPosY + (this.posY - this.prevPosY) * (double)partialTicks - interpPosY) - (Minecraft.getMinecraft().player.motionY / 2f));
+        float f5 = (float)((this.prevPosZ + (this.posZ - this.prevPosZ) * (double)partialTicks - interpPosZ) - (Minecraft.getMinecraft().player.motionZ / 2f));
         int i = this.getBrightnessForRender(partialTicks);
         int j11 = i >> 16 & 65535;
         int k11 = i & 65535;
-        float size = 0.1F * (isCauldronTop ? 3.15f : this.particleScale);
+        float size = directScale > 0 ? directScale : (0.1F * (isCauldronTop ? 3.15f : this.particleScale));
         Minecraft.getMinecraft().getTextureManager().bindTexture(location);
         float k = (float)this.particleTextureIndexX / 16.0F;
         float k1 = isFullTexture() ? 1 : k + 0.0624375F;
@@ -188,13 +187,20 @@ public abstract class BaseHarshenParticle extends Particle
         buffer.pos((double)(f3 + rotX * size - rotXY * size), (double)(f4 - rotZ * size), (double)(f5 + rotYZ * size - rotXZ * size)).tex(t[6], t[7]).color(f6, f6, f6, this.particleAlpha).endVertex();
         Tessellator.getInstance().draw();
         GlStateManager.enableLighting();
-        GlStateManager.depthMask(true);
+        GlStateManager.disableBlend();
 
     }
     
     protected boolean isFullTexture() 
     {
     	return false;
+	}
+    
+    float directScale = -1f;
+    
+    public BaseHarshenParticle setDirectScale(float directScale) {
+		this.directScale = directScale;
+		return this;
 	}
     
     @Override
@@ -219,9 +225,9 @@ public abstract class BaseHarshenParticle extends Particle
     @Override
     public void onUpdate()
     {
-        prevPosX = posX;
-        prevPosY = posY;
-        prevPosZ = posZ;
+    	this.prevPosX = this.posX;
+        this.prevPosY = this.posY;
+        this.prevPosZ = this.posZ;
 
         if (particleAge++ >= particleMaxAge)
         {
