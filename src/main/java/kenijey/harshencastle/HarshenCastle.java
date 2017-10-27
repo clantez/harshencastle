@@ -69,6 +69,8 @@ public class HarshenCastle {
     public void postInit(FMLPostInitializationEvent event) 
     {
     	proxy.postInit(event);
+		hasLoaded = true;
+
     }
     
     @EventHandler
@@ -76,11 +78,5 @@ public class HarshenCastle {
 	{
     	event.registerServerCommand(new CommandHarshenCastleLoader());
 	}
-    
-    @EventHandler
-    public void onLoad(FMLLoadCompleteEvent event)
-    {
-		proxy.onLoad(event);
-		hasLoaded = true;
-    }
+ 
 }

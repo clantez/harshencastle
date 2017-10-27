@@ -6,6 +6,7 @@ import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.api.HarshenPlugin;
 import kenijey.harshencastle.api.IHarshenPlugin;
+import kenijey.harshencastle.enums.items.GlassContainerValue;
 import kenijey.harshencastle.objecthandlers.HarshenAPIError;
 import kenijey.harshencastle.recipies.CauldronRecipes;
 import kenijey.harshencastle.recipies.HereticRitualRecipes;
@@ -48,6 +49,8 @@ public class HarshenAPIHandler
 		allHereticCauldronRecipes.clear();
 		allPedestalRecipes.clear();
 		allMagicTableRecipes.clear();
+		GlassContainerValue.reset();
+		
 		HarshenCastle.LOGGER.info("Sending registry events to the following mods: " + getPluginNames());
 		for(IHarshenPlugin plugin : ALL_PLUGINS)
 			try 

@@ -218,8 +218,5 @@ public class CommonProxy
 	
 	public void resetErroredPositions(){}
 
-	public void onLoad(FMLLoadCompleteEvent event) {
-		
-	}
 
 }

@@ -9,24 +9,8 @@ import mezz.jei.api.recipe.IRecipeWrapper;
 
 public class JEIPedestalSlabHandler extends BaseJeiHandler<PedestalSlabRecipes> {
 
-	@Nonnull
-	@Override
-	public Class<PedestalSlabRecipes> getRecipeClass() {
-		return PedestalSlabRecipes.class;
-	}
-
-	@Override
-	public String getRecipeCategoryUid(PedestalSlabRecipes recipe) {
-		return JEICategoryUIDs.PENDESTAL_SLAB;
-	}
-
 	@Override
 	public IRecipeWrapper getRecipeWrapper(PedestalSlabRecipes recipe) {
 		return new JEIPedestalSlabWrapper(recipe);
-	}
-
-	@Override
-	public boolean isRecipeValid(PedestalSlabRecipes recipe) {
-		return true;
 	}
 }

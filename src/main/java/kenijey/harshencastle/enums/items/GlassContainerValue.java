@@ -159,4 +159,10 @@ public class GlassContainerValue implements IStringSerializable
 	{
 		return ALL_VALUES.toArray(new GlassContainerValue[ALL_VALUES.size()]);
 	}
+	
+	public static void reset()
+	{
+		ALL_VALUES.clear();
+		IDSET = 0;
+	}
 }

@@ -48,8 +48,6 @@ public class TileEntityCaulronBlock extends TileEntity implements Serializable
 		((TileEntityCaulronBlock)world.getTileEntity(position)).addAdjacent(blocksNearby);
 		for(TileEntityCaulronBlock te : blocksNearby)
 			te.testForActivation();
-		for(TileEntityCaulronBlock te : blocksNearby)
-			te.deactivate();
 		HashMap<Integer, ArrayList<CauldronMultiBlock>> sizeMap = new HashMap<>();
 		for(int i = MIN_LEVELS; i <= MAX_LEVELS; i++)
 			sizeMap.put(i, new ArrayList<CauldronMultiBlock>());
@@ -90,9 +88,9 @@ public class TileEntityCaulronBlock extends TileEntity implements Serializable
         if (itemstack.isEmpty())
         	return false;
         boolean flag;
-        if(item instanceof BloodCollector && (controller.fluid ==  GlassContainerValues.BLOOD.getType() || controller.fluid == CauldronLiquid.NONE))
+        if(item instanceof BloodCollector && (controller.fluid == GlassContainerValues.BLOOD.getType() || controller.fluid == CauldronLiquid.NONE))
         {
-        	if(controller.level != 3)
+        	if(controller.level != getMaxLevels())
         		if (playerIn.capabilities.isCreativeMode || (!playerIn.capabilities.isCreativeMode && ((BloodCollector)item).remove(playerIn, hand, 3)))
                 {
         			this.world.playSound((EntityPlayer)null, pos, SoundEvents.ITEM_BOTTLE_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
@@ -102,7 +100,7 @@ public class TileEntityCaulronBlock extends TileEntity implements Serializable
         	return true;
         }
         CauldronLiquid potentionalLiquid = HarshenRegistry.getLiquidFromStack(itemstack);
-        if(potentionalLiquid != null && (controller.level <= 0 || (controller.fluid == potentionalLiquid && controller.level + potentionalLiquid.getFillBy() < 4)))
+        if(potentionalLiquid != null && (controller.level <= 0 || (controller.fluid.getName().equals(potentionalLiquid.getName()) && controller.level + potentionalLiquid.getFillBy() <= getMaxLevels())))
         {
         	controller.fluid = HarshenRegistry.getRelativeFluid(potentionalLiquid);
         	controller.level += potentionalLiquid.getFillBy();
@@ -129,9 +127,9 @@ public class TileEntityCaulronBlock extends TileEntity implements Serializable
 		return isLeader() ? new AxisAlignedBB(pos, pos.add(getSize(), getSize(), getSize())).grow(5) : super.getRenderBoundingBox();
 	}
 	
-	@Override
-	public boolean shouldRenderInPass(int pass) {
-		return true;
+	public int getMaxLevels()
+	{
+		return getSize()*getSize()*getSize();
 	}
 		
 	private void activate(CauldronMultiBlock controller)

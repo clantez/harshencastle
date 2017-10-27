@@ -11,7 +11,6 @@ public interface IHarshenPlugin
 	
 	/**
 	 * Where all of the registering is done. HarshenCastle will only call this while registering things.
-	 * Can be reloaded with F3 + T.
 	 * @param registry The Registry Used to register things.
 	 */
 	default void register(IHarshenRegistry registry) {};

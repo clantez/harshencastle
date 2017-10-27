@@ -1,5 +1,8 @@
 package kenijey.harshencastle.intergration.jei;
 
+import java.util.IdentityHashMap;
+import java.util.Map;
+
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.HarshenUtils;
@@ -17,10 +20,16 @@ import kenijey.harshencastle.intergration.jei.pedestalslab.JEIPedestalSlabHandle
 import kenijey.harshencastle.intergration.jei.ritual.JEIRitualCategory;
 import kenijey.harshencastle.intergration.jei.ritual.JEIRitualHandler;
 import kenijey.harshencastle.internal.HarshenAPIHandler;
+import kenijey.harshencastle.recipies.CauldronRecipes;
+import kenijey.harshencastle.recipies.HereticRitualRecipes;
+import kenijey.harshencastle.recipies.MagicTableRecipe;
+import kenijey.harshencastle.recipies.PedestalSlabRecipes;
+import kenijey.harshencastle.recipies.RitualRecipes;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.JEIPlugin;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
+import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -33,12 +42,12 @@ public class JEIHarshenCastle implements IModPlugin
 	@Override
 	public void register(IModRegistry registry) { 
 		this.registry = registry;
-		registry.addRecipeHandlers(
-				new JEIRitualHandler(),
-				new JEICauldronHandler(),
-				new JEIPedestalSlabHandler(),
-				new JEIHereticRitualHandler(),
-				new JEIMagicTableHandler());
+
+		registry.handleRecipes(RitualRecipes.class, new JEIRitualHandler(), JEICategoryUIDs.RITUAL);
+		registry.handleRecipes(CauldronRecipes.class, new JEICauldronHandler(), JEICategoryUIDs.CAULDRON);
+		registry.handleRecipes(PedestalSlabRecipes.class, new JEIPedestalSlabHandler(), JEICategoryUIDs.PENDESTAL_SLAB);
+		registry.handleRecipes(HereticRitualRecipes.class, new JEIHereticRitualHandler(), JEICategoryUIDs.HERETIC_RITUAL);
+		registry.handleRecipes(MagicTableRecipe.class, new JEIMagicTableHandler(), JEICategoryUIDs.MAGIC_TABLE);
 		
 		registry.getRecipeTransferRegistry().addRecipeTransferHandler(ContainerMagicTable.class, JEICategoryUIDs.MAGIC_TABLE, 0, 5, 5, 36);
 		registry.addRecipeClickArea(GuiMagicTable.class, 105, 77, 59, 34, JEICategoryUIDs.MAGIC_TABLE);
@@ -82,21 +91,22 @@ public class JEIHarshenCastle implements IModPlugin
 
 	private void info(Block block)
 	{
-		registry.addDescription(new ItemStack(block), "jei." + block.getRegistryName().getResourcePath() + ".description");
+		registry.addIngredientInfo(new ItemStack(block), ItemStack.class, "jei." + block.getRegistryName().getResourcePath() + ".description");
 	}
 	
 	private void info(Item item)
 	{
-		registry.addDescription(new ItemStack(item), "jei." + item.getRegistryName().getResourcePath() + ".description");
+		registry.addIngredientInfo(new ItemStack(item), ItemStack.class, "jei." + item.getRegistryName().getResourcePath() + ".description");
 	}
 	
 	@Override
 	public void registerCategories(IRecipeCategoryRegistration registry) {
-		registry.addRecipeCategories(new JEIRitualCategory(JEICategoryUIDs.RITUAL, registry));
-		registry.addRecipeCategories(new JEICauldronCategory(JEICategoryUIDs.CAULDRON, registry));
-		registry.addRecipeCategories(new JEIPedestalSlabCategory(JEICategoryUIDs.PENDESTAL_SLAB, registry));
-		registry.addRecipeCategories(new JEIHereticRitualCategory(JEICategoryUIDs.HERETIC_RITUAL, registry));
-		registry.addRecipeCategories(new JEIMagicTableCategory(JEICategoryUIDs.MAGIC_TABLE, registry));
+		registry.addRecipeCategories(
+		new JEIRitualCategory(JEICategoryUIDs.RITUAL, registry),
+		new JEICauldronCategory(JEICategoryUIDs.CAULDRON, registry),
+		new JEIPedestalSlabCategory(JEICategoryUIDs.PENDESTAL_SLAB, registry),
+		new JEIHereticRitualCategory(JEICategoryUIDs.HERETIC_RITUAL, registry),
+		new JEIMagicTableCategory(JEICategoryUIDs.MAGIC_TABLE, registry));
 
 	}
 }

@@ -50,7 +50,8 @@ public class MessagePacketForceCauldronUpdate extends BaseMessagePacket<MessageP
 	public void onReceived(MessagePacketForceCauldronUpdate message, EntityPlayer player) {
 		if(player.world.getTileEntity(message.pos) instanceof TileEntityCaulronBlock)
 			TileEntityCaulronBlock.testForCauldron(player.world, message.pos);
-		if(player.world.getTileEntity(message.pos) instanceof TileEntityCaulronBlock && ((TileEntityCaulronBlock)player.world.getTileEntity(message.pos)).isLeader())
+		if(player.world.getTileEntity(message.pos) instanceof TileEntityCaulronBlock && ((TileEntityCaulronBlock)player.world.getTileEntity(message.pos)).isLeader()
+				&& ((TileEntityCaulronBlock)player.world.getTileEntity(message.pos)).getController() != null)
 		{
 			((TileEntityCaulronBlock)player.world.getTileEntity(message.pos)).getController().fluid = CauldronLiquid.getFromName(message.fluidname);
 			((TileEntityCaulronBlock)player.world.getTileEntity(message.pos)).getController().level = message.level;

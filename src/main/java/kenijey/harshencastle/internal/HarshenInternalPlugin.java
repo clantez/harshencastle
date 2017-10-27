@@ -45,6 +45,8 @@ public class HarshenInternalPlugin implements IHarshenPlugin
 	@Override
 	public void register(IHarshenRegistry registry) 
 	{
+
+		
 		
 		//glass containers
 		registry.registerGlassContainer("empty", -1, (PotionEffect)null);
@@ -63,6 +65,7 @@ public class HarshenInternalPlugin implements IHarshenPlugin
 		registry.registerGlassContainer("diamond", new CauldronLiquid("diamond", Blocks.DIAMOND_BLOCK.getDefaultState()), 0x67dbc7);
 		registry.registerGlassContainer("magic", new CauldronLiquid("magic", new ResourceLocation(HarshenCastle.MODID, "textures/blocks/magic_still.png")), -1);
 		
+		GlassContainerValues.reloadAll();
 		
 		//magic table recipes
 		registry.registerMagicTableRecipe(HarshenUtils.getMixupBook(), GlassContainerValues.DIAMOND.getHarshenStack(), GlassContainerValues.LAVA.getHarshenStack(), new HarshenStack(new ItemStack(Items.BOOK), new ItemStack(HarshenBlocks.ARCHIVE)), GlassContainerValues.MAGIC.getHarshenStack());
@@ -84,12 +87,13 @@ public class HarshenInternalPlugin implements IHarshenPlugin
 		registry.registerCauldronRecipe(GlassContainerValues.EMPTY.getHarshenStack(), GlassContainerValues.CURE.getStack(), GlassContainerValues.MILK.getType());
 		registry.registerCauldronRecipe(GlassContainerValues.EMPTY.getHarshenStack(), GlassContainerValues.REGEN.getStack(), GlassContainerValues.BLOOD.getType());
 		registry.registerCauldronRecipe(new HarshenStack(new ItemStack(HarshenItems.EMPTY_RING)), new ItemStack(HarshenItems.RING_OF_BLOOD), GlassContainerValues.BLOOD.getType());
+
 		
 		//heretic ritual recipes
 		HarshenStack blockGemStack = new HarshenStack("blockGold", "blockDiamond", "blockEmerald");
 		registry.registerHereticRecipe(new HarshenStack(new ItemStack(Items.APPLE)), new ItemStack(Items.GOLDEN_APPLE, 1, 1), GlassContainerValues.HARSHING_WATER.getType(),
 				blockGemStack.clone(), blockGemStack.clone(), blockGemStack.clone(), blockGemStack.clone(), blockGemStack.clone(), blockGemStack.clone(), blockGemStack.clone(), blockGemStack.clone());
-		
+			
 		registry.registerHereticRecipe(new HarshenStack(new ItemStack(HarshenItems.ITIUM)), new ItemStack(HarshenItems.XRAY_PENDANT), GlassContainerValues.EARTH.getType(), 
 				new HarshenStack(new ItemStack(HarshenItems.RITUAL_CRYSTAL, 1, 1)), new HarshenStack(new ItemStack(HarshenItems.POWDER_OF_HERETISM)), new HarshenStack(new ItemStack(HarshenItems.SOUL_INFUSED_INGOT)),
 				new HarshenStack("gemEmerald"), new HarshenStack("gemQuartz"), new HarshenStack(new ItemStack(Items.ENDER_EYE)),

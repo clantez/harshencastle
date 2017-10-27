@@ -15,8 +15,8 @@ import kenijey.harshencastle.entity.EntityThrown;
 import kenijey.harshencastle.entityrender.RenderEntityThrown;
 import kenijey.harshencastle.enums.ItemLiquidTypeset;
 import kenijey.harshencastle.enums.gui.EnumGuiTypes;
-import kenijey.harshencastle.enums.items.GlassContainerValue;
 import kenijey.harshencastle.enums.items.EnumRitualStick;
+import kenijey.harshencastle.enums.items.GlassContainerValue;
 import kenijey.harshencastle.enums.particle.EnumHarshenParticle;
 import kenijey.harshencastle.gui.GuiBookScreen;
 import kenijey.harshencastle.gui.GuiXrayPendantScreen;
@@ -73,7 +73,6 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
@@ -157,7 +156,8 @@ public class ClientProxy extends CommonProxy
 			
 			@Override
 			public int colorMultiplier(ItemStack stack, int tintIndex) {
-				return tintIndex == 1 ? -1 : GlassContainerValue.getContainerFromMeta(stack.getMetadata()).color;
+				return -1;
+//				return tintIndex == 1 ? -1 : GlassContainerValue.getContainerFromMeta(stack.getMetadata()).color;
 			}
 		}, HarshenItems.GLASS_CONTAINER);
     	
@@ -187,6 +187,11 @@ public class ClientProxy extends CommonProxy
     public void postInit(FMLPostInitializationEvent event) 
     {
     	super.postInit(event);
+    	((IReloadableResourceManager)  Minecraft.getMinecraft().getResourceManager()).registerReloadListener(resourceManager -> {
+			HarshenAPIHandler.register();
+			CauldronBlock.registerModels();
+			HarshenCastle.LOGGER.info("All recipes loaded");
+		});
     }
     
     
@@ -263,15 +268,6 @@ public class ClientProxy extends CommonProxy
     @Override
     public void resetErroredPositions() {
     	HandlerRenderError.erroredPositions.clear();
-    }
-    
-    @Override
-    public void onLoad(FMLLoadCompleteEvent event) {
-    	((IReloadableResourceManager)  Minecraft.getMinecraft().getResourceManager()).registerReloadListener(resourceManager -> {
-			HarshenAPIHandler.register();
-			CauldronBlock.registerModels();
-			HarshenCastle.LOGGER.info("All recipes loaded");
-		});
     }
     
 }
