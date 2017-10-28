@@ -165,22 +165,22 @@ public class TileEntityHereticCauldron extends BaseTileEntityHarshenSingleItemIn
         	return true;
         }
         CauldronLiquid potentionalLiquid = HarshenRegistry.getLiquidFromStack(itemstack);
-        if(potentionalLiquid != null && (level <= 0 || (fluid == potentionalLiquid && level + potentionalLiquid.getFillBy() < 4)))
+        if(potentionalLiquid != null && (level <= 0 || (fluid == potentionalLiquid && level + HarshenRegistry.getFill(itemstack) < 4)))
         {
         	fluid = HarshenRegistry.getRelativeFluid(potentionalLiquid);
-        	level += potentionalLiquid.getFillBy();
-        	itemstack.shrink(1);
-        	if(HarshenRegistry.getOutPutItem(potentionalLiquid) != null)
-        		HarshenUtils.give(playerIn, hand, HarshenRegistry.getOutPutItem(potentionalLiquid));
-        	return true;
-        }
-        ItemStack potentionalItem = HarshenRegistry.getOutPutItem(fluid);
-        if(potentionalItem != null && !itemstack.isEmpty() && potentionalItem.isItemEqual(itemstack) && level - fluid.getFillBy() >= 0)
-        {
-        	level -= fluid.getFillBy();
+        	level += HarshenRegistry.getFill(itemstack);
         	ItemStack oldStack = itemstack.copy();
         	itemstack.shrink(1);
-        	HarshenUtils.give(playerIn, hand, HarshenRegistry.getInputFromOutput(fluid));
+        	HarshenUtils.give(playerIn, hand, HarshenRegistry.getOutPutItem(oldStack, potentionalLiquid));
+        	return true;
+        }
+        ItemStack potentionalItem = HarshenRegistry.getInputFromOutput(itemstack, fluid);
+        if(potentionalItem != null && !potentionalItem.isEmpty() && level - HarshenRegistry.getRemoveFill(itemstack, fluid) >= 0)
+        {
+        	level -= HarshenRegistry.getRemoveFill(itemstack, fluid);
+        	ItemStack oldStack = itemstack.copy();
+        	itemstack.shrink(1);
+        	HarshenUtils.give(playerIn, hand, HarshenRegistry.getInputFromOutput(oldStack, fluid));
         	return true;
         }
         else if(item == HarshenItems.RITUAL_STICK)

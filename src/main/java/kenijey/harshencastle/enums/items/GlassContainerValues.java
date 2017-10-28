@@ -5,22 +5,22 @@ import java.util.ArrayList;
 
 public class GlassContainerValues
 {
-	public static GlassContainerValue EMPTY = GlassContainerValue.getContainerFromMeta(0);
-	public static GlassContainerValue VOID = GlassContainerValue.getContainerFromMeta(1);
-	public static GlassContainerValue REGEN = GlassContainerValue.getContainerFromMeta(2);
-	public static GlassContainerValue CURE = GlassContainerValue.getContainerFromMeta(3);
+	public static GlassContainerValue EMPTY;
+	public static GlassContainerValue VOID;
+	public static GlassContainerValue REGEN;
+	public static GlassContainerValue CURE;
 	
-	public static GlassContainerValue HARSHING_WATER = GlassContainerValue.getContainerFromMeta(4);
-	public static GlassContainerValue HARSHEN_DIMENSIONAL_FLUID = GlassContainerValue.getContainerFromMeta(5);
-	public static GlassContainerValue BLOOD = GlassContainerValue.getContainerFromMeta(6);
-	public static GlassContainerValue LAVA = GlassContainerValue.getContainerFromMeta(7);
-	public static GlassContainerValue MILK = GlassContainerValue.getContainerFromMeta(8);
-	public static GlassContainerValue WATER = GlassContainerValue.getContainerFromMeta(9);
-	public static GlassContainerValue EARTH = GlassContainerValue.getContainerFromMeta(10);
-	public static GlassContainerValue SAND = GlassContainerValue.getContainerFromMeta(11);
-	public static GlassContainerValue COAL = GlassContainerValue.getContainerFromMeta(12);
-	public static GlassContainerValue DIAMOND = GlassContainerValue.getContainerFromMeta(13);
-	public static GlassContainerValue MAGIC = GlassContainerValue.getContainerFromMeta(14);
+	public static GlassContainerValue HARSHING_WATER;
+	public static GlassContainerValue HARSHEN_DIMENSIONAL_FLUID;
+	public static GlassContainerValue BLOOD;
+	public static GlassContainerValue LAVA;
+	public static GlassContainerValue MILK;
+	public static GlassContainerValue WATER;
+	public static GlassContainerValue EARTH;
+	public static GlassContainerValue SAND;
+	public static GlassContainerValue COAL;
+	public static GlassContainerValue DIAMOND;
+	public static GlassContainerValue MAGIC;
 	
 	public final static void reloadAll()
 	{

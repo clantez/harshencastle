@@ -18,6 +18,7 @@ import kenijey.harshencastle.enums.gui.EnumGuiTypes;
 import kenijey.harshencastle.enums.items.EnumRitualStick;
 import kenijey.harshencastle.enums.items.GlassContainerValue;
 import kenijey.harshencastle.enums.particle.EnumHarshenParticle;
+import kenijey.harshencastle.fluids.HarshenFluids;
 import kenijey.harshencastle.gui.GuiBookScreen;
 import kenijey.harshencastle.gui.GuiXrayPendantScreen;
 import kenijey.harshencastle.handlers.client.CauldronUpdate;
@@ -88,6 +89,8 @@ public class ClientProxy extends CommonProxy
     	
 		HarshenItems.regRenders();
 		
+		HarshenFluids.regRenders();
+		
 		HarshenArmors.regRenders();
 		
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityHarshenDimensionalPedestal.class, new RendererDimensionalPedestal());
@@ -156,8 +159,7 @@ public class ClientProxy extends CommonProxy
 			
 			@Override
 			public int colorMultiplier(ItemStack stack, int tintIndex) {
-				return -1;
-//				return tintIndex == 1 ? -1 : GlassContainerValue.getContainerFromMeta(stack.getMetadata()).color;
+				return tintIndex == 1 ? -1 : GlassContainerValue.getContainerFromMeta(stack.getMetadata()).color;
 			}
 		}, HarshenItems.GLASS_CONTAINER);
     	
@@ -197,7 +199,7 @@ public class ClientProxy extends CommonProxy
     
     @Override
     public void registerFluidBlockRendering(Block block, String name) 
-    {
+    {    	
         final ModelResourceLocation fluidLocation = new ModelResourceLocation(HarshenCastle.MODID.toLowerCase() + ":fluids", name);
 
         ModelLoader.setCustomStateMapper(block, new StateMapperBase()
@@ -205,6 +207,7 @@ public class ClientProxy extends CommonProxy
             @Override
             protected ModelResourceLocation getModelResourceLocation(IBlockState state)
             {
+
                 return fluidLocation;
             }
         });

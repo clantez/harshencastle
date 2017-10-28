@@ -28,8 +28,6 @@ public class CauldronLiquid
 	private IBlockState state;
 	/** If the liquid Should render a ResourceLocation, it will be stored here*/
 	private ResourceLocation resourceLoc;
-	/** the amount of which it fills the cauldorn*/
-	private int fillBy;
 	/** The MODID of the mod that registered the liquid. */
 	private String modID;
 	
@@ -103,24 +101,6 @@ public class CauldronLiquid
 			if(liquid.hasState() && liquid.state.getBlock() == state.getBlock() && liquid.state.getBlock().getMetaFromState(liquid.state) == state.getBlock().getMetaFromState(state))
 				return liquid;
 		return NONE;
-	}
-	
-	/**
-	 * Used to set the {@link CauldronLiquid#fillBy} of this CauldronLiquid.
-	 * @param fillBy The amount to set it to
-	 * @return itself
-	 */
-	public CauldronLiquid setFillBy(int fillBy) {
-		this.fillBy = fillBy;
-		return this;
-	}
-	
-	/**
-	 * The getter for the {@link CauldronLiquid#fillBy}
-	 * @return the {@link CauldronLiquid#fillBy}.
-	 */
-	public int getFillBy() {
-		return fillBy;
 	}
 	
 	/**

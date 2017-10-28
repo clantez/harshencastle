@@ -53,7 +53,7 @@ public class HarshenInternalPlugin implements IHarshenPlugin
 		registry.registerGlassContainer("void", 0, new PotionEffect(HarshenPotions.potionSoulless, 600));
 		registry.registerGlassContainer("regen", 0xF40D09, new PotionEffect(MobEffects.REGENERATION, 100, 200));
 		registry.registerGlassContainer("cure", 0xEFEDA2, new PotionEffect(HarshenPotions.potionPure, 1));
-		registry.registerGlassContainer("harshing_water", new CauldronLiquid("harshening_water", HarshenFluids.HARSHEN_DIMENSIONAL_FLUID_BLOCK.getDefaultState()), 0x613A63);
+		registry.registerGlassContainer("harshing_water", new CauldronLiquid("harshening_water", HarshenFluids.HARSHING_WATER_BLOCK.getDefaultState()), 0x613A63);
 		registry.registerGlassContainer("harshen_dimensional_fluid", new CauldronLiquid("harshen_dimensional_fluid", HarshenFluids.HARSHEN_DIMENSIONAL_FLUID_BLOCK.getDefaultState()) , 0x324B64);
 		registry.registerGlassContainer("blood", new CauldronLiquid("blood", new ResourceLocation(HarshenCastle.MODID, "textures/blocks/blood_still.png")), 0x870705);
 		registry.registerGlassContainer("lava", new CauldronLiquid("lava", Blocks.LAVA.getDefaultState()), 0xD96415);

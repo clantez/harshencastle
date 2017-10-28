@@ -14,8 +14,9 @@ public class HarshenItemStackHandler extends ItemStackHandler
 	
 	private int slotLimit = 64;
 	
-	public void setSlotLimit(int slotLimit) {
+	public HarshenItemStackHandler setSlotLimit(int slotLimit) {
 		this.slotLimit = slotLimit;
+		return this;
 	}
 	
 	public ArrayList<ItemStack> getStacks()

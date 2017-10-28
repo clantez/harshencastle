@@ -1,5 +1,7 @@
 package kenijey.harshencastle.fluids;
 
+import java.util.HashMap;
+
 import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.fluids.blocks.HarshenDimensionalFluidBlock;
 import kenijey.harshencastle.fluids.blocks.HarshingWaterBlock;
@@ -11,6 +13,7 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 public class HarshenFluids {
 
+	private final static HashMap<Block, String> BLOCK_MAP = new HashMap<>();
 	
 	public final static Fluid HARSHEN_DIMENSIONAL_FLUID = registerFluid(new HarshenDimensionalFluid());
 	public final static Block HARSHEN_DIMENSIONAL_FLUID_BLOCK = registerFluidBlock(HARSHEN_DIMENSIONAL_FLUID, new HarshenDimensionalFluidBlock(), HarshenDimensionalFluid.NAME);
@@ -23,14 +26,28 @@ public class HarshenFluids {
         FluidRegistry.addBucketForFluid(fluid);
         return fluid;
 	}
-	
+		
 	private static Block registerFluidBlock(Fluid fluid, Block fluidBlock, String name)
     {
-        fluidBlock.setRegistryName(new ResourceLocation(HarshenCastle.MODID, name));
-        ForgeRegistries.BLOCKS.register(fluidBlock);
-        HarshenCastle.proxy.registerFluidBlockRendering(fluidBlock, name);
+        BLOCK_MAP.put(fluidBlock, name);
         fluid.setBlock(fluidBlock);
         return fluidBlock;
     }
+	
+	public static void preInit()
+	{
+		for(Block fluidBlock : BLOCK_MAP.keySet())
+		{
+			fluidBlock.setRegistryName(new ResourceLocation(HarshenCastle.MODID, BLOCK_MAP.get(fluidBlock)));
+	        ForgeRegistries.BLOCKS.register(fluidBlock);
+		}
+	}
+	
+	public static void regRenders()
+	{
+		for(Block fluidBlock : BLOCK_MAP.keySet())
+	        HarshenCastle.proxy.registerFluidBlockRendering(fluidBlock, BLOCK_MAP.get(fluidBlock));
+
+	}
 
 }

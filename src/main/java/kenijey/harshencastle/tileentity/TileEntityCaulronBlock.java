@@ -3,6 +3,8 @@ package kenijey.harshencastle.tileentity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
 
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenUtils;
@@ -14,20 +16,25 @@ import kenijey.harshencastle.items.BloodCollector;
 import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.network.packets.MessagePacketForceCauldronUpdate;
 import kenijey.harshencastle.network.packets.MessagePacketUpdateCauldron;
+import kenijey.harshencastle.objecthandlers.HarshenItemStackHandler;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
-public class TileEntityCaulronBlock extends TileEntity implements Serializable 
+public class TileEntityCaulronBlock extends TileEntity implements Serializable, ITickable
 {
 	public final static int MIN_LEVELS = 2;
 	public final static int MAX_LEVELS = 5;
@@ -35,9 +42,13 @@ public class TileEntityCaulronBlock extends TileEntity implements Serializable
 
 	public final static int LEVEL_RANGE = (MAX_LEVELS - MIN_LEVELS) + 1;
 	
+	private final static Random RANDOM = new Random();
 	
+	public HarshenItemStackHandler handler = new HarshenItemStackHandler(200).setSlotLimit(1);
+	public double[] x_Positions = fillDoubleList(handler.getSlots(), RANDOM);
+	public double[] z_Positions = fillDoubleList(handler.getSlots(), RANDOM);
+	public int[] y_Rotation = fillIntList(handler.getSlots(), RANDOM);
 	private CauldronMultiBlock controller;
-	
 	private int legacySize;
 	
 	public static void testForCauldron(World world, BlockPos position)
@@ -100,26 +111,65 @@ public class TileEntityCaulronBlock extends TileEntity implements Serializable
         	return true;
         }
         CauldronLiquid potentionalLiquid = HarshenRegistry.getLiquidFromStack(itemstack);
-        if(potentionalLiquid != null && (controller.level <= 0 || (controller.fluid.getName().equals(potentionalLiquid.getName()) && controller.level + potentionalLiquid.getFillBy() <= getMaxLevels())))
+        if(potentionalLiquid != null && (controller.level <= 0 || (controller.fluid == potentionalLiquid && controller.level + HarshenRegistry.getFill(itemstack) < getMaxLevels())))
         {
         	controller.fluid = HarshenRegistry.getRelativeFluid(potentionalLiquid);
-        	controller.level += potentionalLiquid.getFillBy();
-        	itemstack.shrink(1);
-        	if(HarshenRegistry.getOutPutItem(potentionalLiquid) != null)
-        		HarshenUtils.give(playerIn, hand, HarshenRegistry.getOutPutItem(potentionalLiquid));
-        	return true;
-        }
-        ItemStack potentionalItem = HarshenRegistry.getOutPutItem(controller.fluid);
-        if(potentionalItem != null && !itemstack.isEmpty() && potentionalItem.isItemEqual(itemstack) && controller.level - controller.fluid.getFillBy() >= 0)
-        {
-        	controller.level -= controller.fluid.getFillBy();
+        	controller.level += HarshenRegistry.getFill(itemstack);
         	ItemStack oldStack = itemstack.copy();
         	itemstack.shrink(1);
-        	HarshenUtils.give(playerIn, hand, HarshenRegistry.getInputFromOutput(controller.fluid));
+        	HarshenUtils.give(playerIn, hand, HarshenRegistry.getOutPutItem(oldStack, potentionalLiquid));
+        	return true;
+        }
+        ItemStack potentionalItem = HarshenRegistry.getInputFromOutput(itemstack, controller.fluid);
+        if(potentionalItem != null && !potentionalItem.isEmpty() && controller.level - HarshenRegistry.getRemoveFill(itemstack, controller.fluid) >= 0)
+        {
+        	controller.level -= HarshenRegistry.getRemoveFill(itemstack, controller.fluid);
+        	itemstack.shrink(1);
+        	HarshenUtils.give(playerIn, hand, potentionalItem);
         	return true;
         }
         
         return false;
+	}
+	
+	@Override
+	public void update() {
+		if(isLeader())
+		{
+			List<EntityItem> itemsInside = world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos, pos.add(getSize(), getSize(), getSize())));
+			HashMap<EntityItem, Integer> deadItems = new HashMap<>();
+			for(EntityItem item : itemsInside)
+				for(int i = 0; i < item.getItem().getCount(); i++)
+					if(setNextFreeSlot(setItemCount(item.getItem().copy(), 1)))
+						if(!deadItems.containsKey(item))
+							deadItems.put(item, 1);
+						else
+							deadItems.put(item, deadItems.get(item) + 1);
+			for(EntityItem item : deadItems.keySet())
+			{
+				if(deadItems.containsKey(item))
+					item.getItem().shrink(deadItems.get(item));
+				if(item.getItem().getCount() <= 0)
+					item.setDead();
+			}
+		}
+	}
+	
+	public ItemStack setItemCount(ItemStack stack, int count)
+	{
+		stack.setCount(count);
+		return stack;
+	}
+		
+	public boolean setNextFreeSlot(ItemStack stack)
+	{
+		for(int i = 0; i < handler.getSlots(); i++)
+			if(handler.getStackInSlot(i).isEmpty())
+			{
+				handler.setStackInSlot(i, stack);
+				return true;
+			}
+		return false;
 	}
 	
 	@Override
@@ -162,7 +212,16 @@ public class TileEntityCaulronBlock extends TileEntity implements Serializable
 	public void deactivate()
 	{
 		HarshenNetwork.sendToPlayersInWorld(world, new MessagePacketUpdateCauldron(pos, false, -1));
+		if(isLeader())
+			for(int i = 0; i < handler.getSlots(); i++)
+			{
+				if(!world.isRemote)
+					InventoryHelper.spawnItemStack(world, pos.getX() + MathHelper.clamp(new Random().nextInt(getSize()), 0.5f, getSize() - 0.5f), pos.getY() + getSize(), 
+							pos.getZ() + MathHelper.clamp(new Random().nextInt(getSize()), 0.5f, getSize() - 0.5f), handler.getStackInSlot(i));
+				handler.setStackInSlot(i, ItemStack.EMPTY);
+			}
 		controller = null;
+
 	}
 	
 	public void addAdjacent(ArrayList<TileEntityCaulronBlock> list)
@@ -250,6 +309,7 @@ public class TileEntityCaulronBlock extends TileEntity implements Serializable
 		this.legacySize = getTileData().getInteger("size");
 		if(world != null && world.isRemote && getTileData().getBoolean("isLeader"))
 			HarshenNetwork.sendToServer(new MessagePacketForceCauldronUpdate(pos, getTileData().getInteger("level"), getTileData().getString("fluid")));
+		this.handler.deserializeNBT(getTileData().getCompoundTag("handler"));
 	}
 	
 	@Override
@@ -259,6 +319,7 @@ public class TileEntityCaulronBlock extends TileEntity implements Serializable
 		getTileData().setInteger("level", getLevel());
 		if(getFluid() != null)
 			getTileData().setString("fluid", getFluid().getName());
+		getTileData().setTag("handler", handler.serializeNBT());
 		return super.writeToNBT(compound);
 	}
 	
@@ -276,6 +337,23 @@ public class TileEntityCaulronBlock extends TileEntity implements Serializable
 		if(controller == null)
 			return null;
 		return controller.fluid;
+	}
+	
+
+	private static double[] fillDoubleList(int size, Random rand)
+	{
+		double[] list = new double[size];
+    	for(int i = 0; i < list.length; i++)
+    		list[i] = rand.nextDouble();
+    	return list;
+	}
+	
+	private static int[] fillIntList(int size, Random rand)
+	{
+		int[] list = new int[size];
+		for(int i = 0; i < list.length; i++)
+			list[i] = rand.nextInt(360);
+		return list;
 	}
 	
 	public static class CauldronMultiBlock implements Serializable

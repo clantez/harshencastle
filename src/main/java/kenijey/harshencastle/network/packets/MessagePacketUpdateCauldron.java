@@ -53,6 +53,9 @@ public class MessagePacketUpdateCauldron extends BaseMessagePacket<MessagePacket
 		}
 		if(!message.active && CauldronBlock.CAULDRON_POSITIONS.contains(message.position))
 		{
+			TileEntityCaulronBlock te = ((TileEntityCaulronBlock)player.world.getTileEntity(message.position));
+			if(te != null && te.isLeader())
+				te.deactivate();
 			CauldronBlock.CAULDRON_POSITIONS.remove(message.position);
 		}	
 		
