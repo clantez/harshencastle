@@ -10,7 +10,6 @@ import kenijey.harshencastle.enums.items.EnumPontusGateSpawnerParts;
 import kenijey.harshencastle.enums.items.EnumProp;
 import kenijey.harshencastle.enums.items.EnumRitualCrystal;
 import kenijey.harshencastle.enums.items.EnumRitualStick;
-import kenijey.harshencastle.enums.items.GlassContainerValues;
 import kenijey.harshencastle.items.BloodCollector;
 import kenijey.harshencastle.items.BloodEssence;
 import kenijey.harshencastle.items.BloodInfusedEnderEye;
