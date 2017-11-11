@@ -916,6 +916,15 @@ public class HarshenUtils
     	return null;
     }
     
+    public static <T> T getObjectFromItemMap(HashMap<ItemStack, T> hashMap, ItemStack key, T _default)
+    {
+    	for(ItemStack stack : hashMap.keySet()){
+    		if(stack.isItemEqual(key))
+    			return hashMap.get(stack);
+    	}
+    	return _default;
+    }
+    
     public static boolean give(EntityPlayer playerIn, EnumHand hand, ItemStack stack)
 	{
 		if(playerIn.getHeldItem(hand).isEmpty())

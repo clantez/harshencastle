@@ -10,6 +10,7 @@ import kenijey.harshencastle.enums.items.GlassContainerValue;
 import kenijey.harshencastle.objecthandlers.HarshenAPIError;
 import kenijey.harshencastle.recipies.CauldronRecipes;
 import kenijey.harshencastle.recipies.HereticRitualRecipes;
+import kenijey.harshencastle.recipies.LargeCauldronRecipe;
 import kenijey.harshencastle.recipies.MagicTableRecipe;
 import kenijey.harshencastle.recipies.PedestalSlabRecipes;
 import kenijey.harshencastle.recipies.RitualRecipes;
@@ -23,6 +24,7 @@ public class HarshenAPIHandler
 	public static ArrayList<RitualRecipes> allRitualRecipes = new ArrayList<>();
 	public static ArrayList<CauldronRecipes> allCauldronRecipes = new ArrayList<>();
 	public static ArrayList<HereticRitualRecipes> allHereticCauldronRecipes = new ArrayList<>();
+	public static ArrayList<LargeCauldronRecipe> allLargeCauldronRecipes = new ArrayList<>();
 	public static ArrayList<PedestalSlabRecipes> allPedestalRecipes = new ArrayList<>();
 	public static ArrayList<MagicTableRecipe> allMagicTableRecipes = new ArrayList<>();
 		

@@ -88,6 +88,9 @@ public class HarshenInternalPlugin implements IHarshenPlugin
 		registry.registerCauldronRecipe(GlassContainerValues.EMPTY.getHarshenStack(), GlassContainerValues.REGEN.getStack(), GlassContainerValues.BLOOD.getType());
 		registry.registerCauldronRecipe(new HarshenStack(new ItemStack(HarshenItems.EMPTY_RING)), new ItemStack(HarshenItems.RING_OF_BLOOD), GlassContainerValues.BLOOD.getType());
 
+		//large cauldron recipes
+		registry.registerLargeCauldronRecipe(new ItemStack(Items.DIAMOND), GlassContainerValues.COAL.getType(), 4, new HarshenStack("stone"), new HarshenStack("cobblestone"), 
+				new HarshenStack(new ItemStack(Items.APPLE)));
 		
 		//heretic ritual recipes
 		HarshenStack blockGemStack = new HarshenStack("blockGold", "blockDiamond", "blockEmerald");

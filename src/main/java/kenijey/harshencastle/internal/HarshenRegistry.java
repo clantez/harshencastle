@@ -15,6 +15,7 @@ import kenijey.harshencastle.enums.items.GlassContainerValue;
 import kenijey.harshencastle.objecthandlers.VanillaProviderToInterface;
 import kenijey.harshencastle.recipies.CauldronRecipes;
 import kenijey.harshencastle.recipies.HereticRitualRecipes;
+import kenijey.harshencastle.recipies.LargeCauldronRecipe;
 import kenijey.harshencastle.recipies.MagicTableRecipe;
 import kenijey.harshencastle.recipies.PedestalSlabRecipes;
 import kenijey.harshencastle.recipies.RitualRecipes;
@@ -74,6 +75,12 @@ public class HarshenRegistry implements IHarshenRegistry
 	@Override
 	public void registerMagicTableRecipe(ItemStack output, HarshenStack input1, HarshenStack input2, HarshenStack input3, HarshenStack input4) {
 			MagicTableRecipe.addRecipe(HarshenUtils.toArray(input1, input2, input3, input4), output);
+	}
+	
+	@Override
+	public void registerLargeCauldronRecipe(ItemStack output, CauldronLiquid catalyst, int cauldronLevel,
+			HarshenStack... inputItems) {
+		LargeCauldronRecipe.addRecipe(output, catalyst, cauldronLevel, inputItems);
 	}
 
 	@Override
@@ -138,6 +145,9 @@ public class HarshenRegistry implements IHarshenRegistry
 	{
 		if(stack.getItem() instanceof UniversalBucket)
 			return FORGE_INPUT_AMOUNT.get(FluidStack.loadFluidStackFromNBT(stack.getTagCompound()).getFluid());
+		for(ItemStack stack1 : ITEMLIQUID_MAP.keySet())
+			if(stack1.isItemEqual(stack))
+				return 64;
 		return HarshenUtils.getObjectFromItemMap(INPUT_FILLBY, stack);
 	}
 	

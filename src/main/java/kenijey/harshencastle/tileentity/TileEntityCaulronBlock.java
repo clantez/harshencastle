@@ -9,6 +9,7 @@ import java.util.Random;
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.api.CauldronLiquid;
+import kenijey.harshencastle.base.BaseHarshenTileEntity;
 import kenijey.harshencastle.blocks.CauldronBlock;
 import kenijey.harshencastle.enums.items.GlassContainerValues;
 import kenijey.harshencastle.internal.HarshenRegistry;
@@ -17,6 +18,7 @@ import kenijey.harshencastle.network.HarshenNetwork;
 import kenijey.harshencastle.network.packets.MessagePacketForceCauldronUpdate;
 import kenijey.harshencastle.network.packets.MessagePacketUpdateCauldron;
 import kenijey.harshencastle.objecthandlers.HarshenItemStackHandler;
+import kenijey.harshencastle.recipies.LargeCauldronRecipe;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -34,7 +36,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
-public class TileEntityCaulronBlock extends TileEntity implements Serializable, ITickable
+public class TileEntityCaulronBlock extends BaseHarshenTileEntity implements Serializable, ITickable
 {
 	public final static int MIN_LEVELS = 2;
 	public final static int MAX_LEVELS = 5;
@@ -44,6 +46,9 @@ public class TileEntityCaulronBlock extends TileEntity implements Serializable, 
 	
 	private final static Random RANDOM = new Random();
 	
+	private boolean isActive;
+	private int activeTimer;
+	private LargeCauldronRecipe recipe;
 	public HarshenItemStackHandler handler = new HarshenItemStackHandler(200).setSlotLimit(1);
 	public double[] x_Positions = fillDoubleList(handler.getSlots(), RANDOM);
 	public double[] z_Positions = fillDoubleList(handler.getSlots(), RANDOM);
@@ -57,6 +62,8 @@ public class TileEntityCaulronBlock extends TileEntity implements Serializable, 
 			return;
 		ArrayList<TileEntityCaulronBlock> blocksNearby = new ArrayList<>();
 		((TileEntityCaulronBlock)world.getTileEntity(position)).addAdjacent(blocksNearby);
+		for(TileEntityCaulronBlock te : blocksNearby)
+			te.deactivate();
 		for(TileEntityCaulronBlock te : blocksNearby)
 			te.testForActivation();
 		HashMap<Integer, ArrayList<CauldronMultiBlock>> sizeMap = new HashMap<>();
@@ -111,7 +118,7 @@ public class TileEntityCaulronBlock extends TileEntity implements Serializable, 
         	return true;
         }
         CauldronLiquid potentionalLiquid = HarshenRegistry.getLiquidFromStack(itemstack);
-        if(potentionalLiquid != null && (controller.level <= 0 || (controller.fluid == potentionalLiquid && controller.level + HarshenRegistry.getFill(itemstack) < getMaxLevels())))
+        if(potentionalLiquid != null && (controller.level <= 0 || (controller.fluid == potentionalLiquid && controller.level + HarshenRegistry.getFill(itemstack) <= getMaxLevels())))
         {
         	controller.fluid = HarshenRegistry.getRelativeFluid(potentionalLiquid);
         	controller.level += HarshenRegistry.getFill(itemstack);
@@ -153,6 +160,31 @@ public class TileEntityCaulronBlock extends TileEntity implements Serializable, 
 					item.setDead();
 			}
 		}
+		if(isLeader() && controller != null)
+			if(!isActive)
+			{
+				ArrayList<ItemStack> stacks = new ArrayList<>();
+				for(int i = 0; i < handler.getSlots(); i++)
+					if(!handler.getStackInSlot(i).isEmpty())
+						stacks.add(handler.getStackInSlot(i));
+				LargeCauldronRecipe recipe = LargeCauldronRecipe.getRecipe(controller.fluid, controller.size, controller.level, stacks);
+				if(recipe != null)
+					this.recipe = recipe;
+				isActive = recipe != null;
+			}
+			else
+			{
+				if(activeTimer++ > 100)
+				{
+					activeTimer = 0;
+					isActive = false;
+					for(int i = 0; i < handler.getSlots(); i++)
+						handler.setStackInSlot(i, ItemStack.EMPTY);
+					handler.setStackInSlot(0, recipe.getOutput());
+					controller.level = 0;
+					controller.fluid = GlassContainerValues.EMPTY.getType();
+				}
+			}
 	}
 	
 	public ItemStack setItemCount(ItemStack stack, int count)
@@ -190,6 +222,14 @@ public class TileEntityCaulronBlock extends TileEntity implements Serializable, 
 		this.controller = controller;
 	}
 	
+	public boolean isActive() {
+		return isActive;
+	}
+	
+	public int getActiveTimer() {
+		return activeTimer;
+	}
+	
 	public void setupCauldronMultiblock(int size)
 	{
 		ArrayList<TileEntityCaulronBlock> cauldrons = new ArrayList<>();
@@ -216,8 +256,8 @@ public class TileEntityCaulronBlock extends TileEntity implements Serializable, 
 			for(int i = 0; i < handler.getSlots(); i++)
 			{
 				if(!world.isRemote)
-					InventoryHelper.spawnItemStack(world, pos.getX() + MathHelper.clamp(new Random().nextInt(getSize()), 0.5f, getSize() - 0.5f), pos.getY() + getSize(), 
-							pos.getZ() + MathHelper.clamp(new Random().nextInt(getSize()), 0.5f, getSize() - 0.5f), handler.getStackInSlot(i));
+					InventoryHelper.spawnItemStack(world, pos.getX() + MathHelper.clamp(new Random().nextInt(getSize() < 1 ? 1 : getSize()), 0.5f, getSize() - 0.5f), pos.getY() + getSize(), 
+							pos.getZ() + MathHelper.clamp(new Random().nextInt(getSize() < 1 ? 1 : getSize()), 0.5f, getSize() - 0.5f), handler.getStackInSlot(i));
 				handler.setStackInSlot(i, ItemStack.EMPTY);
 			}
 		controller = null;
@@ -306,20 +346,20 @@ public class TileEntityCaulronBlock extends TileEntity implements Serializable, 
 	@Override
 	public void readFromNBT(NBTTagCompound compound) {
 		super.readFromNBT(compound);
-		this.legacySize = getTileData().getInteger("size");
-		if(world != null && world.isRemote && getTileData().getBoolean("isLeader"))
-			HarshenNetwork.sendToServer(new MessagePacketForceCauldronUpdate(pos, getTileData().getInteger("level"), getTileData().getString("fluid")));
-		this.handler.deserializeNBT(getTileData().getCompoundTag("handler"));
+		this.legacySize = compound.getInteger("size");
+		if(world != null && world.isRemote && compound.getBoolean("isLeader"))
+			HarshenNetwork.sendToServer(new MessagePacketForceCauldronUpdate(pos, compound.getInteger("level"), compound.getString("fluid")));
+		this.handler.deserializeNBT(compound.getCompoundTag("handler"));
 	}
 	
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-		getTileData().setInteger("size", getSize());
-		getTileData().setBoolean("isLeader", isLeader());
-		getTileData().setInteger("level", getLevel());
+		compound.setInteger("size", getSize());
+		compound.setBoolean("isLeader", isLeader());
+		compound.setInteger("level", getLevel());
 		if(getFluid() != null)
-			getTileData().setString("fluid", getFluid().getName());
-		getTileData().setTag("handler", handler.serializeNBT());
+			compound.setString("fluid", getFluid().getName());
+		compound.setTag("handler", handler.serializeNBT());
 		return super.writeToNBT(compound);
 	}
 	

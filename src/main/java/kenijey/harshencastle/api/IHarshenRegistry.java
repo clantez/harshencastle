@@ -65,6 +65,15 @@ public interface IHarshenRegistry
 	 * @param input4 One of the input items
 	 */
 	void registerMagicTableRecipe(ItemStack output, HarshenStack input1, HarshenStack input2, HarshenStack input3, HarshenStack input4);
+	
+	/**
+	 * Used to register a recipe for the large, multiblock cauldron
+	 * @param output The output item for this recipe
+	 * @param catalyst The liquid used for this recipe
+	 * @param cauldronLevel The level for the cauldron to be at. level 2 would be a 2x2x2, level 3 would be a 3x3x3 and so on.
+	 * @param inputItems A list of the input items that need to be in the cauldron
+	 */
+	void registerLargeCauldronRecipe(ItemStack output, CauldronLiquid catalyst, int cauldronLevel, HarshenStack... inputItems);
 		
 	/**
 	 * Used to register a {@link CauldronLiquid}. <b>THIS IS NOT NBT SENSITIVE</b>
