@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 public class MainCastle extends HarshenStructure
 {
 	public MainCastle() {
-		super("main","castle", 1f, false, 0, true);
+		super("overworld","castle", 1f, false, 0, true);
 	}
 	
 	@Override
