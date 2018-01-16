@@ -5,7 +5,6 @@ import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.handlers.server.HandlerSyncConfig;
 import kenijey.harshencastle.internal.HarshenAPIHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 
 public class ServerProxy extends CommonProxy

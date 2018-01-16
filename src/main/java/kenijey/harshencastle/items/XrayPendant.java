@@ -3,7 +3,6 @@ package kenijey.harshencastle.items;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 
 import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.HarshenClientUtils;
@@ -15,8 +14,6 @@ import kenijey.harshencastle.api.IHarshenProvider;
 import kenijey.harshencastle.config.AccessoryConfig;
 import kenijey.harshencastle.enums.gui.EnumGuiTypes;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockLiquid;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -30,8 +27,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
-import net.minecraftforge.fluids.BlockFluidBase;
-import net.minecraftforge.fluids.BlockFluidClassic;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
 

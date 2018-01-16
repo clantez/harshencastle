@@ -3,10 +3,8 @@ package kenijey.harshencastle.entityrender;
 import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.base.BaseRenderBiped;
 import kenijey.harshencastle.entity.EntitySoullessKnight;
-import kenijey.harshencastle.models.ModelHarshenSoul;
 import kenijey.harshencastle.models.ModelSoullessKnight;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
 

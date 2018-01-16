@@ -2,7 +2,6 @@ package kenijey.harshencastle.base;
 
 import io.netty.buffer.ByteBuf;
 import kenijey.harshencastle.HarshenUtils;
-import kenijey.harshencastle.base.BaseMessagePacket;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;

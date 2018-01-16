@@ -1,7 +1,6 @@
 package kenijey.harshencastle.handlers;
 
 import kenijey.harshencastle.interfaces.IBurnInDay;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;

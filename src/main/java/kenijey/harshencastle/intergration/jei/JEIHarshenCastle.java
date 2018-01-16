@@ -1,8 +1,5 @@
 package kenijey.harshencastle.intergration.jei;
 
-import java.util.IdentityHashMap;
-import java.util.Map;
-
 import kenijey.harshencastle.HarshenBlocks;
 import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.HarshenUtils;
@@ -29,7 +26,6 @@ import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.JEIPlugin;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
-import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

@@ -1,26 +1,15 @@
 package kenijey.harshencastle.enums.items;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
-import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.HarshenItems;
 import kenijey.harshencastle.HarshenUtils;
 import kenijey.harshencastle.api.CauldronLiquid;
 import kenijey.harshencastle.api.HarshenStack;
-import kenijey.harshencastle.api.IIDSet;
 import kenijey.harshencastle.enums.ItemLiquidTypeset;
-import kenijey.harshencastle.fluids.HarshenFluids;
-import kenijey.harshencastle.potions.HarshenPotions;
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.IStringSerializable;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fluids.Fluid;
 
 public class GlassContainerValue implements IStringSerializable
 {
