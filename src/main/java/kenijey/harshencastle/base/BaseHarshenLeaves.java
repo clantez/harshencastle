@@ -2,9 +2,8 @@ package kenijey.harshencastle.base;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
+import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.util.BlockRenderLayer;
@@ -14,11 +13,10 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public abstract class BaseHarshenLeaves extends Block
+public abstract class BaseHarshenLeaves extends BlockLeaves
 {
 
 	public BaseHarshenLeaves() {
-		super(Material.LEAVES);
 		setRegistryName(getName());
 		setUnlocalizedName(getName());
 		this.setSoundType(SoundType.PLANT);
