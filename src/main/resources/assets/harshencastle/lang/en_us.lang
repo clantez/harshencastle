@@ -84,6 +84,7 @@ item.ring_of_blood.name=Ring of Blood
 item.soul_binding_pendant.name=Soul Binding Pendant
 item.reach_pendant.name=Reach Pendant
 item.empty_ring.name=Empty Ring
+item.ring_of_flight.name=Ring of Flight
 
 #keybindings
 key.telering.description=Telering Teleport Key
@@ -287,6 +288,8 @@ soul_binding_pendant1=Keeps your items in your inventory over death
 soul_binding_pendant2=Has only 32 uses
 reach_pendant1=Reach more!
 reach_pendant2=(+2 blocks, approximately)
+ring_of_flight1=Allows you fly like
+ring_of_flight2=in creative mode.
 
 #The One Probe
 top.gate.timeleft=Seconds Left: %s

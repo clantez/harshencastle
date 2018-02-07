@@ -172,9 +172,9 @@ public class HarshenCraftingRecipes
 		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "telering"), new ResourceLocation("harshen_items"),
 				new ItemStack(HarshenItems.TELERING),
-				" i ",
-				"grg",
 				" e ",
+				"grg",
+				" i ",
 				
 				'i', new ItemStack(HarshenItems.ITIUM),
 				'e', new ItemStack(HarshenItems.BLOOD_INFUSED_ENDER_EYE),
@@ -300,7 +300,7 @@ public class HarshenCraftingRecipes
 				'i', new ItemStack(HarshenItems.ITIUM));
 		
 		GameRegistry.addShapedRecipe(new ResourceLocation("harshencastle", "empty_ring"), new ResourceLocation("harshen_items"),
-				new ItemStack(HarshenItems.EMPTY_RING, 2),
+				new ItemStack(HarshenItems.EMPTY_RING),
 				" n ",
 				"n n",
 				" n ",
