@@ -100,6 +100,7 @@ ritual.not=not
 #entity eggs
 entity.soulless_knight.name=Soulless Knight
 entity.soul_part.name=Soul Part
+entity.harshen_soul.name=Harshen Soul
 
 #damage sources
 death.attack.entitySoulPart=%1$s's soul was taken away.
