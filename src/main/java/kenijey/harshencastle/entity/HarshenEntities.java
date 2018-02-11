@@ -6,6 +6,7 @@ import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.config.IdConfig;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.init.Biomes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
@@ -16,7 +17,6 @@ public class HarshenEntities
 	
 	private static final HarshenEntities instance = new HarshenEntities();
 	
-	
 	public static void init()
 	{
 		registerEntity(EntitySoullessKnight.class, IdConfig.EntitySoullessKnight ,"soulless_knight", 0x19232C, 295051);
@@ -24,7 +24,7 @@ public class HarshenEntities
 		registerEntity(EntityThrown.class, IdConfig.EntityThrown, "entity_thrown");
 		registerEntity(EntityHarshenSoul.class, IdConfig.EntityHarshenSoul, "harshen_soul",  0xa62323, 0xaed1515);
 		
-		registerSpawn(EntityHarshenSoul.class, 95, 4, 4, EnumCreatureType.MONSTER, ForgeRegistries.BIOMES.getValues());
+		registerSpawn(EntityHarshenSoul.class, 40, 1, 1, EnumCreatureType.MONSTER, ForgeRegistries.BIOMES.getValues());
 	}
 	
 	public static void registerSpawn(Class <? extends EntityLiving > entityClass, int weightedProb, int min, int max, EnumCreatureType typeOfCreature, List<Biome> biomes)
@@ -48,6 +48,5 @@ public class HarshenEntities
 	{
 		return instance;
 	}
-	
 	
 }
