@@ -6,7 +6,6 @@ import kenijey.harshencastle.HarshenCastle;
 import kenijey.harshencastle.config.IdConfig;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.init.Biomes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
