@@ -17,8 +17,7 @@ public class PontusChaoticLeaves extends BaseHarshenLeaves
 
 	@Override
 	public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
-		// TODO Auto-generated method stub
-		return null;
+		return (List<ItemStack>) this;
 	}
 
 	@Override
